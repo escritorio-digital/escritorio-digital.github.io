@@ -7,9 +7,9 @@ import TurndownService from 'turndown';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import type { WidgetConfig } from '../../../types';
 import { useTranslation } from 'react-i18next';
+import { withBaseUrl } from '../../../utils/assetPaths';
 import './Notepad.css';
 import {
-import { withBaseUrl } from '../../../utils/assetPaths';
   Bold,
   Italic,
   Strikethrough,
