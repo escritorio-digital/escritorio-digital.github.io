@@ -108,7 +108,16 @@
       "no_students_message": "Aucun étudiant sur la liste pour cette date.",
       "add_students_instruction": "Ajoutez des étudiants ou importez un fichier CSV."
     },
-    "scientific_calculator": { "title": "Calculatrice scientifique" },
+    "scientific_calculator": {
+      "title": "Calculatrice scientifique",
+      "basic": "Basique",
+      "standard": "Standard",
+      "scientific": "Scientifique",
+      "history": "Historique",
+      "no_history": "Aucun historique.",
+      "error": "Erreur",
+      "infinity": "Infini"
+    },
     "calendar": { "title": "Calendrier" },
     "image_carousel": {
       "title": "Carrousel d'images",
