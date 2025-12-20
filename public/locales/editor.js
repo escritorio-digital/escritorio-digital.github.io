@@ -233,16 +233,18 @@ async function refresh(lang) {
 
 async function saveFile() {
   const jsonText = `${JSON.stringify(buildOutput(), null, 2)}\n`;
+  const lang = languageSelect.value || BASE_LANG;
+  const filename = `escritorio_${lang}.json`;
 
   if (window.showSaveFilePicker) {
     const handle = await window.showSaveFilePicker({
-      suggestedName: 'translation.json',
+      suggestedName: filename,
       types: [{ description: 'JSON', accept: { 'application/json': ['.json'] } }],
     });
     const writable = await handle.createWritable();
     await writable.write(jsonText);
     await writable.close();
-    footerStatus.textContent = 'Archivo guardado.';
+    footerStatus.textContent = `Archivo guardado: ${filename}`;
   } else {
     downloadJson(jsonText);
   }
@@ -253,10 +255,11 @@ function downloadJson(jsonText) {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = 'translation.json';
+  const lang = languageSelect.value || BASE_LANG;
+  link.download = `escritorio_${lang}.json`;
   link.click();
   URL.revokeObjectURL(url);
-  footerStatus.textContent = 'Descarga iniciada.';
+  footerStatus.textContent = `Descarga iniciada: escritorio_${lang}.json`;
 }
 
 async function copyJson() {
