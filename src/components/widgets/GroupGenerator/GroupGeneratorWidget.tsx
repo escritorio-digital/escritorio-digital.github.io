@@ -1,9 +1,9 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { WidgetConfig } from '../../../types';
 // CORRECCIÓN: Se eliminaron 'Users' y 'ListCollapse' de esta línea
-import { Upload } from 'lucide-react';
+import { Upload, Expand, Minimize } from 'lucide-react';
 import './GroupGeneratorWidget.css';
 import { withBaseUrl } from '../../../utils/assetPaths';
 
@@ -15,7 +15,99 @@ export const GroupGeneratorWidget: FC = () => {
   const [mode, setMode] = useState<GroupMode>('byCount');
   const [groupValue, setGroupValue] = useState(3);
   const [generatedGroups, setGeneratedGroups] = useState<string[][]>([]);
+  const [isLargeView, setIsLargeView] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const overlayContentRef = useRef<HTMLDivElement>(null);
+  const overlayHeaderRef = useRef<HTMLDivElement>(null);
+  const overlayGroupsRef = useRef<HTMLDivElement>(null);
+  const overlaySizingRef = useRef({
+    titleSize: 0,
+    textSize: 0,
+    minCardWidth: 0,
+    containerHeight: 0,
+  });
+
+  useEffect(() => {
+    if (!isLargeView) return;
+    const overlayContent = overlayContentRef.current;
+    const overlayHeader = overlayHeaderRef.current;
+    const groupsContainer = overlayGroupsRef.current;
+    if (!overlayContent || !overlayHeader || !groupsContainer) return;
+
+    let frameId = 0;
+    const updateSizing = () => {
+      if (!overlayContent || !overlayHeader || !groupsContainer) return;
+
+      const contentStyles = getComputedStyle(overlayContent);
+      const paddingTop = parseFloat(contentStyles.paddingTop) || 0;
+      const paddingBottom = parseFloat(contentStyles.paddingBottom) || 0;
+      const gap = parseFloat(contentStyles.rowGap || contentStyles.gap) || 0;
+      const availableHeight = Math.max(
+        120,
+        overlayContent.clientHeight - overlayHeader.offsetHeight - paddingTop - paddingBottom - gap
+      );
+
+      groupsContainer.style.height = `${availableHeight}px`;
+
+      const containerWidth = groupsContainer.clientWidth;
+      const groupCount = Math.max(1, generatedGroups.length);
+      const maxColumns = Math.min(groupCount, Math.max(1, Math.floor(containerWidth / 320)));
+      const minCardWidth = Math.max(240, Math.floor(containerWidth / maxColumns) - 16);
+
+      const minTextSize = 16;
+      const maxTextSize = Math.min(40, Math.max(20, Math.floor(availableHeight / 5)));
+      let low = minTextSize;
+      let high = maxTextSize;
+      let best = minTextSize;
+
+      for (let i = 0; i < 12; i += 1) {
+        const mid = Math.floor((low + high) / 2);
+        overlayContent.style.setProperty('--group-text-size', `${mid}px`);
+        overlayContent.style.setProperty('--group-title-size', `${Math.round(mid * 1.2)}px`);
+        overlayContent.style.setProperty('--group-card-min', `${minCardWidth}px`);
+
+        if (groupsContainer.scrollHeight <= groupsContainer.clientHeight) {
+          best = mid;
+          low = mid + 1;
+        } else {
+          high = mid - 1;
+        }
+      }
+
+      const nextTitle = Math.round(best * 1.2);
+      const last = overlaySizingRef.current;
+      if (
+        last.textSize !== best ||
+        last.titleSize !== nextTitle ||
+        last.minCardWidth !== minCardWidth ||
+        last.containerHeight !== availableHeight
+      ) {
+        overlaySizingRef.current = {
+          textSize: best,
+          titleSize: nextTitle,
+          minCardWidth,
+          containerHeight: availableHeight,
+        };
+        overlayContent.style.setProperty('--group-text-size', `${best}px`);
+        overlayContent.style.setProperty('--group-title-size', `${nextTitle}px`);
+        overlayContent.style.setProperty('--group-card-min', `${minCardWidth}px`);
+      }
+    };
+
+    const scheduleUpdate = () => {
+      cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(updateSizing);
+    };
+
+    scheduleUpdate();
+    const resizeObserver = new ResizeObserver(scheduleUpdate);
+    resizeObserver.observe(overlayContent);
+    resizeObserver.observe(groupsContainer);
+    return () => {
+      cancelAnimationFrame(frameId);
+      resizeObserver.disconnect();
+    };
+  }, [isLargeView, generatedGroups]);
 
   const handleFileLoad = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -94,7 +186,21 @@ export const GroupGeneratorWidget: FC = () => {
         </button>
       </div>
       <div className="output-panel">
-        <label className="panel-label">{t('widgets.group_generator.generated_groups_label')}</label>
+        <div className="output-header">
+          <label className="panel-label">{t('widgets.group_generator.generated_groups_label')}</label>
+          <button
+            className="expand-button"
+            onClick={() => setIsLargeView(!isLargeView)}
+            disabled={generatedGroups.length === 0}
+          >
+            {isLargeView ? <Minimize size={16} /> : <Expand size={16} />}
+            <span>
+              {isLargeView
+                ? t('widgets.group_generator.close_large_view')
+                : t('widgets.group_generator.view_large')}
+            </span>
+          </button>
+        </div>
         <div className="groups-container">
           {generatedGroups.length > 0 ? (
             generatedGroups.map((group, index) => (
@@ -110,6 +216,37 @@ export const GroupGeneratorWidget: FC = () => {
           )}
         </div>
       </div>
+      {isLargeView && (
+        <div className="groups-overlay" onClick={() => setIsLargeView(false)}>
+          <div
+            className="groups-overlay-content"
+            ref={overlayContentRef}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="groups-overlay-header" ref={overlayHeaderRef}>
+              <h3>{t('widgets.group_generator.generated_groups_label')}</h3>
+              <button className="expand-button" onClick={() => setIsLargeView(false)}>
+                <Minimize size={16} />
+                <span>{t('widgets.group_generator.close_large_view')}</span>
+              </button>
+            </div>
+            <div className="groups-container groups-container-large" ref={overlayGroupsRef}>
+              {generatedGroups.length > 0 ? (
+                generatedGroups.map((group, index) => (
+                  <div key={index} className="group-card group-card-large">
+                    <h4 className="group-title">{t('widgets.group_generator.group_title', { number: index + 1 })}</h4>
+                    <ul>
+                      {group.map(student => <li key={student}>{student}</li>)}
+                    </ul>
+                  </div>
+                ))
+              ) : (
+                <p className="no-groups-message">{t('widgets.group_generator.no_groups_message')}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

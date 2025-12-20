@@ -75,6 +75,16 @@
     "open_knowledge_adherence": "Proiektu honek bat egiten du",
     "open_knowledge_decalogue": "Ezagutza Irekiaren Dekalogoarekin"
   },
+  "context_menu": {
+    "new_widget": "Widget berria...",
+    "settings": "Ezarpenak",
+    "manage_profiles": "Profilak kudeatu",
+    "change_background": "Aldatu atzeko planoa...",
+    "show_toolbar": "Erakutsi beheko barra",
+    "hide_toolbar": "Ezkutatu beheko barra",
+    "reset_layout": "Itxi leiho guztiak",
+    "reset_layout_confirm": "Mahaigaineko leiho guztiak itxi nahi dituzu?"
+  },
   "widgets": {
     "attendance": {
       "title": "Asistentzia Kontrola",
@@ -106,8 +116,42 @@
       "no_students_message": "Ez dago ikaslerik zerrendan data honetarako.",
       "add_students_instruction": "Gehitu ikasleak edo inportatu CSV fitxategi bat."
     },
-    "scientific_calculator": { "title": "Kalkulagailu Zientifikoa" },
-    "calendar": { "title": "Egutegia" },
+    "scientific_calculator": {
+      "title": "Kalkulagailu Zientifikoa",
+      "basic": "Oinarrizkoa",
+      "standard": "Estandarra",
+      "scientific": "Zientifikoa",
+      "history": "Historia",
+      "no_history": "Ez dago historiarik.",
+      "error": "Errorea",
+      "infinity": "Infinitua"
+    },
+    "calendar": {
+      "title": "Egutegia",
+      "days": [
+        "Al",
+        "As",
+        "Az",
+        "Og",
+        "Or",
+        "La",
+        "Ig"
+      ],
+      "months": [
+        "urtarrila",
+        "otsaila",
+        "martxoa",
+        "apirila",
+        "maiatza",
+        "ekaina",
+        "uztaila",
+        "abuztua",
+        "iraila",
+        "urria",
+        "azaroa",
+        "abendua"
+      ]
+    },
     "image_carousel": {
       "title": "Irudi-karrusela",
       "no_images": "Ez dago irudirik kargatuta.",
@@ -147,7 +191,13 @@
       "lap": "Itzulia",
       "reset": "Berrezarri"
     },
-    "dice": { "title": "3D Dadoak" },
+    "dice": {
+      "title": "3D Dadoak",
+      "num_dice": "Dado Kopurua:",
+      "rolling": "Botatzen...",
+      "roll_dice": "Bota Dadoak",
+      "total": "Guztira:"
+    },
     "group_generator": {
       "title": "Talde Sortzailea",
       "student_list_label": "Ikasleen Zerrenda",
@@ -157,6 +207,8 @@
       "students_per_group": "Ikasle Taldeko",
       "generate_groups": "Sortu Taldeak",
       "generated_groups_label": "Sortutako Taldeak",
+      "view_large": "Ikuspegi handia",
+      "close_large_view": "Itxi ikuspegi handia",
       "group_title": "{{number}} Taldea",
       "no_groups_message": "Taldeak hemen agertuko dira."
     },
@@ -260,7 +312,9 @@
       "play_again": "Jolastu Berriro",
       "icon_alt": "Memorama"
     },
-    "metronome": { "title": "Metronomoa" },
+    "metronome": {
+      "title": "Metronomoa"
+    },
     "notepad": {
       "title": "Ohar Bloka",
       "icon_alt": "Ohar bloka",
@@ -316,9 +370,15 @@
       "title": "Ausazko Erruleta",
       "icon_alt": "Ausazko Erruleta",
       "default_options": [
-        { "text": "1. Aukera" },
-        { "text": "2. Aukera" },
-        { "text": "3. Aukera" }
+        {
+          "text": "1. Aukera"
+        },
+        {
+          "text": "2. Aukera"
+        },
+        {
+          "text": "3. Aukera"
+        }
       ],
       "result_overlay_text": "Egin klik berriro biratzeko",
       "fullscreen_button_title": "Zabaldu erruleta",
@@ -383,28 +443,6 @@
       "pan_mode": "Aktibatu nabigazio modua",
       "exit_pan": "Irten nabigazio modutik",
       "center_view": "Zentratu ikuspegia"
-    },
-    "scientific_calculator": {
-      "title": "Kalkulagailu Zientifikoa",
-      "basic": "Oinarrizkoa",
-      "standard": "Estandarra",
-      "scientific": "Zientifikoa",
-      "history": "Historia",
-      "no_history": "Ez dago historiarik.",
-      "error": "Errorea",
-      "infinity": "Infinitua"
-    },
-    "calendar": {
-      "title": "Egutegia",
-      "days": ["Al", "As", "Az", "Og", "Or", "La", "Ig"],
-      "months": ["urtarrila", "otsaila", "martxoa", "apirila", "maiatza", "ekaina", "uztaila", "abuztua", "iraila", "urria", "azaroa", "abendua"]
-    },
-    "dice": {
-      "title": "3D Dadoak",
-      "num_dice": "Dado Kopurua:",
-      "rolling": "Botatzen...",
-      "roll_dice": "Bota Dadoak",
-      "total": "Guztira:"
     }
   }
 }

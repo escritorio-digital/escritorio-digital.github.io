@@ -1,6 +1,6 @@
 // src/App.tsx
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { WIDGET_REGISTRY } from './components/widgets';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -10,7 +10,7 @@ import { SettingsModal } from './components/core/SettingsModal';
 import { CreditsModal } from './components/core/CreditsModal';
 import { ThemeProvider, defaultTheme } from './context/ThemeContext';
 import type { ActiveWidget, DesktopProfile, ProfileCollection } from './types';
-import { Copyright } from 'lucide-react';
+import { Copyright, PlusSquare, Settings, Image, Eye, EyeOff, RotateCcw, Users } from 'lucide-react';
 // --- ¡AQUÍ ESTÁ EL CAMBIO! Importamos el nuevo componente ---
 import { ProfileSwitcher } from './components/core/ProfileSwitcher';
 
@@ -39,6 +39,10 @@ const DesktopUI: React.FC<{
     const [highestZ, setHighestZ] = useState(100);
     const [isSettingsOpen, setSettingsOpen] = useState(false);
     const [isCreditsOpen, setIsCreditsOpen] = useState(false);
+    const [settingsInitialTab, setSettingsInitialTab] = useState<'general' | 'profiles' | 'widgets' | 'theme'>('general');
+    const [isToolbarHidden, setToolbarHidden] = useLocalStorage<boolean>('toolbar-hidden', false);
+    const [contextMenu, setContextMenu] = useState({ isOpen: false, x: 0, y: 0 });
+    const contextMenuRef = useRef<HTMLDivElement>(null);
 
     const addWidget = (widgetId: string) => {
         const widgetConfig = WIDGET_REGISTRY[widgetId];
@@ -83,8 +87,66 @@ const DesktopUI: React.FC<{
         }));
     };
 
+    useEffect(() => {
+        if (!contextMenu.isOpen) return;
+        const handlePointerDown = (event: MouseEvent) => {
+            if (contextMenuRef.current && contextMenuRef.current.contains(event.target as Node)) return;
+            setContextMenu(prev => ({ ...prev, isOpen: false }));
+        };
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                setContextMenu(prev => ({ ...prev, isOpen: false }));
+            }
+        };
+        window.addEventListener('mousedown', handlePointerDown);
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('resize', handlePointerDown);
+        return () => {
+            window.removeEventListener('mousedown', handlePointerDown);
+            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('resize', handlePointerDown);
+        };
+    }, [contextMenu.isOpen]);
+
+    useEffect(() => {
+        if (!contextMenu.isOpen) return;
+        const clampMenu = () => {
+            const menu = contextMenuRef.current;
+            if (!menu) return;
+            const rect = menu.getBoundingClientRect();
+            const padding = 8;
+            const maxX = Math.max(padding, window.innerWidth - rect.width - padding);
+            const maxY = Math.max(padding, window.innerHeight - rect.height - padding);
+            const nextX = Math.min(Math.max(contextMenu.x, padding), maxX);
+            const nextY = Math.min(Math.max(contextMenu.y, padding), maxY);
+            if (nextX !== contextMenu.x || nextY !== contextMenu.y) {
+                setContextMenu(prev => ({ ...prev, x: nextX, y: nextY }));
+            }
+        };
+        const frameId = requestAnimationFrame(clampMenu);
+        return () => cancelAnimationFrame(frameId);
+    }, [contextMenu.isOpen, contextMenu.x, contextMenu.y]);
+
+    const openSettingsTab = (tab: 'general' | 'profiles' | 'widgets' | 'theme') => {
+        setSettingsInitialTab(tab);
+        setSettingsOpen(true);
+        setContextMenu(prev => ({ ...prev, isOpen: false }));
+    };
+
+    const handleContextMenu = (event: React.MouseEvent<HTMLDivElement>) => {
+        if (event.target !== event.currentTarget) return;
+        event.preventDefault();
+        setContextMenu({ isOpen: true, x: event.clientX, y: event.clientY });
+    };
+
+    const resetLayout = () => {
+        if (!window.confirm(t('context_menu.reset_layout_confirm'))) return;
+        setActiveWidgets([]);
+        setContextMenu(prev => ({ ...prev, isOpen: false }));
+    };
+
     return (
-        <div className="w-screen h-screen overflow-hidden">
+        <div className="w-screen h-screen overflow-hidden" onContextMenu={handleContextMenu}>
             {activeProfile.activeWidgets.map(widget => {
                 const config = WIDGET_REGISTRY[widget.widgetId];
                 const Component = config.component;
@@ -109,11 +171,27 @@ const DesktopUI: React.FC<{
                     </WidgetWindow>
                 );
             })}
-            <Toolbar pinnedWidgets={activeProfile.pinnedWidgets} onWidgetClick={addWidget} onSettingsClick={() => setSettingsOpen(true)} />
+            {!isToolbarHidden && (
+                <Toolbar
+                    pinnedWidgets={activeProfile.pinnedWidgets}
+                    onWidgetClick={addWidget}
+                    onSettingsClick={() => openSettingsTab('general')}
+                />
+            )}
             <button onClick={() => setIsCreditsOpen(true)} className="fixed bottom-4 left-4 z-[9999] p-3 bg-black/20 backdrop-blur-md rounded-full text-white hover:bg-black/40 transition-colors" title={t('credits.title')}>
                 <Copyright size={24} />
             </button>
-            <SettingsModal isOpen={isSettingsOpen} onClose={() => setSettingsOpen(false)} pinnedWidgets={activeProfile.pinnedWidgets} setPinnedWidgets={setPinnedWidgets} profiles={profiles} setProfiles={setProfiles} activeProfileName={activeProfileName} setActiveProfileName={setActiveProfileName} />
+            <SettingsModal
+                isOpen={isSettingsOpen}
+                onClose={() => setSettingsOpen(false)}
+                initialTab={settingsInitialTab}
+                pinnedWidgets={activeProfile.pinnedWidgets}
+                setPinnedWidgets={setPinnedWidgets}
+                profiles={profiles}
+                setProfiles={setProfiles}
+                activeProfileName={activeProfileName}
+                setActiveProfileName={setActiveProfileName}
+            />
             <CreditsModal isOpen={isCreditsOpen} onClose={() => setIsCreditsOpen(false)} />
             
             {/* --- ¡AQUÍ ESTÁ EL CAMBIO! Añadimos el nuevo componente a la interfaz --- */}
@@ -122,6 +200,61 @@ const DesktopUI: React.FC<{
               activeProfileName={activeProfileName}
               setActiveProfileName={setActiveProfileName}
             />
+
+            {contextMenu.isOpen && (
+                <div
+                    ref={contextMenuRef}
+                    className="fixed z-[10000] min-w-[220px] bg-white/95 backdrop-blur-md rounded-lg shadow-xl border border-gray-200 py-2 text-sm text-text-dark"
+                    style={{ left: contextMenu.x, top: contextMenu.y }}
+                >
+                    <button
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                        onClick={() => openSettingsTab('widgets')}
+                    >
+                        <PlusSquare size={16} />
+                        {t('context_menu.new_widget')}
+                    </button>
+                    <button
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                        onClick={() => openSettingsTab('general')}
+                    >
+                        <Settings size={16} />
+                        {t('context_menu.settings')}
+                    </button>
+                    <button
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                        onClick={() => openSettingsTab('profiles')}
+                    >
+                        <Users size={16} />
+                        {t('context_menu.manage_profiles')}
+                    </button>
+                    <button
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                        onClick={() => openSettingsTab('theme')}
+                    >
+                        <Image size={16} />
+                        {t('context_menu.change_background')}
+                    </button>
+                    <button
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                        onClick={() => {
+                            setToolbarHidden(!isToolbarHidden);
+                            setContextMenu(prev => ({ ...prev, isOpen: false }));
+                        }}
+                    >
+                        {isToolbarHidden ? <Eye size={16} /> : <EyeOff size={16} />}
+                        {isToolbarHidden ? t('context_menu.show_toolbar') : t('context_menu.hide_toolbar')}
+                    </button>
+                    <div className="my-1 border-t border-gray-200" />
+                    <button
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-700 flex items-center gap-2"
+                        onClick={resetLayout}
+                    >
+                        <RotateCcw size={16} />
+                        {t('context_menu.reset_layout')}
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

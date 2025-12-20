@@ -21,6 +21,9 @@ export const StopwatchWidget: FC = () => {
   const [isActive, setIsActive] = useState(false);
   const [laps, setLaps] = useState<number[]>([]);
   const intervalRef = useRef<number | null>(null);
+  const displayRef = useRef<HTMLDivElement>(null);
+  const [timeFontSize, setTimeFontSize] = useState(48);
+  const lastFontSizeRef = useRef(48);
 
   useEffect(() => {
     if (isActive) {
@@ -40,6 +43,26 @@ export const StopwatchWidget: FC = () => {
     };
   }, [isActive, time]);
 
+  useEffect(() => {
+    const container = displayRef.current;
+    if (!container) return;
+
+    const updateSize = () => {
+      const { width, height } = container.getBoundingClientRect();
+      const nextSize = Math.max(28, Math.min(width * 0.18, height * 0.5));
+      const roundedSize = Math.floor(nextSize);
+      if (roundedSize !== lastFontSizeRef.current) {
+        lastFontSizeRef.current = roundedSize;
+        setTimeFontSize(roundedSize);
+      }
+    };
+
+    updateSize();
+    const resizeObserver = new ResizeObserver(updateSize);
+    resizeObserver.observe(container);
+    return () => resizeObserver.disconnect();
+  }, []);
+
   const handleStartStop = () => {
     setIsActive(!isActive);
   };
@@ -58,8 +81,10 @@ export const StopwatchWidget: FC = () => {
 
   return (
     <div className="stopwatch-widget">
-      <div className="time-display-container">
-        <span className="time-display-main">{formatTime(time)}</span>
+      <div className="time-display-container" ref={displayRef}>
+        <span className="time-display-main" style={{ fontSize: `${timeFontSize}px` }}>
+          {formatTime(time)}
+        </span>
       </div>
 
       <div className="controls-container">

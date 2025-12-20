@@ -138,12 +138,15 @@ export const WorkListWidget: React.FC = () => {
       </div>
       
       {/* ¡ESTA ES LA PARTE QUE FALTABA! */}
-      <ul className="flex-grow overflow-y-auto pr-2  min-h-0">
+      <ul className="flex-grow overflow-y-auto pr-2 min-h-0 space-y-2">
         {tasks.map(task => (
-          <li key={task.id} className={`flex items-center gap-3 p-2 border-b border-accent/50 ${task.completed ? 'opacity-50' : ''}`}>
+          <li
+            key={task.id}
+            className={`flex items-center gap-3 p-2 rounded-md border border-black/10 bg-white/85 shadow-sm ${task.completed ? 'opacity-50' : ''}`}
+          >
             <input
               type="checkbox"
-              className="form-checkbox h-5 w-5 rounded text-widget-header bg-custom-bg border-accent focus:ring-widget-header"
+              className="form-checkbox h-5 w-5 rounded text-widget-header bg-white border-accent focus:ring-widget-header"
               checked={task.completed}
               onChange={() => toggleTask(task.id)}
             />

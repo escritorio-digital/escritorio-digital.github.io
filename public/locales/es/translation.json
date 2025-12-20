@@ -76,6 +76,16 @@
     "open_knowledge_adherence": "Este proyecto se adhiere al",
     "open_knowledge_decalogue": "Decálogo del Conocimiento Abierto"
   },
+  "context_menu": {
+    "new_widget": "Nuevo widget...",
+    "settings": "Configuración",
+    "manage_profiles": "Administrar perfiles",
+    "change_background": "Cambiar fondo...",
+    "show_toolbar": "Mostrar barra inferior",
+    "hide_toolbar": "Ocultar barra inferior",
+    "reset_layout": "Cerrar todas las ventanas",
+    "reset_layout_confirm": "¿Quieres cerrar todas las ventanas del escritorio?"
+  },
   "widgets": {
     "attendance": {
       "title": "Control de Asistencia",
@@ -107,8 +117,42 @@
       "no_students_message": "No hay estudiantes en la lista para esta fecha.",
       "add_students_instruction": "Añade estudiantes o importa un archivo CSV."
     },
-    "scientific_calculator": { "title": "Calculadora Científica" },
-    "calendar": { "title": "Calendario" },
+    "scientific_calculator": {
+      "title": "Calculadora Científica",
+      "basic": "Básica",
+      "standard": "Estándar",
+      "scientific": "Científica",
+      "history": "Historial",
+      "no_history": "No hay historial.",
+      "error": "Error",
+      "infinity": "Infinity"
+    },
+    "calendar": {
+      "title": "Calendario",
+      "days": [
+        "Lu",
+        "Ma",
+        "Mi",
+        "Ju",
+        "Vi",
+        "Sá",
+        "Do"
+      ],
+      "months": [
+        "enero",
+        "febrero",
+        "marzo",
+        "abril",
+        "mayo",
+        "junio",
+        "julio",
+        "agosto",
+        "septiembre",
+        "octubre",
+        "noviembre",
+        "diciembre"
+      ]
+    },
     "image_carousel": {
       "title": "Carrusel de Imágenes",
       "no_images": "No hay imágenes cargadas.",
@@ -148,7 +192,13 @@
       "lap": "Vuelta",
       "reset": "Reiniciar"
     },
-    "dice": { "title": "Dados 3D" },
+    "dice": {
+      "title": "Dados 3D",
+      "num_dice": "Número de Dados:",
+      "rolling": "Lanzando...",
+      "roll_dice": "Lanzar Dados",
+      "total": "Total:"
+    },
     "group_generator": {
       "title": "Generador de Grupos",
       "student_list_label": "Lista de Estudiantes",
@@ -158,6 +208,8 @@
       "students_per_group": "Estudiantes por Grupo",
       "generate_groups": "Generar Grupos",
       "generated_groups_label": "Grupos Generados",
+      "view_large": "Ver en grande",
+      "close_large_view": "Cerrar vista grande",
       "group_title": "Grupo {{number}}",
       "no_groups_message": "Los grupos aparecerán aquí."
     },
@@ -261,7 +313,9 @@
       "play_again": "Jugar de Nuevo",
       "icon_alt": "Memorama"
     },
-    "metronome": { "title": "Metrónomo" },
+    "metronome": {
+      "title": "Metrónomo"
+    },
     "notepad": {
       "title": "Bloc de Notas",
       "icon_alt": "Bloc de notas",
@@ -317,9 +371,15 @@
       "title": "Ruleta Aleatoria",
       "icon_alt": "Ruleta Aleatoria",
       "default_options": [
-        { "text": "Opción 1" },
-        { "text": "Opción 2" },
-        { "text": "Opción 3" }
+        {
+          "text": "Opción 1"
+        },
+        {
+          "text": "Opción 2"
+        },
+        {
+          "text": "Opción 3"
+        }
       ],
       "result_overlay_text": "Haz clic para volver a girar",
       "fullscreen_button_title": "Ampliar ruleta",
@@ -384,28 +444,6 @@
       "pan_mode": "Activar modo navegación",
       "exit_pan": "Salir del modo navegación",
       "center_view": "Centrar vista"
-    },
-    "scientific_calculator": {
-      "title": "Calculadora Científica",
-      "basic": "Básica",
-      "standard": "Estándar",
-      "scientific": "Científica",
-      "history": "Historial",
-      "no_history": "No hay historial.",
-      "error": "Error",
-      "infinity": "Infinity"
-    },
-    "calendar": {
-      "title": "Calendario",
-      "days": ["Lu", "Ma", "Mi", "Ju", "Vi", "Sá", "Do"],
-      "months": ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
-    },
-    "dice": {
-      "title": "Dados 3D",
-      "num_dice": "Número de Dados:",
-      "rolling": "Lanzando...",
-      "roll_dice": "Lanzar Dados",
-      "total": "Total:"
     }
   }
 }

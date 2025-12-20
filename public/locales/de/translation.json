@@ -76,6 +76,16 @@
     "open_knowledge_adherence": "Dieses Projekt hält sich an das",
     "open_knowledge_decalogue": "Dekalog des Offenen Wissens"
   },
+  "context_menu": {
+    "new_widget": "Neues Widget...",
+    "settings": "Einstellungen",
+    "manage_profiles": "Profile verwalten",
+    "change_background": "Hintergrund ändern...",
+    "show_toolbar": "Untere Leiste anzeigen",
+    "hide_toolbar": "Untere Leiste ausblenden",
+    "reset_layout": "Alle Fenster schließen",
+    "reset_layout_confirm": "Möchtest du alle Fenster auf dem Desktop schließen?"
+  },
   "widgets": {
     "attendance": {
       "title": "Anwesenheitskontrolle",
@@ -107,8 +117,42 @@
       "no_students_message": "Für dieses Datum sind keine Schüler in der Liste.",
       "add_students_instruction": "Füge Schüler hinzu oder importiere eine CSV-Datei."
     },
-    "scientific_calculator": { "title": "Wissenschaftlicher Taschenrechner" },
-    "calendar": { "title": "Kalender" },
+    "scientific_calculator": {
+      "title": "Wissenschaftlicher Taschenrechner",
+      "basic": "Basis",
+      "standard": "Standard",
+      "scientific": "Wissenschaftlich",
+      "history": "Verlauf",
+      "no_history": "Kein Verlauf.",
+      "error": "Fehler",
+      "infinity": "Unendlich"
+    },
+    "calendar": {
+      "title": "Kalender",
+      "days": [
+        "Mo",
+        "Di",
+        "Mi",
+        "Do",
+        "Fr",
+        "Sa",
+        "So"
+      ],
+      "months": [
+        "Januar",
+        "Februar",
+        "März",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Dezember"
+      ]
+    },
     "image_carousel": {
       "title": "Bilderkarussell",
       "no_images": "Keine Bilder geladen.",
@@ -148,7 +192,13 @@
       "lap": "Runde",
       "reset": "Zurücksetzen"
     },
-    "dice": { "title": "3D-Würfel" },
+    "dice": {
+      "title": "3D-Würfel",
+      "num_dice": "Anzahl der Würfel:",
+      "rolling": "Wird gewürfelt...",
+      "roll_dice": "Würfeln",
+      "total": "Gesamt:"
+    },
     "group_generator": {
       "title": "Gruppengenerator",
       "student_list_label": "Schülerliste",
@@ -158,6 +208,8 @@
       "students_per_group": "Schüler pro Gruppe",
       "generate_groups": "Gruppen erstellen",
       "generated_groups_label": "Erstellte Gruppen",
+      "view_large": "Großansicht",
+      "close_large_view": "Großansicht schließen",
       "group_title": "Gruppe {{number}}",
       "no_groups_message": "Die Gruppen erscheinen hier."
     },
@@ -261,7 +313,9 @@
       "play_again": "Nochmal spielen",
       "icon_alt": "Memory"
     },
-    "metronome": { "title": "Metronom" },
+    "metronome": {
+      "title": "Metronom"
+    },
     "notepad": {
       "title": "Notizblock",
       "icon_alt": "Notizblock",
@@ -317,9 +371,15 @@
       "title": "Zufallsrad",
       "icon_alt": "Zufallsrad",
       "default_options": [
-        { "text": "Option 1" },
-        { "text": "Option 2" },
-        { "text": "Option 3" }
+        {
+          "text": "Option 1"
+        },
+        {
+          "text": "Option 2"
+        },
+        {
+          "text": "Option 3"
+        }
       ],
       "result_overlay_text": "Klicke, um erneut zu drehen",
       "fullscreen_button_title": "Rad vergrößern",
@@ -384,28 +444,6 @@
       "pan_mode": "Schwenkmodus umschalten",
       "exit_pan": "Schwenkmodus verlassen",
       "center_view": "Ansicht zentrieren"
-    },
-    "scientific_calculator": {
-      "title": "Wissenschaftlicher Taschenrechner",
-      "basic": "Basis",
-      "standard": "Standard",
-      "scientific": "Wissenschaftlich",
-      "history": "Verlauf",
-      "no_history": "Kein Verlauf.",
-      "error": "Fehler",
-      "infinity": "Unendlich"
-    },
-    "calendar": {
-      "title": "Kalender",
-      "days": ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
-      "months": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]
-    },
-    "dice": {
-      "title": "3D-Würfel",
-      "num_dice": "Anzahl der Würfel:",
-      "rolling": "Wird gewürfelt...",
-      "roll_dice": "Würfeln",
-      "total": "Gesamt:"
     }
   }
 }

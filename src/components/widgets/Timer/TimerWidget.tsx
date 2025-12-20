@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { FC } from 'react'; // <-- CORRECCIÓN 2: Importación de tipo
 import { useTranslation } from 'react-i18next';
 import { Play, Pause, RotateCw } from 'lucide-react';
@@ -12,6 +12,9 @@ export const TimerWidget: FC = () => {
     const [totalDuration, setTotalDuration] = useState(300);
     const [remainingSeconds, setRemainingSeconds] = useState(300);
     const [isActive, setIsActive] = useState(false);
+    const displayRef = useRef<HTMLDivElement>(null);
+    const [timeFontSize, setTimeFontSize] = useState(48);
+    const lastFontSizeRef = useRef(48);
 
     useEffect(() => {
         // CORRECCIÓN 3: Dejamos que TypeScript infiera el tipo correcto para 'interval'
@@ -37,6 +40,26 @@ export const TimerWidget: FC = () => {
 
     useEffect(handleTimeChange, [minutesInput, secondsInput]);
 
+    useEffect(() => {
+        const container = displayRef.current;
+        if (!container) return;
+
+        const updateSize = () => {
+            const { width, height } = container.getBoundingClientRect();
+            const nextSize = Math.max(32, Math.min(width * 0.3, height * 0.7));
+            const roundedSize = Math.floor(nextSize);
+            if (roundedSize !== lastFontSizeRef.current) {
+                lastFontSizeRef.current = roundedSize;
+                setTimeFontSize(roundedSize);
+            }
+        };
+
+        updateSize();
+        const resizeObserver = new ResizeObserver(updateSize);
+        resizeObserver.observe(container);
+        return () => resizeObserver.disconnect();
+    }, []);
+
     const toggleTimer = () => {
         if (totalDuration <= 0) return;
         if (remainingSeconds === 0) {
@@ -57,9 +80,19 @@ export const TimerWidget: FC = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center h-full text-text-dark p-4">
-            <div className="text-6xl font-bold font-mono mb-4">
-                {remainingSeconds === 0 && !isActive ? t('widgets.timer.finished') : formatTime(remainingSeconds)}
+        <div className="flex flex-col items-center justify-center h-full text-text-dark p-4 overflow-hidden">
+            <div className="flex-1 w-full flex items-center justify-center" ref={displayRef}>
+                <div
+                    className="font-bold font-mono leading-none"
+                    style={{
+                        fontSize: `${timeFontSize}px`,
+                        color: 'var(--color-text-light)',
+                        textShadow: '0 2px 8px rgba(0, 0, 0, 0.55)',
+                        WebkitTextStroke: '1px rgba(0, 0, 0, 0.45)',
+                    }}
+                >
+                    {remainingSeconds === 0 && !isActive ? t('widgets.timer.finished') : formatTime(remainingSeconds)}
+                </div>
             </div>
             
             <div className="flex items-center gap-2 mb-4">

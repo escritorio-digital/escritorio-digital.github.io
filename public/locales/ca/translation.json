@@ -76,6 +76,16 @@
     "open_knowledge_adherence": "Aquest projecte s'adhereix al",
     "open_knowledge_decalogue": "Decàleg del Coneixement Obert"
   },
+  "context_menu": {
+    "new_widget": "Nou widget...",
+    "settings": "Configuració",
+    "manage_profiles": "Gestionar perfils",
+    "change_background": "Canvia fons...",
+    "show_toolbar": "Mostra la barra inferior",
+    "hide_toolbar": "Amaga la barra inferior",
+    "reset_layout": "Tancar totes les finestres",
+    "reset_layout_confirm": "Vols tancar totes les finestres de l'escriptori?"
+  },
   "widgets": {
     "attendance": {
       "title": "Control d'Assistència",
@@ -198,6 +208,8 @@
       "students_per_group": "Estudiants per Grup",
       "generate_groups": "Generar Grups",
       "generated_groups_label": "Grups Generats",
+      "view_large": "Veure en gran",
+      "close_large_view": "Tancar vista gran",
       "group_title": "Grup {{number}}",
       "no_groups_message": "Els grups apareixeran aquí."
     },

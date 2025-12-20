@@ -76,6 +76,16 @@
     "open_knowledge_adherence": "Questo progetto aderisce al",
     "open_knowledge_decalogue": "Decalogo della Conoscenza Aperta"
   },
+  "context_menu": {
+    "new_widget": "Nuovo widget...",
+    "settings": "Impostazioni",
+    "manage_profiles": "Gestisci profili",
+    "change_background": "Cambia sfondo...",
+    "show_toolbar": "Mostra barra inferiore",
+    "hide_toolbar": "Nascondi barra inferiore",
+    "reset_layout": "Chiudi tutte le finestre",
+    "reset_layout_confirm": "Vuoi chiudere tutte le finestre del desktop?"
+  },
   "widgets": {
     "attendance": {
       "title": "Registro presenze",
@@ -107,8 +117,42 @@
       "no_students_message": "Non ci sono studenti nell'elenco per questa data.",
       "add_students_instruction": "Aggiungi studenti o importa un file CSV."
     },
-    "scientific_calculator": { "title": "Calcolatrice scientifica" },
-    "calendar": { "title": "Calendario" },
+    "scientific_calculator": {
+      "title": "Calcolatrice scientifica",
+      "basic": "Base",
+      "standard": "Standard",
+      "scientific": "Scientifica",
+      "history": "Cronologia",
+      "no_history": "Nessuna cronologia.",
+      "error": "Errore",
+      "infinity": "Infinito"
+    },
+    "calendar": {
+      "title": "Calendario",
+      "days": [
+        "Lu",
+        "Ma",
+        "Me",
+        "Gi",
+        "Ve",
+        "Sa",
+        "Do"
+      ],
+      "months": [
+        "gennaio",
+        "febbraio",
+        "marzo",
+        "aprile",
+        "maggio",
+        "giugno",
+        "luglio",
+        "agosto",
+        "settembre",
+        "ottobre",
+        "novembre",
+        "dicembre"
+      ]
+    },
     "image_carousel": {
       "title": "Carosello di immagini",
       "no_images": "Nessuna immagine caricata.",
@@ -148,7 +192,13 @@
       "lap": "Giro",
       "reset": "Reset"
     },
-    "dice": { "title": "Dadi 3D" },
+    "dice": {
+      "title": "Dadi 3D",
+      "num_dice": "Numero di dadi:",
+      "rolling": "Lancio...",
+      "roll_dice": "Lancia i dadi",
+      "total": "Totale:"
+    },
     "group_generator": {
       "title": "Generatore di gruppi",
       "student_list_label": "Elenco studenti",
@@ -158,6 +208,8 @@
       "students_per_group": "Studenti per gruppo",
       "generate_groups": "Genera gruppi",
       "generated_groups_label": "Gruppi generati",
+      "view_large": "Vista grande",
+      "close_large_view": "Chiudi vista grande",
       "group_title": "Gruppo {{number}}",
       "no_groups_message": "I gruppi appariranno qui."
     },
@@ -261,7 +313,9 @@
       "play_again": "Gioca di nuovo",
       "icon_alt": "Gioco di memoria"
     },
-    "metronome": { "title": "Metronomo" },
+    "metronome": {
+      "title": "Metronomo"
+    },
     "notepad": {
       "title": "Blocco note",
       "icon_alt": "Blocco note",
@@ -317,9 +371,15 @@
       "title": "Ruota casuale",
       "icon_alt": "Ruota casuale",
       "default_options": [
-        { "text": "Opzione 1" },
-        { "text": "Opzione 2" },
-        { "text": "Opzione 3" }
+        {
+          "text": "Opzione 1"
+        },
+        {
+          "text": "Opzione 2"
+        },
+        {
+          "text": "Opzione 3"
+        }
       ],
       "result_overlay_text": "Clicca per girare di nuovo",
       "fullscreen_button_title": "Ingrandisci ruota",
@@ -384,28 +444,6 @@
       "pan_mode": "Attiva modalità panoramica",
       "exit_pan": "Esci dalla modalità panoramica",
       "center_view": "Centra vista"
-    },
-    "scientific_calculator": {
-      "title": "Calcolatrice scientifica",
-      "basic": "Base",
-      "standard": "Standard",
-      "scientific": "Scientifica",
-      "history": "Cronologia",
-      "no_history": "Nessuna cronologia.",
-      "error": "Errore",
-      "infinity": "Infinito"
-    },
-    "calendar": {
-      "title": "Calendario",
-      "days": ["Lu", "Ma", "Me", "Gi", "Ve", "Sa", "Do"],
-      "months": ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"]
-    },
-    "dice": {
-      "title": "Dadi 3D",
-      "num_dice": "Numero di dadi:",
-      "rolling": "Lancio...",
-      "roll_dice": "Lancia i dadi",
-      "total": "Totale:"
     }
   }
 }

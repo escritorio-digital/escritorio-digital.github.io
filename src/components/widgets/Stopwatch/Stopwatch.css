@@ -1,25 +1,32 @@
 .stopwatch-widget {
-  @apply w-full h-full flex flex-col bg-gray-900 text-white p-4;
+  @apply w-full h-full flex flex-col bg-gray-900 text-white p-4 overflow-hidden;
 }
 
 .time-display-container {
-  @apply flex-grow flex items-center justify-center;
+  @apply flex-grow flex items-center justify-center min-h-0 min-w-0 overflow-hidden;
 }
 
 .time-display-main {
-  @apply font-mono text-5xl tracking-wider;
+  @apply font-mono tracking-wider leading-none;
 }
 
 .controls-container {
-  @apply flex-shrink-0 flex justify-between items-center my-4;
+  @apply flex-shrink-0 flex justify-center items-center gap-4 my-4;
 }
 
 .control-button {
-  @apply w-20 h-20 rounded-full flex flex-col items-center justify-center border-2 transition-colors;
+  width: clamp(64px, 12vw, 96px);
+  height: clamp(64px, 12vw, 96px);
+  @apply rounded-full flex flex-col items-center justify-center border-2 transition-colors;
   @apply disabled:opacity-50 disabled:cursor-not-allowed;
 }
 .control-button span {
-  @apply text-xs mt-1;
+  font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+  @apply mt-1;
+}
+.control-button svg {
+  width: clamp(20px, 4vw, 32px);
+  height: clamp(20px, 4vw, 32px);
 }
 
 .control-button.reset {

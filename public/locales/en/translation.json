@@ -76,6 +76,16 @@
     "open_knowledge_adherence": "This project adheres to the",
     "open_knowledge_decalogue": "Open Knowledge Decalogue"
   },
+  "context_menu": {
+    "new_widget": "New widget...",
+    "settings": "Settings",
+    "manage_profiles": "Manage profiles",
+    "change_background": "Change background...",
+    "show_toolbar": "Show bottom bar",
+    "hide_toolbar": "Hide bottom bar",
+    "reset_layout": "Close all windows",
+    "reset_layout_confirm": "Do you want to close all desktop windows?"
+  },
   "widgets": {
     "attendance": {
       "title": "Attendance Tracker",
@@ -107,8 +117,42 @@
       "no_students_message": "No students in the list for this date.",
       "add_students_instruction": "Add students or import a CSV file."
     },
-    "scientific_calculator": { "title": "Scientific Calculator" },
-    "calendar": { "title": "Calendar" },
+    "scientific_calculator": {
+      "title": "Scientific Calculator",
+      "basic": "Basic",
+      "standard": "Standard",
+      "scientific": "Scientific",
+      "history": "History",
+      "no_history": "No history.",
+      "error": "Error",
+      "infinity": "Infinity"
+    },
+    "calendar": {
+      "title": "Calendar",
+      "days": [
+        "Mo",
+        "Tu",
+        "We",
+        "Th",
+        "Fr",
+        "Sa",
+        "Su"
+      ],
+      "months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ]
+    },
     "image_carousel": {
       "title": "Image Carousel",
       "no_images": "No images loaded.",
@@ -148,7 +192,13 @@
       "lap": "Lap",
       "reset": "Reset"
     },
-    "dice": { "title": "3D Dice" },
+    "dice": {
+      "title": "3D Dice",
+      "num_dice": "Number of Dice:",
+      "rolling": "Rolling...",
+      "roll_dice": "Roll Dice",
+      "total": "Total:"
+    },
     "group_generator": {
       "title": "Group Generator",
       "student_list_label": "Student List",
@@ -158,6 +208,8 @@
       "students_per_group": "Students per Group",
       "generate_groups": "Generate Groups",
       "generated_groups_label": "Generated Groups",
+      "view_large": "Show large view",
+      "close_large_view": "Close large view",
       "group_title": "Group {{number}}",
       "no_groups_message": "Groups will appear here."
     },
@@ -261,7 +313,9 @@
       "play_again": "Play Again",
       "icon_alt": "Memory Game"
     },
-    "metronome": { "title": "Metronome" },
+    "metronome": {
+      "title": "Metronome"
+    },
     "notepad": {
       "title": "Notepad",
       "icon_alt": "Notepad",
@@ -317,9 +371,15 @@
       "title": "Random Spinner",
       "icon_alt": "Random Spinner",
       "default_options": [
-        { "text": "Option 1" },
-        { "text": "Option 2" },
-        { "text": "Option 3" }
+        {
+          "text": "Option 1"
+        },
+        {
+          "text": "Option 2"
+        },
+        {
+          "text": "Option 3"
+        }
       ],
       "result_overlay_text": "Click to spin again",
       "fullscreen_button_title": "Enlarge spinner",
@@ -384,28 +444,6 @@
       "pan_mode": "Toggle pan mode",
       "exit_pan": "Exit pan mode",
       "center_view": "Center view"
-    },
-    "scientific_calculator": {
-      "title": "Scientific Calculator",
-      "basic": "Basic",
-      "standard": "Standard",
-      "scientific": "Scientific",
-      "history": "History",
-      "no_history": "No history.",
-      "error": "Error",
-      "infinity": "Infinity"
-    },
-    "calendar": {
-      "title": "Calendar",
-      "days": ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
-      "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    },
-    "dice": {
-      "title": "3D Dice",
-      "num_dice": "Number of Dice:",
-      "rolling": "Rolling...",
-      "roll_dice": "Roll Dice",
-      "total": "Total:"
     }
   }
 }
