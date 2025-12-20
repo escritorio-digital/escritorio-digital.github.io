@@ -41,6 +41,11 @@ export const RandomSpinnerWidget: FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const optionsRef = useRef(options);
+
+  useEffect(() => {
+    optionsRef.current = options;
+  }, [options]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -147,14 +152,18 @@ export const RandomSpinnerWidget: FC = () => {
   };
 
   const spin = () => {
-    if (isSpinning || options.length < 2) return;
+    if (isSpinning) return;
+    let activeOptions = optionsRef.current;
     if (removeAfterSelect && pendingRemovalText) {
-      const removalIndex = options.findIndex((option) => option.text === pendingRemovalText);
+      const removalIndex = activeOptions.findIndex((option) => option.text === pendingRemovalText);
       if (removalIndex !== -1) {
-        setOptions(options.filter((_, index) => index !== removalIndex));
+        const nextOptions = activeOptions.filter((_, index) => index !== removalIndex);
+        setOptions(nextOptions);
+        activeOptions = nextOptions;
       }
       setPendingRemovalText(null);
     }
+    if (activeOptions.length < 2) return;
     setIsSpinning(true);
     setResult(null);
     const spinAngleStart = Math.random() * 20 + 20;
@@ -174,11 +183,11 @@ export const RandomSpinnerWidget: FC = () => {
         requestAnimationFrame(animate);
       } else {
         const finalAngle = angle % (2 * Math.PI);
-        const arcSize = (2 * Math.PI) / options.length;
+        const arcSize = (2 * Math.PI) / activeOptions.length;
         const pointerAngle = -Math.PI / 2;
         const normalizedAngle = ((pointerAngle - finalAngle) % (2 * Math.PI) + (2 * Math.PI)) % (2 * Math.PI);
-        const winnerIndex = Math.floor(normalizedAngle / arcSize) % options.length;
-        const winnerText = options[winnerIndex]?.text ?? null;
+        const winnerIndex = Math.floor(normalizedAngle / arcSize) % activeOptions.length;
+        const winnerText = activeOptions[winnerIndex]?.text ?? null;
         setResult(winnerText);
         if (removeAfterSelect && winnerText) {
           setPendingRemovalText(winnerText);
