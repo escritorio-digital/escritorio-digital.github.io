@@ -66,6 +66,10 @@
     "settings": "Ezarpenak",
     "widgetLibrary": "Widget Liburutegia"
   },
+  "desktop": {
+    "fullscreen_enter": "Pantaila osoa",
+    "fullscreen_exit": "Pantaila osoa itxi"
+  },
   "credits": {
     "title": "Kredituak eta Lizentzia",
     "tooltip": "Kredituak, lizentzia eta programaren gida",

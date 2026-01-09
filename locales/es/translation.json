@@ -67,6 +67,10 @@
     "settings": "Configuración",
     "widgetLibrary": "Librería de Widgets"
   },
+  "desktop": {
+    "fullscreen_enter": "Pantalla completa",
+    "fullscreen_exit": "Salir de pantalla completa"
+  },
   "credits": {
     "title": "Créditos y Licencia",
     "tooltip": "Créditos, licencia y guía del programa",

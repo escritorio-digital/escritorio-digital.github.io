@@ -67,6 +67,10 @@
     "settings": "Settings",
     "widgetLibrary": "Widget Library"
   },
+  "desktop": {
+    "fullscreen_enter": "Enter fullscreen",
+    "fullscreen_exit": "Exit fullscreen"
+  },
   "credits": {
     "title": "Credits and License",
     "tooltip": "Credits, license, and program guide",

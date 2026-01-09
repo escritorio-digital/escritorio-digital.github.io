@@ -67,6 +67,10 @@
     "settings": "Configuració",
     "widgetLibrary": "Biblioteca de Ginys"
   },
+  "desktop": {
+    "fullscreen_enter": "Pantalla completa",
+    "fullscreen_exit": "Sortir de pantalla completa"
+  },
   "credits": {
     "title": "Crèdits i Llicència",
     "tooltip": "Crèdits, llicència i guia del programa",
