@@ -19,6 +19,10 @@ export const ProfileManager: React.FC<ProfileManagerProps> = ({
   const { t } = useTranslation();
   const [newProfileName, setNewProfileName] = useState('');
   const { theme } = useTheme();
+  const defaultProfileKey = 'Escritorio Principal';
+
+  const getDisplayName = (name: string) =>
+    name === defaultProfileKey ? t('settings.profiles.default_name') : name;
 
   const handleSaveCurrent = () => {
     const trimmedName = newProfileName.trim();
@@ -43,7 +47,8 @@ export const ProfileManager: React.FC<ProfileManagerProps> = ({
       alert(t('settings.profiles.delete_last_alert'));
       return;
     }
-    if (window.confirm(t('settings.profiles.delete_confirm', { name }))) {
+    const displayName = getDisplayName(name);
+    if (window.confirm(t('settings.profiles.delete_confirm', { name: displayName }))) {
       const newProfiles = { ...profiles };
       delete newProfiles[name];
       setProfiles(newProfiles);
@@ -75,7 +80,7 @@ export const ProfileManager: React.FC<ProfileManagerProps> = ({
         <ul className="space-y-2">
           {Object.keys(profiles).map(name => (
             <li key={name} className="flex items-center justify-between p-3 bg-white/50 rounded-lg">
-              <span className="font-semibold">{name}</span>
+              <span className="font-semibold">{getDisplayName(name)}</span>
               <div className="flex gap-2">
                 <button
                   onClick={() => setActiveProfileName(name)}

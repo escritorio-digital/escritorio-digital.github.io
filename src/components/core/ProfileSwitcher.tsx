@@ -21,6 +21,10 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
   const { t } = useTranslation();
   const profileNames = Object.keys(profiles);
   const containerRef = useRef<HTMLDivElement>(null);
+  const defaultProfileKey = 'Escritorio Principal';
+
+  const getDisplayName = (name: string) =>
+    name === defaultProfileKey ? t('settings.profiles.default_name') : name;
 
   const handleProfileSelect = (name: string) => {
     setActiveProfileName(name);
@@ -62,7 +66,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
                         : 'hover:bg-accent hover:text-text-dark'
                     }`}
                   >
-                    {name}
+                    {getDisplayName(name)}
                   </button>
                 </li>
               ))}
@@ -84,7 +88,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
           className="w-56 h-12 px-4 bg-black/20 backdrop-blur-md rounded-full text-white hover:bg-black/40 transition-colors flex items-center justify-between"
           title={t('settings.profiles.switcher_title')}
         >
-          <span className="font-semibold">{activeProfileName}</span>
+          <span className="font-semibold">{getDisplayName(activeProfileName)}</span>
           {/* El icono cambia si el menú está abierto o cerrado */}
           {isOpen ? <ChevronUp size={20} /> : <ChevronsUpDown size={20} />}
         </button>

@@ -27,6 +27,7 @@
       "invalid_name_alert": "Invalid or already existing profile name.",
       "delete_last_alert": "You cannot delete the last profile.",
       "delete_confirm": "Are you sure you want to delete the profile \"{{name}}\"?",
+      "default_name": "Main desktop",
       "save_current_title": "Save Current Settings as a New Profile",
       "new_profile_placeholder": "New profile name...",
       "manage_button": "Manage profiles",

@@ -27,6 +27,7 @@
       "invalid_name_alert": "Nombre de perfil inválido o ya existente.",
       "delete_last_alert": "No puedes eliminar el último perfil.",
       "delete_confirm": "¿Estás seguro de que quieres eliminar el perfil \"{{name}}\"?",
+      "default_name": "Escritorio principal",
       "save_current_title": "Guardar Configuración Actual como Nuevo Perfil",
       "new_profile_placeholder": "Nombre del nuevo perfil...",
       "manage_button": "Gestionar perfiles",

@@ -27,6 +27,7 @@
       "invalid_name_alert": "Nom de perfil invàlid o ja existent.",
       "delete_last_alert": "No pots eliminar l'últim perfil.",
       "delete_confirm": "Estàs segur que vols eliminar el perfil \"{{name}}\"?",
+      "default_name": "Escriptori principal",
       "save_current_title": "Desar la Configuració Actual com a Nou Perfil",
       "new_profile_placeholder": "Nom del nou perfil...",
       "manage_button": "Gestionar perfils",

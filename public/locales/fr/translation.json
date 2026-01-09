@@ -28,6 +28,7 @@
       "invalid_name_alert": "Nom de profil invalide ou déjà existant.",
       "delete_last_alert": "Vous ne pouvez pas supprimer le dernier profil.",
       "delete_confirm": "Êtes-vous sûr de vouloir supprimer le profil \"{{name}}\" ?",
+      "default_name": "Bureau principal",
       "save_current_title": "Enregistrer la configuration actuelle comme nouveau profil",
       "new_profile_placeholder": "Nom du nouveau profil...",
       "manage_button": "Gérer les profils",
