@@ -4,6 +4,8 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 
 ## How to use it
 
+- **On-screen date and time**: shown in the top-right corner. You can disable it in **Tools → Appearance**.
+
 - **Open a widget**: from the bottom bar or from the **Widget Library**.
 - **Close everything**: from the desktop context menu.
 - **Profiles**: create several desktops and switch between them.
@@ -21,24 +23,24 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 ### Time and rhythm
 
 - **Timer**: countdown for stations, short exams, turn-based work, etc.
-- **Stopwatch.
+- **Stopwatch**: measure times (experiments, challenges, PE, dynamics).
 - **Metronome**: steady pulse. Useful for music, rhythm reading, class routines, or interval work.
 
 ### Math and science
 
 - **Scientific calculator**: common calculations in science and math.
-- **Unit converter for problems and labs.
-- **Markdown + LaTeX.
+- **Unit converter**: convert magnitudes for problems and labs.
+- **Markdown + LaTeX**: write notes with formulas and formatting.
 
 ### Whiteboard, writing, and resources
 
 - **Notepad**: quick notes for instructions, ideas, examples, lists, etc.
-- **Drawing pad.
-- **Image carousel.
+- **Drawing pad**: freehand drawing (sketches, graphs, concept maps, diagrams).
+- **Image carousel**: show a collection of images (plates, exercises, lab photos, maps…).
 - **Web viewer**: open a web page inside the desktop to use an online resource without switching tabs.
 - **PDF viewer**: open PDF files inside the desktop.
 - **Live viewer**: designed to show web content or external resources comfortably while explaining.
-- **HTML.
+- **HTML**: space to display prepared content.
 
 ### Interaction, chance, and educational games
 

@@ -4,6 +4,8 @@ Digitaler Desktop ist eine Arbeitsfläche mit „Fenstern“ für den Unterricht
 
 ## So funktioniert es
 
+- **Datum und Uhrzeit auf dem Bildschirm**: oben rechts sichtbar. Kann unter **Werkzeuge → Erscheinungsbild** deaktiviert werden.
+
 - **Widget öffnen**: über die untere Leiste oder die **Widget‑Bibliothek**.
 - **Alles schließen**: im Kontextmenü des Desktops.
 - **Profile**: mehrere Desktops anlegen und zwischen ihnen wechseln.
@@ -21,24 +23,24 @@ Digitaler Desktop ist eine Arbeitsfläche mit „Fenstern“ für den Unterricht
 ### Zeit und Rhythmus
 
 - **Timer**: Countdown für Stationen, kurze Tests, Arbeit in Runden usw.
-- **Stoppuhr.
+- **Stoppuhr**: Zeiten messen (Experimente, Challenges, Sport, Dynamiken).
 - **Metronom**: gleichmäßiger Puls. Nützlich für Musik, rhythmisches Lesen, Routinen oder Intervallarbeit.
 
 ### Mathematik und Naturwissenschaften
 
 - **Wissenschaftlicher Rechner**: gängige Berechnungen in Mathematik und Naturwissenschaften.
-- **Einheitenumrechner für Aufgaben und Praktika.
-- **Markdown + LaTeX.
+- **Einheitenumrechner**: Größen für Aufgaben und Praktika umrechnen.
+- **Markdown + LaTeX**: Notizen mit Formeln und Formatierung schreiben.
 
 ### Tafel, Schreiben und Ressourcen
 
 - **Notizblock**: schnelle Notizen für Anweisungen, Ideen, Beispiele, Listen usw.
-- **Zeichenfläche.
-- **Bilder‑Karussell.
+- **Zeichenfläche**: freihändig zeichnen (Skizzen, Diagramme, Concept Maps).
+- **Bilder‑Karussell**: Bildsammlung anzeigen (Tafeln, Aufgaben, Laborfotos, Karten …).
 - **Web‑Viewer**: eine Webseite im Desktop öffnen, ohne den Tab zu wechseln.
 - **PDF-Viewer**: PDFs direkt im Desktop öffnen.
 - **Direkt‑Viewer**: für die komfortable Anzeige von Web‑Inhalten oder externen Ressourcen während der Erklärung.
-- **HTML.
+- **HTML**: Bereich für vorbereitete Inhalte.
 
 ### Interaktion, Zufall und Lernspiele
 

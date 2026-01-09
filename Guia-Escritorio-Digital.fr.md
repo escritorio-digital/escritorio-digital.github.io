@@ -4,6 +4,8 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 
 ## Comment l’utiliser
 
+- **Date et heure à l’écran** : visibles en haut à droite. Désactivation dans **Outils → Apparence**.
+
 - **Ouvrir un widget** : depuis la barre inférieure ou la **Bibliothèque de widgets**.
 - **Tout fermer** : via le menu contextuel du bureau.
 - **Profils** : créez plusieurs bureaux et passez de l’un à l’autre.
@@ -21,24 +23,24 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 ### Temps et rythme
 
 - **Minuteur** : compte à rebours pour ateliers, évaluations courtes, travail par tours, etc.
-- **Chronomètre.
+- **Chronomètre** : mesure des temps (expériences, défis, EPS, dynamiques).
 - **Métronome** : marque un tempo constant. Utile pour la musique, la lecture rythmée, les routines ou le travail par intervalles.
 
 ### Mathématiques et sciences
 
 - **Calculatrice scientifique** : calculs courants en sciences et mathématiques.
-- **Convertisseur d’unités pour exercices et TP.
-- **Markdown + LaTeX.
+- **Convertisseur d’unités** : conversion des grandeurs pour exercices et TP.
+- **Markdown + LaTeX** : écrire des notes avec formules et mise en forme.
 
 ### Tableau, écriture et ressources
 
 - **Bloc‑notes** : notes rapides pour consignes, idées, exemples, listes, etc.
-- **Tableau de dessin.
-- **Carrousel d’images.
+- **Tableau de dessin** : dessin à main levée (schémas, graphiques, cartes conceptuelles, diagrammes).
+- **Carrousel d’images** : afficher une collection d’images (planches, exercices, photos de labo, cartes…).
 - **Visionneuse web** : ouvre une page web dans le bureau sans changer d’onglet.
 - **Visionneuse PDF **: ouvrir des fichiers PDF dans le bureau.
 - **Visionneuse directe** : pour afficher confortablement du contenu web ou des ressources externes pendant l’explication.
-- **HTML.
+- **HTML** : espace pour afficher des contenus préparés.
 
 ### Interaction, hasard et jeux éducatifs
 

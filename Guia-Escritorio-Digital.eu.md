@@ -4,6 +4,8 @@ Idazmahai Digitala ikasgelarako pentsatutako “leihoekin” lan‑taula bat da.
 
 ## Nola erabiltzen da
 
+- **Pantailako data eta ordua**: goiko eskuineko izkinan ikusgai. **Tresnak → Itxura** atalean desaktiba daiteke.
+
 - **Widget bat ireki**: beheko barratik edo **Widgeten Liburutegitik**.
 - **Dena ixtea**: mahaigaineko testuinguru‑menuan.
 - **Profilak**: sortu hainbat mahaigain eta aldatu haien artean.
@@ -21,24 +23,24 @@ Idazmahai Digitala ikasgelarako pentsatutako “leihoekin” lan‑taula bat da.
 ### Denbora eta erritmoa
 
 - **Kronometroa**: atzerako kontua estazio‑lanetarako, proba laburretarako, txandakako lanerako, etab.
-- **Kronometroa.
+- **Kronometroa**: denborak neurtu (esperimentuak, erronkak, heziketa fisikoa, dinamikak).
 - **Metronomoa**: pultsua markatzen du. Musika, irakurketa erritmikoa, ikasgelako dinamikak edo tarte‑lana egiteko.
 
 ### Matematika eta zientziak
 
 - **Kalkulagailu zientifikoa**: matematika eta zientzietako kalkulu arruntak.
-- **Unitate‑bihurgailua ariketetarako eta praktiketan.
-- **Markdown + LaTeX.
+- **Unitate‑bihurgailua**: magnitudeak ariketetarako eta praktiketan bihurtu.
+- **Markdown + LaTeX**: oharrak formularekin eta formatuarekin idatzi.
 
 ### Arbel, idazketa eta baliabideak
 
-- **Ohar‑blokea.
-- **Marrazteko arbela.
-- **Irudi‑karusela.
+- **Ohar‑blokea**: oharrak azkar idazteko.
+- **Marrazteko arbela**: eskuz marrazteko (eskemak, grafikoak, kontzeptu‑mapak, diagramak).
+- **Irudi‑karusela**: irudi bilduma bat erakutsi (laminak, ariketak, laborategiko argazkiak, mapak…).
 - **Web‑bisorea**: web orri bat mahaigain barruan ireki, fitxaz aldatu gabe.
 - **PDF ikustailea**: PDF fitxategiak mahaigainean ireki.
 - **Zuzeneko bisorea**: azalpenetan web edukia edo kanpoko baliabideak eroso erakusteko.
-- **HTML.
+- **HTML**: aurrez prestatutako edukiak erakusteko gunea.
 
 ### Interakzioa, ausazkotasuna eta joko didaktikoak
 

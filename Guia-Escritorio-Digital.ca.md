@@ -4,6 +4,8 @@ Escriptori Digital és una pissarra de treball amb “finestres” pensada per a
 
 ## Com s’utilitza
 
+- **Data i hora en pantalla**: visibles a la cantonada superior dreta. Es poden desactivar a **Eines → Aparença**.
+
 - **Obrir un widget**: des de la barra inferior o des de la **Biblioteca de widgets**.
 - **Tancar-ho tot**: al menú contextual de l’escriptori.
 - **Perfils**: crea diversos escriptoris i canvia entre ells.
@@ -21,24 +23,24 @@ Escriptori Digital és una pissarra de treball amb “finestres” pensada per a
 ### Temps i ritme
 
 - **Temporitzador**: compte enrere per a activitats per estacions, exàmens curts, treball per torns, etc.
-- **Cronòmetre.
+- **Cronòmetre**: mesura temps (experiments, reptes, educació física, dinàmiques).
 - **Metrònom**: marca un pols constant. Útil per a música, lectura rítmica, dinàmiques de classe o treball per intervals.
 
 ### Matemàtiques i ciències
 
 - **Calculadora científica**: càlculs comuns en ciències i matemàtiques.
-- **Convertidor d’unitats per a problemes i pràctiques.
-- **Markdown + LaTeX.
+- **Convertidor d’unitats**: converteix magnituds per a problemes i pràctiques.
+- **Markdown + LaTeX**: escriu apunts amb fórmules i format.
 
 ### Pissarra, escriptura i recursos
 
 - **Bloc de notes**: notes ràpides per a consignes, idees, exemples, llistes, etc.
-- **Pissarra de dibuix.
-- **Carrusel d’imatges.
+- **Pissarra de dibuix**: dibuix a mà alçada (esquemes, gràfiques, mapes conceptuals, diagrames).
+- **Carrusel d’imatges**: mostra una col·lecció d’imatges (làmines, exercicis, fotos de laboratori, mapes…).
 - **Visor web**: obre una pàgina web dins l’escriptori per usar un recurs en línia sense canviar de pestanya.
 - **Visor PDF**: obre fitxers PDF dins de l’escriptori.
 - **Visor directe**: pensat per mostrar contingut web o recursos externs de manera còmoda durant l’explicació.
-- **HTML.
+- **HTML**: espai per mostrar continguts preparats.
 
 ### Interacció, atzar i jocs educatius
 

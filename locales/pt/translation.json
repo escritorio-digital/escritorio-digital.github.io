@@ -59,6 +59,8 @@
       "wallpaper_title": "Papel de Parede",
       "upload_image_button": "Enviar Imagem",
       "remove_wallpaper_button": "Remover Papel de Parede",
+      "show_datetime_label": "Mostrar data e hora",
+      "show_datetime_help": "Mostrada no canto superior direito.",
       "reset_theme_button": "Restaurar Tema Padrão"
     }
   },

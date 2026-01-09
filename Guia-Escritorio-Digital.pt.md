@@ -4,6 +4,8 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 
 ## Como se usa
 
+- **Data e hora no ecrã**: visíveis no canto superior direito. Pode desativar em **Ferramentas → Aparência**.
+
 - **Abrir um widget**: a partir da barra inferior ou da **Biblioteca de widgets**.
 - **Fechar tudo**: no menu contextual do ambiente.
 - **Perfis**: crie vários ambientes e mude entre eles.
@@ -21,24 +23,24 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 ### Tempo e ritmo
 
 - **Temporizador**: contagem decrescente para estações, testes curtos, trabalho por turnos, etc.
-- **Cronómetro.
+- **Cronómetro**: mide tiempos (experimentos, retos, educación física, dinámicas).
 - **Metrónomo**: marca um pulso constante. Útil para música, leitura rítmica, dinâmicas de aula ou trabalho por intervalos.
 
 ### Matemática e ciências
 
 - **Calculadora científica**: cálculos comuns em ciências e matemática.
-- **Conversor de unidades para problemas e práticas.
-- **Markdown + LaTeX.
+- **Conversor de unidades**: converte grandezas para problemas e práticas.
+- **Markdown + LaTeX**: escreva apontamentos com fórmulas e formatação.
 
 ### Quadro, escrita e recursos
 
 - **Bloco de notas**: notas rápidas para instruções, ideias, exemplos, listas, etc.
-- **Quadro de desenho.
-- **Carrossel de imagens.
+- **Quadro de desenho**: desenho à mão livre (esquemas, gráficos, mapas conceptuais, diagramas).
+- **Carrossel de imagens**: mostra uma coleção de imagens (pranchas, exercícios, fotos de laboratório, mapas…).
 - **Visualizador web**: abre uma página web dentro do ambiente para usar um recurso online sem mudar de separador.
 - **Visualizador PDF**: abre ficheiros PDF dentro do ambiente.
 - **Visualizador direto**: pensado para mostrar conteúdo web ou recursos externos de forma cómoda durante a explicação.
-- **HTML.
+- **HTML**: espaço para mostrar conteúdos preparados.
 
 ### Interação, azar e jogos educativos
 

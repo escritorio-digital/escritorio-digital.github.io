@@ -4,6 +4,8 @@ Escritorio Digital es una pizarra de trabajo con “ventanas” pensada para el 
 
 ## Cómo se usa
 
+- **Fecha y hora en pantalla**: visibles en la esquina superior derecha. Se pueden desactivar en **Herramientas → Apariencia**.
+
 - **Abrir un widget**: desde la barra inferior o desde la **Librería de widgets**.
 - **Cerrar todo**: en el menú contextual del escritorio.
 - **Perfiles**: crea varios escritorios y cambia entre ellos.
@@ -21,24 +23,24 @@ Escritorio Digital es una pizarra de trabajo con “ventanas” pensada para el 
 ### Tiempo y ritmo
 
 - **Temporizador**: cuenta atrás para actividades por estaciones, exámenes cortos, trabajo por turnos, etc.
-- **Cronómetro.
+- **Cronómetro**: mide tiempos (experimentos, retos, educación física, dinámicas).
 - **Metrónomo**: marca un pulso constante. Útil para música, lectura rítmica, dinámicas de clase o trabajo por intervalos.
 
 ### Matemáticas y ciencias
 
 - **Calculadora científica**: cálculos comunes en ciencias y matemáticas.
-- **Conversor de unidades para problemas y prácticas.
-- **Markdown + LaTeX.
+- **Conversor de unidades**: convierte magnitudes para problemas y prácticas.
+- **Markdown + LaTeX**: escribe apuntes con fórmulas y formato.
 
 ### Pizarra, escritura y recursos
 
 - **Bloc de notas**: notas rápidas para consignas, ideas, ejemplos, listas, etc.
-- **Pizarra de dibujo.
-- **Carrusel de imágenes.
+- **Pizarra de dibujo**: dibuja a mano alzada (esquemas, gráficas, mapas conceptuales, diagramas).
+- **Carrusel de imágenes**: muestra una colección de imágenes (láminas, ejercicios, fotos de laboratorio, mapas…).
 - **Visor web**: abre una página web dentro del escritorio para usar un recurso online sin cambiar de pestaña.
 - **Visor PDF**: abre archivos PDF dentro del escritorio.
 - **Visor directo**: pensado para mostrar contenido web o recursos externos de forma cómoda durante la explicación.
-- **HTML.
+- **HTML**: espacio para mostrar contenidos preparados.
 
 ### Interacción, azar y juegos educativos
 

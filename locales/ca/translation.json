@@ -57,6 +57,8 @@
       "wallpaper_title": "Fons de Pantalla",
       "upload_image_button": "Pujar Imatge",
       "remove_wallpaper_button": "Treure Fons",
+      "show_datetime_label": "Mostrar data i hora",
+      "show_datetime_help": "Es mostra a la cantonada superior dreta.",
       "reset_theme_button": "Restablir Tema per Defecte"
     }
   },

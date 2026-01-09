@@ -57,6 +57,8 @@
       "wallpaper_title": "Wallpaper",
       "upload_image_button": "Upload Image",
       "remove_wallpaper_button": "Remove Wallpaper",
+      "show_datetime_label": "Show date and time",
+      "show_datetime_help": "Shown in the top-right corner.",
       "reset_theme_button": "Reset to Default Theme"
     }
   },

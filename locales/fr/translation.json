@@ -58,6 +58,8 @@
       "wallpaper_title": "Fond d'écran",
       "upload_image_button": "Télécharger une image",
       "remove_wallpaper_button": "Supprimer le fond d'écran",
+      "show_datetime_label": "Afficher la date et l'heure",
+      "show_datetime_help": "Affichées en haut à droite.",
       "reset_theme_button": "Réinitialiser le thème par défaut"
     }
   },

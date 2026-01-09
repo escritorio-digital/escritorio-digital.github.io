@@ -57,6 +57,8 @@
       "wallpaper_title": "Hintergrundbild",
       "upload_image_button": "Bild hochladen",
       "remove_wallpaper_button": "Hintergrund entfernen",
+      "show_datetime_label": "Datum und Uhrzeit anzeigen",
+      "show_datetime_help": "Wird oben rechts angezeigt.",
       "reset_theme_button": "Standardthema wiederherstellen"
     }
   },

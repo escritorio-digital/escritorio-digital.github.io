@@ -57,6 +57,8 @@
       "wallpaper_title": "Fondo de Pantalla",
       "upload_image_button": "Subir Imagen",
       "remove_wallpaper_button": "Quitar Fondo",
+      "show_datetime_label": "Mostrar fecha y hora",
+      "show_datetime_help": "Se muestra en la esquina superior derecha.",
       "reset_theme_button": "Restablecer Tema por Defecto"
     }
   },

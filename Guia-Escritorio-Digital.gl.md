@@ -4,6 +4,8 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 
 ## Como se usa
 
+- **Data e hora na pantalla**: visibles na esquina superior dereita. Pódense desactivar en **Ferramentas → Aparencia**.
+
 - **Abrir un widget**: desde a barra inferior ou desde a **Biblioteca de widgets**.
 - **Pechar todo**: no menú contextual do escritorio.
 - **Perfís**: crea varios escritorios e cambia entre eles.
@@ -21,24 +23,24 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 ### Tempo e ritmo
 
 - **Temporizador**: conta atrás para actividades por estacións, exames curtos, traballo por quendas, etc.
-- **Cronómetro.
+- **Cronómetro**: mide tiempos (experimentos, retos, educación física, dinámicas).
 - **Metrónomo**: marca un pulso constante. Útil para música, lectura rítmica, dinámicas de clase ou traballo por intervalos.
 
 ### Matemáticas e ciencias
 
 - **Calculadora científica**: cálculos comúns en ciencias e matemáticas.
-- **Conversor de unidades para problemas e prácticas.
-- **Markdown + LaTeX.
+- **Conversor de unidades**: converte magnitudes para problemas e prácticas.
+- **Markdown + LaTeX**: escribe apuntes con fórmulas e formato.
 
 ### Pizarra, escritura e recursos
 
 - **Bloc de notas**: notas rápidas para consignas, ideas, exemplos, listas, etc.
-- **Pizarra de debuxo.
-- **Carrusel de imaxes.
+- **Pizarra de debuxo**: debuxa a man alzada (esquemas, gráficas, mapas conceptuais, diagramas).
+- **Carrusel de imaxes**: amosa unha colección de imaxes (láminas, exercicios, fotos de laboratorio, mapas…).
 - **Visor web**: abre unha páxina web dentro do escritorio para usar un recurso en liña sen cambiar de pestana.
 - **Visor PDF**: abre ficheiros PDF dentro do escritorio.
 - **Visor directo**: pensado para mostrar contido web ou recursos externos de forma cómoda durante a explicación.
-- **HTML.
+- **HTML**: espazo para mostrar contidos preparados.
 
 ### Interacción, azar e xogos educativos
 

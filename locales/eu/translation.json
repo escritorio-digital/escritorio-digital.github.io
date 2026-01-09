@@ -56,6 +56,8 @@
       "wallpaper_title": "Horma-papera",
       "upload_image_button": "Irudia igo",
       "remove_wallpaper_button": "Kendu atzealdea",
+      "show_datetime_label": "Data eta ordua erakutsi",
+      "show_datetime_help": "Goiko eskuineko izkinan erakusten da.",
       "reset_theme_button": "Berrezarri gai lehenetsia"
     }
   },
