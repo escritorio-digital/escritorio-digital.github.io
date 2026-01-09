@@ -39,6 +39,7 @@ Idazmahai Digitala ikasgelarako pentsatutako “leihoekin” lan‑taula bat da.
 - **Irudi‑karusela**: irudi bilduma bat erakutsi (laminak, ariketak, laborategiko argazkiak, mapak…).
 - **Web‑bisorea**: web orri bat mahaigain barruan ireki, fitxaz aldatu gabe.
 - **PDF ikustailea**: PDF fitxategiak mahaigainean ireki.
+- **Fitxategi‑arakatzailea**: fitxategi lokalak ireki (PDF, irudiak, testua eta Markdown, audioa eta bideoa).
 - **Zuzeneko bisorea**: azalpenetan web edukia edo kanpoko baliabideak eroso erakusteko.
 - **HTML**: aurrez prestatutako edukiak erakusteko gunea.
 
