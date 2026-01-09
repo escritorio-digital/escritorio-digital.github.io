@@ -39,6 +39,7 @@ Escriptori Digital és una pissarra de treball amb “finestres” pensada per a
 - **Carrusel d’imatges**: mostra una col·lecció d’imatges (làmines, exercicis, fotos de laboratori, mapes…).
 - **Visor web**: obre una pàgina web dins l’escriptori per usar un recurs en línia sense canviar de pestanya.
 - **Visor PDF**: obre fitxers PDF dins de l’escriptori.
+- **Explorador de fitxers**: obre fitxers locals (PDF, imatges, text i Markdown, àudio i vídeo).
 - **Visor directe**: pensat per mostrar contingut web o recursos externs de manera còmoda durant l’explicació.
 - **HTML**: espai per mostrar continguts preparats.
 
