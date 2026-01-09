@@ -29,6 +29,7 @@
       "invalid_name_alert": "Nome de perfil inválido ou já existente.",
       "delete_last_alert": "Você não pode excluir o último perfil.",
       "delete_confirm": "Tem certeza de que deseja excluir o perfil \"{{name}}\"?",
+      "default_name": "Ambiente principal",
       "save_current_title": "Salvar Configuração Atual como Novo Perfil",
       "new_profile_placeholder": "Nome do novo perfil...",
       "manage_button": "Gerenciar perfis",

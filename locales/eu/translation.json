@@ -26,6 +26,7 @@
       "invalid_name_alert": "Profilaren izen baliogabea edo lehendik dagoena.",
       "delete_last_alert": "Ezin duzu azken profila ezabatu.",
       "delete_confirm": "Ziur zaude \"{{name}}\" profila ezabatu nahi duzula?",
+      "default_name": "Idazmahai nagusia",
       "save_current_title": "Gorde uneko konfigurazioa profil berri gisa",
       "new_profile_placeholder": "Profil berriaren izena...",
       "manage_button": "Profilak kudeatu",

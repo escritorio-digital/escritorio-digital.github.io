@@ -27,6 +27,7 @@
       "invalid_name_alert": "Ungültiger oder bereits vorhandener Profilname.",
       "delete_last_alert": "Du kannst das letzte Profil nicht löschen.",
       "delete_confirm": "Möchtest du das Profil \"{{name}}\" wirklich löschen?",
+      "default_name": "Hauptdesktop",
       "save_current_title": "Aktuelle Einstellungen als neues Profil speichern",
       "new_profile_placeholder": "Neuer Profilname...",
       "manage_button": "Profile verwalten",
