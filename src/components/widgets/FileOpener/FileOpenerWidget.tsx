@@ -5,13 +5,41 @@ import type { WidgetConfig } from '../../../types';
 import { FolderOpen, FileText } from 'lucide-react';
 import { withBaseUrl } from '../../../utils/assetPaths';
 import { marked } from 'marked';
+import katex from 'katex';
 import './FileOpenerWidget.css';
+import 'katex/dist/katex.min.css';
 
 type DisplayType = 'none' | 'image' | 'pdf' | 'text' | 'markdown' | 'video' | 'audio';
+
+function renderMarkdownWithLatex(input: string): string {
+  const tokens: Array<{ id: number; latex: string; displayMode: boolean }> = [];
+  let tokenized = input.replace(/\$\$([\s\S]+?)\$\$/g, (_, latex) => {
+    const id = tokens.length;
+    tokens.push({ id, latex, displayMode: true });
+    return `@@LATEX_BLOCK_${id}@@`;
+  });
+  tokenized = tokenized.replace(/\$(?!\$)([^\n$]+?)\$/g, (_, latex) => {
+    const id = tokens.length;
+    tokens.push({ id, latex, displayMode: false });
+    return `@@LATEX_INLINE_${id}@@`;
+  });
+
+  let html = marked.parse(tokenized) as string;
+  for (const token of tokens) {
+    const placeholder = token.displayMode ? `@@LATEX_BLOCK_${token.id}@@` : `@@LATEX_INLINE_${token.id}@@`;
+    const rendered = katex.renderToString(token.latex.trim(), {
+      throwOnError: false,
+      displayMode: token.displayMode,
+    });
+    html = html.split(placeholder).join(rendered);
+  }
+  return html;
+}
 
 export const FileOpenerWidget: FC = () => {
   const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
+  const markdownRef = useRef<HTMLDivElement>(null);
   const [displayType, setDisplayType] = useState<DisplayType>('none');
   const [fileName, setFileName] = useState('');
   const [fileUrl, setFileUrl] = useState('');
@@ -99,8 +127,16 @@ export const FileOpenerWidget: FC = () => {
 
   const markdownHtml = useMemo(() => {
     if (displayType !== 'markdown' || !fileContent) return '';
-    return marked.parse(fileContent) as string;
+    return renderMarkdownWithLatex(fileContent);
   }, [displayType, fileContent]);
+
+  useEffect(() => {
+    const node = markdownRef.current;
+    if (!node) return;
+    node.innerHTML = markdownHtml;
+  }, [markdownHtml]);
+
+  const isDocument = displayType === 'text' || displayType === 'markdown';
 
   return (
     <div className="file-opener-widget">
@@ -112,7 +148,10 @@ export const FileOpenerWidget: FC = () => {
           {t('widgets.file_opener.open_button')}
         </button>
       </div>
-      <div className="file-opener-body" onClick={displayType === 'none' ? handlePick : undefined}>
+      <div
+        className={`file-opener-body${isDocument ? ' file-opener-body-doc' : ''}`}
+        onClick={displayType === 'none' ? handlePick : undefined}
+      >
         {displayType === 'none' && (
           <div className="file-opener-placeholder">
             <FolderOpen size={32} />
@@ -141,7 +180,7 @@ export const FileOpenerWidget: FC = () => {
           <pre className="file-opener-text">{fileContent}</pre>
         )}
         {displayType === 'markdown' && (
-          <div className="file-opener-markdown prose" dangerouslySetInnerHTML={{ __html: markdownHtml }} />
+          <div className="file-opener-markdown prose" ref={markdownRef} />
         )}
       </div>
       <input

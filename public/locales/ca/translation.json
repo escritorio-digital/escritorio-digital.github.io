@@ -288,6 +288,7 @@
       "copy_source": "Copiar codi font",
       "copy_image": "Copiar com a imatge",
       "save_file": "Desar fitxer (.md/.tex)",
+      "open_file": "Obrir fitxer (.md)",
       "export_pdf": "Exportar com a PDF (text)",
       "source_copied": "Codi font copiat",
       "copy_failed": "No s'ha pogut copiar",

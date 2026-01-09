@@ -288,6 +288,7 @@
       "copy_source": "Quellcode kopieren",
       "copy_image": "Als Bild kopieren",
       "save_file": "Datei speichern (.md/.tex)",
+      "open_file": "Datei öffnen (.md)",
       "export_pdf": "Als PDF exportieren (Text)",
       "source_copied": "Quellcode kopiert",
       "copy_failed": "Kopieren fehlgeschlagen",

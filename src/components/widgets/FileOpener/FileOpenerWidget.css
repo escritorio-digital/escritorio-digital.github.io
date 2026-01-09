@@ -18,6 +18,10 @@
   @apply flex-1 overflow-hidden flex items-center justify-center p-4;
 }
 
+.file-opener-body-doc {
+  @apply items-start justify-start;
+}
+
 .file-opener-placeholder {
   @apply text-center text-gray-600 flex flex-col items-center gap-2;
 }
@@ -48,4 +52,9 @@
 
 .file-opener-markdown {
   @apply w-full h-full overflow-auto max-w-none;
+}
+
+.file-opener-markdown.prose {
+  max-width: none;
+  width: 100%;
 }

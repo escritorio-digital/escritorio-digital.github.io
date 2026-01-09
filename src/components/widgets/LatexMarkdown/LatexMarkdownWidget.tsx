@@ -7,7 +7,7 @@ import type { WidgetConfig } from '../../../types';
 import { marked } from 'marked';
 import katex from 'katex';
 import { toPng } from 'html-to-image'; // para "Copiar como imagen"
-import { Clipboard, Image as ImageIcon, FileDown, FileText } from 'lucide-react';
+import { Clipboard, Image as ImageIcon, FileDown, FileText, FolderOpen } from 'lucide-react';
 
 import 'katex/dist/katex.min.css';
 import './LatexMarkdownWidget.css';
@@ -32,23 +32,36 @@ async function getFontEmbedCSS(): Promise<string> {
   return cssText;
 }
 
+function renderMarkdownWithLatex(input: string): string {
+  const tokens: Array<{ id: number; latex: string; displayMode: boolean }> = [];
+  let tokenized = input.replace(/\$\$([\s\S]+?)\$\$/g, (_, latex) => {
+    const id = tokens.length;
+    tokens.push({ id, latex, displayMode: true });
+    return `@@LATEX_BLOCK_${id}@@`;
+  });
+  tokenized = tokenized.replace(/\$(?!\$)([^\n$]+?)\$/g, (_, latex) => {
+    const id = tokens.length;
+    tokens.push({ id, latex, displayMode: false });
+    return `@@LATEX_INLINE_${id}@@`;
+  });
+
+  let html = marked.parse(tokenized) as string;
+  for (const token of tokens) {
+    const placeholder = token.displayMode ? `@@LATEX_BLOCK_${token.id}@@` : `@@LATEX_INLINE_${token.id}@@`;
+    const rendered = katex.renderToString(token.latex.trim(), {
+      throwOnError: false,
+      displayMode: token.displayMode,
+    });
+    html = html.split(placeholder).join(rendered);
+  }
+  return html;
+}
+
 /** Renderiza el contenido (Markdown+KaTeX o KaTeX puro) en un elemento destino */
 function renderContentInto(target: HTMLElement, mode: Mode, input: string) {
   target.innerHTML = '';
   if (mode === 'markdown') {
-    const html = marked.parse(input) as string;
-    target.innerHTML = html;
-
-    // $$...$$ (display)
-    target.innerHTML = target.innerHTML.replace(
-      /\$\$([^$]+)\$\$/g,
-      (_, latex) => katex.renderToString(latex.trim(), { throwOnError: false, displayMode: true })
-    );
-    // $...$ (inline)
-    target.innerHTML = target.innerHTML.replace(
-      /\$([^$]+)\$/g,
-      (_, latex) => katex.renderToString(latex.trim(), { throwOnError: false, displayMode: false })
-    );
+    target.innerHTML = renderMarkdownWithLatex(input);
   } else {
     katex.render(input, target, { throwOnError: true, displayMode: true });
   }
@@ -69,6 +82,7 @@ export const LatexMarkdownWidget: FC = () => {
   const [feedback, setFeedback] = useState<string>('');
   const previewRef = useRef<HTMLDivElement>(null);
   const printRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // EFECTO: Mueve el nodo de impresión al body al montar el componente
   // para que no herede estilos y la estrategia de impresión sea más robusta.
@@ -129,6 +143,20 @@ export const LatexMarkdownWidget: FC = () => {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+  };
+
+  const handleOpenFile = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const content = await file.text();
+    setInput(content);
+    setMode('markdown');
+    event.target.value = '';
   };
 
   const handleExportAsPdfText = async () => {
@@ -219,6 +247,9 @@ export const LatexMarkdownWidget: FC = () => {
             <button title={t('widgets.latex_markdown.copy_source')} onClick={handleCopySource}>
               <Clipboard size={18} />
             </button>
+            <button title={t('widgets.latex_markdown.open_file')} onClick={handleOpenFile}>
+              <FolderOpen size={18} />
+            </button>
             <button title={t('widgets.latex_markdown.copy_image')} onClick={handleCopyAsImage}>
               <ImageIcon size={18} />
             </button>
@@ -235,6 +266,13 @@ export const LatexMarkdownWidget: FC = () => {
 
       {/* Este div se renderiza aquí, pero el useEffect lo mueve al body */}
       <div id="print-root" ref={printRef} className="prose"></div>
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".md,.markdown,text/markdown"
+        onChange={handleFileChange}
+        className="hidden"
+      />
     </>
   );
 };
