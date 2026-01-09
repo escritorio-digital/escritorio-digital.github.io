@@ -86,6 +86,12 @@
     "reset_layout": "Cerrar todas las ventanas",
     "reset_layout_confirm": "¿Quieres cerrar todas las ventanas del escritorio?"
   },
+  "storage_warning": {
+    "title": "Almacenamiento lleno",
+    "body": "El navegador está casi lleno. Hemos guardado tus cambios en un almacenamiento ampliado. Para liberar espacio sin perderlo todo, elimina imágenes del carrusel o borra notas muy largas.",
+    "open_settings": "Abrir ajustes",
+    "dismiss": "Cerrar"
+  },
   "widgets": {
     "attendance": {
       "title": "Control de Asistencia",

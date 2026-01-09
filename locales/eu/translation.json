@@ -85,6 +85,12 @@
     "reset_layout": "Itxi leiho guztiak",
     "reset_layout_confirm": "Mahaigaineko leiho guztiak itxi nahi dituzu?"
   },
+  "storage_warning": {
+    "title": "Biltegiratzea beteta",
+    "body": "Nabigatzailea ia beteta dago. Aldaketak biltegiratze zabalduan gorde ditugu. Espazioa askatzeko dena galdu gabe, ezabatu karuselaren irudiak edo oso luzeak diren oharrak.",
+    "open_settings": "Ezarpenak ireki",
+    "dismiss": "Itxi"
+  },
   "widgets": {
     "attendance": {
       "title": "Asistentzia Kontrola",

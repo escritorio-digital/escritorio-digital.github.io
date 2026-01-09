@@ -86,6 +86,12 @@
     "reset_layout": "Alle Fenster schließen",
     "reset_layout_confirm": "Möchtest du alle Fenster auf dem Desktop schließen?"
   },
+  "storage_warning": {
+    "title": "Speicher voll",
+    "body": "Der Browser ist fast voll. Wir haben deine Änderungen in einem erweiterten Speicher abgelegt. Um Platz zu schaffen, ohne alles zu verlieren, entferne Bilder aus dem Karussell oder lösche sehr lange Notizen.",
+    "open_settings": "Einstellungen öffnen",
+    "dismiss": "Schließen"
+  },
   "widgets": {
     "attendance": {
       "title": "Anwesenheitskontrolle",

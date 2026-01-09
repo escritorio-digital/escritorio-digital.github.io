@@ -86,6 +86,12 @@
     "reset_layout": "Tancar totes les finestres",
     "reset_layout_confirm": "Vols tancar totes les finestres de l'escriptori?"
   },
+  "storage_warning": {
+    "title": "Emmagatzematge ple",
+    "body": "El navegador està gairebé ple. Hem desat els canvis en un emmagatzematge ampliat. Per alliberar espai sense perdre-ho tot, elimina imatges del carrusel o esborra notes molt llargues.",
+    "open_settings": "Obrir ajustos",
+    "dismiss": "Tancar"
+  },
   "widgets": {
     "attendance": {
       "title": "Control d'Assistència",

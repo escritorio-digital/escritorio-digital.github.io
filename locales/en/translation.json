@@ -86,6 +86,12 @@
     "reset_layout": "Close all windows",
     "reset_layout_confirm": "Do you want to close all desktop windows?"
   },
+  "storage_warning": {
+    "title": "Storage full",
+    "body": "Your browser storage is almost full. We saved your changes in extended storage. To free space without losing everything, remove carousel images or delete very long notes.",
+    "open_settings": "Open settings",
+    "dismiss": "Dismiss"
+  },
   "widgets": {
     "attendance": {
       "title": "Attendance Tracker",

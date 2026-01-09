@@ -86,6 +86,12 @@
     "reset_layout": "Pechar todas as xanelas",
     "reset_layout_confirm": "Queres pechar todas as xanelas do escritorio?"
   },
+  "storage_warning": {
+    "title": "Almacenamento cheo",
+    "body": "O navegador está case cheo. Gardamos os cambios nun almacenamento ampliado. Para liberar espazo sen perdelo todo, elimina imaxes do carrusel ou borra notas moi longas.",
+    "open_settings": "Abrir axustes",
+    "dismiss": "Pechar"
+  },
   "widgets": {
     "attendance": {
       "title": "Control de Asistencia",

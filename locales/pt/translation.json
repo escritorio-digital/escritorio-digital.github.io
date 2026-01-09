@@ -88,6 +88,12 @@
     "reset_layout": "Fechar todas as janelas",
     "reset_layout_confirm": "Queres fechar todas as janelas do ambiente de trabalho?"
   },
+  "storage_warning": {
+    "title": "Armazenamento cheio",
+    "body": "O navegador está quase cheio. Guardámos as alterações num armazenamento ampliado. Para libertar espaço sem perder tudo, elimina imagens do carrossel ou apaga notas muito longas.",
+    "open_settings": "Abrir definições",
+    "dismiss": "Fechar"
+  },
   "widgets": {
     "attendance": {
       "title": "Controle de Presença",
