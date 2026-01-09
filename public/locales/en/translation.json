@@ -66,6 +66,9 @@
   },
   "credits": {
     "title": "Credits and License",
+    "tooltip": "Credits, license, and program guide",
+    "user_guide_title": "Program guide",
+    "user_guide_link": "Open widget guide",
     "original_project": "The original project <strong>Interactive Classroom Desktop</strong> and its idea belong to <strong>María Teresa González</strong>.",
     "original_link": "You can visit the original application at:",
     "new_version": "This new version was developed in collaboration by <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong>, and <strong>Pablo G. Guízar</strong>. The repository for this project is located at:",
@@ -74,6 +77,7 @@
     "vibe_apps_link_text": "Check out more applications from this community at:",
     "vibe_apps_repo_text": "Vibe Coding Educativo Repository",
     "vibe_telegram_link_text": "Join the community on Telegram:",
+    "code_license": "Code license:",
     "open_knowledge_adherence": "This project adheres to the",
     "open_knowledge_decalogue": "Open Knowledge Decalogue"
   },
@@ -94,6 +98,17 @@
     "dismiss": "Dismiss"
   },
   "widgets": {
+    "program_guide": {
+      "title": "Program guide",
+      "load_error": "Unable to load the guide."
+    },
+    "pdf_viewer": {
+      "title": "PDF viewer",
+      "url_placeholder": "Paste a PDF URL...",
+      "load_button": "Load",
+      "upload_button": "Upload PDF",
+      "empty_state": "Load a PDF from URL or file."
+    },
     "attendance": {
       "title": "Attendance Tracker",
       "badges": {

@@ -1,0 +1,35 @@
+.pdf-viewer-widget {
+  @apply w-full h-full flex flex-col p-3 bg-gray-100;
+}
+
+.pdf-controls {
+  @apply flex items-center gap-2 mb-3 pb-3 border-b border-gray-300 flex-shrink-0;
+}
+
+.pdf-icon {
+  @apply text-gray-400;
+}
+
+.pdf-url-input {
+  @apply flex-grow bg-white border-2 border-gray-300 rounded p-2 focus:border-accent outline-none text-sm;
+}
+
+.pdf-action-button {
+  @apply bg-accent text-text-dark font-semibold py-2 px-3 rounded-lg hover:bg-[#8ec9c9] transition-colors text-sm;
+}
+
+.pdf-upload-button {
+  @apply cursor-pointer;
+}
+
+.pdf-container {
+  @apply flex-grow bg-white rounded-md shadow-inner overflow-hidden flex items-center justify-center;
+}
+
+.pdf-embed {
+  @apply w-full h-full border-0;
+}
+
+.pdf-placeholder {
+  @apply text-center text-gray-500 flex flex-col items-center gap-2;
+}

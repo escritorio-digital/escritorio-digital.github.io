@@ -66,6 +66,9 @@
   },
   "credits": {
     "title": "Créditos e Licenza",
+    "tooltip": "Créditos, licenza e guía do programa",
+    "user_guide_title": "Guía do programa",
+    "user_guide_link": "Abrir guía de widgets",
     "original_project": "O proxecto orixinal <strong>Escritorio Interactivo para a Aula</strong> e a súa idea pertencen a <strong>María Teresa González</strong>.",
     "original_link": "Podes visitar a aplicación orixinal en:",
     "new_version": "Esta nova versión foi desenvolvida en colaboración por <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> e <strong>Pablo G. Guízar</strong>. O repositorio deste proxecto atópase en:",
@@ -74,6 +77,7 @@
     "vibe_apps_link_text": "Consulta máis aplicacións desta comunidade en:",
     "vibe_apps_repo_text": "Repositorio Vibe Coding Educativo",
     "vibe_telegram_link_text": "Únete á comunidade en Telegram:",
+    "code_license": "Licenza do código:",
     "open_knowledge_adherence": "Este proxecto adhírese ao",
     "open_knowledge_decalogue": "Decálogo do Coñecemento Aberto"
   },
@@ -94,6 +98,17 @@
     "dismiss": "Pechar"
   },
   "widgets": {
+    "program_guide": {
+      "title": "Guía do programa",
+      "load_error": "Non foi posible cargar a guía."
+    },
+    "pdf_viewer": {
+      "title": "Visor PDF",
+      "url_placeholder": "Pega a URL dun PDF...",
+      "load_button": "Cargar",
+      "upload_button": "Subir PDF",
+      "empty_state": "Carga un PDF desde URL ou ficheiro."
+    },
     "attendance": {
       "title": "Control de Asistencia",
       "badges": {

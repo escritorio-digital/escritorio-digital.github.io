@@ -1,0 +1,28 @@
+.program-guide-widget {
+  @apply w-full h-full flex flex-col bg-white text-text-dark;
+}
+
+.program-guide-header {
+  @apply flex items-center gap-2 px-4 py-3 border-b border-gray-200 bg-gray-50 font-semibold;
+}
+
+.program-guide-header h3 {
+  @apply text-base;
+}
+
+.program-guide-body {
+  @apply flex-1 overflow-hidden;
+}
+
+.program-guide-content {
+  @apply h-full w-full overflow-y-auto p-6;
+  max-width: none !important;
+}
+
+.program-guide-content.prose {
+  max-width: none !important;
+}
+
+.program-guide-status {
+  @apply h-full flex items-center justify-center text-sm text-gray-600;
+}

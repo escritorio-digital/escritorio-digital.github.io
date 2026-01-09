@@ -10,7 +10,7 @@ import { SettingsModal } from './components/core/SettingsModal';
 import { CreditsModal } from './components/core/CreditsModal';
 import { ThemeProvider, defaultTheme, type Theme } from './context/ThemeContext';
 import type { ActiveWidget, DesktopProfile, ProfileCollection } from './types';
-import { Copyright, PlusSquare, Settings, Image, Eye, EyeOff, X, Users } from 'lucide-react';
+import { HelpCircle, PlusSquare, Settings, Image, Eye, EyeOff, X, Users } from 'lucide-react';
 import { defaultWallpaperValue, isWallpaperValueValid } from './utils/wallpapers';
 // --- ¡AQUÍ ESTÁ EL CAMBIO! Importamos el nuevo componente ---
 import { ProfileSwitcher } from './components/core/ProfileSwitcher';
@@ -192,8 +192,12 @@ const DesktopUI: React.FC<{
                     onSettingsClick={() => openSettingsTab('general')}
                 />
             )}
-            <button onClick={() => setIsCreditsOpen(true)} className="fixed bottom-4 left-4 z-[9999] p-3 bg-black/20 backdrop-blur-md rounded-full text-white hover:bg-black/40 transition-colors" title={t('credits.title')}>
-                <Copyright size={24} />
+            <button
+                onClick={() => setIsCreditsOpen(true)}
+                className="fixed bottom-4 left-4 z-[9999] p-3 bg-black/20 backdrop-blur-md rounded-full text-white hover:bg-black/40 transition-colors"
+                title={t('credits.tooltip')}
+            >
+                <HelpCircle size={24} />
             </button>
             <SettingsModal
                 isOpen={isSettingsOpen}
@@ -206,7 +210,11 @@ const DesktopUI: React.FC<{
                 activeProfileName={activeProfileName}
                 setActiveProfileName={setActiveProfileName}
             />
-            <CreditsModal isOpen={isCreditsOpen} onClose={() => setIsCreditsOpen(false)} />
+            <CreditsModal
+                isOpen={isCreditsOpen}
+                onClose={() => setIsCreditsOpen(false)}
+                onOpenGuide={() => addWidget('program-guide')}
+            />
             
             {/* --- ¡AQUÍ ESTÁ EL CAMBIO! Añadimos el nuevo componente a la interfaz --- */}
             <ProfileSwitcher

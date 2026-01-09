@@ -29,8 +29,9 @@ Este proyecto es un entorno de escritorio virtual construido con React, que perm
 23. **Temporizador:** Un contador regresivo que puedes configurar con minutos y segundos.
 24. **Tic-Tac-Toe:** El juego clásico de tres en raya para dos jugadores.
 25. **Visor Web:** Permite embeber y mostrar el contenido de una URL directamente en el escritorio, usando un iframe.
-26. **Conexión en Directo:** Es un visor de aplicaciones web que carga una página externa, específicamente la aplicación "Conexión en Directo" de Juan José de Haro, dentro de una ventana en el escritorio.
-27. **Paleta de Dibujo:** Una completa herramienta de dibujo que permite trazos con diferentes pinceles (lápiz, rotulador, spray), insertar formas geométricas (líneas, rectángulos, círculos), añadir flechas y texto. 
+26. **Visor PDF:** Abre archivos PDF dentro del escritorio.
+27. **Conexión en Directo:** Es un visor de aplicaciones web que carga una página externa, específicamente la aplicación "Conexión en Directo" de Juan José de Haro, dentro de una ventana en el escritorio.
+28. **Paleta de Dibujo:** Una completa herramienta de dibujo que permite trazos con diferentes pinceles (lápiz, rotulador, spray), insertar formas geométricas (líneas, rectángulos, círculos), añadir flechas y texto. 
 
 ## 🚀 Cómo Crear un Nuevo Widget
 
@@ -176,5 +177,8 @@ Consulta más aplicaciones de esta comunidad en: <a href="https://vibe-coding-ed
 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener noreferrer">
 <img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Licencia Creative Commons BY-SA 4.0" />
 </a>
+</p>
+<p>
+Código: <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU AGPLv3</a> (ver <a href="./LICENSE">LICENSE</a>).
 </p>
 </div>

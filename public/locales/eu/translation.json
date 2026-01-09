@@ -65,6 +65,9 @@
   },
   "credits": {
     "title": "Kredituak eta Lizentzia",
+    "tooltip": "Kredituak, lizentzia eta programaren gida",
+    "user_guide_title": "Programaren gida",
+    "user_guide_link": "Widgeten gida ireki",
     "original_project": "<strong>Ikasgelarako Idazmahai Interaktiboa</strong> jatorrizko proiektua eta bere ideia <strong>María Teresa González</strong>enak dira.",
     "original_link": "Jatorrizko aplikazioa hemen bisita dezakezu:",
     "new_version": "Bertsio berri hau <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> eta <strong>Pablo G. Guízar</strong>-en artean garatu zen. Proiektu honen biltegia hemen dago:",
@@ -73,6 +76,7 @@
     "vibe_apps_link_text": "Kontsultatu komunitate honetako aplikazio gehiago hemen:",
     "vibe_apps_repo_text": "Vibe Coding Educativo Biltegia",
     "vibe_telegram_link_text": "Batu komunitatera Telegramen:",
+    "code_license": "Kodearen lizentzia:",
     "open_knowledge_adherence": "Proiektu honek bat egiten du",
     "open_knowledge_decalogue": "Ezagutza Irekiaren Dekalogoarekin"
   },
@@ -93,6 +97,17 @@
     "dismiss": "Itxi"
   },
   "widgets": {
+    "program_guide": {
+      "title": "Programaren gida",
+      "load_error": "Ezin izan da gida kargatu."
+    },
+    "pdf_viewer": {
+      "title": "PDF ikustailea",
+      "url_placeholder": "Itsatsi PDF baten URLa...",
+      "load_button": "Kargatu",
+      "upload_button": "Igo PDFa",
+      "empty_state": "Kargatu PDFa URLtik edo fitxategitik."
+    },
     "attendance": {
       "title": "Asistentzia Kontrola",
       "badges": {

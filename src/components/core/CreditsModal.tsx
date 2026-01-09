@@ -1,13 +1,14 @@
 import React from 'react';
 import { useTranslation, Trans } from 'react-i18next';
-import { X } from 'lucide-react';
+import { X, Github } from 'lucide-react';
 
 interface CreditsModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onOpenGuide: () => void;
 }
 
-export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) => {
+export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose, onOpenGuide }) => {
   const { t } = useTranslation();
   if (!isOpen) return null;
 
@@ -23,6 +24,18 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
         </header>
 
         <div className="p-6 overflow-y-auto text-sm space-y-4">
+          <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg text-center">
+            <p className="font-semibold text-amber-900">{t('credits.user_guide_title')}</p>
+            <button
+              onClick={() => {
+                onOpenGuide();
+                onClose();
+              }}
+              className="inline-flex items-center justify-center mt-2 px-4 py-2 rounded-full bg-amber-200 text-amber-900 font-semibold hover:bg-amber-300 transition-colors"
+            >
+              {t('credits.user_guide_link')}
+            </button>
+          </div>
           <p dangerouslySetInnerHTML={{ __html: t('credits.original_project') }} />
           <p>
             {t('credits.original_link')}{' '}
@@ -37,6 +50,12 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
                 {t('credits.repository_link_text')}
               </a>
             </Trans>
+          </p>
+          <p className="flex items-center gap-2">
+            <Github size={18} className="text-gray-700" />
+            <a href="https://github.com/escritorio-digital/escritorio-digital.github.io" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+              github.com/escritorio-digital/escritorio-digital.github.io
+            </a>
           </p>
           <hr />
           <p dangerouslySetInnerHTML={{ __html: t('credits.vibe_community') }} />
@@ -63,6 +82,12 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
             <p className="mt-4">
               <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener noreferrer" className="inline-block" title="Creative Commons Attribution-ShareAlike 4.0 International License">
                 <img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Licencia Creative Commons BY-SA 4.0" />
+              </a>
+            </p>
+            <p className="mt-4 text-sm text-gray-700">
+              {t('credits.code_license')}{' '}
+              <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                GNU AGPLv3
               </a>
             </p>
           </div>
