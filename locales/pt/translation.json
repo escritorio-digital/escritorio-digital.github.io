@@ -68,6 +68,9 @@
   },
   "credits": {
     "title": "Créditos e Licença",
+    "tooltip": "Créditos, licença e guia do programa",
+    "user_guide_title": "Guia do programa",
+    "user_guide_link": "Abrir guia de widgets",
     "original_project": "O projeto original <strong>Escritorio Interativo para a Sala</strong> e sua ideia pertencem a <strong>María Teresa González</strong>.",
     "original_link": "Você pode visitar o aplicativo original em:",
     "new_version": "Esta nova versão foi desenvolvida em colaboração por <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> e <strong>Pablo G. Guízar</strong>. O repositório deste projeto está em:",
@@ -76,6 +79,7 @@
     "vibe_apps_link_text": "Veja mais aplicações desta comunidade em:",
     "vibe_apps_repo_text": "Repositório Vibe Coding Educativo",
     "vibe_telegram_link_text": "Junte-se à comunidade no Telegram:",
+    "code_license": "Licença do código:",
     "open_knowledge_adherence": "Este projeto adere ao",
     "open_knowledge_decalogue": "Decálogo do Conhecimento Aberto"
   },
@@ -96,6 +100,17 @@
     "dismiss": "Fechar"
   },
   "widgets": {
+    "program_guide": {
+      "title": "Guia do programa",
+      "load_error": "Não foi possível carregar a guia."
+    },
+    "pdf_viewer": {
+      "title": "Visualizador PDF",
+      "url_placeholder": "Cole o URL de um PDF...",
+      "load_button": "Carregar",
+      "upload_button": "Enviar PDF",
+      "empty_state": "Carrega um PDF por URL ou ficheiro."
+    },
     "attendance": {
       "title": "Controle de Presença",
       "badges": {

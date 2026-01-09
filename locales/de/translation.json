@@ -66,6 +66,9 @@
   },
   "credits": {
     "title": "Credits und Lizenz",
+    "tooltip": "Credits, Lizenz und Programmleitfaden",
+    "user_guide_title": "Programmleitfaden",
+    "user_guide_link": "Widget-Leitfaden öffnen",
     "original_project": "Das Originalprojekt <strong>Interaktiver Klassenraum-Desktop</strong> und seine Idee gehören <strong>María Teresa González</strong>.",
     "original_link": "Du kannst die Originalanwendung hier besuchen:",
     "new_version": "Diese neue Version wurde in Zusammenarbeit von <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> und <strong>Pablo G. Guízar</strong> entwickelt. Das Repository dieses Projekts findest du unter:",
@@ -74,6 +77,7 @@
     "vibe_apps_link_text": "Weitere Anwendungen dieser Community findest du unter:",
     "vibe_apps_repo_text": "Repository Vibe Coding Educativo",
     "vibe_telegram_link_text": "Tritt der Community auf Telegram bei:",
+    "code_license": "Code-Lizenz:",
     "open_knowledge_adherence": "Dieses Projekt hält sich an das",
     "open_knowledge_decalogue": "Dekalog des Offenen Wissens"
   },
@@ -94,6 +98,17 @@
     "dismiss": "Schließen"
   },
   "widgets": {
+    "program_guide": {
+      "title": "Programmleitfaden",
+      "load_error": "Der Leitfaden konnte nicht geladen werden."
+    },
+    "pdf_viewer": {
+      "title": "PDF-Viewer",
+      "url_placeholder": "PDF-URL einfügen...",
+      "load_button": "Laden",
+      "upload_button": "PDF hochladen",
+      "empty_state": "PDF per URL oder Datei laden."
+    },
     "attendance": {
       "title": "Anwesenheitskontrolle",
       "badges": {

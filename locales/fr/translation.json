@@ -67,6 +67,9 @@
   },
   "credits": {
     "title": "Crédits et Licence",
+    "tooltip": "Crédits, licence et guide du programme",
+    "user_guide_title": "Guide du programme",
+    "user_guide_link": "Ouvrir le guide des widgets",
     "original_project": "Le projet original <strong>Bureau Interactif pour la Salle de Classe</strong> et son idée appartiennent à <strong>María Teresa González</strong>.",
     "original_link": "Vous pouvez visiter l'application originale à l'adresse suivante :",
     "new_version": "Cette nouvelle version a été développée en collaboration par <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> et <strong>Pablo G. Guízar</strong>. Le dépôt de ce projet se trouve à l'adresse suivante :",
@@ -75,6 +78,7 @@
     "vibe_apps_link_text": "Consultez d'autres applications de cette communauté sur :",
     "vibe_apps_repo_text": "Répertoire Vibe Coding Educativo",
     "vibe_telegram_link_text": "Rejoignez la communauté sur Telegram :",
+    "code_license": "Licence du code :",
     "open_knowledge_adherence": "Ce projet adhère au",
     "open_knowledge_decalogue": "Décalogue de la Connaissance Ouverte"
   },
@@ -95,6 +99,17 @@
     "dismiss": "Fermer"
   },
   "widgets": {
+    "program_guide": {
+      "title": "Guide du programme",
+      "load_error": "Impossible de charger le guide."
+    },
+    "pdf_viewer": {
+      "title": "Visionneuse PDF",
+      "url_placeholder": "Collez l’URL d’un PDF...",
+      "load_button": "Charger",
+      "upload_button": "Importer un PDF",
+      "empty_state": "Chargez un PDF depuis une URL ou un fichier."
+    },
     "attendance": {
       "title": "Contrôle des présences",
       "badges": {

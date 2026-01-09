@@ -66,6 +66,9 @@
   },
   "credits": {
     "title": "Crediti e Licenza",
+    "tooltip": "Crediti, licenza e guida del programma",
+    "user_guide_title": "Guida del programma",
+    "user_guide_link": "Apri la guida dei widget",
     "original_project": "Il progetto originale <strong>Desktop Interattivo per l'Aula</strong> e la sua idea appartengono a <strong>María Teresa González</strong>.",
     "original_link": "Puoi visitare l'applicazione originale qui:",
     "new_version": "Questa nuova versione è stata sviluppata in collaborazione da <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> e <strong>Pablo G. Guízar</strong>. Il repository di questo progetto si trova su:",
@@ -74,6 +77,7 @@
     "vibe_apps_link_text": "Scopri altre applicazioni di questa comunità su:",
     "vibe_apps_repo_text": "Repository Vibe Coding Educativo",
     "vibe_telegram_link_text": "Unisciti alla comunità su Telegram:",
+    "code_license": "Licenza del codice:",
     "open_knowledge_adherence": "Questo progetto aderisce al",
     "open_knowledge_decalogue": "Decalogo della Conoscenza Aperta"
   },
@@ -94,6 +98,17 @@
     "dismiss": "Chiudi"
   },
   "widgets": {
+    "program_guide": {
+      "title": "Guida del programma",
+      "load_error": "Impossibile caricare la guida."
+    },
+    "pdf_viewer": {
+      "title": "Visore PDF",
+      "url_placeholder": "Incolla l'URL di un PDF...",
+      "load_button": "Carica",
+      "upload_button": "Carica PDF",
+      "empty_state": "Carica un PDF da URL o file."
+    },
     "attendance": {
       "title": "Registro presenze",
       "badges": {
