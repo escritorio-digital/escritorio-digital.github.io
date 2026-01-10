@@ -60,7 +60,9 @@
       "remove_wallpaper_button": "Quitar Fondo",
       "show_datetime_label": "Mostrar fecha y hora",
       "show_datetime_help": "Se muestra en la esquina superior derecha.",
-      "reset_theme_button": "Restablecer Tema por Defecto"
+      "reset_theme_button": "Restablecer Tema por Defecto",
+      "show_system_stats_label": "Mostrar estadísticas del sistema",
+      "show_system_stats_help": "Se muestran junto al reloj."
     }
   },
   "toolbar": {
@@ -144,7 +146,9 @@
     "show_toolbar": "Mostrar barra inferior",
     "hide_toolbar": "Ocultar barra inferior",
     "reset_layout": "Cerrar todas las ventanas",
-    "reset_layout_confirm": "¿Quieres cerrar todas las ventanas del escritorio?"
+    "reset_layout_confirm": "¿Quieres cerrar todas las ventanas del escritorio?",
+    "show_system_stats": "Mostrar estadísticas del sistema",
+    "hide_system_stats": "Ocultar estadísticas del sistema"
   },
   "storage_warning": {
     "title": "Almacenamiento lleno",
@@ -586,5 +590,17 @@
     "import_mode_label": "Modo de restauración",
     "import_mode_replace": "Sustituir perfiles actuales",
     "import_mode_merge": "Añadir perfiles nuevos"
+  },
+  "system_stats": {
+    "title": "Estadísticas del sistema",
+    "storage_used": "Almacenamiento",
+    "storage_free": "Libre",
+    "memory": "RAM",
+    "memory_value": "{{value}} GB (aprox.)",
+    "cpu": "CPU",
+    "cpu_value": "{{value}} núcleos",
+    "screen": "Pantalla",
+    "screen_value": "{{width}}x{{height}}",
+    "not_available": "N/D"
   }
 }

@@ -60,7 +60,9 @@
       "remove_wallpaper_button": "Hintergrund entfernen",
       "show_datetime_label": "Datum und Uhrzeit anzeigen",
       "show_datetime_help": "Wird oben rechts angezeigt.",
-      "reset_theme_button": "Standardthema wiederherstellen"
+      "reset_theme_button": "Standardthema wiederherstellen",
+      "show_system_stats_label": "Systemstatistiken anzeigen",
+      "show_system_stats_help": "Neben der Uhr angezeigt."
     }
   },
   "toolbar": {
@@ -144,7 +146,9 @@
     "show_toolbar": "Untere Leiste anzeigen",
     "hide_toolbar": "Untere Leiste ausblenden",
     "reset_layout": "Alle Fenster schließen",
-    "reset_layout_confirm": "Möchtest du alle Fenster auf dem Desktop schließen?"
+    "reset_layout_confirm": "Möchtest du alle Fenster auf dem Desktop schließen?",
+    "show_system_stats": "Systemstatistiken anzeigen",
+    "hide_system_stats": "Systemstatistiken ausblenden"
   },
   "storage_warning": {
     "title": "Speicher voll",
@@ -586,5 +590,17 @@
     "import_mode_label": "Wiederherstellungsmodus",
     "import_mode_replace": "Aktuelle Profile ersetzen",
     "import_mode_merge": "Neue Profile hinzufügen"
+  },
+  "system_stats": {
+    "title": "Systemstatistiken",
+    "storage_used": "Speicher",
+    "storage_free": "Frei",
+    "memory": "RAM",
+    "memory_value": "{{value}} GB (ca.)",
+    "cpu": "CPU",
+    "cpu_value": "{{value}} Kerne",
+    "screen": "Bildschirm",
+    "screen_value": "{{width}}x{{height}}",
+    "not_available": "k. A."
   }
 }

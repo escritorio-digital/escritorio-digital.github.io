@@ -5,6 +5,7 @@ Escritorio Digital es una pizarra de trabajo con “ventanas” pensada para el 
 ## Cómo se usa
 
 - **Fecha y hora en pantalla**: visibles en la esquina superior derecha. Se pueden desactivar en **Herramientas → Apariencia**.
+- **Estadísticas del sistema**: panel con almacenamiento, RAM/CPU (si el navegador lo permite) y pantalla. Se puede ocultar en **Herramientas → Apariencia** o con clic derecho.
 
 - **Abrir un widget**: desde la barra inferior o desde la **Librería de widgets**.
 - **Cerrar todo**: en el menú contextual del escritorio.

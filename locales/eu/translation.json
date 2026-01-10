@@ -59,7 +59,9 @@
       "remove_wallpaper_button": "Kendu atzealdea",
       "show_datetime_label": "Data eta ordua erakutsi",
       "show_datetime_help": "Goiko eskuineko izkinan erakusten da.",
-      "reset_theme_button": "Berrezarri gai lehenetsia"
+      "reset_theme_button": "Berrezarri gai lehenetsia",
+      "show_system_stats_label": "Sistemaren estatistikak erakutsi",
+      "show_system_stats_help": "Erlojuaren ondoan erakusten dira."
     }
   },
   "toolbar": {
@@ -143,7 +145,9 @@
     "show_toolbar": "Erakutsi beheko barra",
     "hide_toolbar": "Ezkutatu beheko barra",
     "reset_layout": "Itxi leiho guztiak",
-    "reset_layout_confirm": "Mahaigaineko leiho guztiak itxi nahi dituzu?"
+    "reset_layout_confirm": "Mahaigaineko leiho guztiak itxi nahi dituzu?",
+    "show_system_stats": "Sistemaren estatistikak erakutsi",
+    "hide_system_stats": "Sistemaren estatistikak ezkutatu"
   },
   "storage_warning": {
     "title": "Biltegiratzea beteta",
@@ -585,5 +589,17 @@
     "import_mode_label": "Leheneratze modua",
     "import_mode_replace": "Ordeztu oraingo profilak",
     "import_mode_merge": "Gehitu profil berriak"
+  },
+  "system_stats": {
+    "title": "Sistemaren estatistikak",
+    "storage_used": "Biltegiratzea",
+    "storage_free": "Libre",
+    "memory": "RAM",
+    "memory_value": "{{value}} GB (gutxi gorabehera)",
+    "cpu": "CPU",
+    "cpu_value": "{{value}} nukleo",
+    "screen": "Pantaila",
+    "screen_value": "{{width}}x{{height}}",
+    "not_available": "E/E"
   }
 }
