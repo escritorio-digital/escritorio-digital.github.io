@@ -216,6 +216,30 @@ const rewriteHtmlDocument = (
         });
     };
 
+    const rewriteSrcset = (value: string): string => {
+        const entries = value.split(',').map((part) => part.trim()).filter(Boolean);
+        const rewritten = entries.map((entry) => {
+            const parts = entry.split(/\s+/);
+            const url = parts[0];
+            if (
+                url.startsWith('http:') ||
+                url.startsWith('https:') ||
+                url.startsWith('data:') ||
+                url.startsWith('blob:') ||
+                url.startsWith('#') ||
+                url.startsWith('mailto:')
+            ) {
+                return entry;
+            }
+            const resolved = resolvePath(entryPath, url);
+            const mapped = urlMap.get(resolved);
+            if (!mapped) return entry;
+            parts[0] = mapped;
+            return parts.join(' ');
+        });
+        return rewritten.join(', ');
+    };
+
     replaceAttr('img[src]', 'src');
     replaceAttr('script[src]', 'src');
     replaceAttr('link[href]', 'href');
@@ -223,6 +247,15 @@ const rewriteHtmlDocument = (
     replaceAttr('video[src]', 'src');
     replaceAttr('audio[src]', 'src');
     replaceAttr('iframe[src]', 'src');
+    replaceAttr('a[href]', 'href');
+    replaceAttr('form[action]', 'action');
+
+    const srcsetElements = Array.from(doc.querySelectorAll('img[srcset], source[srcset]'));
+    srcsetElements.forEach((element) => {
+        const value = element.getAttribute('srcset');
+        if (!value) return;
+        element.setAttribute('srcset', rewriteSrcset(value));
+    });
 
     const styleTags = Array.from(doc.querySelectorAll('style'));
     styleTags.forEach((style) => {
@@ -684,7 +717,7 @@ export const widgetConfig: Omit<WidgetConfig, 'component'> = {
     icon: (() => {
         const WidgetIcon: FC = () => {
             const { t } = useTranslation();
-            return <img src={withBaseUrl('icons/LocalWeb.svg')} alt={t('widgets.local_web.title')} width={52} height={52} />;
+            return <img src={withBaseUrl('icons/LocalWeb.png')} alt={t('widgets.local_web.title')} width={52} height={52} />;
         };
         return <WidgetIcon />;
     })(),
