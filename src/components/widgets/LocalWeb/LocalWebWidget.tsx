@@ -336,40 +336,34 @@ export const LocalWebWidget: FC = () => {
     }, []);
 
     const storageLabel = useMemo(() => {
-        const { usage, quota } = storageEstimate;
-        if (usage == null && quota == null) {
-            return t('widgets.local_web.storage_local_used', { used: formatBytes(localUsage) });
-        }
-        if (usage != null && quota != null) {
-            const percent = Math.min(100, Math.round((usage / quota) * 100));
+        const { quota } = storageEstimate;
+        if (quota != null) {
+            const percent = Math.min(100, Math.round((localUsage / quota) * 100));
             return t('widgets.local_web.storage_usage', {
-                used: formatBytes(usage),
+                used: formatBytes(localUsage),
                 total: formatBytes(quota),
                 percent,
             });
         }
-        if (usage != null) {
-            return t('widgets.local_web.storage_used', { used: formatBytes(usage) });
-        }
-        return t('widgets.local_web.storage_unknown');
+        return t('widgets.local_web.storage_local_used', { used: formatBytes(localUsage) });
     }, [storageEstimate, localUsage, t]);
 
     const storageClass = useMemo(() => {
-        const { usage, quota } = storageEstimate;
-        if (usage == null || quota == null) {
+        const { quota } = storageEstimate;
+        if (quota == null) {
             return 'local-web-storage-neutral';
         }
-        const ratio = usage / quota;
+        const ratio = localUsage / quota;
         if (ratio < 0.7) return 'local-web-storage-ok';
         if (ratio < 0.85) return 'local-web-storage-warn';
         return 'local-web-storage-danger';
-    }, [storageEstimate]);
+    }, [storageEstimate, localUsage]);
 
     const storagePercent = useMemo(() => {
-        const { usage, quota } = storageEstimate;
-        if (usage == null || quota == null) return null;
-        return Math.min(100, Math.max(0, Math.round((usage / quota) * 100)));
-    }, [storageEstimate]);
+        const { quota } = storageEstimate;
+        if (quota == null) return null;
+        return Math.min(100, Math.max(0, Math.round((localUsage / quota) * 100)));
+    }, [storageEstimate, localUsage]);
 
     const resetPreview = () => {
         setActiveSiteId(null);
