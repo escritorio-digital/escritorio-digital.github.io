@@ -401,6 +401,7 @@ const DesktopUI: React.FC<{
               profiles={profiles}
               activeProfileName={activeProfileName}
               setActiveProfileName={setActiveProfileName}
+              setProfiles={setProfiles}
               onManageProfiles={() => openSettingsTab('profiles')}
               onOpenContextMenu={(event) => handleContextMenu(event, undefined, true)}
             />

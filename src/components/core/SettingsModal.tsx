@@ -6,6 +6,8 @@ import { WIDGET_REGISTRY } from '../widgets';
 import { ThemeSettings } from './ThemeSettings';
 import { ProfileManager } from './ProfileManager';
 import type { ProfileCollection } from '../../types';
+import { clearLocalWebData, WIDGET_DATA_KEYS } from '../../utils/backup';
+import { removeFromIndexedDb } from '../../utils/storage';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -66,25 +68,17 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     i18n.changeLanguage(newLanguage);
   };
 
-  const handleFactoryReset = () => {
+  const handleFactoryReset = async () => {
     if (!window.confirm(t('settings.general.reset_confirm'))) return;
-    const keysToClear = [
+    const keysToClear = Array.from(new Set([
       'desktop-profiles',
       'active-profile-name',
-      'work-list-tasks',
-      'spinner-options',
-      'notepad-content-html',
-      'image-carousel-images',
-      'tictactoe-players',
-      'tictactoe-score',
-      'global-clocks-selection',
-      'attendance-records',
-      'traffic-light-state',
-      'scoreboard-players',
-      'i18nextLng'
-    ];
+      ...WIDGET_DATA_KEYS,
+    ]));
     try {
       keysToClear.forEach(k => window.localStorage.removeItem(k));
+      await Promise.all(WIDGET_DATA_KEYS.map((key) => removeFromIndexedDb(key)));
+      await clearLocalWebData();
     } catch (error) {
       console.warn('No se pudieron limpiar las preferencias locales.', error);
     }

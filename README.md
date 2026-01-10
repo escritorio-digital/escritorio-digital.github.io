@@ -34,7 +34,7 @@ Este proyecto es un entorno de escritorio virtual construido con React, que perm
 24. **Tic-Tac-Toe:** El juego clásico de tres en raya para dos jugadores.
 25. **Visor Web:** Permite embeber y mostrar el contenido de una URL directamente en el escritorio, usando un iframe.
 26. **Visor PDF:** Abre archivos PDF dentro del escritorio.
-27. **Explorador de Archivos:** Abre archivos locales (PDF, imágenes, texto/Markdown, audio y vídeo) dentro del escritorio.
+27. **Explorador de Archivos:** Abre archivos locales (PDF, imágenes, texto/Markdown, HTML, audio y vídeo) dentro del escritorio.
 28. **Conexión en Directo:** Es un visor de aplicaciones web que carga una página externa, específicamente la aplicación "Conexión en Directo" de Juan José de Haro, dentro de una ventana en el escritorio.
 29. **Paleta de Dibujo:** Una completa herramienta de dibujo que permite trazos con diferentes pinceles (lápiz, rotulador, spray), insertar formas geométricas (líneas, rectángulos, círculos), añadir flechas y texto. 
 

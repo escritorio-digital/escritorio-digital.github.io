@@ -9,7 +9,7 @@ import katex from 'katex';
 import './FileOpenerWidget.css';
 import 'katex/dist/katex.min.css';
 
-type DisplayType = 'none' | 'image' | 'pdf' | 'text' | 'markdown' | 'video' | 'audio';
+type DisplayType = 'none' | 'image' | 'pdf' | 'text' | 'markdown' | 'video' | 'audio' | 'html';
 
 function renderMarkdownWithLatex(input: string): string {
   const tokens: Array<{ id: number; latex: string; displayMode: boolean }> = [];
@@ -68,7 +68,8 @@ export const FileOpenerWidget: FC = () => {
     const isImage = file.type.startsWith('image/') || lower.match(/\.(png|jpe?g|gif|webp|bmp|svg)$/);
     const isPdf = file.type === 'application/pdf' || lower.endsWith('.pdf');
     const isMarkdown = lower.endsWith('.md') || lower.endsWith('.markdown');
-    const isText = file.type.startsWith('text/') || lower.endsWith('.txt');
+    const isHtml = file.type === 'text/html' || lower.match(/\.(html?|xhtml)$/);
+    const isText = (file.type.startsWith('text/') && !isHtml) || lower.endsWith('.txt');
     const isVideo = file.type.startsWith('video/') || lower.match(/\.(mp4|webm|ogg|mov)$/);
     const isAudio = file.type.startsWith('audio/') || lower.match(/\.(mp3|wav|ogg|m4a|aac|flac)$/);
 
@@ -93,6 +94,13 @@ export const FileOpenerWidget: FC = () => {
       setDisplayType('markdown');
       setFileContent(content);
       setFileUrl('');
+      event.target.value = '';
+      return;
+    }
+    if (isHtml) {
+      const url = URL.createObjectURL(file);
+      setFileUrl(url);
+      setDisplayType('html');
       event.target.value = '';
       return;
     }
@@ -170,6 +178,14 @@ export const FileOpenerWidget: FC = () => {
             </div>
           </object>
         )}
+        {displayType === 'html' && fileUrl && (
+          <iframe
+            className="file-opener-embed"
+            src={fileUrl}
+            title={fileName || t('widgets.file_opener.title')}
+            sandbox="allow-same-origin allow-scripts allow-forms"
+          />
+        )}
         {displayType === 'video' && fileUrl && (
           <video className="file-opener-video" controls src={fileUrl} />
         )}
@@ -187,7 +203,7 @@ export const FileOpenerWidget: FC = () => {
         ref={inputRef}
         type="file"
         onChange={handleFiles}
-        accept="image/*,application/pdf,text/plain,text/markdown,video/*,audio/*,.md,.markdown,.txt"
+        accept="image/*,application/pdf,text/plain,text/markdown,text/html,video/*,audio/*,.md,.markdown,.txt,.html,.htm,.xhtml"
         className="hidden"
       />
     </div>

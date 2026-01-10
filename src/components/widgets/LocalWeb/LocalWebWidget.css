@@ -1,0 +1,124 @@
+.local-web-widget {
+  @apply w-full h-full flex flex-col bg-white text-text-dark;
+}
+
+.local-web-header {
+  @apply flex items-center justify-between gap-3 px-4 py-3 border-b border-gray-200 bg-gray-50;
+}
+
+.local-web-title {
+  @apply flex items-center gap-2 text-sm font-semibold;
+}
+
+.local-web-actions {
+  @apply flex items-center gap-2;
+}
+
+.local-web-button {
+  @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-accent text-text-dark font-semibold hover:bg-[#8ec9c9] transition-colors text-xs;
+}
+
+.local-web-button-secondary {
+  @apply bg-white border border-gray-200 hover:bg-gray-100;
+}
+
+.local-web-storage {
+  @apply px-4 py-2 text-xs border-b border-gray-100 flex flex-col gap-1;
+}
+
+.local-web-storage-text {
+  @apply leading-snug;
+}
+
+.local-web-storage-bar {
+  @apply h-2 w-full rounded-full bg-gray-200 overflow-hidden;
+}
+
+.local-web-storage-bar-fill {
+  @apply h-full rounded-full bg-current transition-all duration-300 ease-out;
+}
+
+.local-web-storage-ok {
+  @apply text-green-600;
+}
+
+.local-web-storage-warn {
+  @apply text-amber-600;
+}
+
+.local-web-storage-danger {
+  @apply text-red-600;
+}
+
+.local-web-storage-neutral {
+  @apply text-gray-600;
+}
+
+.local-web-body {
+  @apply flex-1 flex overflow-hidden;
+}
+
+.local-web-list {
+  @apply flex flex-col gap-3 p-4 border-r border-gray-200 overflow-auto w-[320px] max-w-[320px] transition-all duration-300 ease-out;
+}
+
+.local-web-list-collapsed {
+  @apply w-0 max-w-0 p-0 opacity-0 border-r-0 pointer-events-none;
+}
+
+
+.local-web-status {
+  @apply text-xs text-gray-600;
+}
+
+.local-web-empty {
+  @apply text-xs text-gray-500 italic;
+}
+
+.local-web-site {
+  @apply flex items-center justify-between gap-3 border border-gray-200 rounded-lg px-3 py-2 bg-white;
+}
+
+.local-web-site-info {
+  @apply flex flex-col gap-1;
+}
+
+.local-web-site-name {
+  @apply text-sm font-semibold;
+}
+
+.local-web-site-meta {
+  @apply text-xs text-gray-500;
+}
+
+.local-web-site-actions {
+  @apply flex items-center gap-2;
+}
+
+.local-web-icon-button {
+  @apply inline-flex items-center justify-center rounded-lg border border-gray-200 p-2 text-gray-600 hover:bg-gray-100;
+}
+
+.local-web-delete {
+  @apply text-red-600;
+}
+
+.local-web-preview {
+  @apply flex flex-col h-full flex-1;
+}
+
+.local-web-preview-header {
+  @apply flex items-center justify-between gap-2 px-4 py-2 border-b border-gray-200 text-sm;
+}
+
+.local-web-preview-actions {
+  @apply flex items-center gap-2;
+}
+
+.local-web-preview-placeholder {
+  @apply flex-1 flex items-center justify-center text-sm text-gray-500;
+}
+
+.local-web-iframe {
+  @apply w-full h-full border-0;
+}
