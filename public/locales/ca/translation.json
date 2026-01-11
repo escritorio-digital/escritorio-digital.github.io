@@ -154,13 +154,13 @@
     "settings": "Configuració",
     "manage_profiles": "Gestionar perfils",
     "change_background": "Canvia fons...",
-    "show_datetime": "Mostrar data i hora",
+    "show_datetime": "Data i hora",
     "hide_datetime": "Amagar data i hora",
-    "show_toolbar": "Mostra la barra inferior",
+    "show_toolbar": "Barra inferior",
     "hide_toolbar": "Amaga la barra inferior",
-    "reset_layout": "Tancar totes les finestres",
+    "reset_layout": "Tancar totes les finestres obertes",
     "reset_layout_confirm": "Vols tancar totes les finestres de l'escriptori?",
-    "show_system_stats": "Mostrar estadístiques del sistema",
+    "show_system_stats": "Estadístiques del sistema",
     "hide_system_stats": "Ocultar estadístiques del sistema"
   },
   "storage_warning": {

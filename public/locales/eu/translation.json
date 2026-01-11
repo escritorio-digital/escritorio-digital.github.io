@@ -153,13 +153,13 @@
     "settings": "Ezarpenak",
     "manage_profiles": "Profilak kudeatu",
     "change_background": "Aldatu atzeko planoa...",
-    "show_datetime": "Erakutsi data eta ordua",
+    "show_datetime": "Data eta ordua",
     "hide_datetime": "Ezkutatu data eta ordua",
-    "show_toolbar": "Erakutsi beheko barra",
+    "show_toolbar": "Beheko barra",
     "hide_toolbar": "Ezkutatu beheko barra",
-    "reset_layout": "Itxi leiho guztiak",
+    "reset_layout": "Irekitako leiho guztiak itxi",
     "reset_layout_confirm": "Mahaigaineko leiho guztiak itxi nahi dituzu?",
-    "show_system_stats": "Sistemaren estatistikak erakutsi",
+    "show_system_stats": "Sistemaren estatistikak",
     "hide_system_stats": "Sistemaren estatistikak ezkutatu"
   },
   "storage_warning": {

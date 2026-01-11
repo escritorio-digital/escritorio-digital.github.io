@@ -154,13 +154,13 @@
     "settings": "Configuración",
     "manage_profiles": "Xestionar perfís",
     "change_background": "Cambiar fondo...",
-    "show_datetime": "Mostrar data e hora",
+    "show_datetime": "Data e hora",
     "hide_datetime": "Ocultar data e hora",
-    "show_toolbar": "Amosar barra inferior",
+    "show_toolbar": "Barra inferior",
     "hide_toolbar": "Agochar barra inferior",
-    "reset_layout": "Pechar todas as xanelas",
+    "reset_layout": "Pechar todas as xanelas abertas",
     "reset_layout_confirm": "Queres pechar todas as xanelas do escritorio?",
-    "show_system_stats": "Mostrar estatísticas do sistema",
+    "show_system_stats": "Estatísticas do sistema",
     "hide_system_stats": "Ocultar estatísticas do sistema"
   },
   "storage_warning": {

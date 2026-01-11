@@ -154,13 +154,13 @@
     "settings": "Einstellungen",
     "manage_profiles": "Profile verwalten",
     "change_background": "Hintergrund ändern...",
-    "show_datetime": "Datum und Uhrzeit anzeigen",
+    "show_datetime": "Datum und Uhrzeit",
     "hide_datetime": "Datum und Uhrzeit ausblenden",
-    "show_toolbar": "Untere Leiste anzeigen",
+    "show_toolbar": "Untere Leiste",
     "hide_toolbar": "Untere Leiste ausblenden",
-    "reset_layout": "Alle Fenster schließen",
+    "reset_layout": "Alle offenen Fenster schließen",
     "reset_layout_confirm": "Möchtest du alle Fenster auf dem Desktop schließen?",
-    "show_system_stats": "Systemstatistiken anzeigen",
+    "show_system_stats": "Systemstatistiken",
     "hide_system_stats": "Systemstatistiken ausblenden"
   },
   "storage_warning": {

@@ -595,13 +595,7 @@ const DesktopUI: React.FC<{
                         <PlusSquare size={16} />
                         {t('context_menu.new_widget')}
                     </button>
-                    <button
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
-                        onClick={() => openSettingsTab('general')}
-                    >
-                        <Settings size={16} />
-                        {t('context_menu.settings')}
-                    </button>
+                    <div className="my-1 border-t border-gray-200" />
                     <button
                         className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
                         onClick={() => openSettingsTab('profiles')}
@@ -616,39 +610,40 @@ const DesktopUI: React.FC<{
                         <Image size={16} />
                         {t('context_menu.change_background')}
                     </button>
+                    <div className="my-1 border-t border-gray-200" />
                     <button
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center justify-between gap-3"
                         onClick={() => {
                             toggleDateTime();
                             setContextMenu(prev => ({ ...prev, isOpen: false }));
                         }}
                     >
-                        {showDateTime ? <EyeOff size={16} /> : <Eye size={16} />}
-                        {showDateTime ? t('context_menu.hide_datetime') : t('context_menu.show_datetime')}
+                        <span>{t('context_menu.show_datetime')}</span>
+                        <span className={`h-4 w-4 rounded border ${showDateTime ? 'bg-accent border-accent' : 'border-gray-400'}`} />
                     </button>
                     <button
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center justify-between gap-3"
                         onClick={() => {
                             toggleSystemStats();
                             setContextMenu(prev => ({ ...prev, isOpen: false }));
                         }}
                     >
-                        {showSystemStats ? <EyeOff size={16} /> : <Eye size={16} />}
-                        {showSystemStats ? t('context_menu.hide_system_stats') : t('context_menu.show_system_stats')}
+                        <span>{t('context_menu.show_system_stats')}</span>
+                        <span className={`h-4 w-4 rounded border ${showSystemStats ? 'bg-accent border-accent' : 'border-gray-400'}`} />
                     </button>
                     <button
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center justify-between gap-3"
                         onClick={() => {
                             setToolbarHidden(!isToolbarHidden);
                             setContextMenu(prev => ({ ...prev, isOpen: false }));
                         }}
                     >
-                        {isToolbarHidden ? <Eye size={16} /> : <EyeOff size={16} />}
-                        {isToolbarHidden ? t('context_menu.show_toolbar') : t('context_menu.hide_toolbar')}
+                        <span>{t('context_menu.show_toolbar')}</span>
+                        <span className={`h-4 w-4 rounded border ${!isToolbarHidden ? 'bg-accent border-accent' : 'border-gray-400'}`} />
                     </button>
                     {hasOpenWidgets && (
                         <>
-                            <div className="my-1 border-t border-gray-200" />
+                            <div className="my-2 border-t-2 border-gray-200" />
                             <button
                                 className="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-700 flex items-center gap-2"
                                 onClick={resetLayout}

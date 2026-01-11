@@ -155,13 +155,13 @@
     "settings": "Paramètres",
     "manage_profiles": "Gérer les profils",
     "change_background": "Changer le fond...",
-    "show_datetime": "Afficher la date et l'heure",
+    "show_datetime": "Date et heure",
     "hide_datetime": "Masquer la date et l'heure",
-    "show_toolbar": "Afficher la barre inférieure",
+    "show_toolbar": "Barre inférieure",
     "hide_toolbar": "Masquer la barre inférieure",
-    "reset_layout": "Fermer toutes les fenêtres",
+    "reset_layout": "Fermer toutes les fenêtres ouvertes",
     "reset_layout_confirm": "Voulez-vous fermer toutes les fenêtres du bureau ?",
-    "show_system_stats": "Afficher les statistiques système",
+    "show_system_stats": "Statistiques système",
     "hide_system_stats": "Masquer les statistiques système"
   },
   "storage_warning": {
