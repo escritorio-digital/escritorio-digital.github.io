@@ -43,7 +43,20 @@
       "pinned_info": "Select the widgets you want on your toolbar. ({{count}}/{{max}})",
       "add": "Add",
       "remove": "Remove",
-      "max_widgets_alert": "You cannot pin more than {{max}} widgets."
+      "max_widgets_alert": "You cannot pin more than {{max}} widgets.",
+      "view_label": "View",
+      "view_by_theme": "Themes",
+      "view_alphabetical": "Alphabetical",
+      "categories": {
+        "organization": "Organization and classroom",
+        "time": "Time and rhythm",
+        "math_science": "Math and science",
+        "resources": "Board, writing, and resources",
+        "interaction": "Interaction, chance, and educational games",
+        "logic_games": "Logic games and class dynamics",
+        "gestures": "Work gestures",
+        "other": "Other"
+      }
     },
     "theme": {
       "theme_colors_title": "Theme Colors",

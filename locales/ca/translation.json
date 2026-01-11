@@ -43,7 +43,20 @@
       "pinned_info": "Selecciona els ginys que vols a la teva barra d'eines. ({{count}}/{{max}})",
       "add": "Afegir",
       "remove": "Treure",
-      "max_widgets_alert": "No es poden fixar més de {{max}} ginys."
+      "max_widgets_alert": "No es poden fixar més de {{max}} ginys.",
+      "view_label": "Veure per",
+      "view_by_theme": "Temes",
+      "view_alphabetical": "Alfabètic",
+      "categories": {
+        "organization": "Organització i aula",
+        "time": "Temps i ritme",
+        "math_science": "Matemàtiques i ciències",
+        "resources": "Pissarra, escriptura i recursos",
+        "interaction": "Interacció, atzar i jocs educatius",
+        "logic_games": "Jocs de lògica i dinàmica de classe",
+        "gestures": "Gestos de treball",
+        "other": "Altres"
+      }
     },
     "theme": {
       "theme_colors_title": "Colors del Tema",
