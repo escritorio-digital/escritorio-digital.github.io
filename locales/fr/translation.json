@@ -603,7 +603,8 @@
     "tab_import": "Importer",
     "import_mode_label": "Mode de restauration",
     "import_mode_replace": "Remplacer les profils actuels",
-    "import_mode_merge": "Ajouter de nouveaux profils"
+    "import_mode_merge": "Ajouter de nouveaux profils",
+    "manage_profiles": "Enregistrer ou charger des profils"
   },
   "system_stats": {
     "title": "Statistiques système",

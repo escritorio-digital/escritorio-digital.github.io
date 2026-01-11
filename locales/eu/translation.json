@@ -601,7 +601,8 @@
     "tab_import": "Inportatu",
     "import_mode_label": "Leheneratze modua",
     "import_mode_replace": "Ordeztu oraingo profilak",
-    "import_mode_merge": "Gehitu profil berriak"
+    "import_mode_merge": "Gehitu profil berriak",
+    "manage_profiles": "Profilak gorde edo kargatu"
   },
   "system_stats": {
     "title": "Sistemaren estatistikak",

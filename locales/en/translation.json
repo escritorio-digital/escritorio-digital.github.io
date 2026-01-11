@@ -602,7 +602,8 @@
     "tab_import": "Import",
     "import_mode_label": "Restore mode",
     "import_mode_replace": "Replace current profiles",
-    "import_mode_merge": "Add new profiles"
+    "import_mode_merge": "Add new profiles",
+    "manage_profiles": "Save or load profiles"
   },
   "system_stats": {
     "title": "System stats",

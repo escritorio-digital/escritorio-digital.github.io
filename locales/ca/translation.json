@@ -602,7 +602,8 @@
     "tab_import": "Importar",
     "import_mode_label": "Mode de restauració",
     "import_mode_replace": "Substituir els perfils actuals",
-    "import_mode_merge": "Afegir perfils nous"
+    "import_mode_merge": "Afegir perfils nous",
+    "manage_profiles": "Desar o carregar perfils"
   },
   "system_stats": {
     "title": "Estadístiques del sistema",
