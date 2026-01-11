@@ -26,7 +26,7 @@ export const defaultTheme: Theme = {
   '--color-border': '#FFFFFF',
   '--wallpaper': defaultWallpaperValue,
   showDateTime: true,
-  showSystemStats: true,
+  showSystemStats: false,
 };
 
 // 3. Definimos lo que nuestro contexto va a proveer.

@@ -66,7 +66,7 @@ export const ThemeSettings: React.FC = () => {
         </div>
         <input
           type="checkbox"
-          checked={Boolean(theme.showSystemStats ?? true)}
+          checked={Boolean(theme.showSystemStats ?? false)}
           onChange={handleSystemStatsToggle}
           className="h-5 w-5"
         />

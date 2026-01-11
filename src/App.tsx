@@ -28,7 +28,7 @@ const DesktopUI: React.FC<{
     const { t, i18n } = useTranslation();
     const activeProfile = profiles[activeProfileName] || Object.values(profiles)[0];
     const showDateTime = activeProfile.theme?.showDateTime ?? true;
-    const showSystemStats = activeProfile.theme?.showSystemStats ?? true;
+    const showSystemStats = activeProfile.theme?.showSystemStats ?? false;
 
     const setActiveWidgets = useCallback((updater: React.SetStateAction<ActiveWidget[]>) => {
         const updatedWidgets = typeof updater === 'function' ? updater(activeProfile.activeWidgets) : updater;
