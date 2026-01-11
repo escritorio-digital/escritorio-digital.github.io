@@ -38,7 +38,6 @@ Escritorio Digital è una lavagna di lavoro con “finestre” pensata per la cl
 - **Lavagna di disegno**: disegno a mano libera (schemi, grafici, mappe concettuali, diagrammi).
 - **Carosello di immagini**: mostra una raccolta di immagini (tavole, esercizi, foto di laboratorio, mappe…).
 - **Visualizzatore web**: apre una pagina web dentro il desktop per usare una risorsa online senza cambiare scheda.
-- **Visore PDF**: apri file PDF all’interno del desktop.
 - **Esploratore file**: apre file locali (PDF, immagini, testo e Markdown, audio e video).
 - **Visualizzatore diretto**: pensato per mostrare contenuti web o risorse esterne in modo comodo durante la spiegazione.
 - **HTML**: spazio per mostrare contenuti preparati.

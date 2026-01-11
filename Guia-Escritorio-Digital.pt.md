@@ -38,7 +38,6 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 - **Quadro de desenho**: desenho à mão livre (esquemas, gráficos, mapas conceptuais, diagramas).
 - **Carrossel de imagens**: mostra uma coleção de imagens (pranchas, exercícios, fotos de laboratório, mapas…).
 - **Visualizador web**: abre uma página web dentro do ambiente para usar um recurso online sem mudar de separador.
-- **Visualizador PDF**: abre ficheiros PDF dentro do ambiente.
 - **Explorador de ficheiros**: abre ficheiros locais (PDF, imagens, texto e Markdown, áudio e vídeo).
 - **Visualizador direto**: pensado para mostrar conteúdo web ou recursos externos de forma cómoda durante a explicação.
 - **HTML**: espaço para mostrar conteúdos preparados.

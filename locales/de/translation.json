@@ -43,7 +43,10 @@
       "rename_placeholder": "Neuer Profilname",
       "rename_save_button": "Speichern",
       "rename_cancel_button": "Abbrechen",
-      "rename_hint": "Doppelklick, um den Profilnamen zu ändern"
+      "rename_hint": "Doppelklick, um den Profilnamen zu ändern",
+      "create_mode_label": "Profil erstellen als",
+      "create_mode_empty": "Leer",
+      "create_mode_clone": "Aktuelles klonen"
     },
     "widgets": {
       "search": "Widget suchen...",
@@ -180,13 +183,6 @@
     "program_guide": {
       "title": "Programmleitfaden",
       "load_error": "Der Leitfaden konnte nicht geladen werden."
-    },
-    "pdf_viewer": {
-      "title": "PDF-Viewer",
-      "url_placeholder": "PDF-URL einfügen...",
-      "load_button": "Laden",
-      "upload_button": "PDF hochladen",
-      "empty_state": "PDF per URL oder Datei laden."
     },
     "file_opener": {
       "title": "Datei-Explorer",

@@ -38,7 +38,6 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 - **Tableau de dessin** : dessin à main levée (schémas, graphiques, cartes conceptuelles, diagrammes).
 - **Carrousel d’images** : afficher une collection d’images (planches, exercices, photos de labo, cartes…).
 - **Visionneuse web** : ouvre une page web dans le bureau sans changer d’onglet.
-- **Visionneuse PDF **: ouvrir des fichiers PDF dans le bureau.
 - **Explorateur de fichiers** : ouvrir des fichiers locaux (PDF, images, texte et Markdown, audio et vidéo).
 - **Visionneuse directe** : pour afficher confortablement du contenu web ou des ressources externes pendant l’explication.
 - **HTML** : espace pour afficher des contenus préparés.

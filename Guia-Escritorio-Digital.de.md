@@ -38,7 +38,6 @@ Digitaler Desktop ist eine Arbeitsfläche mit „Fenstern“ für den Unterricht
 - **Zeichenfläche**: freihändig zeichnen (Skizzen, Diagramme, Concept Maps).
 - **Bilder‑Karussell**: Bildsammlung anzeigen (Tafeln, Aufgaben, Laborfotos, Karten …).
 - **Web‑Viewer**: eine Webseite im Desktop öffnen, ohne den Tab zu wechseln.
-- **PDF-Viewer**: PDFs direkt im Desktop öffnen.
 - **Datei-Explorer**: lokale Dateien öffnen (PDF, Bilder, Text und Markdown, Audio und Video).
 - **Direkt‑Viewer**: für die komfortable Anzeige von Web‑Inhalten oder externen Ressourcen während der Erklärung.
 - **HTML**: Bereich für vorbereitete Inhalte.

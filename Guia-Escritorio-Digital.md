@@ -40,7 +40,6 @@ Escritorio Digital es una pizarra de trabajo con “ventanas” pensada para el 
 - **Carrusel de imágenes**: muestra una colección de imágenes (láminas, ejercicios, fotos de laboratorio, mapas…).
 - **Visor web**: abre una página web dentro del escritorio para usar un recurso online sin cambiar de pestaña.
 - **Web local**: guarda webs en tu navegador (desde ZIP o carpeta) y ejecútalas sin conexión.
-- **Visor PDF**: abre archivos PDF dentro del escritorio.
 - **Explorador de archivos**: abre archivos locales (PDF, imágenes, texto y Markdown, HTML, audio y vídeo).
 - **Visor directo**: pensado para mostrar contenido web o recursos externos de forma cómoda durante la explicación.
 - **HTML**: espacio para mostrar contenidos preparados.

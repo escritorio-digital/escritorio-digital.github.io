@@ -42,7 +42,10 @@
       "rename_placeholder": "Profil izen berria",
       "rename_save_button": "Gorde",
       "rename_cancel_button": "Utzi",
-      "rename_hint": "Egin klik bikoitza profilaren izena aldatzeko"
+      "rename_hint": "Egin klik bikoitza profilaren izena aldatzeko",
+      "create_mode_label": "Sortu profila honela",
+      "create_mode_empty": "Hutsa",
+      "create_mode_clone": "Unekoa klonatu"
     },
     "widgets": {
       "search": "Bilatu widget-a...",
@@ -179,13 +182,6 @@
     "program_guide": {
       "title": "Programaren gida",
       "load_error": "Ezin izan da gida kargatu."
-    },
-    "pdf_viewer": {
-      "title": "PDF ikustailea",
-      "url_placeholder": "Itsatsi PDF baten URLa...",
-      "load_button": "Kargatu",
-      "upload_button": "Igo PDFa",
-      "empty_state": "Kargatu PDFa URLtik edo fitxategitik."
     },
     "file_opener": {
       "title": "Fitxategi arakatzailea",

@@ -43,7 +43,10 @@
       "rename_placeholder": "Nom nou del perfil",
       "rename_save_button": "Desa",
       "rename_cancel_button": "Cancel·la",
-      "rename_hint": "Fes doble clic per canviar el nom del perfil"
+      "rename_hint": "Fes doble clic per canviar el nom del perfil",
+      "create_mode_label": "Crear perfil com",
+      "create_mode_empty": "Buit",
+      "create_mode_clone": "Clon de l'actual"
     },
     "widgets": {
       "search": "Cercar giny...",
@@ -180,13 +183,6 @@
     "program_guide": {
       "title": "Guia del programa",
       "load_error": "No s'ha pogut carregar la guia."
-    },
-    "pdf_viewer": {
-      "title": "Visor PDF",
-      "url_placeholder": "Enganxa l'URL d'un PDF...",
-      "load_button": "Carregar",
-      "upload_button": "Pujar PDF",
-      "empty_state": "Carrega un PDF des d'URL o fitxer."
     },
     "file_opener": {
       "title": "Explorador de fitxers",

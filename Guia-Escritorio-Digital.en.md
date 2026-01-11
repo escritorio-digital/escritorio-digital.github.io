@@ -38,7 +38,6 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 - **Drawing pad**: freehand drawing (sketches, graphs, concept maps, diagrams).
 - **Image carousel**: show a collection of images (plates, exercises, lab photos, maps…).
 - **Web viewer**: open a web page inside the desktop to use an online resource without switching tabs.
-- **PDF viewer**: open PDF files inside the desktop.
 - **File explorer**: open local files (PDF, images, text and Markdown, audio and video).
 - **Live viewer**: designed to show web content or external resources comfortably while explaining.
 - **HTML**: space to display prepared content.

@@ -43,7 +43,10 @@
       "rename_placeholder": "New profile name",
       "rename_save_button": "Save",
       "rename_cancel_button": "Cancel",
-      "rename_hint": "Double-click to rename the profile"
+      "rename_hint": "Double-click to rename the profile",
+      "create_mode_label": "Create profile as",
+      "create_mode_empty": "Empty",
+      "create_mode_clone": "Clone current"
     },
     "widgets": {
       "search": "Search widget...",
@@ -180,13 +183,6 @@
     "program_guide": {
       "title": "Program guide",
       "load_error": "Unable to load the guide."
-    },
-    "pdf_viewer": {
-      "title": "PDF viewer",
-      "url_placeholder": "Paste a PDF URL...",
-      "load_button": "Load",
-      "upload_button": "Upload PDF",
-      "empty_state": "Load a PDF from URL or file."
     },
     "file_opener": {
       "title": "File Explorer",

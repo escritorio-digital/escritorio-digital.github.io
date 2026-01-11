@@ -44,7 +44,10 @@
       "rename_placeholder": "Nouveau nom du profil",
       "rename_save_button": "Enregistrer",
       "rename_cancel_button": "Annuler",
-      "rename_hint": "Double-cliquez pour renommer le profil"
+      "rename_hint": "Double-cliquez pour renommer le profil",
+      "create_mode_label": "Créer le profil comme",
+      "create_mode_empty": "Vide",
+      "create_mode_clone": "Cloner l'actuel"
     },
     "widgets": {
       "search": "Rechercher un widget...",
@@ -181,13 +184,6 @@
     "program_guide": {
       "title": "Guide du programme",
       "load_error": "Impossible de charger le guide."
-    },
-    "pdf_viewer": {
-      "title": "Visionneuse PDF",
-      "url_placeholder": "Collez l’URL d’un PDF...",
-      "load_button": "Charger",
-      "upload_button": "Importer un PDF",
-      "empty_state": "Chargez un PDF depuis une URL ou un fichier."
     },
     "file_opener": {
       "title": "Explorateur de fichiers",
