@@ -603,8 +603,8 @@
     "tab_export": "Salvare",
     "tab_import": "Caricare",
     "import_mode_label": "Modalità di caricamento",
-    "import_mode_replace": "Sostituisci attuali",
-    "import_mode_merge": "Unisci con esistenti",
+    "import_mode_replace": "Sostituisci attuali (rimuovi tutti e sostituisci con gli importati)",
+    "import_mode_merge": "Unisci con esistenti (non rimuove nulla; aggiunge gli importati)",
     "manage_profiles": "Salvare o caricare profili",
     "choose_profiles": "Quale profilo vuoi salvare"
   },

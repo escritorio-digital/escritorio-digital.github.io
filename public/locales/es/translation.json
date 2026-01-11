@@ -603,8 +603,8 @@
     "tab_export": "Guardar",
     "tab_import": "Cargar",
     "import_mode_label": "Modo de carga",
-    "import_mode_replace": "Reemplazar actuales",
-    "import_mode_merge": "Combinar con existentes",
+    "import_mode_replace": "Reemplazar actuales (se eliminan y se sustituyen por los importados)",
+    "import_mode_merge": "Combinar con existentes (no se elimina ninguno; se añaden los importados)",
     "manage_profiles": "Guardar o cargar perfiles",
     "choose_profiles": "Qué perfil deseas guardar"
   },

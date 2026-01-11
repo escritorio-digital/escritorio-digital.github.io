@@ -603,8 +603,8 @@
     "tab_export": "Speichern",
     "tab_import": "Laden",
     "import_mode_label": "Lademodus",
-    "import_mode_replace": "Aktuelle ersetzen",
-    "import_mode_merge": "Mit vorhandenen zusammenführen",
+    "import_mode_replace": "Aktuelle ersetzen (alle entfernen und durch importierte ersetzen)",
+    "import_mode_merge": "Mit vorhandenen zusammenführen (alle behalten; importierte hinzufügen)",
     "manage_profiles": "Profile speichern oder laden",
     "choose_profiles": "Welches Profil möchtest du speichern"
   },

@@ -604,8 +604,8 @@
     "tab_export": "Enregistrer",
     "tab_import": "Charger",
     "import_mode_label": "Mode de chargement",
-    "import_mode_replace": "Remplacer les actuels",
-    "import_mode_merge": "Fusionner avec les existants",
+    "import_mode_replace": "Remplacer les actuels (tout supprimer et remplacer par les importés)",
+    "import_mode_merge": "Fusionner avec les existants (rien supprimer; ajouter les importés)",
     "manage_profiles": "Enregistrer ou charger des profils",
     "choose_profiles": "Quel profil souhaitez-vous enregistrer"
   },

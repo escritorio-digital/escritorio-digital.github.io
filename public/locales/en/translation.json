@@ -603,8 +603,8 @@
     "tab_export": "Save",
     "tab_import": "Load",
     "import_mode_label": "Load mode",
-    "import_mode_replace": "Replace current",
-    "import_mode_merge": "Merge with existing",
+    "import_mode_replace": "Replace current (remove all and replace with imported)",
+    "import_mode_merge": "Merge with existing (keep all; add imported)",
     "manage_profiles": "Save or load profiles",
     "choose_profiles": "Which profile do you want to save"
   },
