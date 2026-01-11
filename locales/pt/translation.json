@@ -156,13 +156,13 @@
     "settings": "Definições",
     "manage_profiles": "Gerir perfis",
     "change_background": "Mudar fundo...",
-    "show_datetime": "Mostrar data e hora",
+    "show_datetime": "Data e hora",
     "hide_datetime": "Ocultar data e hora",
-    "show_toolbar": "Mostrar barra inferior",
+    "show_toolbar": "Barra inferior",
     "hide_toolbar": "Ocultar barra inferior",
-    "reset_layout": "Fechar todas as janelas",
+    "reset_layout": "Fechar todas as janelas abertas",
     "reset_layout_confirm": "Queres fechar todas as janelas do ambiente de trabalho?",
-    "show_system_stats": "Mostrar estatísticas do sistema",
+    "show_system_stats": "Estatísticas do sistema",
     "hide_system_stats": "Ocultar estatísticas do sistema"
   },
   "storage_warning": {

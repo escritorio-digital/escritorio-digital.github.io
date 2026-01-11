@@ -154,13 +154,13 @@
     "settings": "Settings",
     "manage_profiles": "Manage profiles",
     "change_background": "Change background...",
-    "show_datetime": "Show date and time",
+    "show_datetime": "Date and time",
     "hide_datetime": "Hide date and time",
-    "show_toolbar": "Show bottom bar",
+    "show_toolbar": "Bottom bar",
     "hide_toolbar": "Hide bottom bar",
-    "reset_layout": "Close all windows",
+    "reset_layout": "Close all open windows",
     "reset_layout_confirm": "Do you want to close all desktop windows?",
-    "show_system_stats": "Show system stats",
+    "show_system_stats": "System stats",
     "hide_system_stats": "Hide system stats"
   },
   "storage_warning": {

@@ -152,15 +152,15 @@
   "context_menu": {
     "new_widget": "Nuevo widget...",
     "settings": "Configuración",
-    "manage_profiles": "Administrar perfiles",
+    "manage_profiles": "Gestionar perfiles",
     "change_background": "Cambiar fondo...",
-    "show_datetime": "Mostrar fecha y hora",
+    "show_datetime": "Fecha y hora",
     "hide_datetime": "Ocultar fecha y hora",
-    "show_toolbar": "Mostrar barra inferior",
+    "show_toolbar": "Barra inferior",
     "hide_toolbar": "Ocultar barra inferior",
-    "reset_layout": "Cerrar todas las ventanas",
+    "reset_layout": "Cerrar todas las ventanas abiertas",
     "reset_layout_confirm": "¿Quieres cerrar todas las ventanas del escritorio?",
-    "show_system_stats": "Mostrar estadísticas del sistema",
+    "show_system_stats": "Estadísticas del sistema",
     "hide_system_stats": "Ocultar estadísticas del sistema"
   },
   "storage_warning": {
