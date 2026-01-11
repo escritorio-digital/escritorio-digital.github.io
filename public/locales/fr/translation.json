@@ -44,7 +44,20 @@
       "pinned_info": "Sélectionnez les widgets que vous voulez dans votre barre d'outils. ({{count}}/{{max}})",
       "add": "Ajouter",
       "remove": "Retirer",
-      "max_widgets_alert": "Vous ne pouvez pas épingler plus de {{max}} widgets."
+      "max_widgets_alert": "Vous ne pouvez pas épingler plus de {{max}} widgets.",
+      "view_label": "Afficher par",
+      "view_by_theme": "Thèmes",
+      "view_alphabetical": "Alphabétique",
+      "categories": {
+        "organization": "Organisation et classe",
+        "time": "Temps et rythme",
+        "math_science": "Mathématiques et sciences",
+        "resources": "Tableau, écriture et ressources",
+        "interaction": "Interaction, hasard et jeux éducatifs",
+        "logic_games": "Jeux de logique et dynamique de classe",
+        "gestures": "Gestes de travail",
+        "other": "Autres"
+      }
     },
     "theme": {
       "theme_colors_title": "Couleurs du thème",

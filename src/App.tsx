@@ -11,7 +11,7 @@ import { CreditsModal } from './components/core/CreditsModal';
 import { AboutModal } from './components/core/AboutModal';
 import { ThemeProvider, defaultTheme, type Theme } from './context/ThemeContext';
 import type { ActiveWidget, DesktopProfile, ProfileCollection } from './types';
-import { HelpCircle, PlusSquare, Settings, Image, Eye, EyeOff, X, Users, Maximize2, Minimize2, PinOff } from 'lucide-react';
+import { HelpCircle, PlusSquare, Settings, Image, Eye, EyeOff, X, Users, Maximize2, Minimize2, PinOff, BookOpen, Info, FileText } from 'lucide-react';
 import { defaultWallpaperValue, isWallpaperValueValid } from './utils/wallpapers';
 // --- ¡AQUÍ ESTÁ EL CAMBIO! Importamos el nuevo componente ---
 import { ProfileSwitcher } from './components/core/ProfileSwitcher';
@@ -485,30 +485,33 @@ const DesktopUI: React.FC<{
                     className="fixed bottom-20 left-4 z-[10001] w-64 bg-white/95 backdrop-blur-md rounded-lg shadow-xl border border-gray-200 py-2 text-sm text-text-dark"
                 >
                     <button
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
                         onClick={() => {
                             addWidget('program-guide');
                             setIsHelpOpen(false);
                         }}
                     >
+                        <BookOpen size={16} />
                         {t('help.guide')}
                     </button>
                     <button
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
                         onClick={() => {
                             setIsAboutOpen(true);
                             setIsHelpOpen(false);
                         }}
                     >
+                        <Info size={16} />
                         {t('help.about')}
                     </button>
                     <button
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
                         onClick={() => {
                             setIsCreditsOpen(true);
                             setIsHelpOpen(false);
                         }}
                     >
+                        <FileText size={16} />
                         {t('help.licenses')}
                     </button>
                 </div>

@@ -42,7 +42,20 @@
       "pinned_info": "Hautatu zure tresna-barran nahi dituzun widget-ak. ({{count}}/{{max}})",
       "add": "Gehitu",
       "remove": "Kendu",
-      "max_widgets_alert": "Ezin dira {{max}} widget baino gehiago finkatu."
+      "max_widgets_alert": "Ezin dira {{max}} widget baino gehiago finkatu.",
+      "view_label": "Ikusi honela",
+      "view_by_theme": "Gaiak",
+      "view_alphabetical": "Alfabetikoki",
+      "categories": {
+        "organization": "Antolaketa eta ikasgela",
+        "time": "Denbora eta erritmoa",
+        "math_science": "Matematika eta zientziak",
+        "resources": "Arbela, idazketa eta baliabideak",
+        "interaction": "Elkarrekintza, zoria eta hezkuntza-jokoak",
+        "logic_games": "Logika-jokoak eta klaseko dinamika",
+        "gestures": "Lan-keinuak",
+        "other": "Beste batzuk"
+      }
     },
     "theme": {
       "theme_colors_title": "Gaiaren koloreak",

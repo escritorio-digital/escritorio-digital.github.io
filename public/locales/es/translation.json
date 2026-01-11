@@ -43,7 +43,20 @@
       "pinned_info": "Selecciona los widgets que quieres en tu barra de herramientas. ({{count}}/{{max}})",
       "add": "Añadir",
       "remove": "Quitar",
-      "max_widgets_alert": "No se pueden fijar más de {{max}} widgets."
+      "max_widgets_alert": "No se pueden fijar más de {{max}} widgets.",
+      "view_label": "Ver por",
+      "view_by_theme": "Temas",
+      "view_alphabetical": "Alfabético",
+      "categories": {
+        "organization": "Organización y aula",
+        "time": "Tiempo y ritmo",
+        "math_science": "Matemáticas y ciencias",
+        "resources": "Pizarra, escritura y recursos",
+        "interaction": "Interacción, azar y juegos educativos",
+        "logic_games": "Juegos de lógica y dinámica de clase",
+        "gestures": "Trabajo con gestos",
+        "other": "Otros"
+      }
     },
     "theme": {
       "theme_colors_title": "Colores del Tema",

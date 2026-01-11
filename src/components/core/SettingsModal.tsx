@@ -8,6 +8,51 @@ import { ProfileManager } from './ProfileManager';
 import type { ProfileCollection } from '../../types';
 import { clearLocalWebData, WIDGET_DATA_KEYS } from '../../utils/backup';
 import { removeFromIndexedDb } from '../../utils/storage';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+
+type WidgetsViewMode = 'theme' | 'alphabetical';
+
+const WIDGET_CATEGORIES: Array<{
+  id: string;
+  titleKey: string;
+  widgetIds: string[];
+}> = [
+  {
+    id: 'organization',
+    titleKey: 'settings.widgets.categories.organization',
+    widgetIds: ['work-list', 'attendance', 'group-generator', 'calendar', 'program-guide'],
+  },
+  {
+    id: 'time',
+    titleKey: 'settings.widgets.categories.time',
+    widgetIds: ['timer', 'stopwatch', 'metronome'],
+  },
+  {
+    id: 'math_science',
+    titleKey: 'settings.widgets.categories.math_science',
+    widgetIds: ['scientific-calculator', 'unit-converter', 'latex-markdown'],
+  },
+  {
+    id: 'resources',
+    titleKey: 'settings.widgets.categories.resources',
+    widgetIds: ['notepad', 'drawing-pad', 'image-carousel', 'iframe', 'local-web', 'pdf-viewer', 'file-opener', 'directo-viewer', 'html-sandbox'],
+  },
+  {
+    id: 'interaction',
+    titleKey: 'settings.widgets.categories.interaction',
+    widgetIds: ['dice', 'random-spinner', 'qr-code-generator', 'traffic-light', 'sound-meter', 'scoreboard'],
+  },
+  {
+    id: 'logic_games',
+    titleKey: 'settings.widgets.categories.logic_games',
+    widgetIds: ['tic-tac-toe', 'memory-game', 'sliding-puzzle'],
+  },
+  {
+    id: 'gestures',
+    titleKey: 'settings.widgets.categories.gestures',
+    widgetIds: ['work-gestures'],
+  },
+];
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -35,6 +80,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState('general');
   const [searchTerm, setSearchTerm] = useState('');
+  const [widgetsViewMode, setWidgetsViewMode] = useLocalStorage<WidgetsViewMode>('widgets-view-mode', 'theme');
 
   useEffect(() => {
     if (isOpen) setActiveTab(initialTab);
@@ -48,6 +94,30 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     });
     return results.sort((a, b) => t(a.title).localeCompare(t(b.title)));
   }, [searchTerm, t]);
+
+  const widgetsByCategory = useMemo(() => {
+    const widgetsById = new Map(filteredWidgets.map((widget) => [widget.id, widget]));
+    const categorized = WIDGET_CATEGORIES.map((category) => ({
+      ...category,
+      widgets: category.widgetIds
+        .map((id) => widgetsById.get(id))
+        .filter((widget): widget is (typeof filteredWidgets)[number] => Boolean(widget))
+        .sort((a, b) => t(a.title).localeCompare(t(b.title))),
+    }));
+    const categorizedIds = new Set(WIDGET_CATEGORIES.flatMap((category) => category.widgetIds));
+    const uncategorized = filteredWidgets
+      .filter((widget) => !categorizedIds.has(widget.id))
+      .sort((a, b) => t(a.title).localeCompare(t(b.title)));
+    if (uncategorized.length > 0) {
+      categorized.push({
+        id: 'other',
+        titleKey: 'settings.widgets.categories.other',
+        widgetIds: uncategorized.map((widget) => widget.id),
+        widgets: uncategorized,
+      });
+    }
+    return categorized;
+  }, [filteredWidgets]);
 
   const MAX_WIDGETS = 20;
 
@@ -178,20 +248,64 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                     <input type="text" placeholder={t('settings.widgets.search')} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2 border rounded-lg bg-white/80 focus:ring-2 focus:ring-accent focus:outline-none" />
                   </div>
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <span className="text-sm text-gray-600">{t('settings.widgets.view_label')}</span>
+                    <div className="flex rounded-lg border border-gray-200 overflow-hidden bg-white/70">
+                      <button
+                        type="button"
+                        onClick={() => setWidgetsViewMode('theme')}
+                        className={`px-3 py-1.5 text-sm font-semibold transition-colors ${widgetsViewMode === 'theme' ? 'bg-accent text-text-dark' : 'text-gray-600 hover:bg-gray-100'}`}
+                      >
+                        {t('settings.widgets.view_by_theme')}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setWidgetsViewMode('alphabetical')}
+                        className={`px-3 py-1.5 text-sm font-semibold transition-colors ${widgetsViewMode === 'alphabetical' ? 'bg-accent text-text-dark' : 'text-gray-600 hover:bg-gray-100'}`}
+                      >
+                        {t('settings.widgets.view_alphabetical')}
+                      </button>
+                    </div>
+                  </div>
                   <p className="mb-4 text-sm text-gray-600">{t('settings.widgets.pinned_info', { count: pinnedWidgets.length, max: MAX_WIDGETS })}</p>
-                  <ul className="space-y-2">
-                    {filteredWidgets.map(widget => (
-                      <li key={widget.id} className="flex items-center justify-between p-3 bg-white/50 rounded-lg">
-                        <div className="flex items-center gap-4">
-                          <span className="text-2xl">{widget.icon}</span>
-                          <span className="font-semibold">{t(widget.title)}</span>
-                        </div>
-                        <button onClick={() => togglePin(widget.id)} className={`font-semibold py-2 px-4 rounded-lg transition-colors ${pinnedWidgets.includes(widget.id) ? 'bg-widget-header text-text-light hover:bg-[#7b69b1]' : 'bg-accent text-text-dark hover:bg-[#8ec9c9]'}`}>
-                          {pinnedWidgets.includes(widget.id) ? t('settings.widgets.remove') : t('settings.widgets.add')}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
+                  {widgetsViewMode === 'alphabetical' ? (
+                    <ul className="space-y-2">
+                      {filteredWidgets.map(widget => (
+                        <li key={widget.id} className="flex items-center justify-between p-3 bg-white/50 rounded-lg">
+                          <div className="flex items-center gap-4">
+                            <span className="text-2xl">{widget.icon}</span>
+                            <span className="font-semibold">{t(widget.title)}</span>
+                          </div>
+                          <button onClick={() => togglePin(widget.id)} className={`font-semibold py-2 px-4 rounded-lg transition-colors ${pinnedWidgets.includes(widget.id) ? 'bg-widget-header text-text-light hover:bg-[#7b69b1]' : 'bg-accent text-text-dark hover:bg-[#8ec9c9]'}`}>
+                            {pinnedWidgets.includes(widget.id) ? t('settings.widgets.remove') : t('settings.widgets.add')}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <div className="space-y-5">
+                      {widgetsByCategory
+                        .filter((category) => category.widgets.length > 0)
+                        .map((category) => (
+                          <div key={category.id}>
+                            <h4 className="text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">{t(category.titleKey)}</h4>
+                            <ul className="space-y-2">
+                              {category.widgets.map(widget => (
+                                <li key={widget.id} className="flex items-center justify-between p-3 bg-white/50 rounded-lg">
+                                  <div className="flex items-center gap-4">
+                                    <span className="text-2xl">{widget.icon}</span>
+                                    <span className="font-semibold">{t(widget.title)}</span>
+                                  </div>
+                                  <button onClick={() => togglePin(widget.id)} className={`font-semibold py-2 px-4 rounded-lg transition-colors ${pinnedWidgets.includes(widget.id) ? 'bg-widget-header text-text-light hover:bg-[#7b69b1]' : 'bg-accent text-text-dark hover:bg-[#8ec9c9]'}`}>
+                                    {pinnedWidgets.includes(widget.id) ? t('settings.widgets.remove') : t('settings.widgets.add')}
+                                  </button>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                    </div>
+                  )}
                 </div>
               )}
               {activeTab === 'theme' && <ThemeSettings />}

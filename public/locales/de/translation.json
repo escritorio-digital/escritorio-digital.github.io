@@ -43,7 +43,20 @@
       "pinned_info": "Wähle die Widgets aus, die in deiner Werkzeugleiste erscheinen sollen. ({{count}}/{{max}})",
       "add": "Hinzufügen",
       "remove": "Entfernen",
-      "max_widgets_alert": "Du kannst nicht mehr als {{max}} Widgets anheften."
+      "max_widgets_alert": "Du kannst nicht mehr als {{max}} Widgets anheften.",
+      "view_label": "Ansicht",
+      "view_by_theme": "Themen",
+      "view_alphabetical": "Alphabetisch",
+      "categories": {
+        "organization": "Organisation und Unterricht",
+        "time": "Zeit und Rhythmus",
+        "math_science": "Mathematik und Naturwissenschaften",
+        "resources": "Tafel, Schreiben und Ressourcen",
+        "interaction": "Interaktion, Zufall und Lernspiele",
+        "logic_games": "Logikspiele und Klassendynamik",
+        "gestures": "Arbeitsgesten",
+        "other": "Sonstige"
+      }
     },
     "theme": {
       "theme_colors_title": "Themenfarben",
