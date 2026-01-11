@@ -602,8 +602,8 @@
     "tab_export": "Gorde",
     "tab_import": "Kargatu",
     "import_mode_label": "Karga modua",
-    "import_mode_replace": "Oraingoak ordezkatu",
-    "import_mode_merge": "Daudenekin bateratu",
+    "import_mode_replace": "Oraingoak ordezkatu (guztiak ezabatu eta inportatuekin ordezkatu)",
+    "import_mode_merge": "Daudenekin bateratu (bat ere ez ezabatu; inportatuak gehitu)",
     "manage_profiles": "Profilak gorde edo kargatu",
     "choose_profiles": "Zein profil gorde nahi duzu"
   },

@@ -603,8 +603,8 @@
     "tab_export": "Gardar",
     "tab_import": "Cargar",
     "import_mode_label": "Modo de carga",
-    "import_mode_replace": "Substituír actuais",
-    "import_mode_merge": "Combinar cos existentes",
+    "import_mode_replace": "Substituír actuais (elimínanse e substitúense polos importados)",
+    "import_mode_merge": "Combinar cos existentes (non se elimina ningún; engádense os importados)",
     "manage_profiles": "Gardar ou cargar perfís",
     "choose_profiles": "Que perfil queres gardar"
   },

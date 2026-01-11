@@ -603,8 +603,8 @@
     "tab_export": "Desar",
     "tab_import": "Carregar",
     "import_mode_label": "Mode de càrrega",
-    "import_mode_replace": "Reemplaçar actuals",
-    "import_mode_merge": "Combinar amb existents",
+    "import_mode_replace": "Reemplaçar actuals (s’eliminaran i se substituiran pels importats)",
+    "import_mode_merge": "Combinar amb existents (no se’n elimina cap; s’afegeixen els importats)",
     "manage_profiles": "Desar o carregar perfils",
     "choose_profiles": "Quin perfil vols desar"
   },
