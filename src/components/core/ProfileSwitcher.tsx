@@ -71,8 +71,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
     selectedProfiles.length < profileNames.length;
   const canIncludeLocalWeb =
     hasLocalWeb &&
-    selectedProfiles.length > 0 &&
-    !isPartialProfileSelection;
+    selectedProfiles.length > 0;
   const containerRef = useRef<HTMLDivElement>(null);
   const importInputRef = useRef<HTMLInputElement>(null);
   const estimateCounterRef = useRef(0);
@@ -149,8 +148,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
   useEffect(() => {
     if (!isPartialProfileSelection) return;
     if (includeWidgetData) setIncludeWidgetData(false);
-    if (includeLocalWeb) setIncludeLocalWeb(false);
-  }, [isPartialProfileSelection, includeWidgetData, includeLocalWeb]);
+  }, [isPartialProfileSelection, includeWidgetData]);
 
   useEffect(() => {
     if (canIncludeLocalWeb) return;
@@ -258,7 +256,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
     if (includeWidgetData && hasWidgetData && !isPartialProfileSelection) {
       total += await estimateWidgetDataSize();
     }
-    if (includeLocalWeb && hasLocalWeb && !isPartialProfileSelection) {
+    if (includeLocalWeb && hasLocalWeb) {
       const stats = await getLocalWebStats();
       total += Math.ceil(stats.totalBytes * 1.1);
     }
@@ -304,7 +302,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
     abortControllerRef.current = controller;
     try {
       const payload = await buildDataForExport();
-      const localWebRecords = includeLocalWeb && hasLocalWeb && !isPartialProfileSelection
+      const localWebRecords = includeLocalWeb && hasLocalWeb
         ? await exportLocalWebRecords()
         : undefined;
       let lastUpdate = 0;
