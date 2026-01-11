@@ -11,7 +11,7 @@ import { CreditsModal } from './components/core/CreditsModal';
 import { AboutModal } from './components/core/AboutModal';
 import { ThemeProvider, defaultTheme, type Theme } from './context/ThemeContext';
 import type { ActiveWidget, DesktopProfile, ProfileCollection } from './types';
-import { HelpCircle, PlusSquare, Settings, Image, Eye, EyeOff, X, Users, Maximize2, Minimize2, PinOff, BookOpen, Info, FileText } from 'lucide-react';
+import { HelpCircle, PlusSquare, Image, X, Users, Maximize2, Minimize2, PinOff, BookOpen, Info, FileText } from 'lucide-react';
 import { defaultWallpaperValue, isWallpaperValueValid } from './utils/wallpapers';
 // --- ¡AQUÍ ESTÁ EL CAMBIO! Importamos el nuevo componente ---
 import { ProfileSwitcher } from './components/core/ProfileSwitcher';
