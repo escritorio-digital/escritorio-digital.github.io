@@ -156,6 +156,21 @@ const DesktopUI: React.FC<{
         setActiveWidgets(prev => prev.map(w => (w.instanceId === instanceId ? { ...w, zIndex: newZ } : w)));
     };
     const toggleMinimize = (instanceId: string) => setActiveWidgets(prev => prev.map(w => (w.instanceId === instanceId ? { ...w, isMinimized: !w.isMinimized } : w)));
+    const handleTaskClick = useCallback((instanceId: string) => {
+        const target = activeProfile.activeWidgets.find((widget) => widget.instanceId === instanceId);
+        if (!target) return;
+        if (target.isMinimized) {
+            const newZ = highestZ + 1;
+            setHighestZ(newZ);
+            setActiveWidgets(prev =>
+                prev.map(w => (w.instanceId === instanceId ? { ...w, isMinimized: false, zIndex: newZ } : w))
+            );
+            return;
+        }
+        setActiveWidgets(prev =>
+            prev.map(w => (w.instanceId === instanceId ? { ...w, isMinimized: true } : w))
+        );
+    }, [activeProfile.activeWidgets, highestZ, setActiveWidgets, setHighestZ]);
     const toggleMaximize = (instanceId: string) => {
         const newZ = highestZ + 1;
         setHighestZ(newZ);
@@ -481,6 +496,8 @@ const DesktopUI: React.FC<{
                     onWidgetsClick={() => openSettingsTab('widgets')}
                     onOpenContextMenu={(event, widgetId, force) => handleContextMenu(event, widgetId, force)}
                     onReorderPinned={(orderedIds) => setPinnedWidgets(orderedIds)}
+                    openWidgets={activeProfile.activeWidgets}
+                    onTaskClick={handleTaskClick}
                 />
             )}
             <button

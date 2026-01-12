@@ -93,7 +93,8 @@
     "start": "Inicio",
     "settings": "Configuración",
     "widgetLibrary": "Libraría de Programas",
-    "remove_widget": "Quitar este programa"
+    "remove_widget": "Quitar este programa",
+    "no_open_windows": "Sen ventás abertas"
   },
   "help": {
     "tooltip": "Axuda",

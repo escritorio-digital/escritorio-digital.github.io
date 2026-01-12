@@ -5,6 +5,7 @@ import { DndContext, PointerSensor, KeyboardSensor, useSensor, useSensors, close
 import { SortableContext, arrayMove, horizontalListSortingStrategy, useSortable, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { WIDGET_REGISTRY } from '../widgets';
+import type { ActiveWidget } from '../../types';
 
 interface ToolbarProps {
   pinnedWidgets: string[];
@@ -12,6 +13,8 @@ interface ToolbarProps {
   onWidgetsClick: () => void;
   onOpenContextMenu: (event: React.MouseEvent, widgetId?: string, force?: boolean) => void;
   onReorderPinned: (orderedIds: string[]) => void;
+  openWidgets: ActiveWidget[];
+  onTaskClick: (instanceId: string) => void;
 }
 
 export const Toolbar: React.FC<ToolbarProps> = ({
@@ -20,13 +23,23 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   onWidgetsClick,
   onOpenContextMenu,
   onReorderPinned,
+  openWidgets,
+  onTaskClick,
 }) => {
   const { t } = useTranslation();
+  const highestZ = openWidgets.reduce((acc, widget) => Math.max(acc, widget.zIndex), 0);
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
   const draggableIds = pinnedWidgets.filter((id) => WIDGET_REGISTRY[id]);
+  const visibleTasks = openWidgets
+    .map((widget) => {
+      const config = WIDGET_REGISTRY[widget.widgetId];
+      return config ? { ...widget, title: t(config.title) } : null;
+    })
+    .filter((widget): widget is ActiveWidget & { title: string } => Boolean(widget))
+    .sort((a, b) => a.title.localeCompare(b.title));
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -73,30 +86,58 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 
   return (
     <div
-      className="fixed bottom-5 left-1/2 -translate-x-1/2 bg-widget-bg p-2 rounded-2xl flex items-center gap-2 shadow-lg z-[10000] border border-custom-border max-w-[calc(100vw-1rem)] overflow-x-auto"
+      className="fixed bottom-5 left-1/2 -translate-x-1/2 bg-widget-bg p-2 rounded-2xl flex items-center gap-3 shadow-lg z-[10000] border border-custom-border max-w-[calc(100vw-1rem)]"
       onContextMenu={handleBarContextMenu}
     >
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-      >
-        <SortableContext items={draggableIds} strategy={horizontalListSortingStrategy}>
-          {draggableIds.map((widgetId) => (
-            <SortablePinnedButton key={widgetId} widgetId={widgetId} />
-          ))}
-        </SortableContext>
-      </DndContext>
-      <div className="h-10 w-px bg-white/30 mx-2"></div>
-      <button
-        onClick={onWidgetsClick}
-        onContextMenu={(event) => onOpenContextMenu(event, undefined, true)}
-        className="w-10 h-10 rounded-full text-text-light bg-black/20 hover:bg-black/30 transition-all duration-200 flex items-center justify-center flex-shrink-0"
-        title={t('toolbar.widgetLibrary')}
-        aria-label={t('toolbar.widgetLibrary')}
-      >
-        <LayoutGrid size={18} />
-      </button>
+      <div className="flex items-center gap-2">
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext items={draggableIds} strategy={horizontalListSortingStrategy}>
+            <div className="flex items-center gap-2">
+              {draggableIds.map((widgetId) => (
+                <SortablePinnedButton key={widgetId} widgetId={widgetId} />
+              ))}
+            </div>
+          </SortableContext>
+        </DndContext>
+        <button
+          onClick={onWidgetsClick}
+          onContextMenu={(event) => onOpenContextMenu(event, undefined, true)}
+          className="w-10 h-10 rounded-full text-text-light bg-black/20 hover:bg-black/30 transition-all duration-200 flex items-center justify-center flex-shrink-0"
+          title={t('toolbar.widgetLibrary')}
+          aria-label={t('toolbar.widgetLibrary')}
+        >
+          <LayoutGrid size={18} />
+        </button>
+      </div>
+      <div className="h-10 w-px bg-white/30"></div>
+      <div className="flex items-center gap-2 overflow-x-auto pr-1">
+        {visibleTasks.length === 0 ? (
+          <span className="text-xs text-text-light/70 px-2">{t('toolbar.no_open_windows')}</span>
+        ) : (
+          visibleTasks.map((widget) => (
+            <button
+              key={widget.instanceId}
+              type="button"
+              onClick={() => onTaskClick(widget.instanceId)}
+              className={`max-w-[180px] truncate px-3 py-2 rounded-lg border text-xs font-semibold transition ${
+                widget.isMinimized
+                  ? 'bg-white/60 border-gray-200 text-gray-500'
+                  : widget.zIndex === highestZ
+                    ? 'bg-amber-100 border-amber-300 text-amber-800'
+                    : 'bg-white/90 border-gray-200 text-text-dark hover:bg-amber-50'
+              }`}
+              title={widget.title}
+              aria-label={widget.title}
+            >
+              {widget.title}
+            </button>
+          ))
+        )}
+      </div>
     </div>
   );
 };

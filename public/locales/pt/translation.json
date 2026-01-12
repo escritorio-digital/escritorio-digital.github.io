@@ -95,7 +95,8 @@
     "start": "Início",
     "settings": "Configurações",
     "widgetLibrary": "Biblioteca de Programas",
-    "remove_widget": "Remover este programa"
+    "remove_widget": "Remover este programa",
+    "no_open_windows": "Sem janelas abertas"
   },
   "help": {
     "tooltip": "Ajuda",

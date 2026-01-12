@@ -93,7 +93,8 @@
     "start": "Inici",
     "settings": "Configuració",
     "widgetLibrary": "Biblioteca de Programes",
-    "remove_widget": "Treure aquest programa"
+    "remove_widget": "Treure aquest programa",
+    "no_open_windows": "Cap finestra oberta"
   },
   "help": {
     "tooltip": "Ajuda",

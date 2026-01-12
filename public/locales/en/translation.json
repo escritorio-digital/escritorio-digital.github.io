@@ -93,7 +93,8 @@
     "start": "Start",
     "settings": "Settings",
     "widgetLibrary": "Program Library",
-    "remove_widget": "Remove this program"
+    "remove_widget": "Remove this program",
+    "no_open_windows": "No open windows"
   },
   "help": {
     "tooltip": "Help",

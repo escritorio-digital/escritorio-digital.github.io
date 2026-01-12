@@ -93,7 +93,8 @@
     "start": "Avvio",
     "settings": "Impostazioni",
     "widgetLibrary": "Libreria dei programma",
-    "remove_widget": "Rimuovi questo programma"
+    "remove_widget": "Rimuovi questo programma",
+    "no_open_windows": "Nessuna finestra aperta"
   },
   "help": {
     "tooltip": "Aiuto",

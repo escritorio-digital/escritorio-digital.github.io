@@ -92,7 +92,8 @@
     "start": "Hasiera",
     "settings": "Ezarpenak",
     "widgetLibrary": "Programa Liburutegia",
-    "remove_widget": "Kendu programa hau"
+    "remove_widget": "Kendu programa hau",
+    "no_open_windows": "Ez dago leiho irekirik"
   },
   "help": {
     "tooltip": "Laguntza",

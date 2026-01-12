@@ -94,7 +94,8 @@
     "start": "Démarrer",
     "settings": "Configuration",
     "widgetLibrary": "Bibliothèque de programmes",
-    "remove_widget": "Retirer ce programme"
+    "remove_widget": "Retirer ce programme",
+    "no_open_windows": "Aucune fenêtre ouverte"
   },
   "help": {
     "tooltip": "Aide",
