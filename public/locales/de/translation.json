@@ -6,7 +6,7 @@
     "tabs": {
       "general": "Allgemein",
       "profiles": "Profile",
-      "widgets": "Widgets",
+      "widgets": "Programme",
       "theme": "Erscheinungsbild"
     },
     "general": {
@@ -19,7 +19,7 @@
         "eu": "Baskisch"
       },
       "reset_title": "Anwendung zurücksetzen",
-      "reset_description": "Entfernt alle gespeicherten Daten (Profile, Widgets und Einstellungen) und startet wie beim ersten Mal.",
+      "reset_description": "Entfernt alle gespeicherten Daten (Profile, Programme und Einstellungen) und startet wie beim ersten Mal.",
       "reset_button": "Auf Werkseinstellungen zurücksetzen",
       "reset_confirm": "Möchtest du wirklich alle lokalen Einstellungen und Daten entfernen? Dies kann nicht rückgängig gemacht werden."
     },
@@ -27,28 +27,53 @@
       "invalid_name_alert": "Ungültiger oder bereits vorhandener Profilname.",
       "delete_last_alert": "Du kannst das letzte Profil nicht löschen.",
       "delete_confirm": "Möchtest du das Profil \"{{name}}\" wirklich löschen?",
+      "default_name": "Hauptdesktop",
       "save_current_title": "Aktuelle Einstellungen als neues Profil speichern",
       "new_profile_placeholder": "Neuer Profilname...",
+      "manage_button": "Profile verwalten",
       "save_button": "Speichern",
       "saved_profiles_title": "Gespeicherte Profile",
       "active_button": "Aktiv",
       "load_button": "Laden",
       "delete_button": "Löschen",
-      "switcher_title": "Desktop wechseln"
+      "switcher_title": "Desktop wechseln",
+      "move_up": "Nach oben",
+      "move_down": "Nach unten",
+      "rename_button": "Umbenennen",
+      "rename_placeholder": "Neuer Profilname",
+      "rename_save_button": "Speichern",
+      "rename_cancel_button": "Abbrechen",
+      "rename_hint": "Doppelklick, um den Profilnamen zu ändern",
+      "create_mode_label": "Profil erstellen als",
+      "create_mode_empty": "Leer",
+      "create_mode_clone": "Aktuelles klonen"
     },
     "widgets": {
-      "search": "Widget suchen...",
-      "pinned_info": "Wähle die Widgets aus, die in deiner Werkzeugleiste erscheinen sollen. ({{count}}/{{max}})",
+      "search": "Programm suchen...",
+      "pinned_info": "Wähle die Programme aus, die in deiner Werkzeugleiste erscheinen sollen. ({{count}}/{{max}})",
       "add": "Hinzufügen",
       "remove": "Entfernen",
-      "max_widgets_alert": "Du kannst nicht mehr als {{max}} Widgets anheften."
+      "max_widgets_alert": "Du kannst nicht mehr als {{max}} Programme anheften.",
+      "view_label": "Ansicht",
+      "view_by_theme": "Themen",
+      "view_alphabetical": "Alphabetisch",
+      "categories": {
+        "organization": "Organisation und Unterricht",
+        "time": "Zeit und Rhythmus",
+        "math_science": "Mathematik und Naturwissenschaften",
+        "resources": "Tafel, Schreiben und Ressourcen",
+        "interaction": "Interaktion, Zufall und Lernspiele",
+        "logic_games": "Logikspiele und Klassendynamik",
+        "gestures": "Arbeitsgesten",
+        "other": "Sonstige"
+      }
     },
     "theme": {
       "theme_colors_title": "Themenfarben",
       "colors": {
         "desktop_bg": "Desktop-Hintergrund",
-        "widget_bg": "Widget-Hintergrund",
-        "widget_header": "Widget-Kopfzeile",
+        "widget_bg": "Programm-Hintergrund",
+        "widget_header": "Programm-Kopfzeile",
         "accent": "Akzent",
         "text_light": "Heller Text",
         "text_dark": "Dunkler Text"
@@ -56,15 +81,87 @@
       "wallpaper_title": "Hintergrundbild",
       "upload_image_button": "Bild hochladen",
       "remove_wallpaper_button": "Hintergrund entfernen",
-      "reset_theme_button": "Standardthema wiederherstellen"
+      "show_datetime_label": "Datum und Uhrzeit anzeigen",
+      "show_datetime_help": "Wird oben rechts angezeigt.",
+      "reset_theme_button": "Standardthema wiederherstellen",
+      "show_system_stats_label": "Systemstatistiken anzeigen",
+      "show_system_stats_help": "Neben der Uhr angezeigt."
     }
   },
   "toolbar": {
+    "start": "Start",
     "settings": "Einstellungen",
-    "widgetLibrary": "Widget-Bibliothek"
+    "widgetLibrary": "Programm-Bibliothek",
+    "remove_widget": "Dieses Programm entfernen"
+  },
+  "help": {
+    "tooltip": "Hilfe",
+    "title": "Hilfe",
+    "guide": "Benutzerhandbuch",
+    "about": "Über das Projekt",
+    "licenses": "Credits und Lizenzen"
+  },
+  "start_menu": {
+    "title": "Start",
+    "close": "Schließen",
+    "favorites": "Favoriten",
+    "shortcuts": "Schnellzugriffe",
+    "widgets": "Programme",
+    "help": "Hilfe",
+    "no_results": "Keine Ergebnisse",
+    "remove_favorite": "Aus Favoriten entfernen",
+    "clear_favorites": "Favoriten leeren",
+    "clear_favorites_confirm": "Möchtest du die Favoritenliste leeren?",
+    "reorder_favorites": "Favoriten neu anordnen",
+    "add_favorite": "Zu Favoriten hinzufügen"
+  },
+  "about": {
+    "title": "Über das Projekt",
+    "app_name_label": "Name der Anwendung",
+    "app_name_value": "Digitaler Desktop für den Unterricht",
+    "version_label": "Version",
+    "version_value": "v1.1.10 — Januar 2026",
+    "history_title": "Projektverlauf",
+    "initial_title": "Ursprüngliches Projekt",
+    "initial_text": "Idee und erste Version: María Teresa González. Grundversion des interaktiven Klassenraum-Desktops.",
+    "original_app_label": "Originalanwendung:",
+    "development_title": "Funktionale Weiterentwicklung",
+    "development_text": "Transformation des ersten Prototyps in eine einsatzfähige Anwendung: Pablo G. Guízar.",
+    "continuity_title": "Aktualisierung und Kontinuität",
+    "continuity_text": "Wartung und Weiterentwicklung der aktuellen Version: Juan José de Haro und Pablo G. Guízar.",
+    "community_title": "Community",
+    "community_text": "Dieses Projekt ist Teil des Repositoriums für Bildungsanwendungen der Community Vibe Coding Educativo.",
+    "community_repo_label": "Anwendungs-Repository:",
+    "community_telegram_label": "Telegram-Community:"
+  },
+  "licenses": {
+    "title": "Credits und Lizenzen",
+    "code_title": "Code-Lizenz",
+    "code_text": "Dieses Programm wird unter folgender Lizenz verbreitet:",
+    "code_license_name": "GNU Affero General Public License v3 (AGPL-3.0)",
+    "code_license_desc": "Erlaubt Nutzung, Änderung und Weitergabe der Software unter derselben Lizenz.",
+    "code_link_label": "Offizieller Lizenztext",
+    "content_title": "Inhaltslizenz",
+    "content_text": "Die in der Anwendung enthaltenen Inhalte (Texte, Materialien und didaktische Ressourcen) werden veröffentlicht unter:",
+    "content_license_name": "Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)",
+    "content_link_label": "Offizieller Lizenztext",
+    "external_title": "Externe Ressourcen",
+    "external_text": "Diese Anwendung kann Bibliotheken, Icons oder Schriften von Drittanbietern enthalten, jeweils mit eigener Lizenz, verfügbar im Projekt-Repository.",
+    "repo_link_label": "Projekt-Repository",
+    "principles_title": "Prinzipien",
+    "principles_text": "Dieses Projekt bekennt sich zum:",
+    "principles_name": "Dekalog des Offenen Wissens",
+    "principles_link_label": "Dekalog ansehen"
+  },
+  "desktop": {
+    "fullscreen_enter": "Vollbildmodus",
+    "fullscreen_exit": "Vollbild verlassen"
   },
   "credits": {
     "title": "Credits und Lizenz",
+    "tooltip": "Credits, Lizenz und Programmleitfaden",
+    "user_guide_title": "Programmleitfaden",
+    "user_guide_link": "Programm-Leitfaden öffnen",
     "original_project": "Das Originalprojekt <strong>Interaktiver Klassenraum-Desktop</strong> und seine Idee gehören <strong>María Teresa González</strong>.",
     "original_link": "Du kannst die Originalanwendung hier besuchen:",
     "new_version": "Diese neue Version wurde in Zusammenarbeit von <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> und <strong>Pablo G. Guízar</strong> entwickelt. Das Repository dieses Projekts findest du unter:",
@@ -73,20 +170,42 @@
     "vibe_apps_link_text": "Weitere Anwendungen dieser Community findest du unter:",
     "vibe_apps_repo_text": "Repository Vibe Coding Educativo",
     "vibe_telegram_link_text": "Tritt der Community auf Telegram bei:",
+    "code_license": "Code-Lizenz:",
     "open_knowledge_adherence": "Dieses Projekt hält sich an das",
     "open_knowledge_decalogue": "Dekalog des Offenen Wissens"
   },
   "context_menu": {
-    "new_widget": "Neues Widget...",
-    "settings": "Einstellungen",
+    "new_widget": "Neues Programm...",
+    "settings": "ED konfigurieren",
     "manage_profiles": "Profile verwalten",
     "change_background": "Hintergrund ändern...",
-    "show_toolbar": "Untere Leiste anzeigen",
+    "show_datetime": "Datum und Uhrzeit",
+    "hide_datetime": "Datum und Uhrzeit ausblenden",
+    "show_toolbar": "Untere Leiste",
     "hide_toolbar": "Untere Leiste ausblenden",
-    "reset_layout": "Alle Fenster schließen",
-    "reset_layout_confirm": "Möchtest du alle Fenster auf dem Desktop schließen?"
+    "reset_layout": "Alle offenen Fenster schließen",
+    "reset_layout_confirm": "Möchtest du alle Fenster auf dem Desktop schließen?",
+    "show_system_stats": "Systemstatistiken",
+    "hide_system_stats": "Systemstatistiken ausblenden"
+  },
+  "storage_warning": {
+    "title": "Speicher voll",
+    "body": "Der Browser ist fast voll. Wir haben deine Änderungen in einem erweiterten Speicher abgelegt. Um Platz zu schaffen, ohne alles zu verlieren, entferne Bilder aus dem Karussell oder lösche sehr lange Notizen.",
+    "open_settings": "Einstellungen öffnen",
+    "dismiss": "Schließen"
   },
   "widgets": {
+    "program_guide": {
+      "title": "Programmleitfaden",
+      "load_error": "Der Leitfaden konnte nicht geladen werden."
+    },
+    "file_opener": {
+      "title": "Datei-Explorer",
+      "description": "Klicke, um eine Datei auszuwählen und hier anzuzeigen.",
+      "supported_formats": "PDF, Bilder, Text, Markdown, HTML, Video und Audio.",
+      "pdf_fallback": "Dein Browser kann dieses PDF nicht anzeigen.",
+      "open_button": "Datei öffnen"
+    },
     "attendance": {
       "title": "Anwesenheitskontrolle",
       "badges": {
@@ -256,6 +375,7 @@
       "copy_source": "Quellcode kopieren",
       "copy_image": "Als Bild kopieren",
       "save_file": "Datei speichern (.md/.tex)",
+      "open_file": "Datei öffnen (.md)",
       "export_pdf": "Als PDF exportieren (Text)",
       "source_copied": "Quellcode kopiert",
       "copy_failed": "Kopieren fehlgeschlagen",
@@ -444,6 +564,78 @@
       "pan_mode": "Schwenkmodus umschalten",
       "exit_pan": "Schwenkmodus verlassen",
       "center_view": "Ansicht zentrieren"
+    },
+    "local_web": {
+      "title": "Lokale Web",
+      "import_zip": "ZIP importieren",
+      "import_folder": "Ordner importieren",
+      "empty_state": "Noch keine gespeicherten Websites.",
+      "confirm_extract": "\"{{name}}\" entpacken und speichern?",
+      "confirm_delete": "Diese gespeicherte Website löschen?",
+      "import_done": "Import abgeschlossen.",
+      "import_empty": "Das ZIP ist leer.",
+      "importing": "Dateien werden importiert...",
+      "loading": "Website wird geladen...",
+      "missing_index": "index.html wurde in dieser Website nicht gefunden.",
+      "preview_placeholder": "Wähle eine Website aus, um sie hier zu sehen.",
+      "close_preview": "Viewer schließen",
+      "site_meta": "{{files}} Dateien · {{size}}",
+      "storage_used": "Belegt: {{used}}",
+      "storage_usage": "Belegt: {{used}} / {{total}} ({{percent}}%)",
+      "storage_unknown": "Verfügbarer Speicher: unbekannt",
+      "storage_local_used": "Von lokalen Websites belegt: {{used}}",
+      "site_default_name": "Lokale Web",
+      "open_fullscreen_window": "In neuem Tab öffnen",
+      "open_fullscreen_button": "Vollbild",
+      "close_window_button": "Fenster schließen",
+      "collapse_list": "Liste ausblenden",
+      "expand_list": "Liste anzeigen",
+      "rename_placeholder": "Neuer Website-Name",
+      "rename_invalid": "Der Website-Name ist ungültig."
     }
+  },
+  "backup": {
+    "title": "Profile speichern oder laden",
+    "include_profiles": "Profile und Layout (Fenster, Hintergründe, Leiste)",
+    "include_widgets": "Programm-Einstellungen und Daten",
+    "include_local_web": "Lokale Websites",
+    "export_button": "Datei speichern",
+    "import_button": "Datei laden",
+    "exporting": "Wird gespeichert...",
+    "export_ready": "Datei bereit",
+    "importing": "Wird geladen...",
+    "import_done": "Laden abgeschlossen",
+    "invalid_file": "Ungültige Datei.",
+    "import_confirm": "Profile aus der Datei werden geladen. Fortfahren?",
+    "import_local_web_confirm": "Lokale Websites werden ersetzt. Fortfahren?",
+    "import_note": "Nur mit Escritorio Digital erstellte Dateien können geladen werden.",
+    "no_profiles": "Wähle mindestens ein Profil aus.",
+    "size_label": "Geschätzte Größe: {{size}}",
+    "size_estimating": "Dateigröße wird berechnet...",
+    "size_unknown": "Geschätzte Größe: unbekannt",
+    "export_profiles": "Profile exportieren/importieren",
+    "progress_export_title": "Profile speichern",
+    "progress_import_title": "Profile laden",
+    "progress_preparing": "Wird vorbereitet...",
+    "progress_cancel": "Abbrechen",
+    "tab_export": "Speichern",
+    "tab_import": "Laden",
+    "import_mode_label": "Lademodus",
+    "import_mode_replace": "Aktuelle ersetzen (alle entfernen und durch importierte ersetzen)",
+    "import_mode_merge": "Mit vorhandenen zusammenführen (alle behalten; importierte hinzufügen)",
+    "manage_profiles": "Profile speichern oder laden",
+    "choose_profiles": "Welches Profil möchtest du speichern"
+  },
+  "system_stats": {
+    "title": "Systemstatistiken",
+    "storage_used": "Speicher",
+    "storage_free": "Frei",
+    "memory": "RAM",
+    "memory_value": "{{value}} GB (ca.)",
+    "cpu": "CPU",
+    "cpu_value": "{{value}} Kerne",
+    "screen": "Bildschirm",
+    "screen_value": "{{width}}x{{height}}",
+    "not_available": "k. A."
   }
 }

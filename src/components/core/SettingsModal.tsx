@@ -3,9 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { X, Search } from 'lucide-react';
 import { WIDGET_REGISTRY } from '../widgets';
+import { buildWidgetsByCategory } from '../widgets/widgetCategories';
 import { ThemeSettings } from './ThemeSettings';
 import { ProfileManager } from './ProfileManager';
 import type { ProfileCollection } from '../../types';
+import { clearLocalWebData, WIDGET_DATA_KEYS } from '../../utils/backup';
+import { removeFromIndexedDb } from '../../utils/storage';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+
+type WidgetsViewMode = 'theme' | 'alphabetical';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -17,6 +23,8 @@ interface SettingsModalProps {
   setProfiles: React.Dispatch<React.SetStateAction<ProfileCollection>>;
   activeProfileName: string;
   setActiveProfileName: (name: string) => void;
+  profileOrder: string[];
+  setProfileOrder: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({
@@ -29,23 +37,28 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   setProfiles,
   activeProfileName,
   setActiveProfileName,
+  profileOrder,
+  setProfileOrder,
 }) => {
   const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState('general');
   const [searchTerm, setSearchTerm] = useState('');
+  const [widgetsViewMode, setWidgetsViewMode] = useLocalStorage<WidgetsViewMode>('widgets-view-mode', 'theme');
 
   useEffect(() => {
     if (isOpen) setActiveTab(initialTab);
   }, [isOpen, initialTab]);
 
   const filteredWidgets = useMemo(() => {
-    if (!searchTerm) {
-      return Object.values(WIDGET_REGISTRY);
-    }
-    return Object.values(WIDGET_REGISTRY).filter(widget =>
-      t(widget.title).toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const normalizedSearch = searchTerm.toLowerCase();
+    const results = Object.values(WIDGET_REGISTRY).filter(widget => {
+      if (!searchTerm) return true;
+      return t(widget.title).toLowerCase().includes(normalizedSearch);
+    });
+    return results.sort((a, b) => t(a.title).localeCompare(t(b.title)));
   }, [searchTerm, t]);
+
+  const widgetsByCategory = useMemo(() => buildWidgetsByCategory(filteredWidgets, t), [filteredWidgets, t]);
 
   const MAX_WIDGETS = 20;
 
@@ -66,26 +79,20 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     i18n.changeLanguage(newLanguage);
   };
 
-  const handleFactoryReset = () => {
+  const handleFactoryReset = async () => {
     if (!window.confirm(t('settings.general.reset_confirm'))) return;
-    const keysToClear = [
+    const keysToClear = Array.from(new Set([
       'desktop-profiles',
       'active-profile-name',
-      'work-list-tasks',
-      'spinner-options',
-      'notepad-content-html',
-      'image-carousel-images',
-      'tictactoe-players',
-      'tictactoe-score',
-      'global-clocks-selection',
-      'attendance-records',
-      'traffic-light-state',
-      'scoreboard-players',
-      'i18nextLng'
-    ];
+      ...WIDGET_DATA_KEYS,
+    ]));
     try {
       keysToClear.forEach(k => window.localStorage.removeItem(k));
-    } catch {}
+      await Promise.all(WIDGET_DATA_KEYS.map((key) => removeFromIndexedDb(key)));
+      await clearLocalWebData();
+    } catch (error) {
+      console.warn('No se pudieron limpiar las preferencias locales.', error);
+    }
     // Recargar la página para aplicar el estado inicial
     window.location.reload();
   };
@@ -141,9 +148,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               </button>
             </div>
 
-            <div className="overflow-y-auto p-4">
+            <div className="overflow-y-auto px-4 pb-4 pt-0">
               {activeTab === 'general' && (
-                <div>
+                <div className="pt-4">
                   <h3 className="text-lg font-semibold mb-4">{t('settings.tabs.general')}</h3>
                   <div className="flex items-center justify-between">
                     <label htmlFor="language-select" className="font-medium">{t('settings.general.language')}:</label>
@@ -175,30 +182,98 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                   </div>
                 </div>
               )}
-              {activeTab === 'profiles' && <ProfileManager profiles={profiles} setProfiles={setProfiles} activeProfileName={activeProfileName} setActiveProfileName={setActiveProfileName} />}
-              {activeTab === 'widgets' && (
-                <div>
-                  <div className="relative mb-4">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-                    <input type="text" placeholder={t('settings.widgets.search')} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2 border rounded-lg bg-white/80 focus:ring-2 focus:ring-accent focus:outline-none" />
-                  </div>
-                  <p className="mb-4 text-sm text-gray-600">{t('settings.widgets.pinned_info', { count: pinnedWidgets.length, max: MAX_WIDGETS })}</p>
-                  <ul className="space-y-2">
-                    {filteredWidgets.map(widget => (
-                      <li key={widget.id} className="flex items-center justify-between p-3 bg-white/50 rounded-lg">
-                        <div className="flex items-center gap-4">
-                          <span className="text-2xl">{widget.icon}</span>
-                          <span className="font-semibold">{t(widget.title)}</span>
-                        </div>
-                        <button onClick={() => togglePin(widget.id)} className={`font-semibold py-2 px-4 rounded-lg transition-colors ${pinnedWidgets.includes(widget.id) ? 'bg-widget-header text-text-light hover:bg-[#7b69b1]' : 'bg-accent text-text-dark hover:bg-[#8ec9c9]'}`}>
-                          {pinnedWidgets.includes(widget.id) ? t('settings.widgets.remove') : t('settings.widgets.add')}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
+              {activeTab === 'profiles' && (
+                <div className="pt-4">
+                  <ProfileManager
+                    profiles={profiles}
+                    setProfiles={setProfiles}
+                    activeProfileName={activeProfileName}
+                    setActiveProfileName={setActiveProfileName}
+                    onCloseSettings={onClose}
+                    profileOrder={profileOrder}
+                    setProfileOrder={setProfileOrder}
+                  />
                 </div>
               )}
-              {activeTab === 'theme' && <ThemeSettings />}
+              {activeTab === 'widgets' && (
+                <div>
+                  <div className="sticky top-0 z-10 -mx-4 px-4 pt-4 pb-4 bg-white/90 backdrop-blur border-b border-black/5 mb-4">
+                    <div className="relative mb-3">
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                      <input
+                        type="text"
+                        placeholder={t('settings.widgets.search')}
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full pl-10 pr-4 py-2 border rounded-lg bg-white/80 focus:ring-2 focus:ring-accent focus:outline-none"
+                      />
+                    </div>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-sm text-gray-600">{t('settings.widgets.view_label')}</span>
+                      <div className="flex rounded-lg border border-gray-200 overflow-hidden bg-white/70">
+                        <button
+                          type="button"
+                          onClick={() => setWidgetsViewMode('theme')}
+                          className={`px-3 py-1.5 text-sm font-semibold transition-colors ${widgetsViewMode === 'theme' ? 'bg-accent text-text-dark' : 'text-gray-600 hover:bg-gray-100'}`}
+                        >
+                          {t('settings.widgets.view_by_theme')}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setWidgetsViewMode('alphabetical')}
+                          className={`px-3 py-1.5 text-sm font-semibold transition-colors ${widgetsViewMode === 'alphabetical' ? 'bg-accent text-text-dark' : 'text-gray-600 hover:bg-gray-100'}`}
+                        >
+                          {t('settings.widgets.view_alphabetical')}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mb-4 text-sm text-gray-600">{t('settings.widgets.pinned_info', { count: pinnedWidgets.length, max: MAX_WIDGETS })}</p>
+                  {widgetsViewMode === 'alphabetical' ? (
+                    <ul className="space-y-2">
+                      {filteredWidgets.map(widget => (
+                        <li key={widget.id} className="flex items-center justify-between p-3 bg-white/50 rounded-lg">
+                          <div className="flex items-center gap-4">
+                            <span className="text-2xl">{widget.icon}</span>
+                            <span className="font-semibold">{t(widget.title)}</span>
+                          </div>
+                          <button onClick={() => togglePin(widget.id)} className={`font-semibold py-2 px-4 rounded-lg transition-colors ${pinnedWidgets.includes(widget.id) ? 'bg-widget-header text-text-light hover:bg-[#7b69b1]' : 'bg-accent text-text-dark hover:bg-[#8ec9c9]'}`}>
+                            {pinnedWidgets.includes(widget.id) ? t('settings.widgets.remove') : t('settings.widgets.add')}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <div className="space-y-5">
+                      {widgetsByCategory
+                        .filter((category) => category.widgets.length > 0)
+                        .map((category) => (
+                          <div key={category.id}>
+                            <h4 className="text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">{t(category.titleKey)}</h4>
+                            <ul className="space-y-2">
+                              {category.widgets.map(widget => (
+                                <li key={widget.id} className="flex items-center justify-between p-3 bg-white/50 rounded-lg">
+                                  <div className="flex items-center gap-4">
+                                    <span className="text-2xl">{widget.icon}</span>
+                                    <span className="font-semibold">{t(widget.title)}</span>
+                                  </div>
+                                  <button onClick={() => togglePin(widget.id)} className={`font-semibold py-2 px-4 rounded-lg transition-colors ${pinnedWidgets.includes(widget.id) ? 'bg-widget-header text-text-light hover:bg-[#7b69b1]' : 'bg-accent text-text-dark hover:bg-[#8ec9c9]'}`}>
+                                    {pinnedWidgets.includes(widget.id) ? t('settings.widgets.remove') : t('settings.widgets.add')}
+                                  </button>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                    </div>
+                  )}
+                </div>
+              )}
+              {activeTab === 'theme' && (
+                <div className="pt-4">
+                  <ThemeSettings />
+                </div>
+              )}
             </div>
           </motion.div>
         </motion.div>

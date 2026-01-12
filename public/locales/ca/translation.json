@@ -6,7 +6,7 @@
     "tabs": {
       "general": "General",
       "profiles": "Perfils",
-      "widgets": "Ginys",
+      "widgets": "Programes",
       "theme": "Aparença"
     },
     "general": {
@@ -19,7 +19,7 @@
         "eu": "Basc"
       },
       "reset_title": "Restablir l'aplicació",
-      "reset_description": "Elimina totes les dades desades (perfils, ginys i preferències) i reinicia com si fos la primera vegada.",
+      "reset_description": "Elimina totes les dades desades (perfils, programes i preferències) i reinicia com si fos la primera vegada.",
       "reset_button": "Restablir a valors de fàbrica",
       "reset_confirm": "Estàs segur que vols eliminar totes les preferències i dades locals? Aquesta acció no es pot desfer."
     },
@@ -27,28 +27,53 @@
       "invalid_name_alert": "Nom de perfil invàlid o ja existent.",
       "delete_last_alert": "No pots eliminar l'últim perfil.",
       "delete_confirm": "Estàs segur que vols eliminar el perfil \"{{name}}\"?",
+      "default_name": "Escriptori principal",
       "save_current_title": "Desar la Configuració Actual com a Nou Perfil",
       "new_profile_placeholder": "Nom del nou perfil...",
+      "manage_button": "Gestionar perfils",
       "save_button": "Desar",
       "saved_profiles_title": "Perfils Desats",
       "active_button": "Actiu",
       "load_button": "Carregar",
       "delete_button": "Eliminar",
-      "switcher_title": "Canviar d'Escriptori"
+      "switcher_title": "Canviar d'Escriptori",
+      "move_up": "Pujar",
+      "move_down": "Baixar",
+      "rename_button": "Reanomena",
+      "rename_placeholder": "Nom nou del perfil",
+      "rename_save_button": "Desa",
+      "rename_cancel_button": "Cancel·la",
+      "rename_hint": "Fes doble clic per canviar el nom del perfil",
+      "create_mode_label": "Crear perfil com",
+      "create_mode_empty": "Buit",
+      "create_mode_clone": "Clon de l'actual"
     },
     "widgets": {
-      "search": "Cercar giny...",
-      "pinned_info": "Selecciona els ginys que vols a la teva barra d'eines. ({{count}}/{{max}})",
+      "search": "Cercar programa...",
+      "pinned_info": "Selecciona els programes que vols a la teva barra d'eines. ({{count}}/{{max}})",
       "add": "Afegir",
       "remove": "Treure",
-      "max_widgets_alert": "No es poden fixar més de {{max}} ginys."
+      "max_widgets_alert": "No es poden fixar més de {{max}} programes.",
+      "view_label": "Veure per",
+      "view_by_theme": "Temes",
+      "view_alphabetical": "Alfabètic",
+      "categories": {
+        "organization": "Organització i aula",
+        "time": "Temps i ritme",
+        "math_science": "Matemàtiques i ciències",
+        "resources": "Pissarra, escriptura i recursos",
+        "interaction": "Interacció, atzar i jocs educatius",
+        "logic_games": "Jocs de lògica i dinàmica de classe",
+        "gestures": "Gestos de treball",
+        "other": "Altres"
+      }
     },
     "theme": {
       "theme_colors_title": "Colors del Tema",
       "colors": {
         "desktop_bg": "Fons d'Escriptori",
-        "widget_bg": "Fons de Giny",
-        "widget_header": "Capçalera de Giny",
+        "widget_bg": "Fons de Programa",
+        "widget_header": "Capçalera de Programa",
         "accent": "Accent",
         "text_light": "Text Clar",
         "text_dark": "Text Fosc"
@@ -56,15 +81,87 @@
       "wallpaper_title": "Fons de Pantalla",
       "upload_image_button": "Pujar Imatge",
       "remove_wallpaper_button": "Treure Fons",
-      "reset_theme_button": "Restablir Tema per Defecte"
+      "show_datetime_label": "Mostrar data i hora",
+      "show_datetime_help": "Es mostra a la cantonada superior dreta.",
+      "reset_theme_button": "Restablir Tema per Defecte",
+      "show_system_stats_label": "Mostrar estadístiques del sistema",
+      "show_system_stats_help": "Es mostren al costat del rellotge."
     }
   },
   "toolbar": {
+    "start": "Inici",
     "settings": "Configuració",
-    "widgetLibrary": "Biblioteca de Ginys"
+    "widgetLibrary": "Biblioteca de Programes",
+    "remove_widget": "Treure aquest programa"
+  },
+  "help": {
+    "tooltip": "Ajuda",
+    "title": "Ajuda",
+    "guide": "Guia d'ús",
+    "about": "Sobre el projecte",
+    "licenses": "Crèdits i llicències"
+  },
+  "start_menu": {
+    "title": "Inici",
+    "close": "Tancar",
+    "favorites": "Preferits",
+    "shortcuts": "Accessos",
+    "widgets": "Programes",
+    "help": "Ajuda",
+    "no_results": "Sense resultats",
+    "remove_favorite": "Treure de favorits",
+    "clear_favorites": "Buidar favorits",
+    "clear_favorites_confirm": "Vols buidar la llista de favorits?",
+    "reorder_favorites": "Reordenar favorits",
+    "add_favorite": "Afegir als favorits"
+  },
+  "about": {
+    "title": "Sobre el projecte",
+    "app_name_label": "Nom de l'aplicació",
+    "app_name_value": "Escriptori digital per a l'aula",
+    "version_label": "Versió",
+    "version_value": "v1.1.10 — gener de 2026",
+    "history_title": "Historial del projecte",
+    "initial_title": "Projecte inicial",
+    "initial_text": "Idea i primera versió: María Teresa González. Versió bàsica de l'escriptori interactiu per a l'aula.",
+    "original_app_label": "Aplicació original:",
+    "development_title": "Desenvolupament funcional del projecte",
+    "development_text": "Transformació del prototip inicial en una aplicació operativa: Pablo G. Guízar.",
+    "continuity_title": "Actualització i continuïtat del projecte",
+    "continuity_text": "Manteniment i desenvolupament de la versió actual: Juan José de Haro i Pablo G. Guízar.",
+    "community_title": "Comunitat",
+    "community_text": "Aquest projecte forma part del Repositori d'aplicacions educatives de la comunitat Vibe Coding Educativo.",
+    "community_repo_label": "Repositori d'aplicacions:",
+    "community_telegram_label": "Comunitat a Telegram:"
+  },
+  "licenses": {
+    "title": "Crèdits i llicències",
+    "code_title": "Llicència del codi",
+    "code_text": "Aquest programa es distribueix sota la llicència:",
+    "code_license_name": "GNU Affero General Public License v3 (AGPL-3.0)",
+    "code_license_desc": "Permet usar, modificar i redistribuir el programari, mantenint la mateixa llicència.",
+    "code_link_label": "Text oficial de la llicència",
+    "content_title": "Llicència dels continguts",
+    "content_text": "Els continguts inclosos a l'aplicació (textos, materials i recursos didàctics) es publiquen sota:",
+    "content_license_name": "Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)",
+    "content_link_label": "Text oficial de la llicència",
+    "external_title": "Recursos externs",
+    "external_text": "Aquesta aplicació pot incloure llibreries, icones o tipografies de tercers, cadascun amb la seva pròpia llicència, disponible al repositori del projecte.",
+    "repo_link_label": "Repositori del projecte",
+    "principles_title": "Principis",
+    "principles_text": "Aquest projecte s'adhereix al:",
+    "principles_name": "Decàleg del Coneixement Obert",
+    "principles_link_label": "Veure el decàleg"
+  },
+  "desktop": {
+    "fullscreen_enter": "Pantalla completa",
+    "fullscreen_exit": "Sortir de pantalla completa"
   },
   "credits": {
     "title": "Crèdits i Llicència",
+    "tooltip": "Crèdits, llicència i guia del programa",
+    "user_guide_title": "Guia del programa",
+    "user_guide_link": "Obrir la guia de programes",
     "original_project": "El projecte original <strong>Escriptori Interactiu per a l'Aula</strong> i la seva idea pertanyen a <strong>María Teresa González</strong>.",
     "original_link": "Pots visitar l'aplicació original a:",
     "new_version": "Aquesta nova versió va ser desenvolupada en col·laboració per <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> i <strong>Pablo G. Guízar</strong>. El repositori d'aquest projecte es troba a:",
@@ -73,20 +170,42 @@
     "vibe_apps_link_text": "Consulta més aplicacions d'aquesta comunitat a:",
     "vibe_apps_repo_text": "Repositori Vibe Coding Educativo",
     "vibe_telegram_link_text": "Uneix-te a la comunitat a Telegram:",
+    "code_license": "Llicència del codi:",
     "open_knowledge_adherence": "Aquest projecte s'adhereix al",
     "open_knowledge_decalogue": "Decàleg del Coneixement Obert"
   },
   "context_menu": {
-    "new_widget": "Nou widget...",
-    "settings": "Configuració",
+    "new_widget": "Nou programa...",
+    "settings": "Configurar ED",
     "manage_profiles": "Gestionar perfils",
     "change_background": "Canvia fons...",
-    "show_toolbar": "Mostra la barra inferior",
+    "show_datetime": "Data i hora",
+    "hide_datetime": "Amagar data i hora",
+    "show_toolbar": "Barra inferior",
     "hide_toolbar": "Amaga la barra inferior",
-    "reset_layout": "Tancar totes les finestres",
-    "reset_layout_confirm": "Vols tancar totes les finestres de l'escriptori?"
+    "reset_layout": "Tancar totes les finestres obertes",
+    "reset_layout_confirm": "Vols tancar totes les finestres de l'escriptori?",
+    "show_system_stats": "Estadístiques del sistema",
+    "hide_system_stats": "Ocultar estadístiques del sistema"
+  },
+  "storage_warning": {
+    "title": "Emmagatzematge ple",
+    "body": "El navegador està gairebé ple. Hem desat els canvis en un emmagatzematge ampliat. Per alliberar espai sense perdre-ho tot, elimina imatges del carrusel o esborra notes molt llargues.",
+    "open_settings": "Obrir ajustos",
+    "dismiss": "Tancar"
   },
   "widgets": {
+    "program_guide": {
+      "title": "Guia del programa",
+      "load_error": "No s'ha pogut carregar la guia."
+    },
+    "file_opener": {
+      "title": "Explorador de fitxers",
+      "description": "Fes clic per seleccionar un fitxer i veure'l aquí.",
+      "supported_formats": "PDF, imatges, text, Markdown, HTML, vídeo i àudio.",
+      "pdf_fallback": "El teu navegador no pot mostrar aquest PDF.",
+      "open_button": "Obrir fitxer"
+    },
     "attendance": {
       "title": "Control d'Assistència",
       "badges": {
@@ -256,6 +375,7 @@
       "copy_source": "Copiar codi font",
       "copy_image": "Copiar com a imatge",
       "save_file": "Desar fitxer (.md/.tex)",
+      "open_file": "Obrir fitxer (.md)",
       "export_pdf": "Exportar com a PDF (text)",
       "source_copied": "Codi font copiat",
       "copy_failed": "No s'ha pogut copiar",
@@ -444,6 +564,78 @@
       "pan_mode": "Activar mode navegació",
       "exit_pan": "Sortir del mode navegació",
       "center_view": "Centrar vista"
+    },
+    "local_web": {
+      "title": "Web local",
+      "import_zip": "Importa ZIP",
+      "import_folder": "Importa carpeta",
+      "empty_state": "Encara no hi ha webs desades.",
+      "confirm_extract": "Vols descomprimir i desar \"{{name}}\"?",
+      "confirm_delete": "Vols eliminar aquesta web desada?",
+      "import_done": "Importació finalitzada.",
+      "import_empty": "El ZIP està buit.",
+      "importing": "S'estan important fitxers...",
+      "loading": "S'està carregant la web...",
+      "missing_index": "No s'ha trobat index.html en aquesta web.",
+      "preview_placeholder": "Selecciona una web per veure-la aquí.",
+      "close_preview": "Tanca el visor",
+      "site_meta": "{{files}} fitxers · {{size}}",
+      "storage_used": "Usat: {{used}}",
+      "storage_usage": "Usat: {{used}} / {{total}} ({{percent}}%)",
+      "storage_unknown": "Espai disponible: sense dades",
+      "storage_local_used": "Usat per webs locals: {{used}}",
+      "site_default_name": "Web local",
+      "open_fullscreen_window": "Veure en pestanya nova",
+      "open_fullscreen_button": "Pantalla completa",
+      "close_window_button": "Tanca finestra",
+      "collapse_list": "Amaga la llista",
+      "expand_list": "Mostra la llista",
+      "rename_placeholder": "Nou nom del lloc web",
+      "rename_invalid": "El nom del lloc web no és vàlid."
     }
+  },
+  "backup": {
+    "title": "Desar o carregar perfils",
+    "include_profiles": "Perfils i disposició (finestres, fons, barra)",
+    "include_widgets": "Ajustos i dades de programes",
+    "include_local_web": "Webs locals",
+    "export_button": "Desar fitxer",
+    "import_button": "Carregar fitxer",
+    "exporting": "Desant...",
+    "export_ready": "Fitxer llest",
+    "importing": "Carregant...",
+    "import_done": "Càrrega completada",
+    "invalid_file": "Fitxer no vàlid.",
+    "import_confirm": "Es carregaran els perfils del fitxer. Continuar?",
+    "import_local_web_confirm": "Les webs locals actuals es substituiran. Continuar?",
+    "import_note": "Només es poden carregar fitxers creats amb Escritorio Digital.",
+    "no_profiles": "Selecciona almenys un perfil.",
+    "size_label": "Mida estimada: {{size}}",
+    "size_estimating": "Calculant la mida del fitxer...",
+    "size_unknown": "Mida estimada: sense dades",
+    "export_profiles": "Exporta/importa perfils",
+    "progress_export_title": "Desant perfils",
+    "progress_import_title": "Carregant perfils",
+    "progress_preparing": "Preparant...",
+    "progress_cancel": "Cancel·lar",
+    "tab_export": "Desar",
+    "tab_import": "Carregar",
+    "import_mode_label": "Mode de càrrega",
+    "import_mode_replace": "Reemplaçar actuals (s’eliminaran i se substituiran pels importats)",
+    "import_mode_merge": "Combinar amb existents (no se’n elimina cap; s’afegeixen els importats)",
+    "manage_profiles": "Desar o carregar perfils",
+    "choose_profiles": "Quin perfil vols desar"
+  },
+  "system_stats": {
+    "title": "Estadístiques del sistema",
+    "storage_used": "Emmagatzematge",
+    "storage_free": "Lliure",
+    "memory": "RAM",
+    "memory_value": "{{value}} GB (aprox.)",
+    "cpu": "CPU",
+    "cpu_value": "{{value}} nuclis",
+    "screen": "Pantalla",
+    "screen_value": "{{width}}x{{height}}",
+    "not_available": "N/D"
   }
 }

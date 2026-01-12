@@ -6,7 +6,7 @@
     "tabs": {
       "general": "Xeral",
       "profiles": "Perfís",
-      "widgets": "Widgets",
+      "widgets": "Programas",
       "theme": "Aparencia"
     },
     "general": {
@@ -19,7 +19,7 @@
         "eu": "Éuscaro"
       },
       "reset_title": "Restablecer aplicación",
-      "reset_description": "Elimina todos os datos gardados (perfís, widgets e preferencias) e reinicia como se fose a primeira vez.",
+      "reset_description": "Elimina todos os datos gardados (perfís, programas e preferencias) e reinicia como se fose a primeira vez.",
       "reset_button": "Restablecer a valores de fábrica",
       "reset_confirm": "¿Seguro que queres eliminar todas as preferencias e datos locais? Esta acción non se pode desfacer."
     },
@@ -27,28 +27,53 @@
       "invalid_name_alert": "Nome de perfil inválido ou xa existente.",
       "delete_last_alert": "Non podes eliminar o último perfil.",
       "delete_confirm": "¿Estás seguro de que queres eliminar o perfil \"{{name}}\"?",
+      "default_name": "Escritorio principal",
       "save_current_title": "Gardar Configuración Actual como Novo Perfil",
       "new_profile_placeholder": "Nome do novo perfil...",
+      "manage_button": "Xestionar perfís",
       "save_button": "Gardar",
       "saved_profiles_title": "Perfís Gardados",
       "active_button": "Activo",
       "load_button": "Cargar",
       "delete_button": "Eliminar",
-      "switcher_title": "Cambiar de Escritorio"
+      "switcher_title": "Cambiar de Escritorio",
+      "move_up": "Subir",
+      "move_down": "Baixar",
+      "rename_button": "Renomear",
+      "rename_placeholder": "Novo nome do perfil",
+      "rename_save_button": "Gardar",
+      "rename_cancel_button": "Cancelar",
+      "rename_hint": "Fai dobre clic para cambiar o nome do perfil",
+      "create_mode_label": "Crear perfil como",
+      "create_mode_empty": "Baleiro",
+      "create_mode_clone": "Clon do actual"
     },
     "widgets": {
-      "search": "Buscar widget...",
-      "pinned_info": "Selecciona os widgets que queres na túa barra de ferramentas. ({{count}}/{{max}})",
+      "search": "Buscar programa...",
+      "pinned_info": "Selecciona os programas que queres na túa barra de ferramentas. ({{count}}/{{max}})",
       "add": "Engadir",
       "remove": "Quitar",
-      "max_widgets_alert": "Non se poden fixar máis de {{max}} widgets."
+      "max_widgets_alert": "Non se poden fixar máis de {{max}} programas.",
+      "view_label": "Ver por",
+      "view_by_theme": "Temas",
+      "view_alphabetical": "Alfabético",
+      "categories": {
+        "organization": "Organización e aula",
+        "time": "Tempo e ritmo",
+        "math_science": "Matemáticas e ciencias",
+        "resources": "Pizarra, escritura e recursos",
+        "interaction": "Interacción, azar e xogos educativos",
+        "logic_games": "Xogos de lóxica e dinámica de clase",
+        "gestures": "Xestos de traballo",
+        "other": "Outros"
+      }
     },
     "theme": {
       "theme_colors_title": "Cores do Tema",
       "colors": {
         "desktop_bg": "Fondo de Escritorio",
-        "widget_bg": "Fondo de Widget",
-        "widget_header": "Cabeceira de Widget",
+        "widget_bg": "Fondo de Programa",
+        "widget_header": "Cabeceira de Programa",
         "accent": "Acento",
         "text_light": "Texto Claro",
         "text_dark": "Texto Escuro"
@@ -56,15 +81,87 @@
       "wallpaper_title": "Fondo de Pantalla",
       "upload_image_button": "Subir Imaxe",
       "remove_wallpaper_button": "Quitar Fondo",
-      "reset_theme_button": "Restablecer Tema por Defecto"
+      "show_datetime_label": "Mostrar data e hora",
+      "show_datetime_help": "Móstrase na esquina superior dereita.",
+      "reset_theme_button": "Restablecer Tema por Defecto",
+      "show_system_stats_label": "Mostrar estatísticas do sistema",
+      "show_system_stats_help": "Móstranse ao lado do reloxo."
     }
   },
   "toolbar": {
+    "start": "Inicio",
     "settings": "Configuración",
-    "widgetLibrary": "Libraría de Widgets"
+    "widgetLibrary": "Libraría de Programas",
+    "remove_widget": "Quitar este programa"
+  },
+  "help": {
+    "tooltip": "Axuda",
+    "title": "Axuda",
+    "guide": "Guía de uso",
+    "about": "Sobre o proxecto",
+    "licenses": "Créditos e licenzas"
+  },
+  "start_menu": {
+    "title": "Inicio",
+    "close": "Pechar",
+    "favorites": "Favoritos",
+    "shortcuts": "Accesos",
+    "widgets": "Programas",
+    "help": "Axuda",
+    "no_results": "Sen resultados",
+    "remove_favorite": "Quitar de favoritos",
+    "clear_favorites": "Baleirar favoritos",
+    "clear_favorites_confirm": "Queres baleirar a lista de favoritos?",
+    "reorder_favorites": "Reordenar favoritos",
+    "add_favorite": "Engadir a favoritos"
+  },
+  "about": {
+    "title": "Sobre o proxecto",
+    "app_name_label": "Nome da aplicación",
+    "app_name_value": "Escritorio dixital para a aula",
+    "version_label": "Versión",
+    "version_value": "v1.1.10 — xaneiro de 2026",
+    "history_title": "Historial do proxecto",
+    "initial_title": "Proxecto inicial",
+    "initial_text": "Idea e primeira versión: María Teresa González. Versión básica do escritorio interactivo para a aula.",
+    "original_app_label": "Aplicación orixinal:",
+    "development_title": "Desenvolvemento funcional do proxecto",
+    "development_text": "Transformación do prototipo inicial nunha aplicación operativa: Pablo G. Guízar.",
+    "continuity_title": "Actualización e continuidade do proxecto",
+    "continuity_text": "Mantemento e desenvolvemento da versión actual: Juan José de Haro e Pablo G. Guízar.",
+    "community_title": "Comunidade",
+    "community_text": "Este proxecto forma parte do Repositorio de aplicacións educativas da comunidade Vibe Coding Educativo.",
+    "community_repo_label": "Repositorio de aplicacións:",
+    "community_telegram_label": "Comunidade en Telegram:"
+  },
+  "licenses": {
+    "title": "Créditos e licenzas",
+    "code_title": "Licenza do código",
+    "code_text": "Este programa distribúese baixo a licenza:",
+    "code_license_name": "GNU Affero General Public License v3 (AGPL-3.0)",
+    "code_license_desc": "Permite usar, modificar e redistribuír o software mantendo esta mesma licenza.",
+    "code_link_label": "Texto oficial da licenza",
+    "content_title": "Licenza dos contidos",
+    "content_text": "Os contidos incluídos na aplicación (textos, materiais e recursos didácticos) publícanse baixo:",
+    "content_license_name": "Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)",
+    "content_link_label": "Texto oficial da licenza",
+    "external_title": "Recursos externos",
+    "external_text": "Esta aplicación pode incluír librarías, iconas ou tipografías de terceiros, cada unha coa súa propia licenza, dispoñible no repositorio do proxecto.",
+    "repo_link_label": "Repositorio do proxecto",
+    "principles_title": "Principios",
+    "principles_text": "Este proxecto adhírese ao:",
+    "principles_name": "Decálogo do Coñecemento Aberto",
+    "principles_link_label": "Ver o decálogo"
+  },
+  "desktop": {
+    "fullscreen_enter": "Pantalla completa",
+    "fullscreen_exit": "Saír da pantalla completa"
   },
   "credits": {
     "title": "Créditos e Licenza",
+    "tooltip": "Créditos, licenza e guía do programa",
+    "user_guide_title": "Guía do programa",
+    "user_guide_link": "Abrir guía de programas",
     "original_project": "O proxecto orixinal <strong>Escritorio Interactivo para a Aula</strong> e a súa idea pertencen a <strong>María Teresa González</strong>.",
     "original_link": "Podes visitar a aplicación orixinal en:",
     "new_version": "Esta nova versión foi desenvolvida en colaboración por <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> e <strong>Pablo G. Guízar</strong>. O repositorio deste proxecto atópase en:",
@@ -73,20 +170,42 @@
     "vibe_apps_link_text": "Consulta máis aplicacións desta comunidade en:",
     "vibe_apps_repo_text": "Repositorio Vibe Coding Educativo",
     "vibe_telegram_link_text": "Únete á comunidade en Telegram:",
+    "code_license": "Licenza do código:",
     "open_knowledge_adherence": "Este proxecto adhírese ao",
     "open_knowledge_decalogue": "Decálogo do Coñecemento Aberto"
   },
   "context_menu": {
-    "new_widget": "Novo widget...",
-    "settings": "Configuración",
+    "new_widget": "Novo programa...",
+    "settings": "Configurar ED",
     "manage_profiles": "Xestionar perfís",
     "change_background": "Cambiar fondo...",
-    "show_toolbar": "Amosar barra inferior",
+    "show_datetime": "Data e hora",
+    "hide_datetime": "Ocultar data e hora",
+    "show_toolbar": "Barra inferior",
     "hide_toolbar": "Agochar barra inferior",
-    "reset_layout": "Pechar todas as xanelas",
-    "reset_layout_confirm": "Queres pechar todas as xanelas do escritorio?"
+    "reset_layout": "Pechar todas as xanelas abertas",
+    "reset_layout_confirm": "Queres pechar todas as xanelas do escritorio?",
+    "show_system_stats": "Estatísticas do sistema",
+    "hide_system_stats": "Ocultar estatísticas do sistema"
+  },
+  "storage_warning": {
+    "title": "Almacenamento cheo",
+    "body": "O navegador está case cheo. Gardamos os cambios nun almacenamento ampliado. Para liberar espazo sen perdelo todo, elimina imaxes do carrusel ou borra notas moi longas.",
+    "open_settings": "Abrir axustes",
+    "dismiss": "Pechar"
   },
   "widgets": {
+    "program_guide": {
+      "title": "Guía do programa",
+      "load_error": "Non foi posible cargar a guía."
+    },
+    "file_opener": {
+      "title": "Explorador de ficheiros",
+      "description": "Fai clic para escoller un ficheiro e velo aquí.",
+      "supported_formats": "PDF, imaxes, texto, Markdown, HTML, vídeo e audio.",
+      "pdf_fallback": "O teu navegador non pode mostrar este PDF.",
+      "open_button": "Abrir ficheiro"
+    },
     "attendance": {
       "title": "Control de Asistencia",
       "badges": {
@@ -256,6 +375,7 @@
       "copy_source": "Copiar código fonte",
       "copy_image": "Copiar como imaxe",
       "save_file": "Gardar ficheiro (.md/.tex)",
+      "open_file": "Abrir ficheiro (.md)",
       "export_pdf": "Exportar como PDF (texto)",
       "source_copied": "Código fonte copiado",
       "copy_failed": "Non se puido copiar",
@@ -444,6 +564,78 @@
       "pan_mode": "Activar modo navegación",
       "exit_pan": "Saír do modo navegación",
       "center_view": "Centrar vista"
+    },
+    "local_web": {
+      "title": "Web local",
+      "import_zip": "Importar ZIP",
+      "import_folder": "Importar cartafol",
+      "empty_state": "Aínda non hai webs gardadas.",
+      "confirm_extract": "Descomprimir e gardar \"{{name}}\"?",
+      "confirm_delete": "Eliminar esta web gardada?",
+      "import_done": "Importación rematada.",
+      "import_empty": "O ZIP está baleiro.",
+      "importing": "Importando ficheiros...",
+      "loading": "Cargando web...",
+      "missing_index": "Non se atopou index.html nesta web.",
+      "preview_placeholder": "Selecciona unha web para vela aquí.",
+      "close_preview": "Pechar visor",
+      "site_meta": "{{files}} ficheiros · {{size}}",
+      "storage_used": "Usado: {{used}}",
+      "storage_usage": "Usado: {{used}} / {{total}} ({{percent}}%)",
+      "storage_unknown": "Espazo dispoñible: sen datos",
+      "storage_local_used": "Usado polas webs locais: {{used}}",
+      "site_default_name": "Web local",
+      "open_fullscreen_window": "Abrir nunha nova lapela",
+      "open_fullscreen_button": "Pantalla completa",
+      "close_window_button": "Pechar xanela",
+      "collapse_list": "Ocultar lista",
+      "expand_list": "Mostrar lista",
+      "rename_placeholder": "Novo nome do sitio web",
+      "rename_invalid": "O nome do sitio web non é válido."
     }
+  },
+  "backup": {
+    "title": "Gardar ou cargar perfís",
+    "include_profiles": "Perfís e disposición (xanelas, fondos, barra)",
+    "include_widgets": "Axustes e datos dos programas",
+    "include_local_web": "Webs locais",
+    "export_button": "Gardar ficheiro",
+    "import_button": "Cargar ficheiro",
+    "exporting": "Gardando...",
+    "export_ready": "Ficheiro listo",
+    "importing": "Cargando...",
+    "import_done": "Carga completada",
+    "invalid_file": "Ficheiro non válido.",
+    "import_confirm": "Cargaranse os perfís do ficheiro. Continuar?",
+    "import_local_web_confirm": "As webs locais substituiranse. Continuar?",
+    "import_note": "Só se poden cargar ficheiros creados con Escritorio Digital.",
+    "no_profiles": "Selecciona polo menos un perfil.",
+    "size_label": "Tamaño estimado: {{size}}",
+    "size_estimating": "Calculando tamaño do ficheiro...",
+    "size_unknown": "Tamaño estimado: sen datos",
+    "export_profiles": "Exportar/importar perfís",
+    "progress_export_title": "Gardando perfís",
+    "progress_import_title": "Cargando perfís",
+    "progress_preparing": "Preparando...",
+    "progress_cancel": "Cancelar",
+    "tab_export": "Gardar",
+    "tab_import": "Cargar",
+    "import_mode_label": "Modo de carga",
+    "import_mode_replace": "Substituír actuais (elimínanse e substitúense polos importados)",
+    "import_mode_merge": "Combinar cos existentes (non se elimina ningún; engádense os importados)",
+    "manage_profiles": "Gardar ou cargar perfís",
+    "choose_profiles": "Que perfil queres gardar"
+  },
+  "system_stats": {
+    "title": "Estatísticas do sistema",
+    "storage_used": "Almacenamento",
+    "storage_free": "Libre",
+    "memory": "RAM",
+    "memory_value": "{{value}} GB (aprox.)",
+    "cpu": "CPU",
+    "cpu_value": "{{value}} núcleos",
+    "screen": "Pantalla",
+    "screen_value": "{{width}}x{{height}}",
+    "not_available": "N/D"
   }
 }

@@ -6,7 +6,7 @@
     "tabs": {
       "general": "Orokorra",
       "profiles": "Profilak",
-      "widgets": "Widget-ak",
+      "widgets": "Programak",
       "theme": "Itxura"
     },
     "general": {
@@ -18,7 +18,7 @@
         "eu": "Euskara"
       },
       "reset_title": "Aplikazioa berrezarri",
-      "reset_description": "Gordetako datu guztiak ezabatzen ditu (profilak, widget-ak eta lehentasunak) eta lehen aldia balitz bezala berrabiarazten du.",
+      "reset_description": "Gordetako datu guztiak ezabatzen ditu (profilak, programak eta lehentasunak) eta lehen aldia balitz bezala berrabiarazten du.",
       "reset_button": "Fabrikako balioetara berrezarri",
       "reset_confirm": "Ziur zaude lehentasun eta datu lokal guztiak ezabatu nahi dituzula? Ekintza hau ezin da desegin."
     },
@@ -26,28 +26,53 @@
       "invalid_name_alert": "Profilaren izen baliogabea edo lehendik dagoena.",
       "delete_last_alert": "Ezin duzu azken profila ezabatu.",
       "delete_confirm": "Ziur zaude \"{{name}}\" profila ezabatu nahi duzula?",
+      "default_name": "Idazmahai nagusia",
       "save_current_title": "Gorde uneko konfigurazioa profil berri gisa",
       "new_profile_placeholder": "Profil berriaren izena...",
+      "manage_button": "Profilak kudeatu",
       "save_button": "Gorde",
       "saved_profiles_title": "Gordetako profilak",
       "active_button": "Aktibo",
       "load_button": "Kargatu",
       "delete_button": "Ezabatu",
-      "switcher_title": "Idazmahaiz aldatu"
+      "switcher_title": "Idazmahaiz aldatu",
+      "move_up": "Gora",
+      "move_down": "Behera",
+      "rename_button": "Berrizendatu",
+      "rename_placeholder": "Profil izen berria",
+      "rename_save_button": "Gorde",
+      "rename_cancel_button": "Utzi",
+      "rename_hint": "Egin klik bikoitza profilaren izena aldatzeko",
+      "create_mode_label": "Sortu profila honela",
+      "create_mode_empty": "Hutsa",
+      "create_mode_clone": "Unekoa klonatu"
     },
     "widgets": {
-      "search": "Bilatu widget-a...",
-      "pinned_info": "Hautatu zure tresna-barran nahi dituzun widget-ak. ({{count}}/{{max}})",
+      "search": "Bilatu programa-a...",
+      "pinned_info": "Hautatu zure tresna-barran nahi dituzun programak. ({{count}}/{{max}})",
       "add": "Gehitu",
       "remove": "Kendu",
-      "max_widgets_alert": "Ezin dira {{max}} widget baino gehiago finkatu."
+      "max_widgets_alert": "Ezin dira {{max}} programa baino gehiago finkatu.",
+      "view_label": "Ikusi honela",
+      "view_by_theme": "Gaiak",
+      "view_alphabetical": "Alfabetikoki",
+      "categories": {
+        "organization": "Antolaketa eta ikasgela",
+        "time": "Denbora eta erritmoa",
+        "math_science": "Matematika eta zientziak",
+        "resources": "Arbela, idazketa eta baliabideak",
+        "interaction": "Elkarrekintza, zoria eta hezkuntza-jokoak",
+        "logic_games": "Logika-jokoak eta klaseko dinamika",
+        "gestures": "Lan-keinuak",
+        "other": "Beste batzuk"
+      }
     },
     "theme": {
       "theme_colors_title": "Gaiaren koloreak",
       "colors": {
         "desktop_bg": "Idazmahai-atzealdea",
-        "widget_bg": "Widget-atzealdea",
-        "widget_header": "Widget-goiburua",
+        "widget_bg": "Programa-atzealdea",
+        "widget_header": "Programa-goiburua",
         "accent": "Azentua",
         "text_light": "Testu argia",
         "text_dark": "Testu iluna"
@@ -55,15 +80,87 @@
       "wallpaper_title": "Horma-papera",
       "upload_image_button": "Irudia igo",
       "remove_wallpaper_button": "Kendu atzealdea",
-      "reset_theme_button": "Berrezarri gai lehenetsia"
+      "show_datetime_label": "Data eta ordua erakutsi",
+      "show_datetime_help": "Goiko eskuineko izkinan erakusten da.",
+      "reset_theme_button": "Berrezarri gai lehenetsia",
+      "show_system_stats_label": "Sistemaren estatistikak erakutsi",
+      "show_system_stats_help": "Erlojuaren ondoan erakusten dira."
     }
   },
   "toolbar": {
+    "start": "Hasiera",
     "settings": "Ezarpenak",
-    "widgetLibrary": "Widget Liburutegia"
+    "widgetLibrary": "Programa Liburutegia",
+    "remove_widget": "Kendu programa hau"
+  },
+  "help": {
+    "tooltip": "Laguntza",
+    "title": "Laguntza",
+    "guide": "Erabilera-gida",
+    "about": "Proiektuari buruz",
+    "licenses": "Kredituak eta lizentziak"
+  },
+  "start_menu": {
+    "title": "Hasiera",
+    "close": "Itxi",
+    "favorites": "Gogokoak",
+    "shortcuts": "Lasterbideak",
+    "widgets": "Programak",
+    "help": "Laguntza",
+    "no_results": "Emaitzarik ez",
+    "remove_favorite": "Gogokoetatik kendu",
+    "clear_favorites": "Gogokoak hustu",
+    "clear_favorites_confirm": "Gogokoen zerrenda hustu nahi duzu?",
+    "reorder_favorites": "Gogokoak berrantolatu",
+    "add_favorite": "Gogokoetara gehitu"
+  },
+  "about": {
+    "title": "Proiektuari buruz",
+    "app_name_label": "Aplikazioaren izena",
+    "app_name_value": "Ikasgelarako mahaigain digitala",
+    "version_label": "Bertsioa",
+    "version_value": "v1.1.10 — 2026ko urtarrila",
+    "history_title": "Proiektuaren historia",
+    "initial_title": "Hasierako proiektua",
+    "initial_text": "Ideia eta lehen bertsioa: María Teresa González. Ikasgelarako mahaigain interaktiboaren oinarrizko bertsioa.",
+    "original_app_label": "Jatorrizko aplikazioa:",
+    "development_title": "Garapen funtzionala",
+    "development_text": "Hasierako prototipoa aplikazio operatibo bihurtzea: Pablo G. Guízar.",
+    "continuity_title": "Eguneratzea eta jarraipena",
+    "continuity_text": "Uneko bertsioaren mantentzea eta garapena: Juan José de Haro eta Pablo G. Guízar.",
+    "community_title": "Komunitatea",
+    "community_text": "Proiektu hau Vibe Coding Educativo komunitateko hezkuntza-aplikazioen biltegiaren parte da.",
+    "community_repo_label": "Aplikazioen biltegia:",
+    "community_telegram_label": "Telegram komunitatea:"
+  },
+  "licenses": {
+    "title": "Kredituak eta lizentziak",
+    "code_title": "Kodearen lizentzia",
+    "code_text": "Programa hau honako lizentziapean banatzen da:",
+    "code_license_name": "GNU Affero General Public License v3 (AGPL-3.0)",
+    "code_license_desc": "Softwarea erabiltzea, aldatzea eta birbanatzea ahalbidetzen du, lizentzia bera mantenduz.",
+    "code_link_label": "Lizentziaren testu ofiziala",
+    "content_title": "Edukien lizentzia",
+    "content_text": "Aplikazioan dauden edukiak (testuak, materialak eta baliabide didaktikoak) honen pean argitaratzen dira:",
+    "content_license_name": "Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)",
+    "content_link_label": "Lizentziaren testu ofiziala",
+    "external_title": "Kanpoko baliabideak",
+    "external_text": "Aplikazio honek hirugarrenen liburutegiak, ikonoak edo tipografiak izan ditzake, bakoitza bere lizentziarekin, proiektuaren biltegian eskuragarri.",
+    "repo_link_label": "Proiektuaren biltegia",
+    "principles_title": "Printzipioak",
+    "principles_text": "Proiektu hau honi atxikitzen zaio:",
+    "principles_name": "Ezagutza Irekiaren Dekalogoa",
+    "principles_link_label": "Ikusi dekalogoa"
+  },
+  "desktop": {
+    "fullscreen_enter": "Pantaila osoa",
+    "fullscreen_exit": "Pantaila osoa itxi"
   },
   "credits": {
     "title": "Kredituak eta Lizentzia",
+    "tooltip": "Kredituak, lizentzia eta programaren gida",
+    "user_guide_title": "Programaren gida",
+    "user_guide_link": "Programaen gida ireki",
     "original_project": "<strong>Ikasgelarako Idazmahai Interaktiboa</strong> jatorrizko proiektua eta bere ideia <strong>María Teresa González</strong>enak dira.",
     "original_link": "Jatorrizko aplikazioa hemen bisita dezakezu:",
     "new_version": "Bertsio berri hau <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> eta <strong>Pablo G. Guízar</strong>-en artean garatu zen. Proiektu honen biltegia hemen dago:",
@@ -72,20 +169,42 @@
     "vibe_apps_link_text": "Kontsultatu komunitate honetako aplikazio gehiago hemen:",
     "vibe_apps_repo_text": "Vibe Coding Educativo Biltegia",
     "vibe_telegram_link_text": "Batu komunitatera Telegramen:",
+    "code_license": "Kodearen lizentzia:",
     "open_knowledge_adherence": "Proiektu honek bat egiten du",
     "open_knowledge_decalogue": "Ezagutza Irekiaren Dekalogoarekin"
   },
   "context_menu": {
-    "new_widget": "Widget berria...",
-    "settings": "Ezarpenak",
+    "new_widget": "Programa berria...",
+    "settings": "ED konfiguratu",
     "manage_profiles": "Profilak kudeatu",
     "change_background": "Aldatu atzeko planoa...",
-    "show_toolbar": "Erakutsi beheko barra",
+    "show_datetime": "Data eta ordua",
+    "hide_datetime": "Ezkutatu data eta ordua",
+    "show_toolbar": "Beheko barra",
     "hide_toolbar": "Ezkutatu beheko barra",
-    "reset_layout": "Itxi leiho guztiak",
-    "reset_layout_confirm": "Mahaigaineko leiho guztiak itxi nahi dituzu?"
+    "reset_layout": "Irekitako leiho guztiak itxi",
+    "reset_layout_confirm": "Mahaigaineko leiho guztiak itxi nahi dituzu?",
+    "show_system_stats": "Sistemaren estatistikak",
+    "hide_system_stats": "Sistemaren estatistikak ezkutatu"
+  },
+  "storage_warning": {
+    "title": "Biltegiratzea beteta",
+    "body": "Nabigatzailea ia beteta dago. Aldaketak biltegiratze zabalduan gorde ditugu. Espazioa askatzeko dena galdu gabe, ezabatu karuselaren irudiak edo oso luzeak diren oharrak.",
+    "open_settings": "Ezarpenak ireki",
+    "dismiss": "Itxi"
   },
   "widgets": {
+    "program_guide": {
+      "title": "Programaren gida",
+      "load_error": "Ezin izan da gida kargatu."
+    },
+    "file_opener": {
+      "title": "Fitxategi arakatzailea",
+      "description": "Egin klik fitxategi bat aukeratzeko eta hemen ikusteko.",
+      "supported_formats": "PDF, irudiak, testua, Markdown, HTML, bideoa eta audioa.",
+      "pdf_fallback": "Zure nabigatzaileak ezin du PDF hau erakutsi.",
+      "open_button": "Fitxategia ireki"
+    },
     "attendance": {
       "title": "Asistentzia Kontrola",
       "badges": {
@@ -255,6 +374,7 @@
       "copy_source": "Kopiatu iturburu-kodea",
       "copy_image": "Kopiatu irudi gisa",
       "save_file": "Gorde fitxategia (.md/.tex)",
+      "open_file": "Ireki fitxategia (.md)",
       "export_pdf": "Esportatu PDF gisa (testua)",
       "source_copied": "Iturburu-kodea kopiatuta",
       "copy_failed": "Ezin izan da kopiatu",
@@ -443,6 +563,78 @@
       "pan_mode": "Aktibatu nabigazio modua",
       "exit_pan": "Irten nabigazio modutik",
       "center_view": "Zentratu ikuspegia"
+    },
+    "local_web": {
+      "title": "Web lokala",
+      "import_zip": "ZIPa inportatu",
+      "import_folder": "Karpeta inportatu",
+      "empty_state": "Oraindik ez dago gordetako webik.",
+      "confirm_extract": "\"{{name}}\" deskonprimitu eta gorde?",
+      "confirm_delete": "Gordetako web hau ezabatu?",
+      "import_done": "Inportazioa amaituta.",
+      "import_empty": "ZIPa hutsik dago.",
+      "importing": "Fitxategiak inportatzen...",
+      "loading": "Weba kargatzen...",
+      "missing_index": "Ez da index.html aurkitu web honetan.",
+      "preview_placeholder": "Hautatu web bat hemen ikusteko.",
+      "close_preview": "Ikuslea itxi",
+      "site_meta": "{{files}} fitxategi · {{size}}",
+      "storage_used": "Erabilita: {{used}}",
+      "storage_usage": "Erabilita: {{used}} / {{total}} ({{percent}}%)",
+      "storage_unknown": "Eskuragarri: daturik ez",
+      "storage_local_used": "Web lokalek erabilia: {{used}}",
+      "site_default_name": "Web lokala",
+      "open_fullscreen_window": "Ireki fitxa berrian",
+      "open_fullscreen_button": "Pantaila osoa",
+      "close_window_button": "Leihoa itxi",
+      "collapse_list": "Ezkutatu zerrenda",
+      "expand_list": "Erakutsi zerrenda",
+      "rename_placeholder": "Webgunearen izen berria",
+      "rename_invalid": "Webgunearen izena ez da baliozkoa."
     }
+  },
+  "backup": {
+    "title": "Profilak gorde edo kargatu",
+    "include_profiles": "Profilak eta diseinua (leihoak, horma-irudiak, barra)",
+    "include_widgets": "Programaen ezarpenak eta datuak",
+    "include_local_web": "Web lokalak",
+    "export_button": "Fitxategia gorde",
+    "import_button": "Fitxategia kargatu",
+    "exporting": "Gordetzen...",
+    "export_ready": "Fitxategia prest",
+    "importing": "Kargatzen...",
+    "import_done": "Karga amaituta",
+    "invalid_file": "Fitxategia ez da baliozkoa.",
+    "import_confirm": "Fitxategiko profilak kargatuko dira. Jarraitu?",
+    "import_local_web_confirm": "Web lokalak ordeztuko dira. Jarraitu?",
+    "import_note": "Escritorio Digital-ek sortutako fitxategiak bakarrik karga daitezke.",
+    "no_profiles": "Aukeratu gutxienez profil bat.",
+    "size_label": "Tamaina estimatua: {{size}}",
+    "size_estimating": "Fitxategiaren tamaina kalkulatzen...",
+    "size_unknown": "Tamaina estimatua: daturik ez",
+    "export_profiles": "Profilak esportatu/inportatu",
+    "progress_export_title": "Profilak gordetzen",
+    "progress_import_title": "Profilak kargatzen",
+    "progress_preparing": "Prestatzen...",
+    "progress_cancel": "Utzi",
+    "tab_export": "Gorde",
+    "tab_import": "Kargatu",
+    "import_mode_label": "Karga modua",
+    "import_mode_replace": "Oraingoak ordezkatu (guztiak ezabatu eta inportatuekin ordezkatu)",
+    "import_mode_merge": "Daudenekin bateratu (bat ere ez ezabatu; inportatuak gehitu)",
+    "manage_profiles": "Profilak gorde edo kargatu",
+    "choose_profiles": "Zein profil gorde nahi duzu"
+  },
+  "system_stats": {
+    "title": "Sistemaren estatistikak",
+    "storage_used": "Biltegiratzea",
+    "storage_free": "Libre",
+    "memory": "RAM",
+    "memory_value": "{{value}} GB (gutxi gorabehera)",
+    "cpu": "CPU",
+    "cpu_value": "{{value}} nukleo",
+    "screen": "Pantaila",
+    "screen_value": "{{width}}x{{height}}",
+    "not_available": "E/E"
   }
 }
