@@ -26,8 +26,14 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
     title, children, position, size, zIndex, onDragStop, onResizeStop, 
     onClose, onFocus, isMinimized, isMaximized, onToggleMinimize, onToggleMaximize, onOpenContextMenu
 }) => {
-  
   const finalSize = isMinimized ? { ...size, height: 40 } : size;
+  const containerStyle: React.CSSProperties = {
+    zIndex,
+    opacity: isMinimized ? 0 : 1,
+    pointerEvents: isMinimized ? 'none' : 'auto',
+    transform: isMinimized ? 'scale(0.98)' : 'scale(1)',
+    transition: 'width 220ms ease, height 220ms ease, opacity 220ms ease, transform 220ms ease',
+  };
   
   return (
       <Rnd
@@ -39,8 +45,9 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
         minHeight={isMinimized ? 40 : 150}
         disableDragging={isMaximized}
         enableResizing={!isMaximized && !isMinimized}
-        style={{ zIndex }}
+        style={containerStyle}
         onMouseDown={onFocus}
+        onMouseDownCapture={onFocus}
         className="bg-widget-bg rounded-lg shadow-2xl border-2 border-widget-header relative"
         dragHandleClassName="widget-header-drag-handle"
         bounds="parent" 

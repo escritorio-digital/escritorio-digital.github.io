@@ -189,7 +189,10 @@
     "reset_layout": "Tancar totes les finestres obertes",
     "reset_layout_confirm": "Vols tancar totes les finestres de l'escriptori?",
     "show_system_stats": "Estadístiques del sistema",
-    "hide_system_stats": "Ocultar estadístiques del sistema"
+    "hide_system_stats": "Ocultar estadístiques del sistema",
+    "minimize_windows": "Minimitzar finestres",
+    "restore_windows": "Restaurar finestres",
+    "close_window": "Tancar aquesta finestra"
   },
   "storage_warning": {
     "title": "Emmagatzematge ple",

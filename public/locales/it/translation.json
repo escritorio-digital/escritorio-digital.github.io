@@ -189,7 +189,10 @@
     "reset_layout": "Chiudi tutte le finestre aperte",
     "reset_layout_confirm": "Vuoi chiudere tutte le finestre del desktop?",
     "show_system_stats": "Statistiche di sistema",
-    "hide_system_stats": "Nascondi statistiche di sistema"
+    "hide_system_stats": "Nascondi statistiche di sistema",
+    "minimize_windows": "Minimizza finestre",
+    "restore_windows": "Ripristina finestre",
+    "close_window": "Chiudi questa finestra"
   },
   "storage_warning": {
     "title": "Spazio di archiviazione pieno",

@@ -189,7 +189,10 @@
     "reset_layout": "Close all open windows",
     "reset_layout_confirm": "Do you want to close all desktop windows?",
     "show_system_stats": "System stats",
-    "hide_system_stats": "Hide system stats"
+    "hide_system_stats": "Hide system stats",
+    "minimize_windows": "Minimize windows",
+    "restore_windows": "Restore windows",
+    "close_window": "Close this window"
   },
   "storage_warning": {
     "title": "Storage full",

@@ -189,7 +189,10 @@
     "reset_layout": "Pechar todas as xanelas abertas",
     "reset_layout_confirm": "Queres pechar todas as xanelas do escritorio?",
     "show_system_stats": "Estatísticas do sistema",
-    "hide_system_stats": "Ocultar estatísticas do sistema"
+    "hide_system_stats": "Ocultar estatísticas do sistema",
+    "minimize_windows": "Minimizar ventás",
+    "restore_windows": "Restaurar ventás",
+    "close_window": "Pechar esta ventá"
   },
   "storage_warning": {
     "title": "Almacenamento cheo",

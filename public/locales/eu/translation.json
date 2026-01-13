@@ -188,7 +188,10 @@
     "reset_layout": "Irekitako leiho guztiak itxi",
     "reset_layout_confirm": "Mahaigaineko leiho guztiak itxi nahi dituzu?",
     "show_system_stats": "Sistemaren estatistikak",
-    "hide_system_stats": "Sistemaren estatistikak ezkutatu"
+    "hide_system_stats": "Sistemaren estatistikak ezkutatu",
+    "minimize_windows": "Leihoak minimizatu",
+    "restore_windows": "Leihoak leheneratu",
+    "close_window": "Itxi leiho hau"
   },
   "storage_warning": {
     "title": "Biltegiratzea beteta",

@@ -71,11 +71,19 @@ const DesktopUI: React.FC<{
     const [startMenuAnchor, setStartMenuAnchor] = useState<DOMRect | null>(null);
     const [settingsInitialTab, setSettingsInitialTab] = useState<'general' | 'profiles' | 'widgets' | 'theme'>('general');
     const [isToolbarHidden, setToolbarHidden] = useLocalStorage<boolean>('toolbar-hidden', false);
-    const [contextMenu, setContextMenu] = useState<{ isOpen: boolean; x: number; y: number; widgetId: string | null }>({
+    const [isToolbarPeek, setToolbarPeek] = useState(false);
+    const [contextMenu, setContextMenu] = useState<{
+        isOpen: boolean;
+        x: number;
+        y: number;
+        widgetId: string | null;
+        windowInstanceId: string | null;
+    }>({
         isOpen: false,
         x: 0,
         y: 0,
         widgetId: null,
+        windowInstanceId: null,
     });
     const contextMenuRef = useRef<HTMLDivElement>(null);
     const [showStorageWarning, setShowStorageWarning] = useState(false);
@@ -171,6 +179,12 @@ const DesktopUI: React.FC<{
             prev.map(w => (w.instanceId === instanceId ? { ...w, isMinimized: true } : w))
         );
     }, [activeProfile.activeWidgets, highestZ, setActiveWidgets, setHighestZ]);
+    const minimizeAllWindows = useCallback(() => {
+        setActiveWidgets(prev => prev.map(w => ({ ...w, isMinimized: true })));
+    }, [setActiveWidgets]);
+    const restoreAllWindows = useCallback(() => {
+        setActiveWidgets(prev => prev.map(w => ({ ...w, isMinimized: false })));
+    }, [setActiveWidgets]);
     const toggleMaximize = (instanceId: string) => {
         const newZ = highestZ + 1;
         setHighestZ(newZ);
@@ -283,7 +297,24 @@ const DesktopUI: React.FC<{
     const handleContextMenu = (event: React.MouseEvent<Element>, widgetId?: string, force = false) => {
         if (!force && !widgetId && event.target !== event.currentTarget) return;
         event.preventDefault();
-        setContextMenu({ isOpen: true, x: event.clientX, y: event.clientY, widgetId: widgetId ?? null });
+        setContextMenu({
+            isOpen: true,
+            x: event.clientX,
+            y: event.clientY,
+            widgetId: widgetId ?? null,
+            windowInstanceId: null,
+        });
+    };
+
+    const handleTaskContextMenu = (event: React.MouseEvent, instanceId: string) => {
+        event.preventDefault();
+        setContextMenu({
+            isOpen: true,
+            x: event.clientX,
+            y: event.clientY,
+            widgetId: null,
+            windowInstanceId: instanceId,
+        });
     };
 
     const resetLayout = () => {
@@ -378,6 +409,7 @@ const DesktopUI: React.FC<{
     };
 
     const hasOpenWidgets = activeProfile.activeWidgets.length > 0;
+    const hasMinimizedWidgets = activeProfile.activeWidgets.some((widget) => widget.isMinimized);
     const storageUsed = storageEstimate.usage;
     const storageQuota = storageEstimate.quota;
     const storageFree = storageUsed != null && storageQuota != null ? Math.max(0, storageQuota - storageUsed) : null;
@@ -489,17 +521,27 @@ const DesktopUI: React.FC<{
                     </WidgetWindow>
                 );
             })}
-            {!isToolbarHidden && (
-                <Toolbar
-                    pinnedWidgets={activeProfile.pinnedWidgets}
-                    onWidgetClick={addWidget}
-                    onWidgetsClick={() => openSettingsTab('widgets')}
-                    onOpenContextMenu={(event, widgetId, force) => handleContextMenu(event, widgetId, force)}
-                    onReorderPinned={(orderedIds) => setPinnedWidgets(orderedIds)}
-                    openWidgets={activeProfile.activeWidgets}
-                    onTaskClick={handleTaskClick}
+            {isToolbarHidden && (
+                <div
+                    className="fixed bottom-0 left-0 right-0 h-2 z-[10000]"
+                    onMouseEnter={() => setToolbarPeek(true)}
                 />
             )}
+            <Toolbar
+                pinnedWidgets={activeProfile.pinnedWidgets}
+                onWidgetClick={addWidget}
+                onWidgetsClick={() => openSettingsTab('widgets')}
+                onOpenContextMenu={(event, widgetId, force) => handleContextMenu(event, widgetId, force)}
+                onReorderPinned={(orderedIds) => setPinnedWidgets(orderedIds)}
+                openWidgets={activeProfile.activeWidgets}
+                onTaskClick={handleTaskClick}
+                onTaskContextMenu={handleTaskContextMenu}
+                isHidden={isToolbarHidden}
+                isPeeking={isToolbarPeek}
+                onMouseLeave={() => {
+                    if (isToolbarHidden) setToolbarPeek(false);
+                }}
+            />
             <button
                 ref={startButtonRef}
                 onClick={(event) => toggleStartMenu(event.currentTarget.getBoundingClientRect())}
@@ -605,6 +647,21 @@ const DesktopUI: React.FC<{
                             <div className="my-1 border-t border-gray-200" />
                         </>
                     )}
+                    {contextMenu.windowInstanceId && (
+                        <>
+                            <button
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-700 flex items-center gap-2"
+                                onClick={() => {
+                                    closeWidget(contextMenu.windowInstanceId as string);
+                                    setContextMenu(prev => ({ ...prev, isOpen: false, windowInstanceId: null }));
+                                }}
+                            >
+                                <X size={16} />
+                                {t('context_menu.close_window')}
+                            </button>
+                            <div className="my-1 border-t border-gray-200" />
+                        </>
+                    )}
                     <button
                         className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
                         onClick={() => openSettingsTab('widgets')}
@@ -668,6 +725,28 @@ const DesktopUI: React.FC<{
                     {hasOpenWidgets && (
                         <>
                             <div className="my-2 border-t-2 border-gray-200" />
+                            <button
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                                onClick={() => {
+                                    minimizeAllWindows();
+                                    setContextMenu(prev => ({ ...prev, isOpen: false }));
+                                }}
+                            >
+                                <Minimize2 size={16} />
+                                {t('context_menu.minimize_windows')}
+                            </button>
+                            {hasMinimizedWidgets && (
+                                <button
+                                    className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                                    onClick={() => {
+                                        restoreAllWindows();
+                                        setContextMenu(prev => ({ ...prev, isOpen: false }));
+                                    }}
+                                >
+                                    <Maximize2 size={16} />
+                                    {t('context_menu.restore_windows')}
+                                </button>
+                            )}
                             <button
                                 className="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-700 flex items-center gap-2"
                                 onClick={resetLayout}

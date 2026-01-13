@@ -191,7 +191,10 @@
     "reset_layout": "Fechar todas as janelas abertas",
     "reset_layout_confirm": "Queres fechar todas as janelas do ambiente de trabalho?",
     "show_system_stats": "Estatísticas do sistema",
-    "hide_system_stats": "Ocultar estatísticas do sistema"
+    "hide_system_stats": "Ocultar estatísticas do sistema",
+    "minimize_windows": "Minimizar janelas",
+    "restore_windows": "Restaurar janelas",
+    "close_window": "Fechar esta janela"
   },
   "storage_warning": {
     "title": "Armazenamento cheio",

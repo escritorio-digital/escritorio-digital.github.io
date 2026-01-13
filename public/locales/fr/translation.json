@@ -190,7 +190,10 @@
     "reset_layout": "Fermer toutes les fenêtres ouvertes",
     "reset_layout_confirm": "Voulez-vous fermer toutes les fenêtres du bureau ?",
     "show_system_stats": "Statistiques système",
-    "hide_system_stats": "Masquer les statistiques système"
+    "hide_system_stats": "Masquer les statistiques système",
+    "minimize_windows": "Réduire les fenêtres",
+    "restore_windows": "Restaurer les fenêtres",
+    "close_window": "Fermer cette fenêtre"
   },
   "storage_warning": {
     "title": "Stockage plein",

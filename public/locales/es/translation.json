@@ -189,7 +189,10 @@
     "reset_layout": "Cerrar todas las ventanas abiertas",
     "reset_layout_confirm": "¿Quieres cerrar todas las ventanas del escritorio?",
     "show_system_stats": "Estadísticas del sistema",
-    "hide_system_stats": "Ocultar estadísticas del sistema"
+    "hide_system_stats": "Ocultar estadísticas del sistema",
+    "minimize_windows": "Minimizar ventanas",
+    "restore_windows": "Restaurar ventanas",
+    "close_window": "Cerrar esta ventana"
   },
   "storage_warning": {
     "title": "Almacenamiento lleno",

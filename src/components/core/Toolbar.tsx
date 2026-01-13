@@ -15,6 +15,10 @@ interface ToolbarProps {
   onReorderPinned: (orderedIds: string[]) => void;
   openWidgets: ActiveWidget[];
   onTaskClick: (instanceId: string) => void;
+  onTaskContextMenu: (event: React.MouseEvent, instanceId: string) => void;
+  isHidden?: boolean;
+  isPeeking?: boolean;
+  onMouseLeave?: () => void;
 }
 
 export const Toolbar: React.FC<ToolbarProps> = ({
@@ -25,6 +29,10 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   onReorderPinned,
   openWidgets,
   onTaskClick,
+  onTaskContextMenu,
+  isHidden = false,
+  isPeeking = false,
+  onMouseLeave,
 }) => {
   const { t } = useTranslation();
   const highestZ = openWidgets.reduce((acc, widget) => Math.max(acc, widget.zIndex), 0);
@@ -36,9 +44,9 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   const visibleTasks = openWidgets
     .map((widget) => {
       const config = WIDGET_REGISTRY[widget.widgetId];
-      return config ? { ...widget, title: t(config.title) } : null;
+      return config ? { ...widget, title: t(config.title), icon: config.icon } : null;
     })
-    .filter((widget): widget is ActiveWidget & { title: string } => Boolean(widget))
+    .filter((widget): widget is ActiveWidget & { title: string; icon: React.ReactNode } => Boolean(widget))
     .sort((a, b) => a.title.localeCompare(b.title));
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -86,8 +94,13 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 
   return (
     <div
-      className="fixed bottom-5 left-1/2 -translate-x-1/2 bg-widget-bg p-2 rounded-2xl flex items-center gap-3 shadow-lg z-[10000] border border-custom-border max-w-[calc(100vw-1rem)]"
+      className={`fixed bottom-5 left-1/2 -translate-x-1/2 bg-widget-bg p-2 rounded-2xl flex items-center gap-3 shadow-lg z-[10000] border border-custom-border max-w-[calc(100vw-1rem)] transition-all duration-200 ${
+        isHidden && !isPeeking
+          ? 'opacity-0 translate-y-3 pointer-events-none'
+          : 'opacity-100 translate-y-0'
+      }`}
       onContextMenu={handleBarContextMenu}
+      onMouseLeave={onMouseLeave}
     >
       <div className="flex items-center gap-2">
         <DndContext
@@ -123,6 +136,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
               key={widget.instanceId}
               type="button"
               onClick={() => onTaskClick(widget.instanceId)}
+              onContextMenu={(event) => onTaskContextMenu(event, widget.instanceId)}
               className={`max-w-[180px] truncate px-3 py-2 rounded-lg border text-xs font-semibold transition ${
                 widget.isMinimized
                   ? 'bg-white/60 border-gray-200 text-gray-500'
@@ -133,7 +147,10 @@ export const Toolbar: React.FC<ToolbarProps> = ({
               title={widget.title}
               aria-label={widget.title}
             >
-              {widget.title}
+              <span className="flex items-center gap-2 min-w-0">
+                <span className="text-sm leading-none">{widget.icon}</span>
+                <span className="truncate">{widget.title}</span>
+              </span>
             </button>
           ))
         )}

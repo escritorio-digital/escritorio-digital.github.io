@@ -189,7 +189,10 @@
     "reset_layout": "Alle offenen Fenster schließen",
     "reset_layout_confirm": "Möchtest du alle Fenster auf dem Desktop schließen?",
     "show_system_stats": "Systemstatistiken",
-    "hide_system_stats": "Systemstatistiken ausblenden"
+    "hide_system_stats": "Systemstatistiken ausblenden",
+    "minimize_windows": "Fenster minimieren",
+    "restore_windows": "Fenster wiederherstellen",
+    "close_window": "Dieses Fenster schließen"
   },
   "storage_warning": {
     "title": "Speicher voll",
