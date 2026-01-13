@@ -436,7 +436,8 @@ export const LocalWebWidget: FC = () => {
     <style>
       html, body { margin: 0; padding: 0; height: 100%; }
       body { display: flex; flex-direction: column; font-family: sans-serif; }
-      header { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: #f5f5f5; border-bottom: 1px solid #e0e0e0; }
+      header { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: #f5f5f5; border-bottom: 1px solid #e0e0e0; transition: opacity 0.3s; }
+      header.hidden { display: none; }
       button { border: 1px solid #ccc; background: #fff; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
       iframe { flex: 1; border: 0; width: 100%; }
     </style>
@@ -453,11 +454,22 @@ export const LocalWebWidget: FC = () => {
     <script>
       const fullBtn = document.getElementById('fullscreen');
       const closeBtn = document.getElementById('close');
+      const header = document.querySelector('header');
+
       fullBtn.addEventListener('click', () => {
         const root = document.documentElement;
         if (root.requestFullscreen) root.requestFullscreen();
       });
+
       closeBtn.addEventListener('click', () => window.close());
+
+      document.addEventListener('fullscreenchange', () => {
+        if (document.fullscreenElement) {
+          header.classList.add('hidden');
+        } else {
+          header.classList.remove('hidden');
+        }
+      });
     </script>
   </body>
 </html>`);
