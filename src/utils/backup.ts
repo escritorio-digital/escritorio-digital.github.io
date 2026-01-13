@@ -190,14 +190,19 @@ export const exportLocalWebData = async (
     tx.oncomplete = async () => {
       const sites = (sitesRequest.result as LocalWebSite[]) ?? [];
       const files = (filesRequest.result as Array<{ key: string; siteId: string; path: string; blob: Blob; size: number; type: string; profileName?: string }>) ?? [];
-      const resolvedSites = sites.map((site) => ({
+
+      // Filter sites: include those without profileName OR those with profileName in selection
+      const filteredSites = profileNames && profileNames.length > 0
+        ? sites.filter((site) => !site.profileName || profileNames.includes(site.profileName))
+        : sites;
+
+      // Assign fallback profile to sites without one for export
+      const resolvedSites = filteredSites.map((site) => ({
         ...site,
         profileName: site.profileName ?? fallbackProfileName,
       }));
-      const selectedSites = profileNames && profileNames.length > 0
-        ? resolvedSites.filter((site) => site.profileName && profileNames.includes(site.profileName))
-        : resolvedSites;
-      const selectedSiteIds = new Set(selectedSites.map((site) => site.id));
+
+      const selectedSiteIds = new Set(resolvedSites.map((site) => site.id));
       const encodedFiles: LocalWebFile[] = [];
       for (const file of files.filter((item) => selectedSiteIds.has(item.siteId))) {
         const buffer = await file.blob.arrayBuffer();
@@ -211,7 +216,7 @@ export const exportLocalWebData = async (
           dataBase64: arrayBufferToBase64(buffer),
         });
       }
-      resolve({ sites: selectedSites, files: encodedFiles });
+      resolve({ sites: resolvedSites, files: encodedFiles });
     };
     tx.onerror = () => reject(tx.error);
   });
@@ -229,38 +234,43 @@ export const exportLocalWebRecords = async (
     tx.oncomplete = () => {
       const sites = (sitesRequest.result as LocalWebSite[]) ?? [];
       const files = (filesRequest.result as LocalWebRecord[]) ?? [];
-      const resolvedSites = sites.map((site) => ({
+
+      // Filter sites: include those without profileName OR those with profileName in selection
+      const filteredSites = profileNames && profileNames.length > 0
+        ? sites.filter((site) => !site.profileName || profileNames.includes(site.profileName))
+        : sites;
+
+      // Assign fallback profile to sites without one for export
+      const resolvedSites = filteredSites.map((site) => ({
         ...site,
         profileName: site.profileName ?? fallbackProfileName,
       }));
-      const selectedSites = profileNames && profileNames.length > 0
-        ? resolvedSites.filter((site) => site.profileName && profileNames.includes(site.profileName))
-        : resolvedSites;
-      const selectedSiteIds = new Set(selectedSites.map((site) => site.id));
+
+      const selectedSiteIds = new Set(resolvedSites.map((site) => site.id));
       const selectedFiles = files.filter((file) => selectedSiteIds.has(file.siteId)).map((file) => ({
         ...file,
         profileName: file.profileName ?? fallbackProfileName,
       }));
-      resolve({ sites: selectedSites, files: selectedFiles });
+      resolve({ sites: resolvedSites, files: selectedFiles });
     };
     tx.onerror = () => reject(tx.error);
   });
 };
 
-export const getLocalWebStats = async (profileNames?: string[], fallbackProfileName?: string): Promise<LocalWebStats> => {
+export const getLocalWebStats = async (profileNames?: string[], _fallbackProfileName?: string): Promise<LocalWebStats> => {
   const db = await openLocalWebDb();
   return new Promise<LocalWebStats>((resolve, reject) => {
     const tx = db.transaction(LOCAL_WEB_SITES, 'readonly');
     const request = tx.objectStore(LOCAL_WEB_SITES).getAll();
     request.onsuccess = () => {
       const sites = (request.result as LocalWebSite[]) ?? [];
-      const resolvedSites = sites.map((site) => ({
-        ...site,
-        profileName: site.profileName ?? fallbackProfileName,
-      }));
+
+      // Sites without profileName are considered available for all profiles
+      // Sites with profileName are only available if their profile is in the selection
       const selectedSites = profileNames && profileNames.length > 0
-        ? resolvedSites.filter((site) => site.profileName && profileNames.includes(site.profileName))
-        : resolvedSites;
+        ? sites.filter((site) => !site.profileName || profileNames.includes(site.profileName))
+        : sites;
+
       resolve({
         siteCount: selectedSites.length,
         totalBytes: selectedSites.reduce((sum, site) => sum + (site.totalBytes || 0), 0),
