@@ -10,7 +10,6 @@ import {
     Users,
     Image,
     LayoutGrid,
-    X,
     Star,
     HelpCircle,
     GripVertical,
