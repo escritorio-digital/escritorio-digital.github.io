@@ -6,7 +6,7 @@
     "tabs": {
       "general": "General",
       "profiles": "Profiles",
-      "widgets": "Widgets",
+      "widgets": "Programs",
       "theme": "Appearance"
     },
     "general": {
@@ -19,7 +19,7 @@
         "eu": "Basque"
       },
       "reset_title": "Reset Application",
-      "reset_description": "Removes all saved data (profiles, widgets, and preferences) and restarts as first run.",
+      "reset_description": "Removes all saved data (profiles, programs, and preferences) and restarts as first run.",
       "reset_button": "Factory Reset",
       "reset_confirm": "Are you sure you want to remove all local preferences and data? This cannot be undone."
     },
@@ -49,11 +49,11 @@
       "create_mode_clone": "Clone current"
     },
     "widgets": {
-      "search": "Search widget...",
-      "pinned_info": "Select the widgets you want on your toolbar. ({{count}}/{{max}})",
+      "search": "Search program...",
+      "pinned_info": "Select the programs you want on your toolbar. ({{count}}/{{max}})",
       "add": "Add",
       "remove": "Remove",
-      "max_widgets_alert": "You cannot pin more than {{max}} widgets.",
+      "max_widgets_alert": "You cannot pin more than {{max}} programs.",
       "view_label": "View",
       "view_by_theme": "Themes",
       "view_alphabetical": "Alphabetical",
@@ -63,6 +63,7 @@
         "math_science": "Math and science",
         "resources": "Board, writing, and resources",
         "interaction": "Interaction, chance, and educational games",
+        "participation": "Participation tools",
         "logic_games": "Logic games and class dynamics",
         "gestures": "Work gestures",
         "other": "Other"
@@ -72,8 +73,8 @@
       "theme_colors_title": "Theme Colors",
       "colors": {
         "desktop_bg": "Desktop Background",
-        "widget_bg": "Widget Background",
-        "widget_header": "Widget Header",
+        "widget_bg": "Program Background",
+        "widget_header": "Program Header",
         "accent": "Accent",
         "text_light": "Light Text",
         "text_dark": "Dark Text"
@@ -85,13 +86,36 @@
       "show_datetime_help": "Shown in the top-right corner.",
       "reset_theme_button": "Reset to Default Theme",
       "show_system_stats_label": "Show system stats",
-      "show_system_stats_help": "Shown next to the clock."
+      "show_system_stats_help": "Shown next to the clock.",
+      "modal_title": "Customize theme",
+      "open_modal_title": "Theme customization",
+      "open_modal_help": "Choose a preset theme or adjust colors and wallpapers.",
+      "open_modal_button": "Open themes",
+      "presets_title": "Preset themes",
+      "presets_help": "Choose a ready-to-use look.",
+      "screen_items_title": "On-screen elements",
+      "presets": {
+        "classic": "Light classroom",
+        "chalkboard": "Chalkboard",
+        "slate": "Slate",
+        "sand": "Sand",
+        "ocean": "Ocean",
+        "confetti": "Confetti",
+        "sunrise": "Sunrise",
+        "berry": "Berry",
+        "mint": "Mint"
+      },
+      "solid_color_title": "Solid color",
+      "solid_color_help": "Choose a color and the wallpaper will be removed."
     }
   },
   "toolbar": {
+    "start": "Start",
     "settings": "Settings",
-    "widgetLibrary": "Widget Library",
-    "remove_widget": "Remove this widget"
+    "widgetLibrary": "Program Library",
+    "add_widget": "Add to favorites",
+    "remove_widget": "Remove from favorites",
+    "no_open_windows": "No open windows"
   },
   "help": {
     "tooltip": "Help",
@@ -99,6 +123,21 @@
     "guide": "User guide",
     "about": "About the project",
     "licenses": "Credits and licenses"
+  },
+  "start_menu": {
+    "title": "Start",
+    "close": "Close",
+    "favorites": "Favorites",
+    "shortcuts": "Shortcuts",
+    "widgets": "Programs",
+    "help": "Help",
+    "no_results": "No results",
+    "remove_favorite": "Remove from favorites",
+    "clear_favorites": "Clear favorites",
+    "clear_favorites_confirm": "Do you want to clear the favorites list?",
+    "reorder_favorites": "Reorder favorites",
+    "add_favorite": "Add to favorites",
+    "language_label": "Language"
   },
   "about": {
     "title": "About the project",
@@ -146,7 +185,7 @@
     "title": "Credits and License",
     "tooltip": "Credits, license, and program guide",
     "user_guide_title": "Program guide",
-    "user_guide_link": "Open widget guide",
+    "user_guide_link": "Open program guide",
     "original_project": "The original project <strong>Interactive Classroom Desktop</strong> and its idea belong to <strong>María Teresa González</strong>.",
     "original_link": "You can visit the original application at:",
     "new_version": "This new version was developed in collaboration by <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong>, and <strong>Pablo G. Guízar</strong>. The repository for this project is located at:",
@@ -160,7 +199,7 @@
     "open_knowledge_decalogue": "Open Knowledge Decalogue"
   },
   "context_menu": {
-    "new_widget": "New widget...",
+    "new_widget": "New favorite",
     "settings": "Configure ED",
     "manage_profiles": "Manage profiles",
     "change_background": "Change background...",
@@ -168,10 +207,13 @@
     "hide_datetime": "Hide date and time",
     "show_toolbar": "Bottom bar",
     "hide_toolbar": "Hide bottom bar",
-    "reset_layout": "Close all open windows",
+    "reset_layout": "Close all windows",
     "reset_layout_confirm": "Do you want to close all desktop windows?",
     "show_system_stats": "System stats",
-    "hide_system_stats": "Hide system stats"
+    "hide_system_stats": "Hide system stats",
+    "minimize_windows": "Minimize windows",
+    "restore_windows": "Restore windows",
+    "close_window": "Close this window"
   },
   "storage_warning": {
     "title": "Storage full",
@@ -526,6 +568,27 @@
       "title": "Live Connection",
       "go_to_repo": "Go to Live Connection repository"
     },
+    "directo_vota": {
+      "title": "Simple voting"
+    },
+    "directo_escala": {
+      "title": "Rating scale"
+    },
+    "directo_nube": {
+      "title": "Word cloud"
+    },
+    "directo_ideas": {
+      "title": "Brainstorming and voting"
+    },
+    "directo_muro": {
+      "title": "Interactive wall"
+    },
+    "qplay": {
+      "title": "QPlay: Interactive quiz"
+    },
+    "boardlive": {
+      "title": "BoardLive: Collaborative whiteboard"
+    },
     "drawing_pad": {
       "title": "Drawing Pad",
       "clear_confirm": "Are you sure you want to clear the entire drawing? This will erase the image and strokes.",
@@ -582,7 +645,7 @@
   "backup": {
     "title": "Save or load profiles",
     "include_profiles": "Profiles and layout (windows, backgrounds, bar)",
-    "include_widgets": "Widget settings and data",
+    "include_widgets": "Program settings and data",
     "include_local_web": "Local websites",
     "export_button": "Save file",
     "import_button": "Load file",

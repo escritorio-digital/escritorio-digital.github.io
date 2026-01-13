@@ -6,7 +6,7 @@
     "tabs": {
       "general": "General",
       "profiles": "Perfiles",
-      "widgets": "Widgets",
+      "widgets": "Programas",
       "theme": "Apariencia"
     },
     "general": {
@@ -19,7 +19,7 @@
         "eu": "Euskera"
       },
       "reset_title": "Restablecer aplicación",
-      "reset_description": "Elimina todos los datos guardados (perfiles, widgets y preferencias) y reinicia como si fuera la primera vez.",
+      "reset_description": "Elimina todos los datos guardados (perfiles, programas y preferencias) y reinicia como si fuera la primera vez.",
       "reset_button": "Restablecer a valores de fábrica",
       "reset_confirm": "¿Seguro que quieres eliminar todas las preferencias y datos locales? Esta acción no se puede deshacer."
     },
@@ -49,11 +49,11 @@
       "create_mode_clone": "Clon del actual"
     },
     "widgets": {
-      "search": "Buscar widget...",
-      "pinned_info": "Selecciona los widgets que quieres en tu barra de herramientas. ({{count}}/{{max}})",
+      "search": "Buscar programa...",
+      "pinned_info": "Selecciona los programas que quieres en tu barra de herramientas. ({{count}}/{{max}})",
       "add": "Añadir",
       "remove": "Quitar",
-      "max_widgets_alert": "No se pueden fijar más de {{max}} widgets.",
+      "max_widgets_alert": "No se pueden fijar más de {{max}} programas.",
       "view_label": "Ver por",
       "view_by_theme": "Temas",
       "view_alphabetical": "Alfabético",
@@ -63,6 +63,7 @@
         "math_science": "Matemáticas y ciencias",
         "resources": "Pizarra, escritura y recursos",
         "interaction": "Interacción, azar y juegos educativos",
+        "participation": "Herramientas participativas",
         "logic_games": "Juegos de lógica y dinámica de clase",
         "gestures": "Trabajo con gestos",
         "other": "Otros"
@@ -72,8 +73,8 @@
       "theme_colors_title": "Colores del Tema",
       "colors": {
         "desktop_bg": "Fondo de Escritorio",
-        "widget_bg": "Fondo de Widget",
-        "widget_header": "Cabecera de Widget",
+        "widget_bg": "Fondo de Programa",
+        "widget_header": "Cabecera de Programa",
         "accent": "Acento",
         "text_light": "Texto Claro",
         "text_dark": "Texto Oscuro"
@@ -85,13 +86,36 @@
       "show_datetime_help": "Se muestra en la esquina superior derecha.",
       "reset_theme_button": "Restablecer Tema por Defecto",
       "show_system_stats_label": "Mostrar estadísticas del sistema",
-      "show_system_stats_help": "Se muestran junto al reloj."
+      "show_system_stats_help": "Se muestran junto al reloj.",
+      "modal_title": "Personalizar tema",
+      "open_modal_title": "Personalización del tema",
+      "open_modal_help": "Elige un tema predefinido o ajusta colores y fondos.",
+      "open_modal_button": "Abrir temas",
+      "presets_title": "Temas predefinidos",
+      "presets_help": "Elige un aspecto listo para usar.",
+      "screen_items_title": "Elementos en pantalla",
+      "presets": {
+        "classic": "Aula clara",
+        "chalkboard": "Pizarra",
+        "slate": "Grafito",
+        "sand": "Arena",
+        "ocean": "Marino",
+        "confetti": "Confeti",
+        "sunrise": "Amanecer",
+        "berry": "Frambuesa",
+        "mint": "Menta"
+      },
+      "solid_color_title": "Color sólido",
+      "solid_color_help": "Selecciona un color y se quitará la imagen de fondo."
     }
   },
   "toolbar": {
+    "start": "Inicio",
     "settings": "Configuración",
-    "widgetLibrary": "Librería de Widgets",
-    "remove_widget": "Quitar este widget"
+    "widgetLibrary": "Librería de Programas",
+    "add_widget": "Añadir a favoritos",
+    "remove_widget": "Eliminar de favoritos",
+    "no_open_windows": "Sin ventanas abiertas"
   },
   "help": {
     "tooltip": "Ayuda",
@@ -99,6 +123,21 @@
     "guide": "Guía de uso",
     "about": "Acerca del proyecto",
     "licenses": "Créditos y licencias"
+  },
+  "start_menu": {
+    "title": "Inicio",
+    "close": "Cerrar",
+    "favorites": "Favoritos",
+    "shortcuts": "Accesos",
+    "widgets": "Programas",
+    "help": "Ayuda",
+    "no_results": "Sin resultados",
+    "remove_favorite": "Quitar de favoritos",
+    "add_favorite": "Añadir a favoritos",
+    "clear_favorites": "Vaciar favoritos",
+    "clear_favorites_confirm": "¿Quieres vaciar la lista de favoritos?",
+    "reorder_favorites": "Reordenar favoritos",
+    "language_label": "Idioma"
   },
   "about": {
     "title": "Acerca del proyecto",
@@ -146,7 +185,7 @@
     "title": "Créditos y Licencia",
     "tooltip": "Créditos, licencia y guía del programa",
     "user_guide_title": "Guía del programa",
-    "user_guide_link": "Abrir guía de widgets",
+    "user_guide_link": "Abrir guía de programas",
     "original_project": "El proyecto original <strong>Escritorio Interactivo para el Aula</strong> y su idea pertenecen a <strong>María Teresa González</strong>.",
     "original_link": "Puedes visitar la aplicación original en:",
     "new_version": "Esta nueva versión fue desarrollada en colaboración por <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> y <strong>Pablo G. Guízar</strong>. El repositorio de este proyecto se encuentra en:",
@@ -160,7 +199,7 @@
     "open_knowledge_decalogue": "Decálogo del Conocimiento Abierto"
   },
   "context_menu": {
-    "new_widget": "Nuevo widget...",
+    "new_widget": "Nuevo favorito",
     "settings": "Configurar ED",
     "manage_profiles": "Gestionar perfiles",
     "change_background": "Cambiar fondo...",
@@ -168,10 +207,13 @@
     "hide_datetime": "Ocultar fecha y hora",
     "show_toolbar": "Barra inferior",
     "hide_toolbar": "Ocultar barra inferior",
-    "reset_layout": "Cerrar todas las ventanas abiertas",
+    "reset_layout": "Cerrar todas las ventanas",
     "reset_layout_confirm": "¿Quieres cerrar todas las ventanas del escritorio?",
     "show_system_stats": "Estadísticas del sistema",
-    "hide_system_stats": "Ocultar estadísticas del sistema"
+    "hide_system_stats": "Ocultar estadísticas del sistema",
+    "minimize_windows": "Minimizar ventanas",
+    "restore_windows": "Restaurar ventanas",
+    "close_window": "Cerrar esta ventana"
   },
   "storage_warning": {
     "title": "Almacenamiento lleno",
@@ -526,6 +568,27 @@
       "title": "Conexión en Directo",
       "go_to_repo": "Ir al repositorio de Conexión en Directo"
     },
+    "directo_vota": {
+      "title": "Votación simple"
+    },
+    "directo_escala": {
+      "title": "Escala de valoración"
+    },
+    "directo_nube": {
+      "title": "Nube de palabras"
+    },
+    "directo_ideas": {
+      "title": "Lluvia de ideas y votos"
+    },
+    "directo_muro": {
+      "title": "Muro interactivo"
+    },
+    "qplay": {
+      "title": "QPlay: Concurso interactivo"
+    },
+    "boardlive": {
+      "title": "BoardLive: Pizarra colaborativa"
+    },
     "drawing_pad": {
       "title": "Paleta de Dibujo",
       "clear_confirm": "¿Estás seguro de que quieres limpiar todo el dibujo? Esto borrará la imagen y los trazos.",
@@ -582,7 +645,7 @@
   "backup": {
     "title": "Guardar o cargar perfiles",
     "include_profiles": "Perfiles y disposición (ventanas, fondos, barra)",
-    "include_widgets": "Ajustes y datos de widgets",
+    "include_widgets": "Ajustes y datos de programas",
     "include_local_web": "Webs locales",
     "export_button": "Guardar archivo",
     "import_button": "Cargar archivo",

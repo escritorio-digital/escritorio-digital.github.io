@@ -6,7 +6,7 @@
     "tabs": {
       "general": "General",
       "profiles": "Perfils",
-      "widgets": "Ginys",
+      "widgets": "Programes",
       "theme": "Aparença"
     },
     "general": {
@@ -19,7 +19,7 @@
         "eu": "Basc"
       },
       "reset_title": "Restablir l'aplicació",
-      "reset_description": "Elimina totes les dades desades (perfils, ginys i preferències) i reinicia com si fos la primera vegada.",
+      "reset_description": "Elimina totes les dades desades (perfils, programes i preferències) i reinicia com si fos la primera vegada.",
       "reset_button": "Restablir a valors de fàbrica",
       "reset_confirm": "Estàs segur que vols eliminar totes les preferències i dades locals? Aquesta acció no es pot desfer."
     },
@@ -49,11 +49,11 @@
       "create_mode_clone": "Clon de l'actual"
     },
     "widgets": {
-      "search": "Cercar giny...",
-      "pinned_info": "Selecciona els ginys que vols a la teva barra d'eines. ({{count}}/{{max}})",
+      "search": "Cercar programa...",
+      "pinned_info": "Selecciona els programes que vols a la teva barra d'eines. ({{count}}/{{max}})",
       "add": "Afegir",
       "remove": "Treure",
-      "max_widgets_alert": "No es poden fixar més de {{max}} ginys.",
+      "max_widgets_alert": "No es poden fixar més de {{max}} programes.",
       "view_label": "Veure per",
       "view_by_theme": "Temes",
       "view_alphabetical": "Alfabètic",
@@ -63,6 +63,7 @@
         "math_science": "Matemàtiques i ciències",
         "resources": "Pissarra, escriptura i recursos",
         "interaction": "Interacció, atzar i jocs educatius",
+        "participation": "Eines participatives",
         "logic_games": "Jocs de lògica i dinàmica de classe",
         "gestures": "Gestos de treball",
         "other": "Altres"
@@ -72,8 +73,8 @@
       "theme_colors_title": "Colors del Tema",
       "colors": {
         "desktop_bg": "Fons d'Escriptori",
-        "widget_bg": "Fons de Giny",
-        "widget_header": "Capçalera de Giny",
+        "widget_bg": "Fons de Programa",
+        "widget_header": "Capçalera de Programa",
         "accent": "Accent",
         "text_light": "Text Clar",
         "text_dark": "Text Fosc"
@@ -85,13 +86,36 @@
       "show_datetime_help": "Es mostra a la cantonada superior dreta.",
       "reset_theme_button": "Restablir Tema per Defecte",
       "show_system_stats_label": "Mostrar estadístiques del sistema",
-      "show_system_stats_help": "Es mostren al costat del rellotge."
+      "show_system_stats_help": "Es mostren al costat del rellotge.",
+      "modal_title": "Personalitzar el tema",
+      "open_modal_title": "Personalització del tema",
+      "open_modal_help": "Tria un tema predefinit o ajusta colors i fons.",
+      "open_modal_button": "Obrir temes",
+      "presets_title": "Temes predefinits",
+      "presets_help": "Tria un aspecte llest per usar.",
+      "screen_items_title": "Elements en pantalla",
+      "presets": {
+        "classic": "Aula clara",
+        "chalkboard": "Pissarra",
+        "slate": "Grafit",
+        "sand": "Sorra",
+        "ocean": "Marí",
+        "confetti": "Confeti",
+        "sunrise": "Alba",
+        "berry": "Gerds",
+        "mint": "Menta"
+      },
+      "solid_color_title": "Color sòlid",
+      "solid_color_help": "Selecciona un color i es traurà la imatge de fons."
     }
   },
   "toolbar": {
+    "start": "Inici",
     "settings": "Configuració",
-    "widgetLibrary": "Biblioteca de Ginys",
-    "remove_widget": "Treure aquest giny"
+    "widgetLibrary": "Biblioteca de Programes",
+    "add_widget": "Afegir a favorits",
+    "remove_widget": "Eliminar de favorits",
+    "no_open_windows": "Cap finestra oberta"
   },
   "help": {
     "tooltip": "Ajuda",
@@ -99,6 +123,21 @@
     "guide": "Guia d'ús",
     "about": "Sobre el projecte",
     "licenses": "Crèdits i llicències"
+  },
+  "start_menu": {
+    "title": "Inici",
+    "close": "Tancar",
+    "favorites": "Preferits",
+    "shortcuts": "Accessos",
+    "widgets": "Programes",
+    "help": "Ajuda",
+    "no_results": "Sense resultats",
+    "remove_favorite": "Treure de favorits",
+    "clear_favorites": "Buidar favorits",
+    "clear_favorites_confirm": "Vols buidar la llista de favorits?",
+    "reorder_favorites": "Reordenar favorits",
+    "add_favorite": "Afegir als favorits",
+    "language_label": "Idioma"
   },
   "about": {
     "title": "Sobre el projecte",
@@ -146,7 +185,7 @@
     "title": "Crèdits i Llicència",
     "tooltip": "Crèdits, llicència i guia del programa",
     "user_guide_title": "Guia del programa",
-    "user_guide_link": "Obrir la guia de widgets",
+    "user_guide_link": "Obrir la guia de programes",
     "original_project": "El projecte original <strong>Escriptori Interactiu per a l'Aula</strong> i la seva idea pertanyen a <strong>María Teresa González</strong>.",
     "original_link": "Pots visitar l'aplicació original a:",
     "new_version": "Aquesta nova versió va ser desenvolupada en col·laboració per <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> i <strong>Pablo G. Guízar</strong>. El repositori d'aquest projecte es troba a:",
@@ -160,7 +199,7 @@
     "open_knowledge_decalogue": "Decàleg del Coneixement Obert"
   },
   "context_menu": {
-    "new_widget": "Nou widget...",
+    "new_widget": "Nou favorit",
     "settings": "Configurar ED",
     "manage_profiles": "Gestionar perfils",
     "change_background": "Canvia fons...",
@@ -168,10 +207,13 @@
     "hide_datetime": "Amagar data i hora",
     "show_toolbar": "Barra inferior",
     "hide_toolbar": "Amaga la barra inferior",
-    "reset_layout": "Tancar totes les finestres obertes",
+    "reset_layout": "Tancar totes les finestres",
     "reset_layout_confirm": "Vols tancar totes les finestres de l'escriptori?",
     "show_system_stats": "Estadístiques del sistema",
-    "hide_system_stats": "Ocultar estadístiques del sistema"
+    "hide_system_stats": "Ocultar estadístiques del sistema",
+    "minimize_windows": "Minimitzar finestres",
+    "restore_windows": "Restaurar finestres",
+    "close_window": "Tancar aquesta finestra"
   },
   "storage_warning": {
     "title": "Emmagatzematge ple",
@@ -526,6 +568,27 @@
       "title": "Connexió en Directe",
       "go_to_repo": "Anar al repositori de Connexió en Directe"
     },
+    "directo_vota": {
+      "title": "Votació simple"
+    },
+    "directo_escala": {
+      "title": "Escala de valoració"
+    },
+    "directo_nube": {
+      "title": "Núvol de paraules"
+    },
+    "directo_ideas": {
+      "title": "Pluja d'idees i vots"
+    },
+    "directo_muro": {
+      "title": "Mur interactiu"
+    },
+    "qplay": {
+      "title": "QPlay: Concurs interactiu"
+    },
+    "boardlive": {
+      "title": "BoardLive: Pissarra col·laborativa"
+    },
     "drawing_pad": {
       "title": "Paleta de Dibuix",
       "clear_confirm": "Estàs segur que vols netejar tot el dibuix? Això esborrarà la imatge i els traços.",
@@ -582,7 +645,7 @@
   "backup": {
     "title": "Desar o carregar perfils",
     "include_profiles": "Perfils i disposició (finestres, fons, barra)",
-    "include_widgets": "Ajustos i dades de widgets",
+    "include_widgets": "Ajustos i dades de programes",
     "include_local_web": "Webs locals",
     "export_button": "Desar fitxer",
     "import_button": "Carregar fitxer",

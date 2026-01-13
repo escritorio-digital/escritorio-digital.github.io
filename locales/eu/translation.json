@@ -6,7 +6,7 @@
     "tabs": {
       "general": "Orokorra",
       "profiles": "Profilak",
-      "widgets": "Widget-ak",
+      "widgets": "Programak",
       "theme": "Itxura"
     },
     "general": {
@@ -18,7 +18,7 @@
         "eu": "Euskara"
       },
       "reset_title": "Aplikazioa berrezarri",
-      "reset_description": "Gordetako datu guztiak ezabatzen ditu (profilak, widget-ak eta lehentasunak) eta lehen aldia balitz bezala berrabiarazten du.",
+      "reset_description": "Gordetako datu guztiak ezabatzen ditu (profilak, programak eta lehentasunak) eta lehen aldia balitz bezala berrabiarazten du.",
       "reset_button": "Fabrikako balioetara berrezarri",
       "reset_confirm": "Ziur zaude lehentasun eta datu lokal guztiak ezabatu nahi dituzula? Ekintza hau ezin da desegin."
     },
@@ -48,11 +48,11 @@
       "create_mode_clone": "Unekoa klonatu"
     },
     "widgets": {
-      "search": "Bilatu widget-a...",
-      "pinned_info": "Hautatu zure tresna-barran nahi dituzun widget-ak. ({{count}}/{{max}})",
+      "search": "Bilatu programa-a...",
+      "pinned_info": "Hautatu zure tresna-barran nahi dituzun programak. ({{count}}/{{max}})",
       "add": "Gehitu",
       "remove": "Kendu",
-      "max_widgets_alert": "Ezin dira {{max}} widget baino gehiago finkatu.",
+      "max_widgets_alert": "Ezin dira {{max}} programa baino gehiago finkatu.",
       "view_label": "Ikusi honela",
       "view_by_theme": "Gaiak",
       "view_alphabetical": "Alfabetikoki",
@@ -62,6 +62,7 @@
         "math_science": "Matematika eta zientziak",
         "resources": "Arbela, idazketa eta baliabideak",
         "interaction": "Elkarrekintza, zoria eta hezkuntza-jokoak",
+        "participation": "Parte-hartzeko tresnak",
         "logic_games": "Logika-jokoak eta klaseko dinamika",
         "gestures": "Lan-keinuak",
         "other": "Beste batzuk"
@@ -71,8 +72,8 @@
       "theme_colors_title": "Gaiaren koloreak",
       "colors": {
         "desktop_bg": "Idazmahai-atzealdea",
-        "widget_bg": "Widget-atzealdea",
-        "widget_header": "Widget-goiburua",
+        "widget_bg": "Programa-atzealdea",
+        "widget_header": "Programa-goiburua",
         "accent": "Azentua",
         "text_light": "Testu argia",
         "text_dark": "Testu iluna"
@@ -84,13 +85,36 @@
       "show_datetime_help": "Goiko eskuineko izkinan erakusten da.",
       "reset_theme_button": "Berrezarri gai lehenetsia",
       "show_system_stats_label": "Sistemaren estatistikak erakutsi",
-      "show_system_stats_help": "Erlojuaren ondoan erakusten dira."
+      "show_system_stats_help": "Erlojuaren ondoan erakusten dira.",
+      "modal_title": "Gaia pertsonalizatu",
+      "open_modal_title": "Gaia pertsonalizatzea",
+      "open_modal_help": "Aukeratu aurrezarritako gai bat edo doitu koloreak eta atzeko planoak.",
+      "open_modal_button": "Gaiak ireki",
+      "presets_title": "Aurrezarritako gaiak",
+      "presets_help": "Aukeratu erabilteko prest dagoen itxura.",
+      "screen_items_title": "Pantailako elementuak",
+      "presets": {
+        "classic": "Ikasgelako argia",
+        "chalkboard": "Arbel",
+        "slate": "Grafito",
+        "sand": "Harea",
+        "ocean": "Itsas",
+        "confetti": "Konfeti",
+        "sunrise": "Egunsentia",
+        "berry": "Mugurdi",
+        "mint": "Menta"
+      },
+      "solid_color_title": "Kolore solidoa",
+      "solid_color_help": "Aukeratu kolorea eta atzeko planoko irudia kenduko da."
     }
   },
   "toolbar": {
+    "start": "Hasiera",
     "settings": "Ezarpenak",
-    "widgetLibrary": "Widget Liburutegia",
-    "remove_widget": "Kendu widget hau"
+    "widgetLibrary": "Programa Liburutegia",
+    "add_widget": "Gehitu gogokoetara",
+    "remove_widget": "Gogokoetatik kendu",
+    "no_open_windows": "Ez dago leiho irekirik"
   },
   "help": {
     "tooltip": "Laguntza",
@@ -98,6 +122,21 @@
     "guide": "Erabilera-gida",
     "about": "Proiektuari buruz",
     "licenses": "Kredituak eta lizentziak"
+  },
+  "start_menu": {
+    "title": "Hasiera",
+    "close": "Itxi",
+    "favorites": "Gogokoak",
+    "shortcuts": "Lasterbideak",
+    "widgets": "Programak",
+    "help": "Laguntza",
+    "no_results": "Emaitzarik ez",
+    "remove_favorite": "Gogokoetatik kendu",
+    "clear_favorites": "Gogokoak hustu",
+    "clear_favorites_confirm": "Gogokoen zerrenda hustu nahi duzu?",
+    "reorder_favorites": "Gogokoak berrantolatu",
+    "add_favorite": "Gogokoetara gehitu",
+    "language_label": "Hizkuntza"
   },
   "about": {
     "title": "Proiektuari buruz",
@@ -145,7 +184,7 @@
     "title": "Kredituak eta Lizentzia",
     "tooltip": "Kredituak, lizentzia eta programaren gida",
     "user_guide_title": "Programaren gida",
-    "user_guide_link": "Widgeten gida ireki",
+    "user_guide_link": "Programaen gida ireki",
     "original_project": "<strong>Ikasgelarako Idazmahai Interaktiboa</strong> jatorrizko proiektua eta bere ideia <strong>María Teresa González</strong>enak dira.",
     "original_link": "Jatorrizko aplikazioa hemen bisita dezakezu:",
     "new_version": "Bertsio berri hau <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> eta <strong>Pablo G. Guízar</strong>-en artean garatu zen. Proiektu honen biltegia hemen dago:",
@@ -159,7 +198,7 @@
     "open_knowledge_decalogue": "Ezagutza Irekiaren Dekalogoarekin"
   },
   "context_menu": {
-    "new_widget": "Widget berria...",
+    "new_widget": "Gogoko berria",
     "settings": "ED konfiguratu",
     "manage_profiles": "Profilak kudeatu",
     "change_background": "Aldatu atzeko planoa...",
@@ -167,10 +206,13 @@
     "hide_datetime": "Ezkutatu data eta ordua",
     "show_toolbar": "Beheko barra",
     "hide_toolbar": "Ezkutatu beheko barra",
-    "reset_layout": "Irekitako leiho guztiak itxi",
+    "reset_layout": "Leiho guztiak itxi",
     "reset_layout_confirm": "Mahaigaineko leiho guztiak itxi nahi dituzu?",
     "show_system_stats": "Sistemaren estatistikak",
-    "hide_system_stats": "Sistemaren estatistikak ezkutatu"
+    "hide_system_stats": "Sistemaren estatistikak ezkutatu",
+    "minimize_windows": "Leihoak minimizatu",
+    "restore_windows": "Leihoak leheneratu",
+    "close_window": "Itxi leiho hau"
   },
   "storage_warning": {
     "title": "Biltegiratzea beteta",
@@ -525,6 +567,27 @@
       "title": "Zuzeneko Konexioa",
       "go_to_repo": "Joan Zuzeneko Konexioaren biltegira"
     },
+    "directo_vota": {
+      "title": "Bozketa sinplea"
+    },
+    "directo_escala": {
+      "title": "Balorazio eskala"
+    },
+    "directo_nube": {
+      "title": "Hitz hodeia"
+    },
+    "directo_ideas": {
+      "title": "Ideia-jasa eta botoak"
+    },
+    "directo_muro": {
+      "title": "Horma interaktiboa"
+    },
+    "qplay": {
+      "title": "QPlay: Lehiaketa interaktiboa"
+    },
+    "boardlive": {
+      "title": "BoardLive: Arbel kolaboratiboa"
+    },
     "drawing_pad": {
       "title": "Marrazketa Paleta",
       "clear_confirm": "Ziur zaude marrazki osoa garbitu nahi duzula? Honek irudia eta trazuak ezabatuko ditu.",
@@ -581,7 +644,7 @@
   "backup": {
     "title": "Profilak gorde edo kargatu",
     "include_profiles": "Profilak eta diseinua (leihoak, horma-irudiak, barra)",
-    "include_widgets": "Widgeten ezarpenak eta datuak",
+    "include_widgets": "Programaen ezarpenak eta datuak",
     "include_local_web": "Web lokalak",
     "export_button": "Fitxategia gorde",
     "import_button": "Fitxategia kargatu",

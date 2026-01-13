@@ -6,7 +6,7 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 
 - **Data e hora na pantalla**: visibles na esquina superior dereita. Pódense desactivar en **Ferramentas → Aparencia**.
 
-- **Abrir un widget**: desde a barra inferior ou desde a **Biblioteca de widgets**.
+- **Abrir un widget**: desde a barra inferior, o menú Inicio ou a **Biblioteca de widgets**.
 - **Pechar todo**: no menú contextual do escritorio.
 - **Perfís**: crea varios escritorios e cambia entre eles.
 - **Fondos**: escolle un fondo predefinido ou sobe un propio.
@@ -41,6 +41,16 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 - **Explorador de ficheiros**: abre ficheiros locais (PDF, imaxes, texto e Markdown, audio e vídeo).
 - **Visor directo**: pensado para mostrar contido web ou recursos externos de forma cómoda durante a explicación.
 - **HTML**: espazo para mostrar contidos preparados.
+
+### Ferramentas participativas
+
+- **Votación simple**: votacións en tempo real con resultados inmediatos.
+- **Escala de valoración**: recolle opinións con escalas.
+- **Nube de palabras**: respostas curtas nunha nube dinámica.
+- **Choiva de ideas e votos**: propostas e votación para priorizar.
+- **Muro interactivo**: muro colaborativo con notas tipo post-it.
+- **QPlay**: concurso interactivo con cuestionarios.
+- **BoardLive**: pizarra colaborativa en tempo real.
 
 ### Interacción, azar e xogos educativos
 

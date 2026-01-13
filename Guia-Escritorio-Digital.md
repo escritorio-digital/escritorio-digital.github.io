@@ -5,9 +5,11 @@ Escritorio Digital es una pizarra de trabajo con “ventanas” pensada para el 
 ## Cómo se usa
 
 - **Fecha y hora en pantalla**: visibles en la esquina superior derecha. Se pueden desactivar en **Herramientas → Apariencia**.
+
+- **Menú Inicio**: pulsa el botón Inicio en la esquina inferior izquierda para abrir el menú de programas, favoritos, ajustes y ayuda.
 - **Estadísticas del sistema**: panel con almacenamiento, RAM/CPU (si el navegador lo permite) y pantalla. Se puede ocultar en **Herramientas → Apariencia** o con clic derecho.
 
-- **Abrir un widget**: desde la barra inferior o desde la **Librería de widgets**.
+- **Abrir un widget**: desde la barra inferior, el menú Inicio o la **Librería de widgets**.
 - **Cerrar todo**: en el menú contextual del escritorio.
 - **Perfiles**: crea varios escritorios y cambia entre ellos.
 - **Fondos**: elige un fondo predefinido o sube uno propio.
@@ -54,6 +56,16 @@ Este widget está pensado para abrir webs hechas con IA o recursos offline para 
 - **Previsualización**: al abrir, el contenido se renderiza dentro del widget. Puedes alternar la lista para ver más grande.
 - **Ver en pestaña nueva**: abre la web en una ventana independiente del escritorio.
 - **Almacenamiento**: las webs se guardan en el navegador (persisten tras recargar). Verás el espacio usado y el porcentaje.
+
+### Herramientas participativas
+
+- **Votación simple**: votaciones rápidas en tiempo real con resultados inmediatos.
+- **Escala de valoración**: recoge opiniones con escalas.
+- **Nube de palabras**: respuestas cortas en una nube dinámica.
+- **Lluvia de ideas y votos**: propuestas y votación para priorizar.
+- **Muro interactivo**: muro colaborativo con notas tipo post-it.
+- **QPlay**: concurso interactivo con cuestionarios.
+- **BoardLive**: pizarra colaborativa en tiempo real.
 
 ### Interacción, azar y juegos educativos
 

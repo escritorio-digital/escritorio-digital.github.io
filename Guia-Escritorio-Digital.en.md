@@ -6,7 +6,9 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 
 - **On-screen date and time**: shown in the top-right corner. You can disable it in **Tools → Appearance**.
 
-- **Open a widget**: from the bottom bar or from the **Widget Library**.
+- **Start menu**: click the Start button in the bottom-left to open programs, favorites, settings, and help.
+
+- **Open a widget**: from the bottom bar, the **Start menu**, or the **Widget Library**.
 - **Close everything**: from the desktop context menu.
 - **Profiles**: create several desktops and switch between them.
 - **Backgrounds**: choose a preset background or upload your own.
@@ -38,9 +40,20 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 - **Drawing pad**: freehand drawing (sketches, graphs, concept maps, diagrams).
 - **Image carousel**: show a collection of images (plates, exercises, lab photos, maps…).
 - **Web viewer**: open a web page inside the desktop to use an online resource without switching tabs.
+- **Local web**: save websites in the browser (from ZIP or folder) and run them offline.
 - **File explorer**: open local files (PDF, images, text and Markdown, audio and video).
 - **Live viewer**: designed to show web content or external resources comfortably while explaining.
 - **HTML**: space to display prepared content.
+
+### Participation tools
+
+- **Simple voting**: real-time voting with instant results.
+- **Rating scale**: collect opinions with scales.
+- **Word cloud**: short responses in a dynamic cloud.
+- **Brainstorming and voting**: proposals and voting to prioritize.
+- **Interactive wall**: collaborative wall with post-it notes.
+- **QPlay**: interactive quiz in real time.
+- **BoardLive**: collaborative whiteboard in real time.
 
 ### Interaction, chance, and educational games
 

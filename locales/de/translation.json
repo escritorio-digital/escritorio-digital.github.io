@@ -6,7 +6,7 @@
     "tabs": {
       "general": "Allgemein",
       "profiles": "Profile",
-      "widgets": "Widgets",
+      "widgets": "Programme",
       "theme": "Erscheinungsbild"
     },
     "general": {
@@ -19,7 +19,7 @@
         "eu": "Baskisch"
       },
       "reset_title": "Anwendung zurücksetzen",
-      "reset_description": "Entfernt alle gespeicherten Daten (Profile, Widgets und Einstellungen) und startet wie beim ersten Mal.",
+      "reset_description": "Entfernt alle gespeicherten Daten (Profile, Programme und Einstellungen) und startet wie beim ersten Mal.",
       "reset_button": "Auf Werkseinstellungen zurücksetzen",
       "reset_confirm": "Möchtest du wirklich alle lokalen Einstellungen und Daten entfernen? Dies kann nicht rückgängig gemacht werden."
     },
@@ -49,11 +49,11 @@
       "create_mode_clone": "Aktuelles klonen"
     },
     "widgets": {
-      "search": "Widget suchen...",
-      "pinned_info": "Wähle die Widgets aus, die in deiner Werkzeugleiste erscheinen sollen. ({{count}}/{{max}})",
+      "search": "Programm suchen...",
+      "pinned_info": "Wähle die Programme aus, die in deiner Werkzeugleiste erscheinen sollen. ({{count}}/{{max}})",
       "add": "Hinzufügen",
       "remove": "Entfernen",
-      "max_widgets_alert": "Du kannst nicht mehr als {{max}} Widgets anheften.",
+      "max_widgets_alert": "Du kannst nicht mehr als {{max}} Programme anheften.",
       "view_label": "Ansicht",
       "view_by_theme": "Themen",
       "view_alphabetical": "Alphabetisch",
@@ -63,6 +63,7 @@
         "math_science": "Mathematik und Naturwissenschaften",
         "resources": "Tafel, Schreiben und Ressourcen",
         "interaction": "Interaktion, Zufall und Lernspiele",
+        "participation": "Partizipative Werkzeuge",
         "logic_games": "Logikspiele und Klassendynamik",
         "gestures": "Arbeitsgesten",
         "other": "Sonstige"
@@ -72,8 +73,8 @@
       "theme_colors_title": "Themenfarben",
       "colors": {
         "desktop_bg": "Desktop-Hintergrund",
-        "widget_bg": "Widget-Hintergrund",
-        "widget_header": "Widget-Kopfzeile",
+        "widget_bg": "Programm-Hintergrund",
+        "widget_header": "Programm-Kopfzeile",
         "accent": "Akzent",
         "text_light": "Heller Text",
         "text_dark": "Dunkler Text"
@@ -85,13 +86,36 @@
       "show_datetime_help": "Wird oben rechts angezeigt.",
       "reset_theme_button": "Standardthema wiederherstellen",
       "show_system_stats_label": "Systemstatistiken anzeigen",
-      "show_system_stats_help": "Neben der Uhr angezeigt."
+      "show_system_stats_help": "Neben der Uhr angezeigt.",
+      "modal_title": "Thema anpassen",
+      "open_modal_title": "Thema anpassen",
+      "open_modal_help": "Wähle ein vordefiniertes Thema oder passe Farben und Hintergründe an.",
+      "open_modal_button": "Themen öffnen",
+      "presets_title": "Vordefinierte Themen",
+      "presets_help": "Wähle einen sofort nutzbaren Stil.",
+      "screen_items_title": "Elemente auf dem Bildschirm",
+      "presets": {
+        "classic": "Helles Klassenzimmer",
+        "chalkboard": "Tafel",
+        "slate": "Graphit",
+        "sand": "Sand",
+        "ocean": "Maritim",
+        "confetti": "Konfetti",
+        "sunrise": "Sonnenaufgang",
+        "berry": "Himbeere",
+        "mint": "Minze"
+      },
+      "solid_color_title": "Volltonfarbe",
+      "solid_color_help": "Wahle eine Farbe und das Hintergrundbild wird entfernt."
     }
   },
   "toolbar": {
+    "start": "Start",
     "settings": "Einstellungen",
-    "widgetLibrary": "Widget-Bibliothek",
-    "remove_widget": "Dieses Widget entfernen"
+    "widgetLibrary": "Programm-Bibliothek",
+    "add_widget": "Zu Favoriten hinzufügen",
+    "remove_widget": "Aus Favoriten entfernen",
+    "no_open_windows": "Keine offenen Fenster"
   },
   "help": {
     "tooltip": "Hilfe",
@@ -99,6 +123,21 @@
     "guide": "Benutzerhandbuch",
     "about": "Über das Projekt",
     "licenses": "Credits und Lizenzen"
+  },
+  "start_menu": {
+    "title": "Start",
+    "close": "Schließen",
+    "favorites": "Favoriten",
+    "shortcuts": "Schnellzugriffe",
+    "widgets": "Programme",
+    "help": "Hilfe",
+    "no_results": "Keine Ergebnisse",
+    "remove_favorite": "Aus Favoriten entfernen",
+    "clear_favorites": "Favoriten leeren",
+    "clear_favorites_confirm": "Möchtest du die Favoritenliste leeren?",
+    "reorder_favorites": "Favoriten neu anordnen",
+    "add_favorite": "Zu Favoriten hinzufügen",
+    "language_label": "Sprache"
   },
   "about": {
     "title": "Über das Projekt",
@@ -146,7 +185,7 @@
     "title": "Credits und Lizenz",
     "tooltip": "Credits, Lizenz und Programmleitfaden",
     "user_guide_title": "Programmleitfaden",
-    "user_guide_link": "Widget-Leitfaden öffnen",
+    "user_guide_link": "Programm-Leitfaden öffnen",
     "original_project": "Das Originalprojekt <strong>Interaktiver Klassenraum-Desktop</strong> und seine Idee gehören <strong>María Teresa González</strong>.",
     "original_link": "Du kannst die Originalanwendung hier besuchen:",
     "new_version": "Diese neue Version wurde in Zusammenarbeit von <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> und <strong>Pablo G. Guízar</strong> entwickelt. Das Repository dieses Projekts findest du unter:",
@@ -160,7 +199,7 @@
     "open_knowledge_decalogue": "Dekalog des Offenen Wissens"
   },
   "context_menu": {
-    "new_widget": "Neues Widget...",
+    "new_widget": "Neuer Favorit",
     "settings": "ED konfigurieren",
     "manage_profiles": "Profile verwalten",
     "change_background": "Hintergrund ändern...",
@@ -168,10 +207,13 @@
     "hide_datetime": "Datum und Uhrzeit ausblenden",
     "show_toolbar": "Untere Leiste",
     "hide_toolbar": "Untere Leiste ausblenden",
-    "reset_layout": "Alle offenen Fenster schließen",
+    "reset_layout": "Alle Fenster schließen",
     "reset_layout_confirm": "Möchtest du alle Fenster auf dem Desktop schließen?",
     "show_system_stats": "Systemstatistiken",
-    "hide_system_stats": "Systemstatistiken ausblenden"
+    "hide_system_stats": "Systemstatistiken ausblenden",
+    "minimize_windows": "Fenster minimieren",
+    "restore_windows": "Fenster wiederherstellen",
+    "close_window": "Dieses Fenster schließen"
   },
   "storage_warning": {
     "title": "Speicher voll",
@@ -526,6 +568,27 @@
       "title": "Live-Verbindung",
       "go_to_repo": "Zum Live-Verbindung-Repository"
     },
+    "directo_vota": {
+      "title": "Einfache Abstimmung"
+    },
+    "directo_escala": {
+      "title": "Bewertungsskala"
+    },
+    "directo_nube": {
+      "title": "Wortwolke"
+    },
+    "directo_ideas": {
+      "title": "Brainstorming und Abstimmung"
+    },
+    "directo_muro": {
+      "title": "Interaktive Wand"
+    },
+    "qplay": {
+      "title": "QPlay: Interaktives Quiz"
+    },
+    "boardlive": {
+      "title": "BoardLive: Kollaboratives Whiteboard"
+    },
     "drawing_pad": {
       "title": "Zeichenfläche",
       "clear_confirm": "Möchtest du wirklich die gesamte Zeichnung löschen? Dadurch werden Bild und Striche gelöscht.",
@@ -582,7 +645,7 @@
   "backup": {
     "title": "Profile speichern oder laden",
     "include_profiles": "Profile und Layout (Fenster, Hintergründe, Leiste)",
-    "include_widgets": "Widget-Einstellungen und Daten",
+    "include_widgets": "Programm-Einstellungen und Daten",
     "include_local_web": "Lokale Websites",
     "export_button": "Datei speichern",
     "import_button": "Datei laden",

@@ -6,7 +6,7 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 
 - **Data e hora no ecrã**: visíveis no canto superior direito. Pode desativar em **Ferramentas → Aparência**.
 
-- **Abrir um widget**: a partir da barra inferior ou da **Biblioteca de widgets**.
+- **Abrir um widget**: a partir da barra inferior, do menu Iniciar ou da **Biblioteca de widgets**.
 - **Fechar tudo**: no menu contextual do ambiente.
 - **Perfis**: crie vários ambientes e mude entre eles.
 - **Fundos**: escolha um fundo predefinido ou envie o seu.
@@ -41,6 +41,16 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 - **Explorador de ficheiros**: abre ficheiros locais (PDF, imagens, texto e Markdown, áudio e vídeo).
 - **Visualizador direto**: pensado para mostrar conteúdo web ou recursos externos de forma cómoda durante a explicação.
 - **HTML**: espaço para mostrar conteúdos preparados.
+
+### Ferramentas participativas
+
+- **Votação simples**: votações em tempo real com resultados imediatos.
+- **Escala de avaliação**: recolhe opiniões com escalas.
+- **Nuvem de palavras**: respostas curtas numa nuvem dinâmica.
+- **Chuva de ideias e votos**: propostas e votação para priorizar.
+- **Mural interativo**: mural colaborativo com notas tipo post-it.
+- **QPlay**: concurso interativo com questionários.
+- **BoardLive**: quadro colaborativo em tempo real.
 
 ### Interação, azar e jogos educativos
 

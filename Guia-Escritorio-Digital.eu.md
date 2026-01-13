@@ -6,7 +6,9 @@ Idazmahai Digitala ikasgelarako pentsatutako “leihoekin” lan‑taula bat da.
 
 - **Pantailako data eta ordua**: goiko eskuineko izkinan ikusgai. **Tresnak → Itxura** atalean desaktiba daiteke.
 
-- **Widget bat ireki**: beheko barratik edo **Widgeten Liburutegitik**.
+- **Hasiera menua**: sakatu beheko ezkerreko Hasiera botoia programen, gogokoen, ezarpenen eta laguntzaren menua irekitzeko.
+
+- **Widget bat ireki**: beheko barratik, Hasiera menutik edo **Widgeten Liburutegitik**.
 - **Dena ixtea**: mahaigaineko testuinguru‑menuan.
 - **Profilak**: sortu hainbat mahaigain eta aldatu haien artean.
 - **Atzeko planoak**: aukeratu aurrez zehaztutako bat edo igo zurea.
@@ -38,9 +40,20 @@ Idazmahai Digitala ikasgelarako pentsatutako “leihoekin” lan‑taula bat da.
 - **Marrazteko arbela**: eskuz marrazteko (eskemak, grafikoak, kontzeptu‑mapak, diagramak).
 - **Irudi‑karusela**: irudi bilduma bat erakutsi (laminak, ariketak, laborategiko argazkiak, mapak…).
 - **Web‑bisorea**: web orri bat mahaigain barruan ireki, fitxaz aldatu gabe.
+- **Web lokala**: gorde webak nabigatzailean (ZIP edo karpeta) eta exekutatu lineaz kanpo.
 - **Fitxategi‑arakatzailea**: fitxategi lokalak ireki (PDF, irudiak, testua eta Markdown, audioa eta bideoa).
 - **Zuzeneko bisorea**: azalpenetan web edukia edo kanpoko baliabideak eroso erakusteko.
 - **HTML**: aurrez prestatutako edukiak erakusteko gunea.
+
+### Parte-hartzeko tresnak
+
+- **Bozketa sinplea**: denbora errealean bozkatu eta emaitzak berehala.
+- **Balorazio eskala**: iritziak eskalen bidez jasotzeko.
+- **Hitz hodeia**: erantzun laburrak hodei dinamiko batean.
+- **Ideia-jasa eta botoak**: proposamenak eta bozketa lehentasunak ezartzeko.
+- **Horma interaktiboa**: post-it motako ohar kolaboratiboak.
+- **QPlay**: galdetegi lehiakorra denbora errealean.
+- **BoardLive**: denbora errealeko arbel kolaboratiboa.
 
 ### Interakzioa, ausazkotasuna eta joko didaktikoak
 

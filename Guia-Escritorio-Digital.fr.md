@@ -6,7 +6,9 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 
 - **Date et heure à l’écran** : visibles en haut à droite. Désactivation dans **Outils → Apparence**.
 
-- **Ouvrir un widget** : depuis la barre inférieure ou la **Bibliothèque de widgets**.
+- **Menu Démarrer** : cliquez sur le bouton Démarrer en bas à gauche pour ouvrir le menu des programmes, favoris, réglages et aide.
+
+- **Ouvrir un widget** : depuis la barre inférieure, le menu Démarrer ou la **Bibliothèque de widgets**.
 - **Tout fermer** : via le menu contextuel du bureau.
 - **Profils** : créez plusieurs bureaux et passez de l’un à l’autre.
 - **Fonds** : choisissez un fond prédéfini ou téléversez le vôtre.
@@ -38,9 +40,20 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 - **Tableau de dessin** : dessin à main levée (schémas, graphiques, cartes conceptuelles, diagrammes).
 - **Carrousel d’images** : afficher une collection d’images (planches, exercices, photos de labo, cartes…).
 - **Visionneuse web** : ouvre une page web dans le bureau sans changer d’onglet.
+- **Web local** : enregistrez des sites dans le navigateur (ZIP ou dossier) et exécutez-les hors ligne.
 - **Explorateur de fichiers** : ouvrir des fichiers locaux (PDF, images, texte et Markdown, audio et vidéo).
 - **Visionneuse directe** : pour afficher confortablement du contenu web ou des ressources externes pendant l’explication.
 - **HTML** : espace pour afficher des contenus préparés.
+
+### Outils participatifs
+
+- **Vote simple** : votes en temps réel avec résultats immédiats.
+- **Échelle d’évaluation** : recueille des avis avec des échelles.
+- **Nuage de mots** : réponses courtes dans un nuage dynamique.
+- **Pluie d'idées et votes** : propositions et vote pour prioriser.
+- **Mur interactif** : mur collaboratif avec notes type post-it.
+- **QPlay** : quiz interactif en temps réel.
+- **BoardLive** : tableau collaboratif en temps réel.
 
 ### Interaction, hasard et jeux éducatifs
 

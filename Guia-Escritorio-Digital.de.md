@@ -42,6 +42,16 @@ Digitaler Desktop ist eine Arbeitsfläche mit „Fenstern“ für den Unterricht
 - **Direkt‑Viewer**: für die komfortable Anzeige von Web‑Inhalten oder externen Ressourcen während der Erklärung.
 - **HTML**: Bereich für vorbereitete Inhalte.
 
+### Partizipative Werkzeuge
+
+- **Einfache Abstimmung**: Abstimmungen in Echtzeit mit sofortigen Ergebnissen.
+- **Bewertungsskala**: sammelt Meinungen über Skalen.
+- **Wortwolke**: kurze Antworten in einer dynamischen Wolke.
+- **Brainstorming und Abstimmung**: Vorschläge und Abstimmung zur Priorisierung.
+- **Interaktive Wand**: kollaborative Wand mit Post-it-Notizen.
+- **QPlay**: interaktives Quiz in Echtzeit.
+- **BoardLive**: kollaboratives Whiteboard in Echtzeit.
+
 ### Interaktion, Zufall und Lernspiele
 
 - **Würfel**: schnelle Würfe für Zufall, Gamification oder Auswahl.

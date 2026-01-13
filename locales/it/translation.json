@@ -6,7 +6,7 @@
     "tabs": {
       "general": "Generale",
       "profiles": "Profili",
-      "widgets": "Widget",
+      "widgets": "Programma",
       "theme": "Aspetto"
     },
     "general": {
@@ -19,7 +19,7 @@
         "eu": "Basco"
       },
       "reset_title": "Ripristina applicazione",
-      "reset_description": "Rimuove tutti i dati salvati (profili, widget e preferenze) e riavvia come al primo avvio.",
+      "reset_description": "Rimuove tutti i dati salvati (profili, programma e preferenze) e riavvia come al primo avvio.",
       "reset_button": "Ripristino impostazioni di fabbrica",
       "reset_confirm": "Sei sicuro di voler eliminare tutte le preferenze e i dati locali? Questa azione non può essere annullata."
     },
@@ -49,11 +49,11 @@
       "create_mode_clone": "Clona quello attuale"
     },
     "widgets": {
-      "search": "Cerca widget...",
-      "pinned_info": "Seleziona i widget che vuoi nella barra degli strumenti. ({{count}}/{{max}})",
+      "search": "Cerca programma...",
+      "pinned_info": "Seleziona i programma che vuoi nella barra degli strumenti. ({{count}}/{{max}})",
       "add": "Aggiungi",
       "remove": "Rimuovi",
-      "max_widgets_alert": "Non è possibile fissare più di {{max}} widget.",
+      "max_widgets_alert": "Non è possibile fissare più di {{max}} programma.",
       "view_label": "Mostra per",
       "view_by_theme": "Temi",
       "view_alphabetical": "Alfabetico",
@@ -63,6 +63,7 @@
         "math_science": "Matematica e scienze",
         "resources": "Lavagna, scrittura e risorse",
         "interaction": "Interazione, caso e giochi educativi",
+        "participation": "Strumenti partecipativi",
         "logic_games": "Giochi di logica e dinamica di classe",
         "gestures": "Gesti di lavoro",
         "other": "Altro"
@@ -72,8 +73,8 @@
       "theme_colors_title": "Colori del tema",
       "colors": {
         "desktop_bg": "Sfondo desktop",
-        "widget_bg": "Sfondo widget",
-        "widget_header": "Intestazione widget",
+        "widget_bg": "Sfondo programma",
+        "widget_header": "Intestazione programma",
         "accent": "Accento",
         "text_light": "Testo chiaro",
         "text_dark": "Testo scuro"
@@ -85,13 +86,36 @@
       "show_datetime_help": "Mostrate in alto a destra.",
       "reset_theme_button": "Ripristina tema predefinito",
       "show_system_stats_label": "Mostra statistiche di sistema",
-      "show_system_stats_help": "Mostrate accanto all'orologio."
+      "show_system_stats_help": "Mostrate accanto all'orologio.",
+      "modal_title": "Personalizza tema",
+      "open_modal_title": "Personalizzazione del tema",
+      "open_modal_help": "Scegli un tema predefinito o regola colori e sfondi.",
+      "open_modal_button": "Apri temi",
+      "presets_title": "Temi predefiniti",
+      "presets_help": "Scegli uno stile pronto all'uso.",
+      "screen_items_title": "Elementi a schermo",
+      "presets": {
+        "classic": "Aula chiara",
+        "chalkboard": "Lavagna",
+        "slate": "Grafite",
+        "sand": "Sabbia",
+        "ocean": "Marino",
+        "confetti": "Coriandoli",
+        "sunrise": "Alba",
+        "berry": "Lampone",
+        "mint": "Menta"
+      },
+      "solid_color_title": "Colore pieno",
+      "solid_color_help": "Scegli un colore e l'immagine di sfondo verra rimossa."
     }
   },
   "toolbar": {
+    "start": "Avvio",
     "settings": "Impostazioni",
-    "widgetLibrary": "Libreria dei widget",
-    "remove_widget": "Rimuovi questo widget"
+    "widgetLibrary": "Libreria dei programma",
+    "add_widget": "Aggiungi ai preferiti",
+    "remove_widget": "Rimuovi dai preferiti",
+    "no_open_windows": "Nessuna finestra aperta"
   },
   "help": {
     "tooltip": "Aiuto",
@@ -99,6 +123,21 @@
     "guide": "Guida all'uso",
     "about": "Informazioni sul progetto",
     "licenses": "Crediti e licenze"
+  },
+  "start_menu": {
+    "title": "Avvio",
+    "close": "Chiudi",
+    "favorites": "Preferiti",
+    "shortcuts": "Scorciatoie",
+    "widgets": "Programma",
+    "help": "Aiuto",
+    "no_results": "Nessun risultato",
+    "remove_favorite": "Rimuovi dai preferiti",
+    "clear_favorites": "Svuota preferiti",
+    "clear_favorites_confirm": "Vuoi svuotare la lista dei preferiti?",
+    "reorder_favorites": "Riordina preferiti",
+    "add_favorite": "Aggiungi ai preferiti",
+    "language_label": "Lingua"
   },
   "about": {
     "title": "Informazioni sul progetto",
@@ -146,7 +185,7 @@
     "title": "Crediti e Licenza",
     "tooltip": "Crediti, licenza e guida del programma",
     "user_guide_title": "Guida del programma",
-    "user_guide_link": "Apri la guida dei widget",
+    "user_guide_link": "Apri la guida dei programma",
     "original_project": "Il progetto originale <strong>Desktop Interattivo per l'Aula</strong> e la sua idea appartengono a <strong>María Teresa González</strong>.",
     "original_link": "Puoi visitare l'applicazione originale qui:",
     "new_version": "Questa nuova versione è stata sviluppata in collaborazione da <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> e <strong>Pablo G. Guízar</strong>. Il repository di questo progetto si trova su:",
@@ -160,7 +199,7 @@
     "open_knowledge_decalogue": "Decalogo della Conoscenza Aperta"
   },
   "context_menu": {
-    "new_widget": "Nuovo widget...",
+    "new_widget": "Nuovo preferito",
     "settings": "Configura ED",
     "manage_profiles": "Gestisci profili",
     "change_background": "Cambia sfondo...",
@@ -168,10 +207,13 @@
     "hide_datetime": "Nascondi data e ora",
     "show_toolbar": "Barra inferiore",
     "hide_toolbar": "Nascondi barra inferiore",
-    "reset_layout": "Chiudi tutte le finestre aperte",
+    "reset_layout": "Chiudi tutte le finestre",
     "reset_layout_confirm": "Vuoi chiudere tutte le finestre del desktop?",
     "show_system_stats": "Statistiche di sistema",
-    "hide_system_stats": "Nascondi statistiche di sistema"
+    "hide_system_stats": "Nascondi statistiche di sistema",
+    "minimize_windows": "Minimizza finestre",
+    "restore_windows": "Ripristina finestre",
+    "close_window": "Chiudi questa finestra"
   },
   "storage_warning": {
     "title": "Spazio di archiviazione pieno",
@@ -526,6 +568,27 @@
       "title": "Connessione in diretta",
       "go_to_repo": "Vai al repository di Connessione in Diretta"
     },
+    "directo_vota": {
+      "title": "Votazione semplice"
+    },
+    "directo_escala": {
+      "title": "Scala di valutazione"
+    },
+    "directo_nube": {
+      "title": "Nuvola di parole"
+    },
+    "directo_ideas": {
+      "title": "Pioggia di idee e voti"
+    },
+    "directo_muro": {
+      "title": "Muro interattivo"
+    },
+    "qplay": {
+      "title": "QPlay: Quiz interattivo"
+    },
+    "boardlive": {
+      "title": "BoardLive: Lavagna collaborativa"
+    },
     "drawing_pad": {
       "title": "Area di disegno",
       "clear_confirm": "Sei sicuro di voler pulire tutto il disegno? Questo cancellerà l'immagine e i tratti.",
@@ -582,7 +645,7 @@
   "backup": {
     "title": "Salvare o caricare profili",
     "include_profiles": "Profili e disposizione (finestre, sfondi, barra)",
-    "include_widgets": "Impostazioni e dati dei widget",
+    "include_widgets": "Impostazioni e dati dei programma",
     "include_local_web": "Siti locali",
     "export_button": "Salvare file",
     "import_button": "Caricare file",
