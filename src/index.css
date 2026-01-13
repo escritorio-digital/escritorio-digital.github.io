@@ -127,7 +127,7 @@ body {
 }
 
 .work-list-input {
-  @apply flex-grow bg-custom-bg border-2 border-accent rounded focus:border-widget-header outline-none;
+  @apply flex-grow bg-white/85 border-2 border-accent rounded focus:border-widget-header outline-none text-text-dark;
   padding: clamp(6px, 1.8cqw, 12px);
   font-size: 0.95rem;
   font-size: clamp(0.9rem, 2.4cqw, 1.15rem);

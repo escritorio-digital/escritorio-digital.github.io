@@ -96,7 +96,7 @@ export const TimerWidget: FC = () => {
             <div className="flex items-center gap-2 mb-4">
                 <input 
                     type="number" 
-                    className="w-20 text-center bg-custom-bg border-2 border-accent rounded p-1"
+                    className="w-20 text-center bg-white/85 border-2 border-accent rounded p-1 text-text-dark"
                     value={minutesInput}
                     onChange={e => setMinutesInput(Math.max(0, parseInt(e.target.value) || 0))}
                     disabled={isActive}
@@ -104,7 +104,7 @@ export const TimerWidget: FC = () => {
                 <span className="text-2xl font-bold">:</span>
                 <input 
                     type="number" 
-                    className="w-20 text-center bg-custom-bg border-2 border-accent rounded p-1"
+                    className="w-20 text-center bg-white/85 border-2 border-accent rounded p-1 text-text-dark"
                     value={secondsInput}
                     onChange={e => setSecondsInput(Math.max(0, Math.min(59, parseInt(e.target.value) || 0)))}
                     disabled={isActive}
@@ -115,7 +115,7 @@ export const TimerWidget: FC = () => {
                 <button onClick={toggleTimer} className="p-3 bg-accent rounded-full hover:bg-[#8ec9c9]">
                     {isActive ? <Pause size={24} /> : <Play size={24} />}
                 </button>
-                <button onClick={handleReset} className="p-3 bg-custom-bg border-2 border-accent rounded-full hover:bg-accent/50">
+                <button onClick={handleReset} className="p-3 bg-white/85 border-2 border-accent rounded-full hover:bg-accent/50">
                     <RotateCw size={24} />
                 </button>
             </div>
