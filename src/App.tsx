@@ -1022,10 +1022,14 @@ function App() {
     }, [theme]);
 
     useEffect(() => {
-        if (theme['--wallpaper'] && !isWallpaperValueValid(theme['--wallpaper'])) {
-            handleThemeChange((prevTheme) => ({ ...prevTheme, '--wallpaper': defaultWallpaperValue }));
-        }
-    }, [theme['--wallpaper']]);
+        const value = theme['--wallpaper'];
+        if (!value) return;
+        const lower = value.toLowerCase();
+        const isCustomUrl = lower.startsWith('url(data:') || lower.startsWith('url(http');
+        const isNone = lower === 'none';
+        if (isNone || isCustomUrl || isWallpaperValueValid(value)) return;
+        handleThemeChange((prevTheme) => ({ ...prevTheme, '--wallpaper': defaultWallpaperValue }));
+    }, [theme['--wallpaper'], handleThemeChange]);
 
     useEffect(() => {
         window.dispatchEvent(new CustomEvent('active-profile-change', { detail: { name: activeProfileName } }));

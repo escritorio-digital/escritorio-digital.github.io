@@ -6,6 +6,9 @@
 ## Iconos
 - Nuevos iconos con fondo transparente para las herramientas participativas (Votación, Escala, Nube, Lluvia de ideas, Muro, QPlay y BoardLive).
 
+## Fondos y tema
+- Los fondos personalizados (subidos o externos) se mantienen y pueden eliminarse correctamente con el botón de quitar fondo.
+
 ## Ruleta (Random Spinner)
 - Corrección del nombre ganador para que coincida con la flecha del puntero.
 - Carga de opciones desde archivo .txt (una línea por opción), con botón de subida.
