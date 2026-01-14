@@ -33,15 +33,29 @@ const DesktopUI: React.FC<{
     const showSystemStats = activeProfile.theme?.showSystemStats ?? false;
 
     const setActiveWidgets = useCallback((updater: React.SetStateAction<ActiveWidget[]>) => {
-        const updatedWidgets = typeof updater === 'function' ? updater(activeProfile.activeWidgets) : updater;
-        const newProfileData: DesktopProfile = { ...activeProfile, activeWidgets: updatedWidgets };
-        setProfiles(prev => ({ ...prev, [activeProfileName]: newProfileData }));
+        setProfiles((prev) => {
+            const profile = prev[activeProfileName] || activeProfile;
+            if (!profile) return prev;
+            const nextWidgets = typeof updater === 'function' ? updater(profile.activeWidgets) : updater;
+            if (nextWidgets === profile.activeWidgets) return prev;
+            return {
+                ...prev,
+                [activeProfileName]: { ...profile, activeWidgets: nextWidgets },
+            };
+        });
     }, [activeProfile, activeProfileName, setProfiles]);
 
     const setPinnedWidgets = useCallback((updater: React.SetStateAction<string[]>) => {
-        const updatedPinned = typeof updater === 'function' ? updater(activeProfile.pinnedWidgets) : updater;
-        const newProfileData: DesktopProfile = { ...activeProfile, pinnedWidgets: updatedPinned };
-        setProfiles(prev => ({ ...prev, [activeProfileName]: newProfileData }));
+        setProfiles((prev) => {
+            const profile = prev[activeProfileName] || activeProfile;
+            if (!profile) return prev;
+            const nextPinned = typeof updater === 'function' ? updater(profile.pinnedWidgets) : updater;
+            if (nextPinned === profile.pinnedWidgets) return prev;
+            return {
+                ...prev,
+                [activeProfileName]: { ...profile, pinnedWidgets: nextPinned },
+            };
+        });
     }, [activeProfile, activeProfileName, setProfiles]);
 
     const toggleDateTime = useCallback(() => {
