@@ -189,8 +189,8 @@ export const StartMenu: React.FC<StartMenuProps> = ({
             const padding = 8;
             const maxX = Math.max(padding, container.clientWidth - menu.offsetWidth - padding);
             const maxY = Math.max(padding, container.clientHeight - menu.offsetHeight - padding);
-            const nextX = Math.min(Math.max(favoriteMenu.x, padding), maxX);
-            const nextY = Math.min(Math.max(favoriteMenu.y, padding), maxY);
+            let nextX = Math.min(Math.max(favoriteMenu.x, padding), maxX);
+            let nextY = Math.min(Math.max(favoriteMenu.y, padding), maxY);
             if (nextX !== favoriteMenu.x || nextY !== favoriteMenu.y) {
                 setFavoriteMenu((prev) => ({ ...prev, x: nextX, y: nextY }));
             }
@@ -214,7 +214,7 @@ export const StartMenu: React.FC<StartMenuProps> = ({
             window.removeEventListener('mousedown', handlePointerDown);
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, [favoriteMenu.isOpen, favoriteMenu.x, favoriteMenu.y]);
+    }, [favoriteMenu.isOpen]);
 
     useEffect(() => {
         if (!isLanguageMenuOpen) return;

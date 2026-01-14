@@ -257,7 +257,7 @@ export const exportLocalWebRecords = async (
   });
 };
 
-export const getLocalWebStats = async (profileNames?: string[]): Promise<LocalWebStats> => {
+export const getLocalWebStats = async (profileNames?: string[], _fallbackProfileName?: string): Promise<LocalWebStats> => {
   const db = await openLocalWebDb();
   return new Promise<LocalWebStats>((resolve, reject) => {
     const tx = db.transaction([LOCAL_WEB_SITES, LOCAL_WEB_FILES], 'readonly');

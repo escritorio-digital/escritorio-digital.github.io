@@ -26,7 +26,7 @@ export const TimerWidget: FC = () => {
             setIsActive(false);
         }
         return () => clearInterval(interval);
-    }, [isActive, remainingSeconds, setIsActive]);
+    }, [isActive, remainingSeconds]);
 
     const handleTimeChange = () => {
         const total = (minutesInput * 60) + secondsInput;
@@ -36,7 +36,7 @@ export const TimerWidget: FC = () => {
         }
     };
 
-    useEffect(handleTimeChange, [minutesInput, secondsInput, isActive]);
+    useEffect(handleTimeChange, [minutesInput, secondsInput]);
 
     useEffect(() => {
         const container = displayRef.current;

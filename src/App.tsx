@@ -132,7 +132,7 @@ const DesktopUI: React.FC<{
         return { margin, maxWidth, maxHeight };
     };
 
-    const clampWidgetToViewport = useCallback((widget: ActiveWidget): ActiveWidget => {
+    const clampWidgetToViewport = (widget: ActiveWidget): ActiveWidget => {
         if (widget.isMaximized) return widget;
         const { margin, maxWidth, maxHeight } = getViewportBounds();
         const parseDimension = (value: number | string, fallback: number) => {
@@ -160,7 +160,7 @@ const DesktopUI: React.FC<{
             size: { width: numericWidth, height: numericHeight },
             position: { x, y },
         };
-    }, []);
+    };
 
     const addWidget = (widgetId: string) => {
         const widgetConfig = WIDGET_REGISTRY[widgetId];
@@ -204,7 +204,7 @@ const DesktopUI: React.FC<{
         }
         return next;
     });
-    const focusWidget = useCallback((instanceId: string) => {
+    const focusWidget = (instanceId: string) => {
         setHighestZ((prev) => {
             const newZ = prev + 1;
             setActiveWidgets((widgets) =>
@@ -213,7 +213,7 @@ const DesktopUI: React.FC<{
             return newZ;
         });
         setActiveWindowId(instanceId);
-    }, [setActiveWidgets]);
+    };
     const toggleMinimize = (instanceId: string) => setActiveWidgets(prev => prev.map(w => (w.instanceId === instanceId ? { ...w, isMinimized: !w.isMinimized } : w)));
     const handleTaskClick = useCallback((instanceId: string) => {
         const target = activeProfile.activeWidgets.find((widget) => widget.instanceId === instanceId);
@@ -310,11 +310,11 @@ const DesktopUI: React.FC<{
         };
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, [setActiveWidgets, clampWidgetToViewport]);
+    }, [setActiveWidgets]);
 
     useEffect(() => {
         setActiveWidgets(prev => prev.map(clampWidgetToViewport));
-    }, [activeProfileName, setActiveWidgets, clampWidgetToViewport]);
+    }, [activeProfileName]);
 
     useEffect(() => {
         const handleFullscreenChange = () => {
@@ -978,12 +978,12 @@ function App() {
     const activeProfile = profiles[activeProfileName] || Object.values(profiles)[0];
     const theme = activeProfile.theme || defaultTheme;
 
-    const handleThemeChange = useCallback((newThemeOrUpdater: Theme | ((val: Theme) => Theme)) => {
+    const handleThemeChange = (newThemeOrUpdater: Theme | ((val: Theme) => Theme)) => {
         const currentTheme = activeProfile.theme;
         const newTheme = typeof newThemeOrUpdater === 'function' ? newThemeOrUpdater(currentTheme) : newThemeOrUpdater;
         const newProfileData = { ...activeProfile, theme: newTheme };
         setProfiles(prev => ({ ...prev, [activeProfileName]: newProfileData }));
-    }, [activeProfile, activeProfileName, setProfiles]);
+    };
 
     const handleWallpaperChange = (wallpaperUrl: string) => {
         handleThemeChange((prevTheme) => ({ ...prevTheme, '--wallpaper': wallpaperUrl }));
@@ -997,22 +997,18 @@ function App() {
         document.body.style.backgroundImage = theme['--wallpaper'];
         document.body.classList.toggle('high-contrast', Boolean(theme.highContrast));
         const root = document.documentElement;
-        const entries = Object.entries(theme);
-        for (const [key, value] of entries) {
+        for (const [key, value] of Object.entries(theme)) {
             if (key.startsWith('--') && key !== '--wallpaper') {
                 root.style.setProperty(key, value as string);
             }
         }
-        // Las dependencias ya están incluidas en 'theme'
     }, [theme]);
 
-    const wallpaper = theme['--wallpaper'];
-
     useEffect(() => {
-        if (wallpaper && !isWallpaperValueValid(wallpaper)) {
+        if (theme['--wallpaper'] && !isWallpaperValueValid(theme['--wallpaper'])) {
             handleThemeChange((prevTheme) => ({ ...prevTheme, '--wallpaper': defaultWallpaperValue }));
         }
-    }, [wallpaper, handleThemeChange]);
+    }, [theme['--wallpaper']]);
 
     useEffect(() => {
         window.dispatchEvent(new CustomEvent('active-profile-change', { detail: { name: activeProfileName } }));

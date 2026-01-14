@@ -136,9 +136,7 @@ export const LatexMarkdownWidget: FC = () => {
 
     try {
       await document.fonts?.ready;
-    } catch {
-      // No-op: si falla la carga de fuentes seguimos con la impresión
-    }
+    } catch {}
     await new Promise<void>((r) => requestAnimationFrame(() => r()));
 
     const cleanup = () => {
@@ -184,7 +182,7 @@ export const LatexMarkdownWidget: FC = () => {
         previewElement.innerHTML = `<div class="error-message">${genericError}</div>`;
       }
     }
-  }, [input, mode, t]);
+  }, [input, mode]);
 
   // Si las traducciones no están listas, mostrar un loader simple
   if (!ready) {

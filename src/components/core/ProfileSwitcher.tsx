@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { ChevronUp, ChevronsUpDown, Download, Upload, Users } from 'lucide-react';
 import type { ProfileCollection } from '../../types';
 import { useTranslation } from 'react-i18next';
@@ -241,7 +241,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
     return { updated, nameMap };
   };
 
-  const estimateWidgetDataSize = useCallback(async () => {
+  const estimateWidgetDataSize = async () => {
     let total = 0;
     for (const key of WIDGET_DATA_KEYS) {
       const item = window.localStorage.getItem(key);
@@ -254,9 +254,9 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
       }
     }
     return total;
-  }, []);
+  };
 
-  const estimateBackupSize = useCallback(async () => {
+  const estimateBackupSize = async () => {
     let total = 0;
     if (includeProfiles && selectedProfiles.length > 0) {
       const selected: ProfileCollection = {};
@@ -279,7 +279,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
       }
     }
     return total;
-  }, [includeProfiles, selectedProfiles, profiles, activeProfileName, includeWidgetData, hasWidgetData, includeLocalWeb, estimateWidgetDataSize, isPartialProfileSelection]);
+  };
 
   useEffect(() => {
     if (!isBackupOpen) return;
@@ -303,7 +303,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
       }
     };
     estimate();
-  }, [isBackupOpen, includeProfiles, includeWidgetData, includeLocalWeb, selectedProfiles, hasWidgetData, hasLocalWeb, profiles, activeProfileName, t, estimateBackupSize]);
+  }, [isBackupOpen, includeProfiles, includeWidgetData, includeLocalWeb, selectedProfiles, hasWidgetData, hasLocalWeb, profiles, activeProfileName, t]);
 
   const handleExport = async () => {
     if (includeProfiles && selectedProfiles.length === 0) {

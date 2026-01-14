@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LayoutGrid } from 'lucide-react';
 import { DndContext, PointerSensor, KeyboardSensor, useSensor, useSensors, closestCenter, type DragEndEvent } from '@dnd-kit/core';
@@ -34,7 +34,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   isHidden = false,
   isPeeking = false,
   onMouseLeave,
-  startButtonRef: _startButtonRef,
+  startButtonRef,
 }) => {
   const { t } = useTranslation();
   const toolbarRef = useRef<HTMLDivElement>(null);
@@ -102,10 +102,32 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   };
 
   useLayoutEffect(() => {
-    // Disable dynamic shifting to avoid layout oscillations causing render loops.
-    setAnchorLeft(null);
-    setAnchorMaxWidth(null);
-  }, []);
+    const updateShift = () => {
+      const toolbar = toolbarRef.current;
+      const startButton = startButtonRef?.current;
+      if (!toolbar || !startButton) {
+        setAnchorLeft(null);
+        setAnchorMaxWidth(null);
+        return;
+      }
+      const padding = 8;
+      const toolbarRect = toolbar.getBoundingClientRect();
+      const startRect = startButton.getBoundingClientRect();
+      const centerLeft = window.innerWidth / 2 - toolbarRect.width / 2;
+      const minLeft = startRect.right + padding;
+      if (centerLeft < minLeft) {
+        const nextMaxWidth = Math.max(240, window.innerWidth - minLeft - padding);
+        setAnchorLeft(minLeft);
+        setAnchorMaxWidth(nextMaxWidth);
+      } else {
+        setAnchorLeft(null);
+        setAnchorMaxWidth(null);
+      }
+    };
+    updateShift();
+    window.addEventListener('resize', updateShift);
+    return () => window.removeEventListener('resize', updateShift);
+  }, [pinnedWidgets, openWidgets, isHidden, isPeeking, startButtonRef]);
 
   const translateY = isHidden && !isPeeking ? '0.75rem' : '0rem';
 

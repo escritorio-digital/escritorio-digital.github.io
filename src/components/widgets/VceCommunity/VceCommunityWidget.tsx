@@ -99,7 +99,7 @@ export const VceCommunityWidget = () => {
                         deleteFlag: (row[deleteField] || '').trim(),
                     }))
                     .filter((row) => row.title && row.url && !row.deleteFlag)
-                    .map(({ deleteFlag: _deleteFlag, ...rest }) => rest);
+                    .map(({ deleteFlag, ...rest }) => rest);
                 if (isMounted) {
                     setApps(nextApps);
                 }

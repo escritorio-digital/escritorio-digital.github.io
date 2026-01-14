@@ -19,14 +19,5 @@ export default tseslint.config([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
-    rules: {
-      // Many widgets colocate configs/helpers; disable until refactor splits files.
-      'react-refresh/only-export-components': 'off',
-      // Temporarily silence broad any usage until typed incrementally.
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
-      // Avoid churn on switch blocks that declare scoped variables.
-      'no-case-declarations': 'off',
-    },
   },
 ])
