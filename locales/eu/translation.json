@@ -65,7 +65,8 @@
         "participation": "Parte-hartzeko tresnak",
         "logic_games": "Logika-jokoak eta klaseko dinamika",
         "gestures": "Lan-keinuak",
-        "other": "Beste batzuk"
+        "other": "Beste batzuk",
+        "community": "Komunitatea"
       }
     },
     "theme": {
@@ -143,7 +144,7 @@
     "app_name_label": "Aplikazioaren izena",
     "app_name_value": "Ikasgelarako mahaigain digitala",
     "version_label": "Bertsioa",
-    "version_value": "v1.1.10 — 2026ko urtarrila",
+    "version_value": "v1.2.0 — 2026ko urtarrila",
     "history_title": "Proiektuaren historia",
     "initial_title": "Hasierako proiektua",
     "initial_text": "Ideia eta lehen bertsioa: María Teresa González. Ikasgelarako mahaigain interaktiboaren oinarrizko bertsioa.",
@@ -639,6 +640,42 @@
       "expand_list": "Erakutsi zerrenda",
       "rename_placeholder": "Webgunearen izen berria",
       "rename_invalid": "Webgunearen izena ez da baliozkoa."
+    },
+    "vce": {
+      "title": "Vibe Coding Educativo",
+      "subtitle": "Vibe Coding Educativo Telegram komunitateko programak",
+      "search_placeholder": "Bilatu izenburu, egile edo deskribapenaren arabera",
+      "filter_level_all": "Maila guztiak",
+      "filter_area_all": "Arlo guztiak",
+      "no_results": "Ez dago programa egokirik iragazki hauekin.",
+      "no_selection": "Hautatu programa bat ikusteko.",
+      "open_new_tab": "Ireki fitxa berrian",
+      "loading": "Zerrenda kargatzen...",
+      "load_error": "Ezin izan da zerrenda kargatu.",
+      "intro": "Telegram taldeko Vibe Coding Educativo irakasleek sortutako appak: https://t.me/vceduca\\nIragazi mailaren eta arloaren arabera, aukeratu ezkerreko zerrendatik eta ireki ikuslean edo fitxa berri batean.\\nInformazio gehiago: https://vibe-coding-educativo.github.io/\\nGogokoak widget honetan bakarrik gordetzen dira.",
+      "no_description": "Deskribapenik ez",
+      "more": "gehiago...",
+      "iframe_blocked": "Ezin da webgune honetara sartu ikusletik. Ireki fitxa berri batean.",
+      "favorites_title": "Widgeteko gogokoak",
+      "favorites_note": "Widget honi bakarrik eragiten dio, ez gogoko orokorrei.",
+      "add_favorite": "Gehitu widgeteko gogokoetara",
+      "remove_favorite": "Kendu widgeteko gogokoetatik",
+      "intro_line1": "Telegram taldeko Vibe Coding Educativo irakasleek sortutako appak:",
+      "intro_line2": "Iragazi mailaren eta arloaren arabera, aukeratu ezkerreko zerrendatik eta ireki ikuslean edo fitxa berri batean. Kargatzean errorea agertzen bada, erabili fitxa berria.",
+      "intro_line3": "Informazio gehiago:",
+      "intro_line4": "Gogokoak widget honetan bakarrik gordetzen dira.",
+      "intro_title": "Telegram taldeko Vibe Coding Educativo irakasleek sortutako appak",
+      "intro_group_link": "Taldea ireki",
+      "intro_info_link": "Taldeari buruzko informazioa",
+      "intro_how_title": "Ikuslea nola erabili",
+      "intro_step1": "Iragazi mailaren eta arloaren arabera.",
+      "intro_step2": "Aukeratu app bat ezkerreko zerrendan.",
+      "intro_step3": "Ireki ikuslean edo fitxa berri batean.",
+      "intro_step4": "Kargatze-errorea agertzen bada, erabili fitxa berria.",
+      "intro_step5": "Gogokoek hautatutako aplikazioak zerrendaren goialdean ikusgai mantentzen dituzte.",
+      "less": "gutxiago...",
+      "move_up": "Mugitu gogokoa gora",
+      "move_down": "Mugitu gogokoa behera"
     }
   },
   "backup": {

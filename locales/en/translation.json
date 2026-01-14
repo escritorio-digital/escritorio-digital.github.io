@@ -66,7 +66,8 @@
         "participation": "Participation tools",
         "logic_games": "Logic games and class dynamics",
         "gestures": "Work gestures",
-        "other": "Other"
+        "other": "Other",
+        "community": "Community"
       }
     },
     "theme": {
@@ -144,7 +145,7 @@
     "app_name_label": "Application name",
     "app_name_value": "Digital desktop for the classroom",
     "version_label": "Version",
-    "version_value": "v1.1.10 — January 2026",
+    "version_value": "v1.2.0 — January 2026",
     "history_title": "Project history",
     "initial_title": "Initial project",
     "initial_text": "Idea and first version: María Teresa González. Basic version of the interactive classroom desktop.",
@@ -640,6 +641,42 @@
       "expand_list": "Show list",
       "rename_placeholder": "New site name",
       "rename_invalid": "The site name is not valid."
+    },
+    "vce": {
+      "title": "Vibe Coding Educativo",
+      "subtitle": "Apps from the Vibe Coding Educativo Telegram community",
+      "search_placeholder": "Search by title, author, or description",
+      "filter_level_all": "All levels",
+      "filter_area_all": "All subjects",
+      "no_results": "No apps match these filters.",
+      "no_selection": "Select an app to preview.",
+      "open_new_tab": "Open in new tab",
+      "loading": "Loading list...",
+      "load_error": "Could not load the list.",
+      "intro": "Apps created by teachers from the Telegram group Vibe Coding Educativo: https://t.me/vceduca\\nFilter by level and area, pick one from the left list, and open it in the viewer or a new tab.\\nMore info at https://vibe-coding-educativo.github.io/\\nFavorites are saved only inside this widget.",
+      "no_description": "No description",
+      "more": "more...",
+      "iframe_blocked": "This website cannot be accessed from the viewer. Open it in a new tab.",
+      "favorites_title": "Widget favorites",
+      "favorites_note": "Only affects this widget, not the general favorites.",
+      "add_favorite": "Add to widget favorites",
+      "remove_favorite": "Remove from widget favorites",
+      "intro_line1": "Apps created by teachers from the Telegram group Vibe Coding Educativo:",
+      "intro_line2": "Filter by level and area, pick one from the left list, and open it in the viewer or a new tab. If you see an error while loading, use the new tab.",
+      "intro_line3": "More info at",
+      "intro_line4": "Favorites are saved only inside this widget.",
+      "intro_title": "Apps created by teachers from the Telegram group Vibe Coding Educativo",
+      "intro_group_link": "Access the group",
+      "intro_info_link": "Information about the group",
+      "intro_how_title": "How to use the viewer",
+      "intro_step1": "Filter by level and area.",
+      "intro_step2": "Select an app from the left list.",
+      "intro_step3": "Open it in the viewer or in a new tab.",
+      "intro_step4": "If a loading error appears, use the new tab.",
+      "intro_step5": "Favorites keep the selected apps visible at the top of the list.",
+      "less": "less...",
+      "move_up": "Move favorite up",
+      "move_down": "Move favorite down"
     }
   },
   "backup": {

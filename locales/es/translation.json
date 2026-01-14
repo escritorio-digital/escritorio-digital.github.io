@@ -66,7 +66,8 @@
         "participation": "Herramientas participativas",
         "logic_games": "Juegos de lógica y dinámica de clase",
         "gestures": "Trabajo con gestos",
-        "other": "Otros"
+        "other": "Otros",
+        "community": "Comunidad"
       }
     },
     "theme": {
@@ -144,7 +145,7 @@
     "app_name_label": "Nombre de la aplicación",
     "app_name_value": "Escritorio digital para el aula",
     "version_label": "Versión",
-    "version_value": "v1.1.10 — enero de 2026",
+    "version_value": "v1.2.0 — enero de 2026",
     "history_title": "Historial del proyecto",
     "initial_title": "Proyecto inicial",
     "initial_text": "Idea y primera versión: María Teresa González. Versión básica del escritorio interactivo para aula.",
@@ -640,6 +641,42 @@
       "expand_list": "Mostrar lista",
       "rename_placeholder": "Nuevo nombre de la web",
       "rename_invalid": "El nombre de la web no es válido."
+    },
+    "vce": {
+      "title": "Vibe Coding Educativo",
+      "subtitle": "Programas de la comunidad Telegram Vibe Coding Educativo",
+      "search_placeholder": "Buscar por título, autor o descripción",
+      "filter_level_all": "Todos los niveles",
+      "filter_area_all": "Todas las áreas",
+      "no_results": "No hay programas con estos filtros.",
+      "no_selection": "Selecciona un programa para verlo.",
+      "open_new_tab": "Abrir en pestaña nueva",
+      "loading": "Cargando listado...",
+      "load_error": "No se pudo cargar el listado.",
+      "intro": "Apps creadas por docentes del grupo de Telegram Vibe Coding Educativo: https://t.me/vceduca\\nFiltra por nivel y área, elige una en la lista izquierda y ábrela en el visor o en una pestaña nueva.\\nMás info en https://vibe-coding-educativo.github.io/\\nLos favoritos se guardan solo en este widget.",
+      "no_description": "Sin descripción",
+      "more": "más...",
+      "iframe_blocked": "No se puede acceder a esta web desde el visor. Ábrela en una pestaña nueva.",
+      "favorites_title": "Favoritos del widget",
+      "favorites_note": "Solo afecta a este widget, no a los favoritos generales.",
+      "add_favorite": "Añadir a favoritos del widget",
+      "remove_favorite": "Eliminar de favoritos del widget",
+      "intro_line1": "Apps creadas por docentes del grupo de Telegram Vibe Coding Educativo:",
+      "intro_line2": "Filtra por nivel y área, elige una en la lista izquierda y ábrela en el visor o en una pestaña nueva. Si aparece un error al cargar, usa la pestaña nueva.",
+      "intro_line3": "Más info en",
+      "intro_line4": "Los favoritos se guardan solo en este widget.",
+      "intro_title": "Apps creadas por docentes del grupo Telegram Vibe Coding Educativo",
+      "intro_group_link": "Acceder al grupo",
+      "intro_info_link": "Información sobre el grupo",
+      "intro_how_title": "Cómo usar el visor",
+      "intro_step1": "Filtra por nivel y área.",
+      "intro_step2": "Selecciona una app en la lista de la izquierda.",
+      "intro_step3": "Ábrela en el visor o en una pestaña nueva.",
+      "intro_step4": "Si aparece un error de carga, utiliza la pestaña nueva.",
+      "intro_step5": "Los favoritos permiten mantener las aplicaciones seleccionadas visibles en la parte superior de la lista.",
+      "less": "menos...",
+      "move_up": "Mover favorito arriba",
+      "move_down": "Mover favorito abajo"
     }
   },
   "backup": {
