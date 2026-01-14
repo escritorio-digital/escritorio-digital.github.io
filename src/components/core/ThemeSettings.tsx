@@ -18,6 +18,16 @@ export const ThemeSettings: React.FC = () => {
     setTheme({ ...theme, [name]: value });
   };
 
+  const handleHighContrastToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = e.target;
+    setTheme((prevTheme) => ({ ...prevTheme, highContrast: checked }));
+  };
+
+  const handleFontScaleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value } = e.target;
+    setTheme((prevTheme) => ({ ...prevTheme, '--font-scale': value }));
+  };
+
   const themePresets: ThemePreset[] = [
     {
       id: 'classic',
@@ -157,6 +167,35 @@ export const ThemeSettings: React.FC = () => {
 
   return (
     <div className="p-4 space-y-6">
+      <div>
+        <h3 className="text-lg font-semibold">{t('settings.theme.accessibility_title')}</h3>
+        <p className="text-sm text-gray-600 mb-3">{t('settings.theme.accessibility_help')}</p>
+        <div className="grid gap-3">
+          <label className="flex items-center justify-between text-sm">
+            <span>{t('settings.theme.high_contrast')}</span>
+            <input
+              type="checkbox"
+              checked={Boolean(theme.highContrast)}
+              onChange={handleHighContrastToggle}
+              className="h-4 w-4 rounded border-gray-300 accent-accent"
+            />
+          </label>
+          <label className="flex items-center justify-between text-sm">
+            <span>{t('settings.theme.font_scale')}</span>
+            <select
+              value={theme['--font-scale']}
+              onChange={handleFontScaleChange}
+              className="p-2 border rounded-lg bg-white/80 focus:ring-2 focus:ring-accent focus:outline-none"
+            >
+              <option value="0.9">{t('settings.theme.font_scale_90')}</option>
+              <option value="1">{t('settings.theme.font_scale_100')}</option>
+              <option value="1.1">{t('settings.theme.font_scale_110')}</option>
+              <option value="1.25">{t('settings.theme.font_scale_125')}</option>
+              <option value="1.5">{t('settings.theme.font_scale_150')}</option>
+            </select>
+          </label>
+        </div>
+      </div>
       <div>
         <h3 className="text-lg font-semibold">{t('settings.theme.presets_title')}</h3>
         <p className="text-sm text-gray-600 mb-3">{t('settings.theme.presets_help')}</p>

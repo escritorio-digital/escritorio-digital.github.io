@@ -67,6 +67,7 @@ const DesktopUI: React.FC<{
     const [isSettingsOpen, setSettingsOpen] = useState(false);
     const [isCreditsOpen, setIsCreditsOpen] = useState(false);
     const [isAboutOpen, setIsAboutOpen] = useState(false);
+    const [themeModalRequestId, setThemeModalRequestId] = useState(0);
     const startButtonRef = useRef<HTMLButtonElement>(null);
     const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
     const [startMenuAnchor, setStartMenuAnchor] = useState<DOMRect | null>(null);
@@ -185,9 +186,13 @@ const DesktopUI: React.FC<{
         return next;
     });
     const focusWidget = (instanceId: string) => {
-        const newZ = highestZ + 1;
-        setHighestZ(newZ);
-        setActiveWidgets(prev => prev.map(w => (w.instanceId === instanceId ? { ...w, zIndex: newZ } : w)));
+        setHighestZ((prev) => {
+            const newZ = prev + 1;
+            setActiveWidgets((widgets) =>
+                widgets.map((w) => (w.instanceId === instanceId ? { ...w, zIndex: newZ } : w))
+            );
+            return newZ;
+        });
         setActiveWindowId(instanceId);
     };
     const toggleMinimize = (instanceId: string) => setActiveWidgets(prev => prev.map(w => (w.instanceId === instanceId ? { ...w, isMinimized: !w.isMinimized } : w)));
@@ -200,12 +205,17 @@ const DesktopUI: React.FC<{
             setActiveWidgets(prev =>
                 prev.map(w => (w.instanceId === instanceId ? { ...w, isMinimized: false, zIndex: newZ } : w))
             );
+            setActiveWindowId(instanceId);
+            return;
+        }
+        if (activeWindowId !== instanceId) {
+            focusWidget(instanceId);
             return;
         }
         setActiveWidgets(prev =>
             prev.map(w => (w.instanceId === instanceId ? { ...w, isMinimized: true } : w))
         );
-    }, [activeProfile.activeWidgets, highestZ, setActiveWidgets, setHighestZ]);
+    }, [activeProfile.activeWidgets, activeWindowId, focusWidget, highestZ, setActiveWidgets, setHighestZ]);
     const minimizeAllWindows = useCallback(() => {
         setActiveWidgets(prev => prev.map(w => ({ ...w, isMinimized: true })));
     }, [setActiveWidgets]);
@@ -311,6 +321,12 @@ const DesktopUI: React.FC<{
         setSettingsInitialTab(tab);
         setSettingsOpen(true);
         setContextMenu(prev => ({ ...prev, isOpen: false }));
+    };
+
+    const openThemeModal = () => {
+        setSettingsInitialTab('theme');
+        setSettingsOpen(true);
+        setThemeModalRequestId((prev) => prev + 1);
     };
 
     const toggleStartMenu = (anchorRect: DOMRect) => {
@@ -636,6 +652,7 @@ const DesktopUI: React.FC<{
                 onClose={() => setIsStartMenuOpen(false)}
                 onAddWidget={addWidget}
                 onOpenSettingsTab={openSettingsTab}
+                onOpenThemeModal={openThemeModal}
                 onOpenAbout={() => setIsAboutOpen(true)}
                 onOpenCredits={() => setIsCreditsOpen(true)}
                 onRemoveFavorite={(widgetId) =>
@@ -658,6 +675,7 @@ const DesktopUI: React.FC<{
                 isOpen={isSettingsOpen}
                 onClose={() => setSettingsOpen(false)}
                 initialTab={settingsInitialTab}
+                themeModalRequestId={themeModalRequestId}
                 pinnedWidgets={activeProfile.pinnedWidgets}
                 setPinnedWidgets={setPinnedWidgets}
                 profiles={profiles}
@@ -942,6 +960,7 @@ function App() {
 
     useEffect(() => {
         document.body.style.backgroundImage = theme['--wallpaper'];
+        document.body.classList.toggle('high-contrast', Boolean(theme.highContrast));
         const root = document.documentElement;
         for (const [key, value] of Object.entries(theme)) {
             if (key.startsWith('--') && key !== '--wallpaper') {

@@ -40,6 +40,7 @@ Idazmahai Digitala ikasgelarako pentsatutako “leihoekin” lan‑taula bat da.
 - **Marrazteko arbela**: eskuz marrazteko (eskemak, grafikoak, kontzeptu‑mapak, diagramak).
 - **Irudi‑karusela**: irudi bilduma bat erakutsi (laminak, ariketak, laborategiko argazkiak, mapak…).
 - **Web‑bisorea**: web orri bat mahaigain barruan ireki, fitxaz aldatu gabe.
+- **Vibe Coding Educativo**: komunitateko irakasleek sortutako appen katalogoa. Baliabide didaktikoak aurkitzeko eta ikuslean edo fitxa berri batean irekitzeko balio du. Erabili maila/arlo iragazkiak eta gogokoak goian edukitzeko.
 - **Web lokala**: gorde webak nabigatzailean (ZIP edo karpeta) eta exekutatu lineaz kanpo.
 - **Fitxategi‑arakatzailea**: fitxategi lokalak ireki (PDF, irudiak, testua eta Markdown, audioa eta bideoa).
 - **Zuzeneko bisorea**: azalpenetan web edukia edo kanpoko baliabideak eroso erakusteko.

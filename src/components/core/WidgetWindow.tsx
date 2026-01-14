@@ -39,8 +39,10 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
     opacity: isMinimized ? 0 : 1,
     pointerEvents: isMinimized ? 'none' : 'auto',
     transform: isMinimized ? 'scale(0.98)' : 'scale(1)',
-    filter: !isMinimized && !isActive ? 'brightness(0.97)' : 'none',
-    transition: 'width 220ms ease, height 220ms ease, opacity 220ms ease, transform 220ms ease',
+    opacity: !isMinimized && !isActive ? 0.97 : 1,
+    transition: isMinimized
+      ? 'width 220ms ease, height 220ms ease, opacity 220ms ease, transform 220ms ease'
+      : 'opacity 120ms ease',
   };
   
   return (
@@ -57,12 +59,12 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
         onMouseDown={onFocus}
         onMouseDownCapture={onFocus}
         onDragStart={() => onFocus()}
-        className={`bg-widget-bg rounded-lg border-2 border-widget-header relative ${isActive ? 'ring-2 ring-accent/70 shadow-2xl' : 'shadow-xl'}`}
+        className={`widget-window bg-widget-bg rounded-lg border-2 border-widget-header relative ${isActive ? 'ring-2 ring-accent/70 shadow-2xl' : 'shadow-xl'}`}
         dragHandleClassName="widget-header-drag-handle"
         bounds="parent" 
       >
         <div
-          className="flex items-center justify-between h-10 bg-widget-header text-text-light font-bold px-3 absolute top-0 left-0 right-0"
+          className="widget-header flex items-center justify-between h-10 bg-widget-header text-text-light font-bold px-3 absolute top-0 left-0 right-0"
           onContextMenu={onOpenContextMenu}
           onMouseEnter={() => setIsHeaderHovered(true)}
           onMouseLeave={() => setIsHeaderHovered(false)}

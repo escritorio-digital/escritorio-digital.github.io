@@ -40,6 +40,7 @@ Escriptori Digital és una pissarra de treball amb “finestres” pensada per a
 - **Pissarra de dibuix**: dibuix a mà alçada (esquemes, gràfiques, mapes conceptuals, diagrames).
 - **Carrusel d’imatges**: mostra una col·lecció d’imatges (làmines, exercicis, fotos de laboratori, mapes…).
 - **Visor web**: obre una pàgina web dins l’escriptori per usar un recurs en línia sense canviar de pestanya.
+- **Vibe Coding Educativo**: catàleg d’apps creades per docents de la comunitat. Serveix per descobrir recursos didàctics i obrir-los al visor o en una pestanya nova. Usa filtres per nivell/àrea i favorits per tenir-los a dalt.
 - **Web local**: desa webs al navegador (des de ZIP o carpeta) i executa-les sense connexió.
 - **Explorador de fitxers**: obre fitxers locals (PDF, imatges, text i Markdown, àudio i vídeo).
 - **Visor directe**: pensat per mostrar contingut web o recursos externs de manera còmoda durant l’explicació.

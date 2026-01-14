@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-size: calc(16px * var(--font-scale, 1));
+}
+
 body {
   /* Usamos las variables CSS que definimos en el ThemeContext */
   background-color: var(--color-bg);
@@ -12,6 +16,22 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+body.high-contrast {
+  --color-text-dark: #000000;
+  --color-text-light: #ffffff;
+  --color-border: #000000;
+}
+
+.high-contrast .widget-window {
+  border-color: #000000;
+  box-shadow: 0 0 0 2px #000000, 0 16px 28px rgba(0, 0, 0, 0.4);
+}
+
+.high-contrast .widget-header {
+  background-color: #000000;
+  color: #ffffff;
 }
 
 /* --- Theme color picker (clean circular swatch) --- */

@@ -107,7 +107,16 @@
         "mint": "Menta"
       },
       "solid_color_title": "Color sòlid",
-      "solid_color_help": "Selecciona un color i es traurà la imatge de fons."
+      "solid_color_help": "Selecciona un color i es traurà la imatge de fons.",
+      "accessibility_title": "Accessibilitat",
+      "accessibility_help": "Ajustos per perfil per millorar la llegibilitat.",
+      "high_contrast": "Mode d’alt contrast",
+      "font_scale": "Mida de la lletra",
+      "font_scale_90": "90%",
+      "font_scale_100": "100%",
+      "font_scale_110": "110%",
+      "font_scale_125": "125%",
+      "font_scale_150": "150%"
     }
   },
   "toolbar": {
@@ -138,7 +147,8 @@
     "clear_favorites_confirm": "Vols buidar la llista de favorits?",
     "reorder_favorites": "Reordenar favorits",
     "add_favorite": "Afegir als favorits",
-    "language_label": "Idioma"
+    "language_label": "Idioma",
+    "theme_accessibility": "Temes i accessibilitat"
   },
   "about": {
     "title": "Sobre el projecte",

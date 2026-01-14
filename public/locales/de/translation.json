@@ -107,7 +107,16 @@
         "mint": "Minze"
       },
       "solid_color_title": "Volltonfarbe",
-      "solid_color_help": "Wahle eine Farbe und das Hintergrundbild wird entfernt."
+      "solid_color_help": "Wahle eine Farbe und das Hintergrundbild wird entfernt.",
+      "accessibility_title": "Barrierefreiheit",
+      "accessibility_help": "Profileinstellungen für bessere Lesbarkeit.",
+      "high_contrast": "Hoher Kontrast",
+      "font_scale": "Schriftgröße",
+      "font_scale_90": "90%",
+      "font_scale_100": "100%",
+      "font_scale_110": "110%",
+      "font_scale_125": "125%",
+      "font_scale_150": "150%"
     }
   },
   "toolbar": {
@@ -138,7 +147,8 @@
     "clear_favorites_confirm": "Möchtest du die Favoritenliste leeren?",
     "reorder_favorites": "Favoriten neu anordnen",
     "add_favorite": "Zu Favoriten hinzufügen",
-    "language_label": "Sprache"
+    "language_label": "Sprache",
+    "theme_accessibility": "Themen und Barrierefreiheit"
   },
   "about": {
     "title": "Über das Projekt",

@@ -19,6 +19,7 @@ interface SettingsModalProps {
   isOpen: boolean;
   onClose: () => void;
   initialTab?: 'general' | 'profiles' | 'widgets' | 'theme';
+  themeModalRequestId?: number;
   pinnedWidgets: string[];
   setPinnedWidgets: React.Dispatch<React.SetStateAction<string[]>>;
   profiles: ProfileCollection;
@@ -33,6 +34,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   isOpen,
   onClose,
   initialTab = 'general',
+  themeModalRequestId,
   pinnedWidgets,
   setPinnedWidgets,
   profiles,
@@ -47,6 +49,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   const [searchTerm, setSearchTerm] = useState('');
   const [widgetsViewMode, setWidgetsViewMode] = useLocalStorage<WidgetsViewMode>('widgets-view-mode', 'theme');
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
+  const lastThemeRequestRef = useRef<number | null>(null);
   const { theme, setTheme, setWallpaper, resetTheme } = useTheme();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -57,6 +60,14 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   useEffect(() => {
     if (!isOpen) setIsThemeModalOpen(false);
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen || themeModalRequestId == null) return;
+    if (lastThemeRequestRef.current === themeModalRequestId) return;
+    lastThemeRequestRef.current = themeModalRequestId;
+    setActiveTab('theme');
+    setIsThemeModalOpen(true);
+  }, [isOpen, themeModalRequestId]);
 
   const handleWallpaperUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

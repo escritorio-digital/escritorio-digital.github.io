@@ -38,6 +38,7 @@ Este proyecto es un entorno de escritorio virtual construido con React, que perm
 32. **Muro interactivo:** Muro colaborativo con notas tipo post-it exportables.
 33. **QPlay:** Concurso interactivo con cuestionarios en tiempo real.
 34. **BoardLive:** Pizarra colaborativa en tiempo real con control por el anfitrión.
+35. **Vibe Coding Educativo:** Catálogo de apps creadas por docentes de la comunidad para descubrir recursos didácticos y abrirlos en el visor o en una pestaña nueva.
 
 ## Uso básico
 
@@ -167,7 +168,7 @@ Una vez que hayas creado tus archivos y reiniciado el servidor de desarrollo, tu
 El proyecto original <strong>Escritorio Interactivo para el Aula</strong> y su idea pertenecen a <strong>María Teresa González</strong>. Puedes visitar la aplicación original en: <a href="https://mtgonzalezm.github.io/escritorio-interactivo-aula/" target="_blank" rel="noopener noreferrer">https://mtgonzalezm.github.io/escritorio-interactivo-aula/</a>
 </p>
 <p>
-Esta nueva versión fue desarrollada en colaboración por <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> y <strong>Pablo G. Guízar</strong>. El repositorio de este proyecto se encuentra en: <a href="https://github.com/escritorio-digital/escritorio" target="_blank" rel="noopener noreferrer">Escritorio Digital</a>
+Esta nueva versión fue desarrollada en colaboración por <strong>María Teresa González</strong> y <strong>Juan José de Haro</strong>. El repositorio de este proyecto se encuentra en: <a href="https://github.com/escritorio-digital/escritorio-digital.github.io" target="_blank" rel="noopener noreferrer">Escritorio Digital</a>
 </p>
 <hr />
 <p>

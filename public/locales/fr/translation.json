@@ -108,7 +108,16 @@
         "mint": "Menthe"
       },
       "solid_color_title": "Couleur unie",
-      "solid_color_help": "Choisis une couleur et l’image de fond sera retirée."
+      "solid_color_help": "Choisis une couleur et l’image de fond sera retirée.",
+      "accessibility_title": "Accessibilité",
+      "accessibility_help": "Réglages par profil pour améliorer la lisibilité.",
+      "high_contrast": "Mode contraste élevé",
+      "font_scale": "Taille de police",
+      "font_scale_90": "90%",
+      "font_scale_100": "100%",
+      "font_scale_110": "110%",
+      "font_scale_125": "125%",
+      "font_scale_150": "150%"
     }
   },
   "toolbar": {
@@ -139,7 +148,8 @@
     "clear_favorites_confirm": "Voulez-vous vider la liste des favoris ?",
     "reorder_favorites": "Réordonner les favoris",
     "add_favorite": "Ajouter aux favoris",
-    "language_label": "Langue"
+    "language_label": "Langue",
+    "theme_accessibility": "Thèmes et accessibilité"
   },
   "about": {
     "title": "À propos du projet",

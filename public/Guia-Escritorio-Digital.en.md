@@ -40,6 +40,7 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 - **Drawing pad**: freehand drawing (sketches, graphs, concept maps, diagrams).
 - **Image carousel**: show a collection of images (plates, exercises, lab photos, maps…).
 - **Web viewer**: open a web page inside the desktop to use an online resource without switching tabs.
+- **Vibe Coding Educativo**: catalog of apps created by teachers from the community. Use it to discover teaching resources and open them in the viewer or a new tab. Use level/area filters and favorites to keep them at the top.
 - **Local web**: save websites in the browser (from ZIP or folder) and run them offline.
 - **File explorer**: open local files (PDF, images, text and Markdown, audio and video).
 - **Live viewer**: designed to show web content or external resources comfortably while explaining.

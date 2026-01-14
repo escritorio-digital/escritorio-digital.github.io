@@ -22,6 +22,7 @@ import {
     Hand,
     Layers,
     Megaphone,
+    Sliders,
 } from 'lucide-react';
 import { DndContext, PointerSensor, KeyboardSensor, useSensor, useSensors, closestCenter, type DragEndEvent } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy, useSortable, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
@@ -35,6 +36,7 @@ type StartMenuProps = {
     onClose: () => void;
     onAddWidget: (widgetId: string) => void;
     onOpenSettingsTab: (tab: 'general' | 'profiles' | 'widgets' | 'theme') => void;
+    onOpenThemeModal: () => void;
     onOpenAbout: () => void;
     onOpenCredits: () => void;
     onRemoveFavorite: (widgetId: string) => void;
@@ -75,6 +77,7 @@ export const StartMenu: React.FC<StartMenuProps> = ({
     onClose,
     onAddWidget,
     onOpenSettingsTab,
+    onOpenThemeModal,
     onOpenAbout,
     onOpenCredits,
     onRemoveFavorite,
@@ -517,12 +520,12 @@ export const StartMenu: React.FC<StartMenuProps> = ({
             </div>
             <div className="flex-1 overflow-hidden px-4 py-3 bg-gradient-to-b from-white to-gray-50">
                 <div className="flex items-start gap-4 h-full">
-                    <div ref={leftColumnRef} className="w-52 shrink-0 flex flex-col gap-4">
+                    <div ref={leftColumnRef} className="w-52 shrink-0 flex flex-col gap-4 min-h-0">
                         <div
                             className="pr-1"
                             style={{
                                 maxHeight: leftColumnHeight ? `${leftColumnHeight}px` : undefined,
-                                overflowY: needsCategoryScroll ? 'auto' : 'visible',
+                                overflowY: 'auto',
                             }}
                         >
                             <div className="space-y-1">
@@ -535,13 +538,13 @@ export const StartMenu: React.FC<StartMenuProps> = ({
                                                 setActiveSection('widgets');
                                                 setActiveCategoryId(category.id);
                                             }}
-                                            className={`w-full text-left px-3 py-2 rounded-lg text-[13px] font-semibold border transition flex items-center gap-2 ${activeCategoryId === category.id && activeSection === 'widgets' ? 'bg-accent text-text-dark border-transparent' : 'bg-white/90 hover:bg-amber-50 border-gray-200'}`}
+                                            className={`w-full text-left px-3 py-2 rounded-lg text-[0.8125rem] font-semibold border transition flex items-center gap-2 ${activeCategoryId === category.id && activeSection === 'widgets' ? 'bg-accent text-text-dark border-transparent' : 'bg-white/90 hover:bg-amber-50 border-gray-200'}`}
                                         >
                                             <span className={`h-5 w-5 rounded-md flex items-center justify-center ${iconConfig.className}`}>
                                                 <iconConfig.Icon size={12} />
                                             </span>
                                             <span className="leading-tight">{t(category.titleKey)}</span>
-                                            <span className="ml-auto text-[10px] font-semibold text-gray-600">
+                                            <span className="ml-auto text-[0.625rem] font-semibold text-gray-600">
                                                 {category.widgets.length}
                                             </span>
                                         </button>
@@ -594,7 +597,7 @@ export const StartMenu: React.FC<StartMenuProps> = ({
                                 )}
                             </div>
                         )}
-                        {activeSection === 'shortcuts' && (
+                    {activeSection === 'shortcuts' && (
                             <div className="space-y-3">
                                 <p className="text-xs uppercase tracking-wide text-gray-500">{t('context_menu.settings')}</p>
                                 <div className="space-y-2">
@@ -602,7 +605,7 @@ export const StartMenu: React.FC<StartMenuProps> = ({
                                         onClick={() => handleQuickAction('general')}
                                         className="w-full flex items-center gap-3 px-3 py-2 rounded-lg bg-white/90 hover:bg-amber-50 border border-gray-200 transition text-left shadow-sm"
                                     >
-                                        <Settings size={18} />
+                                        <Sliders size={18} />
                                         <span className="text-sm font-semibold">{t('context_menu.settings')}</span>
                                     </button>
                                     <button
@@ -611,6 +614,16 @@ export const StartMenu: React.FC<StartMenuProps> = ({
                                     >
                                         <Users size={18} />
                                         <span className="text-sm font-semibold">{t('context_menu.manage_profiles')}</span>
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            onOpenThemeModal();
+                                            onClose();
+                                        }}
+                                        className="w-full flex items-center gap-3 px-3 py-2 rounded-lg bg-white/90 hover:bg-amber-50 border border-gray-200 transition text-left shadow-sm"
+                                    >
+                                        <Settings size={18} />
+                                        <span className="text-sm font-semibold">{t('start_menu.theme_accessibility')}</span>
                                     </button>
                                     <button
                                         onClick={() => handleQuickAction('theme')}

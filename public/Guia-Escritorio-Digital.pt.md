@@ -38,6 +38,7 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 - **Quadro de desenho**: desenho à mão livre (esquemas, gráficos, mapas conceptuais, diagramas).
 - **Carrossel de imagens**: mostra uma coleção de imagens (pranchas, exercícios, fotos de laboratório, mapas…).
 - **Visualizador web**: abre uma página web dentro do ambiente para usar um recurso online sem mudar de separador.
+- **Vibe Coding Educativo**: catálogo de apps criadas por docentes da comunidade. Serve para descobrir recursos didáticos e abri-los no visualizador ou numa nova aba. Usa filtros por nível/área e favoritos para mantê-los no topo.
 - **Explorador de ficheiros**: abre ficheiros locais (PDF, imagens, texto e Markdown, áudio e vídeo).
 - **Visualizador direto**: pensado para mostrar conteúdo web ou recursos externos de forma cómoda durante a explicação.
 - **HTML**: espaço para mostrar conteúdos preparados.

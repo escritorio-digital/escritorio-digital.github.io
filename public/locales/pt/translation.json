@@ -109,7 +109,16 @@
         "mint": "Hortelã"
       },
       "solid_color_title": "Cor sólida",
-      "solid_color_help": "Escolhe uma cor e a imagem de fundo será removida."
+      "solid_color_help": "Escolhe uma cor e a imagem de fundo será removida.",
+      "accessibility_title": "Acessibilidade",
+      "accessibility_help": "Ajustes por perfil para melhorar a legibilidade.",
+      "high_contrast": "Modo de alto contraste",
+      "font_scale": "Tamanho da letra",
+      "font_scale_90": "90%",
+      "font_scale_100": "100%",
+      "font_scale_110": "110%",
+      "font_scale_125": "125%",
+      "font_scale_150": "150%"
     }
   },
   "toolbar": {
@@ -140,7 +149,8 @@
     "clear_favorites_confirm": "Deseja esvaziar a lista de favoritos?",
     "reorder_favorites": "Reordenar favoritos",
     "add_favorite": "Adicionar aos favoritos",
-    "language_label": "Idioma"
+    "language_label": "Idioma",
+    "theme_accessibility": "Temas e acessibilidade"
   },
   "about": {
     "title": "Sobre o projeto",
