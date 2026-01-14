@@ -149,7 +149,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
   useEffect(() => {
     if (!isBackupOpen) return;
     if (selectedProfiles.length === 0) return;
-    getLocalWebStats(selectedProfiles)
+    getLocalWebStats(selectedProfiles, activeProfileName)
       .then((stats) => {
         const available = stats.siteCount > 0;
         setHasSelectedLocalWeb(available);
@@ -273,7 +273,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
       total += await estimateWidgetDataSize();
     }
     if (includeLocalWeb) {
-      const stats = await getLocalWebStats(selectedProfiles);
+      const stats = await getLocalWebStats(selectedProfiles, activeProfileName);
       if (stats.siteCount > 0) {
         total += Math.ceil(stats.totalBytes * 1.1);
       }
