@@ -215,7 +215,10 @@
     "hide_system_stats": "Masquer les statistiques système",
     "minimize_windows": "Réduire les fenêtres",
     "restore_windows": "Restaurer les fenêtres",
-    "close_window": "Fermer cette fenêtre"
+    "close_window": "Fermer cette fenêtre",
+    "minimize_window": "Minimiser la fenêtre",
+    "maximize_window": "Maximiser la fenêtre",
+    "restore_window": "Restaurer la fenêtre"
   },
   "storage_warning": {
     "title": "Stockage plein",

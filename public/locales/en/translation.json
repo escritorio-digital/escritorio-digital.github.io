@@ -214,7 +214,10 @@
     "hide_system_stats": "Hide system stats",
     "minimize_windows": "Minimize windows",
     "restore_windows": "Restore windows",
-    "close_window": "Close this window"
+    "close_window": "Close this window",
+    "minimize_window": "Minimize window",
+    "maximize_window": "Maximize window",
+    "restore_window": "Restore window"
   },
   "storage_warning": {
     "title": "Storage full",

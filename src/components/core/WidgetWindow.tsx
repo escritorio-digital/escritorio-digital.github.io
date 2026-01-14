@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Rnd, type RndDragCallback, type RndResizeCallback } from 'react-rnd';
-import { X, Minus, Maximize, Minimize } from 'lucide-react';
+import { X, Minus, Maximize, Minimize, Pin, PinOff } from 'lucide-react';
 
 interface WidgetWindowProps {
   id: string;
@@ -20,12 +20,18 @@ interface WidgetWindowProps {
   onToggleMinimize: () => void;
   onToggleMaximize: () => void;
   onOpenContextMenu?: (event: React.MouseEvent) => void;
+  isPinned?: boolean;
+  onTogglePin?: () => void;
+  pinLabel?: string;
+  unpinLabel?: string;
 }
 
 export const WidgetWindow: React.FC<WidgetWindowProps> = ({ 
     title, children, position, size, zIndex, onDragStop, onResizeStop, 
-    onClose, onFocus, isMinimized, isMaximized, onToggleMinimize, onToggleMaximize, onOpenContextMenu
+    onClose, onFocus, isMinimized, isMaximized, onToggleMinimize, onToggleMaximize, onOpenContextMenu,
+    isPinned, onTogglePin, pinLabel, unpinLabel
 }) => {
+  const [isHeaderHovered, setIsHeaderHovered] = React.useState(false);
   const finalSize = isMinimized ? { ...size, height: 40 } : size;
   const containerStyle: React.CSSProperties = {
     zIndex,
@@ -52,11 +58,27 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
         dragHandleClassName="widget-header-drag-handle"
         bounds="parent" 
       >
-        <div className="flex items-center justify-between h-10 bg-widget-header text-text-light font-bold px-3 absolute top-0 left-0 right-0">
+        <div
+          className="flex items-center justify-between h-10 bg-widget-header text-text-light font-bold px-3 absolute top-0 left-0 right-0"
+          onContextMenu={onOpenContextMenu}
+          onMouseEnter={() => setIsHeaderHovered(true)}
+          onMouseLeave={() => setIsHeaderHovered(false)}
+        >
           {/* --- LÍNEA MODIFICADA: Se han añadido clases de flexbox para centrar --- */}
           <span className="widget-header-drag-handle flex-grow h-full cursor-move flex items-center">{title}</span>
           
           <div className="flex items-center gap-1">
+            {onTogglePin && isHeaderHovered && (
+              <button
+                onClick={onTogglePin}
+                onContextMenu={onOpenContextMenu}
+                className="hover:bg-black/20 rounded-full p-1"
+                title={isPinned ? unpinLabel : pinLabel}
+                aria-label={isPinned ? unpinLabel : pinLabel}
+              >
+                {isPinned ? <PinOff size={18} /> : <Pin size={18} />}
+              </button>
+            )}
             <button onClick={onToggleMinimize} onContextMenu={onOpenContextMenu} className="hover:bg-black/20 rounded-full p-1">
               <Minus size={18} />
             </button>

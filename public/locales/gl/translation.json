@@ -214,7 +214,10 @@
     "hide_system_stats": "Ocultar estatísticas do sistema",
     "minimize_windows": "Minimizar ventás",
     "restore_windows": "Restaurar ventás",
-    "close_window": "Pechar esta ventá"
+    "close_window": "Pechar esta ventá",
+    "minimize_window": "Minimizar xanela",
+    "maximize_window": "Maximizar xanela",
+    "restore_window": "Restaurar xanela"
   },
   "storage_warning": {
     "title": "Almacenamento cheo",

@@ -315,6 +315,17 @@ const DesktopUI: React.FC<{
         });
     };
 
+    const handleWindowContextMenu = (event: React.MouseEvent, widgetId: string, instanceId: string) => {
+        event.preventDefault();
+        setContextMenu({
+            isOpen: true,
+            x: event.clientX,
+            y: event.clientY,
+            widgetId,
+            windowInstanceId: instanceId,
+        });
+    };
+
     const resetLayout = () => {
         setActiveWidgets([]);
         setContextMenu(prev => ({ ...prev, isOpen: false }));
@@ -428,6 +439,9 @@ const DesktopUI: React.FC<{
             ? activeProfile.activeWidgets.find(widget => widget.instanceId === contextMenu.windowInstanceId)?.widgetId
             : null);
     const contextIsPinned = contextWidgetId ? activeProfile.pinnedWidgets.includes(contextWidgetId) : false;
+    const contextWindow = contextMenu.windowInstanceId
+        ? activeProfile.activeWidgets.find(widget => widget.instanceId === contextMenu.windowInstanceId) ?? null
+        : null;
     const showFavoriteAction = Boolean(contextWidgetId);
     const showWindowActions = Boolean(contextMenu.windowInstanceId) || hasOpenWidgets;
     if (showStorageRows) {
@@ -500,6 +514,7 @@ const DesktopUI: React.FC<{
                     return null;
                 }
                 const Component = config.component;
+                const isPinned = activeProfile.pinnedWidgets.includes(widget.widgetId);
                 return (
                     <WidgetWindow
                         key={widget.instanceId}
@@ -516,7 +531,17 @@ const DesktopUI: React.FC<{
                         onFocus={() => focusWidget(widget.instanceId)}
                         onDragStop={(_e, d) => setActiveWidgets(prev => prev.map(w => (w.instanceId === widget.instanceId ? { ...w, position: { x: d.x, y: d.y } } : w)))}
                         onResizeStop={(_e, _direction, ref, _delta, position) => setActiveWidgets(prev => prev.map(w => (w.instanceId === widget.instanceId ? { ...w, size: { width: ref.style.width, height: ref.style.height }, position } : w)))}
-                        onOpenContextMenu={(event) => handleContextMenu(event, undefined, true)}
+                        onOpenContextMenu={(event) => handleWindowContextMenu(event, widget.widgetId, widget.instanceId)}
+                        isPinned={isPinned}
+                        onTogglePin={() => {
+                            setPinnedWidgets((prev) => (
+                                prev.includes(widget.widgetId)
+                                    ? prev.filter((id) => id !== widget.widgetId)
+                                    : [...prev, widget.widgetId]
+                            ));
+                        }}
+                        pinLabel={t('toolbar.add_widget')}
+                        unpinLabel={t('toolbar.remove_widget')}
                     >
                         <Suspense
                             fallback={
@@ -641,117 +666,171 @@ const DesktopUI: React.FC<{
                     className="fixed z-[10000] min-w-[220px] bg-white/95 backdrop-blur-md rounded-lg shadow-xl border border-gray-200 py-2 text-sm text-text-dark"
                     style={{ left: contextMenu.x, top: contextMenu.y }}
                 >
-                    {showFavoriteAction && (
+                    {contextMenu.windowInstanceId && contextWindow ? (
                         <>
-                            <button
-                                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
-                                onClick={() => {
-                                    if (!contextWidgetId) return;
-                                    if (contextIsPinned) {
-                                        setPinnedWidgets(prev => prev.filter(id => id !== contextWidgetId));
-                                    } else {
-                                        setPinnedWidgets(prev => (prev.includes(contextWidgetId) ? prev : [...prev, contextWidgetId]));
-                                    }
-                                    setContextMenu(prev => ({ ...prev, isOpen: false, widgetId: null, windowInstanceId: null }));
-                                }}
-                            >
-                                {contextIsPinned ? <PinOff size={16} /> : <Pin size={16} />}
-                                {contextIsPinned ? t('toolbar.remove_widget') : t('toolbar.add_widget')}
-                            </button>
-                        </>
-                    )}
-                    <button
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
-                        onClick={() => openSettingsTab('widgets')}
-                    >
-                        <PlusSquare size={16} />
-                        {t('context_menu.new_widget')}
-                    </button>
-                    {showWindowActions && <div className="my-1 border-t border-gray-200" />}
-                    <button
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
-                        onClick={() => openSettingsTab('profiles')}
-                    >
-                        <Users size={16} />
-                        {t('context_menu.manage_profiles')}
-                    </button>
-                    <button
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
-                        onClick={() => openSettingsTab('general')}
-                    >
-                        <Settings size={16} />
-                        {t('context_menu.settings')}
-                    </button>
-                    <button
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
-                        onClick={() => openSettingsTab('theme')}
-                    >
-                        <Image size={16} />
-                        {t('context_menu.change_background')}
-                    </button>
-                    <div className="my-1 border-t border-gray-200" />
-                    <button
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center justify-between gap-3"
-                        onClick={() => {
-                            setToolbarHidden(!isToolbarHidden);
-                            setContextMenu(prev => ({ ...prev, isOpen: false }));
-                        }}
-                    >
-                        <span>{t('context_menu.show_toolbar')}</span>
-                        <span className={`h-4 w-4 rounded border ${!isToolbarHidden ? 'bg-accent border-accent' : 'border-gray-400'}`} />
-                    </button>
-                    <button
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center justify-between gap-3"
-                        onClick={() => {
-                            toggleDateTime();
-                            setContextMenu(prev => ({ ...prev, isOpen: false }));
-                        }}
-                    >
-                        <span>{t('context_menu.show_datetime')}</span>
-                        <span className={`h-4 w-4 rounded border ${showDateTime ? 'bg-accent border-accent' : 'border-gray-400'}`} />
-                    </button>
-                    <button
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center justify-between gap-3"
-                        onClick={() => {
-                            toggleSystemStats();
-                            setContextMenu(prev => ({ ...prev, isOpen: false }));
-                        }}
-                    >
-                        <span>{t('context_menu.show_system_stats')}</span>
-                        <span className={`h-4 w-4 rounded border ${showSystemStats ? 'bg-accent border-accent' : 'border-gray-400'}`} />
-                    </button>
-                    {hasOpenWidgets && (
-                        <>
-                            <div className="my-1 border-t border-gray-200" />
-                            <button
-                                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
-                                onClick={() => {
-                                    minimizeAllWindows();
-                                    setContextMenu(prev => ({ ...prev, isOpen: false }));
-                                }}
-                            >
-                                <Minimize2 size={16} />
-                                {t('context_menu.minimize_windows')}
-                            </button>
-                            {contextMenu.windowInstanceId && (
+                            {showFavoriteAction && (
                                 <button
                                     className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
                                     onClick={() => {
-                                        closeWidget(contextMenu.windowInstanceId as string);
-                                        setContextMenu(prev => ({ ...prev, isOpen: false, windowInstanceId: null }));
+                                        if (!contextWidgetId) return;
+                                        if (contextIsPinned) {
+                                            setPinnedWidgets(prev => prev.filter(id => id !== contextWidgetId));
+                                        } else {
+                                            setPinnedWidgets(prev => (prev.includes(contextWidgetId) ? prev : [...prev, contextWidgetId]));
+                                        }
+                                        setContextMenu(prev => ({ ...prev, isOpen: false, widgetId: null, windowInstanceId: null }));
                                     }}
                                 >
-                                    <X size={16} />
-                                    {t('context_menu.close_window')}
+                                    {contextIsPinned ? <PinOff size={16} /> : <Pin size={16} />}
+                                    {contextIsPinned ? t('toolbar.remove_widget') : t('toolbar.add_widget')}
                                 </button>
                             )}
                             <button
                                 className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
-                                onClick={resetLayout}
+                                onClick={() => {
+                                    toggleMinimize(contextWindow.instanceId);
+                                    setContextMenu(prev => ({ ...prev, isOpen: false, windowInstanceId: null }));
+                                }}
+                            >
+                                <Minimize2 size={16} />
+                                {t('context_menu.minimize_window')}
+                            </button>
+                            <button
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                                onClick={() => {
+                                    toggleMaximize(contextWindow.instanceId);
+                                    setContextMenu(prev => ({ ...prev, isOpen: false, windowInstanceId: null }));
+                                }}
+                            >
+                                {contextWindow.isMaximized ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+                                {contextWindow.isMaximized ? t('context_menu.restore_window') : t('context_menu.maximize_window')}
+                            </button>
+                            <button
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                                onClick={() => {
+                                    closeWidget(contextWindow.instanceId);
+                                    setContextMenu(prev => ({ ...prev, isOpen: false, windowInstanceId: null }));
+                                }}
                             >
                                 <X size={16} />
-                                {t('context_menu.reset_layout')}
+                                {t('context_menu.close_window')}
                             </button>
+                        </>
+                    ) : (
+                        <>
+                            {showFavoriteAction && (
+                                <>
+                                    <button
+                                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                                        onClick={() => {
+                                            if (!contextWidgetId) return;
+                                            if (contextIsPinned) {
+                                                setPinnedWidgets(prev => prev.filter(id => id !== contextWidgetId));
+                                            } else {
+                                                setPinnedWidgets(prev => (prev.includes(contextWidgetId) ? prev : [...prev, contextWidgetId]));
+                                            }
+                                            setContextMenu(prev => ({ ...prev, isOpen: false, widgetId: null, windowInstanceId: null }));
+                                        }}
+                                    >
+                                        {contextIsPinned ? <PinOff size={16} /> : <Pin size={16} />}
+                                        {contextIsPinned ? t('toolbar.remove_widget') : t('toolbar.add_widget')}
+                                    </button>
+                                </>
+                            )}
+                            <button
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                                onClick={() => openSettingsTab('widgets')}
+                            >
+                                <PlusSquare size={16} />
+                                {t('context_menu.new_widget')}
+                            </button>
+                            {showWindowActions && <div className="my-1 border-t border-gray-200" />}
+                            <button
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                                onClick={() => openSettingsTab('profiles')}
+                            >
+                                <Users size={16} />
+                                {t('context_menu.manage_profiles')}
+                            </button>
+                            <button
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                                onClick={() => openSettingsTab('general')}
+                            >
+                                <Settings size={16} />
+                                {t('context_menu.settings')}
+                            </button>
+                            <button
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                                onClick={() => openSettingsTab('theme')}
+                            >
+                                <Image size={16} />
+                                {t('context_menu.change_background')}
+                            </button>
+                            <div className="my-1 border-t border-gray-200" />
+                            <button
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center justify-between gap-3"
+                                onClick={() => {
+                                    setToolbarHidden(!isToolbarHidden);
+                                    setContextMenu(prev => ({ ...prev, isOpen: false }));
+                                }}
+                            >
+                                <span>{t('context_menu.show_toolbar')}</span>
+                                <span className={`h-4 w-4 rounded border ${!isToolbarHidden ? 'bg-accent border-accent' : 'border-gray-400'}`} />
+                            </button>
+                            <button
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center justify-between gap-3"
+                                onClick={() => {
+                                    toggleDateTime();
+                                    setContextMenu(prev => ({ ...prev, isOpen: false }));
+                                }}
+                            >
+                                <span>{t('context_menu.show_datetime')}</span>
+                                <span className={`h-4 w-4 rounded border ${showDateTime ? 'bg-accent border-accent' : 'border-gray-400'}`} />
+                            </button>
+                            <button
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center justify-between gap-3"
+                                onClick={() => {
+                                    toggleSystemStats();
+                                    setContextMenu(prev => ({ ...prev, isOpen: false }));
+                                }}
+                            >
+                                <span>{t('context_menu.show_system_stats')}</span>
+                                <span className={`h-4 w-4 rounded border ${showSystemStats ? 'bg-accent border-accent' : 'border-gray-400'}`} />
+                            </button>
+                            {hasOpenWidgets && (
+                                <>
+                                    <div className="my-1 border-t border-gray-200" />
+                                    <button
+                                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                                        onClick={() => {
+                                            minimizeAllWindows();
+                                            setContextMenu(prev => ({ ...prev, isOpen: false }));
+                                        }}
+                                    >
+                                        <Minimize2 size={16} />
+                                        {t('context_menu.minimize_windows')}
+                                    </button>
+                                    {contextMenu.windowInstanceId && (
+                                        <button
+                                            className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                                            onClick={() => {
+                                                closeWidget(contextMenu.windowInstanceId as string);
+                                                setContextMenu(prev => ({ ...prev, isOpen: false, windowInstanceId: null }));
+                                            }}
+                                        >
+                                            <X size={16} />
+                                            {t('context_menu.close_window')}
+                                        </button>
+                                    )}
+                                    <button
+                                        className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                                        onClick={resetLayout}
+                                    >
+                                        <X size={16} />
+                                        {t('context_menu.reset_layout')}
+                                    </button>
+                                </>
+                            )}
                         </>
                     )}
                 </div>
