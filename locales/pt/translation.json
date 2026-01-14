@@ -216,7 +216,10 @@
     "hide_system_stats": "Ocultar estatísticas do sistema",
     "minimize_windows": "Minimizar janelas",
     "restore_windows": "Restaurar janelas",
-    "close_window": "Fechar esta janela"
+    "close_window": "Fechar esta janela",
+    "minimize_window": "Minimizar janela",
+    "maximize_window": "Maximizar janela",
+    "restore_window": "Restaurar janela"
   },
   "storage_warning": {
     "title": "Armazenamento cheio",

@@ -214,7 +214,10 @@
     "hide_system_stats": "Ocultar estadístiques del sistema",
     "minimize_windows": "Minimitzar finestres",
     "restore_windows": "Restaurar finestres",
-    "close_window": "Tancar aquesta finestra"
+    "close_window": "Tancar aquesta finestra",
+    "minimize_window": "Minimitzar finestra",
+    "maximize_window": "Maximitzar finestra",
+    "restore_window": "Restaurar finestra"
   },
   "storage_warning": {
     "title": "Emmagatzematge ple",

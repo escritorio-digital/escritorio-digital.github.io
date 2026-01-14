@@ -214,7 +214,10 @@
     "hide_system_stats": "Ocultar estadísticas del sistema",
     "minimize_windows": "Minimizar ventanas",
     "restore_windows": "Restaurar ventanas",
-    "close_window": "Cerrar esta ventana"
+    "close_window": "Cerrar esta ventana",
+    "minimize_window": "Minimizar ventana",
+    "maximize_window": "Maximizar ventana",
+    "restore_window": "Restaurar ventana"
   },
   "storage_warning": {
     "title": "Almacenamiento lleno",

@@ -1,0 +1,1 @@
+import{j as t}from"./index-Bb3hwzmY.js";import{i as s}from"./index-Bb3hwzmY.js";import{ExternalAppWidget as o}from"./ExternalAppWidget-D9MvCe9u.js";const e=()=>t.jsx(o,{url:"https://jjdeharo.github.io/directo/muro.html",titleKey:"widgets.directo_muro.title"});export{e as DirectoMuroWidget,s as widgetConfig};

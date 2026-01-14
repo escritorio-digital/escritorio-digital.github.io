@@ -213,7 +213,10 @@
     "hide_system_stats": "Sistemaren estatistikak ezkutatu",
     "minimize_windows": "Leihoak minimizatu",
     "restore_windows": "Leihoak leheneratu",
-    "close_window": "Itxi leiho hau"
+    "close_window": "Itxi leiho hau",
+    "minimize_window": "Leihoa minimizatu",
+    "maximize_window": "Leihoa maximizatu",
+    "restore_window": "Leihoa leheneratu"
   },
   "storage_warning": {
     "title": "Biltegiratzea beteta",
