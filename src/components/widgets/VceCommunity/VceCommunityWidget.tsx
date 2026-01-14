@@ -166,7 +166,8 @@ export const VceCommunityWidget = () => {
 
     const filteredApps = useMemo(() => {
         const term = searchTerm.trim().toLowerCase();
-        return apps.filter((app) => {
+        const ordered = [...apps].reverse(); // mostrar en orden inverso al original
+        return ordered.filter((app) => {
             if (levelFilter && !app.levels.includes(levelFilter)) return false;
             if (areaFilter && !app.areas.includes(areaFilter)) return false;
             if (!term) return true;
