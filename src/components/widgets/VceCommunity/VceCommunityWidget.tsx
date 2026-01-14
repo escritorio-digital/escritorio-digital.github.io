@@ -39,6 +39,8 @@ const GOOGLE_HOSTS = new Set([
     'www.ja.cat',
     'edumind.es',
     'www.edumind.es',
+    'claude.ai',
+    'www.claude.ai',
     'withgoogle.com',
     'googleusercontent.com',
     'googleapis.com',
@@ -202,6 +204,7 @@ export const VceCommunityWidget = () => {
                 || host.endsWith('.eaciweb.net')
                 || host.endsWith('.ja.cat')
                 || host.endsWith('.edumind.es')
+                || host.endsWith('.claude.ai')
             );
         } catch {
             return false;
