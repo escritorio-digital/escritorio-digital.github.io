@@ -348,7 +348,6 @@ export const VceCommunityWidget = () => {
                     {!isLoading && !hasError && favoriteApps.length > 0 && (
                         <div className="vce-section">
                             <div className="vce-section-title">{t('widgets.vce.favorites_title')}</div>
-                            <div className="vce-section-note">{t('widgets.vce.favorites_note')}</div>
                         </div>
                     )}
                     {!isLoading && !hasError && favoriteApps.map((app) => {
