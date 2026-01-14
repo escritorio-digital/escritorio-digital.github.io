@@ -3,6 +3,9 @@
 ## Configuración
 - Al abrir «Configurar ED» desde el menú contextual del fondo, se muestra directamente la pestaña General (sin que se superponga el modal de temas en la primera apertura).
 
+## Iconos
+- Nuevos iconos con fondo transparente para las herramientas participativas (Votación, Escala, Nube, Lluvia de ideas, Muro, QPlay y BoardLive).
+
 ## Ruleta (Random Spinner)
 - Corrección del nombre ganador para que coincida con la flecha del puntero.
 - Carga de opciones desde archivo .txt (una línea por opción), con botón de subida.
