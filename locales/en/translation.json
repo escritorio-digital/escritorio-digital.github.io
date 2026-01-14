@@ -107,7 +107,16 @@
         "mint": "Mint"
       },
       "solid_color_title": "Solid color",
-      "solid_color_help": "Choose a color and the wallpaper will be removed."
+      "solid_color_help": "Choose a color and the wallpaper will be removed.",
+      "accessibility_title": "Accessibility",
+      "accessibility_help": "Per-profile adjustments to improve readability.",
+      "high_contrast": "High-contrast mode",
+      "font_scale": "Font size",
+      "font_scale_90": "90%",
+      "font_scale_100": "100%",
+      "font_scale_110": "110%",
+      "font_scale_125": "125%",
+      "font_scale_150": "150%"
     }
   },
   "toolbar": {
@@ -138,7 +147,8 @@
     "clear_favorites_confirm": "Do you want to clear the favorites list?",
     "reorder_favorites": "Reorder favorites",
     "add_favorite": "Add to favorites",
-    "language_label": "Language"
+    "language_label": "Language",
+    "theme_accessibility": "Themes and accessibility"
   },
   "about": {
     "title": "About the project",

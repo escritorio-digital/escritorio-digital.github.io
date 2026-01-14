@@ -107,7 +107,16 @@
         "mint": "Menta"
       },
       "solid_color_title": "Cor sólida",
-      "solid_color_help": "Escolle unha cor e retirarase a imaxe de fondo."
+      "solid_color_help": "Escolle unha cor e retirarase a imaxe de fondo.",
+      "accessibility_title": "Accesibilidade",
+      "accessibility_help": "Axustes por perfil para mellorar a lexibilidade.",
+      "high_contrast": "Modo de alto contraste",
+      "font_scale": "Tamaño da letra",
+      "font_scale_90": "90%",
+      "font_scale_100": "100%",
+      "font_scale_110": "110%",
+      "font_scale_125": "125%",
+      "font_scale_150": "150%"
     }
   },
   "toolbar": {
@@ -138,7 +147,8 @@
     "clear_favorites_confirm": "Queres baleirar a lista de favoritos?",
     "reorder_favorites": "Reordenar favoritos",
     "add_favorite": "Engadir a favoritos",
-    "language_label": "Idioma"
+    "language_label": "Idioma",
+    "theme_accessibility": "Temas e accesibilidade"
   },
   "about": {
     "title": "Sobre o proxecto",

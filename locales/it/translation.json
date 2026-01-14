@@ -107,7 +107,16 @@
         "mint": "Menta"
       },
       "solid_color_title": "Colore pieno",
-      "solid_color_help": "Scegli un colore e l'immagine di sfondo verra rimossa."
+      "solid_color_help": "Scegli un colore e l'immagine di sfondo verra rimossa.",
+      "accessibility_title": "Accessibilità",
+      "accessibility_help": "Impostazioni per profilo per migliorare la leggibilità.",
+      "high_contrast": "Modalità ad alto contrasto",
+      "font_scale": "Dimensione del carattere",
+      "font_scale_90": "90%",
+      "font_scale_100": "100%",
+      "font_scale_110": "110%",
+      "font_scale_125": "125%",
+      "font_scale_150": "150%"
     }
   },
   "toolbar": {
@@ -138,7 +147,8 @@
     "clear_favorites_confirm": "Vuoi svuotare la lista dei preferiti?",
     "reorder_favorites": "Riordina preferiti",
     "add_favorite": "Aggiungi ai preferiti",
-    "language_label": "Lingua"
+    "language_label": "Lingua",
+    "theme_accessibility": "Temi e accessibilità"
   },
   "about": {
     "title": "Informazioni sul progetto",

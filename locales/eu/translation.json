@@ -106,7 +106,16 @@
         "mint": "Menta"
       },
       "solid_color_title": "Kolore solidoa",
-      "solid_color_help": "Aukeratu kolorea eta atzeko planoko irudia kenduko da."
+      "solid_color_help": "Aukeratu kolorea eta atzeko planoko irudia kenduko da.",
+      "accessibility_title": "Irisgarritasuna",
+      "accessibility_help": "Profil bakoitzeko doikuntzak irakurgarritasuna hobetzeko.",
+      "high_contrast": "Kontraste handiko modua",
+      "font_scale": "Letra-tamaina",
+      "font_scale_90": "90%",
+      "font_scale_100": "100%",
+      "font_scale_110": "110%",
+      "font_scale_125": "125%",
+      "font_scale_150": "150%"
     }
   },
   "toolbar": {
@@ -137,7 +146,8 @@
     "clear_favorites_confirm": "Gogokoen zerrenda hustu nahi duzu?",
     "reorder_favorites": "Gogokoak berrantolatu",
     "add_favorite": "Gogokoetara gehitu",
-    "language_label": "Hizkuntza"
+    "language_label": "Hizkuntza",
+    "theme_accessibility": "Gaiak eta irisgarritasuna"
   },
   "about": {
     "title": "Proiektuari buruz",

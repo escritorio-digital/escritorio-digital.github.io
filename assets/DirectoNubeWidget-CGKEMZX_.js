@@ -1,0 +1,1 @@
+import{j as t}from"./index-9O5Sibn1.js";import{k as d}from"./index-9O5Sibn1.js";import{ExternalAppWidget as e}from"./ExternalAppWidget-C-dJp0nA.js";const r=()=>t.jsx(e,{url:"https://jjdeharo.github.io/directo/nube.html",titleKey:"widgets.directo_nube.title"});export{r as DirectoNubeWidget,d as widgetConfig};
