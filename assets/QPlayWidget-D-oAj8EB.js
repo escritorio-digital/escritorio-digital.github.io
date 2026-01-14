@@ -1,0 +1,1 @@
+import{j as t}from"./index-dorX-ewH.js";import{P as a}from"./index-dorX-ewH.js";import{ExternalAppWidget as e}from"./ExternalAppWidget-CjahAvfX.js";const r=()=>t.jsx(e,{url:"https://jjdeharo.github.io/qplay/",titleKey:"widgets.qplay.title"});export{r as QPlayWidget,a as widgetConfig};
