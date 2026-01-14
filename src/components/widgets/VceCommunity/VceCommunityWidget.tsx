@@ -22,10 +22,17 @@ const GOOGLE_HOSTS = new Set([
     'google.com',
     'www.google.com',
     'g.co',
+    'goo.gl',
+    'goo.gle',
+    'forms.gle',
     'docs.google.com',
     'drive.google.com',
     'sites.google.com',
     'gemini.google.com',
+    'app.goo.gl',
+    'withgoogle.com',
+    'googleusercontent.com',
+    'googleapis.com',
 ]);
 
 const readActiveProfileName = (): string => {
@@ -174,7 +181,14 @@ export const VceCommunityWidget = () => {
     const isGoogleUrl = (url: string) => {
         try {
             const { hostname } = new URL(url);
-            return GOOGLE_HOSTS.has(hostname) || hostname.endsWith('.google.com');
+            const host = hostname.toLowerCase();
+            return (
+                GOOGLE_HOSTS.has(host)
+                || host.endsWith('.google.com')
+                || host.endsWith('.googleusercontent.com')
+                || host.endsWith('.googleapis.com')
+                || host.endsWith('.withgoogle.com')
+            );
         } catch {
             return false;
         }
