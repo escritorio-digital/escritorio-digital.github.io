@@ -33,6 +33,12 @@ const GOOGLE_HOSTS = new Set([
     'ai.studio',
     'www.ai.studio',
     'aistudio.google.com',
+    'eaciweb.net',
+    'www.eaciweb.net',
+    'ja.cat',
+    'www.ja.cat',
+    'edumind.es',
+    'www.edumind.es',
     'withgoogle.com',
     'googleusercontent.com',
     'googleapis.com',
@@ -193,6 +199,9 @@ export const VceCommunityWidget = () => {
                 || host.endsWith('.googleapis.com')
                 || host.endsWith('.withgoogle.com')
                 || host.endsWith('.ai.studio')
+                || host.endsWith('.eaciweb.net')
+                || host.endsWith('.ja.cat')
+                || host.endsWith('.edumind.es')
             );
         } catch {
             return false;
