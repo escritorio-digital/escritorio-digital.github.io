@@ -38,6 +38,7 @@ Digitaler Desktop ist eine Arbeitsfläche mit „Fenstern“ für den Unterricht
 - **Zeichenfläche**: freihändig zeichnen (Skizzen, Diagramme, Concept Maps).
 - **Bilder‑Karussell**: Bildsammlung anzeigen (Tafeln, Aufgaben, Laborfotos, Karten …).
 - **Web‑Viewer**: eine Webseite im Desktop öffnen, ohne den Tab zu wechseln.
+- **Vibe Coding Educativo**: Katalog von Apps, die Lehrkräfte der Community erstellt haben. Zum Entdecken didaktischer Ressourcen und zum Öffnen im Viewer oder in einem neuen Tab. Nutze Filter nach Stufe/Fachbereich und Favoriten, um sie oben zu halten.
 - **Datei-Explorer**: lokale Dateien öffnen (PDF, Bilder, Text und Markdown, Audio und Video).
 - **Direkt‑Viewer**: für die komfortable Anzeige von Web‑Inhalten oder externen Ressourcen während der Erklärung.
 - **HTML**: Bereich für vorbereitete Inhalte.

@@ -40,6 +40,7 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 - **Tableau de dessin** : dessin à main levée (schémas, graphiques, cartes conceptuelles, diagrammes).
 - **Carrousel d’images** : afficher une collection d’images (planches, exercices, photos de labo, cartes…).
 - **Visionneuse web** : ouvre une page web dans le bureau sans changer d’onglet.
+- **Vibe Coding Educativo** : catalogue d’apps créées par des enseignants de la communauté. Sert à découvrir des ressources pédagogiques et à les ouvrir dans le lecteur ou dans un nouvel onglet. Utilise les filtres par niveau/domaine et les favoris pour les garder en haut.
 - **Web local** : enregistrez des sites dans le navigateur (ZIP ou dossier) et exécutez-les hors ligne.
 - **Explorateur de fichiers** : ouvrir des fichiers locaux (PDF, images, texte et Markdown, audio et vidéo).
 - **Visionneuse directe** : pour afficher confortablement du contenu web ou des ressources externes pendant l’explication.

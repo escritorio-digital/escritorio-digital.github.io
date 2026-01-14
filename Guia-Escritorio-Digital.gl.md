@@ -38,6 +38,7 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 - **Pizarra de debuxo**: debuxa a man alzada (esquemas, gráficas, mapas conceptuais, diagramas).
 - **Carrusel de imaxes**: amosa unha colección de imaxes (láminas, exercicios, fotos de laboratorio, mapas…).
 - **Visor web**: abre unha páxina web dentro do escritorio para usar un recurso en liña sen cambiar de pestana.
+- **Vibe Coding Educativo**: catálogo de apps creadas por docentes da comunidade. Serve para descubrir recursos didácticos e abrilos no visor ou nunha nova pestana. Usa filtros por nivel/área e favoritos para telos arriba.
 - **Explorador de ficheiros**: abre ficheiros locais (PDF, imaxes, texto e Markdown, audio e vídeo).
 - **Visor directo**: pensado para mostrar contido web ou recursos externos de forma cómoda durante a explicación.
 - **HTML**: espazo para mostrar contidos preparados.

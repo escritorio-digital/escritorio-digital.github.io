@@ -41,6 +41,7 @@ Escritorio Digital es una pizarra de trabajo con “ventanas” pensada para el 
 - **Pizarra de dibujo**: dibuja a mano alzada (esquemas, gráficas, mapas conceptuales, diagramas).
 - **Carrusel de imágenes**: muestra una colección de imágenes (láminas, ejercicios, fotos de laboratorio, mapas…).
 - **Visor web**: abre una página web dentro del escritorio para usar un recurso online sin cambiar de pestaña.
+- **Vibe Coding Educativo**: catálogo de apps creadas por docentes de la comunidad. Sirve para descubrir recursos didácticos y abrirlos en el visor o en una pestaña nueva. Usa filtros por nivel/área y favoritos para tenerlos arriba.
 - **Web local**: guarda webs en tu navegador (desde ZIP o carpeta) y ejecútalas sin conexión.
 - **Explorador de archivos**: abre archivos locales (PDF, imágenes, texto y Markdown, HTML, audio y vídeo).
 - **Visor directo**: pensado para mostrar contenido web o recursos externos de forma cómoda durante la explicación.
