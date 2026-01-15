@@ -35,6 +35,7 @@ export const WIDGET_CATEGORIES: WidgetCategory[] = [
             'drawing-pad',
             'image-carousel',
             'iframe',
+            'edimarkweb',
             'local-web',
             'pdf-viewer',
             'file-opener',

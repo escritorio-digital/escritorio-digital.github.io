@@ -40,6 +40,9 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   const toolbarRef = useRef<HTMLDivElement>(null);
   const [anchorLeft, setAnchorLeft] = useState<number | null>(null);
   const [anchorMaxWidth, setAnchorMaxWidth] = useState<number | null>(null);
+  const getWidgetLabel = (config: (typeof WIDGET_REGISTRY)[string]) => (
+    config?.startTooltip ? t(config.startTooltip) : t(config.title)
+  );
   const highestZ = openWidgets.reduce((acc, widget) => Math.max(acc, widget.zIndex), 0);
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
@@ -49,9 +52,11 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   const visibleTasks = openWidgets
     .map((widget) => {
       const config = WIDGET_REGISTRY[widget.widgetId];
-      return config ? { ...widget, title: t(config.title), icon: config.icon } : null;
+      if (!config) return null;
+      const label = getWidgetLabel(config);
+      return { ...widget, title: t(config.title), icon: config.icon, label };
     })
-    .filter((widget): widget is ActiveWidget & { title: string; icon: React.ReactNode } => Boolean(widget))
+    .filter((widget): widget is ActiveWidget & { title: string; icon: React.ReactNode; label: string } => Boolean(widget))
     .sort((a, b) => a.title.localeCompare(b.title));
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -73,6 +78,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
       transform: isDragging ? CSS.Transform.toString(transform) : undefined,
       transition: isDragging ? transition : undefined,
     };
+    const label = getWidgetLabel(widget);
     return (
       <div ref={setNodeRef} style={style} className="flex-shrink-0">
         <button
@@ -83,7 +89,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           }}
           data-widget-button="true"
           className="group w-14 h-14 bg-accent text-2xl rounded-lg flex items-center justify-center hover:brightness-110 hover:scale-105"
-          title={t(widget.title)}
+          title={label}
           {...attributes}
           {...listeners}
         >
@@ -193,8 +199,8 @@ export const Toolbar: React.FC<ToolbarProps> = ({
                     ? 'bg-amber-100 border-amber-300 text-amber-800'
                     : 'bg-white/90 border-gray-200 text-text-dark hover:bg-amber-50'
               }`}
-              title={widget.title}
-              aria-label={widget.title}
+              title={widget.label}
+              aria-label={widget.label}
             >
               <span className="flex items-center gap-2 min-w-0">
                 <span className="text-sm leading-none">{widget.icon}</span>

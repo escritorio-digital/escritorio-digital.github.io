@@ -13,6 +13,7 @@ export interface WidgetConfig {
   title: string;
   icon: string | ReactNode;
   defaultSize: { width: number; height: number };
+  startTooltip?: string;
   component: WidgetComponent; // El componente de React como una función (cargado bajo demanda)
 }
 

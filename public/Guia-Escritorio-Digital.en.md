@@ -37,6 +37,7 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 ### Whiteboard, writing, and resources
 
 - **Notepad**: quick notes for instructions, ideas, examples, lists, etc.
+- **EdiMarkWeb**: Markdown word processor with live preview and export.
 - **Drawing pad**: freehand drawing (sketches, graphs, concept maps, diagrams).
 - **Image carousel**: show a collection of images (plates, exercises, lab photos, maps…).
 - **Web viewer**: open a web page inside the desktop to use an online resource without switching tabs.

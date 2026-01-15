@@ -29,6 +29,7 @@ import { SortableContext, arrayMove, verticalListSortingStrategy, useSortable, s
 import { CSS } from '@dnd-kit/utilities';
 import { WIDGET_REGISTRY } from '../widgets';
 import { buildWidgetsByCategory } from '../widgets/widgetCategories';
+import type { WidgetConfig } from '../../types';
 import { withBaseUrl } from '../../utils/assetPaths';
 
 type StartMenuProps = {
@@ -89,6 +90,7 @@ export const StartMenu: React.FC<StartMenuProps> = ({
     anchorRef,
 }) => {
     const { t, i18n } = useTranslation();
+    const getWidgetLabel = (widget: WidgetConfig) => (widget.startTooltip ? t(widget.startTooltip) : t(widget.title));
     const menuRef = useRef<HTMLDivElement>(null);
     const leftColumnRef = useRef<HTMLDivElement>(null);
     const searchRef = useRef<HTMLInputElement>(null);
@@ -326,7 +328,7 @@ export const StartMenu: React.FC<StartMenuProps> = ({
                     setFavoriteMenu({ isOpen: true, x: nextX, y: nextY, widgetId: widget.id });
                 }}
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg bg-white/90 hover:bg-amber-50 border border-gray-200 transition text-left shadow-sm min-w-0 ${isDragging ? 'opacity-70' : ''}`}
-                title={t(widget.title)}
+                title={getWidgetLabel(widget)}
             >
                 <span className="text-2xl">{widget.icon}</span>
                 <span className="flex-1 min-w-0 text-sm font-semibold text-text-dark leading-tight truncate">
@@ -383,7 +385,7 @@ export const StartMenu: React.FC<StartMenuProps> = ({
                         setFavoriteMenu({ isOpen: true, x: nextX, y: nextY, widgetId: widget.id });
                     }}
                     className={`w-full flex items-center gap-3 px-3 py-[0.45rem] rounded-lg border transition text-left shadow-sm min-w-0 ${highlightFavorites && favoriteIdSet.has(widget.id) ? 'bg-amber-50 border-amber-300' : 'bg-white/90 hover:bg-amber-50 border-gray-200'}`}
-                    title={t(widget.title)}
+                    title={getWidgetLabel(widget)}
                 >
                     <span className="text-2xl">{widget.icon}</span>
                     <span className="flex-1 min-w-0 text-sm font-semibold text-text-dark leading-tight truncate">

@@ -1,5 +1,10 @@
 # Cambios realizados
 
+## 1.3.0
+- Añadido el programa EdiMarkWeb al menú Inicio con visor integrado y acceso a pestaña nueva.
+- Icono y traducciones completos en todos los idiomas para el nuevo programa.
+- Tooltip de arranque opcional para programas en menú y barra.
+
 ## Configuración
 - Al abrir «Configurar ED» desde el menú contextual del fondo, se muestra directamente la pestaña General (sin que se superponga el modal de temas en la primera apertura).
 

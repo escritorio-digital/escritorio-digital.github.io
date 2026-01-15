@@ -577,6 +577,13 @@
       "content_placeholder": "URLaren edukia hemen erakutsiko da.",
       "embed_notice": "Baliteke webgune batzuek kapsulatzea ez onartzea."
     },
+    "edimarkweb": {
+      "title": "EdiMarkWeb",
+      "subtitle": "Markdown testu-prozesadorea",
+      "tooltip": "Markdown testu-prozesadorea",
+      "reload": "Berritu",
+      "open_new_tab": "Ireki fitxa berrian"
+    },
     "directo_viewer": {
       "title": "Zuzeneko Konexioa",
       "go_to_repo": "Joan Zuzeneko Konexioaren biltegira"

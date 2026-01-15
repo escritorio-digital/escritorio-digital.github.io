@@ -35,6 +35,7 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 ### Quadro, escrita e recursos
 
 - **Bloco de notas**: notas rápidas para instruções, ideias, exemplos, listas, etc.
+- **EdiMarkWeb**: processador de textos Markdown com pré-visualização online e exportação.
 - **Quadro de desenho**: desenho à mão livre (esquemas, gráficos, mapas conceptuais, diagramas).
 - **Carrossel de imagens**: mostra uma coleção de imagens (pranchas, exercícios, fotos de laboratório, mapas…).
 - **Visualizador web**: abre uma página web dentro do ambiente para usar um recurso online sem mudar de separador.

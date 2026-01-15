@@ -37,6 +37,7 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 ### Tableau, écriture et ressources
 
 - **Bloc‑notes** : notes rapides pour consignes, idées, exemples, listes, etc.
+- **EdiMarkWeb** : traitement de texte Markdown avec prévisualisation en ligne et exportation.
 - **Tableau de dessin** : dessin à main levée (schémas, graphiques, cartes conceptuelles, diagrammes).
 - **Carrousel d’images** : afficher une collection d’images (planches, exercices, photos de labo, cartes…).
 - **Visionneuse web** : ouvre une page web dans le bureau sans changer d’onglet.

@@ -578,6 +578,13 @@
       "content_placeholder": "The URL content will be shown here.",
       "embed_notice": "Some sites may not allow being embedded."
     },
+    "edimarkweb": {
+      "title": "EdiMarkWeb",
+      "subtitle": "Markdown word processor",
+      "tooltip": "Markdown word processor",
+      "reload": "Reload",
+      "open_new_tab": "Open in new tab"
+    },
     "directo_viewer": {
       "title": "Live Connection",
       "go_to_repo": "Go to Live Connection repository"

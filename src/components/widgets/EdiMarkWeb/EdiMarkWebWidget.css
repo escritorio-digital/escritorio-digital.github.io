@@ -1,0 +1,39 @@
+.edimarkweb-widget {
+    @apply w-full h-full flex flex-col bg-gray-100;
+}
+
+.edimarkweb-toolbar {
+    @apply flex items-center justify-between gap-3 px-4 py-3 bg-white border-b border-gray-200 shadow-sm flex-shrink-0;
+}
+
+.edimarkweb-heading {
+    @apply flex flex-col;
+}
+
+.edimarkweb-title {
+    @apply text-lg font-bold text-text-dark leading-tight;
+}
+
+.edimarkweb-subtitle {
+    @apply text-sm text-gray-600;
+}
+
+.edimarkweb-actions {
+    @apply flex items-center gap-2;
+}
+
+.edimarkweb-button {
+    @apply inline-flex items-center gap-2 bg-white text-text-dark font-semibold px-3 py-2 rounded-lg border border-gray-200 hover:bg-gray-100 transition-colors text-sm;
+}
+
+.edimarkweb-link {
+    @apply inline-flex items-center gap-2 bg-accent text-text-dark font-semibold px-3 py-2 rounded-lg hover:bg-[#8ec9c9] transition-colors text-sm;
+}
+
+.edimarkweb-frame {
+    @apply flex-1 bg-white;
+}
+
+.edimarkweb-iframe {
+    @apply w-full h-full border-0;
+}

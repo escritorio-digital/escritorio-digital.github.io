@@ -580,6 +580,13 @@
       "content_placeholder": "O conteúdo da URL será exibido aqui.",
       "embed_notice": "Alguns sites podem não permitir incorporação."
     },
+    "edimarkweb": {
+      "title": "EdiMarkWeb",
+      "subtitle": "Processador de textos markdown",
+      "tooltip": "Processador de textos markdown",
+      "reload": "Recarregar",
+      "open_new_tab": "Abrir numa nova aba"
+    },
     "directo_viewer": {
       "title": "Conexão ao Vivo",
       "go_to_repo": "Ir ao repositório Conexão ao Vivo"

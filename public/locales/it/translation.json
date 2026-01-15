@@ -578,6 +578,13 @@
       "content_placeholder": "Il contenuto dell'URL verrà mostrato qui.",
       "embed_notice": "Alcuni siti potrebbero non consentire l'incorporamento."
     },
+    "edimarkweb": {
+      "title": "EdiMarkWeb",
+      "subtitle": "Editor di testo Markdown",
+      "tooltip": "Editor di testo Markdown",
+      "reload": "Ricarica",
+      "open_new_tab": "Apri in una nuova scheda"
+    },
     "directo_viewer": {
       "title": "Connessione in diretta",
       "go_to_repo": "Vai al repository di Connessione in Diretta"

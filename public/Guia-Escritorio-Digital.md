@@ -38,6 +38,7 @@ Escritorio Digital es una pizarra de trabajo con “ventanas” pensada para el 
 ### Pizarra, escritura y recursos
 
 - **Bloc de notas**: notas rápidas para consignas, ideas, ejemplos, listas, etc.
+- **EdiMarkWeb**: procesador de textos Markdown con vista previa en línea y exportación.
 - **Pizarra de dibujo**: dibuja a mano alzada (esquemas, gráficas, mapas conceptuales, diagramas).
 - **Carrusel de imágenes**: muestra una colección de imágenes (láminas, ejercicios, fotos de laboratorio, mapas…).
 - **Visor web**: abre una página web dentro del escritorio para usar un recurso online sin cambiar de pestaña.
