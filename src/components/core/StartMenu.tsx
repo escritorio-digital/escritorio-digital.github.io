@@ -275,7 +275,7 @@ export const StartMenu: React.FC<StartMenuProps> = ({
             const maxHeight = Math.floor(window.innerHeight * 0.72);
             const availableColumnsHeight = Math.max(0, maxHeight - headerHeight - searchHeight - paddingTopBottom);
             const leftContentHeight = left.scrollHeight;
-            const minColumnsHeight = showSearchResults ? Math.min(availableColumnsHeight, 220) : 0;
+            const minColumnsHeight = Math.min(availableColumnsHeight, 220);
             const columnsHeight = Math.min(
                 availableColumnsHeight,
                 Math.max(leftContentHeight, minColumnsHeight)
@@ -288,7 +288,7 @@ export const StartMenu: React.FC<StartMenuProps> = ({
         return () => {
             window.removeEventListener('resize', update);
         };
-    }, [i18n.language, isOpen, menuPosition, showSearchResults, visibleCategories]);
+    }, [i18n.language, isOpen, menuPosition, visibleCategories]);
 
     const sensors = useSensors(
         useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
