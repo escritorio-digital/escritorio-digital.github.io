@@ -429,6 +429,7 @@ const DesktopUI: React.FC<{
         quota: null,
     });
     const [screenSize, setScreenSize] = useState({ width: window.screen.width, height: window.screen.height });
+    const [windowSize, setWindowSize] = useState({ width: window.innerWidth, height: window.innerHeight });
     const clockRef = useRef<HTMLDivElement>(null);
     const [clockBottom, setClockBottom] = useState<number | null>(null);
 
@@ -489,12 +490,13 @@ const DesktopUI: React.FC<{
     }, []);
 
     useEffect(() => {
-        const updateScreenSize = () => {
+        const updateViewportSizes = () => {
             setScreenSize({ width: window.screen.width, height: window.screen.height });
+            setWindowSize({ width: window.innerWidth, height: window.innerHeight });
         };
-        updateScreenSize();
-        window.addEventListener('resize', updateScreenSize);
-        return () => window.removeEventListener('resize', updateScreenSize);
+        updateViewportSizes();
+        window.addEventListener('resize', updateViewportSizes);
+        return () => window.removeEventListener('resize', updateViewportSizes);
     }, []);
 
     const formatBytes = (value: number | null, gbDecimals = 2) => {
@@ -563,6 +565,10 @@ const DesktopUI: React.FC<{
     statsRows.push({
         label: t('system_stats.screen'),
         value: t('system_stats.screen_value', { width: screenSize.width, height: screenSize.height }),
+    });
+    statsRows.push({
+        label: t('system_stats.window'),
+        value: t('system_stats.window_value', { width: windowSize.width, height: windowSize.height }),
     });
 
     return (

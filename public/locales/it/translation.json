@@ -740,6 +740,8 @@
     "cpu_value": "{{value}} core",
     "screen": "Schermo",
     "screen_value": "{{width}}x{{height}}",
+    "window": "Finestra",
+    "window_value": "{{width}}x{{height}}",
     "not_available": "N/D"
   }
 }

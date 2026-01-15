@@ -740,6 +740,8 @@
     "cpu_value": "{{value}} cores",
     "screen": "Screen",
     "screen_value": "{{width}}x{{height}}",
+    "window": "Window",
+    "window_value": "{{width}}x{{height}}",
     "not_available": "N/A"
   }
 }

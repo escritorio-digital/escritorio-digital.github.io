@@ -740,6 +740,8 @@
     "cpu_value": "{{value}} núcleos",
     "screen": "Pantalla",
     "screen_value": "{{width}}x{{height}}",
+    "window": "Ventá",
+    "window_value": "{{width}}x{{height}}",
     "not_available": "N/D"
   }
 }

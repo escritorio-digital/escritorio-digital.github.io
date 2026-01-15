@@ -739,6 +739,8 @@
     "cpu_value": "{{value}} nukleo",
     "screen": "Pantaila",
     "screen_value": "{{width}}x{{height}}",
+    "window": "Leihoa",
+    "window_value": "{{width}}x{{height}}",
     "not_available": "E/E"
   }
 }

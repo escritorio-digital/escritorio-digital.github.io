@@ -1,5 +1,8 @@
 # Cambios realizados
 
+## 1.3.2
+- Estadísticas del sistema: añadido el tamaño de la ventana (viewport) junto al tamaño de pantalla.
+
 ## 1.3.1
 - El menú Inicio conserva el alto durante las búsquedas y se reajusta al panel izquierdo al cerrar el buscador o reabrir.
 

@@ -740,6 +740,8 @@
     "cpu_value": "{{value}} Kerne",
     "screen": "Bildschirm",
     "screen_value": "{{width}}x{{height}}",
+    "window": "Fenster",
+    "window_value": "{{width}}x{{height}}",
     "not_available": "k. A."
   }
 }

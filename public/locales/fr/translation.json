@@ -741,6 +741,8 @@
     "cpu_value": "{{value}} cœurs",
     "screen": "Écran",
     "screen_value": "{{width}}x{{height}}",
+    "window": "Fenêtre",
+    "window_value": "{{width}}x{{height}}",
     "not_available": "N/D"
   }
 }
