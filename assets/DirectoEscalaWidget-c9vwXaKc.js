@@ -1,0 +1,1 @@
+import{j as t}from"./react-vendor-WCYW3yxo.js";import{ExternalAppWidget as e}from"./ExternalAppWidget-B4WJQI2e.js";import{e as l}from"./index-DEF43kZb.js";import"./vendor-DCW5Txpp.js";import"./dnd-kit-ZKKYBs6g.js";const a=()=>t.jsx(e,{url:"https://jjdeharo.github.io/directo/escala.html",titleKey:"widgets.directo_escala.title"});export{a as DirectoEscalaWidget,l as widgetConfig};

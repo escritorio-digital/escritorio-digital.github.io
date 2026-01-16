@@ -1,0 +1,1 @@
+import{j as t}from"./react-vendor-WCYW3yxo.js";import{ExternalAppWidget as o}from"./ExternalAppWidget-B4WJQI2e.js";import{j as d}from"./index-DEF43kZb.js";import"./vendor-DCW5Txpp.js";import"./dnd-kit-ZKKYBs6g.js";const m=()=>t.jsx(o,{url:"https://jjdeharo.github.io/directo/vota.html",titleKey:"widgets.directo_vota.title"});export{m as DirectoVotaWidget,d as widgetConfig};
