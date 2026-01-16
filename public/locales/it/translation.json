@@ -50,7 +50,7 @@
     },
     "widgets": {
       "search": "Cerca programma...",
-      "pinned_info": "Seleziona i programma che vuoi nella barra degli strumenti. ({{count}}/{{max}})",
+      "pinned_info": "Seleziona i programmi che vuoi nella barra degli strumenti. ({{count}}/{{max}}) di {{total}}",
       "add": "Aggiungi",
       "remove": "Rimuovi",
       "max_widgets_alert": "Non è possibile fissare più di {{max}} programma.",
@@ -156,7 +156,7 @@
     "app_name_label": "Nome dell'applicazione",
     "app_name_value": "Scrivania digitale per l'aula",
     "version_label": "Versione",
-    "version_value": "v1.3.4 — aprile 2025",
+    "version_value": "v1.3.6 — aprile 2025",
     "history_title": "Storia del progetto",
     "initial_title": "Progetto iniziale",
     "initial_text": "Idea e prima versione: María Teresa González. Versione base della scrivania interattiva per l'aula.",

@@ -1,5 +1,9 @@
 # Cambios realizados
 
+## 1.3.6
+- Configuración de programas: foco automático en el buscador al abrir la pestaña.
+- Configuración de programas: muestra el total de programas disponibles junto al límite.
+
 ## 1.3.4
 - Barra inferior oculta en pantallas estrechas para evitar desbordes y mantener solo el botón Inicio.
 

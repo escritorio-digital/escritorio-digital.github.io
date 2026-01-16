@@ -50,7 +50,7 @@
     },
     "widgets": {
       "search": "Buscar programa...",
-      "pinned_info": "Selecciona os programas que queres na túa barra de ferramentas. ({{count}}/{{max}})",
+      "pinned_info": "Selecciona os programas que queres na túa barra de ferramentas. ({{count}}/{{max}}) de {{total}}",
       "add": "Engadir",
       "remove": "Quitar",
       "max_widgets_alert": "Non se poden fixar máis de {{max}} programas.",
@@ -156,7 +156,7 @@
     "app_name_label": "Nome da aplicación",
     "app_name_value": "Escritorio dixital para a aula",
     "version_label": "Versión",
-    "version_value": "v1.3.4 — abril de 2025",
+    "version_value": "v1.3.6 — abril de 2025",
     "history_title": "Historial do proxecto",
     "initial_title": "Proxecto inicial",
     "initial_text": "Idea e primeira versión: María Teresa González. Versión básica do escritorio interactivo para a aula.",

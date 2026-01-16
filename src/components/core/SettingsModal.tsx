@@ -52,10 +52,19 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   const lastThemeRequestRef = useRef<number | null>(null);
   const { theme, setTheme, setWallpaper, resetTheme } = useTheme();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const widgetSearchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (isOpen) setActiveTab(initialTab);
   }, [isOpen, initialTab]);
+
+  useEffect(() => {
+    if (!isOpen || activeTab !== 'widgets') return;
+    const focusId = window.requestAnimationFrame(() => {
+      widgetSearchInputRef.current?.focus();
+    });
+    return () => window.cancelAnimationFrame(focusId);
+  }, [isOpen, activeTab]);
 
   useEffect(() => {
     if (!isOpen) setIsThemeModalOpen(false);
@@ -122,6 +131,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   const widgetsByCategory = useMemo(() => buildWidgetsByCategory(filteredWidgets, t), [filteredWidgets, t]);
 
   const MAX_WIDGETS = 20;
+  const totalWidgets = Object.keys(WIDGET_REGISTRY).length;
 
   const togglePin = (widgetId: string) => {
     setPinnedWidgets(prev => {
@@ -267,6 +277,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                         placeholder={t('settings.widgets.search')}
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
+                        ref={widgetSearchInputRef}
                         className="w-full pl-10 pr-4 py-2 border rounded-lg bg-white/80 focus:ring-2 focus:ring-accent focus:outline-none"
                       />
                     </div>
@@ -290,7 +301,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                       </div>
                     </div>
                   </div>
-                  <p className="mb-4 text-sm text-gray-600">{t('settings.widgets.pinned_info', { count: pinnedWidgets.length, max: MAX_WIDGETS })}</p>
+                  <p className="mb-4 text-sm text-gray-600">{t('settings.widgets.pinned_info', { count: pinnedWidgets.length, max: MAX_WIDGETS, total: totalWidgets })}</p>
                   {widgetsViewMode === 'alphabetical' ? (
                     <ul className="space-y-2">
                       {filteredWidgets.map(widget => (
