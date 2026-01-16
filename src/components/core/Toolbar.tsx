@@ -140,7 +140,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   return (
     <div
       ref={toolbarRef}
-      className={`fixed bottom-5 left-1/2 bg-widget-bg p-2 rounded-2xl flex items-center gap-3 shadow-lg z-[10000] border border-custom-border max-w-[calc(100vw-1rem)] transition-all duration-200 ${
+      className={`fixed bottom-5 left-1/2 bg-widget-bg p-2 rounded-2xl flex items-center gap-3 shadow-lg z-[10000] border border-custom-border max-w-[calc(100vw-1rem)] transition-all duration-200 max-[700px]:hidden ${
         isHidden && !isPeeking
           ? 'opacity-0 pointer-events-none'
           : 'opacity-100'
