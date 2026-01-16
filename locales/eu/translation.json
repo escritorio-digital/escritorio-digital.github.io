@@ -49,7 +49,7 @@
     },
     "widgets": {
       "search": "Bilatu programa-a...",
-      "pinned_info": "Hautatu zure tresna-barran nahi dituzun programak. ({{count}}/{{max}})",
+      "pinned_info": "Hautatu zure tresna-barran nahi dituzun programak. ({{count}}/{{max}}) {{total}}tik",
       "add": "Gehitu",
       "remove": "Kendu",
       "max_widgets_alert": "Ezin dira {{max}} programa baino gehiago finkatu.",
@@ -155,7 +155,7 @@
     "app_name_label": "Aplikazioaren izena",
     "app_name_value": "Ikasgelarako mahaigain digitala",
     "version_label": "Bertsioa",
-    "version_value": "v1.3.4 — 2025ko apirila",
+    "version_value": "v1.3.6 — 2025ko apirila",
     "history_title": "Proiektuaren historia",
     "initial_title": "Hasierako proiektua",
     "initial_text": "Ideia eta lehen bertsioa: María Teresa González. Ikasgelarako mahaigain interaktiboaren oinarrizko bertsioa.",

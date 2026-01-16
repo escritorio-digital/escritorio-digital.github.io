@@ -52,7 +52,7 @@
     },
     "widgets": {
       "search": "Buscar programa...",
-      "pinned_info": "Selecione os programas que você quer na barra de ferramentas. ({{count}}/{{max}})",
+      "pinned_info": "Selecione os programas que você quer na barra de ferramentas. ({{count}}/{{max}}) de {{total}}",
       "add": "Adicionar",
       "remove": "Remover",
       "max_widgets_alert": "Não é possível fixar mais de {{max}} programas.",
@@ -158,7 +158,7 @@
     "app_name_label": "Nome da aplicação",
     "app_name_value": "Ambiente de trabalho digital para a aula",
     "version_label": "Versão",
-    "version_value": "v1.3.4 — abril de 2025",
+    "version_value": "v1.3.6 — abril de 2025",
     "history_title": "Histórico do projeto",
     "initial_title": "Projeto inicial",
     "initial_text": "Ideia e primeira versão: María Teresa González. Versão básica do ambiente de trabalho interativo para a aula.",

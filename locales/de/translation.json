@@ -50,7 +50,7 @@
     },
     "widgets": {
       "search": "Programm suchen...",
-      "pinned_info": "Wähle die Programme aus, die in deiner Werkzeugleiste erscheinen sollen. ({{count}}/{{max}})",
+      "pinned_info": "Wähle die Programme aus, die in deiner Werkzeugleiste erscheinen sollen. ({{count}}/{{max}}) von {{total}}",
       "add": "Hinzufügen",
       "remove": "Entfernen",
       "max_widgets_alert": "Du kannst nicht mehr als {{max}} Programme anheften.",
@@ -156,7 +156,7 @@
     "app_name_label": "Name der Anwendung",
     "app_name_value": "Digitaler Desktop für den Unterricht",
     "version_label": "Version",
-    "version_value": "v1.3.4 — April 2025",
+    "version_value": "v1.3.6 — April 2025",
     "history_title": "Projektverlauf",
     "initial_title": "Ursprüngliches Projekt",
     "initial_text": "Idee und erste Version: María Teresa González. Grundversion des interaktiven Klassenraum-Desktops.",
