@@ -15,7 +15,7 @@ export const ExternalAppWidget: React.FC<ExternalAppWidgetProps> = ({ url, title
                 <button
                     type="button"
                     onClick={() => window.open(url, '_blank', 'noopener,noreferrer')}
-                    className="text-xs font-semibold text-accent hover:text-accent/80"
+                    className="text-xs font-semibold text-text-dark underline decoration-accent/60 underline-offset-2 hover:text-text-dark/70"
                 >
                     {t('widgets.local_web.open_fullscreen_window')}
                 </button>
