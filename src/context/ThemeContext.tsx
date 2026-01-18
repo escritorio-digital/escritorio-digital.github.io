@@ -14,6 +14,7 @@ export interface Theme {
   '--font-scale': string;
   showDateTime: boolean;
   showSystemStats: boolean;
+  showProfileSwitcher: boolean;
   highContrast: boolean;
 }
 
@@ -30,6 +31,7 @@ export const defaultTheme: Theme = {
   '--font-scale': '1',
   showDateTime: true,
   showSystemStats: false,
+  showProfileSwitcher: true,
   highContrast: false,
 };
 
