@@ -4,17 +4,11 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig(() => ({
-    base: '/escritorio/',
+    base: '/',
     plugins: [
         react(),
         VitePWA({
             registerType: 'autoUpdate',
-            workbox: {
-                navigateFallbackDenylist: [
-                    /^\/escritorio\/directo\//,
-                    /^\/directo\//,
-                ],
-            },
             manifest: {
                 name: 'Escritorio Digital',
                 short_name: 'Escritorio',
@@ -36,20 +30,4 @@ export default defineConfig(() => ({
             },
         })
     ],
-    build: {
-        rollupOptions: {
-            output: {
-                manualChunks(id) {
-                    if (!id.includes('node_modules')) {
-                        return;
-                    }
-                    const parts = id.split('node_modules/')[1].split('/');
-                    const name = parts[0].startsWith('@')
-                        ? `${parts[0]}-${parts[1]}`
-                        : parts[0];
-                    return `vendor-${name.replace('@', '')}`;
-                },
-            },
-        },
-    },
 }))

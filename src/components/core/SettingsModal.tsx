@@ -100,11 +100,6 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     setTheme((prevTheme) => ({ ...prevTheme, showSystemStats: checked }));
   };
 
-  const handleProfileSwitcherToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { checked } = e.target;
-    setTheme((prevTheme) => ({ ...prevTheme, showProfileSwitcher: checked }));
-  };
-
   const handleSolidColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setTheme({ ...theme, '--color-bg': value, '--wallpaper': 'none' });
@@ -468,18 +463,6 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                           type="checkbox"
                           checked={Boolean(theme.showSystemStats ?? false)}
                           onChange={handleSystemStatsToggle}
-                          className="h-5 w-5"
-                        />
-                      </div>
-                      <div className="flex items-center justify-between p-3 bg-white/70 border border-gray-200 rounded-lg">
-                        <div>
-                          <p className="font-semibold text-sm">{t('settings.theme.show_profile_switcher_label')}</p>
-                          <p className="text-xs text-gray-500">{t('settings.theme.show_profile_switcher_help')}</p>
-                        </div>
-                        <input
-                          type="checkbox"
-                          checked={Boolean(theme.showProfileSwitcher ?? true)}
-                          onChange={handleProfileSwitcherToggle}
                           className="h-5 w-5"
                         />
                       </div>

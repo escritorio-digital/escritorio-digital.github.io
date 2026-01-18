@@ -88,8 +88,6 @@
       "reset_theme_button": "Berrezarri gai lehenetsia",
       "show_system_stats_label": "Sistemaren estatistikak erakutsi",
       "show_system_stats_help": "Erlojuaren ondoan erakusten dira.",
-      "show_profile_switcher_label": "Idazmahaien menua erakutsi",
-      "show_profile_switcher_help": "Beheko eskuineko izkinan erakusten da.",
       "modal_title": "Gaia pertsonalizatu",
       "open_modal_title": "Gaia pertsonalizatzea",
       "open_modal_help": "Aukeratu aurrezarritako gai bat edo doitu koloreak eta atzeko planoak.",
@@ -220,7 +218,6 @@
     "hide_datetime": "Ezkutatu data eta ordua",
     "show_toolbar": "Beheko barra",
     "hide_toolbar": "Ezkutatu beheko barra",
-    "show_profile_switcher": "Idazmahaien menua",
     "reset_layout": "Leiho guztiak itxi",
     "reset_layout_confirm": "Mahaigaineko leiho guztiak itxi nahi dituzu?",
     "show_system_stats": "Sistemaren estatistikak",
@@ -776,12 +773,6 @@
       "empty_state": "Hasi bilaketa bat emaitzak ikusteko.",
       "open_new_tab": "Ireki fitxa berri batean",
       "open_article": "Ireki artikulua"
-    },
-    "class_diary": {
-      "title": "Ikasgela egunkaria",
-      "description": "Ikasgela eta ikasleen egunerokoa eramateko da, baina ez da asistentziako faltak edo notak jartzeko.",
-      "open_new_tab": "Ireki fitxa berrian",
-      "search_keywords": "egunkari, ikasgela, ikasle, jarraipena"
     }
   },
   "backup": {

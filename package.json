@@ -2,7 +2,7 @@
   "name": "escritorio",
   "private": true,
   "homepage": "https://jjdeharo.github.io/escritorio/",
-  "version": "1.3.7",
+  "version": "1.3.6",
   "type": "module",
   "scripts": {
     "dev": "vite",

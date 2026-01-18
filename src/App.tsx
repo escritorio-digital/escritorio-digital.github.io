@@ -31,7 +31,6 @@ const DesktopUI: React.FC<{
     const activeProfile = profiles[activeProfileName] || Object.values(profiles)[0];
     const showDateTime = activeProfile.theme?.showDateTime ?? true;
     const showSystemStats = activeProfile.theme?.showSystemStats ?? false;
-    const showProfileSwitcher = activeProfile.theme?.showProfileSwitcher ?? true;
 
     const setActiveWidgets = useCallback((updater: React.SetStateAction<ActiveWidget[]>) => {
         setProfiles((prev) => {
@@ -76,15 +75,6 @@ const DesktopUI: React.FC<{
         };
         setProfiles(prev => ({ ...prev, [activeProfileName]: newProfileData }));
     }, [activeProfile, activeProfileName, setProfiles, showSystemStats]);
-
-    const toggleProfileSwitcher = useCallback(() => {
-        const nextShowProfileSwitcher = !showProfileSwitcher;
-        const newProfileData: DesktopProfile = {
-            ...activeProfile,
-            theme: { ...activeProfile.theme, showProfileSwitcher: nextShowProfileSwitcher },
-        };
-        setProfiles(prev => ({ ...prev, [activeProfileName]: newProfileData }));
-    }, [activeProfile, activeProfileName, setProfiles, showProfileSwitcher]);
 
     const [highestZ, setHighestZ] = useState(100);
     const highestZRef = useRef(100);
@@ -760,17 +750,15 @@ const DesktopUI: React.FC<{
             />
             
             {/* --- ¡AQUÍ ESTÁ EL CAMBIO! Añadimos el nuevo componente a la interfaz --- */}
-            {showProfileSwitcher && (
-                <ProfileSwitcher
-                  profiles={profiles}
-                  activeProfileName={activeProfileName}
-                  setActiveProfileName={setActiveProfileName}
-                  setProfiles={setProfiles}
-                  onManageProfiles={() => openSettingsTab('profiles')}
-                  onOpenContextMenu={(event) => handleContextMenu(event, undefined, true)}
-                  profileOrder={profileOrder}
-                />
-            )}
+            <ProfileSwitcher
+              profiles={profiles}
+              activeProfileName={activeProfileName}
+              setActiveProfileName={setActiveProfileName}
+              setProfiles={setProfiles}
+              onManageProfiles={() => openSettingsTab('profiles')}
+              onOpenContextMenu={(event) => handleContextMenu(event, undefined, true)}
+              profileOrder={profileOrder}
+            />
 
             {showStorageWarning && (
                 <div className="fixed top-4 right-4 z-[10002] max-w-sm bg-white/95 backdrop-blur-md border border-amber-200 shadow-xl rounded-lg p-4 text-sm text-text-dark">
@@ -909,16 +897,6 @@ const DesktopUI: React.FC<{
                             >
                                 <span>{t('context_menu.show_toolbar')}</span>
                                 <span className={`h-4 w-4 rounded border ${!isToolbarHidden ? 'bg-accent border-accent' : 'border-gray-400'}`} />
-                            </button>
-                            <button
-                                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center justify-between gap-3"
-                                onClick={() => {
-                                    toggleProfileSwitcher();
-                                    setContextMenu(prev => ({ ...prev, isOpen: false }));
-                                }}
-                            >
-                                <span>{t('context_menu.show_profile_switcher')}</span>
-                                <span className={`h-4 w-4 rounded border ${showProfileSwitcher ? 'bg-accent border-accent' : 'border-gray-400'}`} />
                             </button>
                             <button
                                 className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center justify-between gap-3"

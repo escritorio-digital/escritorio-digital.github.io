@@ -89,8 +89,6 @@
       "reset_theme_button": "Standardthema wiederherstellen",
       "show_system_stats_label": "Systemstatistiken anzeigen",
       "show_system_stats_help": "Neben der Uhr angezeigt.",
-      "show_profile_switcher_label": "Desktop-Menü anzeigen",
-      "show_profile_switcher_help": "Wird unten rechts angezeigt.",
       "modal_title": "Thema anpassen",
       "open_modal_title": "Thema anpassen",
       "open_modal_help": "Wähle ein vordefiniertes Thema oder passe Farben und Hintergründe an.",
@@ -221,7 +219,6 @@
     "hide_datetime": "Datum und Uhrzeit ausblenden",
     "show_toolbar": "Untere Leiste",
     "hide_toolbar": "Untere Leiste ausblenden",
-    "show_profile_switcher": "Desktop-Menü",
     "reset_layout": "Alle Fenster schließen",
     "reset_layout_confirm": "Möchtest du alle Fenster auf dem Desktop schließen?",
     "show_system_stats": "Systemstatistiken",
@@ -777,12 +774,6 @@
       "empty_state": "Starte eine Suche, um Ergebnisse zu sehen.",
       "open_new_tab": "In neuem Tab öffnen",
       "open_article": "Artikel öffnen"
-    },
-    "class_diary": {
-      "title": "Klassen-Tagebuch",
-      "description": "Zum Führen eines Tagebuchs der Klasse und der Schüler:innen, nicht zum Eintragen von Fehlzeiten oder Noten.",
-      "open_new_tab": "In neuem Tab öffnen",
-      "search_keywords": "tagebuch, klasse, schüler, protokoll"
     }
   },
   "backup": {

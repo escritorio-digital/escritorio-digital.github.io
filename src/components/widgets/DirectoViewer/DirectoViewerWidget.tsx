@@ -2,7 +2,6 @@ import React from 'react';
 import type { FC } from 'react';
 import { Info } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { getDirectoAppUrl } from '../shared/getDirectoAppUrl';
 
 // --- Estilos CSS como objetos de JavaScript ---
 
@@ -42,7 +41,8 @@ const infoButtonStyles: React.CSSProperties = {
 // --- Componente principal del Widget ---
 export const AppViewerWidget: FC = () => {
     const { t, i18n } = useTranslation();
-    const appUrl = getDirectoAppUrl('index.html', i18n);
+    const currentLanguage = i18n.language || 'es';
+    const appUrl = `https://jjdeharo.github.io/directo/?lang=${currentLanguage}`;
     const repoUrl = "https://github.com/jjdeharo/directo/";
 
     return (

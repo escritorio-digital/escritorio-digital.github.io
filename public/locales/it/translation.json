@@ -89,8 +89,6 @@
       "reset_theme_button": "Ripristina tema predefinito",
       "show_system_stats_label": "Mostra statistiche di sistema",
       "show_system_stats_help": "Mostrate accanto all'orologio.",
-      "show_profile_switcher_label": "Mostra menu dei desktop",
-      "show_profile_switcher_help": "Mostrato nell'angolo in basso a destra.",
       "modal_title": "Personalizza tema",
       "open_modal_title": "Personalizzazione del tema",
       "open_modal_help": "Scegli un tema predefinito o regola colori e sfondi.",
@@ -221,7 +219,6 @@
     "hide_datetime": "Nascondi data e ora",
     "show_toolbar": "Barra inferiore",
     "hide_toolbar": "Nascondi barra inferiore",
-    "show_profile_switcher": "Menu dei desktop",
     "reset_layout": "Chiudi tutte le finestre",
     "reset_layout_confirm": "Vuoi chiudere tutte le finestre del desktop?",
     "show_system_stats": "Statistiche di sistema",
@@ -777,12 +774,6 @@
       "empty_state": "Avvia una ricerca per vedere i risultati.",
       "open_new_tab": "Apri in una nuova scheda",
       "open_article": "Apri articolo"
-    },
-    "class_diary": {
-      "title": "Diario di classe",
-      "description": "Serve per tenere un diario della classe e degli studenti, ma non per registrare assenze o voti.",
-      "open_new_tab": "Apri in una nuova scheda",
-      "search_keywords": "diario, classe, studenti, registro"
     }
   },
   "backup": {
