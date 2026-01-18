@@ -490,7 +490,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
 
   return (
     // Contenedor principal en la esquina inferior derecha
-    <div className="fixed bottom-4 right-4 z-[9999]" ref={containerRef} onContextMenu={onOpenContextMenu}>
+    <div className="fixed bottom-4 right-4 z-[9999] max-[700px]:hidden" ref={containerRef} onContextMenu={onOpenContextMenu}>
       <div className="relative">
         {/* Menú desplegable que aparece cuando isOpen es true */}
         {isOpen && (

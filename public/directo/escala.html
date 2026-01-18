@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escala de Valoración en Tiempo Real</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.4.7/peerjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --theme-color-primary: #3b82f6; /* Azul por defecto */
+            --theme-color-text: #ffffff;
+            --theme-color-content-bg: #eff6ff; 
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--theme-color-primary); border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #results-view-content { display: flex; flex-direction: column; md:flex-direction: row; gap: 2rem; height: 100%; }
+        #sharing-info-container { flex: 0 0 280px; }
+        #results-column { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+        #results-container { flex-grow: 1; }
+        body.projection-mode { overflow: hidden; cursor: pointer; }
+        body.projection-mode #app { max-width: 100%; width: 100%; height: 100vh; border-radius: 0; padding: 1rem; margin: 0; background-color: var(--theme-color-content-bg); }
+        .hide-on-projection { display: flex; }
+        body.projection-mode .hide-on-projection { display: none !important; }
+        body.projection-mode #results-column { justify-content: center; }
+        body.projection-mode #results-question { text-align: center; font-size: 2.5rem; margin-bottom: 2rem; }
+        body.projection-mode #sharing-info-container { display: none; }
+        body.projection-mode #results-view-content { flex-direction: column; }
+        .themed-bg { background-color: var(--theme-color-primary); color: var(--theme-color-text); }
+        .themed-bg-hover:hover { filter: brightness(90%); }
+        .themed-content-bg { background-color: var(--theme-color-content-bg); }
+        #session-code { font-family: monospace; font-size: 1.5rem; font-weight: bold; letter-spacing: 0.1em; padding: 0.5rem; border: 2px dashed var(--theme-color-primary); border-radius: 0.5rem; color: var(--theme-color-primary); background-color: #fff; cursor: pointer; }
+        .bar-result .bar { background-color: var(--theme-color-primary); transition: width 0.5s ease; }
+        .traffic-light-results { display: flex; justify-content: center; align-items: center; gap: 2rem; height: 100%; }
+        .light-circle { width: 150px; height: 150px; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        .light-circle .votes { font-size: 3rem; }
+        .light-circle .label { font-size: 1rem; }
+        .light-red { background-color: #ef4444; }
+        .light-yellow { background-color: #f59e0b; }
+        .light-green { background-color: #22c55e; }
+        .vote-btn { border: 2px solid #d1d5db; transition: all 0.2s ease; }
+        .vote-btn:hover:not(:disabled) { border-color: var(--theme-color-primary); background-color: var(--theme-color-content-bg); }
+        .vote-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .vote-btn-circle { width: 100px; height: 100px; border-radius: 50%; }
+        .vote-btn-red { background-color: #fca5a5; border-color: #ef4444; }
+        .vote-btn-yellow { background-color: #fde68a; border-color: #f59e0b; }
+        .vote-btn-green { background-color: #86efac; border-color: #22c55e; }
+        .qr-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.35rem; }
+        .qr-tooltip { position: absolute; top: -10px; transform: translateY(-100%); background: #111827; color: #ffffff; font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 999px; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; white-space: nowrap; }
+        .qr-wrapper:hover .qr-tooltip { opacity: 1; transform: translateY(-120%); }
+        .qr-hint { font-size: 0.75rem; color: #4b5563; }
+
+        #lang-selector,
+        #lang-selector-participant,
+        #lang-selector-container {
+          display: none !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div id="app" class="w-full max-w-2xl mx-auto rounded-xl shadow-lg transition-all duration-300 relative">
+
+        <div id="presenter-view" class="hidden">
+            <div id="create-session-form" class="themed-content-bg p-6 md:p-8 rounded-xl">
+                 <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold" data-translate-key="create_title"></h2>
+                    <div>
+                        <select id="lang-selector" onchange="setLanguage(this.value)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg">
+                            <option value="es">Español</option>
+                            <option value="ca">Català</option>
+                            <option value="gl">Galego</option>
+                            <option value="eu">Euskara</option>
+                            <option value="en">English</option>
+                            <option value="de">Deutsch</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div class="md:col-span-2">
+                        <label for="question" class="block text-sm font-medium text-gray-700 mb-1" data-translate-key="question_label"></label>
+                        <input type="text" id="question" class="w-full p-2 border border-gray-300 rounded-md shadow-sm" data-translate-key-placeholder="question_placeholder">
+                    </div>
+                    <div>
+                        <label for="color-picker" class="block text-sm font-medium text-gray-700 mb-1" data-translate-key="theme_color_label"></label>
+                        <input type="color" id="color-picker" value="#3b82f6" class="w-12 h-12 p-1 border border-gray-300 rounded-md cursor-pointer">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="scale-type" class="block text-sm font-medium text-gray-700 mb-1" data-translate-key="scale_type_label"></label>
+                    <select id="scale-type" onchange="handleScaleTypeChange()" class="w-full p-2 border border-gray-300 rounded-md shadow-sm">
+                        <option value="trafficlight" data-translate-key="scale_trafficlight"></option>
+                        <option value="satisfaction" data-translate-key="scale_satisfaction"></option>
+                        <option value="agreement" data-translate-key="scale_agreement"></option>
+                        <option value="frequency" data-translate-key="scale_frequency"></option>
+                        <option value="numeric" data-translate-key="scale_numeric"></option>
+                        <option value="custom" data-translate-key="scale_custom"></option>
+                    </select>
+                </div>
+                
+                <div id="scale-labels-container" class="space-y-2 mb-4">
+                    </div>
+
+                <div id="custom-scale-container" class="hidden space-y-2 mb-4">
+                     <label class="block text-sm font-medium text-gray-700" data-translate-key="custom_scale_label"></label>
+                     <div id="custom-labels-wrapper"></div>
+                     <button onclick="addCustomLabel()" class="text-sm text-blue-600 hover:text-blue-800" data-translate-key="add_label_btn"></button>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 mt-6">
+                    <button onclick="generateShareableLink()" class="w-full bg-gray-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-gray-600" data-translate-key="prepare_session_btn"></button>
+                    <button onclick="hostSession()" id="host-button" class="w-full themed-bg themed-bg-hover font-bold py-3 px-4 rounded-lg flex items-center justify-center">
+                        <span id="host-button-text" data-translate-key="start_session_btn"></span>
+                        <div id="host-loader" class="loader hidden ml-3"></div>
+                    </button>
+                </div>
+
+                <div id="shareable-link-container" class="hidden mt-4 p-4 bg-gray-100 rounded-lg">
+                    <label class="block text-sm font-medium text-gray-700 mb-2" data-translate-key="shareable_link_title"></label>
+                    <input type="text" id="shareable-link-input" readonly class="w-full p-2 border border-gray-300 rounded-md bg-white font-mono text-sm">
+                </div>
+                 <p class="text-center mt-8"><a href="#" onclick="event.preventDefault(); switchView('participant')" class="text-sm text-gray-500 hover:text-blue-600" data-translate-key="switch_to_participant"></a></p>
+            </div>
+            
+            <div id="results-view" class="hidden themed-content-bg p-6 md:p-8 rounded-xl h-full flex flex-col">
+                <div class="flex justify-between items-start gap-4 mb-4">
+                    <h2 id="results-question" class="text-3xl font-extrabold flex-grow text-gray-800"></h2>
+                    <div class="flex-shrink-0 flex items-center gap-2 hide-on-projection">
+                         <button id="stop-btn" onclick="toggleVotingStatus()" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-3 rounded-lg text-sm">
+                            <span data-translate-key="stop_voting_btn"></span>
+                        </button>
+                        <button id="projection-btn" onclick="toggleProjectionMode()" class="bg-white hover:bg-gray-200 text-gray-800 font-bold py-2 px-3 rounded-lg text-sm border border-gray-300">
+                            <span data-translate-key="projection_btn_text"></span>
+                        </button>
+                    </div>
+                </div>
+                <div id="results-view-content" class="flex-grow min-h-0">
+                    <div id="sharing-info-container" class="space-y-4 hide-on-projection">
+                        <div class="bg-white/60 p-4 rounded-lg text-center backdrop-blur-sm">
+                            <h3 class="font-bold mb-2 text-gray-700" data-translate-key="scan_qr_label"></h3>
+                            <div class="qr-wrapper">
+                                <span class="qr-tooltip" data-translate-key="qr_expand_hint">Haz clic para ampliar</span>
+                                <div id="qrcode-container" class="mx-auto max-w-[240px] cursor-pointer"></div>
+                                <p class="qr-hint" data-translate-key="qr_expand_hint">Haz clic para ampliar</p>
+                            </div>
+                        </div>
+                        <div class="bg-white/60 p-4 rounded-lg text-center backdrop-blur-sm">
+                             <h3 class="font-bold mb-2 text-gray-700" data-translate-key="direct_link_label"></h3>
+                             <p id="direct-session-link" onclick="copyToClipboard('direct-session-link', 'link_copied_toast')" class="font-mono bg-gray-200 px-2 py-1 rounded text-sm my-1 break-all hover:bg-gray-300 cursor-pointer"></p>
+                        </div>
+                        <div class="bg-white/60 p-4 rounded-lg text-center backdrop-blur-sm">
+                            <h3 class="font-bold mb-2 text-gray-700">3. <span data-translate-key="or_go_to"></span></h3>
+                            <p id="app-url" class="font-mono text-sm my-1 break-all"></p>
+                            <p class="text-gray-600 text-sm my-2" data-translate-key="and_enter_code"></p>
+                            <span id="session-code" onclick="copyToClipboard('session-code', 'code_copied_toast')"></span>
+                        </div>
+                    </div>
+                    <div id="results-column">
+                        <div id="results-container" class="h-full"></div>
+                        <p class="text-center text-2xl font-bold mt-4 text-gray-700">
+                            <span data-translate-key="total_votes_label"></span>: <span id="total-votes">0</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="participant-view">
+            <div id="join-session-form" class="bg-white p-6 md:p-8 rounded-xl">
+                 <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold" data-translate-key="join_title"></h2>
+                    <div>
+                        <select id="lang-selector-participant" onchange="setLanguage(this.value)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg">
+                           <option value="es">Español</option>
+                            <option value="ca">Català</option>
+                            <option value="gl">Galego</option>
+                            <option value="eu">Euskara</option>
+                            <option value="en">English</option>
+                            <option value="de">Deutsch</option>
+                        </select>
+                    </div>
+                </div>
+                <label for="code-input" class="block text-sm font-medium text-gray-700 mb-1" data-translate-key="session_code_label"></label>
+                <input type="text" id="code-input" class="w-full p-2 border uppercase border-gray-300 rounded-md shadow-sm" data-translate-key-placeholder="code_input_placeholder">
+                <button onclick="joinSession()" class="mt-4 w-full themed-bg themed-bg-hover font-bold py-3 px-4 rounded-lg flex items-center justify-center">
+                    <span id="join-button-text" data-translate-key="join_btn"></span>
+                    <div id="join-loader" class="loader hidden ml-3"></div>
+                </button>
+                <p id="join-error" class="text-red-500 text-sm mt-2 hidden"></p>
+                <p class="text-center mt-8"><a href="#" onclick="event.preventDefault(); switchView('presenter')" class="text-sm text-gray-500 hover:text-blue-600" data-translate-key="switch_to_presenter"></a></p>
+            </div>
+
+            <div id="voting-view" class="hidden bg-white p-6 md:p-8 rounded-xl">
+                <h2 id="vote-question" class="text-2xl font-bold mb-6 text-center"></h2>
+                <div id="vote-options-container" class="flex flex-wrap justify-center items-center gap-4"></div>
+            </div>
+
+             <div id="voting-paused-view" class="hidden text-center py-8 bg-white p-6 md:p-8 rounded-xl">
+                 <h2 class="text-2xl font-bold mt-4" data-translate-key="voting_paused_title"></h2>
+                 <p class="text-gray-600" data-translate-key="voting_paused_subtitle"></p>
+            </div>
+
+            <div id="voted-view" class="hidden text-center py-8 bg-white p-6 md:p-8 rounded-xl">
+                 <svg class="mx-auto h-16 w-16 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h2 class="text-2xl font-bold mt-4" data-translate-key="voted_title"></h2>
+                <p class="text-gray-600" data-translate-key="voted_subtitle"></p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="toast" class="fixed bottom-5 right-5 bg-gray-900 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300"></div>
+    
+    <script>
+        const APP_ID = 'escala';
+        let translations = {};
+        const fallbackLanguages = [
+            { code: 'es', name: 'Español' },
+            { code: 'ca', name: 'Català' },
+            { code: 'gl', name: 'Galego' },
+            { code: 'eu', name: 'Euskara' },
+            { code: 'en', name: 'English' },
+            { code: 'de', name: 'Deutsch' }
+        ];
+        const safeJson = async (response, fallback) => {
+            try {
+                return await response.json();
+            } catch (error) {
+                return fallback;
+            }
+        };
+
+        const fallbackTranslations = {
+            create_title: 'Crear una nueva escala',
+            question_label: 'Afirmación o pregunta:',
+            question_placeholder: 'Ej: Valora la sesión de hoy',
+            theme_color_label: 'Color:',
+            scale_type_label: 'Tipo de escala:',
+            scale_satisfaction: 'Satisfacción (5 niveles)',
+            scale_agreement: 'Acuerdo (5 niveles)',
+            scale_frequency: 'Frecuencia (5 niveles)',
+            scale_trafficlight: 'Comprensión / Semáforo (3 niveles)',
+            scale_numeric: 'Numérica (1-10)',
+            scale_custom: 'Personalizada',
+            custom_scale_label: 'Etiquetas personalizadas:',
+            add_label_btn: '+ Añadir etiqueta',
+            prepare_session_btn: 'Preparar',
+            start_session_btn: 'Iniciar',
+            switch_to_participant: '¿Unirte a una sesión?',
+            projection_btn_text: 'Proyectar',
+            stop_voting_btn: 'Detener',
+            resume_voting_btn: 'Reanudar',
+            scan_qr_label: '1. Escanea QR',
+            direct_link_label: '2. Comparte enlace',
+            or_go_to: 'O ve a',
+            and_enter_code: 'e introduce el código:',
+            total_votes_label: 'Votos totales',
+            join_title: 'Unirse a una valoración',
+            session_code_label: 'Código de sesión:',
+            code_input_placeholder: 'Introduce el código',
+            join_btn: 'Unirse',
+            switch_to_presenter: '¿Eres presentador?',
+            voted_title: '¡Gracias por tu valoración!',
+            voted_subtitle: 'Resultados en la pantalla principal.',
+            vote_sending: 'Enviando...',
+            voting_paused_title: 'Votación en pausa',
+            voting_paused_subtitle: 'El presentador ha detenido las respuestas.',
+            alert_no_question: 'Introduce una pregunta.',
+            join_error_text: 'Error. Verifica el código.',
+            shareable_link_title: 'Enlace de preparación:',
+            link_copied_toast: 'Enlace copiado',
+            code_copied_toast: 'Código copiado',
+            scales: {
+                satisfaction: ['😠', '🙁', '😐', '🙂', '😄'],
+                agreement: [
+                    'Totalmente en desacuerdo',
+                    'En desacuerdo',
+                    'Neutral',
+                    'De acuerdo',
+                    'Totalmente de acuerdo'
+                ],
+                frequency: [
+                    'Nunca',
+                    'Rara vez',
+                    'A veces',
+                    'Frecuentemente',
+                    'Siempre'
+                ],
+                trafficlight: [
+                    'No lo entiendo',
+                    'Tengo dudas',
+                    'Lo entiendo'
+                ]
+            },
+            qr_expand_hint: 'Haz clic para ampliar'
+        };
+                                
+                                async function loadTranslations() {
+                                    const response = await fetch('locales/index.json', { cache: 'no-store' });
+                                    const languages = response.ok
+                                        ? await safeJson(response, fallbackLanguages)
+                                        : fallbackLanguages;
+                                    const selectorIds = ['lang-selector', 'lang-selector-participant'];
+                                    selectorIds.forEach((id) => {
+                                        const select = document.getElementById(id);
+                                        if (!select) return;
+                                        select.innerHTML = '';
+                                        languages.forEach((lang) => {
+                                            const option = document.createElement('option');
+                                            option.value = lang.code;
+                                            option.textContent = lang.name;
+                                            select.appendChild(option);
+                                        });
+                                    });
+                                
+                                    const entries = await Promise.all(languages.map(async (lang) => {
+                                        const langResp = await fetch(`locales/${APP_ID}/${lang.code}.json`, { cache: 'no-store' });
+                                        if (!langResp.ok) return [lang.code, null];
+                                        const json = await safeJson(langResp, null);
+                                        return [lang.code, json];
+                                    }));
+                                    translations = Object.fromEntries(entries);
+                                    if (!translations.es) {
+                                        throw new Error(`Falta locales/${APP_ID}/es.json`);
+                                    }
+                                    Object.keys(translations).forEach((code) => {
+                                        if (!translations[code]) translations[code] = translations.es;
+                                    });
+                                    return translations;
+                                }
+        let currentLang = 'es';
+        let peer = null, hostConnection = null, guestConnections = [];
+        let sessionData = {};
+
+        const peerConfig = {
+            host: '0.peerjs.com',
+            port: 443,
+            path: '/',
+            secure: true,
+            debug: 2,
+            config: {
+                iceServers: [
+                  { urls: 'stun:stun.relay.metered.ca:80' },
+                  { 
+                    urls: 'turn:standard.relay.metered.ca:80', 
+                    username: '9745e21b303bdaea589c29bc', 
+                    credential: 'UgG56tBqCEGNjzLY' 
+                  },
+                  { 
+                    urls: 'turn:standard.relay.metered.ca:443?transport=tcp', 
+                    username: '9745e21b303bdaea589c29bc', 
+                    credential: 'UgG56tBqCEGNjzLY' 
+                  }
+                ],
+                iceTransportPolicy: 'all'
+            }
+        };
+
+        function setLanguage(lang) {
+            if (!translations[lang]) lang = 'es';
+            currentLang = lang;
+            localStorage.setItem('preferred_language', lang);
+            document.documentElement.lang = lang;
+            ['lang-selector', 'lang-selector-participant'].forEach(id => document.getElementById(id).value = lang);
+            
+            document.querySelectorAll('[data-translate-key]').forEach(el => {
+                const key = el.getAttribute('data-translate-key');
+                if (translations[lang]?.[key]) el.innerText = translations[lang][key];
+            });
+            document.querySelectorAll('[data-translate-key-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-translate-key-placeholder');
+                if (translations[lang]?.[key]) el.placeholder = translations[lang][key];
+            });
+            Object.keys(translations.es.scales).forEach(key => {
+                const optionEl = document.querySelector(`#scale-type option[value=${key}]`);
+                if (optionEl) optionEl.innerText = translations[lang][`scale_${key}`] || translations.es[`scale_${key}`];
+            });
+            handleScaleTypeChange();
+        }
+        
+        function applyTheme(color) {
+            const root = document.documentElement;
+            root.style.setProperty('--theme-color-primary', color);
+            const getContrast = (hex) => (((parseInt(hex.slice(1, 3), 16) * 299) + (parseInt(hex.slice(3, 5), 16) * 587) + (parseInt(hex.slice(5, 7), 16) * 114)) / 1000) >= 128 ? '#000000' : '#ffffff';
+            root.style.setProperty('--theme-color-text', getContrast(color));
+            root.style.setProperty('--theme-color-content-bg', color + '1A');
+        }
+
+        function copyToClipboard(elementId, messageKey) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.innerText = translations[currentLang][messageKey];
+                toast.style.opacity = 1;
+                setTimeout(() => { toast.style.opacity = 0; }, 2000);
+            });
+        }
+
+        function openQrPopup(sessionUrl) {
+            const popup = window.open('', 'qrWindow', 'width=720,height=720,resizable=yes,scrollbars=yes');
+            if (!popup) return;
+            const popupDoc = popup.document;
+            popupDoc.open();
+            popupDoc.write(`<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR</title>
+    <style>
+        body { margin: 0; display: flex; align-items: center; justify-content: center; background: #f8fafc; font-family: 'Inter', sans-serif; }
+        #qr-wrapper { padding: 24px; background: white; border-radius: 16px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2); }
+    </style>
+</head>
+<body>
+    <div id="qr-wrapper"><div id="qr"></div></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"><\/script>
+    <script>
+        const sessionUrl = ${JSON.stringify(sessionUrl)};
+        const qrContainer = document.getElementById('qr');
+        function renderQr() {
+            const size = Math.max(240, Math.min(window.innerWidth, window.innerHeight) - 80);
+            qrContainer.innerHTML = '';
+            new QRCode(qrContainer, { text: sessionUrl, width: size, height: size });
+        }
+        window.addEventListener('load', renderQr);
+        window.addEventListener('resize', renderQr);
+    <\/script>
+</body>
+</html>`);
+            popupDoc.close();
+        }
+        
+        function switchView(view) {
+            document.getElementById('presenter-view').classList.toggle('hidden', view !== 'presenter');
+            document.getElementById('participant-view').classList.toggle('hidden', view === 'presenter');
+            const appEl = document.getElementById('app');
+            appEl.classList.toggle('max-w-5xl', view === 'presenter');
+            appEl.classList.toggle('max-w-2xl', view !== 'presenter');
+            if(view === 'participant') {
+                document.getElementById('join-session-form').classList.remove('hidden');
+                document.getElementById('voting-view').classList.add('hidden');
+                document.getElementById('voted-view').classList.add('hidden');
+            }
+        }
+
+        function handleScaleTypeChange() {
+            const type = document.getElementById('scale-type').value;
+            const customContainer = document.getElementById('custom-scale-container');
+            const labelsContainer = document.getElementById('scale-labels-container');
+            
+            labelsContainer.innerHTML = '';
+            customContainer.classList.add('hidden');
+
+            if (type === 'custom') {
+                customContainer.classList.remove('hidden');
+                if (document.getElementById('custom-labels-wrapper').children.length === 0) {
+                    addCustomLabel(); addCustomLabel();
+                }
+            } else if (type !== 'numeric') {
+                const defaultLabels = translations[currentLang].scales[type] || translations.es.scales[type];
+                defaultLabels.forEach(labelText => {
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = labelText;
+                    input.className = 'w-full p-2 border border-gray-300 rounded-md shadow-sm mb-2';
+                    labelsContainer.appendChild(input);
+                });
+            }
+        }
+
+        function addCustomLabel(value = '') {
+            const wrapper = document.getElementById('custom-labels-wrapper');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = value;
+            input.className = 'w-full p-2 border border-gray-300 rounded-md shadow-sm mb-2';
+            input.placeholder = `Etiqueta ${wrapper.children.length + 1}`;
+            wrapper.appendChild(input);
+        }
+
+        function getScaleOptions() {
+            const type = document.getElementById('scale-type').value;
+            let options = [];
+
+            if (type === 'numeric') {
+                options = Array.from({length: 10}, (_, i) => ({ text: `${i + 1}`, votes: 0 }));
+            } else if (type === 'custom') {
+                options = Array.from(document.querySelectorAll('#custom-labels-wrapper input'))
+                    .map(input => ({ text: input.value.trim(), votes: 0 }))
+                    .filter(opt => opt.text);
+            } else {
+                options = Array.from(document.querySelectorAll('#scale-labels-container input'))
+                    .map(input => ({ text: input.value.trim(), votes: 0 }))
+                    .filter(opt => opt.text);
+            }
+            return options;
+        }
+
+        function generateShareableLink() {
+            const question = document.getElementById('question').value.trim();
+            if (!question) { alert(translations[currentLang].alert_no_question); return; }
+            const options = getScaleOptions();
+            if (options.length < 2) { alert('La escala debe tener al menos 2 opciones.'); return; }
+
+            const data = {
+                question: question,
+                scaleType: document.getElementById('scale-type').value,
+                customOptions: options.map(o => o.text),
+                themeColor: document.getElementById('color-picker').value,
+            };
+            const shareUrl = window.location.href.split('?')[0] + '?data=' + btoa(JSON.stringify(data));
+            document.getElementById('shareable-link-input').value = shareUrl;
+            document.getElementById('shareable-link-container').classList.remove('hidden');
+            copyToClipboard('shareable-link-input', 'link_copied_toast');
+        }
+
+        function hostSession() {
+            const question = document.getElementById('question').value.trim();
+            if (!question) { alert(translations[currentLang].alert_no_question); return; }
+            
+            document.getElementById('host-loader').classList.remove('hidden');
+            document.getElementById('host-button-text').classList.add('hidden');
+            
+            sessionData = {
+                question: question,
+                themeColor: document.getElementById('color-picker').value,
+                scaleType: document.getElementById('scale-type').value,
+                options: getScaleOptions(),
+                votingActive: true
+            };
+            
+            applyTheme(sessionData.themeColor);
+            peer = new Peer(Math.random().toString(36).substring(2, 8).toUpperCase(), peerConfig);
+
+            peer.on('open', id => {
+                switchView('presenter');
+                document.getElementById('create-session-form').classList.add('hidden');
+                document.getElementById('results-view').classList.remove('hidden');
+                const baseUrl = window.location.href.split('?')[0];
+                const sessionUrl = `${baseUrl}?session=${id}`;
+                document.getElementById('session-code').innerText = id;
+                document.getElementById('direct-session-link').innerText = sessionUrl;
+                document.getElementById('app-url').innerText = baseUrl.replace(/^https?:\/\//, '');
+                
+                const qrContainer = document.getElementById('qrcode-container');
+                qrContainer.innerHTML = '';
+                new QRCode(qrContainer, { text: sessionUrl, width: 240, height: 240 });
+                qrContainer.onclick = () => openQrPopup(sessionUrl);
+                updateResultsView();
+            });
+
+            peer.on('connection', conn => {
+                guestConnections.push(conn);
+                conn.on('open', () => conn.send({ type: 'session-data', payload: sessionData }));
+                conn.on('data', data => {
+                    if (data.type === 'vote') {
+                        sessionData.options[data.payload.optionIndex].votes++;
+                        updateResultsView();
+                        broadcastUpdate();
+                    }
+                });
+                conn.on('close', () => {
+                    guestConnections = guestConnections.filter(c => c.peer !== conn.peer);
+                });
+            });
+        }
+        
+        function broadcastUpdate() {
+            guestConnections.forEach(conn => {
+                if(conn.open) conn.send({ type: 'session-update', payload: sessionData })
+            });
+        }
+
+        function toggleVotingStatus() {
+            sessionData.votingActive = !sessionData.votingActive;
+            const btn = document.getElementById('stop-btn').querySelector('span');
+            btn.innerText = translations[currentLang][sessionData.votingActive ? 'stop_voting_btn' : 'resume_voting_btn'];
+            btn.parentElement.classList.toggle('bg-red-500', sessionData.votingActive);
+            btn.parentElement.classList.toggle('hover:bg-red-600', sessionData.votingActive);
+            btn.parentElement.classList.toggle('bg-green-500', !sessionData.votingActive);
+            btn.parentElement.classList.toggle('hover:bg-green-600', !sessionData.votingActive);
+            broadcastUpdate();
+        }
+
+        function updateResultsView() {
+            document.getElementById('results-question').innerText = sessionData.question;
+            const container = document.getElementById('results-container');
+            const totalVotes = sessionData.options.reduce((sum, opt) => sum + opt.votes, 0);
+            document.getElementById('total-votes').innerText = totalVotes;
+            container.innerHTML = '';
+            
+            if (sessionData.scaleType === 'trafficlight') {
+                renderTrafficLightResults(container, sessionData.options);
+            } else {
+                renderBarResults(container, sessionData.options, totalVotes);
+            }
+        }
+        
+        function renderBarResults(container, options, totalVotes) {
+            container.className = 'space-y-4 w-full';
+            options.forEach(option => {
+                const percentage = totalVotes > 0 ? (option.votes / totalVotes) * 100 : 0;
+                container.innerHTML += `
+                    <div class="bar-result">
+                        <div class="flex justify-between items-baseline mb-1">
+                            <span class="text-lg text-gray-800 font-medium">${option.text}</span>
+                            <span class="text-lg font-bold text-gray-900">${option.votes} <span class="text-base text-gray-600 font-medium">(${percentage.toFixed(0)}%)</span></span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-6"><div class="bar h-6 rounded-full" style="width: ${percentage}%"></div></div>
+                    </div>`;
+            });
+        }
+
+        function renderTrafficLightResults(container, options) {
+            container.className = 'traffic-light-results';
+            const colors = ['light-red', 'light-yellow', 'light-green'];
+            options.forEach((option, index) => {
+                container.innerHTML += `
+                    <div class="light-circle ${colors[index % colors.length]}">
+                        <div class="votes">${option.votes}</div>
+                        <div class="label">${option.text}</div>
+                    </div>`;
+            });
+        }
+
+        function joinSession() {
+            const hostId = document.getElementById('code-input').value.trim().toUpperCase();
+            if (!hostId) return;
+            document.getElementById('join-loader').classList.remove('hidden');
+            document.getElementById('join-button-text').classList.add('hidden');
+            
+            peer = new Peer(null, peerConfig);
+            peer.on('open', () => {
+                hostConnection = peer.connect(hostId, { reliable: true });
+                hostConnection.on('data', data => {
+                    if (data.type === 'session-data' || data.type === 'session-update') {
+                        sessionData = data.payload;
+                        applyTheme(sessionData.themeColor);
+                        if (localStorage.getItem(`voted_in_scale_${hostConnection.peer}`)) {
+                            showVotedView();
+                        } else {
+                            updateParticipantView();
+                        }
+                    }
+                });
+                hostConnection.on('error', () => document.getElementById('join-error').classList.remove('hidden'));
+            });
+            peer.on('error', () => document.getElementById('join-error').classList.remove('hidden'));
+        }
+
+        function updateParticipantView() {
+            document.getElementById('join-session-form').classList.add('hidden');
+            document.getElementById('voted-view').classList.add('hidden');
+
+            if (!sessionData.votingActive) {
+                document.getElementById('voting-view').classList.add('hidden');
+                document.getElementById('voting-paused-view').classList.remove('hidden');
+            } else {
+                showVotingView();
+            }
+        }
+        
+        function showVotedView() {
+            document.getElementById('join-session-form').classList.add('hidden');
+            document.getElementById('voting-view').classList.add('hidden');
+            document.getElementById('voting-paused-view').classList.add('hidden');
+            document.getElementById('voted-view').classList.remove('hidden');
+        }
+
+        function showVotingView() {
+            document.getElementById('voting-paused-view').classList.add('hidden');
+            document.getElementById('voting-view').classList.remove('hidden');
+            document.getElementById('vote-question').innerText = sessionData.question;
+            const container = document.getElementById('vote-options-container');
+            container.innerHTML = '';
+            
+            if (sessionData.scaleType === 'trafficlight') {
+                const colors = ['vote-btn-red', 'vote-btn-yellow', 'vote-btn-green'];
+                sessionData.options.forEach((option, index) => {
+                    container.innerHTML += `<button class="vote-btn vote-btn-circle ${colors[index % colors.length]}" onclick="castVote(${index})"></button>`;
+                });
+            } else {
+                sessionData.options.forEach((option, index) => {
+                    const isIcon = ['satisfaction'].includes(sessionData.scaleType);
+                    container.innerHTML += `<button class="vote-btn p-3 rounded-lg flex-grow text-center ${isIcon ? 'text-4xl' : 'text-lg'}" onclick="castVote(${index})">${option.text}</button>`;
+                });
+            }
+        }
+
+        function castVote(optionIndex) {
+            hostConnection.send({ type: 'vote', payload: { optionIndex } });
+            localStorage.setItem(`voted_in_scale_${hostConnection.peer}`, 'true');
+            showVotedView();
+        }
+
+        function toggleProjectionMode() {
+            document.body.classList.toggle('projection-mode');
+            window.addEventListener('keydown', handleExitProjection);
+            document.getElementById('app').addEventListener('click', handleExitProjection);
+        }
+
+        function handleExitProjection(event) {
+            if (event.key === 'Escape' || (event.type === 'click' && !event.target.closest('button'))) {
+                if (document.body.classList.contains('projection-mode')) {
+                    document.body.classList.remove('projection-mode');
+                    window.removeEventListener('keydown', handleExitProjection);
+                    document.getElementById('app').removeEventListener('click', handleExitProjection);
+                }
+            }
+        }
+        
+        function checkURLParameters() {
+            const params = new URLSearchParams(window.location.search);
+            const sessionId = params.get('session');
+            const data = params.get('data');
+
+            if (sessionId) {
+                switchView('participant');
+                document.getElementById('code-input').value = sessionId;
+                joinSession();
+            } else if (data) {
+                switchView('presenter');
+                try {
+                    const decoded = JSON.parse(atob(data));
+                    document.getElementById('question').value = decoded.question;
+                    document.getElementById('color-picker').value = decoded.themeColor;
+                    applyTheme(decoded.themeColor);
+                    document.getElementById('scale-type').value = decoded.scaleType;
+                    handleScaleTypeChange();
+
+                    const targetContainer = decoded.scaleType === 'custom' ? '#custom-labels-wrapper' : '#scale-labels-container';
+                    const inputs = document.querySelectorAll(`${targetContainer} input`);
+                    
+                    decoded.customOptions.forEach((opt, index) => {
+                        if (inputs[index]) {
+                            inputs[index].value = opt;
+                        } else if (decoded.scaleType === 'custom') {
+                            addCustomLabel(opt);
+                        }
+                    });
+
+                } catch (e) {
+                    console.error("Error decoding URL data:", e);
+                    switchView('participant');
+                }
+            } else {
+                switchView('participant'); 
+            }
+        }
+
+        window.onload = async () => {
+            try {
+                await loadTranslations();
+            } catch (error) {
+                console.error(error);
+                translations = { es: fallbackTranslations };
+            }
+            const urlLang = new URLSearchParams(window.location.search).get('lang');
+            const normalizedUrlLang = urlLang ? urlLang.split('-')[0] : null;
+            const browserLang = (navigator.language || navigator.userLanguage).split('-')[0];
+            const langToSet = (normalizedUrlLang && translations[normalizedUrlLang])
+                ? normalizedUrlLang
+                : (translations[browserLang] ? browserLang : 'es');
+            setLanguage(langToSet);
+            switchView('participant');
+            checkURLParameters();
+            document.getElementById('color-picker').addEventListener('input', (e) => applyTheme(e.target.value));
+            handleScaleTypeChange(); 
+        };
+    </script>
+</body>
+</html>

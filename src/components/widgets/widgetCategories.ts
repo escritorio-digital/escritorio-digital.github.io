@@ -10,7 +10,7 @@ export const WIDGET_CATEGORIES: WidgetCategory[] = [
     {
         id: 'organization',
         titleKey: 'settings.widgets.categories.organization',
-        widgetIds: ['work-list', 'attendance', 'group-generator', 'calendar', 'program-guide'],
+        widgetIds: ['work-list', 'attendance', 'class-diary', 'group-generator', 'calendar'],
     },
     {
         id: 'time',

@@ -15,6 +15,7 @@ type LinkPortalWidgetProps = {
     url: string;
     openLabelKey: string;
     actions?: LinkPortalAction[];
+    sandbox?: string;
 };
 
 export const LinkPortalWidget: React.FC<LinkPortalWidgetProps> = ({
@@ -23,6 +24,7 @@ export const LinkPortalWidget: React.FC<LinkPortalWidgetProps> = ({
     url,
     openLabelKey,
     actions = [],
+    sandbox = 'allow-scripts allow-forms allow-popups',
 }) => {
     const { t } = useTranslation();
 
@@ -64,7 +66,7 @@ export const LinkPortalWidget: React.FC<LinkPortalWidgetProps> = ({
                     className="link-portal-frame"
                     src={url}
                     title={t(titleKey)}
-                    sandbox="allow-scripts allow-forms allow-popups"
+                    sandbox={sandbox}
                 />
             </div>
         </section>
