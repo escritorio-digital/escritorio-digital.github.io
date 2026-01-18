@@ -91,8 +91,6 @@
       "reset_theme_button": "Restaurar Tema Padrão",
       "show_system_stats_label": "Mostrar estatísticas do sistema",
       "show_system_stats_help": "Mostradas ao lado do relógio.",
-      "show_profile_switcher_label": "Mostrar menu de desktops",
-      "show_profile_switcher_help": "Mostrado no canto inferior direito.",
       "modal_title": "Personalizar tema",
       "open_modal_title": "Personalização do tema",
       "open_modal_help": "Escolhe um tema predefinido ou ajusta cores e fundos.",
@@ -223,7 +221,6 @@
     "hide_datetime": "Ocultar data e hora",
     "show_toolbar": "Barra inferior",
     "hide_toolbar": "Ocultar barra inferior",
-    "show_profile_switcher": "Menu de desktops",
     "reset_layout": "Fechar todas as janelas",
     "reset_layout_confirm": "Queres fechar todas as janelas do ambiente de trabalho?",
     "show_system_stats": "Estatísticas do sistema",
@@ -779,12 +776,6 @@
       "empty_state": "Começa uma pesquisa para ver resultados.",
       "open_new_tab": "Abrir em nova aba",
       "open_article": "Abrir artigo"
-    },
-    "class_diary": {
-      "title": "Diário de turma",
-      "description": "Serve para manter um diário da turma e dos alunos, mas não para registrar faltas ou notas.",
-      "open_new_tab": "Abrir em nova aba",
-      "search_keywords": "diário, turma, alunos, acompanhamento"
     }
   },
   "backup": {
