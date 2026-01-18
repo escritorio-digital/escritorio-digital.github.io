@@ -214,7 +214,7 @@
 
                                 
                                 async function loadTranslations() {
-                                    const response = await fetch('/directo/locales/index.json', { cache: 'no-store' });
+                                    const response = await fetch('locales/index.json', { cache: 'no-store' });
                                     const languages = response.ok
                                         ? await safeJson(response, fallbackLanguages)
                                         : fallbackLanguages;
@@ -232,14 +232,14 @@
                                     });
                                 
                                     const entries = await Promise.all(languages.map(async (lang) => {
-                                        const langResp = await fetch(`/directo/locales/${APP_ID}/${lang.code}.json`, { cache: 'no-store' });
+                                        const langResp = await fetch(`locales/${APP_ID}/${lang.code}.json`, { cache: 'no-store' });
                                         if (!langResp.ok) return [lang.code, null];
                                         const json = await safeJson(langResp, null);
                                         return [lang.code, json];
                                     }));
                                     translations = Object.fromEntries(entries);
                                     if (!translations.es) {
-                                        throw new Error(`Falta /directo/locales/${APP_ID}/es.json`);
+                                        throw new Error(`Falta locales/${APP_ID}/es.json`);
                                     }
                                     Object.keys(translations).forEach((code) => {
                                         if (!translations[code]) translations[code] = translations.es;
