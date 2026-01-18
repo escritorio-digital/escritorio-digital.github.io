@@ -31,20 +31,6 @@ export default defineConfig(() => ({
         })
     ],
     build: {
-        rollupOptions: {
-            output: {
-                manualChunks(id) {
-                    if (!id.includes('node_modules')) return;
-                    if (id.includes('react')) return 'react-vendor';
-                    if (id.includes('i18next')) return 'i18n-vendor';
-                    if (id.includes('katex')) return 'katex-vendor';
-                    if (id.includes('jspdf')) return 'pdf-vendor';
-                    if (id.includes('html2canvas')) return 'canvas-vendor';
-                    if (id.includes('marked') || id.includes('turndown')) return 'markdown-vendor';
-                    if (id.includes('@tiptap')) return 'editor-vendor';
-                    return 'vendor';
-                },
-            },
-        },
+        chunkSizeWarningLimit: 1000,
     },
 }))
