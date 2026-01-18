@@ -1,0 +1,1 @@
+const r=new Set(["es","ca","gl","eu","en","de"]),g=(e,o)=>{const s=(o.language||"es").split("-")[0],t=r.has(s)?s:"es",a=e.startsWith("/")?e.slice(1):e,n="/escritorio/";return`${n.endsWith("/")?n:`${n}/`}directo/${a}?lang=${encodeURIComponent(t)}`};export{g};

@@ -89,6 +89,8 @@
       "reset_theme_button": "Restablecer Tema por Defecto",
       "show_system_stats_label": "Mostrar estatísticas do sistema",
       "show_system_stats_help": "Móstranse ao lado do reloxo.",
+      "show_profile_switcher_label": "Mostrar menú de escritorios",
+      "show_profile_switcher_help": "Móstrase na esquina inferior dereita.",
       "modal_title": "Personalizar tema",
       "open_modal_title": "Personalización do tema",
       "open_modal_help": "Escolle un tema predefinido ou axusta cores e fondos.",
@@ -219,6 +221,7 @@
     "hide_datetime": "Ocultar data e hora",
     "show_toolbar": "Barra inferior",
     "hide_toolbar": "Agochar barra inferior",
+    "show_profile_switcher": "Menú de escritorios",
     "reset_layout": "Pechar todas as xanelas",
     "reset_layout_confirm": "Queres pechar todas as xanelas do escritorio?",
     "show_system_stats": "Estatísticas do sistema",
@@ -774,6 +777,12 @@
       "empty_state": "Comeza unha busca para ver resultados.",
       "open_new_tab": "Abrir nunha nova pestana",
       "open_article": "Abrir artigo"
+    },
+    "class_diary": {
+      "title": "Diario de clase",
+      "description": "Serve para levar un diario da clase e do alumnado, pero non para poñer faltas de asistencia nin notas.",
+      "open_new_tab": "Abrir nunha lapela nova",
+      "search_keywords": "diario, clase, alumnado, seguimento"
     }
   },
   "backup": {

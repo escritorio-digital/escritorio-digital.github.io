@@ -89,6 +89,8 @@
       "reset_theme_button": "Reset to Default Theme",
       "show_system_stats_label": "Show system stats",
       "show_system_stats_help": "Shown next to the clock.",
+      "show_profile_switcher_label": "Show desktop menu",
+      "show_profile_switcher_help": "Shown in the bottom-right corner.",
       "modal_title": "Customize theme",
       "open_modal_title": "Theme customization",
       "open_modal_help": "Choose a preset theme or adjust colors and wallpapers.",
@@ -219,6 +221,7 @@
     "hide_datetime": "Hide date and time",
     "show_toolbar": "Bottom bar",
     "hide_toolbar": "Hide bottom bar",
+    "show_profile_switcher": "Desktop menu",
     "reset_layout": "Close all windows",
     "reset_layout_confirm": "Do you want to close all desktop windows?",
     "show_system_stats": "System stats",
@@ -774,6 +777,12 @@
       "empty_state": "Start a search to see results.",
       "open_new_tab": "Open in new tab",
       "open_article": "Open article"
+    },
+    "class_diary": {
+      "title": "Class diary",
+      "description": "For keeping a diary of the class and students, not for recording absences or grades.",
+      "open_new_tab": "Open in a new tab",
+      "search_keywords": "diary, class, students, log"
     }
   },
   "backup": {

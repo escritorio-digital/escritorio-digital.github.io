@@ -89,6 +89,8 @@
       "reset_theme_button": "Restablir Tema per Defecte",
       "show_system_stats_label": "Mostrar estadístiques del sistema",
       "show_system_stats_help": "Es mostren al costat del rellotge.",
+      "show_profile_switcher_label": "Mostrar menú d'escriptoris",
+      "show_profile_switcher_help": "Es mostra a la cantonada inferior dreta.",
       "modal_title": "Personalitzar el tema",
       "open_modal_title": "Personalització del tema",
       "open_modal_help": "Tria un tema predefinit o ajusta colors i fons.",
@@ -219,6 +221,7 @@
     "hide_datetime": "Amagar data i hora",
     "show_toolbar": "Barra inferior",
     "hide_toolbar": "Amaga la barra inferior",
+    "show_profile_switcher": "Menú d'escriptoris",
     "reset_layout": "Tancar totes les finestres",
     "reset_layout_confirm": "Vols tancar totes les finestres de l'escriptori?",
     "show_system_stats": "Estadístiques del sistema",
@@ -774,6 +777,12 @@
       "empty_state": "Comença una cerca per veure resultats.",
       "open_new_tab": "Obrir en una pestanya nova",
       "open_article": "Obrir article"
+    },
+    "class_diary": {
+      "title": "Diari de classe",
+      "description": "Serveix per portar un diari de la classe i l'alumnat, però no per posar faltes d'assistència ni notes.",
+      "open_new_tab": "Obrir en una pestanya nova",
+      "search_keywords": "diari, classe, alumnat, seguiment"
     }
   },
   "backup": {
