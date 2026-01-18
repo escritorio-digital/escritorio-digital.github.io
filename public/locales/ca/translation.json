@@ -774,6 +774,12 @@
       "empty_state": "Comença una cerca per veure resultats.",
       "open_new_tab": "Obrir en una pestanya nova",
       "open_article": "Obrir article"
+    },
+    "class_diary": {
+      "title": "Diari de classe",
+      "description": "Serveix per portar un diari de la classe i l'alumnat, però no per posar faltes d'assistència ni notes.",
+      "open_new_tab": "Obrir en una pestanya nova",
+      "search_keywords": "diari, classe, alumnat, seguiment"
     }
   },
   "backup": {

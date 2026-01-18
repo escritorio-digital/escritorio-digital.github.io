@@ -774,6 +774,12 @@
       "empty_state": "Starte eine Suche, um Ergebnisse zu sehen.",
       "open_new_tab": "In neuem Tab öffnen",
       "open_article": "Artikel öffnen"
+    },
+    "class_diary": {
+      "title": "Klassen-Tagebuch",
+      "description": "Zum Führen eines Tagebuchs der Klasse und der Schüler:innen, nicht zum Eintragen von Fehlzeiten oder Noten.",
+      "open_new_tab": "In neuem Tab öffnen",
+      "search_keywords": "tagebuch, klasse, schüler, protokoll"
     }
   },
   "backup": {

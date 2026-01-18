@@ -774,6 +774,12 @@
       "empty_state": "Avvia una ricerca per vedere i risultati.",
       "open_new_tab": "Apri in una nuova scheda",
       "open_article": "Apri articolo"
+    },
+    "class_diary": {
+      "title": "Diario di classe",
+      "description": "Serve per tenere un diario della classe e degli studenti, ma non per registrare assenze o voti.",
+      "open_new_tab": "Apri in una nuova scheda",
+      "search_keywords": "diario, classe, studenti, registro"
     }
   },
   "backup": {

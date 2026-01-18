@@ -776,6 +776,12 @@
       "empty_state": "Começa uma pesquisa para ver resultados.",
       "open_new_tab": "Abrir em nova aba",
       "open_article": "Abrir artigo"
+    },
+    "class_diary": {
+      "title": "Diário de turma",
+      "description": "Serve para manter um diário da turma e dos alunos, mas não para registrar faltas ou notas.",
+      "open_new_tab": "Abrir em nova aba",
+      "search_keywords": "diário, turma, alunos, acompanhamento"
     }
   },
   "backup": {

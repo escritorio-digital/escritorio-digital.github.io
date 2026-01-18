@@ -775,6 +775,12 @@
       "empty_state": "Lance une recherche pour voir des résultats.",
       "open_new_tab": "Ouvrir dans un nouvel onglet",
       "open_article": "Ouvrir l'article"
+    },
+    "class_diary": {
+      "title": "Journal de classe",
+      "description": "Permet de tenir un journal de la classe et des élèves, mais pas d'y saisir des absences ou des notes.",
+      "open_new_tab": "Ouvrir dans un nouvel onglet",
+      "search_keywords": "journal, classe, élèves, suivi"
     }
   },
   "backup": {

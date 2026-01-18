@@ -774,6 +774,12 @@
       "empty_state": "Comeza unha busca para ver resultados.",
       "open_new_tab": "Abrir nunha nova pestana",
       "open_article": "Abrir artigo"
+    },
+    "class_diary": {
+      "title": "Diario de clase",
+      "description": "Serve para levar un diario da clase e do alumnado, pero non para poñer faltas de asistencia nin notas.",
+      "open_new_tab": "Abrir nunha lapela nova",
+      "search_keywords": "diario, clase, alumnado, seguimento"
     }
   },
   "backup": {

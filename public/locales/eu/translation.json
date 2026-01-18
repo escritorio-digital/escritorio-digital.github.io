@@ -773,6 +773,12 @@
       "empty_state": "Hasi bilaketa bat emaitzak ikusteko.",
       "open_new_tab": "Ireki fitxa berri batean",
       "open_article": "Ireki artikulua"
+    },
+    "class_diary": {
+      "title": "Ikasgela egunkaria",
+      "description": "Ikasgela eta ikasleen egunerokoa eramateko da, baina ez da asistentziako faltak edo notak jartzeko.",
+      "open_new_tab": "Ireki fitxa berrian",
+      "search_keywords": "egunkari, ikasgela, ikasle, jarraipena"
     }
   },
   "backup": {

@@ -774,6 +774,12 @@
       "empty_state": "Start a search to see results.",
       "open_new_tab": "Open in new tab",
       "open_article": "Open article"
+    },
+    "class_diary": {
+      "title": "Class diary",
+      "description": "For keeping a diary of the class and students, not for recording absences or grades.",
+      "open_new_tab": "Open in a new tab",
+      "search_keywords": "diary, class, students, log"
     }
   },
   "backup": {
