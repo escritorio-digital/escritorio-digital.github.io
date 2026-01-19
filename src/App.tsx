@@ -31,6 +31,7 @@ const DesktopUI: React.FC<{
     const activeProfile = profiles[activeProfileName] || Object.values(profiles)[0];
     const showDateTime = activeProfile.theme?.showDateTime ?? true;
     const showSystemStats = activeProfile.theme?.showSystemStats ?? false;
+    const showProfileMenu = activeProfile.theme?.showProfileMenu ?? true;
 
     const setActiveWidgets = useCallback((updater: React.SetStateAction<ActiveWidget[]>) => {
         setProfiles((prev) => {
@@ -75,6 +76,15 @@ const DesktopUI: React.FC<{
         };
         setProfiles(prev => ({ ...prev, [activeProfileName]: newProfileData }));
     }, [activeProfile, activeProfileName, setProfiles, showSystemStats]);
+
+    const toggleProfileMenu = useCallback(() => {
+        const nextShowProfileMenu = !showProfileMenu;
+        const newProfileData: DesktopProfile = {
+            ...activeProfile,
+            theme: { ...activeProfile.theme, showProfileMenu: nextShowProfileMenu },
+        };
+        setProfiles(prev => ({ ...prev, [activeProfileName]: newProfileData }));
+    }, [activeProfile, activeProfileName, setProfiles, showProfileMenu]);
 
     const [highestZ, setHighestZ] = useState(100);
     const highestZRef = useRef(100);
@@ -750,15 +760,17 @@ const DesktopUI: React.FC<{
             />
             
             {/* --- ¡AQUÍ ESTÁ EL CAMBIO! Añadimos el nuevo componente a la interfaz --- */}
-            <ProfileSwitcher
-              profiles={profiles}
-              activeProfileName={activeProfileName}
-              setActiveProfileName={setActiveProfileName}
-              setProfiles={setProfiles}
-              onManageProfiles={() => openSettingsTab('profiles')}
-              onOpenContextMenu={(event) => handleContextMenu(event, undefined, true)}
-              profileOrder={profileOrder}
-            />
+            {showProfileMenu && (
+                <ProfileSwitcher
+                  profiles={profiles}
+                  activeProfileName={activeProfileName}
+                  setActiveProfileName={setActiveProfileName}
+                  setProfiles={setProfiles}
+                  onManageProfiles={() => openSettingsTab('profiles')}
+                  onOpenContextMenu={(event) => handleContextMenu(event, undefined, true)}
+                  profileOrder={profileOrder}
+                />
+            )}
 
             {showStorageWarning && (
                 <div className="fixed top-4 right-4 z-[10002] max-w-sm bg-white/95 backdrop-blur-md border border-amber-200 shadow-xl rounded-lg p-4 text-sm text-text-dark">
@@ -895,7 +907,7 @@ const DesktopUI: React.FC<{
                                     setContextMenu(prev => ({ ...prev, isOpen: false }));
                                 }}
                             >
-                                <span>{t('context_menu.show_toolbar')}</span>
+                                <span>{isToolbarHidden ? t('context_menu.show_toolbar') : t('context_menu.hide_toolbar')}</span>
                                 <span className={`h-4 w-4 rounded border ${!isToolbarHidden ? 'bg-accent border-accent' : 'border-gray-400'}`} />
                             </button>
                             <button
@@ -905,7 +917,7 @@ const DesktopUI: React.FC<{
                                     setContextMenu(prev => ({ ...prev, isOpen: false }));
                                 }}
                             >
-                                <span>{t('context_menu.show_datetime')}</span>
+                                <span>{showDateTime ? t('context_menu.hide_datetime') : t('context_menu.show_datetime')}</span>
                                 <span className={`h-4 w-4 rounded border ${showDateTime ? 'bg-accent border-accent' : 'border-gray-400'}`} />
                             </button>
                             <button
@@ -915,8 +927,18 @@ const DesktopUI: React.FC<{
                                     setContextMenu(prev => ({ ...prev, isOpen: false }));
                                 }}
                             >
-                                <span>{t('context_menu.show_system_stats')}</span>
+                                <span>{showSystemStats ? t('context_menu.hide_system_stats') : t('context_menu.show_system_stats')}</span>
                                 <span className={`h-4 w-4 rounded border ${showSystemStats ? 'bg-accent border-accent' : 'border-gray-400'}`} />
+                            </button>
+                            <button
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center justify-between gap-3"
+                                onClick={() => {
+                                    toggleProfileMenu();
+                                    setContextMenu(prev => ({ ...prev, isOpen: false }));
+                                }}
+                            >
+                                <span>{showProfileMenu ? t('context_menu.hide_profile_menu') : t('context_menu.show_profile_menu')}</span>
+                                <span className={`h-4 w-4 rounded border ${showProfileMenu ? 'bg-accent border-accent' : 'border-gray-400'}`} />
                             </button>
                             {hasOpenWidgets && (
                                 <>

@@ -117,7 +117,9 @@
       "font_scale_100": "100%",
       "font_scale_110": "110%",
       "font_scale_125": "125%",
-      "font_scale_150": "150%"
+      "font_scale_150": "150%",
+      "show_profile_menu_label": "Mostrar menú de perfiles",
+      "show_profile_menu_help": "Se muestra en la esquina inferior derecha."
     }
   },
   "toolbar": {
@@ -156,7 +158,7 @@
     "app_name_label": "Nombre de la aplicación",
     "app_name_value": "Escritorio digital para el aula",
     "version_label": "Versión",
-    "version_value": "v1.3.6 — abril de 2025",
+    "version_value": "v1.3.7 — abril de 2025",
     "history_title": "Historial del proyecto",
     "initial_title": "Proyecto inicial",
     "initial_text": "Idea y primera versión: María Teresa González. Versión básica del escritorio interactivo para aula.",
@@ -228,7 +230,9 @@
     "close_window": "Cerrar esta ventana",
     "minimize_window": "Minimizar ventana",
     "maximize_window": "Maximizar ventana",
-    "restore_window": "Restaurar ventana"
+    "restore_window": "Restaurar ventana",
+    "show_profile_menu": "Menú de perfiles",
+    "hide_profile_menu": "Ocultar menú de perfiles"
   },
   "storage_warning": {
     "title": "Almacenamiento lleno",

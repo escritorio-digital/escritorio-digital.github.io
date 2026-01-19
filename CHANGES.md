@@ -1,5 +1,10 @@
 # Cambios realizados
 
+## 1.3.7
+- Menú de perfiles: opción para mostrar/ocultar desde Apariencia.
+- Menú de perfiles: opción en el menú contextual del botón derecho.
+- Menú de perfiles: se oculta en pantallas estrechas como la barra inferior.
+
 ## 1.3.6
 - Configuración de programas: foco automático en el buscador al abrir la pestaña.
 - Configuración de programas: muestra el total de programas disponibles junto al límite.

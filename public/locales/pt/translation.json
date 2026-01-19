@@ -119,7 +119,9 @@
       "font_scale_100": "100%",
       "font_scale_110": "110%",
       "font_scale_125": "125%",
-      "font_scale_150": "150%"
+      "font_scale_150": "150%",
+      "show_profile_menu_label": "Mostrar menu de perfis",
+      "show_profile_menu_help": "É mostrado no canto inferior direito."
     }
   },
   "toolbar": {
@@ -158,7 +160,7 @@
     "app_name_label": "Nome da aplicação",
     "app_name_value": "Ambiente de trabalho digital para a aula",
     "version_label": "Versão",
-    "version_value": "v1.3.6 — abril de 2025",
+    "version_value": "v1.3.7 — abril de 2025",
     "history_title": "Histórico do projeto",
     "initial_title": "Projeto inicial",
     "initial_text": "Ideia e primeira versão: María Teresa González. Versão básica do ambiente de trabalho interativo para a aula.",
@@ -230,7 +232,9 @@
     "close_window": "Fechar esta janela",
     "minimize_window": "Minimizar janela",
     "maximize_window": "Maximizar janela",
-    "restore_window": "Restaurar janela"
+    "restore_window": "Restaurar janela",
+    "show_profile_menu": "Menu de perfis",
+    "hide_profile_menu": "Ocultar menu de perfis"
   },
   "storage_warning": {
     "title": "Armazenamento cheio",
