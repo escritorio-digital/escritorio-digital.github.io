@@ -117,7 +117,9 @@
       "font_scale_100": "100%",
       "font_scale_110": "110%",
       "font_scale_125": "125%",
-      "font_scale_150": "150%"
+      "font_scale_150": "150%",
+      "show_profile_menu_label": "Profilmenü anzeigen",
+      "show_profile_menu_help": "Wird in der rechten unteren Ecke angezeigt."
     }
   },
   "toolbar": {
@@ -156,7 +158,7 @@
     "app_name_label": "Name der Anwendung",
     "app_name_value": "Digitaler Desktop für den Unterricht",
     "version_label": "Version",
-    "version_value": "v1.3.6 — April 2025",
+    "version_value": "v1.3.7 — April 2025",
     "history_title": "Projektverlauf",
     "initial_title": "Ursprüngliches Projekt",
     "initial_text": "Idee und erste Version: María Teresa González. Grundversion des interaktiven Klassenraum-Desktops.",
@@ -228,7 +230,9 @@
     "close_window": "Dieses Fenster schließen",
     "minimize_window": "Fenster minimieren",
     "maximize_window": "Fenster maximieren",
-    "restore_window": "Fenster wiederherstellen"
+    "restore_window": "Fenster wiederherstellen",
+    "show_profile_menu": "Profilmenü",
+    "hide_profile_menu": "Profilmenü ausblenden"
   },
   "storage_warning": {
     "title": "Speicher voll",

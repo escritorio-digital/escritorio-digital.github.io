@@ -117,7 +117,9 @@
       "font_scale_100": "100%",
       "font_scale_110": "110%",
       "font_scale_125": "125%",
-      "font_scale_150": "150%"
+      "font_scale_150": "150%",
+      "show_profile_menu_label": "Mostrar menú de perfils",
+      "show_profile_menu_help": "Es mostra a la cantonada inferior dreta."
     }
   },
   "toolbar": {
@@ -156,7 +158,7 @@
     "app_name_label": "Nom de l'aplicació",
     "app_name_value": "Escriptori digital per a l'aula",
     "version_label": "Versió",
-    "version_value": "v1.3.6 — abril de 2025",
+    "version_value": "v1.3.7 — abril de 2025",
     "history_title": "Historial del projecte",
     "initial_title": "Projecte inicial",
     "initial_text": "Idea i primera versió: María Teresa González. Versió bàsica de l'escriptori interactiu per a l'aula.",
@@ -228,7 +230,9 @@
     "close_window": "Tancar aquesta finestra",
     "minimize_window": "Minimitzar finestra",
     "maximize_window": "Maximitzar finestra",
-    "restore_window": "Restaurar finestra"
+    "restore_window": "Restaurar finestra",
+    "show_profile_menu": "Menú de perfils",
+    "hide_profile_menu": "Amagar menú de perfils"
   },
   "storage_warning": {
     "title": "Emmagatzematge ple",

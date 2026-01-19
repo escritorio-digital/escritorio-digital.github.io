@@ -117,7 +117,9 @@
       "font_scale_100": "100%",
       "font_scale_110": "110%",
       "font_scale_125": "125%",
-      "font_scale_150": "150%"
+      "font_scale_150": "150%",
+      "show_profile_menu_label": "Show profile menu",
+      "show_profile_menu_help": "Shown in the bottom-right corner."
     }
   },
   "toolbar": {
@@ -156,7 +158,7 @@
     "app_name_label": "Application name",
     "app_name_value": "Digital desktop for the classroom",
     "version_label": "Version",
-    "version_value": "v1.3.6 — April 2025",
+    "version_value": "v1.3.7 — April 2025",
     "history_title": "Project history",
     "initial_title": "Initial project",
     "initial_text": "Idea and first version: María Teresa González. Basic version of the interactive classroom desktop.",
@@ -228,7 +230,9 @@
     "close_window": "Close this window",
     "minimize_window": "Minimize window",
     "maximize_window": "Maximize window",
-    "restore_window": "Restore window"
+    "restore_window": "Restore window",
+    "show_profile_menu": "Profile menu",
+    "hide_profile_menu": "Hide profile menu"
   },
   "storage_warning": {
     "title": "Storage full",

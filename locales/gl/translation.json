@@ -117,7 +117,9 @@
       "font_scale_100": "100%",
       "font_scale_110": "110%",
       "font_scale_125": "125%",
-      "font_scale_150": "150%"
+      "font_scale_150": "150%",
+      "show_profile_menu_label": "Mostrar menú de perfís",
+      "show_profile_menu_help": "Amósase na esquina inferior dereita."
     }
   },
   "toolbar": {
@@ -156,7 +158,7 @@
     "app_name_label": "Nome da aplicación",
     "app_name_value": "Escritorio dixital para a aula",
     "version_label": "Versión",
-    "version_value": "v1.3.6 — abril de 2025",
+    "version_value": "v1.3.7 — abril de 2025",
     "history_title": "Historial do proxecto",
     "initial_title": "Proxecto inicial",
     "initial_text": "Idea e primeira versión: María Teresa González. Versión básica do escritorio interactivo para a aula.",
@@ -228,7 +230,9 @@
     "close_window": "Pechar esta ventá",
     "minimize_window": "Minimizar xanela",
     "maximize_window": "Maximizar xanela",
-    "restore_window": "Restaurar xanela"
+    "restore_window": "Restaurar xanela",
+    "show_profile_menu": "Menú de perfís",
+    "hide_profile_menu": "Ocultar menú de perfís"
   },
   "storage_warning": {
     "title": "Almacenamento cheo",

@@ -116,7 +116,9 @@
       "font_scale_100": "100%",
       "font_scale_110": "110%",
       "font_scale_125": "125%",
-      "font_scale_150": "150%"
+      "font_scale_150": "150%",
+      "show_profile_menu_label": "Profilen menua erakutsi",
+      "show_profile_menu_help": "Beheko eskuineko izkinan agertzen da."
     }
   },
   "toolbar": {
@@ -155,7 +157,7 @@
     "app_name_label": "Aplikazioaren izena",
     "app_name_value": "Ikasgelarako mahaigain digitala",
     "version_label": "Bertsioa",
-    "version_value": "v1.3.6 — 2025ko apirila",
+    "version_value": "v1.3.7 — 2025ko apirila",
     "history_title": "Proiektuaren historia",
     "initial_title": "Hasierako proiektua",
     "initial_text": "Ideia eta lehen bertsioa: María Teresa González. Ikasgelarako mahaigain interaktiboaren oinarrizko bertsioa.",
@@ -227,7 +229,9 @@
     "close_window": "Itxi leiho hau",
     "minimize_window": "Leihoa minimizatu",
     "maximize_window": "Leihoa maximizatu",
-    "restore_window": "Leihoa leheneratu"
+    "restore_window": "Leihoa leheneratu",
+    "show_profile_menu": "Profilen menua",
+    "hide_profile_menu": "Profilen menua ezkutatu"
   },
   "storage_warning": {
     "title": "Biltegiratzea beteta",

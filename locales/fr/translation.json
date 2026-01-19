@@ -118,7 +118,9 @@
       "font_scale_100": "100%",
       "font_scale_110": "110%",
       "font_scale_125": "125%",
-      "font_scale_150": "150%"
+      "font_scale_150": "150%",
+      "show_profile_menu_label": "Afficher le menu des profils",
+      "show_profile_menu_help": "Il s'affiche dans le coin inférieur droit."
     }
   },
   "toolbar": {
@@ -157,7 +159,7 @@
     "app_name_label": "Nom de l'application",
     "app_name_value": "Bureau numérique pour la classe",
     "version_label": "Version",
-    "version_value": "v1.3.6 — avril 2025",
+    "version_value": "v1.3.7 — avril 2025",
     "history_title": "Historique du projet",
     "initial_title": "Projet initial",
     "initial_text": "Idée et première version : María Teresa González. Version de base du bureau interactif pour la classe.",
@@ -229,7 +231,9 @@
     "close_window": "Fermer cette fenêtre",
     "minimize_window": "Minimiser la fenêtre",
     "maximize_window": "Maximiser la fenêtre",
-    "restore_window": "Restaurer la fenêtre"
+    "restore_window": "Restaurer la fenêtre",
+    "show_profile_menu": "Menu des profils",
+    "hide_profile_menu": "Masquer le menu des profils"
   },
   "storage_warning": {
     "title": "Stockage plein",
