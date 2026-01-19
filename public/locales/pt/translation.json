@@ -611,6 +611,9 @@
     "directo_muro": {
       "title": "Mural interativo"
     },
+    "directo_ticket": {
+      "title": "Tickets de saída"
+    },
     "qplay": {
       "title": "QPlay: Concurso interativo"
     },

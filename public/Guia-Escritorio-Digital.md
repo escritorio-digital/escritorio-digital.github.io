@@ -66,6 +66,7 @@ Este widget está pensado para abrir webs hechas con IA o recursos offline para 
 - **Nube de palabras**: respuestas cortas en una nube dinámica.
 - **Lluvia de ideas y votos**: propuestas y votación para priorizar.
 - **Muro interactivo**: muro colaborativo con notas tipo post-it.
+- **Tickets de salida**: recoge impresiones rápidas al final de la sesión.
 - **QPlay**: concurso interactivo con cuestionarios.
 - **BoardLive**: pizarra colaborativa en tiempo real.
 

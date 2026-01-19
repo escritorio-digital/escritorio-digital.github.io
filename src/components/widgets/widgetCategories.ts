@@ -65,6 +65,7 @@ export const WIDGET_CATEGORIES: WidgetCategory[] = [
             'directo-nube',
             'directo-ideas',
             'directo-muro',
+            'directo-ticket',
             'qplay',
             'boardlive',
         ],

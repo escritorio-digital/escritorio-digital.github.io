@@ -4,6 +4,7 @@ export const QPlayWidget = () => (
     <ExternalAppWidget
         url="https://jjdeharo.github.io/qplay/"
         titleKey="widgets.qplay.title"
+        appendLanguageParam
     />
 );
 

@@ -3,7 +3,6 @@ import type { RefObject } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { LucideIcon } from 'lucide-react';
 import {
-    BookOpen,
     Info,
     FileText,
     Settings,
@@ -76,6 +75,7 @@ const categoryIcons: Record<string, CategoryIconConfig> = {
 };
 
 const MAX_FAVORITES = 20;
+const HIDDEN_START_MENU_WIDGET_IDS = new Set(['program-guide']);
 
 export const StartMenu: React.FC<StartMenuProps> = ({
     isOpen,
@@ -122,7 +122,10 @@ export const StartMenu: React.FC<StartMenuProps> = ({
             .toLowerCase()
     ), []);
 
-    const widgetList = useMemo(() => Object.values(WIDGET_REGISTRY), []);
+    const widgetList = useMemo(
+        () => Object.values(WIDGET_REGISTRY).filter((widget) => !HIDDEN_START_MENU_WIDGET_IDS.has(widget.id)),
+        []
+    );
     const normalizedSearch = normalizeText(searchTerm.trim());
     const showSearchResults = normalizedSearch.length > 0;
     const filteredWidgets = useMemo(() => {
@@ -140,7 +143,10 @@ export const StartMenu: React.FC<StartMenuProps> = ({
     }, [normalizeText, normalizedSearch, t, widgetList]);
 
     const widgetsByCategory = useMemo(() => buildWidgetsByCategory(filteredWidgets, t), [filteredWidgets, t]);
-    const pinnedWidgetIds = useMemo(() => pinnedWidgets.filter((id) => WIDGET_REGISTRY[id]), [pinnedWidgets]);
+    const pinnedWidgetIds = useMemo(
+        () => pinnedWidgets.filter((id) => WIDGET_REGISTRY[id] && !HIDDEN_START_MENU_WIDGET_IDS.has(id)),
+        [pinnedWidgets]
+    );
     const pinnedWidgetItems = useMemo(
         () => pinnedWidgetIds.map((id) => WIDGET_REGISTRY[id]).filter(Boolean),
         [pinnedWidgetIds]
@@ -701,15 +707,6 @@ export const StartMenu: React.FC<StartMenuProps> = ({
                             <div className="space-y-3">
                                 <p className="text-xs uppercase tracking-wide text-gray-500">{t('start_menu.help')}</p>
                                 <div className="space-y-1">
-                                    <button
-                                        onClick={() => {
-                                            handleWidgetAdd('program-guide');
-                                        }}
-                                        className="w-full flex items-center gap-3 px-3 py-2 rounded-lg bg-white/90 hover:bg-amber-50 border border-gray-200 transition text-left shadow-sm"
-                                    >
-                                        <BookOpen size={18} />
-                                        <span className="text-sm font-semibold">{t('help.guide')}</span>
-                                    </button>
                                     <button
                                         onClick={() => {
                                             onOpenAbout();

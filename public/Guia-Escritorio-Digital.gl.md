@@ -51,6 +51,7 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 - **Nube de palabras**: respostas curtas nunha nube dinámica.
 - **Choiva de ideas e votos**: propostas e votación para priorizar.
 - **Muro interactivo**: muro colaborativo con notas tipo post-it.
+- **Tickets de saída**: recolle impresións rápidas ao final da sesión.
 - **QPlay**: concurso interactivo con cuestionarios.
 - **BoardLive**: pizarra colaborativa en tempo real.
 

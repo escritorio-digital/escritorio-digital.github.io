@@ -1,12 +1,35 @@
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 type ExternalAppWidgetProps = {
     url: string;
     titleKey: string;
+    appendLanguageParam?: boolean;
+    languageParamKey?: string;
 };
 
-export const ExternalAppWidget: React.FC<ExternalAppWidgetProps> = ({ url, titleKey }) => {
-    const { t } = useTranslation();
+const buildUrlWithLanguage = (rawUrl: string, language: string, paramKey: string): string => {
+    try {
+        const url = new URL(rawUrl);
+        url.searchParams.set(paramKey, language);
+        return url.toString();
+    } catch (error) {
+        return rawUrl;
+    }
+};
+
+export const ExternalAppWidget: React.FC<ExternalAppWidgetProps> = ({
+    url,
+    titleKey,
+    appendLanguageParam = false,
+    languageParamKey = 'lang',
+}) => {
+    const { t, i18n } = useTranslation();
+    const resolvedUrl = useMemo(() => {
+        if (!appendLanguageParam) return url;
+        const language = (i18n.resolvedLanguage ?? i18n.language).split('-')[0];
+        return buildUrlWithLanguage(url, language, languageParamKey);
+    }, [appendLanguageParam, i18n.language, i18n.resolvedLanguage, languageParamKey, url]);
 
     return (
         <div className="flex h-full w-full flex-col bg-white/70">
@@ -14,7 +37,7 @@ export const ExternalAppWidget: React.FC<ExternalAppWidgetProps> = ({ url, title
                 <span className="text-sm font-semibold text-text-dark">{t(titleKey)}</span>
                 <button
                     type="button"
-                    onClick={() => window.open(url, '_blank', 'noopener,noreferrer')}
+                    onClick={() => window.open(resolvedUrl, '_blank', 'noopener,noreferrer')}
                     className="text-xs font-semibold text-accent hover:text-accent/80"
                 >
                     {t('widgets.local_web.open_fullscreen_window')}
@@ -22,7 +45,7 @@ export const ExternalAppWidget: React.FC<ExternalAppWidgetProps> = ({ url, title
             </div>
             <iframe
                 title={t(titleKey)}
-                src={url}
+                src={resolvedUrl}
                 className="h-full w-full flex-1 border-0"
                 loading="lazy"
             />

@@ -1,9 +1,9 @@
 import { ExternalAppWidget } from '../shared/ExternalAppWidget';
 
-export const DirectoEscalaWidget = () => (
+export const DirectoTicketWidget = () => (
     <ExternalAppWidget
-        url="https://jjdeharo.github.io/directo/escala.html"
-        titleKey="widgets.directo_escala.title"
+        url="https://jjdeharo.github.io/directo/ticket.html"
+        titleKey="widgets.directo_ticket.title"
         appendLanguageParam
     />
 );

@@ -4,6 +4,7 @@ export const BoardLiveWidget = () => (
     <ExternalAppWidget
         url="https://boardlive.github.io/"
         titleKey="widgets.boardlive.title"
+        appendLanguageParam
     />
 );
 
