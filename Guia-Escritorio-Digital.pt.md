@@ -51,6 +51,7 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 - **Nuvem de palavras**: respostas curtas numa nuvem dinâmica.
 - **Chuva de ideias e votos**: propostas e votação para priorizar.
 - **Mural interativo**: mural colaborativo com notas tipo post-it.
+- **Tickets de saída**: recolhe impressões rápidas no final da sessão.
 - **QPlay**: concurso interativo com questionários.
 - **BoardLive**: quadro colaborativo em tempo real.
 

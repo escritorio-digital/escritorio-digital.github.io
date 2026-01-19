@@ -609,6 +609,9 @@
     "directo_muro": {
       "title": "Interaktive Wand"
     },
+    "directo_ticket": {
+      "title": "Exit-Tickets"
+    },
     "qplay": {
       "title": "QPlay: Interaktives Quiz"
     },
