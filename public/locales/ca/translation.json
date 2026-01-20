@@ -35,7 +35,7 @@
       "reset_description": "Elimina totes les dades desades (perfils, programes i preferències) i reinicia com si fos la primera vegada.",
       "reset_button": "Restablir a valors de fàbrica",
       "reset_confirm": "Estàs segur que vols eliminar totes les preferències i dades locals? Aquesta acció no es pot desfer.",
-      "version_value": "v1.6.1 (Enero 2026)"
+      "version_value": "v1.6.2 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Nom de perfil invàlid o ja existent.",

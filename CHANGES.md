@@ -1,5 +1,9 @@
 # Cambios realizados
 
+## 1.6.2
+- Archivos Ed: evita duplicados de la Guia del programa en la lista.
+
+
 ## 1.6.1
 - Actualización del icono de Web local.
 - Archivos Ed: selección visual del icono y z-index fijo bajo las ventanas.

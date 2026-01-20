@@ -163,6 +163,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
       'active-profile-name',
       'file-manager-trash-ttl-hours',
       'file-manager-icon-position',
+      'file-manager-guide-seeded',
       ...WIDGET_DATA_KEYS,
     ]));
     try {

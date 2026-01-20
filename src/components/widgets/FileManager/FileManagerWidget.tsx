@@ -26,6 +26,7 @@ import './FileManagerWidget.css';
 
 const DEFAULT_TRASH_HOURS = 1;
 const TRASH_TTL_OPTIONS = [1, 6, 12, 24];
+const GUIDE_ENTRY_SEED_KEY = 'file-manager-guide-seeded';
 
 const formatBytes = (bytes: number) => {
     if (bytes < 1024) return `${bytes} B`;
@@ -113,6 +114,45 @@ export const FileManagerWidget: FC = () => {
         const ttlMs = Math.max(1, trashTtlHours) * 60 * 60 * 1000;
         purgeExpiredTrash(ttlMs).then(() => refreshEntries());
     }, [refreshEntries, trashTtlHours]);
+
+    useEffect(() => {
+        let isMounted = true;
+        const seedGuideEntry = async () => {
+            const wasSeeded = window.localStorage.getItem(GUIDE_ENTRY_SEED_KEY) === '1';
+            if (!wasSeeded) {
+                window.localStorage.setItem(GUIDE_ENTRY_SEED_KEY, '1');
+            }
+            const entries = await getAllEntries();
+            const guideEntries = entries.filter((entry) => entry.sourceWidgetId === 'program-guide');
+            if (guideEntries.length > 1) {
+                const sorted = [...guideEntries].sort((a, b) => a.createdAt - b.createdAt);
+                const [, ...extras] = sorted;
+                await Promise.all(extras.map((entry) => deleteEntryPermanently(entry.id)));
+            }
+            if (guideEntries.length > 0) {
+                if (isMounted) {
+                    refreshEntries();
+                }
+                return;
+            }
+            if (wasSeeded) return;
+            await saveFileEntry({
+                name: t('widgets.program_guide.title'),
+                parentId: FILE_MANAGER_ROOT_ID,
+                blob: new Blob([''], { type: 'text/plain' }),
+                mime: 'text/plain',
+                sourceWidgetId: 'program-guide',
+                sourceWidgetTitleKey: 'widgets.program_guide.title',
+            });
+            if (isMounted) {
+                refreshEntries();
+            }
+        };
+        seedGuideEntry();
+        return () => {
+            isMounted = false;
+        };
+    }, [refreshEntries, t]);
 
     useEffect(() => {
         let isMounted = true;
