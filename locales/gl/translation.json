@@ -35,7 +35,7 @@
       "reset_description": "Elimina todos os datos gardados (perfís, programas e preferencias) e reinicia como se fose a primeira vez.",
       "reset_button": "Restablecer a valores de fábrica",
       "reset_confirm": "¿Seguro que queres eliminar todas as preferencias e datos locais? Esta acción non se pode desfacer.",
-      "version_value": "v1.6.2 (Enero 2026)"
+      "version_value": "v1.6.3 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Nome de perfil inválido ou xa existente.",
@@ -250,7 +250,8 @@
     "maximize_window": "Maximizar xanela",
     "restore_window": "Restaurar xanela",
     "show_profile_menu": "Menú de perfís",
-    "hide_profile_menu": "Ocultar menú de perfís"
+    "hide_profile_menu": "Ocultar menú de perfís",
+    "open": "Abrir"
   },
   "storage_warning": {
     "title": "Almacenamento cheo",

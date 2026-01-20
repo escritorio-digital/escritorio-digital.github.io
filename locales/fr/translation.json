@@ -36,7 +36,7 @@
       "reset_description": "Supprime toutes les données enregistrées (profils, programmes et préférences) et redémarre comme si c'était la première fois.",
       "reset_button": "Réinitialiser aux valeurs d'usine",
       "reset_confirm": "Êtes-vous sûr de vouloir supprimer toutes les préférences et données locales ? Cette action est irréversible.",
-      "version_value": "v1.6.2 (Enero 2026)"
+      "version_value": "v1.6.3 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Nom de profil invalide ou déjà existant.",
@@ -251,7 +251,8 @@
     "maximize_window": "Maximiser la fenêtre",
     "restore_window": "Restaurer la fenêtre",
     "show_profile_menu": "Menu des profils",
-    "hide_profile_menu": "Masquer le menu des profils"
+    "hide_profile_menu": "Masquer le menu des profils",
+    "open": "Ouvrir"
   },
   "storage_warning": {
     "title": "Stockage plein",
