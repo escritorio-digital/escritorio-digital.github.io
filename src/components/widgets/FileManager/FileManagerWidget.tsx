@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Folder, File, Trash2, UploadCloud, FolderPlus, ArrowUp, Download, Copy, Scissors, ClipboardPaste, Trash, XCircle } from 'lucide-react';
+import { Folder, File, Trash2, UploadCloud, FolderPlus, ArrowUp, Download, Copy, Scissors, ClipboardPaste, XCircle } from 'lucide-react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { withBaseUrl } from '../../../utils/assetPaths';
 import {
@@ -84,7 +84,7 @@ export const FileManagerWidget: FC = () => {
 
     useEffect(() => {
         if (!contextMenu.isOpen) return;
-        const handleClick = (event: MouseEvent) => {
+        const handleClick = (event: Event) => {
             if (contextMenuRef.current?.contains(event.target as Node)) return;
             setContextMenu((prev) => ({ ...prev, isOpen: false }));
         };

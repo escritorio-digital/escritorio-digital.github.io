@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
+import type { FC } from 'react';
 import { useEditor, EditorContent, Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { Heading as TiptapHeadingExtension } from '@tiptap/extension-heading';
@@ -26,7 +27,7 @@ import {
   Heading3,
 } from 'lucide-react';
 
-const MenuBar: React.FC<{ editor: Editor | null; onUpload: () => void; onDownload: () => void; }> = ({ editor, onUpload, onDownload }) => {
+const MenuBar: FC<{ editor: Editor | null; onUpload: () => void; onDownload: () => void; }> = ({ editor, onUpload, onDownload }) => {
   const { t } = useTranslation();
   if (!editor) {
     return null;
