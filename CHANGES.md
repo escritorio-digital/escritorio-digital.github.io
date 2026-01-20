@@ -1,5 +1,8 @@
 # Cambios realizados
 
+## 2.0.0
+- Nuevo: gestion de archivos internos con Archivos Ed.
+
 ## 1.6.3
 - Archivos Ed: menu contextual con opcion Abrir y pulsacion larga en moviles.
 
