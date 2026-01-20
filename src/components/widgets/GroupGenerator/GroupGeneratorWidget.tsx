@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 // CORRECCIÓN: Se eliminaron 'Users' y 'ListCollapse' de esta línea
@@ -11,6 +11,42 @@ import { requestOpenFile } from '../../../utils/openDialog';
 import './GroupGeneratorWidget.css';
 
 type GroupMode = 'byCount' | 'bySize';
+
+type GroupGeneratorSnapshot = {
+  version: 1;
+  studentList: string;
+  generatedGroups: string[][];
+  mode: GroupMode;
+  groupValue: number;
+};
+
+const isGroupMode = (value: unknown): value is GroupMode => value === 'byCount' || value === 'bySize';
+
+const isStringArrayArray = (value: unknown): value is string[][] => (
+  Array.isArray(value)
+  && value.every((group) => Array.isArray(group) && group.every((student) => typeof student === 'string'))
+);
+
+const parseSnapshot = (text: string): GroupGeneratorSnapshot | null => {
+  try {
+    const parsed = JSON.parse(text) as Partial<GroupGeneratorSnapshot>;
+    if (!parsed || typeof parsed !== 'object') return null;
+    if (parsed.version !== 1) return null;
+    if (typeof parsed.studentList !== 'string') return null;
+    if (!isGroupMode(parsed.mode)) return null;
+    if (typeof parsed.groupValue !== 'number' || !Number.isFinite(parsed.groupValue)) return null;
+    if (!isStringArrayArray(parsed.generatedGroups)) return null;
+    return {
+      version: 1,
+      studentList: parsed.studentList,
+      generatedGroups: parsed.generatedGroups,
+      mode: parsed.mode,
+      groupValue: parsed.groupValue,
+    };
+  } catch {
+    return null;
+  }
+};
 
 export const GroupGeneratorWidget: FC = () => {
   const { t } = useTranslation();
@@ -29,6 +65,28 @@ export const GroupGeneratorWidget: FC = () => {
     minCardWidth: 0,
     containerHeight: 0,
   });
+
+  const applySnapshot = useCallback((snapshot: GroupGeneratorSnapshot) => {
+    setStudentList(snapshot.studentList);
+    setGeneratedGroups(snapshot.generatedGroups);
+    setMode(snapshot.mode);
+    setGroupValue(Math.max(1, Math.floor(snapshot.groupValue)));
+  }, []);
+
+  const loadFromText = useCallback((text: string) => {
+    const snapshot = parseSnapshot(text);
+    if (snapshot) {
+      applySnapshot(snapshot);
+      return;
+    }
+    setStudentList(text);
+    setGeneratedGroups([]);
+  }, [applySnapshot]);
+
+  const loadFromBlob = useCallback(async (blob: Blob) => {
+    const text = await blob.text();
+    loadFromText(text);
+  }, [loadFromText]);
 
   useEffect(() => {
     if (!isLargeView) return;
@@ -112,40 +170,29 @@ export const GroupGeneratorWidget: FC = () => {
     };
   }, [isLargeView, generatedGroups]);
 
-  const loadFromFile = (file: File) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const text = e.target?.result as string;
-      setStudentList(text);
-    };
-    reader.readAsText(file);
-  };
-
   const handleOpenFile = async () => {
     const result = await requestOpenFile({ accept: '.txt' });
     if (!result) return;
     if (result.source === 'local') {
       const [file] = result.files;
-      if (file) loadFromFile(file);
+      if (file) await loadFromBlob(file);
       return;
     }
     const [entryId] = result.entryIds;
     if (!entryId) return;
     const entry = await getEntry(entryId);
     if (!entry?.blob) return;
-    const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
-    loadFromFile(file);
+    await loadFromBlob(entry.blob);
   };
 
   useEffect(() => {
     const unsubscribe = subscribeFileOpen('group-generator', async ({ entryId }) => {
       const entry = await getEntry(entryId);
       if (!entry?.blob) return;
-      const text = await entry.blob.text();
-      setStudentList(text);
+      await loadFromBlob(entry.blob);
     });
     return unsubscribe;
-  }, []);
+  }, [loadFromBlob]);
 
   const generateGroups = () => {
     // 1. Limpiar y obtener la lista de estudiantes
@@ -210,10 +257,16 @@ export const GroupGeneratorWidget: FC = () => {
 
   const downloadGroups = async () => {
     if (generatedGroups.length === 0) return;
-    const text = formatGroupsText();
-    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
     const destination = await requestSaveDestination('grupos.txt');
     if (destination?.destination === 'file-manager') {
+      const snapshot: GroupGeneratorSnapshot = {
+        version: 1,
+        studentList,
+        generatedGroups,
+        mode,
+        groupValue,
+      };
+      const blob = new Blob([JSON.stringify(snapshot, null, 2)], { type: 'application/json;charset=utf-8' });
       await saveToFileManager({
         blob,
         filename: destination.filename,
@@ -224,6 +277,8 @@ export const GroupGeneratorWidget: FC = () => {
       return;
     }
     if (destination?.destination === 'download') {
+      const text = formatGroupsText();
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
       downloadBlob(blob, destination.filename);
     }
   };
