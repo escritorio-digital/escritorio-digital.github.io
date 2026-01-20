@@ -35,7 +35,7 @@
       "reset_description": "Removes all saved data (profiles, programs, and preferences) and restarts as first run.",
       "reset_button": "Factory Reset",
       "reset_confirm": "Are you sure you want to remove all local preferences and data? This cannot be undone.",
-      "version_value": "v1.6.0 — April 2025"
+      "version_value": "v1.6.1 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Invalid or already existing profile name.",

@@ -35,7 +35,7 @@
       "reset_description": "Rimuove tutti i dati salvati (profili, programma e preferenze) e riavvia come al primo avvio.",
       "reset_button": "Ripristino impostazioni di fabbrica",
       "reset_confirm": "Sei sicuro di voler eliminare tutte le preferenze e i dati locali? Questa azione non può essere annullata.",
-      "version_value": "v1.6.0 — aprile 2025"
+      "version_value": "v1.6.1 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Nome profilo non valido o già esistente.",

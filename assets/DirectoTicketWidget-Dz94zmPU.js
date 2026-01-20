@@ -1,1 +1,0 @@
-import{j as t}from"./index-5fVle3rd.js";import{n as d}from"./index-5fVle3rd.js";import{ExternalAppWidget as e}from"./ExternalAppWidget-Cn64sEGT.js";const o=()=>t.jsx(e,{url:"https://jjdeharo.github.io/directo/ticket.html",titleKey:"widgets.directo_ticket.title",appendLanguageParam:!0});export{o as DirectoTicketWidget,d as widgetConfig};

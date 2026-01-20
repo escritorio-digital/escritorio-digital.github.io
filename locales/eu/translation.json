@@ -34,7 +34,7 @@
       "reset_description": "Gordetako datu guztiak ezabatzen ditu (profilak, programak eta lehentasunak) eta lehen aldia balitz bezala berrabiarazten du.",
       "reset_button": "Fabrikako balioetara berrezarri",
       "reset_confirm": "Ziur zaude lehentasun eta datu lokal guztiak ezabatu nahi dituzula? Ekintza hau ezin da desegin.",
-      "version_value": "v1.6.0 — 2025ko apirila"
+      "version_value": "v1.6.1 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Profilaren izen baliogabea edo lehendik dagoena.",
