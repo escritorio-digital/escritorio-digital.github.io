@@ -146,6 +146,45 @@ export const ThemeSettings: React.FC = () => {
         '--color-border': '#D2F3E7',
       },
     },
+    {
+      id: 'colorblind-protanopia',
+      labelKey: 'settings.theme.presets.colorblind_protanopia',
+      colors: {
+        '--color-bg': '#F7F7F2',
+        '--color-widget-bg': '#2A6F97',
+        '--color-widget-header': '#F4D35E',
+        '--color-accent': '#EE6C4D',
+        '--color-text-light': '#FFFFFF',
+        '--color-text-dark': '#1B263B',
+        '--color-border': '#E0E0D6',
+      },
+    },
+    {
+      id: 'colorblind-deuteranopia',
+      labelKey: 'settings.theme.presets.colorblind_deuteranopia',
+      colors: {
+        '--color-bg': '#F0F5F9',
+        '--color-widget-bg': '#457B9D',
+        '--color-widget-header': '#E9C46A',
+        '--color-accent': '#2A9D8F',
+        '--color-text-light': '#FFFFFF',
+        '--color-text-dark': '#1D3557',
+        '--color-border': '#DCE6EF',
+      },
+    },
+    {
+      id: 'colorblind-tritanopia',
+      labelKey: 'settings.theme.presets.colorblind_tritanopia',
+      colors: {
+        '--color-bg': '#FFF3F0',
+        '--color-widget-bg': '#8C1C13',
+        '--color-widget-header': '#5A189A',
+        '--color-accent': '#2F7E4E',
+        '--color-text-light': '#FFFFFF',
+        '--color-text-dark': '#2D1B1B',
+        '--color-border': '#F0DAD4',
+      },
+    },
   ];
 
   const applyPreset = (preset: ThemePreset) => {
