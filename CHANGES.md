@@ -1,19 +1,8 @@
 # Cambios realizados
 
-## 1.4.0
-- Apariencia: nuevos temas de accesibilidad para daltonismo (protanopia, deuteranopia y tritanopia).
-- Apariencia: el botón de temas ahora indica que incluye accesibilidad.
-- Inicio: nuevo acceso rápido a la guía del programa en Ayuda.
-
-## 1.4.1
-- Guía del programa: catálogo actualizado para incluir todos los widgets y secciones alineadas con el menú Inicio.
-
-## 1.5.0
-- Ventanas: icono de ayuda con descripción breve de cada programa.
-- Ventanas: el icono de fijado permanece visible cuando la ventana está fijada.
-
-## 1.5.1
-- Generador de grupos: opciones para copiar y guardar los grupos como .txt.
+## 1.6.1
+- Actualización del icono de Web local.
+- Archivos Ed: selección visual del icono y z-index fijo bajo las ventanas.
 
 ## 1.6.0
 - Archivos Ed: gestor de archivos con carpetas, papelera, copia/pega, selección múltiple y arrastrar/soltar.
@@ -21,6 +10,21 @@
 - Web local: nuevo acceso desde Archivos Ed y descripción actualizada.
 - Guía del programa: Archivos Ed añadido en todas las guías.
 - Perfiles: exportación/importación opcional de Archivos Ed con tamaño estimado.
+
+## 1.5.1
+- Generador de grupos: opciones para copiar y guardar los grupos como .txt.
+
+## 1.5.0
+- Ventanas: icono de ayuda con descripción breve de cada programa.
+- Ventanas: el icono de fijado permanece visible cuando la ventana está fijada.
+
+## 1.4.1
+- Guía del programa: catálogo actualizado para incluir todos los widgets y secciones alineadas con el menú Inicio.
+
+## 1.4.0
+- Apariencia: nuevos temas de accesibilidad para daltonismo (protanopia, deuteranopia y tritanopia).
+- Apariencia: el botón de temas ahora indica que incluye accesibilidad.
+- Inicio: nuevo acceso rápido a la guía del programa en Ayuda.
 
 ## 1.3.7
 - Menú de perfiles: opción para mostrar/ocultar desde Apariencia.

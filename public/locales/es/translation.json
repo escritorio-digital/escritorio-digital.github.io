@@ -35,7 +35,7 @@
       "reset_description": "Elimina todos los datos guardados (perfiles, programas y preferencias) y reinicia como si fuera la primera vez.",
       "reset_button": "Restablecer a valores de fábrica",
       "reset_confirm": "¿Seguro que quieres eliminar todas las preferencias y datos locales? Esta acción no se puede deshacer.",
-      "version_value": "v1.6.0 — abril de 2025"
+      "version_value": "v1.6.1 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Nombre de perfil inválido o ya existente.",

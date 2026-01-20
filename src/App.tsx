@@ -127,6 +127,8 @@ const DesktopUI: React.FC<{
         { x: 16, y: 32 }
     );
     const fileManagerIconSize = { width: 120, height: 110 };
+    const [isFileManagerIconSelected, setFileManagerIconSelected] = useState(false);
+    const fileManagerIconRef = useRef<HTMLDivElement>(null);
     const [saveDialogState, setSaveDialogState] = useState<{ isOpen: boolean }>({ isOpen: false });
     const saveDialogResolverRef = useRef<((result: SaveDialogResult) => void) | null>(null);
     const [saveDialogFolders, setSaveDialogFolders] = useState<{ id: string; label: string }[]>([]);
@@ -149,6 +151,16 @@ const DesktopUI: React.FC<{
         if (fileManagerIconPosition.y >= 32) return;
         setFileManagerIconPosition((prev) => ({ ...prev, y: 32 }));
     }, [fileManagerIconPosition.y, setFileManagerIconPosition]);
+
+    useEffect(() => {
+        const handlePointerDown = (event: MouseEvent) => {
+            if (!fileManagerIconRef.current) return;
+            if (fileManagerIconRef.current.contains(event.target as Node)) return;
+            setFileManagerIconSelected(false);
+        };
+        window.addEventListener('mousedown', handlePointerDown);
+        return () => window.removeEventListener('mousedown', handlePointerDown);
+    }, []);
 
     useEffect(() => {
         if (!saveDialogState.isOpen) return;
@@ -912,19 +924,24 @@ const DesktopUI: React.FC<{
                 onDrag={(_, data) => setFileManagerIconPosition({ x: data.x, y: data.y })}
                 onDragStop={(_, data) => setFileManagerIconPosition({ x: data.x, y: data.y })}
                 dragHandleClassName="file-manager-desktop-icon"
-                className="z-[10001]"
+                className="z-[1]"
             >
                 <div
+                    ref={fileManagerIconRef}
                     role="button"
                     tabIndex={0}
-                    onDoubleClick={() => addWidget('file-manager')}
+                    onClick={() => setFileManagerIconSelected(true)}
+                    onDoubleClick={() => {
+                        setFileManagerIconSelected(false);
+                        addWidget('file-manager');
+                    }}
                     onKeyDown={(event) => {
                         if (event.key === 'Enter' || event.key === ' ') {
                             event.preventDefault();
                             addWidget('file-manager');
                         }
                     }}
-                    className="file-manager-desktop-icon flex h-full w-full flex-col items-center justify-center gap-1 bg-transparent text-text-dark select-none cursor-default touch-none"
+                    className={`file-manager-desktop-icon flex h-full w-full flex-col items-center justify-center gap-1 bg-transparent text-text-dark select-none cursor-default touch-none ${isFileManagerIconSelected ? 'rounded-lg bg-white/40 ring-2 ring-accent/70' : ''}`}
                     title={t('widgets.file_manager.title')}
                     aria-label={t('widgets.file_manager.title')}
                 >
