@@ -160,7 +160,7 @@
     "app_name_label": "Aplikazioaren izena",
     "app_name_value": "Ikasgelarako mahaigain digitala",
     "version_label": "Bertsioa",
-    "version_value": "v1.5.0 — 2025ko apirila",
+    "version_value": "v1.5.1 — 2025ko apirila",
     "history_title": "Proiektuaren historia",
     "initial_title": "Hasierako proiektua",
     "initial_text": "Ideia eta lehen bertsioa: María Teresa González. Ikasgelarako mahaigain interaktiboaren oinarrizko bertsioa.",
@@ -377,6 +377,9 @@
       "generated_groups_label": "Sortutako Taldeak",
       "view_large": "Ikuspegi handia",
       "close_large_view": "Itxi ikuspegi handia",
+      "copy_groups": "Taldeak kopiatu",
+      "download_groups": "Gorde .txt gisa",
+      "copied": "Kopiatua",
       "group_title": "{{number}} Taldea",
       "no_groups_message": "Taldeak hemen agertuko dira."
     },

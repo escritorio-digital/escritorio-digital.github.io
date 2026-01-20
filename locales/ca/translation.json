@@ -161,7 +161,7 @@
     "app_name_label": "Nom de l'aplicació",
     "app_name_value": "Escriptori digital per a l'aula",
     "version_label": "Versió",
-    "version_value": "v1.5.0 — abril de 2025",
+    "version_value": "v1.5.1 — abril de 2025",
     "history_title": "Historial del projecte",
     "initial_title": "Projecte inicial",
     "initial_text": "Idea i primera versió: María Teresa González. Versió bàsica de l'escriptori interactiu per a l'aula.",
@@ -378,6 +378,9 @@
       "generated_groups_label": "Grups Generats",
       "view_large": "Veure en gran",
       "close_large_view": "Tancar vista gran",
+      "copy_groups": "Copiar grups",
+      "download_groups": "Desar com a .txt",
+      "copied": "Copiat",
       "group_title": "Grup {{number}}",
       "no_groups_message": "Els grups apareixeran aquí."
     },

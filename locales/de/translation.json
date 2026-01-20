@@ -161,7 +161,7 @@
     "app_name_label": "Name der Anwendung",
     "app_name_value": "Digitaler Desktop für den Unterricht",
     "version_label": "Version",
-    "version_value": "v1.5.0 — April 2025",
+    "version_value": "v1.5.1 — April 2025",
     "history_title": "Projektverlauf",
     "initial_title": "Ursprüngliches Projekt",
     "initial_text": "Idee und erste Version: María Teresa González. Grundversion des interaktiven Klassenraum-Desktops.",
@@ -378,6 +378,9 @@
       "generated_groups_label": "Erstellte Gruppen",
       "view_large": "Großansicht",
       "close_large_view": "Großansicht schließen",
+      "copy_groups": "Gruppen kopieren",
+      "download_groups": "Als .txt speichern",
+      "copied": "Kopiert",
       "group_title": "Gruppe {{number}}",
       "no_groups_message": "Die Gruppen erscheinen hier."
     },

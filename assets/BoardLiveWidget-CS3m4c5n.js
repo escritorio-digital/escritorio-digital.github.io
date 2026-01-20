@@ -1,0 +1,1 @@
+import{j as t}from"./index-BgqH8RSj.js";import{d}from"./index-BgqH8RSj.js";import{ExternalAppWidget as e}from"./ExternalAppWidget-D_hZP7zl.js";const o=()=>t.jsx(e,{url:"https://boardlive.github.io/",titleKey:"widgets.boardlive.title",appendLanguageParam:!0});export{o as BoardLiveWidget,d as widgetConfig};
