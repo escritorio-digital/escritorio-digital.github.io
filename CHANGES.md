@@ -1,8 +1,9 @@
 # Cambios realizados
 
-## 1.3.9
+## 1.4.0
 - Apariencia: nuevos temas de accesibilidad para daltonismo (protanopia, deuteranopia y tritanopia).
 - Apariencia: el botón de temas ahora indica que incluye accesibilidad.
+- Inicio: nuevo acceso rápido a la guía del programa en Ayuda.
 
 ## 1.3.7
 - Menú de perfiles: opción para mostrar/ocultar desde Apariencia.
