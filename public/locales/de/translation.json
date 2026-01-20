@@ -35,7 +35,7 @@
       "reset_description": "Entfernt alle gespeicherten Daten (Profile, Programme und Einstellungen) und startet wie beim ersten Mal.",
       "reset_button": "Auf Werkseinstellungen zurücksetzen",
       "reset_confirm": "Möchtest du wirklich alle lokalen Einstellungen und Daten entfernen? Dies kann nicht rückgängig gemacht werden.",
-      "version_value": "v1.6.2 (Enero 2026)"
+      "version_value": "v1.6.3 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Ungültiger oder bereits vorhandener Profilname.",
@@ -250,7 +250,8 @@
     "maximize_window": "Fenster maximieren",
     "restore_window": "Fenster wiederherstellen",
     "show_profile_menu": "Profilmenü",
-    "hide_profile_menu": "Profilmenü ausblenden"
+    "hide_profile_menu": "Profilmenü ausblenden",
+    "open": "Öffnen"
   },
   "storage_warning": {
     "title": "Speicher voll",

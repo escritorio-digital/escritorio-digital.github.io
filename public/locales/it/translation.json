@@ -35,7 +35,7 @@
       "reset_description": "Rimuove tutti i dati salvati (profili, programma e preferenze) e riavvia come al primo avvio.",
       "reset_button": "Ripristino impostazioni di fabbrica",
       "reset_confirm": "Sei sicuro di voler eliminare tutte le preferenze e i dati locali? Questa azione non può essere annullata.",
-      "version_value": "v1.6.2 (Enero 2026)"
+      "version_value": "v1.6.3 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Nome profilo non valido o già esistente.",
@@ -250,7 +250,8 @@
     "maximize_window": "Massimizza finestra",
     "restore_window": "Ripristina finestra",
     "show_profile_menu": "Menu profili",
-    "hide_profile_menu": "Nascondi menu profili"
+    "hide_profile_menu": "Nascondi menu profili",
+    "open": "Apri"
   },
   "storage_warning": {
     "title": "Spazio di archiviazione pieno",

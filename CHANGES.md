@@ -1,5 +1,9 @@
 # Cambios realizados
 
+## 1.6.3
+- Archivos Ed: menu contextual con opcion Abrir y pulsacion larga en moviles.
+
+
 ## 1.6.2
 - Archivos Ed: evita duplicados de la Guia del programa en la lista.
 

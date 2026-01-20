@@ -13,7 +13,7 @@ import { AboutModal } from './components/core/AboutModal';
 import { StartMenu } from './components/core/StartMenu';
 import { ThemeProvider, defaultTheme, type Theme } from './context/ThemeContext';
 import type { ActiveWidget, DesktopProfile, ProfileCollection } from './types';
-import { PlusSquare, Image, Settings, X, Users, Maximize2, Minimize2, Pin, PinOff } from 'lucide-react';
+import { PlusSquare, Image, Settings, X, Users, Maximize2, Minimize2, Pin, PinOff, FolderOpen } from 'lucide-react';
 import { defaultWallpaperValue, isWallpaperValueValid } from './utils/wallpapers';
 import { withBaseUrl } from './utils/assetPaths';
 import { getWidgetHelpText } from './utils/widgetHelp';
@@ -129,6 +129,9 @@ const DesktopUI: React.FC<{
     const fileManagerIconSize = { width: 120, height: 110 };
     const [isFileManagerIconSelected, setFileManagerIconSelected] = useState(false);
     const fileManagerIconRef = useRef<HTMLDivElement>(null);
+    const fileManagerPressTimerRef = useRef<number | null>(null);
+    const fileManagerPressStartRef = useRef<{ x: number; y: number } | null>(null);
+    const fileManagerLongPressTriggeredRef = useRef(false);
     const [saveDialogState, setSaveDialogState] = useState<{ isOpen: boolean }>({ isOpen: false });
     const saveDialogResolverRef = useRef<((result: SaveDialogResult) => void) | null>(null);
     const [saveDialogFolders, setSaveDialogFolders] = useState<{ id: string; label: string }[]>([]);
@@ -160,6 +163,14 @@ const DesktopUI: React.FC<{
         };
         window.addEventListener('mousedown', handlePointerDown);
         return () => window.removeEventListener('mousedown', handlePointerDown);
+    }, []);
+
+    const clearFileManagerPressTimer = useCallback(() => {
+        if (fileManagerPressTimerRef.current !== null) {
+            window.clearTimeout(fileManagerPressTimerRef.current);
+        }
+        fileManagerPressTimerRef.current = null;
+        fileManagerPressStartRef.current = null;
     }, []);
 
     useEffect(() => {
@@ -253,12 +264,14 @@ const DesktopUI: React.FC<{
         y: number;
         widgetId: string | null;
         windowInstanceId: string | null;
+        source?: 'desktop' | 'window' | 'task' | 'file-manager-icon';
     }>({
         isOpen: false,
         x: 0,
         y: 0,
         widgetId: null,
         windowInstanceId: null,
+        source: 'desktop',
     });
     const contextMenuRef = useRef<HTMLDivElement>(null);
     const [showStorageWarning, setShowStorageWarning] = useState(false);
@@ -610,6 +623,7 @@ const DesktopUI: React.FC<{
             y: event.clientY,
             widgetId: widgetId ?? null,
             windowInstanceId: null,
+            source: 'desktop',
         });
     };
 
@@ -622,6 +636,7 @@ const DesktopUI: React.FC<{
             y: event.clientY,
             widgetId: targetWidgetId,
             windowInstanceId: instanceId,
+            source: 'task',
         });
     };
 
@@ -634,6 +649,7 @@ const DesktopUI: React.FC<{
             y: event.clientY,
             widgetId,
             windowInstanceId: instanceId,
+            source: 'window',
         });
     };
 
@@ -930,10 +946,55 @@ const DesktopUI: React.FC<{
                     ref={fileManagerIconRef}
                     role="button"
                     tabIndex={0}
-                    onClick={() => setFileManagerIconSelected(true)}
+                    onClick={() => {
+                        if (fileManagerLongPressTriggeredRef.current) {
+                            fileManagerLongPressTriggeredRef.current = false;
+                            return;
+                        }
+                        setFileManagerIconSelected(true);
+                    }}
                     onDoubleClick={() => {
                         setFileManagerIconSelected(false);
                         addWidget('file-manager');
+                    }}
+                    onContextMenu={(event) => {
+                        event.preventDefault();
+                        setFileManagerIconSelected(true);
+                        setContextMenu({
+                            isOpen: true,
+                            x: event.clientX,
+                            y: event.clientY,
+                            widgetId: 'file-manager',
+                            windowInstanceId: null,
+                            source: 'file-manager-icon',
+                        });
+                    }}
+                    onPointerDown={(event) => {
+                        setFileManagerIconSelected(true);
+                        if (event.pointerType === 'touch' || event.pointerType === 'pen') {
+                            clearFileManagerPressTimer();
+                            fileManagerPressStartRef.current = { x: event.clientX, y: event.clientY };
+                            fileManagerLongPressTriggeredRef.current = false;
+                            fileManagerPressTimerRef.current = window.setTimeout(() => {
+                                fileManagerLongPressTriggeredRef.current = true;
+                                setFileManagerIconSelected(false);
+                                addWidget('file-manager');
+                            }, 500);
+                        }
+                    }}
+                    onPointerMove={(event) => {
+                        if (!fileManagerPressStartRef.current) return;
+                        const dx = event.clientX - fileManagerPressStartRef.current.x;
+                        const dy = event.clientY - fileManagerPressStartRef.current.y;
+                        if (Math.hypot(dx, dy) > 8) {
+                            clearFileManagerPressTimer();
+                        }
+                    }}
+                    onPointerUp={() => {
+                        clearFileManagerPressTimer();
+                    }}
+                    onPointerCancel={() => {
+                        clearFileManagerPressTimer();
                     }}
                     onKeyDown={(event) => {
                         if (event.key === 'Enter' || event.key === ' ') {
@@ -1289,7 +1350,18 @@ const DesktopUI: React.FC<{
                     className="fixed z-[10000] min-w-[220px] bg-white/95 backdrop-blur-md rounded-lg shadow-xl border border-gray-200 py-2 text-sm text-text-dark"
                     style={{ left: contextMenu.x, top: contextMenu.y }}
                 >
-                    {contextMenu.windowInstanceId && contextWindow ? (
+                    {contextMenu.source === 'file-manager-icon' ? (
+                        <button
+                            className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                            onClick={() => {
+                                addWidget('file-manager');
+                                setContextMenu(prev => ({ ...prev, isOpen: false, widgetId: null, windowInstanceId: null }));
+                            }}
+                        >
+                            <FolderOpen size={16} />
+                            {t('context_menu.open')}
+                        </button>
+                    ) : contextMenu.windowInstanceId && contextWindow ? (
                         <>
                             {showFavoriteAction && (
                                 <button
