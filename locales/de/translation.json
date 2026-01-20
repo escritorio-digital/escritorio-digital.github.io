@@ -35,7 +35,7 @@
       "reset_description": "Entfernt alle gespeicherten Daten (Profile, Programme und Einstellungen) und startet wie beim ersten Mal.",
       "reset_button": "Auf Werkseinstellungen zurücksetzen",
       "reset_confirm": "Möchtest du wirklich alle lokalen Einstellungen und Daten entfernen? Dies kann nicht rückgängig gemacht werden.",
-      "version_value": "v1.6.1 (Enero 2026)"
+      "version_value": "v1.6.2 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Ungültiger oder bereits vorhandener Profilname.",
