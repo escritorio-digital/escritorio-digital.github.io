@@ -21,12 +21,14 @@ Escriptori Digital és una pissarra de treball amb “finestres” pensada per a
 - **Control d’assistència**: registre ràpid d’assistència i estat del grup.
 - **Generador de grups**: crea grups de manera aleatòria o equilibrada per al treball cooperatiu.
 - **Calendari**: suport visual per a dates, lliuraments i planificació.
+- **Guia del programa**: guia integrada amb el catàleg de widgets i recomanacions d’ús.
 
 ### Temps i ritme
 
 - **Temporitzador**: compte enrere per a activitats per estacions, exàmens curts, treball per torns, etc.
 - **Cronòmetre**: mesura temps (experiments, reptes, educació física, dinàmiques).
 - **Metrònom**: marca un pols constant. Útil per a música, lectura rítmica, dinàmiques de classe o treball per intervals.
+- **Rellotges mundials**: mostra hores de diverses ciutats per comparar-les a classe.
 
 ### Matemàtiques i ciències
 
@@ -34,18 +36,28 @@ Escriptori Digital és una pissarra de treball amb “finestres” pensada per a
 - **Convertidor d’unitats**: converteix magnituds per a problemes i pràctiques.
 - **Markdown + LaTeX**: escriu apunts amb fórmules i format.
 
-### Pissarra, escriptura i recursos
+### Comunitat
+
+- **Vibe Coding Educativo**: catàleg d’apps creades per docents de la comunitat. Serveix per descobrir recursos didàctics i obrir-los al visor o en una pestanya nova. Usa filtres per nivell/àrea i favorits per tenir-los a dalt.
+- **Comunitat ChatGPT-IA-edu**: accés a recursos i enllaços del projecte ChatGPT-IA-edu.
+- **EduMedia-IAG**: recursos i multimèdia educativa amb IA generativa.
+
+### Pissarra i escriptura
 
 - **Bloc de notes**: notes ràpides per a consignes, idees, exemples, llistes, etc.
 - **EdiMarkWeb**: processador de textos Markdown amb previsualització en línia i exportació.
 - **Pissarra de dibuix**: dibuix a mà alçada (esquemes, gràfiques, mapes conceptuals, diagrames).
 - **Carrusel d’imatges**: mostra una col·lecció d’imatges (làmines, exercicis, fotos de laboratori, mapes…).
+- **Sandbox HTML**: espai per mostrar continguts preparats.
+- **BoardLive**: pissarra col·laborativa en temps real.
+
+### Recursos i visors
+
 - **Visor web**: obre una pàgina web dins l’escriptori per usar un recurs en línia sense canviar de pestanya.
-- **Vibe Coding Educativo**: catàleg d’apps creades per docents de la comunitat. Serveix per descobrir recursos didàctics i obrir-los al visor o en una pestanya nova. Usa filtres per nivell/àrea i favorits per tenir-los a dalt.
 - **Web local**: desa webs al navegador (des de ZIP o carpeta) i executa-les sense connexió.
 - **Explorador de fitxers**: obre fitxers locals (PDF, imatges, text i Markdown, àudio i vídeo).
-- **Visor directe**: pensat per mostrar contingut web o recursos externs de manera còmoda durant l’explicació.
-- **HTML**: espai per mostrar continguts preparats.
+- **Connexió en Directe**: pensat per mostrar contingut web o recursos externs de manera còmoda durant l’explicació.
+- **Wikipedia**: cerca ràpida amb canvi d’idioma per a temes de classe.
 
 ### Eines participatives
 
@@ -54,6 +66,7 @@ Escriptori Digital és una pissarra de treball amb “finestres” pensada per a
 - **Núvol de paraules**: respostes curtes en un núvol dinàmic.
 - **Pluja d'idees i vots**: propostes i votació per prioritzar.
 - **Mur interactiu**: mur col·laboratiu amb notes tipus post-it.
+- **Tickets de sortida**: recull impressions ràpides al final de la sessió.
 - **QPlay**: concurs interactiu amb qüestionaris.
 - **BoardLive**: pissarra col·laborativa en temps real.
 
@@ -64,6 +77,7 @@ Escriptori Digital és una pissarra de treball amb “finestres” pensada per a
 - **Generador de QR**: crea codis QR per compartir enllaços o recursos amb la classe.
 - **Semàfor**: senyal visual de “silenci / treball / atenció” o estats d’activitat.
 - **Mesurador de so**: indicador visual del nivell de soroll per a l’autoregulació del grup.
+- **Marcador de punts**: marcador ràpid per a equips, reptes i gamificació.
 
 ### Jocs de lògica i dinàmica de classe
 
@@ -71,7 +85,7 @@ Escriptori Digital és una pissarra de treball amb “finestres” pensada per a
 - **Memòria**: joc de parelles per a vocabulari, conceptes, imatges i definicions.
 - **Trencaclosques lliscant**: trencaclosques per a atenció, lògica i moments de transició.
 
-### Treball amb gestos
+### Gestos de treball
 
 - **Gestos de treball**: eina de suport per a dinàmiques d’aula basades en senyals/gestos i rutines.
 

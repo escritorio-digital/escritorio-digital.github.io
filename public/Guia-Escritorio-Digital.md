@@ -22,12 +22,14 @@ Escritorio Digital es una pizarra de trabajo con “ventanas” pensada para el 
 - **Control de asistencia**: registro rápido de asistencia y estado del grupo.
 - **Generador de grupos**: crea grupos de forma aleatoria o equilibrada para trabajo cooperativo.
 - **Calendario**: apoyo visual para fechas, entregas y planificación.
+- **Guía del programa**: guía integrada con el catálogo de widgets y recomendaciones de uso.
 
 ### Tiempo y ritmo
 
 - **Temporizador**: cuenta atrás para actividades por estaciones, exámenes cortos, trabajo por turnos, etc.
 - **Cronómetro**: mide tiempos (experimentos, retos, educación física, dinámicas).
 - **Metrónomo**: marca un pulso constante. Útil para música, lectura rítmica, dinámicas de clase o trabajo por intervalos.
+- **Relojes mundiales**: muestra horas de ciudades para compararlas en clase.
 
 ### Matemáticas y ciencias
 
@@ -35,18 +37,28 @@ Escritorio Digital es una pizarra de trabajo con “ventanas” pensada para el 
 - **Conversor de unidades**: convierte magnitudes para problemas y prácticas.
 - **Markdown + LaTeX**: escribe apuntes con fórmulas y formato.
 
-### Pizarra, escritura y recursos
+### Comunidad
+
+- **Vibe Coding Educativo**: catálogo de apps creadas por docentes de la comunidad. Sirve para descubrir recursos didácticos y abrirlos en el visor o en una pestaña nueva. Usa filtros por nivel/área y favoritos para tenerlos arriba.
+- **Comunidad ChatGPT-IA-edu**: acceso a recursos y enlaces del proyecto ChatGPT-IA-edu.
+- **EduMedia-IAG**: recursos y multimedia educativa con IA generativa.
+
+### Pizarra y escritura
 
 - **Bloc de notas**: notas rápidas para consignas, ideas, ejemplos, listas, etc.
 - **EdiMarkWeb**: procesador de textos Markdown con vista previa en línea y exportación.
 - **Pizarra de dibujo**: dibuja a mano alzada (esquemas, gráficas, mapas conceptuales, diagramas).
 - **Carrusel de imágenes**: muestra una colección de imágenes (láminas, ejercicios, fotos de laboratorio, mapas…).
+- **Sandbox HTML**: espacio para mostrar contenidos preparados.
+- **BoardLive**: pizarra colaborativa en tiempo real.
+
+### Recursos y visores
+
 - **Visor web**: abre una página web dentro del escritorio para usar un recurso online sin cambiar de pestaña.
-- **Vibe Coding Educativo**: catálogo de apps creadas por docentes de la comunidad. Sirve para descubrir recursos didácticos y abrirlos en el visor o en una pestaña nueva. Usa filtros por nivel/área y favoritos para tenerlos arriba.
 - **Web local**: guarda webs en tu navegador (desde ZIP o carpeta) y ejecútalas sin conexión.
 - **Explorador de archivos**: abre archivos locales (PDF, imágenes, texto y Markdown, HTML, audio y vídeo).
-- **Visor directo**: pensado para mostrar contenido web o recursos externos de forma cómoda durante la explicación.
-- **HTML**: espacio para mostrar contenidos preparados.
+- **Conexión en Directo**: pensado para mostrar contenido web o recursos externos de forma cómoda durante la explicación.
+- **Wikipedia**: búsqueda rápida con cambio de idioma para términos de clase.
 
 #### Web local: cómo usarlo
 
@@ -77,6 +89,7 @@ Este widget está pensado para abrir webs hechas con IA o recursos offline para 
 - **Generador de QR**: crea códigos QR para compartir enlaces o recursos a la clase.
 - **Semáforo**: señal visual de “silencio / trabajo / atención” o estados de actividad.
 - **Medidor de sonido**: indicador visual del nivel de ruido para autorregulación del grupo.
+- **Marcador de puntos**: marcador rápido para equipos, retos y gamificación.
 
 ### Juegos de lógica y dinámica de clase
 

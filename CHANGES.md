@@ -5,6 +5,9 @@
 - Apariencia: el botón de temas ahora indica que incluye accesibilidad.
 - Inicio: nuevo acceso rápido a la guía del programa en Ayuda.
 
+## 1.4.1
+- Guía del programa: catálogo actualizado para incluir todos los widgets y secciones alineadas con el menú Inicio.
+
 ## 1.3.7
 - Menú de perfiles: opción para mostrar/ocultar desde Apariencia.
 - Menú de perfiles: opción en el menú contextual del botón derecho.

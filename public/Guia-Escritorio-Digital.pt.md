@@ -19,12 +19,14 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 - **Assiduidade**: registo rápido de presença e estado do grupo.
 - **Gerador de grupos**: cria grupos de forma aleatória ou equilibrada para trabalho cooperativo.
 - **Calendário**: apoio visual para datas, entregas e planeamento.
+- **Guia do programa**: guia integrada com o catálogo de widgets e dicas de uso.
 
 ### Tempo e ritmo
 
 - **Temporizador**: contagem decrescente para estações, testes curtos, trabalho por turnos, etc.
 - **Cronómetro**: mide tiempos (experimentos, retos, educación física, dinámicas).
 - **Metrónomo**: marca um pulso constante. Útil para música, leitura rítmica, dinâmicas de aula ou trabalho por intervalos.
+- **Relógios Mundiais**: mostra a hora de várias cidades para comparação em sala.
 
 ### Matemática e ciências
 
@@ -32,17 +34,28 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 - **Conversor de unidades**: converte grandezas para problemas e práticas.
 - **Markdown + LaTeX**: escreva apontamentos com fórmulas e formatação.
 
-### Quadro, escrita e recursos
+### Comunidade
+
+- **Vibe Coding Educativo**: catálogo de apps criadas por docentes da comunidade. Serve para descobrir recursos didáticos e abri-los no visualizador ou numa nova aba. Usa filtros por nível/área e favoritos para mantê-los no topo.
+- **Comunidade ChatGPT-IA-edu**: recursos e links do projeto ChatGPT-IA-edu.
+- **EduMedia-IAG**: recursos e multimédia educativa com IA generativa.
+
+### Quadro e escrita
 
 - **Bloco de notas**: notas rápidas para instruções, ideias, exemplos, listas, etc.
 - **EdiMarkWeb**: processador de textos Markdown com pré-visualização online e exportação.
 - **Quadro de desenho**: desenho à mão livre (esquemas, gráficos, mapas conceptuais, diagramas).
 - **Carrossel de imagens**: mostra uma coleção de imagens (pranchas, exercícios, fotos de laboratório, mapas…).
+- **Sandbox HTML**: espaço para mostrar conteúdos preparados.
+- **BoardLive**: quadro colaborativo em tempo real.
+
+### Recursos e visualizadores
+
 - **Visualizador web**: abre uma página web dentro do ambiente para usar um recurso online sem mudar de separador.
-- **Vibe Coding Educativo**: catálogo de apps criadas por docentes da comunidade. Serve para descobrir recursos didáticos e abri-los no visualizador ou numa nova aba. Usa filtros por nível/área e favoritos para mantê-los no topo.
+- **Web local**: guarda sites no navegador (ZIP ou pasta) e executa-os offline.
 - **Explorador de ficheiros**: abre ficheiros locais (PDF, imagens, texto e Markdown, áudio e vídeo).
-- **Visualizador direto**: pensado para mostrar conteúdo web ou recursos externos de forma cómoda durante a explicação.
-- **HTML**: espaço para mostrar conteúdos preparados.
+- **Conexão ao Vivo**: pensado para mostrar conteúdo web ou recursos externos de forma cómoda durante a explicação.
+- **Wikipedia**: pesquisa rápida com troca de idioma para temas da aula.
 
 ### Ferramentas participativas
 
@@ -62,6 +75,7 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 - **Gerador de QR**: cria códigos QR para partilhar links ou recursos com a turma.
 - **Semáforo**: sinal visual de “silêncio / trabalho / atenção” ou estados da atividade.
 - **Medidor de som**: indicador visual do nível de ruído para autorregulação do grupo.
+- **Placar de Pontos**: pontuação rápida para equipas, desafios e gamificação.
 
 ### Jogos de lógica e dinâmica de turma
 
@@ -69,7 +83,7 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 - **Memória**: jogo de pares para vocabulário, conceitos, imagens e definições.
 - **Puzzle deslizante**: quebra‑cabeças para atenção, lógica e momentos de transição.
 
-### Trabalho com gestos
+### Gestos de trabalho
 
 - **Gestos de trabalho**: ferramenta de apoio para dinâmicas de aula baseadas em sinais/gestos e rotinas.
 

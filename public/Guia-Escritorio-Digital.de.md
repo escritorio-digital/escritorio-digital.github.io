@@ -13,18 +13,20 @@ Digitaler Desktop ist eine Arbeitsfläche mit „Fenstern“ für den Unterricht
 
 ## Widget‑Katalog
 
-### Organisation und Klasse
+### Organisation und Unterricht
 
 - **Aufgabenliste**: Aufgaben/Erinnerungen. Nützlich für Tagesplan, Schritte eines Experiments, kurze Rubrik oder „Sitzungsplan“.
 - **Anwesenheit**: schnelle Anwesenheits- und Gruppenstatus‑Erfassung.
 - **Gruppengenerator**: Gruppen zufällig oder ausgewogen für kooperatives Arbeiten erstellen.
 - **Kalender**: visuelle Unterstützung für Termine, Abgaben und Planung.
+- **Programmleitfaden**: integrierter Leitfaden mit Widget‑Katalog und Nutzungstipps.
 
 ### Zeit und Rhythmus
 
 - **Timer**: Countdown für Stationen, kurze Tests, Arbeit in Runden usw.
 - **Stoppuhr**: Zeiten messen (Experimente, Challenges, Sport, Dynamiken).
 - **Metronom**: gleichmäßiger Puls. Nützlich für Musik, rhythmisches Lesen, Routinen oder Intervallarbeit.
+- **Weltuhren**: zeigt die Uhrzeiten mehrerer Städte zum Vergleich im Unterricht.
 
 ### Mathematik und Naturwissenschaften
 
@@ -32,17 +34,28 @@ Digitaler Desktop ist eine Arbeitsfläche mit „Fenstern“ für den Unterricht
 - **Einheitenumrechner**: Größen für Aufgaben und Praktika umrechnen.
 - **Markdown + LaTeX**: Notizen mit Formeln und Formatierung schreiben.
 
-### Tafel, Schreiben und Ressourcen
+### Community
+
+- **Vibe Coding Educativo**: Katalog von Apps, die Lehrkräfte der Community erstellt haben. Zum Entdecken didaktischer Ressourcen und zum Öffnen im Viewer oder in einem neuen Tab. Nutze Filter nach Stufe/Fachbereich und Favoriten, um sie oben zu halten.
+- **ChatGPT-IA-edu Community**: Ressourcen und Links des Projekts ChatGPT-IA-edu.
+- **EduMedia-IAG**: Bildungs‑Multimedia und Ressourcen mit generativer KI.
+
+### Tafel und Schreiben
 
 - **Notizblock**: schnelle Notizen für Anweisungen, Ideen, Beispiele, Listen usw.
 - **EdiMarkWeb**: Markdown-Texteditor mit Online-Vorschau und Export.
 - **Zeichenfläche**: freihändig zeichnen (Skizzen, Diagramme, Concept Maps).
 - **Bilder‑Karussell**: Bildsammlung anzeigen (Tafeln, Aufgaben, Laborfotos, Karten …).
+- **HTML‑Sandbox**: Bereich für vorbereitete Inhalte.
+- **BoardLive**: kollaboratives Whiteboard in Echtzeit.
+
+### Ressourcen und Viewer
+
 - **Web‑Viewer**: eine Webseite im Desktop öffnen, ohne den Tab zu wechseln.
-- **Vibe Coding Educativo**: Katalog von Apps, die Lehrkräfte der Community erstellt haben. Zum Entdecken didaktischer Ressourcen und zum Öffnen im Viewer oder in einem neuen Tab. Nutze Filter nach Stufe/Fachbereich und Favoriten, um sie oben zu halten.
+- **Lokale Webs**: Webseiten im Browser speichern (ZIP oder Ordner) und offline nutzen.
 - **Datei-Explorer**: lokale Dateien öffnen (PDF, Bilder, Text und Markdown, Audio und Video).
-- **Direkt‑Viewer**: für die komfortable Anzeige von Web‑Inhalten oder externen Ressourcen während der Erklärung.
-- **HTML**: Bereich für vorbereitete Inhalte.
+- **Live-Verbindung**: für die komfortable Anzeige von Web‑Inhalten oder externen Ressourcen während der Erklärung.
+- **Wikipedia**: schnelle Suche mit Sprachwechsel für Unterrichtsthemen.
 
 ### Partizipative Werkzeuge
 
@@ -51,6 +64,7 @@ Digitaler Desktop ist eine Arbeitsfläche mit „Fenstern“ für den Unterricht
 - **Wortwolke**: kurze Antworten in einer dynamischen Wolke.
 - **Brainstorming und Abstimmung**: Vorschläge und Abstimmung zur Priorisierung.
 - **Interaktive Wand**: kollaborative Wand mit Post-it-Notizen.
+- **Exit-Tickets**: kurze Rückmeldungen am Ende der Stunde.
 - **QPlay**: interaktives Quiz in Echtzeit.
 - **BoardLive**: kollaboratives Whiteboard in Echtzeit.
 
@@ -61,14 +75,15 @@ Digitaler Desktop ist eine Arbeitsfläche mit „Fenstern“ für den Unterricht
 - **QR‑Generator**: QR‑Codes für Links oder Ressourcen erstellen.
 - **Ampel**: visuelles Signal für „Ruhe / Arbeit / Aufmerksamkeit“ oder Aktivitätszustände.
 - **Lautstärke‑Messgerät**: visuelle Anzeige des Geräuschpegels zur Selbstregulation.
+- **Punktestand**: schnelle Punktevergabe für Teams, Herausforderungen und Gamification.
 
-### Logikspiele und Klassen‑Dynamik
+### Logikspiele und Klassendynamik
 
 - **Tic Tac Toe**: kurzes Spiel für Wiederholung, Q&A, Motivation oder Konzept‑Duell.
 - **Memory**: Paare finden für Wortschatz, Konzepte, Bilder und Definitionen.
 - **Schiebepuzzle**: Puzzle für Aufmerksamkeit, Logik und Übergänge.
 
-### Arbeiten mit Gesten
+### Arbeitsgesten
 
 - **Arbeitsgesten**: Unterstützung für Unterrichtsroutinen mit Signalen/Gesten.
 
