@@ -1,5 +1,18 @@
 {
   "loading": "Loading...",
+  "save_dialog": {
+    "title": "Save file",
+    "description": "Where do you want to save it?",
+    "save_in_manager": "Ed Files",
+    "save_in_device": "Local disk",
+    "cancel": "Cancel",
+    "folder_label": "Destination folder",
+    "new_folder": "New folder",
+    "root_folder": "Ed Files",
+    "filename_label": "File name",
+    "default_filename": "file",
+    "message": "Save in Ed Files? OK = Ed Files, Cancel = Local disk."
+  },
   "settings": {
     "title": "Settings",
     "close": "Close",
@@ -21,7 +34,8 @@
       "reset_title": "Reset Application",
       "reset_description": "Removes all saved data (profiles, programs, and preferences) and restarts as first run.",
       "reset_button": "Factory Reset",
-      "reset_confirm": "Are you sure you want to remove all local preferences and data? This cannot be undone."
+      "reset_confirm": "Are you sure you want to remove all local preferences and data? This cannot be undone.",
+      "version_value": "v1.6.0 — April 2025"
     },
     "profiles": {
       "invalid_name_alert": "Invalid or already existing profile name.",
@@ -68,7 +82,8 @@
         "logic_games": "Logic games and class dynamics",
         "gestures": "Work gestures",
         "other": "Other",
-        "community": "Community"
+        "community": "Community",
+        "vibe_coding": "Vibe Coding"
       }
     },
     "theme": {
@@ -247,6 +262,33 @@
     "program_guide": {
       "title": "Program guide",
       "load_error": "Unable to load the guide."
+    },
+    "file_manager": {
+      "title": "Ed Files",
+      "new_folder": "New folder",
+      "new_folder_prompt": "Folder name",
+      "upload": "Upload files",
+      "open_trash": "Trash",
+      "exit_trash": "Exit trash",
+      "move_to_trash": "Move to trash",
+      "restore": "Restore",
+      "delete_permanent": "Delete permanently",
+      "delete_confirm": "Delete this item permanently?",
+      "empty_folder": "This folder is empty.",
+      "empty_trash": "Trash is empty.",
+      "storage_usage": "Used: {{used}} / {{total}} ({{percent}}%)",
+      "storage_unknown": "Available space: no data",
+      "trash_ttl": "Trash:",
+      "trash_option": "{{hours}} h",
+      "root": "Root",
+      "up": "Up",
+      "download": "Download",
+      "saved_from": "Saved from {{widget}}",
+      "empty_trash_button": "Empty trash",
+      "empty_trash_confirm": "Delete everything in the trash permanently?",
+      "copy": "Copy",
+      "cut": "Cut",
+      "paste": "Paste"
     },
     "file_opener": {
       "title": "File Explorer",
@@ -675,7 +717,9 @@
       "collapse_list": "Hide list",
       "expand_list": "Show list",
       "rename_placeholder": "New site name",
-      "rename_invalid": "The site name is not valid."
+      "rename_invalid": "The site name is not valid.",
+      "description": "Import your local website to run it in Ed",
+      "tooltip": "Import your local website to run it in Ed"
     },
     "vce": {
       "title": "Community apps",
@@ -819,7 +863,8 @@
     "import_mode_replace": "Replace current (remove all and replace with imported)",
     "import_mode_merge": "Merge with existing (keep all; add imported)",
     "manage_profiles": "Save or load profiles",
-    "choose_profiles": "Which profile do you want to save"
+    "choose_profiles": "Which profile do you want to save",
+    "include_file_manager": "Include Ed Files"
   },
   "system_stats": {
     "title": "System stats",
@@ -834,5 +879,19 @@
     "window": "Window",
     "window_value": "{{width}}x{{height}}",
     "not_available": "N/A"
+  },
+  "open_dialog": {
+    "title": "Open file",
+    "description": "Choose from Ed Files or from your local disk.",
+    "file_manager": "Ed Files",
+    "up": "Up",
+    "empty_folder": "This folder is empty.",
+    "local": "Local disk",
+    "local_hint": "Choose a file from your device.",
+    "choose_local": "Choose file",
+    "cancel": "Cancel",
+    "open_selected": "Open selected",
+    "open_file": "Open file",
+    "root_folder": "Ed Files"
   }
 }

@@ -53,11 +53,20 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 
 ### Ressources et visualiseurs
 
+- **Fichiers Ed** : gestionnaire de fichiers du bureau. Enregistrez, organisez et ouvrez des fichiers dans le navigateur.
 - **Visionneuse web** : ouvre une page web dans le bureau sans changer d’onglet.
 - **Web local** : enregistrez des sites dans le navigateur (ZIP ou dossier) et exécutez-les hors ligne.
 - **Explorateur de fichiers** : ouvrir des fichiers locaux (PDF, images, texte et Markdown, audio et vidéo).
 - **Connexion en direct** : pour afficher confortablement du contenu web ou des ressources externes pendant l’explication.
 - **Wikipedia** : recherche rapide avec changement de langue pour les sujets de classe.
+
+#### Fichiers Ed : comment l’utiliser
+
+Ce widget fonctionne comme un classeur dans le navigateur.
+
+- **Enregistrer** : depuis d’autres widgets, choisissez Fichiers Ed ou le disque local.
+- **Organiser** : créez des dossiers, déplacez par glisser-déposer et utilisez la corbeille.
+- **Ouvrir** : double‑clic pour ouvrir les fichiers avec leur programme associé.
 
 ### Outils participatifs
 

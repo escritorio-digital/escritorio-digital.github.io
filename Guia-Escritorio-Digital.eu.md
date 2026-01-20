@@ -53,11 +53,20 @@ Idazmahai Digitala ikasgelarako pentsatutako “leihoekin” lan‑taula bat da.
 
 ### Baliabideak eta ikusleak
 
+- **Ed fitxategiak**: mahaigaineko fitxategi‑kudeatzailea. Gorde, antolatu eta ireki fitxategiak nabigatzailean.
 - **Web‑bisorea**: web orri bat mahaigain barruan ireki, fitxaz aldatu gabe.
 - **Web lokala**: gorde webak nabigatzailean (ZIP edo karpeta) eta exekutatu lineaz kanpo.
 - **Fitxategi‑arakatzailea**: fitxategi lokalak ireki (PDF, irudiak, testua eta Markdown, audioa eta bideoa).
 - **Zuzeneko Konexioa**: azalpenetan web edukia edo kanpoko baliabideak eroso erakusteko.
 - **Wikipedia**: hizkuntza‑aldaketarekin bilaketa azkarra klaseko gaientzat.
+
+#### Ed fitxategiak: nola erabili
+
+Widget honek nabigatzaile barruko artxibategi gisa funtzionatzen du.
+
+- **Gorde**: beste widgetetatik Ed fitxategiak edo disko lokala aukeratu.
+- **Antolatu**: sortu karpetak, mugitu elementuak arrastatu eta askatuz eta erabili zakarrontzia.
+- **Ireki**: egin klik bikoitza fitxategiak programarekin irekitzeko.
 
 ### Parte-hartzeko tresnak
 

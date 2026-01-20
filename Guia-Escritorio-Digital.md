@@ -54,11 +54,20 @@ Escritorio Digital es una pizarra de trabajo con “ventanas” pensada para el 
 
 ### Recursos y visores
 
+- **Archivos Ed**: gestor de archivos del escritorio. Guarda, organiza y abre archivos dentro del navegador.
 - **Visor web**: abre una página web dentro del escritorio para usar un recurso online sin cambiar de pestaña.
 - **Web local**: guarda webs en tu navegador (desde ZIP o carpeta) y ejecútalas sin conexión.
 - **Explorador de archivos**: abre archivos locales (PDF, imágenes, texto y Markdown, HTML, audio y vídeo).
 - **Conexión en Directo**: pensado para mostrar contenido web o recursos externos de forma cómoda durante la explicación.
 - **Wikipedia**: búsqueda rápida con cambio de idioma para términos de clase.
+
+#### Archivos Ed: cómo usarlo
+
+Este widget funciona como un archivador dentro del navegador.
+
+- **Guardar**: desde otros widgets puedes elegir guardar en Archivos Ed o en el disco local.
+- **Organizar**: crea carpetas, mueve archivos con arrastrar y soltar y usa papelera con borrado diferido.
+- **Abrir**: doble clic para abrir archivos con su programa asociado.
 
 #### Web local: cómo usarlo
 

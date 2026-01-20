@@ -51,11 +51,20 @@ Escritorio Digital è una lavagna di lavoro con “finestre” pensata per la cl
 
 ### Risorse e visualizzatori
 
+- **File Ed**: gestore dei file del desktop. Salva, organizza e apri file nel browser.
 - **Visualizzatore web**: apre una pagina web dentro il desktop per usare una risorsa online senza cambiare scheda.
 - **Web locale**: salva siti nel browser (da ZIP o cartella) e usali offline.
 - **Esploratore file**: apre file locali (PDF, immagini, testo e Markdown, audio e video).
 - **Connessione in diretta**: pensato per mostrare contenuti web o risorse esterne in modo comodo durante la spiegazione.
 - **Wikipedia**: ricerca rapida con cambio lingua per temi di classe.
+
+#### File Ed: come usarlo
+
+Questo widget funziona come un archivio nel browser.
+
+- **Salvare**: da altri widget puoi scegliere File Ed o il disco locale.
+- **Organizzare**: crea cartelle, sposta con trascinamento e usa il cestino.
+- **Aprire**: doppio clic per aprire i file con il programma associato.
 
 ### Strumenti partecipativi
 

@@ -53,11 +53,20 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 
 ### Resources and viewers
 
+- **Ed Files**: file manager for the desktop. Save, organize, and open files inside the browser.
 - **Web viewer**: open a web page inside the desktop to use an online resource without switching tabs.
 - **Local web**: save websites in the browser (from ZIP or folder) and run them offline.
 - **File explorer**: open local files (PDF, images, text and Markdown, audio and video).
 - **Live viewer**: designed to show web content or external resources comfortably while explaining.
 - **Wikipedia**: quick search with language switching for class topics.
+
+#### Ed Files: how to use it
+
+This widget works as a file cabinet inside the browser.
+
+- **Save**: from other widgets you can choose to save in Ed Files or on your local disk.
+- **Organize**: create folders, move items by drag and drop, and use the trash with delayed deletion.
+- **Open**: double click to open files with their associated program.
 
 ### Participation tools
 

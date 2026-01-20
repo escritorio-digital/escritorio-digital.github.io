@@ -51,11 +51,20 @@ Digitaler Desktop ist eine Arbeitsfläche mit „Fenstern“ für den Unterricht
 
 ### Ressourcen und Viewer
 
+- **Ed-Dateien**: Dateiverwaltung des Desktops. Dateien im Browser speichern, organisieren und öffnen.
 - **Web‑Viewer**: eine Webseite im Desktop öffnen, ohne den Tab zu wechseln.
 - **Lokale Webs**: Webseiten im Browser speichern (ZIP oder Ordner) und offline nutzen.
 - **Datei-Explorer**: lokale Dateien öffnen (PDF, Bilder, Text und Markdown, Audio und Video).
 - **Live-Verbindung**: für die komfortable Anzeige von Web‑Inhalten oder externen Ressourcen während der Erklärung.
 - **Wikipedia**: schnelle Suche mit Sprachwechsel für Unterrichtsthemen.
+
+#### Ed-Dateien: so nutzt du es
+
+Dieses Widget funktioniert wie ein Ablagesystem im Browser.
+
+- **Speichern**: aus anderen Widgets in Ed-Dateien oder auf den lokalen Datenträger speichern.
+- **Organisieren**: Ordner erstellen, per Drag-and-drop verschieben und den Papierkorb nutzen.
+- **Öffnen**: Doppelklick zum Öffnen mit dem zugeordneten Programm.
 
 ### Partizipative Werkzeuge
 

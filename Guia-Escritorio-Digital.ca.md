@@ -53,11 +53,20 @@ Escriptori Digital és una pissarra de treball amb “finestres” pensada per a
 
 ### Recursos i visors
 
+- **Arxius Ed**: gestor d’arxius de l’escriptori. Desa, organitza i obre fitxers dins del navegador.
 - **Visor web**: obre una pàgina web dins l’escriptori per usar un recurs en línia sense canviar de pestanya.
 - **Web local**: desa webs al navegador (des de ZIP o carpeta) i executa-les sense connexió.
 - **Explorador de fitxers**: obre fitxers locals (PDF, imatges, text i Markdown, àudio i vídeo).
 - **Connexió en Directe**: pensat per mostrar contingut web o recursos externs de manera còmoda durant l’explicació.
 - **Wikipedia**: cerca ràpida amb canvi d’idioma per a temes de classe.
+
+#### Arxius Ed: com fer-lo servir
+
+Aquest widget funciona com un arxivador dins del navegador.
+
+- **Desar**: des d’altres widgets pots triar desar a Arxius Ed o al disc local.
+- **Organitzar**: crea carpetes, mou elements amb arrossegar i deixar anar i usa la paperera amb esborrat diferit.
+- **Obrir**: doble clic per obrir fitxers amb el programa associat.
 
 ### Eines participatives
 
