@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Rnd, type RndDragCallback, type RndResizeCallback } from 'react-rnd';
-import { X, Minus, Maximize, Minimize, Pin, PinOff } from 'lucide-react';
+import { CircleHelp, X, Minus, Maximize, Minimize, Pin, PinOff } from 'lucide-react';
 
 interface WidgetWindowProps {
   id: string;
@@ -26,12 +26,13 @@ interface WidgetWindowProps {
   pinLabel?: string;
   unpinLabel?: string;
   isActive?: boolean;
+  helpText?: string;
 }
 
 export const WidgetWindow: React.FC<WidgetWindowProps> = ({ 
     title, icon, children, position, size, zIndex, onDragStop, onResizeStop, 
     onClose, onFocus, isMinimized, isMaximized, onToggleMinimize, onToggleMaximize, onOpenContextMenu,
-    isPinned, onTogglePin, pinLabel, unpinLabel, isActive
+    isPinned, onTogglePin, pinLabel, unpinLabel, isActive, helpText
 }) => {
   const [isHeaderHovered, setIsHeaderHovered] = React.useState(false);
   const finalSize = isMinimized ? { ...size, height: 40 } : size;
@@ -84,7 +85,7 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
           </span>
           
           <div className="flex items-center gap-1">
-            {onTogglePin && isHeaderHovered && (
+            {onTogglePin && (isHeaderHovered || isPinned) && (
               <button
                 onClick={onTogglePin}
                 onContextMenu={onOpenContextMenu}
@@ -94,6 +95,15 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
               >
                 {isPinned ? <PinOff size={18} /> : <Pin size={18} />}
               </button>
+            )}
+            {helpText && (
+              <span
+                className="hover:bg-black/20 rounded-full p-1"
+                title={helpText}
+                aria-label={helpText}
+              >
+                <CircleHelp size={18} />
+              </span>
             )}
             <button onClick={onToggleMinimize} onContextMenu={onOpenContextMenu} className="hover:bg-black/20 rounded-full p-1">
               <Minus size={18} />

@@ -8,6 +8,10 @@
 ## 1.4.1
 - Guía del programa: catálogo actualizado para incluir todos los widgets y secciones alineadas con el menú Inicio.
 
+## 1.5.0
+- Ventanas: icono de ayuda con descripción breve de cada programa.
+- Ventanas: el icono de fijado permanece visible cuando la ventana está fijada.
+
 ## 1.3.7
 - Menú de perfiles: opción para mostrar/ocultar desde Apariencia.
 - Menú de perfiles: opción en el menú contextual del botón derecho.

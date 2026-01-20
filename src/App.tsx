@@ -15,6 +15,7 @@ import type { ActiveWidget, DesktopProfile, ProfileCollection } from './types';
 import { PlusSquare, Image, Settings, X, Users, Maximize2, Minimize2, Pin, PinOff } from 'lucide-react';
 import { defaultWallpaperValue, isWallpaperValueValid } from './utils/wallpapers';
 import { withBaseUrl } from './utils/assetPaths';
+import { getWidgetHelpText } from './utils/widgetHelp';
 // --- ¡AQUÍ ESTÁ EL CAMBIO! Importamos el nuevo componente ---
 import { ProfileSwitcher } from './components/core/ProfileSwitcher';
 
@@ -624,12 +625,14 @@ const DesktopUI: React.FC<{
                 const Component = config.component;
                 const isPinned = activeProfile.pinnedWidgets.includes(widget.widgetId);
                 const isActiveWindow = widget.instanceId === activeWindowId;
+                const helpText = getWidgetHelpText(widget.widgetId);
                 return (
                     <WidgetWindow
                         key={widget.instanceId}
                         id={widget.instanceId}
                         title={t(config.title)}
                         icon={config.icon}
+                        helpText={helpText}
                         position={widget.position}
                         size={widget.size}
                         zIndex={widget.zIndex}
