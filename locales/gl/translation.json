@@ -422,7 +422,7 @@
       "view_large": "Ver en grande",
       "close_large_view": "Pechar vista grande",
       "copy_groups": "Copiar grupos",
-      "download_groups": "Gardar como .txt",
+      "download_groups": "Gardar",
       "copied": "Copiado",
       "group_title": "Grupo {{number}}",
       "no_groups_message": "Os grupos aparecerán aquí."

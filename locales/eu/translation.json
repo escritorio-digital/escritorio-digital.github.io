@@ -421,7 +421,7 @@
       "view_large": "Ikuspegi handia",
       "close_large_view": "Itxi ikuspegi handia",
       "copy_groups": "Taldeak kopiatu",
-      "download_groups": "Gorde .txt gisa",
+      "download_groups": "Gorde",
       "copied": "Kopiatua",
       "group_title": "{{number}} Taldea",
       "no_groups_message": "Taldeak hemen agertuko dira."
