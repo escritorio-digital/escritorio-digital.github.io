@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useEditor, EditorContent, Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { Heading as TiptapHeadingExtension } from '@tiptap/extension-heading';
@@ -7,6 +7,11 @@ import TurndownService from 'turndown';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { useTranslation } from 'react-i18next';
 import './Notepad.css';
+import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
+import { getEntry } from '../../../utils/fileManagerDb';
+import { subscribeFileOpen } from '../../../utils/fileOpenBus';
+import { requestSaveDestination } from '../../../utils/saveDialog';
+import { requestOpenFile } from '../../../utils/openDialog';
 import {
   Bold,
   Italic,
@@ -65,7 +70,6 @@ const MenuBar: React.FC<{ editor: Editor | null; onUpload: () => void; onDownloa
 export const NotepadWidget = () => {
   const { t } = useTranslation();
   const [content, setContent] = useLocalStorage('notepad-content-html', t('widgets.notepad.initial_content'));
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const turndownService = new TurndownService();
 
   const editor = useEditor({
@@ -87,45 +91,68 @@ export const NotepadWidget = () => {
     },
   });
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (!editor) return;
     const htmlContent = editor.getHTML();
     const markdownContent = turndownService.turndown(htmlContent);
 
     const blob = new Blob([markdownContent], { type: 'text/markdown;charset=utf-8;' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = t('widgets.notepad.default_filename');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const filename = t('widgets.notepad.default_filename');
+    const destination = await requestSaveDestination(filename);
+    if (destination?.destination === 'file-manager') {
+      await saveToFileManager({
+        blob,
+        filename: destination.filename,
+        sourceWidgetId: 'notepad',
+        sourceWidgetTitleKey: 'widgets.notepad.title',
+        parentId: destination.parentId,
+      });
+      return;
+    }
+    if (destination?.destination === 'download') {
+      downloadBlob(blob, destination.filename);
+    }
   };
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file && editor) {
-      const reader = new FileReader();
-      reader.onload = async (event) => {
-        const markdownContent = event.target?.result as string;
-        const htmlContent = await marked.parse(markdownContent);
-        editor.commands.setContent(htmlContent);
-      };
-      reader.readAsText(file);
-    }
-    if(e.target) e.target.value = '';
+  const loadFromFile = async (file: File) => {
+    if (!editor) return;
+    const text = await file.text();
+    const htmlContent = await marked.parse(text);
+    editor.commands.setContent(htmlContent);
   };
+
+  const handleOpenFile = async () => {
+    const result = await requestOpenFile({ accept: '.md,.txt' });
+    if (!result) return;
+    if (result.source === 'local') {
+      const [file] = result.files;
+      if (file) await loadFromFile(file);
+      return;
+    }
+    const [entryId] = result.entryIds;
+    if (!entryId) return;
+    const entry = await getEntry(entryId);
+    if (!entry?.blob) return;
+    const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
+    await loadFromFile(file);
+  };
+
+  useEffect(() => {
+    if (!editor) return;
+    const unsubscribe = subscribeFileOpen('notepad', async ({ entryId }) => {
+      const entry = await getEntry(entryId);
+      if (!entry?.blob) return;
+      const content = await entry.blob.text();
+      const htmlContent = await marked.parse(content);
+      editor.commands.setContent(htmlContent);
+    });
+    return unsubscribe;
+  }, [editor]);
 
   return (
     <div className="flex flex-col h-full w-full notepad-widget bg-white rounded-b-md overflow-hidden">
-      <MenuBar editor={editor} onUpload={() => fileInputRef.current?.click()} onDownload={handleDownload} />
+      <MenuBar editor={editor} onUpload={handleOpenFile} onDownload={handleDownload} />
       <EditorContent editor={editor} className="flex-grow overflow-auto" />
-      <input
-        type="file"
-        ref={fileInputRef}
-        onChange={handleFileUpload}
-        accept=".md,.txt"
-        className="hidden"
-      />
     </div>
   );
 };

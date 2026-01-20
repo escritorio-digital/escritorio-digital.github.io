@@ -3,6 +3,11 @@ import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 // CORRECCIÓN: Se eliminaron 'Users' y 'ListCollapse' de esta línea
 import { Upload, Expand, Minimize } from 'lucide-react';
+import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
+import { getEntry } from '../../../utils/fileManagerDb';
+import { subscribeFileOpen } from '../../../utils/fileOpenBus';
+import { requestSaveDestination } from '../../../utils/saveDialog';
+import { requestOpenFile } from '../../../utils/openDialog';
 import './GroupGeneratorWidget.css';
 
 type GroupMode = 'byCount' | 'bySize';
@@ -15,7 +20,6 @@ export const GroupGeneratorWidget: FC = () => {
   const [generatedGroups, setGeneratedGroups] = useState<string[][]>([]);
   const [isLargeView, setIsLargeView] = useState(false);
   const [copyFeedback, setCopyFeedback] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const overlayContentRef = useRef<HTMLDivElement>(null);
   const overlayHeaderRef = useRef<HTMLDivElement>(null);
   const overlayGroupsRef = useRef<HTMLDivElement>(null);
@@ -108,17 +112,40 @@ export const GroupGeneratorWidget: FC = () => {
     };
   }, [isLargeView, generatedGroups]);
 
-  const handleFileLoad = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const text = e.target?.result as string;
-        setStudentList(text);
-      };
-      reader.readAsText(file);
-    }
+  const loadFromFile = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = e.target?.result as string;
+      setStudentList(text);
+    };
+    reader.readAsText(file);
   };
+
+  const handleOpenFile = async () => {
+    const result = await requestOpenFile({ accept: '.txt' });
+    if (!result) return;
+    if (result.source === 'local') {
+      const [file] = result.files;
+      if (file) loadFromFile(file);
+      return;
+    }
+    const [entryId] = result.entryIds;
+    if (!entryId) return;
+    const entry = await getEntry(entryId);
+    if (!entry?.blob) return;
+    const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
+    loadFromFile(file);
+  };
+
+  useEffect(() => {
+    const unsubscribe = subscribeFileOpen('group-generator', async ({ entryId }) => {
+      const entry = await getEntry(entryId);
+      if (!entry?.blob) return;
+      const text = await entry.blob.text();
+      setStudentList(text);
+    });
+    return unsubscribe;
+  }, []);
 
   const generateGroups = () => {
     // 1. Limpiar y obtener la lista de estudiantes
@@ -181,18 +208,24 @@ export const GroupGeneratorWidget: FC = () => {
     }
   };
 
-  const downloadGroups = () => {
+  const downloadGroups = async () => {
     if (generatedGroups.length === 0) return;
     const text = formatGroupsText();
     const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'grupos.txt';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    const destination = await requestSaveDestination('grupos.txt');
+    if (destination?.destination === 'file-manager') {
+      await saveToFileManager({
+        blob,
+        filename: destination.filename,
+        sourceWidgetId: 'group-generator',
+        sourceWidgetTitleKey: 'widgets.group_generator.title',
+        parentId: destination.parentId,
+      });
+      return;
+    }
+    if (destination?.destination === 'download') {
+      downloadBlob(blob, destination.filename);
+    }
   };
 
   return (
@@ -204,10 +237,9 @@ export const GroupGeneratorWidget: FC = () => {
           onChange={(e) => setStudentList(e.target.value)}
           placeholder={t('widgets.group_generator.placeholder')}
         />
-        <button onClick={() => fileInputRef.current?.click()} className="upload-button">
+        <button onClick={handleOpenFile} className="upload-button">
           <Upload size={16} /> {t('widgets.group_generator.load_from_file')}
         </button>
-        <input type="file" ref={fileInputRef} onChange={handleFileLoad} accept=".txt" className="hidden" />
       </div>
       <div className="controls-panel">
         <div className="mode-selection">

@@ -10,6 +10,10 @@ import { Clipboard, Image as ImageIcon, FileDown, FileText } from 'lucide-react'
 
 import 'katex/dist/katex.min.css';
 import './LatexMarkdownWidget.css';
+import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
+import { getEntry } from '../../../utils/fileManagerDb';
+import { subscribeFileOpen } from '../../../utils/fileOpenBus';
+import { requestSaveDestination } from '../../../utils/saveDialog';
 
 type Mode = 'markdown' | 'latex';
 
@@ -114,18 +118,25 @@ export const LatexMarkdownWidget: FC = () => {
     }
   };
 
-  const handleSaveToFile = () => {
+  const handleSaveToFile = async () => {
     const extension = mode === 'latex' ? 'tex' : 'md';
     const mimeType = mode === 'latex' ? 'text/x-latex' : 'text/markdown';
     const blob = new Blob([input], { type: `${mimeType};charset=utf-8` });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `documento.${extension}`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    const filename = `documento.${extension}`;
+    const destination = await requestSaveDestination(filename);
+    if (destination?.destination === 'file-manager') {
+      await saveToFileManager({
+        blob,
+        filename: destination.filename,
+        sourceWidgetId: 'latex-markdown',
+        sourceWidgetTitleKey: 'widgets.latex_markdown.title',
+        parentId: destination.parentId,
+      });
+      return;
+    }
+    if (destination?.destination === 'download') {
+      downloadBlob(blob, destination.filename);
+    }
   };
 
   const handleExportAsPdfText = async () => {
@@ -183,6 +194,18 @@ export const LatexMarkdownWidget: FC = () => {
       }
     }
   }, [input, mode]);
+
+  useEffect(() => {
+    const unsubscribe = subscribeFileOpen('latex-markdown', async ({ entryId }) => {
+      const entry = await getEntry(entryId);
+      if (!entry?.blob) return;
+      const content = await entry.blob.text();
+      const lower = entry.name.toLowerCase();
+      setMode(lower.endsWith('.tex') ? 'latex' : 'markdown');
+      setInput(content);
+    });
+    return unsubscribe;
+  }, []);
 
   // Si las traducciones no están listas, mostrar un loader simple
   if (!ready) {

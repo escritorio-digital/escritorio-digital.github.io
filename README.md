@@ -14,31 +14,35 @@ Este proyecto es un entorno de escritorio virtual construido con React, que perm
 8.  **Generador de Grupos:** Permite crear grupos aleatorios a partir de una lista de nombres, ya sea especificando el número de grupos o el número de integrantes por grupo.
 9.  **Generador QR:** Crea un código QR a partir de un texto o una URL que introduzcas.
 10. **Gestos de Trabajo:** Muestra tarjetas visuales grandes para indicar el modo de trabajo en el aula (Silencio, Parejas, Equipos, Plenaria).
-11. **HTML Sandbox:** Un lienzo con un único campo para pegar código HTML y un botón para alternar entre el editor y la vista previa.
-12. **Intérprete (MD/LaTeX):** Renderiza documentos que mezclan texto en formato Markdown con fórmulas matemáticas escritas en LaTeX.
-13. **Lista de Trabajo:** Un gestor de tareas pendientes (to-do list) que permite añadir, marcar como completadas y eliminar tareas.
-14. **Marcador de Puntos:** Un marcador para llevar la puntuación de varios equipos o jugadores.
-15. **Medidor de Ruido:** Utiliza el micrófono para medir el nivel de ruido ambiental y lo clasifica como silencio, conversación o ruido.
-16. **Memorama:** Un juego de memoria clásico que se crea cargando tus propias imágenes para encontrar los pares.
-17. **Metrónomo:** Un metrónomo digital para marcar un tempo (BPM) constante.
-18. **Bloc de Notas:** Un editor de texto enriquecido para tomar apuntes rápidos con formato.
-19. **Puzzle Deslizante:** El clásico juego de puzzle de 15, que se crea a partir de una imagen que tú subas.
-20. **Relojes Mundiales:** Muestra la hora actual en diferentes ciudades del mundo y la compara con tu hora local.
-21. **Ruleta Aleatoria:** Una ruleta personalizable para seleccionar opciones al azar.
-22. **Semáforo:** Un semáforo visual (rojo, amarillo, verde) ideal para gestionar los tiempos o niveles de ruido en el aula.
-23. **Temporizador:** Un contador regresivo que puedes configurar con minutos y segundos.
-24. **Tic-Tac-Toe:** El juego clásico de tres en raya para dos jugadores.
-25. **Visor Web:** Permite embeber y mostrar el contenido de una URL directamente en el escritorio, usando un iframe.
-26. **Conexión en Directo:** Es un visor de aplicaciones web que carga una página externa, específicamente la aplicación "Conexión en Directo" de Juan José de Haro, dentro de una ventana en el escritorio.
-27. **Paleta de Dibujo:** Una completa herramienta de dibujo que permite trazos con diferentes pinceles (lápiz, rotulador, spray), insertar formas geométricas (líneas, rectángulos, círculos), añadir flechas y texto.
-28. **Votación simple:** Votaciones de opción múltiple en tiempo real con resultados instantáneos.
-29. **Escala de valoración:** Escalas tipo Likert, numéricas o semáforo para medir opiniones.
-30. **Nube de palabras:** Recopila ideas y las muestra como una nube visual.
-31. **Lluvia de ideas y votos:** Fase de propuestas + fase de votación para priorizar.
-32. **Muro interactivo:** Muro colaborativo con notas tipo post-it exportables.
-33. **QPlay:** Concurso interactivo con cuestionarios en tiempo real.
-34. **BoardLive:** Pizarra colaborativa en tiempo real con control por el anfitrión.
-35. **Vibe Coding Educativo:** Catálogo de apps creadas por docentes de la comunidad para descubrir recursos didácticos y abrirlos en el visor o en una pestaña nueva.
+11. **Guía del programa:** Guía integrada con el catálogo de widgets y recomendaciones de uso.
+12. **HTML Sandbox:** Un lienzo con un único campo para pegar código HTML y un botón para alternar entre el editor y la vista previa.
+13. **Intérprete (MD/LaTeX):** Renderiza documentos que mezclan texto en formato Markdown con fórmulas matemáticas escritas en LaTeX.
+14. **Lista de Trabajo:** Un gestor de tareas pendientes (to-do list) que permite añadir, marcar como completadas y eliminar tareas.
+15. **Marcador de Puntos:** Un marcador para llevar la puntuación de varios equipos o jugadores.
+16. **Medidor de Ruido:** Utiliza el micrófono para medir el nivel de ruido ambiental y lo clasifica como silencio, conversación o ruido.
+17. **Memorama:** Un juego de memoria clásico que se crea cargando tus propias imágenes para encontrar los pares.
+18. **Metrónomo:** Un metrónomo digital para marcar un tempo (BPM) constante.
+19. **Bloc de Notas:** Un editor de texto enriquecido para tomar apuntes rápidos con formato.
+20. **Puzzle Deslizante:** El clásico juego de puzzle de 15, que se crea a partir de una imagen que tú subas.
+21. **Relojes Mundiales:** Muestra la hora actual en diferentes ciudades del mundo y la compara con tu hora local.
+22. **Ruleta Aleatoria:** Una ruleta personalizable para seleccionar opciones al azar.
+23. **Semáforo:** Un semáforo visual (rojo, amarillo, verde) ideal para gestionar los tiempos o niveles de ruido en el aula.
+24. **Temporizador:** Un contador regresivo que puedes configurar con minutos y segundos.
+25. **Tic-Tac-Toe:** El juego clásico de tres en raya para dos jugadores.
+26. **Visor Web:** Permite embeber y mostrar el contenido de una URL directamente en el escritorio, usando un iframe.
+27. **Web local:** Guarda webs en el navegador (desde ZIP o carpeta) y ejecútalas sin conexión.
+28. **Explorador de archivos:** Abre archivos locales (PDF, imágenes, texto y Markdown, HTML, audio y vídeo).
+29. **Archivos Ed:** Gestor de archivos del escritorio para guardar, organizar y abrir archivos.
+30. **Conexión en Directo:** Es un visor de aplicaciones web que carga una página externa, específicamente la aplicación "Conexión en Directo" de Juan José de Haro, dentro de una ventana en el escritorio.
+31. **Paleta de Dibujo:** Una completa herramienta de dibujo que permite trazos con diferentes pinceles (lápiz, rotulador, spray), insertar formas geométricas (líneas, rectángulos, círculos), añadir flechas y texto.
+32. **Votación simple:** Votaciones de opción múltiple en tiempo real con resultados instantáneos.
+33. **Escala de valoración:** Escalas tipo Likert, numéricas o semáforo para medir opiniones.
+34. **Nube de palabras:** Recopila ideas y las muestra como una nube visual.
+35. **Lluvia de ideas y votos:** Fase de propuestas + fase de votación para priorizar.
+36. **Muro interactivo:** Muro colaborativo con notas tipo post-it exportables.
+37. **QPlay:** Concurso interactivo con cuestionarios en tiempo real.
+38. **BoardLive:** Pizarra colaborativa en tiempo real con control por el anfitrión.
+39. **Vibe Coding Educativo:** Catálogo de apps creadas por docentes de la comunidad para descubrir recursos didácticos y abrirlos en el visor o en una pestaña nueva.
 
 ## Uso básico
 

@@ -1,0 +1,123 @@
+.file-manager-widget {
+  @apply relative w-full h-full flex flex-col gap-3 bg-gray-100 p-3 text-text-dark;
+}
+
+.file-manager-toolbar {
+  @apply flex flex-wrap items-center gap-2 bg-white rounded-lg shadow-sm p-2;
+}
+
+.file-manager-button {
+  @apply flex items-center gap-2 text-sm bg-gray-200 hover:bg-gray-300 px-3 py-2 rounded-md;
+}
+
+.file-manager-icon-only {
+  @apply flex items-center justify-center rounded-md bg-gray-200 hover:bg-gray-300 px-3 py-2;
+}
+
+.file-manager-button:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.file-manager-breadcrumbs {
+  @apply flex items-center gap-1 flex-wrap text-sm;
+}
+
+.file-manager-breadcrumb {
+  @apply text-gray-600 hover:text-text-dark;
+}
+
+.file-manager-breadcrumb:disabled {
+  @apply opacity-60 cursor-not-allowed;
+}
+
+.file-manager-spacer {
+  @apply flex-1;
+}
+
+.file-manager-usage {
+  @apply flex flex-wrap items-center gap-3 bg-white rounded-lg p-3 shadow-sm text-xs text-gray-600;
+}
+
+.file-manager-usage-bar {
+  @apply h-2 w-40 bg-gray-200 rounded-full overflow-hidden;
+}
+
+.file-manager-usage-fill {
+  @apply h-full bg-accent;
+}
+
+.file-manager-usage-text {
+  @apply text-gray-600;
+}
+
+.file-manager-trash-settings {
+  @apply flex items-center gap-2;
+}
+
+.file-manager-trash-settings select {
+  @apply border border-gray-300 rounded-md px-2 py-1 text-xs;
+}
+
+.file-manager-list {
+  @apply flex-1 bg-white rounded-lg shadow-inner overflow-auto p-2 space-y-2;
+}
+
+.file-manager-empty {
+  @apply text-center text-gray-400 py-8;
+}
+
+.file-manager-row {
+  @apply flex items-center justify-between gap-2 border border-gray-200 rounded-md px-3 py-2;
+}
+
+.file-manager-entry {
+  @apply flex items-center gap-3 text-left flex-1 min-w-0 cursor-default;
+}
+
+.file-manager-entry.selected {
+  @apply bg-accent bg-opacity-20 rounded-md;
+}
+
+.file-manager-entry.drag-over {
+  @apply bg-accent bg-opacity-30 ring-2 ring-accent ring-opacity-60;
+}
+
+.file-manager-context-menu {
+  @apply absolute z-[10010] min-w-[180px] rounded-lg border border-gray-200 bg-white/95 p-1 text-sm text-text-dark shadow-xl backdrop-blur-md;
+}
+
+.file-manager-context-item {
+  @apply flex w-full items-center gap-2 rounded-md px-3 py-2 text-left hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.file-manager-context-item.danger {
+  @apply text-red-600 hover:text-red-700;
+}
+
+.file-manager-context-separator {
+  @apply my-1 border-t border-gray-200;
+}
+
+.file-manager-entry-name {
+  @apply font-semibold truncate;
+}
+
+.file-manager-entry-size {
+  @apply text-xs text-gray-500 ml-2;
+}
+
+.file-manager-entry-source {
+  @apply text-xs text-gray-500 ml-2;
+}
+
+.file-manager-actions {
+  @apply flex items-center gap-2;
+}
+
+.file-manager-icon-button {
+  @apply text-xs text-gray-600 hover:text-text-dark;
+}
+
+.file-manager-icon-button.danger {
+  @apply text-red-600 hover:text-red-700;
+}

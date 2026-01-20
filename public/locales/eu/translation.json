@@ -1,5 +1,18 @@
 {
   "loading": "Kargatzen...",
+  "save_dialog": {
+    "title": "Fitxategia gorde",
+    "description": "Non gorde nahi duzu?",
+    "save_in_manager": "Ed fitxategiak",
+    "save_in_device": "Disko lokala",
+    "cancel": "Utzi",
+    "folder_label": "Helburu karpeta",
+    "new_folder": "Karpeta berria",
+    "root_folder": "Ed fitxategiak",
+    "filename_label": "Fitxategiaren izena",
+    "default_filename": "fitxategia",
+    "message": "Ed fitxategiak-en gorde? Ados = Ed fitxategiak, Utzi = Disko lokala."
+  },
   "settings": {
     "title": "Ezarpenak",
     "close": "Itxi",
@@ -20,7 +33,8 @@
       "reset_title": "Aplikazioa berrezarri",
       "reset_description": "Gordetako datu guztiak ezabatzen ditu (profilak, programak eta lehentasunak) eta lehen aldia balitz bezala berrabiarazten du.",
       "reset_button": "Fabrikako balioetara berrezarri",
-      "reset_confirm": "Ziur zaude lehentasun eta datu lokal guztiak ezabatu nahi dituzula? Ekintza hau ezin da desegin."
+      "reset_confirm": "Ziur zaude lehentasun eta datu lokal guztiak ezabatu nahi dituzula? Ekintza hau ezin da desegin.",
+      "version_value": "v1.6.0 — 2025ko apirila"
     },
     "profiles": {
       "invalid_name_alert": "Profilaren izen baliogabea edo lehendik dagoena.",
@@ -67,7 +81,8 @@
         "logic_games": "Logika-jokoak eta klaseko dinamika",
         "gestures": "Lan-keinuak",
         "other": "Beste batzuk",
-        "community": "Komunitatea"
+        "community": "Komunitatea",
+        "vibe_coding": "Vibe Coding"
       }
     },
     "theme": {
@@ -246,6 +261,33 @@
     "program_guide": {
       "title": "Programaren gida",
       "load_error": "Ezin izan da gida kargatu."
+    },
+    "file_manager": {
+      "title": "Ed fitxategiak",
+      "new_folder": "Karpeta berria",
+      "new_folder_prompt": "Karpetaren izena",
+      "upload": "Igo fitxategiak",
+      "open_trash": "Zakarrontzia",
+      "exit_trash": "Irten zakarrontzitik",
+      "move_to_trash": "Zakarrontzira eraman",
+      "restore": "Berreskuratu",
+      "delete_permanent": "Behin betiko ezabatu",
+      "delete_confirm": "Elementu hau behin betiko ezabatu?",
+      "empty_folder": "Karpeta hau hutsik dago.",
+      "empty_trash": "Zakarrontzia hutsik dago.",
+      "storage_usage": "Erabilita: {{used}} / {{total}} ({{percent}}%)",
+      "storage_unknown": "Leku erabilgarria: daturik ez",
+      "trash_ttl": "Zakarrontzia:",
+      "trash_option": "{{hours}} h",
+      "root": "Erroa",
+      "up": "Gora",
+      "download": "Deskargatu",
+      "saved_from": "Gordeta: {{widget}}-tik",
+      "empty_trash_button": "Hustu zakarrontzia",
+      "empty_trash_confirm": "Zakarrontziko eduki guztia betiko ezabatu?",
+      "copy": "Kopiatu",
+      "cut": "Ebaki",
+      "paste": "Itsatsi"
     },
     "file_opener": {
       "title": "Fitxategi arakatzailea",
@@ -674,7 +716,9 @@
       "collapse_list": "Ezkutatu zerrenda",
       "expand_list": "Erakutsi zerrenda",
       "rename_placeholder": "Webgunearen izen berria",
-      "rename_invalid": "Webgunearen izena ez da baliozkoa."
+      "rename_invalid": "Webgunearen izena ez da baliozkoa.",
+      "description": "Inportatu zure web lokala Ed-en exekutatzeko",
+      "tooltip": "Inportatu zure web lokala Ed-en exekutatzeko"
     },
     "vce": {
       "title": "Komunitateko aplikazioak",
@@ -818,7 +862,8 @@
     "import_mode_replace": "Oraingoak ordezkatu (guztiak ezabatu eta inportatuekin ordezkatu)",
     "import_mode_merge": "Daudenekin bateratu (bat ere ez ezabatu; inportatuak gehitu)",
     "manage_profiles": "Profilak gorde edo kargatu",
-    "choose_profiles": "Zein profil gorde nahi duzu"
+    "choose_profiles": "Zein profil gorde nahi duzu",
+    "include_file_manager": "Sartu Ed fitxategiak"
   },
   "system_stats": {
     "title": "Sistemaren estatistikak",
@@ -833,5 +878,19 @@
     "window": "Leihoa",
     "window_value": "{{width}}x{{height}}",
     "not_available": "E/E"
+  },
+  "open_dialog": {
+    "title": "Fitxategia ireki",
+    "description": "Hautatu Ed fitxategiak edo disko lokala.",
+    "file_manager": "Ed fitxategiak",
+    "up": "Gora",
+    "empty_folder": "Karpeta hau hutsik dago.",
+    "local": "Disko lokala",
+    "local_hint": "Hautatu gailuko fitxategi bat.",
+    "choose_local": "Hautatu fitxategia",
+    "cancel": "Utzi",
+    "open_selected": "Hautatutakoak ireki",
+    "open_file": "Fitxategia ireki",
+    "root_folder": "Ed fitxategiak"
   }
 }

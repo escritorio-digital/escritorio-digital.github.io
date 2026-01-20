@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FolderOpen, FileText } from 'lucide-react';
@@ -6,6 +6,9 @@ import { marked } from 'marked';
 import katex from 'katex';
 import './FileOpenerWidget.css';
 import 'katex/dist/katex.min.css';
+import { getEntry } from '../../../utils/fileManagerDb';
+import { subscribeFileOpen } from '../../../utils/fileOpenBus';
+import { requestOpenFile } from '../../../utils/openDialog';
 
 type DisplayType = 'none' | 'image' | 'pdf' | 'text' | 'markdown' | 'video' | 'audio' | 'html';
 
@@ -36,7 +39,6 @@ function renderMarkdownWithLatex(input: string): string {
 
 export const FileOpenerWidget: FC = () => {
   const { t } = useTranslation();
-  const inputRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLDivElement>(null);
   const [displayType, setDisplayType] = useState<DisplayType>('none');
   const [fileName, setFileName] = useState('');
@@ -51,13 +53,25 @@ export const FileOpenerWidget: FC = () => {
     };
   }, [fileUrl]);
 
-  const handlePick = () => {
-    inputRef.current?.click();
+  const handlePick = async () => {
+    const result = await requestOpenFile({
+      accept: 'image/*,application/pdf,text/plain,text/markdown,text/html,video/*,audio/*,.md,.markdown,.txt,.html,.htm,.xhtml',
+    });
+    if (!result) return;
+    if (result.source === 'local') {
+      const [file] = result.files;
+      if (file) openFile(file);
+      return;
+    }
+    const [entryId] = result.entryIds;
+    if (!entryId) return;
+    const entry = await getEntry(entryId);
+    if (!entry?.blob) return;
+    const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
+    openFile(file);
   };
 
-  const handleFiles = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
+  const openFile = useCallback(async (file: File) => {
     if (fileUrl) URL.revokeObjectURL(fileUrl);
     setFileUrl('');
     setFileContent('');
@@ -77,14 +91,12 @@ export const FileOpenerWidget: FC = () => {
       const url = URL.createObjectURL(file);
       setFileUrl(url);
       setDisplayType('image');
-      event.target.value = '';
       return;
     }
     if (isPdf) {
       const url = URL.createObjectURL(file);
       setFileUrl(url);
       setDisplayType('pdf');
-      event.target.value = '';
       return;
     }
     if (isMarkdown) {
@@ -92,14 +104,12 @@ export const FileOpenerWidget: FC = () => {
       setDisplayType('markdown');
       setFileContent(content);
       setFileUrl('');
-      event.target.value = '';
       return;
     }
     if (isHtml) {
       const url = URL.createObjectURL(file);
       setFileUrl(url);
       setDisplayType('html');
-      event.target.value = '';
       return;
     }
     if (isText) {
@@ -107,29 +117,35 @@ export const FileOpenerWidget: FC = () => {
       setDisplayType('text');
       setFileContent(content);
       setFileUrl('');
-      event.target.value = '';
       return;
     }
     if (isVideo) {
       const url = URL.createObjectURL(file);
       setFileUrl(url);
       setDisplayType('video');
-      event.target.value = '';
       return;
     }
     if (isAudio) {
       const url = URL.createObjectURL(file);
       setFileUrl(url);
       setDisplayType('audio');
-      event.target.value = '';
       return;
     }
 
     const url = URL.createObjectURL(file);
     window.open(url, '_blank');
     window.setTimeout(() => URL.revokeObjectURL(url), 60000);
-    event.target.value = '';
-  };
+  }, [fileUrl]);
+
+  useEffect(() => {
+    const unsubscribe = subscribeFileOpen('file-opener', async ({ entryId }) => {
+      const entry = await getEntry(entryId);
+      if (!entry?.blob) return;
+      const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
+      await openFile(file);
+    });
+    return unsubscribe;
+  }, [openFile]);
 
   const markdownHtml = useMemo(() => {
     if (displayType !== 'markdown' || !fileContent) return '';
@@ -197,13 +213,6 @@ export const FileOpenerWidget: FC = () => {
           <div className="file-opener-markdown prose" ref={markdownRef} />
         )}
       </div>
-      <input
-        ref={inputRef}
-        type="file"
-        onChange={handleFiles}
-        accept="image/*,application/pdf,text/plain,text/markdown,text/html,video/*,audio/*,.md,.markdown,.txt,.html,.htm,.xhtml"
-        className="hidden"
-      />
     </div>
   );
 };

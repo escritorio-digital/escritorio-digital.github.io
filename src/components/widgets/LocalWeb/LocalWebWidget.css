@@ -10,6 +10,10 @@
   @apply flex items-center gap-2 text-sm font-semibold;
 }
 
+.local-web-description {
+  @apply text-xs text-gray-600 flex-1;
+}
+
 .local-web-actions {
   @apply flex items-center gap-2;
 }

@@ -15,6 +15,13 @@
 ## 1.5.1
 - Generador de grupos: opciones para copiar y guardar los grupos como .txt.
 
+## 1.6.0
+- Archivos Ed: gestor de archivos con carpetas, papelera, copia/pega, selección múltiple y arrastrar/soltar.
+- Guardar y abrir: selector de ubicación con nombre de archivo y acceso a Archivos Ed o disco local.
+- Web local: nuevo acceso desde Archivos Ed y descripción actualizada.
+- Guía del programa: Archivos Ed añadido en todas las guías.
+- Perfiles: exportación/importación opcional de Archivos Ed con tamaño estimado.
+
 ## 1.3.7
 - Menú de perfiles: opción para mostrar/ocultar desde Apariencia.
 - Menú de perfiles: opción en el menú contextual del botón derecho.

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Upload, Shuffle } from 'lucide-react';
+import { getEntry } from '../../../utils/fileManagerDb';
+import { requestOpenFile } from '../../../utils/openDialog';
 import './SlidingPuzzle.css';
 
 const isSolvable = (order: number[], gridSize: number): boolean => {
@@ -56,14 +58,28 @@ export const SlidingPuzzleWidget: FC = () => {
     setIsSolved(solved);
   }, [pieces]);
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setImage(event.target?.result as string);
-      };
-      reader.readAsDataURL(e.target.files[0]);
+  const loadImage = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setImage(event.target?.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleOpenImage = async () => {
+    const result = await requestOpenFile({ accept: 'image/*' });
+    if (!result) return;
+    if (result.source === 'local') {
+      const [file] = result.files;
+      if (file) loadImage(file);
+      return;
     }
+    const [entryId] = result.entryIds;
+    if (!entryId) return;
+    const entry = await getEntry(entryId);
+    if (!entry?.blob) return;
+    const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
+    loadImage(file);
   };
 
   const handlePieceClick = (clickedIndex: number) => {
@@ -91,7 +107,9 @@ export const SlidingPuzzleWidget: FC = () => {
       <div className="puzzle-placeholder">
         <Upload size={48} />
         <p>{t('widgets.sliding_puzzle.upload_prompt')}</p>
-        <input type="file" accept="image/*" onChange={handleImageUpload} />
+        <button className="puzzle-upload-button" onClick={handleOpenImage}>
+          {t('widgets.sliding_puzzle.upload_prompt')}
+        </button>
       </div>
     );
   }

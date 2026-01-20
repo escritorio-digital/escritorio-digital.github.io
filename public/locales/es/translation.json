@@ -1,5 +1,18 @@
 {
   "loading": "Cargando...",
+  "save_dialog": {
+    "title": "Guardar archivo",
+    "description": "¿Dónde quieres guardarlo?",
+    "save_in_manager": "Archivos Ed",
+    "save_in_device": "Disco local",
+    "cancel": "Cancelar",
+    "folder_label": "Carpeta de destino",
+    "new_folder": "Nueva carpeta",
+    "root_folder": "Archivos Ed",
+    "filename_label": "Nombre del archivo",
+    "default_filename": "archivo",
+    "message": "¿Guardar en Archivos Ed? Aceptar = Archivos Ed, Cancelar = Disco local."
+  },
   "settings": {
     "title": "Configuración",
     "close": "Cerrar",
@@ -21,7 +34,8 @@
       "reset_title": "Restablecer aplicación",
       "reset_description": "Elimina todos los datos guardados (perfiles, programas y preferencias) y reinicia como si fuera la primera vez.",
       "reset_button": "Restablecer a valores de fábrica",
-      "reset_confirm": "¿Seguro que quieres eliminar todas las preferencias y datos locales? Esta acción no se puede deshacer."
+      "reset_confirm": "¿Seguro que quieres eliminar todas las preferencias y datos locales? Esta acción no se puede deshacer.",
+      "version_value": "v1.6.0 — abril de 2025"
     },
     "profiles": {
       "invalid_name_alert": "Nombre de perfil inválido o ya existente.",
@@ -68,7 +82,8 @@
         "logic_games": "Juegos de lógica y dinámica de clase",
         "gestures": "Trabajo con gestos",
         "other": "Otros",
-        "community": "Comunidad"
+        "community": "Comunidad",
+        "vibe_coding": "Vibe Coding"
       }
     },
     "theme": {
@@ -247,6 +262,33 @@
     "program_guide": {
       "title": "Guía del programa",
       "load_error": "No se pudo cargar la guía."
+    },
+    "file_manager": {
+      "title": "Archivos Ed",
+      "new_folder": "Nueva carpeta",
+      "new_folder_prompt": "Nombre de la carpeta",
+      "upload": "Subir archivos",
+      "open_trash": "Papelera",
+      "exit_trash": "Salir de papelera",
+      "move_to_trash": "Mover a la papelera",
+      "restore": "Restaurar",
+      "delete_permanent": "Eliminar definitivamente",
+      "delete_confirm": "¿Eliminar definitivamente este elemento?",
+      "empty_folder": "Esta carpeta está vacía.",
+      "empty_trash": "La papelera está vacía.",
+      "storage_usage": "Usado: {{used}} / {{total}} ({{percent}}%)",
+      "storage_unknown": "Espacio disponible: sin datos",
+      "trash_ttl": "Papelera:",
+      "trash_option": "{{hours}} h",
+      "root": "Raíz",
+      "up": "Subir",
+      "download": "Descargar",
+      "saved_from": "Guardado desde {{widget}}",
+      "empty_trash_button": "Vaciar papelera",
+      "empty_trash_confirm": "¿Eliminar definitivamente todo lo que hay en la papelera?",
+      "copy": "Copiar",
+      "cut": "Cortar",
+      "paste": "Pegar"
     },
     "file_opener": {
       "title": "Explorador de archivos",
@@ -675,7 +717,9 @@
       "collapse_list": "Ocultar lista",
       "expand_list": "Mostrar lista",
       "rename_placeholder": "Nuevo nombre de la web",
-      "rename_invalid": "El nombre de la web no es válido."
+      "rename_invalid": "El nombre de la web no es válido.",
+      "description": "Importa tu web local para ejecutarla en Ed",
+      "tooltip": "Importa tu web local para ejecutarla en Ed"
     },
     "vce": {
       "title": "Aplicaciones de la comunidad",
@@ -819,7 +863,8 @@
     "import_mode_replace": "Reemplazar actuales (se eliminan y se sustituyen por los importados)",
     "import_mode_merge": "Combinar con existentes (no se elimina ninguno; se añaden los importados)",
     "manage_profiles": "Guardar o cargar perfiles",
-    "choose_profiles": "Qué perfil deseas guardar"
+    "choose_profiles": "Qué perfil deseas guardar",
+    "include_file_manager": "Incluir Archivos Ed"
   },
   "system_stats": {
     "title": "Estadísticas del sistema",
@@ -834,5 +879,19 @@
     "window": "Ventana",
     "window_value": "{{width}}x{{height}}",
     "not_available": "N/D"
+  },
+  "open_dialog": {
+    "title": "Abrir archivo",
+    "description": "Elige desde Archivos Ed o desde el disco local.",
+    "file_manager": "Archivos Ed",
+    "up": "Subir",
+    "empty_folder": "Esta carpeta está vacía.",
+    "local": "Disco local",
+    "local_hint": "Selecciona un archivo desde tu dispositivo.",
+    "choose_local": "Elegir archivo",
+    "cancel": "Cancelar",
+    "open_selected": "Abrir seleccionados",
+    "open_file": "Abrir archivo",
+    "root_folder": "Archivos Ed"
   }
 }

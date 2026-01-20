@@ -1,5 +1,18 @@
 {
   "loading": "Carregant...",
+  "save_dialog": {
+    "title": "Desar fitxer",
+    "description": "On el vols desar?",
+    "save_in_manager": "Arxius Ed",
+    "save_in_device": "Disc local",
+    "cancel": "Cancel·lar",
+    "folder_label": "Carpeta de destinació",
+    "new_folder": "Carpeta nova",
+    "root_folder": "Arxius Ed",
+    "filename_label": "Nom del fitxer",
+    "default_filename": "fitxer",
+    "message": "Desar a Arxius Ed? D’acord = Arxius Ed, Cancel·lar = Disc local."
+  },
   "settings": {
     "title": "Configuració",
     "close": "Tancar",
@@ -21,7 +34,8 @@
       "reset_title": "Restablir l'aplicació",
       "reset_description": "Elimina totes les dades desades (perfils, programes i preferències) i reinicia com si fos la primera vegada.",
       "reset_button": "Restablir a valors de fàbrica",
-      "reset_confirm": "Estàs segur que vols eliminar totes les preferències i dades locals? Aquesta acció no es pot desfer."
+      "reset_confirm": "Estàs segur que vols eliminar totes les preferències i dades locals? Aquesta acció no es pot desfer.",
+      "version_value": "v1.6.0 — abril de 2025"
     },
     "profiles": {
       "invalid_name_alert": "Nom de perfil invàlid o ja existent.",
@@ -68,7 +82,8 @@
         "logic_games": "Jocs de lògica i dinàmica de classe",
         "gestures": "Gestos de treball",
         "other": "Altres",
-        "community": "Comunitat"
+        "community": "Comunitat",
+        "vibe_coding": "Vibe Coding"
       }
     },
     "theme": {
@@ -247,6 +262,33 @@
     "program_guide": {
       "title": "Guia del programa",
       "load_error": "No s'ha pogut carregar la guia."
+    },
+    "file_manager": {
+      "title": "Arxius Ed",
+      "new_folder": "Nova carpeta",
+      "new_folder_prompt": "Nom de la carpeta",
+      "upload": "Pujar fitxers",
+      "open_trash": "Paperera",
+      "exit_trash": "Sortir de la paperera",
+      "move_to_trash": "Moure a la paperera",
+      "restore": "Restaurar",
+      "delete_permanent": "Eliminar definitivament",
+      "delete_confirm": "Eliminar definitivament aquest element?",
+      "empty_folder": "Aquesta carpeta és buida.",
+      "empty_trash": "La paperera és buida.",
+      "storage_usage": "Usat: {{used}} / {{total}} ({{percent}}%)",
+      "storage_unknown": "Espai disponible: sense dades",
+      "trash_ttl": "Paperera:",
+      "trash_option": "{{hours}} h",
+      "root": "Arrel",
+      "up": "Pujar",
+      "download": "Descarregar",
+      "saved_from": "Desat des de {{widget}}",
+      "empty_trash_button": "Buidar paperera",
+      "empty_trash_confirm": "Voleu eliminar definitivament tot el contingut de la paperera?",
+      "copy": "Copiar",
+      "cut": "Retallar",
+      "paste": "Enganxar"
     },
     "file_opener": {
       "title": "Explorador de fitxers",
@@ -675,7 +717,9 @@
       "collapse_list": "Amaga la llista",
       "expand_list": "Mostra la llista",
       "rename_placeholder": "Nou nom del lloc web",
-      "rename_invalid": "El nom del lloc web no és vàlid."
+      "rename_invalid": "El nom del lloc web no és vàlid.",
+      "description": "Importa la teva web local per executar-la a Ed",
+      "tooltip": "Importa la teva web local per executar-la a Ed"
     },
     "vce": {
       "title": "Aplicacions de la comunitat",
@@ -819,7 +863,8 @@
     "import_mode_replace": "Reemplaçar actuals (s’eliminaran i se substituiran pels importats)",
     "import_mode_merge": "Combinar amb existents (no se’n elimina cap; s’afegeixen els importats)",
     "manage_profiles": "Desar o carregar perfils",
-    "choose_profiles": "Quin perfil vols desar"
+    "choose_profiles": "Quin perfil vols desar",
+    "include_file_manager": "Incloure Arxius Ed"
   },
   "system_stats": {
     "title": "Estadístiques del sistema",
@@ -834,5 +879,19 @@
     "window": "Finestra",
     "window_value": "{{width}}x{{height}}",
     "not_available": "N/D"
+  },
+  "open_dialog": {
+    "title": "Obrir fitxer",
+    "description": "Tria entre Arxius Ed o el disc local.",
+    "file_manager": "Arxius Ed",
+    "up": "Pujar",
+    "empty_folder": "Aquesta carpeta està buida.",
+    "local": "Disc local",
+    "local_hint": "Selecciona un fitxer del dispositiu.",
+    "choose_local": "Tria fitxer",
+    "cancel": "Cancel·lar",
+    "open_selected": "Obrir seleccionats",
+    "open_file": "Obrir fitxer",
+    "root_folder": "Arxius Ed"
   }
 }

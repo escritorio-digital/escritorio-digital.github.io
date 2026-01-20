@@ -3,6 +3,8 @@ import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 // 'Shuffle' ha sido eliminado de esta línea
 import { Upload, RotateCcw } from 'lucide-react'; 
+import { getEntry } from '../../../utils/fileManagerDb';
+import { requestOpenFile } from '../../../utils/openDialog';
 import './MemoryGame.css';
 
 // Interfaz para representar cada carta
@@ -21,7 +23,7 @@ export const MemoryGameWidget: FC = () => {
   const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
   const [moves, setMoves] = useState(0);
 
-  const setupGame = (imageFiles: FileList) => {
+  const setupGame = (imageFiles: FileList | File[]) => {
     const imagePromises: Promise<string>[] = [];
     Array.from(imageFiles).forEach(file => {
       if (file.type.startsWith('image/')) {
@@ -46,9 +48,26 @@ export const MemoryGameWidget: FC = () => {
     });
   };
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 1) {
-      setupGame(e.target.files);
+  const handleOpenImages = async () => {
+    const result = await requestOpenFile({ accept: 'image/*', multiple: true });
+    if (!result) return;
+    if (result.source === 'local') {
+      if (result.files.length > 1) {
+        setupGame(result.files);
+      } else {
+        alert(t('widgets.memory_game.min_images_alert'));
+      }
+      return;
+    }
+    const files: File[] = [];
+    for (const entryId of result.entryIds) {
+      const entry = await getEntry(entryId);
+      if (!entry?.blob) continue;
+      if (entry.mime && !entry.mime.startsWith('image/')) continue;
+      files.push(new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type }));
+    }
+    if (files.length > 1) {
+      setupGame(files);
     } else {
       alert(t('widgets.memory_game.min_images_alert'));
     }
@@ -99,7 +118,9 @@ export const MemoryGameWidget: FC = () => {
         <Upload size={48} />
         <p>{t('widgets.memory_game.upload_prompt')}</p>
         <small>{t('widgets.memory_game.upload_rule')}</small>
-        <input type="file" multiple accept="image/*" onChange={handleFileSelect} />
+        <button className="memory-upload-button" onClick={handleOpenImages}>
+          {t('widgets.memory_game.upload_prompt')}
+        </button>
       </div>
     );
   }

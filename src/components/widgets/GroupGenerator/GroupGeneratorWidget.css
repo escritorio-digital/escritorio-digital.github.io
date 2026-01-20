@@ -77,11 +77,13 @@
 
 .group-card ul {
   @apply list-disc list-inside text-sm text-gray-700 space-y-1;
+  line-height: 1.4;
 }
 
 .group-card-large ul {
   font-size: var(--group-text-size, 1rem);
   @apply space-y-2;
+  line-height: 1.4;
 }
 
 .expand-button {

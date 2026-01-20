@@ -84,6 +84,26 @@ export type LocalWebArchive = {
   files: LocalWebRecord[];
 };
 
+type FileManagerEntryMeta = {
+  id: string;
+  type: 'file' | 'folder';
+  name: string;
+  parentId: string;
+  createdAt: number;
+  updatedAt: number;
+  trashedAt?: number | null;
+  size?: number;
+  mime?: string;
+  sourceWidgetId?: string;
+  sourceWidgetTitleKey?: string;
+  hasBlob: boolean;
+};
+
+export type FileManagerArchive = {
+  entries: FileManagerEntryMeta[];
+  files: Array<{ id: string; blob: Blob }>;
+};
+
 export type BackupPayload = {
   meta: BackupMeta;
   data: {
@@ -99,12 +119,22 @@ export type LocalWebStats = {
   totalBytes: number;
 };
 
+export type FileManagerStats = {
+  entryCount: number;
+  totalBytes: number;
+};
+
 const LOCAL_WEB_DB_NAME = 'escritorio-digital-sites';
 const LOCAL_WEB_DB_VERSION = 1;
 const LOCAL_WEB_SITES = 'sites';
 const LOCAL_WEB_FILES = 'files';
 
+const FILE_MANAGER_DB_NAME = 'escritorio-digital-files';
+const FILE_MANAGER_DB_VERSION = 1;
+const FILE_MANAGER_ENTRIES = 'entries';
+
 let localWebDbPromise: Promise<IDBDatabase> | null = null;
+let fileManagerDbPromise: Promise<IDBDatabase> | null = null;
 
 const openLocalWebDb = (): Promise<IDBDatabase> => {
   if (!localWebDbPromise) {
@@ -125,6 +155,25 @@ const openLocalWebDb = (): Promise<IDBDatabase> => {
     });
   }
   return localWebDbPromise;
+};
+
+const openFileManagerDb = (): Promise<IDBDatabase> => {
+  if (!fileManagerDbPromise) {
+    fileManagerDbPromise = new Promise((resolve, reject) => {
+      const request = window.indexedDB.open(FILE_MANAGER_DB_NAME, FILE_MANAGER_DB_VERSION);
+      request.onupgradeneeded = () => {
+        const db = request.result;
+        if (!db.objectStoreNames.contains(FILE_MANAGER_ENTRIES)) {
+          const store = db.createObjectStore(FILE_MANAGER_ENTRIES, { keyPath: 'id' });
+          store.createIndex('parentId', 'parentId', { unique: false });
+          store.createIndex('trashedAt', 'trashedAt', { unique: false });
+        }
+      };
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  }
+  return fileManagerDbPromise;
 };
 
 const arrayBufferToBase64 = (buffer: ArrayBuffer): string => {
@@ -288,12 +337,86 @@ export const getLocalWebStats = async (profileNames?: string[], _fallbackProfile
   });
 };
 
+export const getFileManagerStats = async (): Promise<FileManagerStats> => {
+  const db = await openFileManagerDb();
+  return new Promise<FileManagerStats>((resolve, reject) => {
+    const tx = db.transaction(FILE_MANAGER_ENTRIES, 'readonly');
+    const request = tx.objectStore(FILE_MANAGER_ENTRIES).getAll();
+    tx.oncomplete = () => {
+      const entries = (request.result as Array<{ id: string; type: 'file' | 'folder'; size?: number }>) ?? [];
+      const files = entries.filter((entry) => entry.type === 'file');
+      const entryCount = entries.filter((entry) => entry.id !== 'root').length;
+      const totalBytes = files.reduce((sum, entry) => sum + (entry.size || 0), 0);
+      resolve({ entryCount, totalBytes });
+    };
+    tx.onerror = () => reject(tx.error);
+  });
+};
+
 export const clearLocalWebData = async (): Promise<void> => {
   const db = await openLocalWebDb();
   await new Promise<void>((resolve, reject) => {
     const tx = db.transaction([LOCAL_WEB_SITES, LOCAL_WEB_FILES], 'readwrite');
     tx.objectStore(LOCAL_WEB_SITES).clear();
     tx.objectStore(LOCAL_WEB_FILES).clear();
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+};
+
+export const exportFileManagerRecords = async (): Promise<FileManagerArchive> => {
+  const db = await openFileManagerDb();
+  return new Promise<FileManagerArchive>((resolve, reject) => {
+    const tx = db.transaction(FILE_MANAGER_ENTRIES, 'readonly');
+    const request = tx.objectStore(FILE_MANAGER_ENTRIES).getAll();
+    tx.oncomplete = () => {
+      const entries = (request.result as Array<any>) ?? [];
+      const meta: FileManagerEntryMeta[] = entries.map((entry) => ({
+        id: entry.id,
+        type: entry.type,
+        name: entry.name,
+        parentId: entry.parentId,
+        createdAt: entry.createdAt,
+        updatedAt: entry.updatedAt,
+        trashedAt: entry.trashedAt,
+        size: entry.size,
+        mime: entry.mime,
+        sourceWidgetId: entry.sourceWidgetId,
+        sourceWidgetTitleKey: entry.sourceWidgetTitleKey,
+        hasBlob: Boolean(entry.blob),
+      }));
+      const files = entries
+        .filter((entry) => entry.blob)
+        .map((entry) => ({ id: entry.id, blob: entry.blob as Blob }));
+      resolve({ entries: meta, files });
+    };
+    tx.onerror = () => reject(tx.error);
+  });
+};
+
+export const importFileManagerRecords = async (payload: FileManagerArchive): Promise<void> => {
+  const db = await openFileManagerDb();
+  const fileMap = new Map(payload.files.map((file) => [file.id, file.blob]));
+  await new Promise<void>((resolve, reject) => {
+    const tx = db.transaction(FILE_MANAGER_ENTRIES, 'readwrite');
+    const store = tx.objectStore(FILE_MANAGER_ENTRIES);
+    payload.entries.forEach((entry) => {
+      const blob = entry.hasBlob ? fileMap.get(entry.id) : undefined;
+      store.put({
+        id: entry.id,
+        type: entry.type,
+        name: entry.name,
+        parentId: entry.parentId,
+        createdAt: entry.createdAt,
+        updatedAt: entry.updatedAt,
+        trashedAt: entry.trashedAt,
+        blob,
+        size: entry.size ?? (blob ? blob.size : undefined),
+        mime: entry.mime ?? (blob ? blob.type : undefined),
+        sourceWidgetId: entry.sourceWidgetId,
+        sourceWidgetTitleKey: entry.sourceWidgetTitleKey,
+      });
+    });
     tx.oncomplete = () => resolve();
     tx.onerror = () => reject(tx.error);
   });
@@ -420,6 +543,7 @@ export const isZipBuffer = (buffer: ArrayBuffer): boolean => {
 export const buildBackupArchive = async (
   data: BackupPayload['data'],
   localWebRecords?: LocalWebArchive,
+  fileManagerRecords?: FileManagerArchive,
   onProgress?: (current: number, total: number) => void,
   yieldControl?: () => Promise<void>,
   signal?: AbortSignal
@@ -446,6 +570,8 @@ export const buildBackupArchive = async (
       try {
         addEntry('manifest.json', strToU8(JSON.stringify(payload)));
 
+        const totalFileEntries = (localWebRecords?.files.length ?? 0) + (fileManagerRecords?.files.length ?? 0);
+        let totalProcessed = 0;
         if (localWebRecords) {
           const filesMeta: LocalWebFileMeta[] = localWebRecords.files.map((file) => ({
             key: file.key,
@@ -456,8 +582,6 @@ export const buildBackupArchive = async (
             profileName: file.profileName,
           }));
           addEntry('localWeb/meta.json', strToU8(JSON.stringify({ sites: localWebRecords.sites, files: filesMeta })));
-          const total = localWebRecords.files.length;
-          let current = 0;
           for (const file of localWebRecords.files) {
             if (signal?.aborted) {
               reject(new Error('abort'));
@@ -465,8 +589,23 @@ export const buildBackupArchive = async (
             }
             const buffer = await file.blob.arrayBuffer();
             addEntry(`localWeb/files/${file.key}`, new Uint8Array(buffer));
-            current += 1;
-            if (onProgress) onProgress(current, total);
+            totalProcessed += 1;
+            if (onProgress && totalFileEntries > 0) onProgress(totalProcessed, totalFileEntries);
+            if (yieldControl) await yieldControl();
+          }
+        }
+
+        if (fileManagerRecords) {
+          addEntry('fileManager/meta.json', strToU8(JSON.stringify({ entries: fileManagerRecords.entries })));
+          for (const file of fileManagerRecords.files) {
+            if (signal?.aborted) {
+              reject(new Error('abort'));
+              return;
+            }
+            const buffer = await file.blob.arrayBuffer();
+            addEntry(`fileManager/files/${file.id}`, new Uint8Array(buffer));
+            totalProcessed += 1;
+            if (onProgress && totalFileEntries > 0) onProgress(totalProcessed, totalFileEntries);
             if (yieldControl) await yieldControl();
           }
         }
@@ -488,7 +627,11 @@ export const buildBackupArchive = async (
   return result;
 };
 
-export const parseBackupArchive = (buffer: ArrayBuffer): { payload: BackupPayload; localWeb?: LocalWebArchive } => {
+export const parseBackupArchive = (buffer: ArrayBuffer): {
+  payload: BackupPayload;
+  localWeb?: LocalWebArchive;
+  fileManager?: FileManagerArchive;
+} => {
   const entries = unzipSync(new Uint8Array(buffer));
   const manifest = entries['manifest.json'];
   if (!manifest) {
@@ -499,27 +642,40 @@ export const parseBackupArchive = (buffer: ArrayBuffer): { payload: BackupPayloa
     throw new Error('invalid payload');
   }
   const metaEntry = entries['localWeb/meta.json'];
-  if (!metaEntry) {
-    return { payload };
-  }
-  const localMeta = JSON.parse(strFromU8(metaEntry)) as { sites: LocalWebSite[]; files: LocalWebFileMeta[] };
-  const files: LocalWebRecord[] = [];
-  localMeta.files.forEach((file) => {
-    const entry = entries[`localWeb/files/${file.key}`];
-    if (!entry) return;
-    files.push({
-      ...file,
-      profileName: file.profileName,
-      blob: new Blob([entry], { type: file.type }),
+  const localWeb = (() => {
+    if (!metaEntry) return undefined;
+    const localMeta = JSON.parse(strFromU8(metaEntry)) as { sites: LocalWebSite[]; files: LocalWebFileMeta[] };
+    const files: LocalWebRecord[] = [];
+    localMeta.files.forEach((file) => {
+      const entry = entries[`localWeb/files/${file.key}`];
+      if (!entry) return;
+      files.push({
+        ...file,
+        profileName: file.profileName,
+        blob: new Blob([entry], { type: file.type }),
+      });
     });
-  });
-  return {
-    payload,
-    localWeb: {
+    return {
       sites: localMeta.sites ?? [],
       files,
-    },
-  };
+    };
+  })();
+
+  const fileManager = (() => {
+    const fmMetaEntry = entries['fileManager/meta.json'];
+    if (!fmMetaEntry) return undefined;
+    const parsed = JSON.parse(strFromU8(fmMetaEntry)) as { entries: FileManagerEntryMeta[] };
+    const files: Array<{ id: string; blob: Blob }> = [];
+    parsed.entries.forEach((entry) => {
+      if (!entry.hasBlob) return;
+      const fileEntry = entries[`fileManager/files/${entry.id}`];
+      if (!fileEntry) return;
+      files.push({ id: entry.id, blob: new Blob([fileEntry], { type: entry.mime || '' }) });
+    });
+    return { entries: parsed.entries ?? [], files };
+  })();
+
+  return { payload, localWeb, fileManager };
 };
 
 export const cloneLocalWebData = async (sourceProfileName: string, targetProfileName: string): Promise<void> => {

@@ -1,5 +1,18 @@
 {
   "loading": "Chargement...",
+  "save_dialog": {
+    "title": "Enregistrer le fichier",
+    "description": "Où voulez-vous l'enregistrer ?",
+    "save_in_manager": "Fichiers Ed",
+    "save_in_device": "Disque local",
+    "cancel": "Annuler",
+    "folder_label": "Dossier de destination",
+    "new_folder": "Nouveau dossier",
+    "root_folder": "Fichiers Ed",
+    "filename_label": "Nom du fichier",
+    "default_filename": "fichier",
+    "message": "Enregistrer dans Fichiers Ed ? OK = Fichiers Ed, Annuler = Disque local."
+  },
   "settings": {
     "title": "Configuration",
     "close": "Fermer",
@@ -22,7 +35,8 @@
       "reset_title": "Réinitialiser l'application",
       "reset_description": "Supprime toutes les données enregistrées (profils, programmes et préférences) et redémarre comme si c'était la première fois.",
       "reset_button": "Réinitialiser aux valeurs d'usine",
-      "reset_confirm": "Êtes-vous sûr de vouloir supprimer toutes les préférences et données locales ? Cette action est irréversible."
+      "reset_confirm": "Êtes-vous sûr de vouloir supprimer toutes les préférences et données locales ? Cette action est irréversible.",
+      "version_value": "v1.6.0 — avril 2025"
     },
     "profiles": {
       "invalid_name_alert": "Nom de profil invalide ou déjà existant.",
@@ -69,7 +83,8 @@
         "logic_games": "Jeux de logique et dynamique de classe",
         "gestures": "Gestes de travail",
         "other": "Autres",
-        "community": "Communauté"
+        "community": "Communauté",
+        "vibe_coding": "Vibe Coding"
       }
     },
     "theme": {
@@ -248,6 +263,33 @@
     "program_guide": {
       "title": "Guide du programme",
       "load_error": "Impossible de charger le guide."
+    },
+    "file_manager": {
+      "title": "Fichiers Ed",
+      "new_folder": "Nouveau dossier",
+      "new_folder_prompt": "Nom du dossier",
+      "upload": "Téléverser des fichiers",
+      "open_trash": "Corbeille",
+      "exit_trash": "Quitter la corbeille",
+      "move_to_trash": "Déplacer vers la corbeille",
+      "restore": "Restaurer",
+      "delete_permanent": "Supprimer définitivement",
+      "delete_confirm": "Supprimer définitivement cet élément ?",
+      "empty_folder": "Ce dossier est vide.",
+      "empty_trash": "La corbeille est vide.",
+      "storage_usage": "Utilisé : {{used}} / {{total}} ({{percent}}%)",
+      "storage_unknown": "Espace disponible : aucune donnée",
+      "trash_ttl": "Corbeille :",
+      "trash_option": "{{hours}} h",
+      "root": "Racine",
+      "up": "Monter",
+      "download": "Télécharger",
+      "saved_from": "Enregistré depuis {{widget}}",
+      "empty_trash_button": "Vider la corbeille",
+      "empty_trash_confirm": "Supprimer définitivement tout le contenu de la corbeille ?",
+      "copy": "Copier",
+      "cut": "Couper",
+      "paste": "Coller"
     },
     "file_opener": {
       "title": "Explorateur de fichiers",
@@ -676,7 +718,9 @@
       "collapse_list": "Masquer la liste",
       "expand_list": "Afficher la liste",
       "rename_placeholder": "Nouveau nom du site",
-      "rename_invalid": "Le nom du site n'est pas valide."
+      "rename_invalid": "Le nom du site n'est pas valide.",
+      "description": "Importez votre site local pour l'executer dans Ed",
+      "tooltip": "Importez votre site local pour l'executer dans Ed"
     },
     "vce": {
       "title": "Applications de la communauté",
@@ -820,7 +864,8 @@
     "import_mode_replace": "Remplacer les actuels (tout supprimer et remplacer par les importés)",
     "import_mode_merge": "Fusionner avec les existants (rien supprimer; ajouter les importés)",
     "manage_profiles": "Enregistrer ou charger des profils",
-    "choose_profiles": "Quel profil souhaitez-vous enregistrer"
+    "choose_profiles": "Quel profil souhaitez-vous enregistrer",
+    "include_file_manager": "Inclure Fichiers Ed"
   },
   "system_stats": {
     "title": "Statistiques système",
@@ -835,5 +880,19 @@
     "window": "Fenêtre",
     "window_value": "{{width}}x{{height}}",
     "not_available": "N/D"
+  },
+  "open_dialog": {
+    "title": "Ouvrir un fichier",
+    "description": "Choisissez dans Fichiers Ed ou sur le disque local.",
+    "file_manager": "Fichiers Ed",
+    "up": "Monter",
+    "empty_folder": "Ce dossier est vide.",
+    "local": "Disque local",
+    "local_hint": "Choisissez un fichier depuis votre appareil.",
+    "choose_local": "Choisir un fichier",
+    "cancel": "Annuler",
+    "open_selected": "Ouvrir la sélection",
+    "open_file": "Ouvrir le fichier",
+    "root_folder": "Fichiers Ed"
   }
 }

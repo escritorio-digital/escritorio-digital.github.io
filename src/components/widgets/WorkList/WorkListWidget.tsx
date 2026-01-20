@@ -1,8 +1,13 @@
-import React, { useState, useRef } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { X, Edit, Download, Upload } from 'lucide-react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import Papa from 'papaparse';
+import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
+import { getEntry } from '../../../utils/fileManagerDb';
+import { subscribeFileOpen } from '../../../utils/fileOpenBus';
+import { requestSaveDestination } from '../../../utils/saveDialog';
+import { requestOpenFile } from '../../../utils/openDialog';
 
 interface Task {
   id: number;
@@ -16,7 +21,6 @@ export const WorkListWidget = () => {
   const [newTask, setNewTask] = useState('');
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
   const [editingTaskText, setEditingTaskText] = useState('');
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const addTask = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && newTask.trim() !== '') {
@@ -54,24 +58,27 @@ export const WorkListWidget = () => {
     }
   };
 
-  const downloadAsCSV = () => {
+  const downloadAsCSV = async () => {
     const csv = Papa.unparse(tasks.map(t => ({ id: t.id, text: t.text, completed: t.completed })));
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    const url = URL.createObjectURL(blob);
-    
-    link.setAttribute('href', url);
-    link.setAttribute('download', 'lista_de_trabajo.csv');
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const destination = await requestSaveDestination('lista_de_trabajo.csv');
+    if (destination?.destination === 'file-manager') {
+      await saveToFileManager({
+        blob,
+        filename: destination.filename,
+        sourceWidgetId: 'work-list',
+        sourceWidgetTitleKey: 'widgets.work_list.title',
+        parentId: destination.parentId,
+      });
+      return;
+    }
+    if (destination?.destination === 'download') {
+      downloadBlob(blob, destination.filename);
+    }
   };
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      Papa.parse<Task>(file, {
+  const loadCsvFile = useCallback((file: File) => {
+    Papa.parse<Task>(file, {
         header: true,
         skipEmptyLines: true,
         complete: (results) => {
@@ -91,10 +98,35 @@ export const WorkListWidget = () => {
           console.error("Error al parsear el CSV:", error);
           alert(t('widgets.work_list.csv_error'));
         }
-      });
+    });
+  }, [setTasks, t]);
+
+  const handleOpenFile = async () => {
+    const result = await requestOpenFile({ accept: '.csv' });
+    if (!result) return;
+    if (result.source === 'local') {
+      const [file] = result.files;
+      if (file) loadCsvFile(file);
+      return;
     }
-    if(e.target) e.target.value = '';
+    const [entryId] = result.entryIds;
+    if (!entryId) return;
+    const entry = await getEntry(entryId);
+    if (!entry?.blob) return;
+    const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
+    loadCsvFile(file);
   };
+
+
+  useEffect(() => {
+    const unsubscribe = subscribeFileOpen('work-list', async ({ entryId }) => {
+      const entry = await getEntry(entryId);
+      if (!entry?.blob) return;
+      const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
+      loadCsvFile(file);
+    });
+    return unsubscribe;
+  }, [loadCsvFile]);
 
   // Debug: verificar qué devuelve t()
   console.log('WorkList translations:', {
@@ -120,7 +152,7 @@ export const WorkListWidget = () => {
           onKeyPress={addTask}
         />
         <button 
-          onClick={() => fileInputRef.current?.click()}
+          onClick={handleOpenFile}
           className="work-list-icon-button"
           title={t('widgets.work_list.load_csv')}
         >
@@ -177,13 +209,6 @@ export const WorkListWidget = () => {
       </ul>
       <p className="work-list-hint">{t('widgets.work_list.double_click_edit')}</p>
 
-      <input
-        type="file"
-        ref={fileInputRef}
-        onChange={handleFileUpload}
-        accept=".csv"
-        className="hidden"
-      />
     </div>
   );
 };

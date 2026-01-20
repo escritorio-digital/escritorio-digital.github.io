@@ -51,11 +51,20 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 
 ### Recursos e visores
 
+- **Arquivos Ed**: xestor de ficheiros do escritorio. Garda, organiza e abre ficheiros no navegador.
 - **Visor web**: abre unha páxina web dentro do escritorio para usar un recurso en liña sen cambiar de pestana.
 - **Web local**: garda webs no navegador (desde ZIP ou cartafol) e execútaas sen conexión.
 - **Explorador de ficheiros**: abre ficheiros locais (PDF, imaxes, texto e Markdown, audio e vídeo).
 - **Conexión en Directo**: pensado para mostrar contido web ou recursos externos de forma cómoda durante a explicación.
 - **Wikipedia**: procura rápida con cambio de idioma para temas da clase.
+
+#### Arquivos Ed: como usalo
+
+Este widget funciona como un archivador dentro do navegador.
+
+- **Gardar**: desde outros widgets podes escoller gardar en Arquivos Ed ou no disco local.
+- **Organizar**: crea cartafoles, move elementos con arrastrar e soltar e usa a papeleira con borrado diferido.
+- **Abrir**: dobre clic para abrir ficheiros co programa asociado.
 
 ### Ferramentas participativas
 

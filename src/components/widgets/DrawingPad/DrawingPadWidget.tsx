@@ -2,6 +2,11 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 // Importamos todos los iconos necesarios, incluyendo Type para la herramienta de texto y iconos de navegación
 import { Paintbrush, Eraser, Trash2, Pen, Highlighter, SprayCan, Image as ImageIcon, Save as SaveIcon, LineChart, Square, Circle, ArrowRight, Type, RotateCcw, Move } from 'lucide-react';
+import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
+import { getEntry } from '../../../utils/fileManagerDb';
+import { subscribeFileOpen } from '../../../utils/fileOpenBus';
+import { requestSaveDestination } from '../../../utils/saveDialog';
+import { requestOpenFile } from '../../../utils/openDialog';
 // Asumiendo que WidgetConfig existe en tu proyecto. Si no, puedes quitar esta línea o definirla.
 
 // --- El Componente Principal del Widget de Dibujo ---
@@ -631,14 +636,10 @@ export const DrawingPadWidget = () => {
     }
   };
 
-  // Manejador para la carga de imágenes
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const loadImageFile = (file: File) => {
     // Ocultar mensaje inicial al subir una imagen
     hideInitialMessage();
     
-    const file = event.target.files?.[0];
-    if (!file) return;
-
     const reader = new FileReader();
     reader.onload = (e) => {
       const img = new Image();
@@ -654,18 +655,54 @@ export const DrawingPadWidget = () => {
     reader.readAsDataURL(file);
   };
 
+  const handleOpenImage = async () => {
+    const result = await requestOpenFile({ accept: 'image/*' });
+    if (!result) return;
+    if (result.source === 'local') {
+      const [file] = result.files;
+      if (file) loadImageFile(file);
+      return;
+    }
+    const [entryId] = result.entryIds;
+    if (!entryId) return;
+    const entry = await getEntry(entryId);
+    if (!entry?.blob) return;
+    const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
+    loadImageFile(file);
+  };
+
+  useEffect(() => {
+    const unsubscribe = subscribeFileOpen('drawing-pad', async ({ entryId }) => {
+      const entry = await getEntry(entryId);
+      if (!entry?.blob) return;
+      const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
+      loadImageFile(file);
+    });
+    return unsubscribe;
+  }, []);
+
   // Manejador para guardar el dibujo
   const handleSaveDrawing = () => {
     const canvas = canvasRef.current;
-    if (canvas) {
-      const image = canvas.toDataURL('image/png'); // Obtener la imagen como PNG
-      const link = document.createElement('a');
-      link.href = image;
-      link.download = t('widgets.drawing_pad.default_filename'); // Nombre del archivo
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
+    if (!canvas) return;
+    canvas.toBlob(async (blob) => {
+      if (!blob) return;
+      const filename = t('widgets.drawing_pad.default_filename');
+      const destination = await requestSaveDestination(filename);
+      if (destination?.destination === 'file-manager') {
+        await saveToFileManager({
+          blob,
+          filename: destination.filename,
+          sourceWidgetId: 'drawing-pad',
+          sourceWidgetTitleKey: 'widgets.drawing_pad.title',
+          parentId: destination.parentId,
+        });
+        return;
+      }
+      if (destination?.destination === 'download') {
+        downloadBlob(blob, destination.filename);
+      }
+    }, 'image/png');
   };
 
   // NUEVA FUNCIÓN: Dibujar el texto en el canvas de forma permanente
@@ -782,10 +819,9 @@ export const DrawingPadWidget = () => {
         </div>
 
         {/* Botón para subir imagen */}
-        <label htmlFor="image-upload" className="p-2 rounded-md hover:bg-gray-300 cursor-pointer" title={t('widgets.drawing_pad.upload_image')}>
+        <button onClick={handleOpenImage} className="p-2 rounded-md hover:bg-gray-300" title={t('widgets.drawing_pad.upload_image')}>
           <ImageIcon size={20} />
-          <input id="image-upload" type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
-        </label>
+        </button>
 
         {/* Botón: Guardar Dibujo */}
         <button onClick={handleSaveDrawing} className="p-2 rounded-md hover:bg-green-300" title={t('widgets.drawing_pad.save_drawing')}>

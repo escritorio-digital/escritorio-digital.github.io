@@ -51,11 +51,20 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 
 ### Recursos e visualizadores
 
+- **Arquivos Ed**: gestor de ficheiros do ambiente. Guarda, organiza e abre ficheiros no navegador.
 - **Visualizador web**: abre uma página web dentro do ambiente para usar um recurso online sem mudar de separador.
 - **Web local**: guarda sites no navegador (ZIP ou pasta) e executa-os offline.
 - **Explorador de ficheiros**: abre ficheiros locais (PDF, imagens, texto e Markdown, áudio e vídeo).
 - **Conexão ao Vivo**: pensado para mostrar conteúdo web ou recursos externos de forma cómoda durante a explicação.
 - **Wikipedia**: pesquisa rápida com troca de idioma para temas da aula.
+
+#### Arquivos Ed: como usar
+
+Este widget funciona como um arquivo dentro do navegador.
+
+- **Guardar**: em outros widgets, escolhe Arquivos Ed ou o disco local.
+- **Organizar**: cria pastas, move com arrastar e soltar e usa o lixo.
+- **Abrir**: duplo clique para abrir ficheiros com o programa associado.
 
 ### Ferramentas participativas
 

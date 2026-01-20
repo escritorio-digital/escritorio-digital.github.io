@@ -9,6 +9,7 @@ import { ProfileManager } from './ProfileManager';
 import type { ProfileCollection } from '../../types';
 import { clearLocalWebData, WIDGET_DATA_KEYS } from '../../utils/backup';
 import { removeFromIndexedDb } from '../../utils/storage';
+import { clearFileManagerData } from '../../utils/fileManagerDb';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useTheme } from '../../context/ThemeContext';
 import { wallpaperOptions, getWallpaperValue } from '../../utils/wallpapers';
@@ -160,11 +161,14 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     const keysToClear = Array.from(new Set([
       'desktop-profiles',
       'active-profile-name',
+      'file-manager-trash-ttl-hours',
+      'file-manager-icon-position',
       ...WIDGET_DATA_KEYS,
     ]));
     try {
       keysToClear.forEach(k => window.localStorage.removeItem(k));
       await Promise.all(WIDGET_DATA_KEYS.map((key) => removeFromIndexedDb(key)));
+      await clearFileManagerData();
       await clearLocalWebData();
     } catch (error) {
       console.warn('No se pudieron limpiar las preferencias locales.', error);

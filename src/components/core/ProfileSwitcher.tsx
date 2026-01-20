@@ -2,15 +2,18 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { ChevronUp, ChevronsUpDown, Download, Upload, Users } from 'lucide-react';
 import type { ProfileCollection } from '../../types';
 import { useTranslation } from 'react-i18next';
-import type { LocalWebArchive } from '../../utils/backup';
+import type { FileManagerArchive, LocalWebArchive } from '../../utils/backup';
 import {
   buildBackupPayload,
   clearLocalWebData,
+  exportFileManagerRecords,
   exportLocalWebRecords,
+  getFileManagerStats,
   getLocalWebStats,
   buildBackupArchive,
   isZipBuffer,
   isValidBackupPayload,
+  importFileManagerRecords,
   parseBackupArchive,
   exportWidgetData,
   importLocalWebData,
@@ -19,6 +22,7 @@ import {
   WIDGET_DATA_KEYS,
 } from '../../utils/backup';
 import { getFromIndexedDb } from '../../utils/storage';
+import { clearFileManagerData } from '../../utils/fileManagerDb';
 
 // Definimos las propiedades que nuestro componente necesita
 interface ProfileSwitcherProps {
@@ -46,8 +50,10 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
   const [includeProfiles] = useState(true);
   const [includeWidgetData, setIncludeWidgetData] = useState(true);
   const [includeLocalWeb, setIncludeLocalWeb] = useState(true);
+  const [includeFileManager, setIncludeFileManager] = useState(true);
   const [hasWidgetData, setHasWidgetData] = useState(false);
   const [hasLocalWeb, setHasLocalWeb] = useState(false);
+  const [hasFileManager, setHasFileManager] = useState(false);
   const [hasSelectedLocalWeb, setHasSelectedLocalWeb] = useState(false);
   const [selectedProfiles, setSelectedProfiles] = useState<string[]>([]);
   const [importMode, setImportMode] = useState<'replace' | 'merge'>('replace');
@@ -144,6 +150,16 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
         setHasLocalWeb(false);
         setIncludeLocalWeb(false);
       });
+    getFileManagerStats()
+      .then((stats) => {
+        const available = stats.entryCount > 0;
+        setHasFileManager(available);
+        if (!available) setIncludeFileManager(false);
+      })
+      .catch(() => {
+        setHasFileManager(false);
+        setIncludeFileManager(false);
+      });
   }, [isBackupOpen, profileNames, activeProfileName]);
 
   useEffect(() => {
@@ -170,6 +186,11 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
     if (canIncludeLocalWeb) return;
     if (includeLocalWeb) setIncludeLocalWeb(false);
   }, [canIncludeLocalWeb, includeLocalWeb]);
+
+  useEffect(() => {
+    if (hasFileManager) return;
+    if (includeFileManager) setIncludeFileManager(false);
+  }, [hasFileManager, includeFileManager]);
 
   const toggleProfileSelection = (name: string) => {
     setSelectedProfiles(prev => {
@@ -278,6 +299,12 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
         total += Math.ceil(stats.totalBytes * 1.1);
       }
     }
+    if (includeFileManager) {
+      const stats = await getFileManagerStats();
+      if (stats.entryCount > 0) {
+        total += Math.ceil(stats.totalBytes * 1.05);
+      }
+    }
     return total;
   };
 
@@ -303,7 +330,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
       }
     };
     estimate();
-  }, [isBackupOpen, includeProfiles, includeWidgetData, includeLocalWeb, selectedProfiles, hasWidgetData, hasLocalWeb, profiles, activeProfileName, t]);
+  }, [isBackupOpen, includeProfiles, includeWidgetData, includeLocalWeb, includeFileManager, selectedProfiles, hasWidgetData, hasLocalWeb, hasFileManager, profiles, activeProfileName, t]);
 
   const handleExport = async () => {
     if (includeProfiles && selectedProfiles.length === 0) {
@@ -326,11 +353,15 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
       const localWebRecords = includeLocalWeb
         ? await exportLocalWebRecords(selectedProfiles, fallbackProfileName)
         : undefined;
+      const fileManagerRecords = includeFileManager
+        ? await exportFileManagerRecords()
+        : undefined;
       let lastUpdate = 0;
       let processed = 0;
       const archive = await buildBackupArchive(
         payload.data,
         localWebRecords,
+        fileManagerRecords,
         (current, total) => {
           const now = performance.now();
           if (now - lastUpdate > 200) {
@@ -380,10 +411,12 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
       const buffer = await file.arrayBuffer();
       let payload: ReturnType<typeof buildBackupPayload>;
       let localWebRecords: LocalWebArchive | undefined;
+      let fileManagerRecords: FileManagerArchive | undefined;
       if (isZipBuffer(buffer) || file.name.toLowerCase().endsWith('.zip')) {
         const parsed = parseBackupArchive(buffer);
         payload = parsed.payload;
         localWebRecords = parsed.localWeb;
+        fileManagerRecords = parsed.fileManager;
       } else {
         const text = new TextDecoder().decode(buffer);
         payload = JSON.parse(text) as ReturnType<typeof buildBackupPayload>;
@@ -463,6 +496,13 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
           await importLocalWebData(payload.data.localWeb, { profileNameMap, fallbackProfileName });
         }
         window.dispatchEvent(new Event('local-web-data-changed'));
+      }
+      if (fileManagerRecords) {
+        if (importMode === 'replace') {
+          await clearFileManagerData();
+        }
+        await importFileManagerRecords(fileManagerRecords);
+        window.dispatchEvent(new CustomEvent('file-manager-refresh'));
       }
       setBackupStatus(t('backup.import_done'));
       if (!controller.signal.aborted) {
@@ -608,16 +648,25 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
                         <span>{t('backup.include_widgets')}</span>
                       </label>
                     )}
-                    <label className={`flex items-center gap-2 ${canIncludeLocalWeb ? '' : 'opacity-50'}`}>
-                      <input
-                        type="checkbox"
-                        checked={includeLocalWeb}
-                        onChange={(e) => setIncludeLocalWeb(e.target.checked)}
-                        disabled={!canIncludeLocalWeb}
-                      />
-                      <span>{t('backup.include_local_web')}</span>
-                    </label>
-                  </div>
+                  <label className={`flex items-center gap-2 ${canIncludeLocalWeb ? '' : 'opacity-50'}`}>
+                    <input
+                      type="checkbox"
+                      checked={includeLocalWeb}
+                      onChange={(e) => setIncludeLocalWeb(e.target.checked)}
+                      disabled={!canIncludeLocalWeb}
+                    />
+                    <span>{t('backup.include_local_web')}</span>
+                  </label>
+                  <label className={`flex items-center gap-2 ${hasFileManager ? '' : 'opacity-50'}`}>
+                    <input
+                      type="checkbox"
+                      checked={includeFileManager}
+                      onChange={(e) => setIncludeFileManager(e.target.checked)}
+                      disabled={!hasFileManager}
+                    />
+                    <span>{t('backup.include_file_manager')}</span>
+                  </label>
+                </div>
 
                   <div className="mt-3 text-sm text-gray-700 font-semibold">
                     {isEstimating ? t('backup.size_estimating') : sizeLabel || t('backup.size_unknown')}

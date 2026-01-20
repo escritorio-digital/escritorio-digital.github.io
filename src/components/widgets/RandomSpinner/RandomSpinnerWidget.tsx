@@ -3,6 +3,8 @@ import type { FC } from 'react';
 import { Trash2, Plus, Play, Expand, Minimize, Upload } from 'lucide-react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { useTranslation } from 'react-i18next';
+import { getEntry } from '../../../utils/fileManagerDb';
+import { requestOpenFile } from '../../../utils/openDialog';
 import './RandomSpinner.css';
 
 interface SpinnerOption {
@@ -38,7 +40,6 @@ export const RandomSpinnerWidget: FC = () => {
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const optionsRef = useRef(options);
 
   useEffect(() => {
@@ -110,9 +111,7 @@ export const RandomSpinnerWidget: FC = () => {
     }
   };
 
-  const handleFileLoad = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
+  const loadFromFile = (file: File) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       const text = (e.target?.result ?? '') as string;
@@ -127,7 +126,22 @@ export const RandomSpinnerWidget: FC = () => {
       setEditingText('');
     };
     reader.readAsText(file);
-    event.target.value = '';
+  };
+
+  const handleOpenFile = async () => {
+    const result = await requestOpenFile({ accept: '.txt' });
+    if (!result) return;
+    if (result.source === 'local') {
+      const [file] = result.files;
+      if (file) loadFromFile(file);
+      return;
+    }
+    const [entryId] = result.entryIds;
+    if (!entryId) return;
+    const entry = await getEntry(entryId);
+    if (!entry?.blob) return;
+    const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
+    loadFromFile(file);
   };
 
   const removeOption = (index: number) => {
@@ -245,10 +259,9 @@ export const RandomSpinnerWidget: FC = () => {
           />
           <button onClick={addOption}><Plus size={18} /></button>
         </div>
-        <button onClick={() => fileInputRef.current?.click()} className="upload-options-button">
+        <button onClick={handleOpenFile} className="upload-options-button">
           <Upload size={16} /> {t('widgets.random_spinner.load_from_file')}
         </button>
-        <input type="file" ref={fileInputRef} onChange={handleFileLoad} accept=".txt" className="hidden" />
         <ul className="options-list">
           {options.map((option, index) => (
             <li key={index} onDoubleClick={() => startEditing(index)}>

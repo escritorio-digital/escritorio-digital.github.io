@@ -2,6 +2,7 @@
 
 import { Suspense, useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Rnd } from 'react-rnd';
 import { WIDGET_REGISTRY } from './components/widgets';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { WidgetWindow } from './components/core/WidgetWindow';
@@ -16,6 +17,10 @@ import { PlusSquare, Image, Settings, X, Users, Maximize2, Minimize2, Pin, PinOf
 import { defaultWallpaperValue, isWallpaperValueValid } from './utils/wallpapers';
 import { withBaseUrl } from './utils/assetPaths';
 import { getWidgetHelpText } from './utils/widgetHelp';
+import { emitFileOpen } from './utils/fileOpenBus';
+import type { SaveDialogResult } from './utils/saveDialog';
+import { FILE_MANAGER_ROOT_ID, createFolder, getAllEntries, listEntriesByParent, type FileManagerEntry } from './utils/fileManagerDb';
+import type { OpenDialogResult, OpenDialogOptions } from './utils/openDialog';
 // --- ¡AQUÍ ESTÁ EL CAMBIO! Importamos el nuevo componente ---
 import { ProfileSwitcher } from './components/core/ProfileSwitcher';
 
@@ -78,6 +83,13 @@ const DesktopUI: React.FC<{
         setProfiles(prev => ({ ...prev, [activeProfileName]: newProfileData }));
     }, [activeProfile, activeProfileName, setProfiles, showSystemStats]);
 
+    const closeSaveDialog = useCallback((result: SaveDialogResult) => {
+        const resolver = saveDialogResolverRef.current;
+        saveDialogResolverRef.current = null;
+        setSaveDialogState({ isOpen: false });
+        if (resolver) resolver(result);
+    }, []);
+
     const toggleProfileMenu = useCallback(() => {
         const nextShowProfileMenu = !showProfileMenu;
         const newProfileData: DesktopProfile = {
@@ -110,6 +122,119 @@ const DesktopUI: React.FC<{
     const [settingsInitialTab, setSettingsInitialTab] = useState<'general' | 'profiles' | 'widgets' | 'theme'>('general');
     const [isToolbarHidden, setToolbarHidden] = useLocalStorage<boolean>('toolbar-hidden', false);
     const [isToolbarPeek, setToolbarPeek] = useState(false);
+    const [fileManagerIconPosition, setFileManagerIconPosition] = useLocalStorage<{ x: number; y: number }>(
+        'file-manager-icon-position',
+        { x: 16, y: 32 }
+    );
+    const fileManagerIconSize = { width: 120, height: 110 };
+    const [saveDialogState, setSaveDialogState] = useState<{ isOpen: boolean }>({ isOpen: false });
+    const saveDialogResolverRef = useRef<((result: SaveDialogResult) => void) | null>(null);
+    const [saveDialogFolders, setSaveDialogFolders] = useState<{ id: string; label: string }[]>([]);
+    const [saveDialogFolderId, setSaveDialogFolderId] = useState(FILE_MANAGER_ROOT_ID);
+    const [saveDialogFilename, setSaveDialogFilename] = useState('');
+    const [saveDialogSuggestedFilename, setSaveDialogSuggestedFilename] = useState('');
+    const [openDialogState, setOpenDialogState] = useState<{
+        isOpen: boolean;
+        options: OpenDialogOptions;
+    }>({ isOpen: false, options: {} });
+    const openDialogResolverRef = useRef<((result: OpenDialogResult | null) => void) | null>(null);
+    const [openDialogFolderId, setOpenDialogFolderId] = useState(FILE_MANAGER_ROOT_ID);
+    const [openDialogEntries, setOpenDialogEntries] = useState<FileManagerEntry[]>([]);
+    const [openDialogSelectedIds, setOpenDialogSelectedIds] = useState<string[]>([]);
+    const [openDialogFolderLabel, setOpenDialogFolderLabel] = useState('');
+    const [openDialogParentId, setOpenDialogParentId] = useState(FILE_MANAGER_ROOT_ID);
+    const openDialogInputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (fileManagerIconPosition.y >= 32) return;
+        setFileManagerIconPosition((prev) => ({ ...prev, y: 32 }));
+    }, [fileManagerIconPosition.y, setFileManagerIconPosition]);
+
+    useEffect(() => {
+        if (!saveDialogState.isOpen) return;
+        let isMounted = true;
+        const loadFolders = async () => {
+            const entries = await getAllEntries();
+            const folders = entries.filter((entry) => entry.type === 'folder');
+            const byId = new Map(folders.map((entry) => [entry.id, entry]));
+            const labelFor = (entry: FileManagerEntry) => {
+                const parts: string[] = [];
+                let current: FileManagerEntry | undefined = entry;
+                while (current && current.id !== FILE_MANAGER_ROOT_ID) {
+                    parts.unshift(current.name);
+                    current = byId.get(current.parentId);
+                }
+                return parts.join(' / ') || t('save_dialog.root_folder');
+            };
+            const options = [
+                { id: FILE_MANAGER_ROOT_ID, label: t('save_dialog.root_folder') },
+                ...folders
+                    .filter((entry) => entry.id !== FILE_MANAGER_ROOT_ID)
+                    .map((entry) => ({
+                        id: entry.id,
+                        label: labelFor(entry),
+                    }))
+                    .sort((a, b) => a.label.localeCompare(b.label)),
+            ];
+            if (isMounted) {
+                setSaveDialogFolders(options);
+                if (!options.find((option) => option.id === saveDialogFolderId)) {
+                    setSaveDialogFolderId(FILE_MANAGER_ROOT_ID);
+                }
+            }
+        };
+        loadFolders();
+        return () => {
+            isMounted = false;
+        };
+    }, [saveDialogFolderId, saveDialogState.isOpen, t]);
+
+    useEffect(() => {
+        if (!openDialogState.isOpen) return;
+        let isMounted = true;
+        const loadEntries = async () => {
+            const entries = await listEntriesByParent(openDialogFolderId);
+            const allEntries = await getAllEntries();
+            const folders = allEntries.filter((entry) => entry.type === 'folder');
+            const byId = new Map(folders.map((entry) => [entry.id, entry]));
+            const current = byId.get(openDialogFolderId);
+            const labelFor = (entry: FileManagerEntry) => {
+                const parts: string[] = [];
+                let cursor: FileManagerEntry | undefined = entry;
+                while (cursor && cursor.id !== FILE_MANAGER_ROOT_ID) {
+                    parts.unshift(cursor.name);
+                    cursor = byId.get(cursor.parentId);
+                }
+                return parts.join(' / ') || t('open_dialog.root_folder');
+            };
+            const folderLabel = current ? labelFor(current) : t('open_dialog.root_folder');
+            const parentId = current?.parentId || FILE_MANAGER_ROOT_ID;
+            if (isMounted) {
+                setOpenDialogEntries(entries);
+                setOpenDialogFolderLabel(folderLabel);
+                setOpenDialogParentId(parentId);
+                setOpenDialogSelectedIds([]);
+            }
+        };
+        loadEntries();
+        return () => {
+            isMounted = false;
+        };
+    }, [openDialogFolderId, openDialogState.isOpen, t]);
+
+    const getSaveDialogFilename = useCallback(() => {
+        const trimmed = saveDialogFilename.trim();
+        if (trimmed) return trimmed;
+        const fallback = saveDialogSuggestedFilename.trim() || t('save_dialog.default_filename');
+        return fallback.trim() || 'archivo';
+    }, [saveDialogFilename, saveDialogSuggestedFilename, t]);
+
+    const closeOpenDialog = useCallback((result: OpenDialogResult | null) => {
+        const resolver = openDialogResolverRef.current;
+        openDialogResolverRef.current = null;
+        setOpenDialogState((prev) => ({ ...prev, isOpen: false }));
+        if (resolver) resolver(result);
+    }, []);
     const [contextMenu, setContextMenu] = useState<{
         isOpen: boolean;
         x: number;
@@ -222,6 +347,54 @@ const DesktopUI: React.FC<{
         setActiveWindowId(newWidget.instanceId);
     };
 
+    const addWidgetRef = useRef(addWidget);
+    useEffect(() => {
+        addWidgetRef.current = addWidget;
+    }, [addWidget]);
+
+    useEffect(() => {
+        const handler = (event: Event) => {
+            const custom = event as CustomEvent<{ widgetId?: string }>;
+            if (!custom.detail?.widgetId) return;
+            addWidgetRef.current(custom.detail.widgetId);
+        };
+        window.addEventListener('open-widget', handler as EventListener);
+        return () => window.removeEventListener('open-widget', handler as EventListener);
+    }, []);
+
+    useEffect(() => {
+        const handler = (event: Event) => {
+            const custom = event as CustomEvent<{ resolve?: (result: SaveDialogResult) => void; suggestedFilename?: string }>;
+            if (!custom.detail?.resolve) return;
+            if (saveDialogResolverRef.current) {
+                saveDialogResolverRef.current(null);
+            }
+            saveDialogResolverRef.current = custom.detail.resolve;
+            const suggested = custom.detail.suggestedFilename?.trim() || t('save_dialog.default_filename');
+            setSaveDialogSuggestedFilename(suggested);
+            setSaveDialogFilename(suggested);
+            setSaveDialogState({ isOpen: true });
+        };
+        window.addEventListener('save-dialog-request', handler as EventListener);
+        return () => window.removeEventListener('save-dialog-request', handler as EventListener);
+    }, [t]);
+
+    useEffect(() => {
+        const handler = (event: Event) => {
+            const custom = event as CustomEvent<{ resolve?: (result: OpenDialogResult | null) => void; options?: OpenDialogOptions }>;
+            if (!custom.detail?.resolve) return;
+            if (openDialogResolverRef.current) {
+                openDialogResolverRef.current(null);
+            }
+            openDialogResolverRef.current = custom.detail.resolve;
+            setOpenDialogSelectedIds([]);
+            setOpenDialogFolderId(FILE_MANAGER_ROOT_ID);
+            setOpenDialogState({ isOpen: true, options: custom.detail.options ?? {} });
+        };
+        window.addEventListener('open-dialog-request', handler as EventListener);
+        return () => window.removeEventListener('open-dialog-request', handler as EventListener);
+    }, []);
+
     const closeWidget = (instanceId: string) => setActiveWidgets(prev => {
         const next = prev.filter(w => w.instanceId !== instanceId);
         if (activeWindowId === instanceId) {
@@ -242,6 +415,29 @@ const DesktopUI: React.FC<{
         );
         setActiveWindowId(instanceId);
     }, [setActiveWidgets]);
+    useEffect(() => {
+        const handler = (event: Event) => {
+            const custom = event as CustomEvent<{ widgetId: string; entryId: string }>;
+            if (!custom.detail?.widgetId) return;
+            const sameWidgets = activeProfile.activeWidgets.filter((widget) => widget.widgetId === custom.detail.widgetId);
+            if (sameWidgets.length > 0) {
+                const target = sameWidgets.reduce((acc, item) => (item.zIndex > acc.zIndex ? item : acc));
+                setActiveWidgets((widgets) =>
+                    widgets.map((widget) =>
+                        widget.instanceId === target.instanceId ? { ...widget, isMinimized: false } : widget
+                    )
+                );
+                focusWidget(target.instanceId);
+            } else {
+                addWidgetRef.current(custom.detail.widgetId);
+            }
+            window.setTimeout(() => {
+                emitFileOpen(custom.detail.widgetId, { entryId: custom.detail.entryId });
+            }, 50);
+        };
+        window.addEventListener('file-manager-open', handler as EventListener);
+        return () => window.removeEventListener('file-manager-open', handler as EventListener);
+    }, [activeProfile.activeWidgets, focusWidget, setActiveWidgets]);
     const toggleMinimize = (instanceId: string) => setActiveWidgets(prev => prev.map(w => (w.instanceId === instanceId ? { ...w, isMinimized: !w.isMinimized } : w)));
     const handleTaskClick = useCallback((instanceId: string) => {
         const target = activeProfile.activeWidgets.find((widget) => widget.instanceId === instanceId);
@@ -708,6 +904,41 @@ const DesktopUI: React.FC<{
                 }}
                 startButtonRef={startButtonRef}
             />
+            <Rnd
+                bounds="window"
+                position={fileManagerIconPosition}
+                size={fileManagerIconSize}
+                enableResizing={false}
+                onDrag={(_, data) => setFileManagerIconPosition({ x: data.x, y: data.y })}
+                onDragStop={(_, data) => setFileManagerIconPosition({ x: data.x, y: data.y })}
+                dragHandleClassName="file-manager-desktop-icon"
+                className="z-[10001]"
+            >
+                <div
+                    role="button"
+                    tabIndex={0}
+                    onDoubleClick={() => addWidget('file-manager')}
+                    onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            addWidget('file-manager');
+                        }
+                    }}
+                    className="file-manager-desktop-icon flex h-full w-full flex-col items-center justify-center gap-1 bg-transparent text-text-dark select-none cursor-default touch-none"
+                    title={t('widgets.file_manager.title')}
+                    aria-label={t('widgets.file_manager.title')}
+                >
+                    <img
+                        src={withBaseUrl('icons/archivos.png')}
+                        alt={t('widgets.file_manager.title')}
+                        width={56}
+                        height={56}
+                    />
+                    <span className="text-[11px] font-semibold bg-white/70 px-2 py-0.5 rounded-md shadow-sm backdrop-blur-sm whitespace-nowrap">
+                        {t('widgets.file_manager.title')}
+                    </span>
+                </div>
+            </Rnd>
             <button
                 ref={startButtonRef}
                 onClick={(event) => toggleStartMenu(event.currentTarget.getBoundingClientRect())}
@@ -739,6 +970,245 @@ const DesktopUI: React.FC<{
                 anchorRect={startMenuAnchor}
                 anchorRef={startButtonRef}
             />
+            {saveDialogState.isOpen && (
+                <div
+                    className="fixed inset-0 z-[10002] flex items-center justify-center bg-black/50"
+                    onClick={() => closeSaveDialog(null)}
+                >
+                    <div
+                        className="w-full max-w-md rounded-2xl bg-white/95 px-6 py-5 text-text-dark shadow-2xl backdrop-blur-xl"
+                        onClick={(event) => event.stopPropagation()}
+                        role="dialog"
+                        aria-modal="true"
+                    >
+                        <h3 className="text-lg font-semibold">{t('save_dialog.title')}</h3>
+                        <p className="mt-2 text-sm text-gray-600">{t('save_dialog.description')}</p>
+                        <div className="mt-4">
+                            <label className="text-sm font-semibold text-gray-700" htmlFor="save-filename-input">
+                                {t('save_dialog.filename_label')}
+                            </label>
+                            <input
+                                id="save-filename-input"
+                                type="text"
+                                className="mt-2 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm"
+                                value={saveDialogFilename}
+                                onChange={(event) => setSaveDialogFilename(event.target.value)}
+                            />
+                        </div>
+                        <div className="mt-4">
+                            <label className="text-sm font-semibold text-gray-700" htmlFor="save-folder-select">
+                                {t('save_dialog.folder_label')}
+                            </label>
+                            <div className="mt-2 flex items-center gap-2">
+                                <select
+                                    id="save-folder-select"
+                                    className="flex-1 rounded-lg border border-gray-200 px-3 py-2 text-sm"
+                                    value={saveDialogFolderId}
+                                    onChange={(event) => setSaveDialogFolderId(event.target.value)}
+                                >
+                                    {saveDialogFolders.map((option) => (
+                                        <option key={option.id} value={option.id}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </select>
+                                <button
+                                    type="button"
+                                    className="rounded-full border border-gray-200 px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+                                    onClick={async () => {
+                                        const name = window.prompt(t('widgets.file_manager.new_folder_prompt'));
+                                        if (!name) return;
+                                        const trimmed = name.trim();
+                                        if (!trimmed) return;
+                                        const folder = await createFolder(trimmed, saveDialogFolderId);
+                                        setSaveDialogFolderId(folder.id);
+                                        const entries = await getAllEntries();
+                                        const folders = entries.filter((entry) => entry.type === 'folder');
+                                        const byId = new Map(folders.map((entry) => [entry.id, entry]));
+                                        const labelFor = (entry: FileManagerEntry) => {
+                                            const parts: string[] = [];
+                                            let current: FileManagerEntry | undefined = entry;
+                                            while (current && current.id !== FILE_MANAGER_ROOT_ID) {
+                                                parts.unshift(current.name);
+                                                current = byId.get(current.parentId);
+                                            }
+                                            return parts.join(' / ') || t('save_dialog.root_folder');
+                                        };
+                                        const options = [
+                                            { id: FILE_MANAGER_ROOT_ID, label: t('save_dialog.root_folder') },
+                                            ...folders
+                                                .filter((entry) => entry.id !== FILE_MANAGER_ROOT_ID)
+                                                .map((entry) => ({
+                                                    id: entry.id,
+                                                    label: labelFor(entry),
+                                                }))
+                                                .sort((a, b) => a.label.localeCompare(b.label)),
+                                        ];
+                                        setSaveDialogFolders(options);
+                                    }}
+                                >
+                                    {t('save_dialog.new_folder')}
+                                </button>
+                            </div>
+                        </div>
+                        <div className="mt-6 flex flex-wrap justify-end gap-2">
+                            <button
+                                type="button"
+                                className="rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+                                onClick={() => closeSaveDialog(null)}
+                            >
+                                {t('save_dialog.cancel')}
+                            </button>
+                            <button
+                                type="button"
+                                className="rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+                                onClick={() => closeSaveDialog({ destination: 'download', filename: getSaveDialogFilename() })}
+                            >
+                                {t('save_dialog.save_in_device')}
+                            </button>
+                            <button
+                                type="button"
+                                className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-text-dark shadow-sm hover:opacity-90"
+                                onClick={() => closeSaveDialog({
+                                    destination: 'file-manager',
+                                    parentId: saveDialogFolderId,
+                                    filename: getSaveDialogFilename(),
+                                })}
+                            >
+                                {t('save_dialog.save_in_manager')}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {openDialogState.isOpen && (
+                <div
+                    className="fixed inset-0 z-[10002] flex items-center justify-center bg-black/50"
+                    onClick={() => closeOpenDialog(null)}
+                >
+                    <div
+                        className="w-full max-w-3xl rounded-2xl bg-white/95 px-6 py-5 text-text-dark shadow-2xl backdrop-blur-xl"
+                        onClick={(event) => event.stopPropagation()}
+                        role="dialog"
+                        aria-modal="true"
+                    >
+                        <h3 className="text-lg font-semibold">{t('open_dialog.title')}</h3>
+                        <p className="mt-2 text-sm text-gray-600">{t('open_dialog.description')}</p>
+                        <div className="mt-4 grid gap-4 md:grid-cols-[2fr_1fr]">
+                            <div className="rounded-xl border border-gray-200 p-4">
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <div className="text-sm font-semibold text-gray-700">{t('open_dialog.file_manager')}</div>
+                                        <div className="text-xs text-gray-500">{openDialogFolderLabel}</div>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        className="rounded-full border border-gray-200 px-3 py-1 text-xs font-semibold text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed"
+                                        onClick={() => setOpenDialogFolderId(openDialogParentId)}
+                                        disabled={openDialogFolderId === FILE_MANAGER_ROOT_ID}
+                                    >
+                                        {t('open_dialog.up')}
+                                    </button>
+                                </div>
+                                <div className="mt-3 max-h-64 overflow-y-auto">
+                                    {openDialogEntries.length === 0 ? (
+                                        <div className="text-sm text-gray-500">{t('open_dialog.empty_folder')}</div>
+                                    ) : (
+                                        <ul className="space-y-2">
+                                            {openDialogEntries.map((entry) => {
+                                                const isSelected = openDialogSelectedIds.includes(entry.id);
+                                                return (
+                                                    <li key={entry.id}>
+                                                        <button
+                                                            type="button"
+                                                            className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm transition ${
+                                                                isSelected ? 'bg-accent/40' : 'hover:bg-gray-100'
+                                                            }`}
+                                                            onClick={() => {
+                                                                if (entry.type === 'folder') {
+                                                                    setOpenDialogFolderId(entry.id);
+                                                                    return;
+                                                                }
+                                                                if (openDialogState.options.multiple) {
+                                                                    setOpenDialogSelectedIds((prev) =>
+                                                                        prev.includes(entry.id)
+                                                                            ? prev.filter((id) => id !== entry.id)
+                                                                            : [...prev, entry.id]
+                                                                    );
+                                                                } else {
+                                                                    setOpenDialogSelectedIds([entry.id]);
+                                                                }
+                                                            }}
+                                                            onDoubleClick={() => {
+                                                                if (entry.type === 'folder') {
+                                                                    setOpenDialogFolderId(entry.id);
+                                                                    return;
+                                                                }
+                                                                closeOpenDialog({ source: 'file-manager', entryIds: [entry.id] });
+                                                            }}
+                                                        >
+                                                            <span className="truncate">
+                                                                {entry.type === 'folder' ? '📁 ' : '📄 '}
+                                                                {entry.name}
+                                                            </span>
+                                                            {entry.type === 'file' && (
+                                                                <span className="text-xs text-gray-400">
+                                                                    {entry.size ? `${Math.round(entry.size / 1024)} KB` : ''}
+                                                                </span>
+                                                            )}
+                                                        </button>
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="rounded-xl border border-gray-200 p-4">
+                                <div className="text-sm font-semibold text-gray-700">{t('open_dialog.local')}</div>
+                                <p className="mt-2 text-xs text-gray-500">{t('open_dialog.local_hint')}</p>
+                                <button
+                                    type="button"
+                                    className="mt-4 w-full rounded-full border border-gray-200 px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+                                    onClick={() => openDialogInputRef.current?.click()}
+                                >
+                                    {t('open_dialog.choose_local')}
+                                </button>
+                                <input
+                                    ref={openDialogInputRef}
+                                    type="file"
+                                    className="hidden"
+                                    accept={openDialogState.options.accept}
+                                    multiple={openDialogState.options.multiple}
+                                    onChange={(event) => {
+                                        const files = event.target.files ? Array.from(event.target.files) : [];
+                                        event.target.value = '';
+                                        if (files.length === 0) return;
+                                        closeOpenDialog({ source: 'local', files });
+                                    }}
+                                />
+                            </div>
+                        </div>
+                        <div className="mt-6 flex flex-wrap justify-end gap-2">
+                            <button
+                                type="button"
+                                className="rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+                                onClick={() => closeOpenDialog(null)}
+                            >
+                                {t('open_dialog.cancel')}
+                            </button>
+                            <button
+                                type="button"
+                                className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-text-dark shadow-sm hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+                                onClick={() => closeOpenDialog({ source: 'file-manager', entryIds: openDialogSelectedIds })}
+                                disabled={openDialogSelectedIds.length === 0}
+                            >
+                                {openDialogState.options.multiple ? t('open_dialog.open_selected') : t('open_dialog.open_file')}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
             <AboutModal
                 isOpen={isAboutOpen}
                 onClose={() => setIsAboutOpen(false)}

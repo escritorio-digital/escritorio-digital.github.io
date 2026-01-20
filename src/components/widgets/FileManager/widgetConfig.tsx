@@ -4,14 +4,19 @@ import { withBaseUrl } from '../../../utils/assetPaths';
 import type { WidgetConfig } from '../../../types';
 
 export const widgetConfig: Omit<WidgetConfig, 'component'> = {
-    id: 'local-web',
-    title: 'widgets.local_web.title',
-    startTooltip: 'widgets.local_web.tooltip',
-    searchKeywords: ['widgets.local_web.search_keywords'],
+    id: 'file-manager',
+    title: 'widgets.file_manager.title',
     icon: (() => {
         const WidgetIcon: FC = () => {
             const { t } = useTranslation();
-            return <img src={withBaseUrl('icons/LocalWeb.png')} alt={t('widgets.local_web.title')} width={52} height={52} />;
+            return (
+                <img
+                    src={withBaseUrl('icons/archivos.png')}
+                    alt={t('widgets.file_manager.title')}
+                    width={52}
+                    height={52}
+                />
+            );
         };
         return <WidgetIcon />;
     })(),

@@ -14,6 +14,7 @@ const widgetHelpText: Record<string, string> = {
     'vce-community': 'Catálogo de apps educativas de la comunidad.',
     'comunidad-chatgpt-ia-edu': 'Recursos del proyecto ChatGPT-IA-edu.',
     'edumedia-iag': 'Recursos multimedia educativos con IA generativa.',
+    'file-manager': 'Gestiona archivos y carpetas guardados en el navegador.',
     'notepad': 'Bloc de notas rápido para consignas y listas.',
     'drawing-pad': 'Pizarra de dibujo libre y esquemas.',
     'image-carousel': 'Muestra una colección de imágenes.',

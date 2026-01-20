@@ -28,6 +28,11 @@ export const WIDGET_CATEGORIES: WidgetCategory[] = [
         widgetIds: ['vce-community', 'comunidad-chatgpt-ia-edu', 'edumedia-iag'],
     },
     {
+        id: 'vibe_coding',
+        titleKey: 'settings.widgets.categories.vibe_coding',
+        widgetIds: ['vce-community', 'local-web'],
+    },
+    {
         id: 'board_writing',
         titleKey: 'settings.widgets.categories.board_writing',
         widgetIds: [
@@ -43,6 +48,7 @@ export const WIDGET_CATEGORIES: WidgetCategory[] = [
         id: 'resources',
         titleKey: 'settings.widgets.categories.resources',
         widgetIds: [
+            'file-manager',
             'iframe',
             'local-web',
             'pdf-viewer',

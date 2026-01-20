@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FolderOpen, Trash2, Eye, UploadCloud, Maximize2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { getEntry } from '../../../utils/fileManagerDb';
+import { requestOpenFile } from '../../../utils/openDialog';
 import { unzipSync } from 'fflate';
 import './LocalWebWidget.css';
 
@@ -332,7 +334,6 @@ export const LocalWebWidget: FC = () => {
     const [statusMessage, setStatusMessage] = useState('');
     const [storageEstimate, setStorageEstimate] = useState<StorageEstimate>({ usage: null, quota: null });
     const [isListCollapsed, setIsListCollapsed] = useState(false);
-    const fileInputRef = useRef<HTMLInputElement>(null);
     const folderInputRef = useRef<HTMLInputElement>(null);
     const objectUrlsRef = useRef<string[]>([]);
     const skipRenameBlurRef = useRef(false);
@@ -689,11 +690,20 @@ export const LocalWebWidget: FC = () => {
         cancelRenameSite();
     };
 
-    const handleZipInput = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (!file) return;
+    const handleOpenZip = async () => {
+        const result = await requestOpenFile({ accept: '.zip' });
+        if (!result) return;
+        if (result.source === 'local') {
+            const [file] = result.files;
+            if (file) await importZip(file);
+            return;
+        }
+        const [entryId] = result.entryIds;
+        if (!entryId) return;
+        const entry = await getEntry(entryId);
+        if (!entry?.blob) return;
+        const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
         await importZip(file);
-        event.target.value = '';
     };
 
     const handleFolderInput = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -721,6 +731,9 @@ export const LocalWebWidget: FC = () => {
                     <FolderOpen size={18} />
                     <span>{t('widgets.local_web.title')}</span>
                 </div>
+                <div className="local-web-description">
+                    {t('widgets.local_web.description')}
+                </div>
                 <div className="local-web-actions">
                     <button
                         className="local-web-button local-web-button-secondary"
@@ -731,7 +744,7 @@ export const LocalWebWidget: FC = () => {
                     </button>
                     <button
                         className="local-web-button"
-                        onClick={() => fileInputRef.current?.click()}
+                        onClick={handleOpenZip}
                     >
                         <UploadCloud size={16} />
                         {t('widgets.local_web.import_zip')}
@@ -851,13 +864,6 @@ export const LocalWebWidget: FC = () => {
                 </div>
             </div>
 
-            <input
-                ref={fileInputRef}
-                type="file"
-                accept=".zip"
-                className="hidden"
-                onChange={handleZipInput}
-            />
             <input
                 ref={folderInputRef}
                 type="file"

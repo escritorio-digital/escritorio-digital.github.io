@@ -1,10 +1,15 @@
-import { useState } from 'react'; // 'useEffect' ha sido eliminado de esta línea
+import { useEffect, useState } from 'react'; // 'useEffect' ha sido eliminado de esta línea
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import Papa from 'papaparse';
 import { Users, Badge, UserPlus, Upload, Download, RotateCcw, AlertTriangle } from 'lucide-react';
 import './Attendance.css';
+import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
+import { getEntry } from '../../../utils/fileManagerDb';
+import { subscribeFileOpen } from '../../../utils/fileOpenBus';
+import { requestSaveDestination } from '../../../utils/saveDialog';
+import { requestOpenFile } from '../../../utils/openDialog';
 
 // --- Tipos de Datos ---
 interface BadgeInfo {
@@ -122,9 +127,7 @@ export const AttendanceWidget: FC = () => {
     updateStudentsForDate(updatedStudents);
   };
   
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const loadCsvFile = (file: File) => {
     Papa.parse<any>(file, {
       header: true,
       skipEmptyLines: true,
@@ -141,7 +144,33 @@ export const AttendanceWidget: FC = () => {
     });
   };
 
-  const handleExport = () => {
+  const handleOpenFile = async () => {
+    const result = await requestOpenFile({ accept: '.csv' });
+    if (!result) return;
+    if (result.source === 'local') {
+      const [file] = result.files;
+      if (file) loadCsvFile(file);
+      return;
+    }
+    const [entryId] = result.entryIds;
+    if (!entryId) return;
+    const entry = await getEntry(entryId);
+    if (!entry?.blob) return;
+    const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
+    loadCsvFile(file);
+  };
+
+  useEffect(() => {
+    const unsubscribe = subscribeFileOpen('attendance', async ({ entryId }) => {
+      const entry = await getEntry(entryId);
+      if (!entry?.blob) return;
+      const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
+      loadCsvFile(file);
+    });
+    return unsubscribe;
+  }, []);
+
+  const handleExport = async () => {
     const dataToExport: any[] = [];
     Object.keys(records).sort().forEach(date => {
         records[date].forEach(s => {
@@ -158,10 +187,20 @@ export const AttendanceWidget: FC = () => {
 
     const csv = Papa.unparse(dataToExport);
     const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = `asistencia_completa.csv`;
-    link.click();
+    const destination = await requestSaveDestination('asistencia_completa.csv');
+    if (destination?.destination === 'file-manager') {
+      await saveToFileManager({
+        blob,
+        filename: destination.filename,
+        sourceWidgetId: 'attendance',
+        sourceWidgetTitleKey: 'widgets.attendance.title',
+        parentId: destination.parentId,
+      });
+      return;
+    }
+    if (destination?.destination === 'download') {
+      downloadBlob(blob, destination.filename);
+    }
   };
 
   const resetAll = () => {
@@ -260,8 +299,7 @@ export const AttendanceWidget: FC = () => {
           <button onClick={addStudent}><UserPlus size={16}/></button>
         </div>
         <div className="actions-group">
-            <input type="file" id="csv-upload" accept=".csv" onChange={handleFileUpload} style={{display: 'none'}}/>
-            <label htmlFor="csv-upload" className="action-btn" title={t('widgets.attendance.import_csv_tooltip')}><Upload size={16}/></label>
+            <button onClick={handleOpenFile} className="action-btn" title={t('widgets.attendance.import_csv_tooltip')}><Upload size={16}/></button>
             <button onClick={handleExport} className="action-btn" title={t('widgets.attendance.export_records_tooltip')}><Download size={16}/></button>
             <button onClick={resetAll} className="action-btn danger" title={t('widgets.attendance.delete_all_tooltip')}><RotateCcw size={16}/></button>
         </div>
