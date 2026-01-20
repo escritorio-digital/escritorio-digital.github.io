@@ -14,6 +14,7 @@ export const GroupGeneratorWidget: FC = () => {
   const [groupValue, setGroupValue] = useState(3);
   const [generatedGroups, setGeneratedGroups] = useState<string[][]>([]);
   const [isLargeView, setIsLargeView] = useState(false);
+  const [copyFeedback, setCopyFeedback] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const overlayContentRef = useRef<HTMLDivElement>(null);
   const overlayHeaderRef = useRef<HTMLDivElement>(null);
@@ -147,6 +148,53 @@ export const GroupGeneratorWidget: FC = () => {
     setGeneratedGroups(newGroups);
   };
 
+  const formatGroupsText = () => (
+    generatedGroups
+      .map((group, index) => {
+        const title = t('widgets.group_generator.group_title', { number: index + 1 });
+        const lines = group.map((student) => `- ${student}`);
+        return [title, ...lines].join('\n');
+      })
+      .join('\n\n')
+  );
+
+  const copyGroups = async () => {
+    if (generatedGroups.length === 0) return;
+    const text = formatGroupsText();
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+      setCopyFeedback(true);
+      window.setTimeout(() => setCopyFeedback(false), 1500);
+    } catch {
+      setCopyFeedback(false);
+    }
+  };
+
+  const downloadGroups = () => {
+    if (generatedGroups.length === 0) return;
+    const text = formatGroupsText();
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'grupos.txt';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="group-generator-widget">
       <div className="input-panel">
@@ -186,18 +234,36 @@ export const GroupGeneratorWidget: FC = () => {
       <div className="output-panel">
         <div className="output-header">
           <label className="panel-label">{t('widgets.group_generator.generated_groups_label')}</label>
-          <button
-            className="expand-button"
-            onClick={() => setIsLargeView(!isLargeView)}
-            disabled={generatedGroups.length === 0}
-          >
-            {isLargeView ? <Minimize size={16} /> : <Expand size={16} />}
-            <span>
-              {isLargeView
-                ? t('widgets.group_generator.close_large_view')
-                : t('widgets.group_generator.view_large')}
-            </span>
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              className="expand-button"
+              onClick={copyGroups}
+              disabled={generatedGroups.length === 0}
+              title={t('widgets.group_generator.copy_groups')}
+            >
+              <span>{copyFeedback ? t('widgets.group_generator.copied') : t('widgets.group_generator.copy_groups')}</span>
+            </button>
+            <button
+              className="expand-button"
+              onClick={downloadGroups}
+              disabled={generatedGroups.length === 0}
+              title={t('widgets.group_generator.download_groups')}
+            >
+              <span>{t('widgets.group_generator.download_groups')}</span>
+            </button>
+            <button
+              className="expand-button"
+              onClick={() => setIsLargeView(!isLargeView)}
+              disabled={generatedGroups.length === 0}
+            >
+              {isLargeView ? <Minimize size={16} /> : <Expand size={16} />}
+              <span>
+                {isLargeView
+                  ? t('widgets.group_generator.close_large_view')
+                  : t('widgets.group_generator.view_large')}
+              </span>
+            </button>
+          </div>
         </div>
         <div className="groups-container">
           {generatedGroups.length > 0 ? (

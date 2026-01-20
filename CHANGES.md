@@ -12,6 +12,9 @@
 - Ventanas: icono de ayuda con descripción breve de cada programa.
 - Ventanas: el icono de fijado permanece visible cuando la ventana está fijada.
 
+## 1.5.1
+- Generador de grupos: opciones para copiar y guardar los grupos como .txt.
+
 ## 1.3.7
 - Menú de perfiles: opción para mostrar/ocultar desde Apariencia.
 - Menú de perfiles: opción en el menú contextual del botón derecho.
