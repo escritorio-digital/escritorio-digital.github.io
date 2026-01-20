@@ -21,12 +21,14 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 - **Présences** : enregistrement rapide des présences et de l’état du groupe.
 - **Générateur de groupes** : crée des groupes aléatoires ou équilibrés pour le travail coopératif.
 - **Calendrier** : support visuel pour dates, échéances et planification.
+- **Guide du programme** : guide intégré avec le catalogue des widgets et des conseils d’usage.
 
 ### Temps et rythme
 
 - **Minuteur** : compte à rebours pour ateliers, évaluations courtes, travail par tours, etc.
 - **Chronomètre** : mesure des temps (expériences, défis, EPS, dynamiques).
 - **Métronome** : marque un tempo constant. Utile pour la musique, la lecture rythmée, les routines ou le travail par intervalles.
+- **Horloges mondiales** : affiche l’heure de plusieurs villes pour comparer en classe.
 
 ### Mathématiques et sciences
 
@@ -34,18 +36,28 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 - **Convertisseur d’unités** : conversion des grandeurs pour exercices et TP.
 - **Markdown + LaTeX** : écrire des notes avec formules et mise en forme.
 
-### Tableau, écriture et ressources
+### Communauté
+
+- **Vibe Coding Educativo** : catalogue d’apps créées par des enseignants de la communauté. Sert à découvrir des ressources pédagogiques et à les ouvrir dans le lecteur ou dans un nouvel onglet. Utilise les filtres par niveau/domaine et les favoris pour les garder en haut.
+- **Communauté ChatGPT-IA-edu** : ressources et liens du projet ChatGPT-IA-edu.
+- **EduMedia-IAG** : ressources et multimédia éducatif avec IA générative.
+
+### Tableau et écriture
 
 - **Bloc‑notes** : notes rapides pour consignes, idées, exemples, listes, etc.
 - **EdiMarkWeb** : traitement de texte Markdown avec prévisualisation en ligne et exportation.
 - **Tableau de dessin** : dessin à main levée (schémas, graphiques, cartes conceptuelles, diagrammes).
 - **Carrousel d’images** : afficher une collection d’images (planches, exercices, photos de labo, cartes…).
+- **Sandbox HTML** : espace pour afficher des contenus préparés.
+- **BoardLive** : tableau collaboratif en temps réel.
+
+### Ressources et visualiseurs
+
 - **Visionneuse web** : ouvre une page web dans le bureau sans changer d’onglet.
-- **Vibe Coding Educativo** : catalogue d’apps créées par des enseignants de la communauté. Sert à découvrir des ressources pédagogiques et à les ouvrir dans le lecteur ou dans un nouvel onglet. Utilise les filtres par niveau/domaine et les favoris pour les garder en haut.
 - **Web local** : enregistrez des sites dans le navigateur (ZIP ou dossier) et exécutez-les hors ligne.
 - **Explorateur de fichiers** : ouvrir des fichiers locaux (PDF, images, texte et Markdown, audio et vidéo).
-- **Visionneuse directe** : pour afficher confortablement du contenu web ou des ressources externes pendant l’explication.
-- **HTML** : espace pour afficher des contenus préparés.
+- **Connexion en direct** : pour afficher confortablement du contenu web ou des ressources externes pendant l’explication.
+- **Wikipedia** : recherche rapide avec changement de langue pour les sujets de classe.
 
 ### Outils participatifs
 
@@ -54,6 +66,7 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 - **Nuage de mots** : réponses courtes dans un nuage dynamique.
 - **Pluie d'idées et votes** : propositions et vote pour prioriser.
 - **Mur interactif** : mur collaboratif avec notes type post-it.
+- **Tickets de sortie** : recueillir des impressions rapides en fin de séance.
 - **QPlay** : quiz interactif en temps réel.
 - **BoardLive** : tableau collaboratif en temps réel.
 
@@ -64,14 +77,15 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 - **Générateur de QR** : crée des QR codes pour partager liens ou ressources.
 - **Feu tricolore** : signal visuel « silence / travail / attention » ou états d’activité.
 - **Sonomètre** : indicateur visuel du niveau sonore pour l’autorégulation.
+- **Tableau des scores** : suivi rapide des points pour équipes, défis et gamification.
 
-### Jeux de logique et dynamiques de classe
+### Jeux de logique et dynamique de classe
 
 - **Morpion** : jeu rapide pour révisions, questions‑réponses, motivation ou « duels » de concepts.
 - **Memory** : jeu de paires pour vocabulaire, concepts, images et définitions.
 - **Puzzle coulissant** : casse‑tête pour attention, logique et transitions.
 
-### Travail par gestes
+### Gestes de travail
 
 - **Gestes de travail** : outil d’appui pour des routines de classe basées sur des signaux/gestes.
 

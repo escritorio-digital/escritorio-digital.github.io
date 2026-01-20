@@ -19,12 +19,14 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 - **Control de asistencia**: rexistro rápido de asistencia e estado do grupo.
 - **Xerador de grupos**: crea grupos de forma aleatoria ou equilibrada para traballo cooperativo.
 - **Calendario**: apoio visual para datas, entregas e planificación.
+- **Guía do programa**: guía integrada co catálogo de widgets e recomendacións de uso.
 
 ### Tempo e ritmo
 
 - **Temporizador**: conta atrás para actividades por estacións, exames curtos, traballo por quendas, etc.
 - **Cronómetro**: mide tiempos (experimentos, retos, educación física, dinámicas).
 - **Metrónomo**: marca un pulso constante. Útil para música, lectura rítmica, dinámicas de clase ou traballo por intervalos.
+- **Reloxos mundiais**: amosa horas de varias cidades para comparalas en clase.
 
 ### Matemáticas e ciencias
 
@@ -32,17 +34,28 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 - **Conversor de unidades**: converte magnitudes para problemas e prácticas.
 - **Markdown + LaTeX**: escribe apuntes con fórmulas e formato.
 
-### Pizarra, escritura e recursos
+### Comunidade
+
+- **Vibe Coding Educativo**: catálogo de apps creadas por docentes da comunidade. Serve para descubrir recursos didácticos e abrilos no visor ou nunha nova pestana. Usa filtros por nivel/área e favoritos para telos arriba.
+- **Comunidade ChatGPT-IA-edu**: acceso a recursos e ligazóns do proxecto ChatGPT-IA-edu.
+- **EduMedia-IAG**: recursos e multimedia educativa con IA xerativa.
+
+### Pizarra e escritura
 
 - **Bloc de notas**: notas rápidas para consignas, ideas, exemplos, listas, etc.
 - **EdiMarkWeb**: procesador de textos Markdown con previsualización en liña e exportación.
 - **Pizarra de debuxo**: debuxa a man alzada (esquemas, gráficas, mapas conceptuais, diagramas).
 - **Carrusel de imaxes**: amosa unha colección de imaxes (láminas, exercicios, fotos de laboratorio, mapas…).
+- **Sandbox HTML**: espazo para mostrar contidos preparados.
+- **BoardLive**: pizarra colaborativa en tempo real.
+
+### Recursos e visores
+
 - **Visor web**: abre unha páxina web dentro do escritorio para usar un recurso en liña sen cambiar de pestana.
-- **Vibe Coding Educativo**: catálogo de apps creadas por docentes da comunidade. Serve para descubrir recursos didácticos e abrilos no visor ou nunha nova pestana. Usa filtros por nivel/área e favoritos para telos arriba.
+- **Web local**: garda webs no navegador (desde ZIP ou cartafol) e execútaas sen conexión.
 - **Explorador de ficheiros**: abre ficheiros locais (PDF, imaxes, texto e Markdown, audio e vídeo).
-- **Visor directo**: pensado para mostrar contido web ou recursos externos de forma cómoda durante a explicación.
-- **HTML**: espazo para mostrar contidos preparados.
+- **Conexión en Directo**: pensado para mostrar contido web ou recursos externos de forma cómoda durante a explicación.
+- **Wikipedia**: procura rápida con cambio de idioma para temas da clase.
 
 ### Ferramentas participativas
 
@@ -62,6 +75,7 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 - **Xerador de QR**: crea códigos QR para compartir ligazóns ou recursos coa clase.
 - **Semáforo**: sinal visual de “silencio / traballo / atención” ou estados de actividade.
 - **Medidor de son**: indicador visual do nivel de ruído para a autorregulación do grupo.
+- **Marcador de puntos**: marcador rápido para equipos, retos e gamificación.
 
 ### Xogos de lóxica e dinámica de clase
 
@@ -69,7 +83,7 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 - **Memoria**: xogo de parellas para vocabulario, conceptos, imaxes e definicións.
 - **Puzzle deslizante**: quebracabezas para atención, lóxica e momentos de transición.
 
-### Traballo con xestos
+### Xestos de traballo
 
 - **Xestos de traballo**: ferramenta de apoio para dinámicas de aula baseadas en sinais/xestos e rutinas.
 

@@ -21,12 +21,14 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 - **Attendance**: quick attendance and class status record.
 - **Group generator**: create groups randomly or balanced for cooperative work.
 - **Calendar**: visual support for dates, deadlines, and planning.
+- **Program guide**: built-in guide with the widget catalog and usage tips.
 
 ### Time and rhythm
 
 - **Timer**: countdown for stations, short exams, turn-based work, etc.
 - **Stopwatch**: measure times (experiments, challenges, PE, dynamics).
 - **Metronome**: steady pulse. Useful for music, rhythm reading, class routines, or interval work.
+- **World clocks**: show times in multiple cities for class comparisons.
 
 ### Math and science
 
@@ -34,18 +36,28 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 - **Unit converter**: convert magnitudes for problems and labs.
 - **Markdown + LaTeX**: write notes with formulas and formatting.
 
-### Whiteboard, writing, and resources
+### Community
+
+- **Vibe Coding Educativo**: catalog of apps created by teachers from the community. Use it to discover teaching resources and open them in the viewer or a new tab. Use level/area filters and favorites to keep them at the top.
+- **ChatGPT-IA-edu community**: resources and links for the ChatGPT-IA-edu project.
+- **EduMedia-IAG**: educational multimedia with generative AI resources.
+
+### Board and writing
 
 - **Notepad**: quick notes for instructions, ideas, examples, lists, etc.
 - **EdiMarkWeb**: Markdown word processor with live preview and export.
 - **Drawing pad**: freehand drawing (sketches, graphs, concept maps, diagrams).
 - **Image carousel**: show a collection of images (plates, exercises, lab photos, maps…).
+- **HTML Sandbox**: space to display prepared content.
+- **BoardLive**: collaborative whiteboard in real time.
+
+### Resources and viewers
+
 - **Web viewer**: open a web page inside the desktop to use an online resource without switching tabs.
-- **Vibe Coding Educativo**: catalog of apps created by teachers from the community. Use it to discover teaching resources and open them in the viewer or a new tab. Use level/area filters and favorites to keep them at the top.
 - **Local web**: save websites in the browser (from ZIP or folder) and run them offline.
 - **File explorer**: open local files (PDF, images, text and Markdown, audio and video).
 - **Live viewer**: designed to show web content or external resources comfortably while explaining.
-- **HTML**: space to display prepared content.
+- **Wikipedia**: quick search with language switching for class topics.
 
 ### Participation tools
 
@@ -64,6 +76,7 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 - **QR generator**: create QR codes to share links or resources with the class.
 - **Traffic light**: visual signal for “silence / work / attention” or activity states.
 - **Sound meter**: visual indicator of noise level for group self‑regulation.
+- **Scoreboard**: quick score tracking for teams, challenges, and gamification.
 
 ### Logic games and class dynamics
 
@@ -71,7 +84,7 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 - **Memory**: matching pairs for vocabulary, concepts, images, and definitions.
 - **Sliding puzzle**: puzzle for attention, logic, and transitions.
 
-### Gesture-based work
+### Work gestures
 
 - **Work gestures**: support tool for class routines based on signals/gestures.
 
