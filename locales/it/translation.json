@@ -534,6 +534,7 @@
         "h1": "Titolo (H1)",
         "h2": "Sottotitolo (H2)",
         "h3": "Sottotitolo minore (H3)",
+        "copy": "Copia testo",
         "upload": "Carica nota (.md)",
         "download": "Scarica nota (.md)"
       },
