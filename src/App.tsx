@@ -134,7 +134,6 @@ const DesktopUI: React.FC<{
     const fileManagerLongPressTriggeredRef = useRef(false);
     const [saveDialogState, setSaveDialogState] = useState<{ isOpen: boolean }>({ isOpen: false });
     const saveDialogResolverRef = useRef<((result: SaveDialogResult) => void) | null>(null);
-    const [saveDialogFolders, setSaveDialogFolders] = useState<{ id: string; label: string }[]>([]);
     const [saveDialogFolderId, setSaveDialogFolderId] = useState(FILE_MANAGER_ROOT_ID);
     const [saveDialogFilename, setSaveDialogFilename] = useState('');
     const [saveDialogSuggestedFilename, setSaveDialogSuggestedFilename] = useState('');
@@ -204,7 +203,6 @@ const DesktopUI: React.FC<{
                     .sort((a, b) => a.label.localeCompare(b.label)),
             ];
             if (isMounted) {
-                setSaveDialogFolders(options);
                 if (!options.find((option) => option.id === saveDialogFolderId)) {
                     setSaveDialogFolderId(FILE_MANAGER_ROOT_ID);
                 }
@@ -1182,29 +1180,6 @@ const DesktopUI: React.FC<{
                                         if (!trimmed) return;
                                         const folder = await createFolder(trimmed, saveDialogFolderId);
                                         setSaveDialogFolderId(folder.id);
-                                        const entries = await getAllEntries();
-                                        const folders = entries.filter((entry) => entry.type === 'folder');
-                                        const byId = new Map(folders.map((entry) => [entry.id, entry]));
-                                        const labelFor = (entry: FileManagerEntry) => {
-                                            const parts: string[] = [];
-                                            let current: FileManagerEntry | undefined = entry;
-                                            while (current && current.id !== FILE_MANAGER_ROOT_ID) {
-                                                parts.unshift(current.name);
-                                                current = byId.get(current.parentId);
-                                            }
-                                            return parts.join(' / ') || t('save_dialog.root_folder');
-                                        };
-                                        const options = [
-                                            { id: FILE_MANAGER_ROOT_ID, label: t('save_dialog.root_folder') },
-                                            ...folders
-                                                .filter((entry) => entry.id !== FILE_MANAGER_ROOT_ID)
-                                                .map((entry) => ({
-                                                    id: entry.id,
-                                                    label: labelFor(entry),
-                                                }))
-                                                .sort((a, b) => a.label.localeCompare(b.label)),
-                                        ];
-                                        setSaveDialogFolders(options);
                                     }}
                                 >
                                     {t('save_dialog.new_folder')}
