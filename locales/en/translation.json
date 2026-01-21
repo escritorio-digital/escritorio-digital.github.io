@@ -11,7 +11,10 @@
     "root_folder": "Ed Files",
     "filename_label": "File name",
     "default_filename": "file",
-    "message": "Save in Ed Files? OK = Ed Files, Cancel = Local disk."
+    "message": "Save in Ed Files? OK = Ed Files, Cancel = Local disk.",
+    "existing_files": "Files in this folder",
+    "replace_hint": "Click a folder to open it or a file to use its name and replace it.",
+    "no_files": "No files in this folder."
   },
   "settings": {
     "title": "Settings",
@@ -291,7 +294,11 @@
       "cut": "Cut",
       "paste": "Paste",
       "feedback_saved": "Saved to Archivos Ed.",
-      "feedback_opening": "Opening file..."
+      "feedback_opening": "Opening file...",
+      "rename": "Rename",
+      "rename_prompt": "New name",
+      "rename_invalid": "The name is not valid.",
+      "rename_duplicate": "A file or folder with that name already exists."
     },
     "file_opener": {
       "title": "File Explorer",
@@ -468,11 +475,11 @@
       "preview_title": "HTML Preview"
     },
     "latex_markdown": {
-      "title": "Interpreter (MD/LaTeX)",
+      "title": "Interpreter (Markdown/LaTeX)",
       "copy_source": "Copy source code",
       "copy_image": "Copy as image",
       "save_file": "Save file (.md/.tex)",
-      "open_file": "Open file (.md)",
+      "open_file": "Open file (.md/.tex)",
       "export_pdf": "Export as PDF (text)",
       "source_copied": "Source code copied",
       "copy_failed": "Could not copy",

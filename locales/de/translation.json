@@ -11,7 +11,10 @@
     "root_folder": "Ed-Dateien",
     "filename_label": "Dateiname",
     "default_filename": "datei",
-    "message": "In Ed-Dateien speichern? OK = Ed-Dateien, Abbrechen = Lokaler Datenträger."
+    "message": "In Ed-Dateien speichern? OK = Ed-Dateien, Abbrechen = Lokaler Datenträger.",
+    "existing_files": "Dateien in diesem Ordner",
+    "replace_hint": "Ordner anklicken, um ihn zu oeffnen, oder Datei anklicken, um den Namen zu verwenden und zu ersetzen.",
+    "no_files": "Keine Dateien in diesem Ordner."
   },
   "settings": {
     "title": "Einstellungen",
@@ -291,7 +294,11 @@
       "cut": "Ausschneiden",
       "paste": "Einfügen",
       "feedback_saved": "In Archivos Ed gespeichert.",
-      "feedback_opening": "Datei wird geoffnet..."
+      "feedback_opening": "Datei wird geoffnet...",
+      "rename": "Umbenennen",
+      "rename_prompt": "Neuer Name",
+      "rename_invalid": "Der Name ist ungültig.",
+      "rename_duplicate": "Es existiert bereits eine Datei oder ein Ordner mit diesem Namen."
     },
     "file_opener": {
       "title": "Datei-Explorer",
@@ -468,11 +475,11 @@
       "preview_title": "HTML-Vorschau"
     },
     "latex_markdown": {
-      "title": "Interpreter (MD/LaTeX)",
+      "title": "Interpreter (Markdown/LaTeX)",
       "copy_source": "Quellcode kopieren",
       "copy_image": "Als Bild kopieren",
       "save_file": "Datei speichern (.md/.tex)",
-      "open_file": "Datei öffnen (.md)",
+      "open_file": "Datei öffnen (.md/.tex)",
       "export_pdf": "Als PDF exportieren (Text)",
       "source_copied": "Quellcode kopiert",
       "copy_failed": "Kopieren fehlgeschlagen",

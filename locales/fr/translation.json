@@ -11,7 +11,10 @@
     "root_folder": "Fichiers Ed",
     "filename_label": "Nom du fichier",
     "default_filename": "fichier",
-    "message": "Enregistrer dans Fichiers Ed ? OK = Fichiers Ed, Annuler = Disque local."
+    "message": "Enregistrer dans Fichiers Ed ? OK = Fichiers Ed, Annuler = Disque local.",
+    "existing_files": "Fichiers dans ce dossier",
+    "replace_hint": "Cliquez sur un dossier pour l’ouvrir ou sur un fichier pour utiliser son nom et le remplacer.",
+    "no_files": "Aucun fichier dans ce dossier."
   },
   "settings": {
     "title": "Configuration",
@@ -292,7 +295,11 @@
       "cut": "Couper",
       "paste": "Coller",
       "feedback_saved": "Enregistre dans Archivos Ed.",
-      "feedback_opening": "Ouverture du fichier..."
+      "feedback_opening": "Ouverture du fichier...",
+      "rename": "Renommer",
+      "rename_prompt": "Nouveau nom",
+      "rename_invalid": "Le nom n’est pas valide.",
+      "rename_duplicate": "Un fichier ou un dossier avec ce nom existe déjà."
     },
     "file_opener": {
       "title": "Explorateur de fichiers",
@@ -469,11 +476,11 @@
       "preview_title": "Aperçu HTML"
     },
     "latex_markdown": {
-      "title": "Interpréteur (MD/LaTeX)",
+      "title": "Interpréteur (Markdown/LaTeX)",
       "copy_source": "Copier le code source",
       "copy_image": "Copier comme image",
       "save_file": "Enregistrer le fichier (.md/.tex)",
-      "open_file": "Ouvrir un fichier (.md)",
+      "open_file": "Ouvrir un fichier (.md/.tex)",
       "export_pdf": "Exporter en PDF (texte)",
       "source_copied": "Code source copié",
       "copy_failed": "La copie a échoué",

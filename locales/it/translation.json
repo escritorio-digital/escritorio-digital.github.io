@@ -11,7 +11,10 @@
     "root_folder": "File Ed",
     "filename_label": "Nome file",
     "default_filename": "file",
-    "message": "Salvare in File Ed? OK = File Ed, Annulla = Disco locale."
+    "message": "Salvare in File Ed? OK = File Ed, Annulla = Disco locale.",
+    "existing_files": "File in questa cartella",
+    "replace_hint": "Fai clic su una cartella per aprirla o su un file per usare il nome e sostituirlo.",
+    "no_files": "Nessun file in questa cartella."
   },
   "settings": {
     "title": "Impostazioni",
@@ -291,7 +294,11 @@
       "cut": "Taglia",
       "paste": "Incolla",
       "feedback_saved": "Salvato in Archivos Ed.",
-      "feedback_opening": "Apertura file..."
+      "feedback_opening": "Apertura file...",
+      "rename": "Rinomina",
+      "rename_prompt": "Nuovo nome",
+      "rename_invalid": "Il nome non è valido.",
+      "rename_duplicate": "Esiste già un file o una cartella con questo nome."
     },
     "file_opener": {
       "title": "Esplora file",
@@ -468,11 +475,11 @@
       "preview_title": "Anteprima HTML"
     },
     "latex_markdown": {
-      "title": "Interprete (MD/LaTeX)",
+      "title": "Interprete (Markdown/LaTeX)",
       "copy_source": "Copia il codice sorgente",
       "copy_image": "Copia come immagine",
       "save_file": "Salva file (.md/.tex)",
-      "open_file": "Apri file (.md)",
+      "open_file": "Apri file (.md/.tex)",
       "export_pdf": "Esporta come PDF (testo)",
       "source_copied": "Codice sorgente copiato",
       "copy_failed": "Impossibile copiare",

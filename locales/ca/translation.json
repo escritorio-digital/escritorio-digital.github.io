@@ -11,7 +11,10 @@
     "root_folder": "Arxius Ed",
     "filename_label": "Nom del fitxer",
     "default_filename": "fitxer",
-    "message": "Desar a Arxius Ed? D’acord = Arxius Ed, Cancel·lar = Disc local."
+    "message": "Desar a Arxius Ed? D’acord = Arxius Ed, Cancel·lar = Disc local.",
+    "existing_files": "Fitxers en aquesta carpeta",
+    "replace_hint": "Fes clic en una carpeta per obrir-la o en un fitxer per usar-ne el nom i reemplaçar-lo.",
+    "no_files": "No hi ha fitxers en aquesta carpeta."
   },
   "settings": {
     "title": "Configuració",
@@ -291,7 +294,11 @@
       "cut": "Retallar",
       "paste": "Enganxar",
       "feedback_saved": "Desat a Arxius Ed.",
-      "feedback_opening": "Obrint arxiu..."
+      "feedback_opening": "Obrint arxiu...",
+      "rename": "Reanomena",
+      "rename_prompt": "Nom nou",
+      "rename_invalid": "El nom no és vàlid.",
+      "rename_duplicate": "Ja existeix un fitxer o carpeta amb aquest nom."
     },
     "file_opener": {
       "title": "Explorador de fitxers",
@@ -468,11 +475,11 @@
       "preview_title": "Vista prèvia HTML"
     },
     "latex_markdown": {
-      "title": "Intèrpret (MD/LaTeX)",
+      "title": "Intèrpret (Markdown/LaTeX)",
       "copy_source": "Copiar codi font",
       "copy_image": "Copiar com a imatge",
       "save_file": "Desar fitxer (.md/.tex)",
-      "open_file": "Obrir fitxer (.md)",
+      "open_file": "Obrir fitxer (.md/.tex)",
       "export_pdf": "Exportar com a PDF (text)",
       "source_copied": "Codi font copiat",
       "copy_failed": "No s'ha pogut copiar",
