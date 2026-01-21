@@ -289,7 +289,9 @@
       "empty_trash_confirm": "Voleu eliminar definitivament tot el contingut de la paperera?",
       "copy": "Copiar",
       "cut": "Retallar",
-      "paste": "Enganxar"
+      "paste": "Enganxar",
+      "feedback_saved": "Desat a Arxius Ed.",
+      "feedback_opening": "Obrint arxiu..."
     },
     "file_opener": {
       "title": "Explorador de fitxers",

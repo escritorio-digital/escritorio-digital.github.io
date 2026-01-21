@@ -62,6 +62,29 @@
   @apply flex-1 bg-white rounded-lg shadow-inner overflow-auto p-2 space-y-2;
 }
 
+.file-manager-feedback {
+  @apply mb-2 inline-flex items-center gap-2 rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-xs text-gray-600;
+}
+
+.file-manager-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(107, 114, 128, 0.35);
+  border-top-color: rgba(55, 65, 81, 0.9);
+  border-radius: 50%;
+  animation: file-manager-spin 0.8s linear infinite;
+}
+
+.file-manager-toast {
+  @apply absolute bottom-3 right-3 rounded-md bg-black/80 px-3 py-2 text-xs text-white shadow-lg;
+}
+
+@keyframes file-manager-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .file-manager-empty {
   @apply text-center text-gray-400 py-8;
 }

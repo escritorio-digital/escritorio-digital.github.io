@@ -291,7 +291,9 @@
       "empty_trash_confirm": "Eliminar definitivamente todo o conteúdo do lixo?",
       "copy": "Copiar",
       "cut": "Cortar",
-      "paste": "Colar"
+      "paste": "Colar",
+      "feedback_saved": "Guardado no Archivos Ed.",
+      "feedback_opening": "Abrindo ficheiro..."
     },
     "file_opener": {
       "title": "Explorador de ficheiros",

@@ -27,6 +27,8 @@ import './FileManagerWidget.css';
 const DEFAULT_TRASH_HOURS = 1;
 const TRASH_TTL_OPTIONS = [1, 6, 12, 24];
 const GUIDE_ENTRY_SEED_KEY = 'file-manager-guide-seeded';
+const LARGE_FILE_BYTES = 2 * 1024 * 1024;
+const FEEDBACK_TIMEOUT_MS = 2200;
 
 const formatBytes = (bytes: number) => {
     if (bytes < 1024) return `${bytes} B`;
@@ -52,6 +54,8 @@ export const FileManagerWidget: FC = () => {
     const [lastSelectedIndex, setLastSelectedIndex] = useState<number | null>(null);
     const [dragOverFolderId, setDragOverFolderId] = useState<string | null>(null);
     const [clipboard, setClipboard] = useState<{ mode: 'copy' | 'cut'; entryIds: string[] } | null>(null);
+    const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
+    const [openingMessage, setOpeningMessage] = useState<string | null>(null);
     const [contextMenu, setContextMenu] = useState<{
         isOpen: boolean;
         x: number;
@@ -61,6 +65,8 @@ export const FileManagerWidget: FC = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const contextMenuRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const feedbackTimeoutRef = useRef<number | null>(null);
+    const openingTimeoutRef = useRef<number | null>(null);
 
     const refreshEntries = useCallback(async () => {
         setIsLoading(true);
@@ -109,6 +115,24 @@ export const FileManagerWidget: FC = () => {
         window.addEventListener('file-manager-refresh', handler);
         return () => window.removeEventListener('file-manager-refresh', handler);
     }, [refreshEntries]);
+
+    useEffect(() => {
+        const handler = (event: Event) => {
+            const custom = event as CustomEvent<{ type?: string }>;
+            if (custom.detail?.type !== 'saved') return;
+            setFeedbackMessage(t('widgets.file_manager.feedback_saved'));
+            if (feedbackTimeoutRef.current) {
+                window.clearTimeout(feedbackTimeoutRef.current);
+            }
+            feedbackTimeoutRef.current = window.setTimeout(() => {
+                setFeedbackMessage(null);
+            }, FEEDBACK_TIMEOUT_MS);
+        };
+        window.addEventListener('file-manager-feedback', handler);
+        return () => {
+            window.removeEventListener('file-manager-feedback', handler);
+        };
+    }, [t]);
 
     useEffect(() => {
         const ttlMs = Math.max(1, trashTtlHours) * 60 * 60 * 1000;
@@ -164,6 +188,17 @@ export const FileManagerWidget: FC = () => {
         };
     }, [entries.length]);
 
+    useEffect(() => {
+        return () => {
+            if (feedbackTimeoutRef.current) {
+                window.clearTimeout(feedbackTimeoutRef.current);
+            }
+            if (openingTimeoutRef.current) {
+                window.clearTimeout(openingTimeoutRef.current);
+            }
+        };
+    }, []);
+
     const breadcrumb = useMemo(() => {
         const build = async () => {
             const all = await getAllEntries();
@@ -217,6 +252,13 @@ export const FileManagerWidget: FC = () => {
         ));
         await Promise.all(tasks);
         refreshEntries();
+        setFeedbackMessage(t('widgets.file_manager.feedback_saved'));
+        if (feedbackTimeoutRef.current) {
+            window.clearTimeout(feedbackTimeoutRef.current);
+        }
+        feedbackTimeoutRef.current = window.setTimeout(() => {
+            setFeedbackMessage(null);
+        }, FEEDBACK_TIMEOUT_MS);
     };
 
     const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
@@ -241,6 +283,16 @@ export const FileManagerWidget: FC = () => {
         if (entry.type === 'folder') {
             setCurrentFolderId(entry.id);
             return;
+        }
+        const entrySize = entry.size ?? entry.blob?.size ?? 0;
+        if (entrySize >= LARGE_FILE_BYTES) {
+            setOpeningMessage(t('widgets.file_manager.feedback_opening'));
+            if (openingTimeoutRef.current) {
+                window.clearTimeout(openingTimeoutRef.current);
+            }
+            openingTimeoutRef.current = window.setTimeout(() => {
+                setOpeningMessage(null);
+            }, FEEDBACK_TIMEOUT_MS);
         }
         const widgetId = entry.sourceWidgetId || 'file-opener';
         window.dispatchEvent(new CustomEvent('file-manager-open', { detail: { widgetId, entryId: entry.id } }));
@@ -488,6 +540,12 @@ export const FileManagerWidget: FC = () => {
                 }}
                 onContextMenu={(event) => handleContextMenu(event)}
             >
+                {openingMessage && (
+                    <div className="file-manager-feedback" role="status" aria-live="polite">
+                        <span className="file-manager-spinner" aria-hidden="true" />
+                        <span>{openingMessage}</span>
+                    </div>
+                )}
                 {isLoading ? (
                     <div className="file-manager-empty">{t('loading')}</div>
                 ) : sortedEntries.length === 0 ? (
@@ -643,6 +701,11 @@ export const FileManagerWidget: FC = () => {
                         <XCircle size={14} />
                         {t('widgets.file_manager.delete_permanent')}
                     </button>
+                </div>
+            )}
+            {feedbackMessage && (
+                <div className="file-manager-toast" role="status" aria-live="polite">
+                    {feedbackMessage}
                 </div>
             )}
         </div>

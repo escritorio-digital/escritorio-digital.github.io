@@ -289,7 +289,9 @@
       "empty_trash_confirm": "Eliminare definitivamente tutto il contenuto del cestino?",
       "copy": "Copia",
       "cut": "Taglia",
-      "paste": "Incolla"
+      "paste": "Incolla",
+      "feedback_saved": "Salvato in Archivos Ed.",
+      "feedback_opening": "Apertura file..."
     },
     "file_opener": {
       "title": "Esplora file",

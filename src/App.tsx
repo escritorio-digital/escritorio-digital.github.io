@@ -677,6 +677,25 @@ const DesktopUI: React.FC<{
         hour: '2-digit',
         minute: '2-digit',
     }).format(now);
+    const isClockColonOn = now.getSeconds() % 2 === 0;
+
+    const renderClockTime = (time: string) => {
+        const parts = time.split(':');
+        if (parts.length < 2) return time;
+        return parts.flatMap((part, index) => {
+            const chunk = <span key={`time-part-${index}`}>{part}</span>;
+            if (index === 0) return [chunk];
+            return [
+                <span
+                    key={`time-colon-${index}`}
+                    className={`desktop-clock-colon${isClockColonOn ? ' is-on' : ''}`}
+                >
+                    :
+                </span>,
+                chunk,
+            ];
+        });
+    };
 
     useEffect(() => {
         const intervalId = window.setInterval(() => setNow(new Date()), 1000);
@@ -823,7 +842,7 @@ const DesktopUI: React.FC<{
                     className="fixed top-4 right-4 z-[1] pointer-events-none select-none text-white bg-black/45 backdrop-blur-md rounded-2xl px-6 py-5 shadow-lg"
                 >
                     <div className="text-lg opacity-90">{formattedDate}</div>
-                    <div className="text-4xl font-semibold leading-tight">{formattedTime}</div>
+                    <div className="text-4xl font-semibold leading-tight">{renderClockTime(formattedTime)}</div>
                 </div>
             )}
             {showSystemStats && statsRows.length > 0 && (

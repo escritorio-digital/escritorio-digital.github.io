@@ -289,7 +289,9 @@
       "empty_trash_confirm": "Delete everything in the trash permanently?",
       "copy": "Copy",
       "cut": "Cut",
-      "paste": "Paste"
+      "paste": "Paste",
+      "feedback_saved": "Saved to Archivos Ed.",
+      "feedback_opening": "Opening file..."
     },
     "file_opener": {
       "title": "File Explorer",

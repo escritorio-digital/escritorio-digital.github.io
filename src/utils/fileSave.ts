@@ -27,4 +27,10 @@ export const saveToFileManager = async (params: {
         sourceWidgetTitleKey: params.sourceWidgetTitleKey,
     });
     window.dispatchEvent(new CustomEvent('file-manager-refresh'));
+    window.dispatchEvent(new CustomEvent('file-manager-feedback', {
+        detail: {
+            type: 'saved',
+            filename: params.filename,
+        },
+    }));
 };

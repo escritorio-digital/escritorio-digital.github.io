@@ -39,6 +39,7 @@ export const GlobalClocksWidget: FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [newTimezone, setNewTimezone] = useState<string>('America/New_York');
 
+  const isColonOn = currentTime.getSeconds() % 2 === 0;
   const renderTime = (time: string) => {
     const parts = time.split(':');
     if (parts.length < 2) return time;
@@ -46,7 +47,7 @@ export const GlobalClocksWidget: FC = () => {
       const chunk = <span key={`part-${index}`}>{part}</span>;
       if (index === 0) return [chunk];
       return [
-        <span key={`colon-${index}`} className="time-colon">:</span>,
+        <span key={`colon-${index}`} className={`time-colon${isColonOn ? ' is-on' : ''}`}>:</span>,
         chunk,
       ];
     });

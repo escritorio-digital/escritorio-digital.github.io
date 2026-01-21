@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.desktop-clock-colon {
+  display: inline-block;
+  margin: 0 0.08em;
+  opacity: 0;
+}
+
+.desktop-clock-colon.is-on {
+  opacity: 1;
+}
+
 html {
   font-size: calc(16px * var(--font-scale, 1));
 }

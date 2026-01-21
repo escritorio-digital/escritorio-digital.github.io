@@ -42,20 +42,14 @@
 .time-colon {
   display: inline-block;
   margin: 0 0.15em;
-  animation: time-colon-pulse 1s ease-in-out infinite;
-  opacity: 0.55;
+  opacity: 0.45;
+  transform: scale(0.9);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-@keyframes time-colon-pulse {
-  0%,
-  100% {
-    opacity: 0.55;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.15);
-  }
+.time-colon.is-on {
+  opacity: 1;
+  transform: scale(1.2);
 }
 
 .remove-clock-btn {
