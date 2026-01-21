@@ -39,6 +39,25 @@
   font-size: clamp(1.2rem, 4cqw, 2.4rem);
 }
 
+.time-colon {
+  display: inline-block;
+  margin: 0 0.15em;
+  animation: time-colon-pulse 1s ease-in-out infinite;
+  opacity: 0.55;
+}
+
+@keyframes time-colon-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
 .remove-clock-btn {
   @apply text-gray-500 hover:text-red-500 ml-2 transition-colors;
 }

@@ -39,6 +39,19 @@ export const GlobalClocksWidget: FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [newTimezone, setNewTimezone] = useState<string>('America/New_York');
 
+  const renderTime = (time: string) => {
+    const parts = time.split(':');
+    if (parts.length < 2) return time;
+    return parts.flatMap((part, index) => {
+      const chunk = <span key={`part-${index}`}>{part}</span>;
+      if (index === 0) return [chunk];
+      return [
+        <span key={`colon-${index}`} className="time-colon">:</span>,
+        chunk,
+      ];
+    });
+  };
+
   // Actualiza la hora cada segundo
   useEffect(() => {
     const timerId = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -66,7 +79,7 @@ export const GlobalClocksWidget: FC = () => {
             <span className="city-name">{t('widgets.global_clocks.your_local_time')}</span>
             <span className="offset">GMT{localOffset >= 0 ? '+' : ''}{localOffset}</span>
           </div>
-          <span className="time-display">{currentTime.toLocaleTimeString()}</span>
+          <span className="time-display">{renderTime(currentTime.toLocaleTimeString())}</span>
         </div>
 
         {/* Relojes Seleccionados */}
@@ -83,7 +96,9 @@ export const GlobalClocksWidget: FC = () => {
                 <span className="city-name">{t(`widgets.global_clocks.cities.${cityData.cityKey}`)}</span>
                 <span className="offset">{offsetDiff >= 0 ? '+' : ''}{offsetDiff}h</span>
               </div>
-              <span className="time-display">{currentTime.toLocaleTimeString(undefined, { timeZone: tz })}</span>
+              <span className="time-display">
+                {renderTime(currentTime.toLocaleTimeString(undefined, { timeZone: tz }))}
+              </span>
               <button onClick={() => removeClock(tz)} className="remove-clock-btn"><Trash2 size={16} /></button>
             </div>
           );
