@@ -289,7 +289,9 @@
       "empty_trash_confirm": "Eliminar definitivamente todo o contido da papeleira?",
       "copy": "Copiar",
       "cut": "Cortar",
-      "paste": "Pegar"
+      "paste": "Pegar",
+      "feedback_saved": "Gardado en Archivos Ed.",
+      "feedback_opening": "Abrindo arquivo..."
     },
     "file_opener": {
       "title": "Explorador de ficheiros",

@@ -290,7 +290,9 @@
       "empty_trash_confirm": "Supprimer définitivement tout le contenu de la corbeille ?",
       "copy": "Copier",
       "cut": "Couper",
-      "paste": "Coller"
+      "paste": "Coller",
+      "feedback_saved": "Enregistre dans Archivos Ed.",
+      "feedback_opening": "Ouverture du fichier..."
     },
     "file_opener": {
       "title": "Explorateur de fichiers",

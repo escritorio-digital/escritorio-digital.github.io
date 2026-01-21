@@ -288,7 +288,9 @@
       "empty_trash_confirm": "Zakarrontziko eduki guztia betiko ezabatu?",
       "copy": "Kopiatu",
       "cut": "Ebaki",
-      "paste": "Itsatsi"
+      "paste": "Itsatsi",
+      "feedback_saved": "Archivos Ed-en gorde da.",
+      "feedback_opening": "Fitxategia irekitzen..."
     },
     "file_opener": {
       "title": "Fitxategi arakatzailea",

@@ -289,7 +289,9 @@
       "empty_trash_confirm": "Alles im Papierkorb dauerhaft löschen?",
       "copy": "Kopieren",
       "cut": "Ausschneiden",
-      "paste": "Einfügen"
+      "paste": "Einfügen",
+      "feedback_saved": "In Archivos Ed gespeichert.",
+      "feedback_opening": "Datei wird geoffnet..."
     },
     "file_opener": {
       "title": "Datei-Explorer",
