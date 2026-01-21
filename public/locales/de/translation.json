@@ -534,6 +534,7 @@
         "h1": "Titel (H1)",
         "h2": "Untertitel (H2)",
         "h3": "Kleiner Untertitel (H3)",
+        "copy": "Text kopieren",
         "upload": "Notiz hochladen (.md)",
         "download": "Notiz herunterladen (.md)"
       },

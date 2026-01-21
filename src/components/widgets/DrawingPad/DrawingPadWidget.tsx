@@ -10,8 +10,10 @@ import { requestOpenFile } from '../../../utils/openDialog';
 // Asumiendo que WidgetConfig existe en tu proyecto. Si no, puedes quitar esta línea o definirla.
 
 // --- El Componente Principal del Widget de Dibujo ---
-export const DrawingPadWidget = () => {
+export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId }) => {
   const { t } = useTranslation();
+  const instanceIdRef = useRef(instanceId ?? `drawing-pad-${Date.now()}-${Math.random().toString(16).slice(2)}`);
+  const resolvedInstanceId = instanceId ?? instanceIdRef.current;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
 
@@ -40,6 +42,7 @@ export const DrawingPadWidget = () => {
   // Estado para el desplazamiento del lienzo (pan)
   const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
   const [isPanning, setIsPanning] = useState(false);
+  const [currentFilename, setCurrentFilename] = useState<string | null>(null);
   
   // Canvas oculto para mantener el contenido completo durante redimensionamientos
   const backupCanvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -653,6 +656,12 @@ export const DrawingPadWidget = () => {
       img.src = e.target?.result as string;
     };
     reader.readAsDataURL(file);
+    window.dispatchEvent(
+      new CustomEvent('widget-title-update', {
+        detail: { instanceId: resolvedInstanceId, title: file.name },
+      })
+    );
+    setCurrentFilename(file.name);
   };
 
   const handleOpenImage = async () => {
@@ -687,8 +696,9 @@ export const DrawingPadWidget = () => {
     if (!canvas) return;
     canvas.toBlob(async (blob) => {
       if (!blob) return;
-      const filename = t('widgets.drawing_pad.default_filename');
+      const filename = currentFilename || t('widgets.drawing_pad.default_filename');
       const destination = await requestSaveDestination(filename);
+      if (!destination) return;
       if (destination?.destination === 'file-manager') {
         await saveToFileManager({
           blob,
@@ -697,11 +707,23 @@ export const DrawingPadWidget = () => {
           sourceWidgetTitleKey: 'widgets.drawing_pad.title',
           parentId: destination.parentId,
         });
+        window.dispatchEvent(
+          new CustomEvent('widget-title-update', {
+            detail: { instanceId: resolvedInstanceId, title: destination.filename },
+          })
+        );
+        setCurrentFilename(destination.filename);
         return;
       }
       if (destination?.destination === 'download') {
         downloadBlob(blob, destination.filename);
       }
+      window.dispatchEvent(
+        new CustomEvent('widget-title-update', {
+          detail: { instanceId: resolvedInstanceId, title: destination.filename },
+        })
+      );
+      setCurrentFilename(destination.filename);
     }, 'image/png');
   };
 

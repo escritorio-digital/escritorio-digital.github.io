@@ -83,6 +83,7 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
     const [lastSavedSnapshot, setLastSavedSnapshot] = useState<string>('');
     const [viewMode, setViewMode] = useState<ViewMode>('split');
     const [zoomLevel, setZoomLevel] = useState(1);
+    const [currentFilename, setCurrentFilename] = useState<string | null>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const previewRef = useRef<HTMLDivElement>(null);
     const printRef = useRef<HTMLDivElement>(null);
@@ -229,7 +230,7 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
 
     const handleSaveToFile = async () => {
         const blob = new Blob([input], { type: 'text/markdown;charset=utf-8' });
-        const filename = t('widgets.markdown_text_editor.default_filename');
+        const filename = currentFilename || t('widgets.markdown_text_editor.default_filename');
         const destination = await requestSaveDestination(filename);
         if (!destination) return;
         if (destination?.destination === 'file-manager') {
@@ -243,6 +244,17 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
         } else if (destination?.destination === 'download') {
             downloadBlob(blob, destination.filename);
         }
+        window.dispatchEvent(
+            new CustomEvent('widget-title-update', {
+                detail: { instanceId: resolvedInstanceId, title: destination.filename },
+            })
+        );
+        setCurrentFilename(destination.filename);
+        window.dispatchEvent(
+            new CustomEvent('widget-dirty-state', {
+                detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor', isDirty: false },
+            })
+        );
         const snapshot = JSON.stringify({ input });
         setLastSavedSnapshot(snapshot);
         window.dispatchEvent(
@@ -256,6 +268,17 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
         const text = await file.text();
         setInput(text);
         setLastSavedSnapshot(JSON.stringify({ input: text }));
+        window.dispatchEvent(
+            new CustomEvent('widget-title-update', {
+                detail: { instanceId: resolvedInstanceId, title: file.name },
+            })
+        );
+        setCurrentFilename(file.name);
+        window.dispatchEvent(
+            new CustomEvent('widget-dirty-state', {
+                detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor', isDirty: false },
+            })
+        );
     };
 
     const handleOpenFile = async () => {
@@ -362,6 +385,17 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
             const content = await entry.blob.text();
             setInput(content);
             setLastSavedSnapshot(JSON.stringify({ input: content }));
+            window.dispatchEvent(
+                new CustomEvent('widget-title-update', {
+                    detail: { instanceId: resolvedInstanceId, title: entry.name },
+                })
+            );
+            setCurrentFilename(entry.name);
+            window.dispatchEvent(
+                new CustomEvent('widget-dirty-state', {
+                    detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor', isDirty: false },
+                })
+            );
         });
         return unsubscribe;
     }, []);

@@ -47,6 +47,7 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
   const [activeTab, setActiveTab] = useState<'attendance' | 'badges' | 'alerts'>('attendance');
   const [newStudentName, setNewStudentName] = useState('');
   const [lastSavedSignature, setLastSavedSignature] = useState<string>('');
+  const [currentFilename, setCurrentFilename] = useState<string | null>(null);
 
   // Constantes traducidas
   const AVAILABLE_BADGES: BadgeInfo[] = [
@@ -130,7 +131,7 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
     updateStudentsForDate(updatedStudents);
   };
   
-  const loadCsvFile = (file: File) => {
+  const loadCsvFile = (file: File, filename?: string) => {
     Papa.parse<any>(file, {
       header: true,
       skipEmptyLines: true,
@@ -144,6 +145,20 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
         }));
         updateStudentsForDate(importedStudents);
         setLastSavedSignature(JSON.stringify({ ...records, [dateKey]: importedStudents }));
+        const title = filename || file.name;
+        if (title) {
+          window.dispatchEvent(
+            new CustomEvent('widget-title-update', {
+              detail: { instanceId: resolvedInstanceId, title },
+            })
+          );
+          setCurrentFilename(title);
+        }
+        window.dispatchEvent(
+          new CustomEvent('widget-dirty-state', {
+            detail: { instanceId: resolvedInstanceId, widgetId: 'attendance', isDirty: false },
+          })
+        );
       }
     });
   };
@@ -161,7 +176,7 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
     const entry = await getEntry(entryId);
     if (!entry?.blob) return;
     const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
-    loadCsvFile(file);
+    loadCsvFile(file, entry.name);
   };
 
   useEffect(() => {
@@ -193,7 +208,7 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
       const entry = await getEntry(entryId);
       if (!entry?.blob) return;
       const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
-      loadCsvFile(file);
+      loadCsvFile(file, entry.name);
     });
     return unsubscribe;
   }, []);
@@ -215,7 +230,7 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
 
     const csv = Papa.unparse(dataToExport);
     const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-    const destination = await requestSaveDestination('asistencia_completa.csv');
+    const destination = await requestSaveDestination(currentFilename || 'asistencia_completa.csv');
     if (!destination) return;
     if (destination?.destination === 'file-manager') {
       await saveToFileManager({
@@ -228,6 +243,17 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
     } else if (destination?.destination === 'download') {
       downloadBlob(blob, destination.filename);
     }
+    window.dispatchEvent(
+      new CustomEvent('widget-title-update', {
+        detail: { instanceId: resolvedInstanceId, title: destination.filename },
+      })
+    );
+    setCurrentFilename(destination.filename);
+    window.dispatchEvent(
+      new CustomEvent('widget-dirty-state', {
+        detail: { instanceId: resolvedInstanceId, widgetId: 'attendance', isDirty: false },
+      })
+    );
     setLastSavedSignature(JSON.stringify(records));
     window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'attendance' } }));
   };

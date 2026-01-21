@@ -24,6 +24,7 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
   const [editingTaskText, setEditingTaskText] = useState('');
   const [lastSavedSignature, setLastSavedSignature] = useState<string>('');
+  const [currentFilename, setCurrentFilename] = useState<string | null>(null);
 
   const addTask = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && newTask.trim() !== '') {
@@ -64,7 +65,7 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
   const downloadAsCSV = async () => {
     const csv = Papa.unparse(tasks.map(t => ({ id: t.id, text: t.text, completed: t.completed })));
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const destination = await requestSaveDestination('lista_de_trabajo.csv');
+    const destination = await requestSaveDestination(currentFilename || 'lista_de_trabajo.csv');
     if (!destination) return;
     if (destination?.destination === 'file-manager') {
       await saveToFileManager({
@@ -77,12 +78,23 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
     } else if (destination?.destination === 'download') {
       downloadBlob(blob, destination.filename);
     }
+    window.dispatchEvent(
+      new CustomEvent('widget-title-update', {
+        detail: { instanceId: resolvedInstanceId, title: destination.filename },
+      })
+    );
+    setCurrentFilename(destination.filename);
+    window.dispatchEvent(
+      new CustomEvent('widget-dirty-state', {
+        detail: { instanceId: resolvedInstanceId, widgetId: 'work-list', isDirty: false },
+      })
+    );
     const signature = JSON.stringify(tasks);
     setLastSavedSignature(signature);
     window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'work-list' } }));
   };
 
-  const loadCsvFile = useCallback((file: File) => {
+  const loadCsvFile = useCallback((file: File, filename?: string) => {
     Papa.parse<Task>(file, {
         header: true,
         skipEmptyLines: true,
@@ -103,13 +115,27 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
               return merged;
             });
           }
+          const title = filename || file.name;
+          if (title) {
+            window.dispatchEvent(
+              new CustomEvent('widget-title-update', {
+                detail: { instanceId: resolvedInstanceId, title },
+              })
+            );
+            setCurrentFilename(title);
+          }
+          window.dispatchEvent(
+            new CustomEvent('widget-dirty-state', {
+              detail: { instanceId: resolvedInstanceId, widgetId: 'work-list', isDirty: false },
+            })
+          );
         },
         error: (error) => {
           console.error("Error al parsear el CSV:", error);
           alert(t('widgets.work_list.csv_error'));
         }
     });
-  }, [setTasks, t]);
+  }, [resolvedInstanceId, setTasks, t]);
 
   const handleOpenFile = async () => {
     const result = await requestOpenFile({ accept: '.csv' });
@@ -124,7 +150,7 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
     const entry = await getEntry(entryId);
     if (!entry?.blob) return;
     const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
-    loadCsvFile(file);
+    loadCsvFile(file, entry.name);
   };
 
 
@@ -133,7 +159,7 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
       const entry = await getEntry(entryId);
       if (!entry?.blob) return;
       const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
-      loadCsvFile(file);
+      loadCsvFile(file, entry.name);
     });
     return unsubscribe;
   }, [loadCsvFile]);

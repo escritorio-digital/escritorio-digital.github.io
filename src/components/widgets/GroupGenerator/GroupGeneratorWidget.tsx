@@ -59,6 +59,7 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
   const [isLargeView, setIsLargeView] = useState(false);
   const [copyFeedback, setCopyFeedback] = useState(false);
   const [lastSavedSnapshot, setLastSavedSnapshot] = useState<string>('');
+  const [currentFilename, setCurrentFilename] = useState<string | null>(null);
   const overlayContentRef = useRef<HTMLDivElement>(null);
   const overlayHeaderRef = useRef<HTMLDivElement>(null);
   const overlayGroupsRef = useRef<HTMLDivElement>(null);
@@ -92,12 +93,28 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
       mode,
       groupValue,
     }));
-  }, [applySnapshot]);
+  }, [applySnapshot, groupValue, mode]);
 
-  const loadFromBlob = useCallback(async (blob: Blob) => {
+  const loadFromBlob = useCallback(async (blob: Blob, filename?: string) => {
     const text = await blob.text();
     loadFromText(text);
-  }, [loadFromText]);
+    const title = filename?.trim();
+    if (title) {
+      window.dispatchEvent(
+        new CustomEvent('widget-title-update', {
+          detail: { instanceId: resolvedInstanceId, title },
+        })
+      );
+    }
+    window.dispatchEvent(
+      new CustomEvent('widget-dirty-state', {
+        detail: { instanceId: resolvedInstanceId, widgetId: 'group-generator', isDirty: false },
+      })
+    );
+    if (title) {
+      setCurrentFilename(title);
+    }
+  }, [loadFromText, resolvedInstanceId]);
 
   useEffect(() => {
     if (!isLargeView) return;
@@ -186,21 +203,21 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
     if (!result) return;
     if (result.source === 'local') {
       const [file] = result.files;
-      if (file) await loadFromBlob(file);
+      if (file) await loadFromBlob(file, file.name);
       return;
     }
     const [entryId] = result.entryIds;
     if (!entryId) return;
     const entry = await getEntry(entryId);
     if (!entry?.blob) return;
-    await loadFromBlob(entry.blob);
+    await loadFromBlob(entry.blob, entry.name);
   };
 
   useEffect(() => {
     const unsubscribe = subscribeFileOpen('group-generator', async ({ entryId }) => {
       const entry = await getEntry(entryId);
       if (!entry?.blob) return;
-      await loadFromBlob(entry.blob);
+      await loadFromBlob(entry.blob, entry.name);
     });
     return unsubscribe;
   }, [loadFromBlob]);
@@ -268,7 +285,7 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
 
   const downloadGroups = async () => {
     if (generatedGroups.length === 0) return;
-    const destination = await requestSaveDestination('grupos.txt');
+    const destination = await requestSaveDestination(currentFilename || 'grupos.txt');
     if (!destination) return;
     if (destination?.destination === 'file-manager') {
       const snapshot: GroupGeneratorSnapshot = {
@@ -287,6 +304,17 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
         parentId: destination.parentId,
       });
       setLastSavedSnapshot(JSON.stringify(snapshot));
+      window.dispatchEvent(
+        new CustomEvent('widget-title-update', {
+          detail: { instanceId: resolvedInstanceId, title: destination.filename },
+        })
+      );
+      setCurrentFilename(destination.filename);
+      window.dispatchEvent(
+        new CustomEvent('widget-dirty-state', {
+          detail: { instanceId: resolvedInstanceId, widgetId: 'group-generator', isDirty: false },
+        })
+      );
       window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'group-generator' } }));
       return;
     }
@@ -302,6 +330,17 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
         groupValue,
       };
       setLastSavedSnapshot(JSON.stringify(snapshot));
+      window.dispatchEvent(
+        new CustomEvent('widget-title-update', {
+          detail: { instanceId: resolvedInstanceId, title: destination.filename },
+        })
+      );
+      setCurrentFilename(destination.filename);
+      window.dispatchEvent(
+        new CustomEvent('widget-dirty-state', {
+          detail: { instanceId: resolvedInstanceId, widgetId: 'group-generator', isDirty: false },
+        })
+      );
       window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'group-generator' } }));
     }
   };

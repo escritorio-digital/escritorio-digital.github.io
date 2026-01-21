@@ -1,5 +1,10 @@
 # Cambios realizados
 
+## 2.3.2
+- Guardado: reutiliza el ultimo nombre de archivo al volver a guardar.
+- Titulo de ventana: muestra el nombre del archivo abierto/guardado.
+- Cierre: solo pide guardar si hay cambios reales.
+
 ## 2.3.1
 - Fix: cerrar todas las ventanas desde el menu contextual cierra todas.
 - Editor Markdown: icono actualizado.

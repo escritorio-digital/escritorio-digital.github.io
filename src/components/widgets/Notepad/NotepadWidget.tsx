@@ -25,6 +25,7 @@ import {
   Heading1,
   Heading2,
   Heading3,
+  Clipboard,
 } from 'lucide-react';
 
 const MenuBar: FC<{ editor: Editor | null; onUpload: () => void; onDownload: () => void; }> = ({ editor, onUpload, onDownload }) => {
@@ -32,6 +33,18 @@ const MenuBar: FC<{ editor: Editor | null; onUpload: () => void; onDownload: () 
   if (!editor) {
     return null;
   }
+
+  const handleCopy = async () => {
+    const { from, to } = editor.state.selection;
+    const selection = editor.state.doc.textBetween(from, to, '\n', '\n').trim();
+    const text = selection || editor.state.doc.textBetween(0, editor.state.doc.content.size, '\n', '\n').trim();
+    if (!text) return;
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      // silent fail: clipboard might be blocked
+    }
+  };
 
   const menuButtons = [
     { Icon: Bold, action: () => editor.chain().focus().toggleBold().run(), name: 'bold', title: t('widgets.notepad.menubar.bold') },
@@ -43,6 +56,7 @@ const MenuBar: FC<{ editor: Editor | null; onUpload: () => void; onDownload: () 
     { Icon: Heading1, action: () => editor.chain().focus().toggleHeading({ level: 1 }).run(), name: 'heading', level: 1, title: t('widgets.notepad.menubar.h1') },
     { Icon: Heading2, action: () => editor.chain().focus().toggleHeading({ level: 2 }).run(), name: 'heading', level: 2, title: t('widgets.notepad.menubar.h2') },
     { Icon: Heading3, action: () => editor.chain().focus().toggleHeading({ level: 3 }).run(), name: 'heading', level: 3, title: t('widgets.notepad.menubar.h3') },
+    { Icon: Clipboard, action: handleCopy, name: 'copy', title: t('widgets.notepad.menubar.copy') },
   ];
 
   return (
@@ -77,6 +91,7 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
   const [content, setContent] = useLocalStorage(storageKey, t('widgets.notepad.initial_content'));
   const [lastSavedContent, setLastSavedContent] = useState(content);
   const [isDirty, setIsDirty] = useState(false);
+  const [currentFilename, setCurrentFilename] = useState<string | null>(null);
   const turndownService = new TurndownService();
 
   const editor = useEditor({
@@ -104,7 +119,7 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
     const markdownContent = turndownService.turndown(htmlContent);
 
     const blob = new Blob([markdownContent], { type: 'text/markdown;charset=utf-8;' });
-    const filename = t('widgets.notepad.default_filename');
+    const filename = currentFilename || t('widgets.notepad.default_filename');
     const destination = await requestSaveDestination(filename);
     if (!destination) return;
     if (destination?.destination === 'file-manager') {
@@ -118,6 +133,17 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
     } else if (destination?.destination === 'download') {
       downloadBlob(blob, destination.filename);
     }
+    window.dispatchEvent(
+      new CustomEvent('widget-title-update', {
+        detail: { instanceId: resolvedInstanceId, title: destination.filename },
+      })
+    );
+    setCurrentFilename(destination.filename);
+    window.dispatchEvent(
+      new CustomEvent('widget-dirty-state', {
+        detail: { instanceId: resolvedInstanceId, widgetId: 'notepad', isDirty: false },
+      })
+    );
     setLastSavedContent(htmlContent);
     setIsDirty(false);
     window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'notepad' } }));
@@ -130,6 +156,17 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
     editor.commands.setContent(htmlContent);
     setLastSavedContent(htmlContent);
     setIsDirty(false);
+    window.dispatchEvent(
+      new CustomEvent('widget-title-update', {
+        detail: { instanceId: resolvedInstanceId, title: file.name },
+      })
+    );
+    setCurrentFilename(file.name);
+    window.dispatchEvent(
+      new CustomEvent('widget-dirty-state', {
+        detail: { instanceId: resolvedInstanceId, widgetId: 'notepad', isDirty: false },
+      })
+    );
   };
 
   const handleOpenFile = async () => {
@@ -158,6 +195,17 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
       editor.commands.setContent(htmlContent);
       setLastSavedContent(htmlContent);
       setIsDirty(false);
+      window.dispatchEvent(
+        new CustomEvent('widget-title-update', {
+          detail: { instanceId: resolvedInstanceId, title: entry.name },
+        })
+      );
+      setCurrentFilename(entry.name);
+      window.dispatchEvent(
+        new CustomEvent('widget-dirty-state', {
+          detail: { instanceId: resolvedInstanceId, widgetId: 'notepad', isDirty: false },
+        })
+      );
     });
     return unsubscribe;
   }, [editor]);

@@ -537,6 +537,22 @@ const DesktopUI: React.FC<{
         window.addEventListener('widget-dirty-state', handler as EventListener);
         return () => window.removeEventListener('widget-dirty-state', handler as EventListener);
     }, []);
+    useEffect(() => {
+        const handler = (event: Event) => {
+            const custom = event as CustomEvent<{ instanceId?: string; title?: string }>;
+            if (!custom.detail?.instanceId) return;
+            const nextTitle = custom.detail.title?.trim() ?? '';
+            setActiveWidgets((prev) =>
+                prev.map((widget) =>
+                    widget.instanceId === custom.detail.instanceId
+                        ? { ...widget, titleOverride: nextTitle || undefined }
+                        : widget
+                )
+            );
+        };
+        window.addEventListener('widget-title-update', handler as EventListener);
+        return () => window.removeEventListener('widget-title-update', handler as EventListener);
+    }, [setActiveWidgets]);
     const closeWidgetsWithPrompt = useCallback((instanceIds: string[]) => {
         for (let index = 0; index < instanceIds.length; index += 1) {
             const instanceId = instanceIds[index];
@@ -992,11 +1008,14 @@ const DesktopUI: React.FC<{
                 const isPinned = activeProfile.pinnedWidgets.includes(widget.widgetId);
                 const isActiveWindow = widget.instanceId === activeWindowId;
                 const helpText = getWidgetHelpText(widget.widgetId);
+                const windowTitle = widget.titleOverride
+                    ? `${t(config.title)} — ${widget.titleOverride}`
+                    : t(config.title);
                 return (
                     <WidgetWindow
                         key={widget.instanceId}
                         id={widget.instanceId}
-                        title={t(config.title)}
+                        title={windowTitle}
                         icon={config.icon}
                         helpText={helpText}
                         position={widget.position}
