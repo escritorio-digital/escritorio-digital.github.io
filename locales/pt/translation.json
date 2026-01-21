@@ -181,7 +181,7 @@
     "app_name_label": "Nome da aplicação",
     "app_name_value": "Ambiente de trabalho digital para a aula",
     "version_label": "Versão",
-    "version_value": "v1.5.1 — abril de 2025",
+    "version_value": "v{{version}} — {{date}}",
     "history_title": "Histórico do projeto",
     "initial_title": "Projeto inicial",
     "initial_text": "Ideia e primeira versão: María Teresa González. Versão básica do ambiente de trabalho interativo para a aula.",

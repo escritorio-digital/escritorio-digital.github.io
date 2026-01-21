@@ -178,7 +178,7 @@
     "app_name_label": "Aplikazioaren izena",
     "app_name_value": "Ikasgelarako mahaigain digitala",
     "version_label": "Bertsioa",
-    "version_value": "v1.5.1 — 2025ko apirila",
+    "version_value": "v{{version}} — {{date}}",
     "history_title": "Proiektuaren historia",
     "initial_title": "Hasierako proiektua",
     "initial_text": "Ideia eta lehen bertsioa: María Teresa González. Ikasgelarako mahaigain interaktiboaren oinarrizko bertsioa.",
