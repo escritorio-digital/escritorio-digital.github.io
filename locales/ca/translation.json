@@ -474,27 +474,6 @@
       "show_code": "Mostrar Codi",
       "preview_title": "Vista prèvia HTML"
     },
-    "latex_markdown": {
-      "title": "Intèrpret (Markdown/LaTeX)",
-      "copy_source": "Copiar codi font",
-      "copy_image": "Copiar com a imatge",
-      "save_file": "Desar fitxer (.md/.tex)",
-      "open_file": "Obrir fitxer (.md/.tex)",
-      "export_pdf": "Exportar com a PDF (text)",
-      "source_copied": "Codi font copiat",
-      "copy_failed": "No s'ha pogut copiar",
-      "image_copied": "Imatge copiada",
-      "copy_image_failed": "Error en copiar la imatge",
-      "sample_content": "# Teorema de Pitàgores\n\nEn un triangle rectangle, el quadrat de la hipotenusa és igual a la suma dels quadrats dels catets.\n\n$$c = \\\\sqrt{a^2 + b^2}$$",
-      "latex_mode_title": "Mode exclusiu de LaTeX",
-      "latex_mode_description": "Aquest mode mostra una única fórmula. El contingut actual sembla ser text o Markdown.",
-      "how_to_proceed": "Com procedir",
-      "isolated_formula": "Per a una fórmula aïllada, deixa només LaTeX. Exemple:",
-      "text_with_formulas": "Per a text amb fórmules, fes servir el mode",
-      "markdown": "Markdown",
-      "latex_syntax_error": "Error de sintaxi a LaTeX:",
-      "generic_error": "Ha ocorregut un error."
-    },
     "work_list": {
       "title": "Llista de Treball",
       "add_task_placeholder": "Afegir nova tasca i prémer Enter...",
@@ -563,6 +542,54 @@
       "unsaved_cancel": "Cancel·lar",
       "unsaved_discard": "No guardar",
       "unsaved_save": "Guardar"
+    },
+    "markdown_text_editor": {
+      "title": "Editor de textos Markdown",
+      "icon_alt": "Editor de textos Markdown",
+      "sample_content": "# Editor de textos Markdown\n\nEscriu el teu document aquí. Usa **negreta**, *cursiva*, llistes i fórmules:\n\n- Àrea del cercle: $A = \\pi r^2$\n- Equació quadràtica: $$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$\n\n> Obre EdiCuaTeX per inserir fórmules visualment.",
+      "default_filename": "document-markdown.md",
+      "editor_title": "Editor",
+      "preview_title": "Vista prèvia",
+      "edicuatex_title": "EdiCuaTeX",
+      "edicuatex_subtitle": "Prem \"Enviar\" per inserir la fórmula al text.",
+      "popup_blocked": "El navegador ha bloquejat la finestra d'EdiCuaTeX.",
+      "toolbar": {
+        "bold": "Negreta",
+        "italic": "Cursiva",
+        "strike": "Ratllat",
+        "h1": "Títol (H1)",
+        "h2": "Subtítol (H2)",
+        "h3": "Subtítol menor (H3)",
+        "bullet_list": "Llista de vinyetes",
+        "ordered_list": "Llista numerada",
+        "quote": "Cita",
+        "inline_code": "Codi en línia",
+        "code_block": "Bloc de codi",
+        "link": "Enllaç",
+        "view_split": "Vista dividida",
+        "view_editor": "Només editor",
+        "view_preview": "Només vista prèvia",
+        "zoom_in": "Augmentar el zoom",
+        "zoom_out": "Reduir el zoom",
+        "zoom_reset": "Restablir el zoom",
+        "formula": "Inserir fórmula",
+        "copy_source": "Copiar Markdown",
+        "open_file": "Obrir fitxer",
+        "save_file": "Desar fitxer",
+        "export_pdf": "Imprimir PDF"
+      },
+      "placeholders": {
+        "text": "text",
+        "code": "codi",
+        "link_text": "text de l'enllaç"
+      },
+      "search_keywords": "markdown, latex, fórmula, fórmules, equació, equacions, matemàtiques",
+      "prompts": {
+        "link_url": "Introdueix l'URL de l'enllaç"
+      },
+      "source_copied": "Markdown copiat.",
+      "copy_failed": "No s'ha pogut copiar el text.",
+      "preview_error": "Error en renderitzar la vista prèvia."
     },
     "sliding_puzzle": {
       "title": "Puzzle Lliscant",

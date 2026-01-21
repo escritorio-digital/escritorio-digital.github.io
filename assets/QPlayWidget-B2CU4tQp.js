@@ -1,1 +1,0 @@
-import{j as t}from"./index-KG3SMhAr.js";import{ae as g}from"./index-KG3SMhAr.js";import{ExternalAppWidget as e}from"./ExternalAppWidget-BMm2asn-.js";const i=()=>t.jsx(e,{url:"https://jjdeharo.github.io/qplay/",titleKey:"widgets.qplay.title",appendLanguageParam:!0});export{i as QPlayWidget,g as widgetConfig};

@@ -474,27 +474,6 @@
       "show_code": "Show Code",
       "preview_title": "HTML Preview"
     },
-    "latex_markdown": {
-      "title": "Interpreter (Markdown/LaTeX)",
-      "copy_source": "Copy source code",
-      "copy_image": "Copy as image",
-      "save_file": "Save file (.md/.tex)",
-      "open_file": "Open file (.md/.tex)",
-      "export_pdf": "Export as PDF (text)",
-      "source_copied": "Source code copied",
-      "copy_failed": "Could not copy",
-      "image_copied": "Image copied",
-      "copy_image_failed": "Error copying image",
-      "sample_content": "# Pythagorean Theorem\n\nIn a right triangle, the square of the hypotenuse is equal to the sum of the squares of the legs.\n\n$$c = \\sqrt{a^2 + b^2}$$",
-      "latex_mode_title": "LaTeX Exclusive Mode",
-      "latex_mode_description": "This mode displays a single formula. The current content appears to be text or Markdown.",
-      "how_to_proceed": "How to proceed",
-      "isolated_formula": "For an isolated formula, leave only LaTeX. Example:",
-      "text_with_formulas": "For text with formulas, use",
-      "markdown": "Markdown",
-      "latex_syntax_error": "LaTeX syntax error:",
-      "generic_error": "An error occurred."
-    },
     "work_list": {
       "title": "Work List",
       "add_task_placeholder": "Add new task and press Enter...",
@@ -563,6 +542,54 @@
       "unsaved_cancel": "Cancel",
       "unsaved_discard": "Don't save",
       "unsaved_save": "Save"
+    },
+    "markdown_text_editor": {
+      "title": "Markdown Text Editor",
+      "icon_alt": "Markdown Text Editor",
+      "sample_content": "# Markdown Text Editor\n\nWrite your document here. Use **bold**, *italic*, lists and formulas:\n\n- Circle area: $A = \\pi r^2$\n- Quadratic equation: $$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$\n\n> Open EdiCuaTeX to insert formulas visually.",
+      "default_filename": "markdown-document.md",
+      "editor_title": "Editor",
+      "preview_title": "Preview",
+      "edicuatex_title": "EdiCuaTeX",
+      "edicuatex_subtitle": "Press \"Send\" to insert the formula into the text.",
+      "popup_blocked": "The browser blocked the EdiCuaTeX window.",
+      "toolbar": {
+        "bold": "Bold",
+        "italic": "Italic",
+        "strike": "Strikethrough",
+        "h1": "Heading (H1)",
+        "h2": "Subheading (H2)",
+        "h3": "Smaller heading (H3)",
+        "bullet_list": "Bullet list",
+        "ordered_list": "Numbered list",
+        "quote": "Quote",
+        "inline_code": "Inline code",
+        "code_block": "Code block",
+        "link": "Link",
+        "view_split": "Split view",
+        "view_editor": "Editor only",
+        "view_preview": "Preview only",
+        "zoom_in": "Zoom in",
+        "zoom_out": "Zoom out",
+        "zoom_reset": "Reset zoom",
+        "formula": "Insert formula",
+        "copy_source": "Copy Markdown",
+        "open_file": "Open file",
+        "save_file": "Save file",
+        "export_pdf": "Print PDF"
+      },
+      "placeholders": {
+        "text": "text",
+        "code": "code",
+        "link_text": "link text"
+      },
+      "search_keywords": "markdown, latex, formula, formulas, equation, equations, math",
+      "prompts": {
+        "link_url": "Enter the link URL"
+      },
+      "source_copied": "Markdown copied.",
+      "copy_failed": "Could not copy the text.",
+      "preview_error": "Error rendering preview."
     },
     "sliding_puzzle": {
       "title": "Sliding Puzzle",
