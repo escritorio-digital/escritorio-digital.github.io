@@ -11,7 +11,10 @@
     "root_folder": "Arquivos Ed",
     "filename_label": "Nome do ficheiro",
     "default_filename": "ficheiro",
-    "message": "Gardar en Arquivos Ed? Aceptar = Arquivos Ed, Cancelar = Disco local."
+    "message": "Gardar en Arquivos Ed? Aceptar = Arquivos Ed, Cancelar = Disco local.",
+    "existing_files": "Ficheiros neste cartafol",
+    "replace_hint": "Preme nun cartafol para abrilo ou nun ficheiro para usar o seu nome e substituílo.",
+    "no_files": "Non hai ficheiros neste cartafol."
   },
   "settings": {
     "title": "Configuración",
@@ -291,7 +294,11 @@
       "cut": "Cortar",
       "paste": "Pegar",
       "feedback_saved": "Gardado en Archivos Ed.",
-      "feedback_opening": "Abrindo arquivo..."
+      "feedback_opening": "Abrindo arquivo...",
+      "rename": "Renomear",
+      "rename_prompt": "Novo nome",
+      "rename_invalid": "O nome non é válido.",
+      "rename_duplicate": "Xa existe un ficheiro ou cartafol con ese nome."
     },
     "file_opener": {
       "title": "Explorador de ficheiros",
@@ -468,11 +475,11 @@
       "preview_title": "Vista previa HTML"
     },
     "latex_markdown": {
-      "title": "Intérprete (MD/LaTeX)",
+      "title": "Intérprete (Markdown/LaTeX)",
       "copy_source": "Copiar código fonte",
       "copy_image": "Copiar como imaxe",
       "save_file": "Gardar ficheiro (.md/.tex)",
-      "open_file": "Abrir ficheiro (.md)",
+      "open_file": "Abrir ficheiro (.md/.tex)",
       "export_pdf": "Exportar como PDF (texto)",
       "source_copied": "Código fonte copiado",
       "copy_failed": "Non se puido copiar",

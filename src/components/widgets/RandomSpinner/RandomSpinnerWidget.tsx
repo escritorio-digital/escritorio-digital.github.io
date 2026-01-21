@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import type { FC } from 'react';
-import { Trash2, Plus, Play, Expand, Minimize, Upload } from 'lucide-react';
+import { Trash2, Plus, Play, Expand, Minimize, FolderOpen } from 'lucide-react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { useTranslation } from 'react-i18next';
 import { getEntry } from '../../../utils/fileManagerDb';
@@ -260,7 +260,7 @@ export const RandomSpinnerWidget: FC = () => {
           <button onClick={addOption}><Plus size={18} /></button>
         </div>
         <button onClick={handleOpenFile} className="upload-options-button">
-          <Upload size={16} /> {t('widgets.random_spinner.load_from_file')}
+          <FolderOpen size={16} /> {t('widgets.random_spinner.load_from_file')}
         </button>
         <ul className="options-list">
           {options.map((option, index) => (

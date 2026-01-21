@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { marked } from 'marked';
 import katex from 'katex';
 import { toPng } from 'html-to-image'; // para "Copiar como imagen"
-import { Clipboard, Image as ImageIcon, FileDown, FileText } from 'lucide-react';
+import { Clipboard, Image as ImageIcon, FileText, FolderOpen, Save } from 'lucide-react';
 
 import 'katex/dist/katex.min.css';
 import './LatexMarkdownWidget.css';
@@ -14,6 +14,7 @@ import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
 import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
 import { requestSaveDestination } from '../../../utils/saveDialog';
+import { requestOpenFile } from '../../../utils/openDialog';
 
 type Mode = 'markdown' | 'latex';
 
@@ -139,6 +140,29 @@ export const LatexMarkdownWidget: FC = () => {
     }
   };
 
+  const loadFromFile = async (file: File) => {
+    const text = await file.text();
+    const lower = file.name.toLowerCase();
+    setMode(lower.endsWith('.tex') ? 'latex' : 'markdown');
+    setInput(text);
+  };
+
+  const handleOpenFile = async () => {
+    const result = await requestOpenFile({ accept: '.md,.tex,.txt' });
+    if (!result) return;
+    if (result.source === 'local') {
+      const [file] = result.files;
+      if (file) await loadFromFile(file);
+      return;
+    }
+    const [entryId] = result.entryIds;
+    if (!entryId) return;
+    const entry = await getEntry(entryId);
+    if (!entry?.blob) return;
+    const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
+    await loadFromFile(file);
+  };
+
   const handleExportAsPdfText = async () => {
     const dst = printRef.current;
     if (!dst) return;
@@ -240,8 +264,11 @@ export const LatexMarkdownWidget: FC = () => {
             <button title={t('widgets.latex_markdown.copy_image')} onClick={handleCopyAsImage}>
               <ImageIcon size={18} />
             </button>
+            <button title={t('widgets.latex_markdown.open_file')} onClick={handleOpenFile}>
+              <FolderOpen size={18} />
+            </button>
             <button title={t('widgets.latex_markdown.save_file')} onClick={handleSaveToFile}>
-              <FileDown size={18} />
+              <Save size={18} />
             </button>
             <button title={t('widgets.latex_markdown.export_pdf')} onClick={handleExportAsPdfText}>
               <FileText size={18} />

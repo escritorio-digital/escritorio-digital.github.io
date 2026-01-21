@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 // CORRECCIÓN: Se eliminaron 'Users' y 'ListCollapse' de esta línea
-import { Upload, Expand, Minimize } from 'lucide-react';
+import { FolderOpen, Expand, Minimize } from 'lucide-react';
 import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
 import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
@@ -293,7 +293,7 @@ export const GroupGeneratorWidget: FC = () => {
           placeholder={t('widgets.group_generator.placeholder')}
         />
         <button onClick={handleOpenFile} className="upload-button">
-          <Upload size={16} /> {t('widgets.group_generator.load_from_file')}
+          <FolderOpen size={16} /> {t('widgets.group_generator.load_from_file')}
         </button>
       </div>
       <div className="controls-panel">

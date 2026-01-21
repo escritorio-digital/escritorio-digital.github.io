@@ -1,4 +1,4 @@
-import { FILE_MANAGER_ROOT_ID, saveFileEntry } from './fileManagerDb';
+import { FILE_MANAGER_ROOT_ID, listEntriesByParent, moveEntryToTrash, saveFileEntry } from './fileManagerDb';
 
 export const downloadBlob = (blob: Blob, filename: string) => {
     const url = URL.createObjectURL(blob);
@@ -18,9 +18,15 @@ export const saveToFileManager = async (params: {
     sourceWidgetTitleKey: string;
     parentId?: string;
 }) => {
+    const parentId = params.parentId ?? FILE_MANAGER_ROOT_ID;
+    const existing = await listEntriesByParent(parentId);
+    const matches = existing.filter((entry) => entry.type === 'file' && entry.name === params.filename);
+    if (matches.length > 0) {
+        await Promise.all(matches.map((entry) => moveEntryToTrash(entry.id)));
+    }
     await saveFileEntry({
         name: params.filename,
-        parentId: params.parentId ?? FILE_MANAGER_ROOT_ID,
+        parentId,
         blob: params.blob,
         mime: params.blob.type,
         sourceWidgetId: params.sourceWidgetId,

@@ -19,8 +19,8 @@ import {
   Strikethrough,
   List,
   ListOrdered,
-  Upload,
-  Download,
+  FolderOpen,
+  Save,
   Text,
   Heading1,
   Heading2,
@@ -46,7 +46,7 @@ const MenuBar: FC<{ editor: Editor | null; onUpload: () => void; onDownload: () 
   ];
 
   return (
-    <div className="menubar flex items-center gap-1 p-2 bg-gray-100 border-b border-accent">
+    <div className="menubar flex flex-wrap items-center gap-1 p-2 bg-gray-100 border-b border-accent">
       {menuButtons.map(({ Icon, action, name, title, level }) => (
         <button
           key={name + (level || '')}
@@ -57,13 +57,14 @@ const MenuBar: FC<{ editor: Editor | null; onUpload: () => void; onDownload: () 
           <Icon size={16} />
         </button>
       ))}
-      <div className="flex-grow"></div>
-      <button onClick={onUpload} className="p-2 rounded hover:bg-gray-200" title={t('widgets.notepad.menubar.upload')}>
-          <Upload size={16} />
-      </button>
-      <button onClick={onDownload} className="p-2 rounded hover:bg-gray-200" title={t('widgets.notepad.menubar.download')}>
-          <Download size={16} />
-      </button>
+      <div className="menubar-actions">
+        <button onClick={onUpload} className="p-2 rounded hover:bg-gray-200" title={t('widgets.notepad.menubar.upload')}>
+            <FolderOpen size={16} />
+        </button>
+        <button onClick={onDownload} className="p-2 rounded hover:bg-gray-200" title={t('widgets.notepad.menubar.download')}>
+            <Save size={16} />
+        </button>
+      </div>
     </div>
   );
 };

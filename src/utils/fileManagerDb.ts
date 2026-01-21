@@ -166,6 +166,18 @@ export const saveFileEntry = async (params: {
     return entry;
 };
 
+export const renameEntry = async (entryId: string, name: string): Promise<void> => {
+    await ensureRoot();
+    const entry = await withStore<FileManagerEntry | undefined>('readonly', (store) => store.get(entryId));
+    if (!entry) return;
+    const updated: FileManagerEntry = {
+        ...entry,
+        name,
+        updatedAt: Date.now(),
+    };
+    await withStore('readwrite', (store) => store.put(updated));
+};
+
 const collectDescendantIds = (entries: FileManagerEntry[], rootId: string): string[] => {
     const ids: string[] = [];
     const queue = [rootId];

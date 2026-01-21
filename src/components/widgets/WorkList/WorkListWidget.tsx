@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { X, Edit, Download, Upload } from 'lucide-react';
+import { X, Edit, Download, FolderOpen } from 'lucide-react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import Papa from 'papaparse';
 import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
@@ -156,7 +156,7 @@ export const WorkListWidget = () => {
           className="work-list-icon-button"
           title={t('widgets.work_list.load_csv')}
         >
-          <Upload size={20} />
+          <FolderOpen size={20} />
         </button>
         <button 
           onClick={downloadAsCSV}

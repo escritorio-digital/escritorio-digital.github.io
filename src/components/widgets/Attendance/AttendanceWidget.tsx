@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import Papa from 'papaparse';
-import { Users, Badge, UserPlus, Upload, Download, RotateCcw, AlertTriangle } from 'lucide-react';
+import { Users, Badge, UserPlus, FolderOpen, Download, RotateCcw, AlertTriangle } from 'lucide-react';
 import './Attendance.css';
 import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
 import { getEntry } from '../../../utils/fileManagerDb';
@@ -299,7 +299,7 @@ export const AttendanceWidget: FC = () => {
           <button onClick={addStudent}><UserPlus size={16}/></button>
         </div>
         <div className="actions-group">
-            <button onClick={handleOpenFile} className="action-btn" title={t('widgets.attendance.import_csv_tooltip')}><Upload size={16}/></button>
+            <button onClick={handleOpenFile} className="action-btn" title={t('widgets.attendance.import_csv_tooltip')}><FolderOpen size={16}/></button>
             <button onClick={handleExport} className="action-btn" title={t('widgets.attendance.export_records_tooltip')}><Download size={16}/></button>
             <button onClick={resetAll} className="action-btn danger" title={t('widgets.attendance.delete_all_tooltip')}><RotateCcw size={16}/></button>
         </div>

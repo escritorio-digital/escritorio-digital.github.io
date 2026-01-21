@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Folder, File, Trash2, UploadCloud, FolderPlus, ArrowUp, Download, Copy, Scissors, ClipboardPaste, XCircle } from 'lucide-react';
+import { Folder, File, Trash2, UploadCloud, FolderPlus, ArrowUp, Download, Copy, Scissors, ClipboardPaste, XCircle, Pencil } from 'lucide-react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { withBaseUrl } from '../../../utils/assetPaths';
 import {
@@ -17,6 +17,7 @@ import {
     moveEntryToTrash,
     moveEntries,
     purgeExpiredTrash,
+    renameEntry,
     restoreEntryFromTrash,
     saveFileEntry,
     type FileManagerEntry,
@@ -412,6 +413,40 @@ export const FileManagerWidget: FC = () => {
         });
     };
 
+    const normalizeEntryName = (name: string) => {
+        const trimmed = name.trim();
+        if (!trimmed) return '';
+        let normalized = trimmed.replace(/[\\/:*?"<>|]/g, '-');
+        normalized = normalized.replace(/[\u0000-\u001f]/g, '');
+        normalized = normalized.replace(/\s+/g, ' ');
+        normalized = normalized.replace(/^\.+/, '').replace(/\.+$/, '');
+        return normalized.trim();
+    };
+
+    const handleRenameEntry = useCallback(async () => {
+        if (isTrashView) return;
+        if (selectedEntryIds.length !== 1) return;
+        const targetId = selectedEntryIds[0];
+        const entry = entries.find((item) => item.id === targetId);
+        if (!entry) return;
+        const nextNameRaw = window.prompt(t('widgets.file_manager.rename_prompt'), entry.name);
+        if (nextNameRaw === null) return;
+        const nextName = normalizeEntryName(nextNameRaw);
+        if (!nextName) {
+            window.alert(t('widgets.file_manager.rename_invalid'));
+            return;
+        }
+        if (nextName === entry.name) return;
+        const conflict = entries.some((item) => item.id !== entry.id && item.name === nextName);
+        if (conflict) {
+            window.alert(t('widgets.file_manager.rename_duplicate'));
+            return;
+        }
+        await renameEntry(entry.id, nextName);
+        refreshEntries();
+        setSelectedEntryIds([entry.id]);
+    }, [entries, isTrashView, refreshEntries, selectedEntryIds, t]);
+
     const handlePaste = async (targetFolderId: string) => {
         if (!clipboard) return;
         if (clipboard.mode === 'copy') {
@@ -439,6 +474,19 @@ export const FileManagerWidget: FC = () => {
         setSelectedEntryIds([]);
         setLastSelectedIndex(null);
     };
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key !== 'F2') return;
+            const target = event.target as HTMLElement | null;
+            if (target?.closest('input, textarea, select, [contenteditable=\"true\"]')) return;
+            if (selectedEntryIds.length !== 1 || isTrashView) return;
+            event.preventDefault();
+            handleRenameEntry();
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [handleRenameEntry, isTrashView, selectedEntryIds.length]);
 
     return (
         <div
@@ -677,6 +725,17 @@ export const FileManagerWidget: FC = () => {
                     >
                         <ClipboardPaste size={14} />
                         {t('widgets.file_manager.paste')}
+                    </button>
+                    <button
+                        className="file-manager-context-item"
+                        onClick={() => {
+                            handleRenameEntry();
+                            setContextMenu((prev) => ({ ...prev, isOpen: false }));
+                        }}
+                        disabled={selectedEntryIds.length !== 1 || isTrashView}
+                    >
+                        <Pencil size={14} />
+                        {t('widgets.file_manager.rename')}
                     </button>
                     <div className="file-manager-context-separator" />
                     <button

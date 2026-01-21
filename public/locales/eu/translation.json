@@ -11,7 +11,10 @@
     "root_folder": "Ed fitxategiak",
     "filename_label": "Fitxategiaren izena",
     "default_filename": "fitxategia",
-    "message": "Ed fitxategiak-en gorde? Ados = Ed fitxategiak, Utzi = Disko lokala."
+    "message": "Ed fitxategiak-en gorde? Ados = Ed fitxategiak, Utzi = Disko lokala.",
+    "existing_files": "Karpeta honetako fitxategiak",
+    "replace_hint": "Egin klik karpeta batean hura irekitzeko edo fitxategi batean haren izena erabiltzeko eta ordezkatzeko.",
+    "no_files": "Ez dago fitxategirik karpeta honetan."
   },
   "settings": {
     "title": "Ezarpenak",
@@ -290,7 +293,11 @@
       "cut": "Ebaki",
       "paste": "Itsatsi",
       "feedback_saved": "Archivos Ed-en gorde da.",
-      "feedback_opening": "Fitxategia irekitzen..."
+      "feedback_opening": "Fitxategia irekitzen...",
+      "rename": "Berrizendatu",
+      "rename_prompt": "Izen berria",
+      "rename_invalid": "Izena ez da baliozkoa.",
+      "rename_duplicate": "Izen hori duen fitxategi edo karpeta bat dago jadanik."
     },
     "file_opener": {
       "title": "Fitxategi arakatzailea",
@@ -467,11 +474,11 @@
       "preview_title": "HTML aurrebista"
     },
     "latex_markdown": {
-      "title": "Interpretatzailea (MD/LaTeX)",
+      "title": "Interpretea (Markdown/LaTeX)",
       "copy_source": "Kopiatu iturburu-kodea",
       "copy_image": "Kopiatu irudi gisa",
       "save_file": "Gorde fitxategia (.md/.tex)",
-      "open_file": "Ireki fitxategia (.md)",
+      "open_file": "Ireki fitxategia (.md/.tex)",
       "export_pdf": "Esportatu PDF gisa (testua)",
       "source_copied": "Iturburu-kodea kopiatuta",
       "copy_failed": "Ezin izan da kopiatu",
