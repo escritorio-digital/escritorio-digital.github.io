@@ -474,27 +474,6 @@
       "show_code": "Mostrar Código",
       "preview_title": "Vista previa HTML"
     },
-    "latex_markdown": {
-      "title": "Intérprete (Markdown/LaTeX)",
-      "copy_source": "Copiar código fonte",
-      "copy_image": "Copiar como imaxe",
-      "save_file": "Gardar ficheiro (.md/.tex)",
-      "open_file": "Abrir ficheiro (.md/.tex)",
-      "export_pdf": "Exportar como PDF (texto)",
-      "source_copied": "Código fonte copiado",
-      "copy_failed": "Non se puido copiar",
-      "image_copied": "Imaxe copiada",
-      "copy_image_failed": "Erro ao copiar imaxe",
-      "sample_content": "# Teorema de Pitágoras\n\nNun triángulo rectángulo, o cadrado da hipotenusa é igual á suma dos cadrados dos catetos.\n\n$$c = \\sqrt{a^2 + b^2}$$",
-      "latex_mode_title": "Modo exclusivo de LaTeX",
-      "latex_mode_description": "Este modo amosa unha única fórmula. O contido actual parece ser texto ou Markdown.",
-      "how_to_proceed": "Como proceder",
-      "isolated_formula": "Para unha fórmula illada, deixa só LaTeX. Exemplo:",
-      "text_with_formulas": "Para texto con fórmulas, usa o modo",
-      "markdown": "Markdown",
-      "latex_syntax_error": "Erro de sintaxe en LaTeX:",
-      "generic_error": "Ocorreu un erro."
-    },
     "work_list": {
       "title": "Lista de Traballo",
       "add_task_placeholder": "Engadir nova tarefa e premer Enter...",
@@ -563,6 +542,54 @@
       "unsaved_cancel": "Cancelar",
       "unsaved_discard": "Non gardar",
       "unsaved_save": "Gardar"
+    },
+    "markdown_text_editor": {
+      "title": "Editor de textos Markdown",
+      "icon_alt": "Editor de textos Markdown",
+      "sample_content": "# Editor de textos Markdown\n\nEscribe o teu documento aquí. Usa **negrita**, *cursiva*, listas e fórmulas:\n\n- Área do círculo: $A = \\pi r^2$\n- Ecuación cadrática: $$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$\n\n> Abre EdiCuaTeX para inserir fórmulas visualmente.",
+      "default_filename": "documento-markdown.md",
+      "editor_title": "Editor",
+      "preview_title": "Vista previa",
+      "edicuatex_title": "EdiCuaTeX",
+      "edicuatex_subtitle": "Preme \"Enviar\" para inserir a fórmula no texto.",
+      "popup_blocked": "O navegador bloqueou a xanela de EdiCuaTeX.",
+      "toolbar": {
+        "bold": "Negriña",
+        "italic": "Cursiva",
+        "strike": "Riscado",
+        "h1": "Título (H1)",
+        "h2": "Subtítulo (H2)",
+        "h3": "Subtítulo menor (H3)",
+        "bullet_list": "Lista de viñetas",
+        "ordered_list": "Lista numerada",
+        "quote": "Cita",
+        "inline_code": "Código en liña",
+        "code_block": "Bloque de código",
+        "link": "Ligazón",
+        "view_split": "Vista dividida",
+        "view_editor": "Só editor",
+        "view_preview": "Só vista previa",
+        "zoom_in": "Aumentar o zoom",
+        "zoom_out": "Diminuír o zoom",
+        "zoom_reset": "Restablecer o zoom",
+        "formula": "Inserir fórmula",
+        "copy_source": "Copiar Markdown",
+        "open_file": "Abrir ficheiro",
+        "save_file": "Gardar ficheiro",
+        "export_pdf": "Imprimir PDF"
+      },
+      "placeholders": {
+        "text": "texto",
+        "code": "código",
+        "link_text": "texto da ligazón"
+      },
+      "search_keywords": "markdown, latex, fórmula, fórmulas, ecuación, ecuacións, matemáticas",
+      "prompts": {
+        "link_url": "Introduce o URL da ligazón"
+      },
+      "source_copied": "Markdown copiado.",
+      "copy_failed": "Non se puido copiar o texto.",
+      "preview_error": "Erro ao renderizar a vista previa."
     },
     "sliding_puzzle": {
       "title": "Puzzle Deslizante",

@@ -473,27 +473,6 @@
       "show_code": "Erakutsi Kodea",
       "preview_title": "HTML aurrebista"
     },
-    "latex_markdown": {
-      "title": "Interpretea (Markdown/LaTeX)",
-      "copy_source": "Kopiatu iturburu-kodea",
-      "copy_image": "Kopiatu irudi gisa",
-      "save_file": "Gorde fitxategia (.md/.tex)",
-      "open_file": "Ireki fitxategia (.md/.tex)",
-      "export_pdf": "Esportatu PDF gisa (testua)",
-      "source_copied": "Iturburu-kodea kopiatuta",
-      "copy_failed": "Ezin izan da kopiatu",
-      "image_copied": "Irudia kopiatuta",
-      "copy_image_failed": "Errorea irudia kopiatzean",
-      "sample_content": "# Pitagorasen Teorema\n\nTriangelu zuzen batean, hipotenusaren karratua katetoen karratuen baturaren berdina da.\n\n$$c = \\sqrt{a^2 + b^2}$$",
-      "latex_mode_title": "LaTeX modu esklusiboa",
-      "latex_mode_description": "Modu honek formula bakarra erakusten du. Uneko edukiak testua edo Markdown dirudi.",
-      "how_to_proceed": "Nola jarraitu",
-      "isolated_formula": "Formula isolatu baterako, utzi LaTeX bakarrik. Adibidez:",
-      "text_with_formulas": "Formulak dituen testurako, erabili modua",
-      "markdown": "Markdown",
-      "latex_syntax_error": "Sintaxi-errorea LaTeX-en:",
-      "generic_error": "Errore bat gertatu da."
-    },
     "work_list": {
       "title": "Lan Zerrenda",
       "add_task_placeholder": "Gehitu zeregin berria eta sakatu Sartu...",
@@ -562,6 +541,54 @@
       "unsaved_cancel": "Utzi",
       "unsaved_discard": "Ez gorde",
       "unsaved_save": "Gorde"
+    },
+    "markdown_text_editor": {
+      "title": "Markdown testu editorea",
+      "icon_alt": "Markdown testu editorea",
+      "sample_content": "# Markdown testu editorea\n\nIdatzi dokumentua hemen. Erabili **lodiz**, *etzanez*, zerrendak eta formulak:\n\n- Zirkuluaren azalera: $A = \\pi r^2$\n- Bigarren mailako ekuazioa: $$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$\n\n> Ireki EdiCuaTeX formulak txertatzeko.",
+      "default_filename": "markdown-dokumentua.md",
+      "editor_title": "Editorea",
+      "preview_title": "Aurrebista",
+      "edicuatex_title": "EdiCuaTeX",
+      "edicuatex_subtitle": "Sakatu \"Bidali\" formula testuan txertatzeko.",
+      "popup_blocked": "Nabigatzaileak EdiCuaTeX leihoa blokeatu du.",
+      "toolbar": {
+        "bold": "Lodia",
+        "italic": "Etzana",
+        "strike": "Marratua",
+        "h1": "Izenburua (H1)",
+        "h2": "Azpiizenburua (H2)",
+        "h3": "Azpiizenburu txikiagoa (H3)",
+        "bullet_list": "Bulet zerrenda",
+        "ordered_list": "Zenbakitutako zerrenda",
+        "quote": "Aipua",
+        "inline_code": "Lerroko kodea",
+        "code_block": "Kode blokea",
+        "link": "Esteka",
+        "view_split": "Ikuspegi zatitua",
+        "view_editor": "Editorea bakarrik",
+        "view_preview": "Aurrebista bakarrik",
+        "zoom_in": "Handitu zooma",
+        "zoom_out": "Txikitu zooma",
+        "zoom_reset": "Leheneratu zooma",
+        "formula": "Formula txertatu",
+        "copy_source": "Markdown kopiatu",
+        "open_file": "Ireki fitxategia",
+        "save_file": "Gorde fitxategia",
+        "export_pdf": "PDF inprimatu"
+      },
+      "placeholders": {
+        "text": "testua",
+        "code": "kodea",
+        "link_text": "estekaren testua"
+      },
+      "search_keywords": "markdown, latex, formula, formulak, ekuazio, ekuazioak, matematika",
+      "prompts": {
+        "link_url": "Sartu estekaren URLa"
+      },
+      "source_copied": "Markdown kopiatua.",
+      "copy_failed": "Ezin izan da testua kopiatu.",
+      "preview_error": "Errorea aurrebista errendatzean."
     },
     "sliding_puzzle": {
       "title": "Puzzle Lerragarria",

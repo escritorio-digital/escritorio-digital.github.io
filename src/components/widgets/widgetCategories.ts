@@ -20,7 +20,7 @@ export const WIDGET_CATEGORIES: WidgetCategory[] = [
     {
         id: 'math_science',
         titleKey: 'settings.widgets.categories.math_science',
-        widgetIds: ['scientific-calculator', 'unit-converter', 'latex-markdown'],
+        widgetIds: ['scientific-calculator', 'unit-converter', 'markdown-text-editor'],
     },
     {
         id: 'community',
@@ -37,6 +37,7 @@ export const WIDGET_CATEGORIES: WidgetCategory[] = [
         titleKey: 'settings.widgets.categories.board_writing',
         widgetIds: [
             'notepad',
+            'markdown-text-editor',
             'drawing-pad',
             'image-carousel',
             'edimarkweb',

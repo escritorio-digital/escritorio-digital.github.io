@@ -474,27 +474,6 @@
       "show_code": "Code anzeigen",
       "preview_title": "HTML-Vorschau"
     },
-    "latex_markdown": {
-      "title": "Interpreter (Markdown/LaTeX)",
-      "copy_source": "Quellcode kopieren",
-      "copy_image": "Als Bild kopieren",
-      "save_file": "Datei speichern (.md/.tex)",
-      "open_file": "Datei öffnen (.md/.tex)",
-      "export_pdf": "Als PDF exportieren (Text)",
-      "source_copied": "Quellcode kopiert",
-      "copy_failed": "Kopieren fehlgeschlagen",
-      "image_copied": "Bild kopiert",
-      "copy_image_failed": "Fehler beim Kopieren des Bildes",
-      "sample_content": "# Satz des Pythagoras\n\nIn einem rechtwinkligen Dreieck ist das Quadrat der Hypotenuse gleich der Summe der Quadrate der Katheten.\n\n$$c = \\sqrt{a^2 + b^2}$$",
-      "latex_mode_title": "Exklusiver LaTeX-Modus",
-      "latex_mode_description": "Dieser Modus zeigt eine einzelne Formel an. Der aktuelle Inhalt scheint Text oder Markdown zu sein.",
-      "how_to_proceed": "Wie fortfahren",
-      "isolated_formula": "Für eine einzelne Formel lass nur LaTeX stehen. Beispiel:",
-      "text_with_formulas": "Für Text mit Formeln verwende den Modus",
-      "markdown": "Markdown",
-      "latex_syntax_error": "LaTeX-Syntaxfehler:",
-      "generic_error": "Ein Fehler ist aufgetreten."
-    },
     "work_list": {
       "title": "Arbeitsliste",
       "add_task_placeholder": "Neue Aufgabe hinzufügen und Enter drücken...",
@@ -563,6 +542,54 @@
       "unsaved_cancel": "Abbrechen",
       "unsaved_discard": "Nicht speichern",
       "unsaved_save": "Speichern"
+    },
+    "markdown_text_editor": {
+      "title": "Markdown-Texteditor",
+      "icon_alt": "Markdown-Texteditor",
+      "sample_content": "# Markdown-Texteditor\n\nSchreibe dein Dokument hier. Nutze **fett**, *kursiv*, Listen und Formeln:\n\n- Kreisflaeche: $A = \\pi r^2$\n- Quadratische Gleichung: $$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$\n\n> Oeffne EdiCuaTeX, um Formeln visuell einzufuegen.",
+      "default_filename": "markdown-dokument.md",
+      "editor_title": "Editor",
+      "preview_title": "Vorschau",
+      "edicuatex_title": "EdiCuaTeX",
+      "edicuatex_subtitle": "Klicke auf \"Senden\", um die Formel in den Text einzufuegen.",
+      "popup_blocked": "Der Browser hat das EdiCuaTeX-Fenster blockiert.",
+      "toolbar": {
+        "bold": "Fett",
+        "italic": "Kursiv",
+        "strike": "Durchgestrichen",
+        "h1": "Ueberschrift (H1)",
+        "h2": "Zwischenueberschrift (H2)",
+        "h3": "Kleinere Ueberschrift (H3)",
+        "bullet_list": "Aufzaehlung",
+        "ordered_list": "Nummerierte Liste",
+        "quote": "Zitat",
+        "inline_code": "Inline-Code",
+        "code_block": "Codeblock",
+        "link": "Link",
+        "view_split": "Geteilte Ansicht",
+        "view_editor": "Nur Editor",
+        "view_preview": "Nur Vorschau",
+        "zoom_in": "Zoom vergroessern",
+        "zoom_out": "Zoom verkleinern",
+        "zoom_reset": "Zoom zuruecksetzen",
+        "formula": "Formel einfuegen",
+        "copy_source": "Markdown kopieren",
+        "open_file": "Datei oeffnen",
+        "save_file": "Datei speichern",
+        "export_pdf": "PDF drucken"
+      },
+      "placeholders": {
+        "text": "Text",
+        "code": "Code",
+        "link_text": "Linktext"
+      },
+      "search_keywords": "markdown, latex, formel, formeln, gleichung, gleichungen, mathe",
+      "prompts": {
+        "link_url": "Link-URL eingeben"
+      },
+      "source_copied": "Markdown kopiert.",
+      "copy_failed": "Text konnte nicht kopiert werden.",
+      "preview_error": "Fehler beim Rendern der Vorschau."
     },
     "sliding_puzzle": {
       "title": "Schiebepuzzle",

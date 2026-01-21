@@ -475,27 +475,6 @@
       "show_code": "Afficher le code",
       "preview_title": "Aperçu HTML"
     },
-    "latex_markdown": {
-      "title": "Interpréteur (Markdown/LaTeX)",
-      "copy_source": "Copier le code source",
-      "copy_image": "Copier comme image",
-      "save_file": "Enregistrer le fichier (.md/.tex)",
-      "open_file": "Ouvrir un fichier (.md/.tex)",
-      "export_pdf": "Exporter en PDF (texte)",
-      "source_copied": "Code source copié",
-      "copy_failed": "La copie a échoué",
-      "image_copied": "Image copiée",
-      "copy_image_failed": "Erreur lors de la copie de l'image",
-      "sample_content": "# Théorème de Pythagore\n\nDans un triangle rectangle, le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés.\n\n$$c = \\sqrt{a^2 + b^2}$$",
-      "latex_mode_title": "Mode LaTeX exclusif",
-      "latex_mode_description": "Ce mode affiche une seule formule. Le contenu actuel semble être du texte ou du Markdown.",
-      "how_to_proceed": "Comment procéder",
-      "isolated_formula": "Pour une formule isolée, ne laissez que du LaTeX. Exemple :",
-      "text_with_formulas": "Pour du texte avec des formules, utilisez le mode",
-      "markdown": "Markdown",
-      "latex_syntax_error": "Erreur de syntaxe LaTeX :",
-      "generic_error": "Une erreur est survenue."
-    },
     "work_list": {
       "title": "Liste de tâches",
       "add_task_placeholder": "Ajouter une nouvelle tâche et appuyer sur Entrée...",
@@ -564,6 +543,54 @@
       "unsaved_cancel": "Annuler",
       "unsaved_discard": "Ne pas enregistrer",
       "unsaved_save": "Enregistrer"
+    },
+    "markdown_text_editor": {
+      "title": "Éditeur de textes Markdown",
+      "icon_alt": "Éditeur de textes Markdown",
+      "sample_content": "# Éditeur de textes Markdown\n\nÉcrivez votre document ici. Utilisez **gras**, *italique*, des listes et des formules :\n\n- Aire du cercle : $A = \\pi r^2$\n- Équation quadratique : $$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$\n\n> Ouvrez EdiCuaTeX pour insérer des formules visuellement.",
+      "default_filename": "document-markdown.md",
+      "editor_title": "Éditeur",
+      "preview_title": "Aperçu",
+      "edicuatex_title": "EdiCuaTeX",
+      "edicuatex_subtitle": "Cliquez sur \"Envoyer\" pour insérer la formule dans le texte.",
+      "popup_blocked": "Le navigateur a bloqué la fenêtre EdiCuaTeX.",
+      "toolbar": {
+        "bold": "Gras",
+        "italic": "Italique",
+        "strike": "Barré",
+        "h1": "Titre (H1)",
+        "h2": "Sous-titre (H2)",
+        "h3": "Sous-titre mineur (H3)",
+        "bullet_list": "Liste à puces",
+        "ordered_list": "Liste numérotée",
+        "quote": "Citation",
+        "inline_code": "Code en ligne",
+        "code_block": "Bloc de code",
+        "link": "Lien",
+        "view_split": "Vue divisée",
+        "view_editor": "Éditeur seul",
+        "view_preview": "Aperçu seul",
+        "zoom_in": "Agrandir le zoom",
+        "zoom_out": "Réduire le zoom",
+        "zoom_reset": "Réinitialiser le zoom",
+        "formula": "Insérer une formule",
+        "copy_source": "Copier le Markdown",
+        "open_file": "Ouvrir un fichier",
+        "save_file": "Enregistrer le fichier",
+        "export_pdf": "Imprimer en PDF"
+      },
+      "placeholders": {
+        "text": "texte",
+        "code": "code",
+        "link_text": "texte du lien"
+      },
+      "search_keywords": "markdown, latex, formule, formules, equation, equations, maths",
+      "prompts": {
+        "link_url": "Entrez l'URL du lien"
+      },
+      "source_copied": "Markdown copié.",
+      "copy_failed": "Impossible de copier le texte.",
+      "preview_error": "Erreur lors du rendu de l'aperçu."
     },
     "sliding_puzzle": {
       "title": "Puzzle coulissant",

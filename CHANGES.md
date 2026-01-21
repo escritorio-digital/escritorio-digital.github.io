@@ -1,5 +1,12 @@
 # Cambios realizados
 
+## 2.3.0
+- Nuevo editor de textos Markdown con barra de formato, vista previa y exportación PDF.
+- Integración con EdiCuaTeX para insertar fórmulas desde ventana emergente.
+- Zoom de contenido y modos de vista (editor, vista previa, dividido).
+- Nuevo icono del editor y búsqueda por "latex" y "fórmula".
+- Eliminado el Intérprete (Markdown/LaTeX) anterior.
+
 ## 2.2.0
 - Widgets con archivos: aviso al cerrar si hay cambios sin guardar (modal propio).
 - Bloc de notas: contenido independiente por ventana.

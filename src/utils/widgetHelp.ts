@@ -10,7 +10,7 @@ const widgetHelpText: Record<string, string> = {
     'global-clocks': 'Horarios de varias ciudades para comparar.',
     'scientific-calculator': 'Calculadora científica para cálculos avanzados.',
     'unit-converter': 'Conversor de unidades para problemas y prácticas.',
-    'latex-markdown': 'Editor de Markdown y LaTeX con fórmulas.',
+    'markdown-text-editor': 'Editor de Markdown con fórmulas y exportación.',
     'vce-community': 'Catálogo de apps educativas de la comunidad.',
     'comunidad-chatgpt-ia-edu': 'Recursos del proyecto ChatGPT-IA-edu.',
     'edumedia-iag': 'Recursos multimedia educativos con IA generativa.',
