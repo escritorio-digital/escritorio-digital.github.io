@@ -1,5 +1,12 @@
 # Cambios realizados
 
+## 2.1.0
+- Archivos Ed: renombrar con menu contextual y tecla F2.
+- Guardar archivo: lista navegable de carpetas y archivos con reemplazo rapido.
+- Iconos de abrir/guardar normalizados en widgets.
+- Bloc de notas: barra responsiva.
+- Intérprete (Markdown/LaTeX): renombre y boton de abrir archivos.
+
 ## 2.0.1
 - Archivos Ed: aviso al guardar y al abrir archivos grandes.
 - Reloj del escritorio: parpadeo de los dos puntos cada segundo.
