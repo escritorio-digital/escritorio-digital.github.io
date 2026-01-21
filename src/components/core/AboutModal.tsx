@@ -3,8 +3,15 @@ import { ExternalLink, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export const AboutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   if (!isOpen) return null;
+
+  const appVersion = import.meta.env.VITE_APP_VERSION ?? 'dev';
+  const formattedDate = new Intl.DateTimeFormat(i18n.language, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(new Date());
 
   return (
     <div className="fixed inset-0 bg-black/50 z-[10001] flex items-center justify-center" onClick={onClose}>
@@ -27,7 +34,7 @@ export const AboutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
             </div>
             <div>
               <p className="text-xs uppercase tracking-wide text-gray-500">{t('about.version_label')}</p>
-              <p className="font-semibold">{t('about.version_value')}</p>
+              <p className="font-semibold">{t('about.version_value', { version: appVersion, date: formattedDate })}</p>
             </div>
           </div>
 
