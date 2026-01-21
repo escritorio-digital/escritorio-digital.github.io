@@ -1,5 +1,10 @@
 # Cambios realizados
 
+## 2.0.1
+- Archivos Ed: aviso al guardar y al abrir archivos grandes.
+- Reloj del escritorio: parpadeo de los dos puntos cada segundo.
+- Reloj mundial: parpadeo de los dos puntos.
+
 ## 2.0.0
 - Nuevo: gestion de archivos internos con Archivos Ed.
 
