@@ -1,5 +1,8 @@
 # Cambios realizados
 
+## 2.1.1
+- Acerca del proyecto: muestra la version real y la fecha actual.
+
 ## 2.1.0
 - Archivos Ed: renombrar con menu contextual y tecla F2.
 - Guardar archivo: lista navegable de carpetas y archivos con reemplazo rapido.
