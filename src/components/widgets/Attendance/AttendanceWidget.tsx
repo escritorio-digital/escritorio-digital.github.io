@@ -179,17 +179,6 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
   }, [lastSavedSignature, records, resolvedInstanceId]);
 
   useEffect(() => {
-    const handler = (event: Event) => {
-      const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
-      if (custom.detail?.instanceId !== resolvedInstanceId) return;
-      if (custom.detail?.widgetId && custom.detail.widgetId !== 'attendance') return;
-      handleExport();
-    };
-    window.addEventListener('widget-save-request', handler as EventListener);
-    return () => window.removeEventListener('widget-save-request', handler as EventListener);
-  }, [handleExport, resolvedInstanceId]);
-
-  useEffect(() => {
     return () => {
       window.dispatchEvent(
         new CustomEvent('widget-dirty-state', {
@@ -242,6 +231,17 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
     setLastSavedSignature(JSON.stringify(records));
     window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'attendance' } }));
   };
+
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
+      if (custom.detail?.instanceId !== resolvedInstanceId) return;
+      if (custom.detail?.widgetId && custom.detail.widgetId !== 'attendance') return;
+      handleExport();
+    };
+    window.addEventListener('widget-save-request', handler as EventListener);
+    return () => window.removeEventListener('widget-save-request', handler as EventListener);
+  }, [handleExport, resolvedInstanceId]);
 
   const resetAll = () => {
     if (window.confirm(t('widgets.attendance.reset_confirm'))) {

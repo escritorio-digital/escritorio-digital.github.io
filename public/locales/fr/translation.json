@@ -915,6 +915,7 @@
     "message": "Vous avez des modifications non enregistrées dans {{widget}}. Enregistrer avant de fermer ?",
     "cancel": "Annuler",
     "discard": "Ne pas enregistrer",
-    "save": "Enregistrer"
+    "save": "Enregistrer",
+    "unknown_widget": "ce programme"
   }
 }

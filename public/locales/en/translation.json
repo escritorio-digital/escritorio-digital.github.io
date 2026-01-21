@@ -914,6 +914,7 @@
     "message": "You have unsaved changes in {{widget}}. Save before closing?",
     "cancel": "Cancel",
     "discard": "Don't save",
-    "save": "Save"
+    "save": "Save",
+    "unknown_widget": "this widget"
   }
 }

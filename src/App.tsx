@@ -523,12 +523,13 @@ const DesktopUI: React.FC<{
         const handler = (event: Event) => {
             const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string; isDirty?: boolean }>;
             if (!custom.detail?.instanceId) return;
+            const instanceId = custom.detail.instanceId;
             setDirtyWidgets((prev) => {
                 const next = { ...prev };
                 if (custom.detail.isDirty) {
-                    next[custom.detail.instanceId] = true;
+                    next[instanceId] = true;
                 } else {
-                    delete next[custom.detail.instanceId];
+                    delete next[instanceId];
                 }
                 return next;
             });
@@ -1472,7 +1473,7 @@ const DesktopUI: React.FC<{
                             {t('unsaved_modal.message', {
                                 widget: pendingCloseWidgetId && WIDGET_REGISTRY[pendingCloseWidgetId]
                                     ? t(WIDGET_REGISTRY[pendingCloseWidgetId].title)
-                                    : '',
+                                    : t('unsaved_modal.unknown_widget'),
                             })}
                         </p>
                         <div className="mt-6 flex flex-wrap justify-end gap-2">

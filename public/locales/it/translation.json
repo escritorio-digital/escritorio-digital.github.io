@@ -914,6 +914,7 @@
     "message": "Hai modifiche non salvate in {{widget}}. Salvare prima di chiudere?",
     "cancel": "Annulla",
     "discard": "Non salvare",
-    "save": "Salva"
+    "save": "Salva",
+    "unknown_widget": "questo programma"
   }
 }

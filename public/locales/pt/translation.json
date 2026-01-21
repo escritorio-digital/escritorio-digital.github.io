@@ -916,6 +916,7 @@
     "message": "Tem alterações não guardadas em {{widget}}. Guardar antes de fechar?",
     "cancel": "Cancelar",
     "discard": "Não guardar",
-    "save": "Guardar"
+    "save": "Guardar",
+    "unknown_widget": "este programa"
   }
 }

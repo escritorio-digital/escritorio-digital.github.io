@@ -914,6 +914,7 @@
     "message": "Tes cambios sen gardar en {{widget}}. Queres gardalos antes de pechar?",
     "cancel": "Cancelar",
     "discard": "Non gardar",
-    "save": "Gardar"
+    "save": "Gardar",
+    "unknown_widget": "este programa"
   }
 }

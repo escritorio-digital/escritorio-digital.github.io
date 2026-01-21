@@ -914,6 +914,7 @@
     "message": "Tienes cambios sin guardar en {{widget}}. ¿Quieres guardarlos antes de cerrar?",
     "cancel": "Cancelar",
     "discard": "No guardar",
-    "save": "Guardar"
+    "save": "Guardar",
+    "unknown_widget": "este programa"
   }
 }

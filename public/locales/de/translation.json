@@ -914,6 +914,7 @@
     "message": "Du hast nicht gespeicherte Änderungen in {{widget}}. Vor dem Schließen speichern?",
     "cancel": "Abbrechen",
     "discard": "Nicht speichern",
-    "save": "Speichern"
+    "save": "Speichern",
+    "unknown_widget": "dieses Programm"
   }
 }

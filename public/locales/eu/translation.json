@@ -913,6 +913,7 @@
     "message": "{{widget}}-en gorde gabeko aldaketak dituzu. Itxi aurretik gorde?",
     "cancel": "Utzi",
     "discard": "Ez gorde",
-    "save": "Gorde"
+    "save": "Gorde",
+    "unknown_widget": "programa hau"
   }
 }
