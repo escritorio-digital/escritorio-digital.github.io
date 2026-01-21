@@ -138,6 +138,10 @@ const DesktopUI: React.FC<{
     const [saveDialogFolderId, setSaveDialogFolderId] = useState(FILE_MANAGER_ROOT_ID);
     const [saveDialogFilename, setSaveDialogFilename] = useState('');
     const [saveDialogSuggestedFilename, setSaveDialogSuggestedFilename] = useState('');
+    const [saveDialogEntries, setSaveDialogEntries] = useState<FileManagerEntry[]>([]);
+    const [saveDialogFolderLabel, setSaveDialogFolderLabel] = useState('');
+    const [saveDialogParentId, setSaveDialogParentId] = useState(FILE_MANAGER_ROOT_ID);
+    const [saveDialogSelectedEntryId, setSaveDialogSelectedEntryId] = useState<string | null>(null);
     const [openDialogState, setOpenDialogState] = useState<{
         isOpen: boolean;
         options: OpenDialogOptions;
@@ -213,6 +217,43 @@ const DesktopUI: React.FC<{
     }, [saveDialogFolderId, saveDialogState.isOpen, t]);
 
     useEffect(() => {
+        if (!saveDialogState.isOpen) return;
+        let isMounted = true;
+        const loadEntries = async () => {
+            const entries = await listEntriesByParent(saveDialogFolderId);
+            const allEntries = await getAllEntries();
+            const folders = allEntries.filter((entry) => entry.type === 'folder');
+            const byId = new Map(folders.map((entry) => [entry.id, entry]));
+            const current = byId.get(saveDialogFolderId);
+            const labelFor = (entry: FileManagerEntry) => {
+                const parts: string[] = [];
+                let cursor: FileManagerEntry | undefined = entry;
+                while (cursor && cursor.id !== FILE_MANAGER_ROOT_ID) {
+                    parts.unshift(cursor.name);
+                    cursor = byId.get(cursor.parentId);
+                }
+                return parts.join(' / ') || t('save_dialog.root_folder');
+            };
+            const folderLabel = current ? labelFor(current) : t('save_dialog.root_folder');
+            const parentId = current?.parentId || FILE_MANAGER_ROOT_ID;
+            const sorted = [...entries].sort((a, b) => {
+                if (a.type !== b.type) return a.type === 'folder' ? -1 : 1;
+                return a.name.localeCompare(b.name);
+            });
+            if (isMounted) {
+                setSaveDialogEntries(sorted);
+                setSaveDialogFolderLabel(folderLabel);
+                setSaveDialogParentId(parentId);
+                setSaveDialogSelectedEntryId(null);
+            }
+        };
+        loadEntries();
+        return () => {
+            isMounted = false;
+        };
+    }, [saveDialogFolderId, saveDialogState.isOpen, t]);
+
+    useEffect(() => {
         if (!openDialogState.isOpen) return;
         let isMounted = true;
         const loadEntries = async () => {
@@ -245,12 +286,24 @@ const DesktopUI: React.FC<{
         };
     }, [openDialogFolderId, openDialogState.isOpen, t]);
 
+    const normalizeFilename = useCallback((name: string) => {
+        const trimmed = name.trim();
+        if (!trimmed) return '';
+        let normalized = trimmed.replace(/[\\/:*?"<>|]/g, '-');
+        normalized = normalized.replace(/[\u0000-\u001f]/g, '');
+        normalized = normalized.replace(/\s+/g, ' ');
+        normalized = normalized.replace(/^\.+/, '').replace(/\.+$/, '');
+        return normalized.trim();
+    }, []);
+
     const getSaveDialogFilename = useCallback(() => {
-        const trimmed = saveDialogFilename.trim();
-        if (trimmed) return trimmed;
-        const fallback = saveDialogSuggestedFilename.trim() || t('save_dialog.default_filename');
-        return fallback.trim() || 'archivo';
-    }, [saveDialogFilename, saveDialogSuggestedFilename, t]);
+        const normalized = normalizeFilename(saveDialogFilename);
+        if (normalized) return normalized;
+        const fallback = normalizeFilename(saveDialogSuggestedFilename)
+            || normalizeFilename(t('save_dialog.default_filename'))
+            || 'archivo';
+        return fallback;
+    }, [normalizeFilename, saveDialogFilename, saveDialogSuggestedFilename, t]);
 
     const closeOpenDialog = useCallback((result: OpenDialogResult | null) => {
         const resolver = openDialogResolverRef.current;
@@ -956,8 +1009,15 @@ const DesktopUI: React.FC<{
                 position={fileManagerIconPosition}
                 size={fileManagerIconSize}
                 enableResizing={false}
-                onDrag={(_, data) => setFileManagerIconPosition({ x: data.x, y: data.y })}
-                onDragStop={(_, data) => setFileManagerIconPosition({ x: data.x, y: data.y })}
+                onDragStart={() => {
+                    clearFileManagerPressTimer();
+                    fileManagerLongPressTriggeredRef.current = false;
+                    fileManagerPressStartRef.current = null;
+                }}
+                onDragStop={(_, data) => {
+                    clearFileManagerPressTimer();
+                    setFileManagerIconPosition({ x: data.x, y: data.y });
+                }}
                 dragHandleClassName="file-manager-desktop-icon"
                 className="z-[1]"
             >
@@ -1069,11 +1129,11 @@ const DesktopUI: React.FC<{
             />
             {saveDialogState.isOpen && (
                 <div
-                    className="fixed inset-0 z-[10002] flex items-center justify-center bg-black/50"
+                    className="fixed inset-0 z-[10002] flex items-center justify-center bg-black/60"
                     onClick={() => closeSaveDialog(null)}
                 >
                     <div
-                        className="w-full max-w-md rounded-2xl bg-white/95 px-6 py-5 text-text-dark shadow-2xl backdrop-blur-xl"
+                        className="w-full max-w-md rounded-2xl border border-gray-200 bg-white px-6 py-5 text-text-dark shadow-2xl"
                         onClick={(event) => event.stopPropagation()}
                         role="dialog"
                         aria-modal="true"
@@ -1087,9 +1147,15 @@ const DesktopUI: React.FC<{
                             <input
                                 id="save-filename-input"
                                 type="text"
-                                className="mt-2 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm"
+                                className="mt-2 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-gray-400 focus:outline-none"
                                 value={saveDialogFilename}
                                 onChange={(event) => setSaveDialogFilename(event.target.value)}
+                                onBlur={() => {
+                                    const normalized = normalizeFilename(saveDialogFilename);
+                                    if (normalized && normalized !== saveDialogFilename) {
+                                        setSaveDialogFilename(normalized);
+                                    }
+                                }}
                             />
                         </div>
                         <div className="mt-4">
@@ -1097,21 +1163,18 @@ const DesktopUI: React.FC<{
                                 {t('save_dialog.folder_label')}
                             </label>
                             <div className="mt-2 flex items-center gap-2">
-                                <select
-                                    id="save-folder-select"
-                                    className="flex-1 rounded-lg border border-gray-200 px-3 py-2 text-sm"
-                                    value={saveDialogFolderId}
-                                    onChange={(event) => setSaveDialogFolderId(event.target.value)}
-                                >
-                                    {saveDialogFolders.map((option) => (
-                                        <option key={option.id} value={option.id}>
-                                            {option.label}
-                                        </option>
-                                    ))}
-                                </select>
+                                <div className="flex-1 text-sm text-gray-600">{saveDialogFolderLabel}</div>
                                 <button
                                     type="button"
-                                    className="rounded-full border border-gray-200 px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+                                    className="rounded-full border border-gray-300 bg-white px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed"
+                                    onClick={() => setSaveDialogFolderId(saveDialogParentId)}
+                                    disabled={saveDialogFolderId === FILE_MANAGER_ROOT_ID}
+                                >
+                                    {t('open_dialog.up')}
+                                </button>
+                                <button
+                                    type="button"
+                                    className="rounded-full border border-gray-300 bg-white px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
                                     onClick={async () => {
                                         const name = window.prompt(t('widgets.file_manager.new_folder_prompt'));
                                         if (!name) return;
@@ -1148,17 +1211,61 @@ const DesktopUI: React.FC<{
                                 </button>
                             </div>
                         </div>
+                        <div className="mt-4">
+                            <div className="text-sm font-semibold text-gray-700">{t('save_dialog.existing_files')}</div>
+                            <p className="mt-1 text-xs text-gray-500">{t('save_dialog.replace_hint')}</p>
+                            <div className="mt-2 max-h-40 overflow-y-auto rounded-lg border border-gray-200 bg-gray-50 p-2">
+                                {saveDialogEntries.length === 0 ? (
+                                    <div className="text-xs text-gray-500">{t('save_dialog.no_files')}</div>
+                                ) : (
+                                    <ul className="space-y-1">
+                                        {saveDialogEntries.map((entry) => {
+                                            const isSelected = saveDialogSelectedEntryId === entry.id;
+                                            return (
+                                                <li key={entry.id}>
+                                                    <button
+                                                        type="button"
+                                                        className={`flex w-full items-center justify-between rounded-md px-2 py-1 text-left text-sm transition ${
+                                                            isSelected ? 'bg-accent/25 ring-1 ring-accent/40' : 'hover:bg-gray-100'
+                                                        }`}
+                                                        onClick={() => {
+                                                            setSaveDialogSelectedEntryId(entry.id);
+                                                            if (entry.type === 'folder') {
+                                                                setSaveDialogFolderId(entry.id);
+                                                                return;
+                                                            }
+                                                            setSaveDialogFilename(entry.name);
+                                                        }}
+                                                        title={entry.name}
+                                                    >
+                                                        <span className="truncate">
+                                                            {entry.type === 'folder' ? '📁 ' : '📄 '}
+                                                            {entry.name}
+                                                        </span>
+                                                        {entry.type === 'file' && entry.size ? (
+                                                            <span className="text-xs text-gray-400">
+                                                                {Math.round(entry.size / 1024)} KB
+                                                            </span>
+                                                        ) : null}
+                                                    </button>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                )}
+                            </div>
+                        </div>
                         <div className="mt-6 flex flex-wrap justify-end gap-2">
                             <button
                                 type="button"
-                                className="rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+                                className="rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
                                 onClick={() => closeSaveDialog(null)}
                             >
                                 {t('save_dialog.cancel')}
                             </button>
                             <button
                                 type="button"
-                                className="rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+                                className="rounded-full border border-gray-300 bg-gray-100 px-4 py-2 text-sm font-semibold text-gray-800 hover:bg-gray-200"
                                 onClick={() => closeSaveDialog({ destination: 'download', filename: getSaveDialogFilename() })}
                             >
                                 {t('save_dialog.save_in_device')}
@@ -1180,11 +1287,11 @@ const DesktopUI: React.FC<{
             )}
             {openDialogState.isOpen && (
                 <div
-                    className="fixed inset-0 z-[10002] flex items-center justify-center bg-black/50"
+                    className="fixed inset-0 z-[10002] flex items-center justify-center bg-black/60"
                     onClick={() => closeOpenDialog(null)}
                 >
                     <div
-                        className="w-full max-w-3xl rounded-2xl bg-white/95 px-6 py-5 text-text-dark shadow-2xl backdrop-blur-xl"
+                        className="w-full max-w-3xl rounded-2xl border border-gray-200 bg-white px-6 py-5 text-text-dark shadow-2xl"
                         onClick={(event) => event.stopPropagation()}
                         role="dialog"
                         aria-modal="true"
@@ -1192,7 +1299,7 @@ const DesktopUI: React.FC<{
                         <h3 className="text-lg font-semibold">{t('open_dialog.title')}</h3>
                         <p className="mt-2 text-sm text-gray-600">{t('open_dialog.description')}</p>
                         <div className="mt-4 grid gap-4 md:grid-cols-[2fr_1fr]">
-                            <div className="rounded-xl border border-gray-200 p-4">
+                            <div className="rounded-xl border border-gray-200 bg-gray-50/80 p-4">
                                 <div className="flex items-center justify-between">
                                     <div>
                                         <div className="text-sm font-semibold text-gray-700">{t('open_dialog.file_manager')}</div>
@@ -1200,14 +1307,14 @@ const DesktopUI: React.FC<{
                                     </div>
                                     <button
                                         type="button"
-                                        className="rounded-full border border-gray-200 px-3 py-1 text-xs font-semibold text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed"
+                                        className="rounded-full border border-gray-300 bg-white px-3 py-1 text-xs font-semibold text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed"
                                         onClick={() => setOpenDialogFolderId(openDialogParentId)}
                                         disabled={openDialogFolderId === FILE_MANAGER_ROOT_ID}
                                     >
                                         {t('open_dialog.up')}
                                     </button>
                                 </div>
-                                <div className="mt-3 max-h-64 overflow-y-auto">
+                                <div className="mt-3 max-h-64 overflow-y-auto rounded-lg border border-gray-200 bg-white p-2">
                                     {openDialogEntries.length === 0 ? (
                                         <div className="text-sm text-gray-500">{t('open_dialog.empty_folder')}</div>
                                     ) : (
@@ -1219,7 +1326,7 @@ const DesktopUI: React.FC<{
                                                         <button
                                                             type="button"
                                                             className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm transition ${
-                                                                isSelected ? 'bg-accent/40' : 'hover:bg-gray-100'
+                                                                isSelected ? 'bg-accent/30 ring-1 ring-accent/50' : 'hover:bg-gray-100'
                                                             }`}
                                                             onClick={() => {
                                                                 if (entry.type === 'folder') {
@@ -1261,12 +1368,12 @@ const DesktopUI: React.FC<{
                                     )}
                                 </div>
                             </div>
-                            <div className="rounded-xl border border-gray-200 p-4">
+                            <div className="rounded-xl border border-gray-200 bg-gray-50/80 p-4">
                                 <div className="text-sm font-semibold text-gray-700">{t('open_dialog.local')}</div>
                                 <p className="mt-2 text-xs text-gray-500">{t('open_dialog.local_hint')}</p>
                                 <button
                                     type="button"
-                                    className="mt-4 w-full rounded-full border border-gray-200 px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+                                    className="mt-4 w-full rounded-full border border-gray-300 bg-gray-100 px-3 py-2 text-sm font-semibold text-gray-800 hover:bg-gray-200"
                                     onClick={() => openDialogInputRef.current?.click()}
                                 >
                                     {t('open_dialog.choose_local')}
@@ -1289,7 +1396,7 @@ const DesktopUI: React.FC<{
                         <div className="mt-6 flex flex-wrap justify-end gap-2">
                             <button
                                 type="button"
-                                className="rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+                                className="rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
                                 onClick={() => closeOpenDialog(null)}
                             >
                                 {t('open_dialog.cancel')}
