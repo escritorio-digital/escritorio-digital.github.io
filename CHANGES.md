@@ -1,5 +1,9 @@
 # Cambios realizados
 
+## 2.2.0
+- Widgets con archivos: aviso al cerrar si hay cambios sin guardar (modal propio).
+- Bloc de notas: contenido independiente por ventana.
+
 ## 2.1.1
 - Acerca del proyecto: muestra la version real y la fecha actual.
 
