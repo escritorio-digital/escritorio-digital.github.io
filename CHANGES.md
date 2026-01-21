@@ -1,5 +1,9 @@
 # Cambios realizados
 
+## 2.3.1
+- Fix: cerrar todas las ventanas desde el menu contextual cierra todas.
+- Editor Markdown: icono actualizado.
+
 ## 2.3.0
 - Nuevo editor de textos Markdown con barra de formato, vista previa y exportación PDF.
 - Integración con EdiCuaTeX para insertar fórmulas desde ventana emergente.

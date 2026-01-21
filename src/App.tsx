@@ -560,8 +560,15 @@ const DesktopUI: React.FC<{
     }, [closeWidgetsWithPrompt]);
     const requestCloseAll = useCallback(() => {
         const instanceIds = activeProfile.activeWidgets.map((widget) => widget.instanceId);
+        const hasDirty = instanceIds.some((instanceId) => dirtyWidgets[instanceId]);
+        if (!hasDirty) {
+            setActiveWidgets([]);
+            setActiveWindowId(null);
+            setPendingCloseQueue([]);
+            return;
+        }
         closeWidgetsWithPrompt(instanceIds);
-    }, [activeProfile.activeWidgets, closeWidgetsWithPrompt]);
+    }, [activeProfile.activeWidgets, closeWidgetsWithPrompt, dirtyWidgets, setActiveWidgets]);
     useEffect(() => {
         const handler = (event: Event) => {
             const custom = event as CustomEvent<{ instanceId?: string }>;
