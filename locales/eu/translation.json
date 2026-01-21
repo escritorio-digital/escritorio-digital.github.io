@@ -556,7 +556,12 @@
         "h3": "Azpititulu Txikia (H3)",
         "upload": "Kargatu oharra (.md)",
         "download": "Deskargatu oharra (.md)"
-      }
+      },
+      "unsaved_title": "Gorde gabeko aldaketak",
+      "unsaved_message": "Gorde gabeko aldaketak dituzu. Itxi aurretik gorde?",
+      "unsaved_cancel": "Utzi",
+      "unsaved_discard": "Ez gorde",
+      "unsaved_save": "Gorde"
     },
     "sliding_puzzle": {
       "title": "Puzzle Lerragarria",
@@ -902,5 +907,13 @@
     "open_selected": "Hautatutakoak ireki",
     "open_file": "Fitxategia ireki",
     "root_folder": "Ed fitxategiak"
+  },
+  "unsaved_modal": {
+    "title": "Gorde gabeko aldaketak",
+    "message": "{{widget}}-en gorde gabeko aldaketak dituzu. Itxi aurretik gorde?",
+    "cancel": "Utzi",
+    "discard": "Ez gorde",
+    "save": "Gorde",
+    "unknown_widget": "programa hau"
   }
 }

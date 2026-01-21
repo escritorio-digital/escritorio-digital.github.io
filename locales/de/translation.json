@@ -557,7 +557,12 @@
         "h3": "Kleiner Untertitel (H3)",
         "upload": "Notiz hochladen (.md)",
         "download": "Notiz herunterladen (.md)"
-      }
+      },
+      "unsaved_title": "Nicht gespeicherte Aenderungen",
+      "unsaved_message": "Du hast nicht gespeicherte Aenderungen. Vor dem Schliessen speichern?",
+      "unsaved_cancel": "Abbrechen",
+      "unsaved_discard": "Nicht speichern",
+      "unsaved_save": "Speichern"
     },
     "sliding_puzzle": {
       "title": "Schiebepuzzle",
@@ -903,5 +908,13 @@
     "open_selected": "Auswahl öffnen",
     "open_file": "Datei öffnen",
     "root_folder": "Ed-Dateien"
+  },
+  "unsaved_modal": {
+    "title": "Nicht gespeicherte Änderungen",
+    "message": "Du hast nicht gespeicherte Änderungen in {{widget}}. Vor dem Schließen speichern?",
+    "cancel": "Abbrechen",
+    "discard": "Nicht speichern",
+    "save": "Speichern",
+    "unknown_widget": "dieses Programm"
   }
 }

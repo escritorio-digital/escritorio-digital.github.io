@@ -557,7 +557,12 @@
         "h3": "Subtítulo Menor (H3)",
         "upload": "Cargar nota (.md)",
         "download": "Descargar nota (.md)"
-      }
+      },
+      "unsaved_title": "Cambios sin guardar",
+      "unsaved_message": "Tienes cambios sin guardar. ¿Quieres guardarlos antes de cerrar?",
+      "unsaved_cancel": "Cancelar",
+      "unsaved_discard": "No guardar",
+      "unsaved_save": "Guardar"
     },
     "sliding_puzzle": {
       "title": "Puzzle Deslizante",
@@ -903,5 +908,13 @@
     "open_selected": "Abrir seleccionados",
     "open_file": "Abrir archivo",
     "root_folder": "Archivos Ed"
+  },
+  "unsaved_modal": {
+    "title": "Cambios sin guardar",
+    "message": "Tienes cambios sin guardar en {{widget}}. ¿Quieres guardarlos antes de cerrar?",
+    "cancel": "Cancelar",
+    "discard": "No guardar",
+    "save": "Guardar",
+    "unknown_widget": "este programa"
   }
 }
