@@ -557,7 +557,12 @@
         "h3": "Minor Subtitle (H3)",
         "upload": "Upload note (.md)",
         "download": "Download note (.md)"
-      }
+      },
+      "unsaved_title": "Unsaved changes",
+      "unsaved_message": "You have unsaved changes. Save before closing?",
+      "unsaved_cancel": "Cancel",
+      "unsaved_discard": "Don't save",
+      "unsaved_save": "Save"
     },
     "sliding_puzzle": {
       "title": "Sliding Puzzle",
@@ -903,5 +908,12 @@
     "open_selected": "Open selected",
     "open_file": "Open file",
     "root_folder": "Ed Files"
+  },
+  "unsaved_modal": {
+    "title": "Unsaved changes",
+    "message": "You have unsaved changes in {{widget}}. Save before closing?",
+    "cancel": "Cancel",
+    "discard": "Don't save",
+    "save": "Save"
   }
 }

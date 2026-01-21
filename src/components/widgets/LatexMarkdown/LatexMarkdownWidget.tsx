@@ -57,8 +57,10 @@ function renderContentInto(target: HTMLElement, mode: Mode, input: string) {
   }
 }
 
-export const LatexMarkdownWidget: FC = () => {
+export const LatexMarkdownWidget: FC<{ instanceId?: string }> = ({ instanceId }) => {
   const { t, i18n, ready } = useTranslation();
+  const instanceIdRef = useRef(instanceId ?? `latex-markdown-${Date.now()}-${Math.random().toString(16).slice(2)}`);
+  const resolvedInstanceId = instanceId ?? instanceIdRef.current;
   const [input, setInput] = useState<string>('# Teorema de Pitágoras\n\nEn un triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos.\n\n$$c = \\sqrt{a^2 + b^2}$$');
   
   // Actualizar contenido cuando cambie el idioma
@@ -70,6 +72,7 @@ export const LatexMarkdownWidget: FC = () => {
   }, [t, i18n.language]);
   const [mode, setMode] = useState<Mode>('markdown');
   const [feedback, setFeedback] = useState<string>('');
+  const [lastSavedSnapshot, setLastSavedSnapshot] = useState<string>('');
   const previewRef = useRef<HTMLDivElement>(null);
   const printRef = useRef<HTMLDivElement>(null);
 
@@ -125,6 +128,7 @@ export const LatexMarkdownWidget: FC = () => {
     const blob = new Blob([input], { type: `${mimeType};charset=utf-8` });
     const filename = `documento.${extension}`;
     const destination = await requestSaveDestination(filename);
+    if (!destination) return;
     if (destination?.destination === 'file-manager') {
       await saveToFileManager({
         blob,
@@ -133,11 +137,12 @@ export const LatexMarkdownWidget: FC = () => {
         sourceWidgetTitleKey: 'widgets.latex_markdown.title',
         parentId: destination.parentId,
       });
-      return;
-    }
-    if (destination?.destination === 'download') {
+    } else if (destination?.destination === 'download') {
       downloadBlob(blob, destination.filename);
     }
+    const snapshot = JSON.stringify({ input, mode });
+    setLastSavedSnapshot(snapshot);
+    window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'latex-markdown' } }));
   };
 
   const loadFromFile = async (file: File) => {
@@ -145,6 +150,7 @@ export const LatexMarkdownWidget: FC = () => {
     const lower = file.name.toLowerCase();
     setMode(lower.endsWith('.tex') ? 'latex' : 'markdown');
     setInput(text);
+    setLastSavedSnapshot(JSON.stringify({ input: text, mode: lower.endsWith('.tex') ? 'latex' : 'markdown' }));
   };
 
   const handleOpenFile = async () => {
@@ -220,6 +226,12 @@ export const LatexMarkdownWidget: FC = () => {
   }, [input, mode]);
 
   useEffect(() => {
+    if (!lastSavedSnapshot) {
+      setLastSavedSnapshot(JSON.stringify({ input, mode }));
+    }
+  }, [input, lastSavedSnapshot, mode]);
+
+  useEffect(() => {
     const unsubscribe = subscribeFileOpen('latex-markdown', async ({ entryId }) => {
       const entry = await getEntry(entryId);
       if (!entry?.blob) return;
@@ -227,9 +239,41 @@ export const LatexMarkdownWidget: FC = () => {
       const lower = entry.name.toLowerCase();
       setMode(lower.endsWith('.tex') ? 'latex' : 'markdown');
       setInput(content);
+      setLastSavedSnapshot(JSON.stringify({ input: content, mode: lower.endsWith('.tex') ? 'latex' : 'markdown' }));
     });
     return unsubscribe;
   }, []);
+
+  useEffect(() => {
+    const snapshot = JSON.stringify({ input, mode });
+    const isDirty = lastSavedSnapshot !== '' && snapshot !== lastSavedSnapshot;
+    window.dispatchEvent(
+      new CustomEvent('widget-dirty-state', {
+        detail: { instanceId: resolvedInstanceId, widgetId: 'latex-markdown', isDirty },
+      })
+    );
+  }, [input, lastSavedSnapshot, mode, resolvedInstanceId]);
+
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
+      if (custom.detail?.instanceId !== resolvedInstanceId) return;
+      if (custom.detail?.widgetId && custom.detail.widgetId !== 'latex-markdown') return;
+      handleSaveToFile();
+    };
+    window.addEventListener('widget-save-request', handler as EventListener);
+    return () => window.removeEventListener('widget-save-request', handler as EventListener);
+  }, [handleSaveToFile, resolvedInstanceId]);
+
+  useEffect(() => {
+    return () => {
+      window.dispatchEvent(
+        new CustomEvent('widget-dirty-state', {
+          detail: { instanceId: resolvedInstanceId, widgetId: 'latex-markdown', isDirty: false },
+        })
+      );
+    };
+  }, [resolvedInstanceId]);
 
   // Si las traducciones no están listas, mostrar un loader simple
   if (!ready) {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { X, Edit, Download, FolderOpen } from 'lucide-react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
@@ -15,12 +15,15 @@ interface Task {
   completed: boolean;
 }
 
-export const WorkListWidget = () => {
+export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }) => {
   const { t, ready } = useTranslation();
+  const instanceIdRef = useRef(instanceId ?? `work-list-${Date.now()}-${Math.random().toString(16).slice(2)}`);
+  const resolvedInstanceId = instanceId ?? instanceIdRef.current;
   const [tasks, setTasks] = useLocalStorage<Task[]>('work-list-tasks', []);
   const [newTask, setNewTask] = useState('');
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
   const [editingTaskText, setEditingTaskText] = useState('');
+  const [lastSavedSignature, setLastSavedSignature] = useState<string>('');
 
   const addTask = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && newTask.trim() !== '') {
@@ -62,6 +65,7 @@ export const WorkListWidget = () => {
     const csv = Papa.unparse(tasks.map(t => ({ id: t.id, text: t.text, completed: t.completed })));
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const destination = await requestSaveDestination('lista_de_trabajo.csv');
+    if (!destination) return;
     if (destination?.destination === 'file-manager') {
       await saveToFileManager({
         blob,
@@ -70,11 +74,12 @@ export const WorkListWidget = () => {
         sourceWidgetTitleKey: 'widgets.work_list.title',
         parentId: destination.parentId,
       });
-      return;
-    }
-    if (destination?.destination === 'download') {
+    } else if (destination?.destination === 'download') {
       downloadBlob(blob, destination.filename);
     }
+    const signature = JSON.stringify(tasks);
+    setLastSavedSignature(signature);
+    window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'work-list' } }));
   };
 
   const loadCsvFile = useCallback((file: File) => {
@@ -90,8 +95,13 @@ export const WorkListWidget = () => {
 
           if (window.confirm(t('widgets.work_list.replace_list_confirm'))) {
             setTasks(newTasks);
+            setLastSavedSignature(JSON.stringify(newTasks));
           } else {
-            setTasks(prevTasks => [...prevTasks, ...newTasks]);
+            setTasks(prevTasks => {
+              const merged = [...prevTasks, ...newTasks];
+              setLastSavedSignature(JSON.stringify(merged));
+              return merged;
+            });
           }
         },
         error: (error) => {
@@ -127,6 +137,41 @@ export const WorkListWidget = () => {
     });
     return unsubscribe;
   }, [loadCsvFile]);
+
+  useEffect(() => {
+    if (!lastSavedSignature) {
+      setLastSavedSignature(JSON.stringify(tasks));
+      return;
+    }
+    const signature = JSON.stringify(tasks);
+    const isDirty = signature !== lastSavedSignature;
+    window.dispatchEvent(
+      new CustomEvent('widget-dirty-state', {
+        detail: { instanceId: resolvedInstanceId, widgetId: 'work-list', isDirty },
+      })
+    );
+  }, [lastSavedSignature, resolvedInstanceId, tasks]);
+
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
+      if (custom.detail?.instanceId !== resolvedInstanceId) return;
+      if (custom.detail?.widgetId && custom.detail.widgetId !== 'work-list') return;
+      downloadAsCSV();
+    };
+    window.addEventListener('widget-save-request', handler as EventListener);
+    return () => window.removeEventListener('widget-save-request', handler as EventListener);
+  }, [downloadAsCSV, resolvedInstanceId]);
+
+  useEffect(() => {
+    return () => {
+      window.dispatchEvent(
+        new CustomEvent('widget-dirty-state', {
+          detail: { instanceId: resolvedInstanceId, widgetId: 'work-list', isDirty: false },
+        })
+      );
+    };
+  }, [resolvedInstanceId]);
 
   // Debug: verificar qué devuelve t()
   console.log('WorkList translations:', {

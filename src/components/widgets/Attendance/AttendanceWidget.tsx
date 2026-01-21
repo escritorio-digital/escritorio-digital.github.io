@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'; // 'useEffect' ha sido eliminado de esta línea
+import { useEffect, useRef, useState } from 'react'; // 'useEffect' ha sido eliminado de esta línea
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
@@ -38,12 +38,15 @@ const formatDate = (date: Date): string => {
 };
 
 // --- Componente Principal ---
-export const AttendanceWidget: FC = () => {
+export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) => {
   const { t, ready } = useTranslation();
+  const instanceIdRef = useRef(instanceId ?? `attendance-${Date.now()}-${Math.random().toString(16).slice(2)}`);
+  const resolvedInstanceId = instanceId ?? instanceIdRef.current;
   const [records, setRecords] = useLocalStorage<AttendanceRecords>('attendance-records', {});
   const [selectedDate, setSelectedDate] = useState(() => new Date());
   const [activeTab, setActiveTab] = useState<'attendance' | 'badges' | 'alerts'>('attendance');
   const [newStudentName, setNewStudentName] = useState('');
+  const [lastSavedSignature, setLastSavedSignature] = useState<string>('');
 
   // Constantes traducidas
   const AVAILABLE_BADGES: BadgeInfo[] = [
@@ -140,6 +143,7 @@ export const AttendanceWidget: FC = () => {
           alerts: [],
         }));
         updateStudentsForDate(importedStudents);
+        setLastSavedSignature(JSON.stringify({ ...records, [dateKey]: importedStudents }));
       }
     });
   };
@@ -159,6 +163,41 @@ export const AttendanceWidget: FC = () => {
     const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
     loadCsvFile(file);
   };
+
+  useEffect(() => {
+    if (!lastSavedSignature) {
+      setLastSavedSignature(JSON.stringify(records));
+      return;
+    }
+    const signature = JSON.stringify(records);
+    const isDirty = signature !== lastSavedSignature;
+    window.dispatchEvent(
+      new CustomEvent('widget-dirty-state', {
+        detail: { instanceId: resolvedInstanceId, widgetId: 'attendance', isDirty },
+      })
+    );
+  }, [lastSavedSignature, records, resolvedInstanceId]);
+
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
+      if (custom.detail?.instanceId !== resolvedInstanceId) return;
+      if (custom.detail?.widgetId && custom.detail.widgetId !== 'attendance') return;
+      handleExport();
+    };
+    window.addEventListener('widget-save-request', handler as EventListener);
+    return () => window.removeEventListener('widget-save-request', handler as EventListener);
+  }, [handleExport, resolvedInstanceId]);
+
+  useEffect(() => {
+    return () => {
+      window.dispatchEvent(
+        new CustomEvent('widget-dirty-state', {
+          detail: { instanceId: resolvedInstanceId, widgetId: 'attendance', isDirty: false },
+        })
+      );
+    };
+  }, [resolvedInstanceId]);
 
   useEffect(() => {
     const unsubscribe = subscribeFileOpen('attendance', async ({ entryId }) => {
@@ -188,6 +227,7 @@ export const AttendanceWidget: FC = () => {
     const csv = Papa.unparse(dataToExport);
     const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
     const destination = await requestSaveDestination('asistencia_completa.csv');
+    if (!destination) return;
     if (destination?.destination === 'file-manager') {
       await saveToFileManager({
         blob,
@@ -196,11 +236,11 @@ export const AttendanceWidget: FC = () => {
         sourceWidgetTitleKey: 'widgets.attendance.title',
         parentId: destination.parentId,
       });
-      return;
-    }
-    if (destination?.destination === 'download') {
+    } else if (destination?.destination === 'download') {
       downloadBlob(blob, destination.filename);
     }
+    setLastSavedSignature(JSON.stringify(records));
+    window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'attendance' } }));
   };
 
   const resetAll = () => {

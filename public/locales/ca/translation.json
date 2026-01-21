@@ -557,7 +557,12 @@
         "h3": "Subtítol Menor (H3)",
         "upload": "Carregar nota (.md)",
         "download": "Descarregar nota (.md)"
-      }
+      },
+      "unsaved_title": "Canvis sense guardar",
+      "unsaved_message": "Tens canvis sense guardar. Vols guardar-los abans de tancar?",
+      "unsaved_cancel": "Cancel·lar",
+      "unsaved_discard": "No guardar",
+      "unsaved_save": "Guardar"
     },
     "sliding_puzzle": {
       "title": "Puzzle Lliscant",
@@ -903,5 +908,12 @@
     "open_selected": "Obrir seleccionats",
     "open_file": "Obrir fitxer",
     "root_folder": "Arxius Ed"
+  },
+  "unsaved_modal": {
+    "title": "Canvis sense guardar",
+    "message": "Tens canvis sense guardar a {{widget}}. Vols guardar-los abans de tancar?",
+    "cancel": "Cancel·lar",
+    "discard": "No guardar",
+    "save": "Guardar"
   }
 }

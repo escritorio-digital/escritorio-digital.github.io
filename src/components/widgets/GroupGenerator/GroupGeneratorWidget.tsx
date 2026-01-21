@@ -48,14 +48,17 @@ const parseSnapshot = (text: string): GroupGeneratorSnapshot | null => {
   }
 };
 
-export const GroupGeneratorWidget: FC = () => {
+export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }) => {
   const { t } = useTranslation();
+  const instanceIdRef = useRef(instanceId ?? `group-generator-${Date.now()}-${Math.random().toString(16).slice(2)}`);
+  const resolvedInstanceId = instanceId ?? instanceIdRef.current;
   const [studentList, setStudentList] = useState('Ana\nBeatriz\nCarlos\nDaniela\nEsteban\nFernanda\nGael\nHilda\nIván\nJulia');
   const [mode, setMode] = useState<GroupMode>('byCount');
   const [groupValue, setGroupValue] = useState(3);
   const [generatedGroups, setGeneratedGroups] = useState<string[][]>([]);
   const [isLargeView, setIsLargeView] = useState(false);
   const [copyFeedback, setCopyFeedback] = useState(false);
+  const [lastSavedSnapshot, setLastSavedSnapshot] = useState<string>('');
   const overlayContentRef = useRef<HTMLDivElement>(null);
   const overlayHeaderRef = useRef<HTMLDivElement>(null);
   const overlayGroupsRef = useRef<HTMLDivElement>(null);
@@ -71,6 +74,7 @@ export const GroupGeneratorWidget: FC = () => {
     setGeneratedGroups(snapshot.generatedGroups);
     setMode(snapshot.mode);
     setGroupValue(Math.max(1, Math.floor(snapshot.groupValue)));
+    setLastSavedSnapshot(JSON.stringify(snapshot));
   }, []);
 
   const loadFromText = useCallback((text: string) => {
@@ -81,6 +85,13 @@ export const GroupGeneratorWidget: FC = () => {
     }
     setStudentList(text);
     setGeneratedGroups([]);
+    setLastSavedSnapshot(JSON.stringify({
+      version: 1,
+      studentList: text,
+      generatedGroups: [],
+      mode,
+      groupValue,
+    }));
   }, [applySnapshot]);
 
   const loadFromBlob = useCallback(async (blob: Blob) => {
@@ -258,6 +269,7 @@ export const GroupGeneratorWidget: FC = () => {
   const downloadGroups = async () => {
     if (generatedGroups.length === 0) return;
     const destination = await requestSaveDestination('grupos.txt');
+    if (!destination) return;
     if (destination?.destination === 'file-manager') {
       const snapshot: GroupGeneratorSnapshot = {
         version: 1,
@@ -274,14 +286,73 @@ export const GroupGeneratorWidget: FC = () => {
         sourceWidgetTitleKey: 'widgets.group_generator.title',
         parentId: destination.parentId,
       });
+      setLastSavedSnapshot(JSON.stringify(snapshot));
+      window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'group-generator' } }));
       return;
     }
     if (destination?.destination === 'download') {
       const text = formatGroupsText();
       const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
       downloadBlob(blob, destination.filename);
+      const snapshot: GroupGeneratorSnapshot = {
+        version: 1,
+        studentList,
+        generatedGroups,
+        mode,
+        groupValue,
+      };
+      setLastSavedSnapshot(JSON.stringify(snapshot));
+      window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'group-generator' } }));
     }
   };
+
+  useEffect(() => {
+    if (!lastSavedSnapshot) {
+      const snapshot = JSON.stringify({
+        version: 1,
+        studentList,
+        generatedGroups,
+        mode,
+        groupValue,
+      });
+      setLastSavedSnapshot(snapshot);
+      return;
+    }
+    const snapshot = JSON.stringify({
+      version: 1,
+      studentList,
+      generatedGroups,
+      mode,
+      groupValue,
+    });
+    const isDirty = snapshot !== lastSavedSnapshot;
+    window.dispatchEvent(
+      new CustomEvent('widget-dirty-state', {
+        detail: { instanceId: resolvedInstanceId, widgetId: 'group-generator', isDirty },
+      })
+    );
+  }, [generatedGroups, groupValue, lastSavedSnapshot, mode, resolvedInstanceId, studentList]);
+
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
+      if (custom.detail?.instanceId !== resolvedInstanceId) return;
+      if (custom.detail?.widgetId && custom.detail.widgetId !== 'group-generator') return;
+      downloadGroups();
+    };
+    window.addEventListener('widget-save-request', handler as EventListener);
+    return () => window.removeEventListener('widget-save-request', handler as EventListener);
+  }, [downloadGroups, resolvedInstanceId]);
+
+  useEffect(() => {
+    return () => {
+      window.dispatchEvent(
+        new CustomEvent('widget-dirty-state', {
+          detail: { instanceId: resolvedInstanceId, widgetId: 'group-generator', isDirty: false },
+        })
+      );
+    };
+  }, [resolvedInstanceId]);
 
   return (
     <div className="group-generator-widget">

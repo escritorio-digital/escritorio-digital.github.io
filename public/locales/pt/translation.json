@@ -559,7 +559,12 @@
         "h3": "Subtítulo Menor (H3)",
         "upload": "Carregar nota (.md)",
         "download": "Baixar nota (.md)"
-      }
+      },
+      "unsaved_title": "Alterações não guardadas",
+      "unsaved_message": "Tem alterações não guardadas. Guardar antes de fechar?",
+      "unsaved_cancel": "Cancelar",
+      "unsaved_discard": "Não guardar",
+      "unsaved_save": "Guardar"
     },
     "sliding_puzzle": {
       "title": "Quebra-cabeça Deslizante",
@@ -905,5 +910,12 @@
     "open_selected": "Abrir selecionados",
     "open_file": "Abrir ficheiro",
     "root_folder": "Arquivos Ed"
+  },
+  "unsaved_modal": {
+    "title": "Alterações não guardadas",
+    "message": "Tem alterações não guardadas em {{widget}}. Guardar antes de fechar?",
+    "cancel": "Cancelar",
+    "discard": "Não guardar",
+    "save": "Guardar"
   }
 }

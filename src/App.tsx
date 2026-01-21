@@ -482,6 +482,11 @@ const DesktopUI: React.FC<{
         }
         return next;
     });
+    const [dirtyWidgets, setDirtyWidgets] = useState<Record<string, boolean>>({});
+    const [pendingCloseWidgetId, setPendingCloseWidgetId] = useState<string | null>(null);
+    const [pendingCloseInstanceId, setPendingCloseInstanceId] = useState<string | null>(null);
+    const [pendingCloseAfterSave, setPendingCloseAfterSave] = useState<string | null>(null);
+    const [pendingCloseQueue, setPendingCloseQueue] = useState<string[]>([]);
     const focusWidget = useCallback((instanceId: string) => {
         const newZ = highestZRef.current + 1;
         highestZRef.current = newZ;
@@ -514,6 +519,65 @@ const DesktopUI: React.FC<{
         window.addEventListener('file-manager-open', handler as EventListener);
         return () => window.removeEventListener('file-manager-open', handler as EventListener);
     }, [activeProfile.activeWidgets, focusWidget, setActiveWidgets]);
+    useEffect(() => {
+        const handler = (event: Event) => {
+            const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string; isDirty?: boolean }>;
+            if (!custom.detail?.instanceId) return;
+            setDirtyWidgets((prev) => {
+                const next = { ...prev };
+                if (custom.detail.isDirty) {
+                    next[custom.detail.instanceId] = true;
+                } else {
+                    delete next[custom.detail.instanceId];
+                }
+                return next;
+            });
+        };
+        window.addEventListener('widget-dirty-state', handler as EventListener);
+        return () => window.removeEventListener('widget-dirty-state', handler as EventListener);
+    }, []);
+    const closeWidgetsWithPrompt = useCallback((instanceIds: string[]) => {
+        for (let index = 0; index < instanceIds.length; index += 1) {
+            const instanceId = instanceIds[index];
+            const target = activeProfile.activeWidgets.find((widget) => widget.instanceId === instanceId);
+            if (!target) {
+                continue;
+            }
+            const isDirty = dirtyWidgets[instanceId];
+            if (isDirty) {
+                setPendingCloseWidgetId(target.widgetId);
+                setPendingCloseInstanceId(instanceId);
+                setPendingCloseQueue(instanceIds.slice(index + 1));
+                return;
+            }
+            closeWidget(instanceId);
+        }
+        setPendingCloseQueue([]);
+    }, [activeProfile.activeWidgets, closeWidget, dirtyWidgets]);
+    const requestCloseWidget = useCallback((instanceId: string) => {
+        closeWidgetsWithPrompt([instanceId]);
+    }, [closeWidgetsWithPrompt]);
+    const requestCloseAll = useCallback(() => {
+        const instanceIds = activeProfile.activeWidgets.map((widget) => widget.instanceId);
+        closeWidgetsWithPrompt(instanceIds);
+    }, [activeProfile.activeWidgets, closeWidgetsWithPrompt]);
+    useEffect(() => {
+        const handler = (event: Event) => {
+            const custom = event as CustomEvent<{ instanceId?: string }>;
+            if (!custom.detail?.instanceId) return;
+            if (pendingCloseAfterSave === custom.detail.instanceId) {
+                closeWidget(custom.detail.instanceId);
+                setPendingCloseAfterSave(null);
+                setPendingCloseInstanceId(null);
+                setPendingCloseWidgetId(null);
+                if (pendingCloseQueue.length > 0) {
+                    closeWidgetsWithPrompt(pendingCloseQueue);
+                }
+            }
+        };
+        window.addEventListener('widget-save-complete', handler as EventListener);
+        return () => window.removeEventListener('widget-save-complete', handler as EventListener);
+    }, [closeWidget, pendingCloseAfterSave, pendingCloseQueue, closeWidgetsWithPrompt]);
     const toggleMinimize = (instanceId: string) => setActiveWidgets(prev => prev.map(w => (w.instanceId === instanceId ? { ...w, isMinimized: !w.isMinimized } : w)));
     const handleTaskClick = useCallback((instanceId: string) => {
         const target = activeProfile.activeWidgets.find((widget) => widget.instanceId === instanceId);
@@ -705,7 +769,7 @@ const DesktopUI: React.FC<{
     };
 
     const resetLayout = () => {
-        setActiveWidgets([]);
+        requestCloseAll();
         setContextMenu(prev => ({ ...prev, isOpen: false }));
     };
 
@@ -934,7 +998,7 @@ const DesktopUI: React.FC<{
                         isMaximized={widget.isMaximized}
                         onToggleMinimize={() => toggleMinimize(widget.instanceId)}
                         onToggleMaximize={() => toggleMaximize(widget.instanceId)}
-                        onClose={() => closeWidget(widget.instanceId)}
+                        onClose={() => requestCloseWidget(widget.instanceId)}
                         onFocus={() => focusWidget(widget.instanceId)}
                         onDragStop={(_e, d) => {
                             setActiveWidgets(prev => prev.map(w => (w.instanceId === widget.instanceId ? { ...w, position: { x: d.x, y: d.y } } : w)));
@@ -975,7 +1039,7 @@ const DesktopUI: React.FC<{
                                 </div>
                             }
                         >
-                            <Component />
+                            <Component instanceId={widget.instanceId} />
                         </Suspense>
                     </WidgetWindow>
                 );
@@ -1388,6 +1452,83 @@ const DesktopUI: React.FC<{
                     </div>
                 </div>
             )}
+            {pendingCloseInstanceId && pendingCloseWidgetId && (
+                <div
+                    className="fixed inset-0 z-[10003] flex items-center justify-center bg-black/60"
+                    onClick={() => {
+                        setPendingCloseInstanceId(null);
+                        setPendingCloseWidgetId(null);
+                        setPendingCloseQueue([]);
+                    }}
+                >
+                    <div
+                        className="w-full max-w-md rounded-2xl border border-gray-200 bg-white px-6 py-5 text-text-dark shadow-2xl"
+                        onClick={(event) => event.stopPropagation()}
+                        role="dialog"
+                        aria-modal="true"
+                    >
+                        <h3 className="text-lg font-semibold">{t('unsaved_modal.title')}</h3>
+                        <p className="mt-2 text-sm text-gray-600">
+                            {t('unsaved_modal.message', {
+                                widget: pendingCloseWidgetId && WIDGET_REGISTRY[pendingCloseWidgetId]
+                                    ? t(WIDGET_REGISTRY[pendingCloseWidgetId].title)
+                                    : '',
+                            })}
+                        </p>
+                        <div className="mt-6 flex flex-wrap justify-end gap-2">
+                            <button
+                                type="button"
+                                className="rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+                                onClick={() => {
+                                    setPendingCloseInstanceId(null);
+                                    setPendingCloseWidgetId(null);
+                                    setPendingCloseQueue([]);
+                                }}
+                            >
+                                {t('unsaved_modal.cancel')}
+                            </button>
+                            <button
+                                type="button"
+                                className="rounded-full border border-gray-300 bg-gray-100 px-4 py-2 text-sm font-semibold text-gray-800 hover:bg-gray-200"
+                                onClick={() => {
+                                    const instanceId = pendingCloseInstanceId;
+                                    setPendingCloseInstanceId(null);
+                                    setPendingCloseWidgetId(null);
+                                    if (instanceId) {
+                                        setDirtyWidgets((prev) => {
+                                            const next = { ...prev };
+                                            delete next[instanceId];
+                                            return next;
+                                        });
+                                        closeWidget(instanceId);
+                                    }
+                                    if (pendingCloseQueue.length > 0) {
+                                        closeWidgetsWithPrompt(pendingCloseQueue);
+                                    }
+                                }}
+                            >
+                                {t('unsaved_modal.discard')}
+                            </button>
+                            <button
+                                type="button"
+                                className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-text-dark shadow-sm hover:opacity-90"
+                                onClick={() => {
+                                    const instanceId = pendingCloseInstanceId;
+                                    const widgetId = pendingCloseWidgetId;
+                                    setPendingCloseInstanceId(null);
+                                    setPendingCloseWidgetId(null);
+                                    if (instanceId) {
+                                        setPendingCloseAfterSave(instanceId);
+                                        window.dispatchEvent(new CustomEvent('widget-save-request', { detail: { instanceId, widgetId } }));
+                                    }
+                                }}
+                            >
+                                {t('unsaved_modal.save')}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
             <AboutModal
                 isOpen={isAboutOpen}
                 onClose={() => setIsAboutOpen(false)}
@@ -1504,7 +1645,7 @@ const DesktopUI: React.FC<{
                             <button
                                 className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
                                 onClick={() => {
-                                    closeWidget(contextWindow.instanceId);
+                                    requestCloseWidget(contextWindow.instanceId);
                                     setContextMenu(prev => ({ ...prev, isOpen: false, windowInstanceId: null }));
                                 }}
                             >
@@ -1620,7 +1761,7 @@ const DesktopUI: React.FC<{
                                         <button
                                             className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
                                             onClick={() => {
-                                                closeWidget(contextMenu.windowInstanceId as string);
+                                                requestCloseWidget(contextMenu.windowInstanceId as string);
                                                 setContextMenu(prev => ({ ...prev, isOpen: false, windowInstanceId: null }));
                                             }}
                                         >

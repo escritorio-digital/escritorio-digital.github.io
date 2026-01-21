@@ -557,7 +557,12 @@
         "h3": "Sottotitolo minore (H3)",
         "upload": "Carica nota (.md)",
         "download": "Scarica nota (.md)"
-      }
+      },
+      "unsaved_title": "Modifiche non salvate",
+      "unsaved_message": "Hai modifiche non salvate. Salvare prima di chiudere?",
+      "unsaved_cancel": "Annulla",
+      "unsaved_discard": "Non salvare",
+      "unsaved_save": "Salva"
     },
     "sliding_puzzle": {
       "title": "Puzzle scorrevole",
@@ -903,5 +908,12 @@
     "open_selected": "Apri selezionati",
     "open_file": "Apri file",
     "root_folder": "File Ed"
+  },
+  "unsaved_modal": {
+    "title": "Modifiche non salvate",
+    "message": "Hai modifiche non salvate in {{widget}}. Salvare prima di chiudere?",
+    "cancel": "Annulla",
+    "discard": "Non salvare",
+    "save": "Salva"
   }
 }

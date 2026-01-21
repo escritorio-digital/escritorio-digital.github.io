@@ -558,7 +558,12 @@
         "h3": "Sous-titre secondaire (H3)",
         "upload": "Charger une note (.md)",
         "download": "Télécharger la note (.md)"
-      }
+      },
+      "unsaved_title": "Modifications non enregistrées",
+      "unsaved_message": "Vous avez des modifications non enregistrées. Enregistrer avant de fermer ?",
+      "unsaved_cancel": "Annuler",
+      "unsaved_discard": "Ne pas enregistrer",
+      "unsaved_save": "Enregistrer"
     },
     "sliding_puzzle": {
       "title": "Puzzle coulissant",
@@ -904,5 +909,12 @@
     "open_selected": "Ouvrir la sélection",
     "open_file": "Ouvrir le fichier",
     "root_folder": "Fichiers Ed"
+  },
+  "unsaved_modal": {
+    "title": "Modifications non enregistrées",
+    "message": "Vous avez des modifications non enregistrées dans {{widget}}. Enregistrer avant de fermer ?",
+    "cancel": "Annuler",
+    "discard": "Ne pas enregistrer",
+    "save": "Enregistrer"
   }
 }

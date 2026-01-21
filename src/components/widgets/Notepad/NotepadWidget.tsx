@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FC } from 'react';
 import { useEditor, EditorContent, Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -69,9 +69,14 @@ const MenuBar: FC<{ editor: Editor | null; onUpload: () => void; onDownload: () 
   );
 };
 
-export const NotepadWidget = () => {
+export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId }) => {
   const { t } = useTranslation();
-  const [content, setContent] = useLocalStorage('notepad-content-html', t('widgets.notepad.initial_content'));
+  const instanceIdRef = useRef(instanceId ?? `notepad-${Date.now()}-${Math.random().toString(16).slice(2)}`);
+  const resolvedInstanceId = instanceId ?? instanceIdRef.current;
+  const storageKey = `notepad-content-${resolvedInstanceId}`;
+  const [content, setContent] = useLocalStorage(storageKey, t('widgets.notepad.initial_content'));
+  const [lastSavedContent, setLastSavedContent] = useState(content);
+  const [isDirty, setIsDirty] = useState(false);
   const turndownService = new TurndownService();
 
   const editor = useEditor({
@@ -93,7 +98,7 @@ export const NotepadWidget = () => {
     },
   });
 
-  const handleDownload = async () => {
+  const handleDownload = useCallback(async () => {
     if (!editor) return;
     const htmlContent = editor.getHTML();
     const markdownContent = turndownService.turndown(htmlContent);
@@ -101,6 +106,7 @@ export const NotepadWidget = () => {
     const blob = new Blob([markdownContent], { type: 'text/markdown;charset=utf-8;' });
     const filename = t('widgets.notepad.default_filename');
     const destination = await requestSaveDestination(filename);
+    if (!destination) return;
     if (destination?.destination === 'file-manager') {
       await saveToFileManager({
         blob,
@@ -109,18 +115,21 @@ export const NotepadWidget = () => {
         sourceWidgetTitleKey: 'widgets.notepad.title',
         parentId: destination.parentId,
       });
-      return;
-    }
-    if (destination?.destination === 'download') {
+    } else if (destination?.destination === 'download') {
       downloadBlob(blob, destination.filename);
     }
-  };
+    setLastSavedContent(htmlContent);
+    setIsDirty(false);
+    window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'notepad' } }));
+  }, [editor, resolvedInstanceId, t, turndownService]);
 
   const loadFromFile = async (file: File) => {
     if (!editor) return;
     const text = await file.text();
     const htmlContent = await marked.parse(text);
     editor.commands.setContent(htmlContent);
+    setLastSavedContent(htmlContent);
+    setIsDirty(false);
   };
 
   const handleOpenFile = async () => {
@@ -147,9 +156,44 @@ export const NotepadWidget = () => {
       const content = await entry.blob.text();
       const htmlContent = await marked.parse(content);
       editor.commands.setContent(htmlContent);
+      setLastSavedContent(htmlContent);
+      setIsDirty(false);
     });
     return unsubscribe;
   }, [editor]);
+
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
+      if (custom.detail?.instanceId !== resolvedInstanceId) return;
+      if (custom.detail?.widgetId && custom.detail.widgetId !== 'notepad') return;
+      handleDownload();
+    };
+    window.addEventListener('widget-save-request', handler as EventListener);
+    return () => window.removeEventListener('widget-save-request', handler as EventListener);
+  }, [handleDownload, resolvedInstanceId]);
+
+  useEffect(() => {
+    setIsDirty(content !== lastSavedContent);
+  }, [content, lastSavedContent]);
+
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent('widget-dirty-state', {
+        detail: { instanceId: resolvedInstanceId, widgetId: 'notepad', isDirty },
+      })
+    );
+  }, [isDirty, resolvedInstanceId]);
+
+  useEffect(() => {
+    return () => {
+      window.dispatchEvent(
+        new CustomEvent('widget-dirty-state', {
+          detail: { instanceId: resolvedInstanceId, widgetId: 'notepad', isDirty: false },
+        })
+      );
+    };
+  }, [resolvedInstanceId]);
 
   return (
     <div className="flex flex-col h-full w-full notepad-widget bg-white rounded-b-md overflow-hidden">
