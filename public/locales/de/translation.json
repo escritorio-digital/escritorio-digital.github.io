@@ -214,7 +214,12 @@
   },
   "desktop": {
     "fullscreen_enter": "Vollbildmodus",
-    "fullscreen_exit": "Vollbild verlassen"
+    "fullscreen_exit": "Vollbild verlassen",
+    "window_help": "Hilfe",
+    "window_minimize": "Minimieren",
+    "window_maximize": "Maximieren",
+    "window_restore": "Wiederherstellen",
+    "window_close": "Schließen"
   },
   "credits": {
     "title": "Credits und Lizenz",
@@ -287,7 +292,6 @@
       "root": "Stamm",
       "up": "Nach oben",
       "download": "Herunterladen",
-      "saved_from": "Gespeichert aus {{widget}}",
       "empty_trash_button": "Papierkorb leeren",
       "empty_trash_confirm": "Alles im Papierkorb dauerhaft löschen?",
       "copy": "Kopieren",
@@ -536,7 +540,11 @@
         "h3": "Kleiner Untertitel (H3)",
         "copy": "Text kopieren",
         "upload": "Notiz hochladen (.md)",
-        "download": "Notiz herunterladen (.md)"
+        "download": "Notiz herunterladen (.md)",
+        "zoom_in": "Vergrößern",
+        "zoom_out": "Verkleinern",
+        "zoom_reset": "Zoom zurücksetzen",
+        "zoom_edit_hint": "Doppelklick, um den Prozentsatz einzugeben."
       },
       "unsaved_title": "Nicht gespeicherte Aenderungen",
       "unsaved_message": "Du hast nicht gespeicherte Aenderungen. Vor dem Schliessen speichern?",
@@ -578,7 +586,8 @@
         "open_file": "Datei oeffnen",
         "save_file": "Datei speichern",
         "export_pdf": "PDF drucken",
-        "copy_html": "HTML kopieren"
+        "copy_html": "HTML kopieren",
+        "zoom_edit_hint": "Doppelklick, um den Prozentsatz einzugeben."
       },
       "placeholders": {
         "text": "Text",
@@ -592,7 +601,8 @@
       "source_copied": "Markdown kopiert.",
       "copy_failed": "Text konnte nicht kopiert werden.",
       "preview_error": "Fehler beim Rendern der Vorschau.",
-      "html_copied": "HTML kopiert"
+      "html_copied": "HTML kopiert",
+      "help": "Markdown-Texteditor mit LaTeX-Formeln. Du kannst als Markdown (.md) speichern, den Markdown-Code kopieren, den HTML-Code zum Einfugen in andere Textverarbeitungen kopieren und als PDF drucken."
     },
     "sliding_puzzle": {
       "title": "Schiebepuzzle",
@@ -946,5 +956,51 @@
     "discard": "Nicht speichern",
     "save": "Speichern",
     "unknown_widget": "dieses Programm"
+  },
+  "widgets_help": {
+    "work-list": "Aufgabenliste und Erinnerungen zur Organisation der Stunde.",
+    "attendance": "Schnelle Anwesenheits- und Gruppenstatus-Erfassung.",
+    "group-generator": "Erstellt zufällige oder ausgewogene Gruppen.",
+    "calendar": "Visueller Kalender für Termine und Planung.",
+    "program-guide": "Integrierter Leitfaden mit Widget-Katalog und Nutzung.",
+    "timer": "Countdown für Aktivitäten und Runden.",
+    "stopwatch": "Stoppuhr zum Messen von Zeiten.",
+    "metronome": "Konstanter Puls für Rhythmus und Dynamiken.",
+    "global-clocks": "Uhrzeiten mehrerer Städte zum Vergleichen.",
+    "scientific-calculator": "Wissenschaftlicher Taschenrechner für fortgeschrittene Berechnungen.",
+    "unit-converter": "Einheitenumrechner für Aufgaben und Übungen.",
+    "markdown-text-editor": "Markdown-Texteditor mit LaTeX-Formeln. Du kannst als Markdown (.md) speichern, den Markdown-Code kopieren, den HTML-Code zum Einfügen in andere Textverarbeitungen kopieren und als PDF drucken.",
+    "vce-community": "Katalog von Bildungs-Apps aus der Community.",
+    "comunidad-chatgpt-ia-edu": "Ressourcen des Projekts ChatGPT-IA-edu.",
+    "edumedia-iag": "Bildungs-Multimediaressourcen mit generativer KI.",
+    "file-manager": "Verwalte Dateien und Ordner, die im Browser gespeichert sind.",
+    "notepad": "Schnelles Notizfeld für Anweisungen und Listen.",
+    "drawing-pad": "Freies Zeichenbrett und Skizzen.",
+    "image-carousel": "Zeigt eine Sammlung von Bildern.",
+    "edimarkweb": "Markdown-Textverarbeitung mit Live-Vorschau und Export.",
+    "html-sandbox": "Bereich zum Anzeigen von HTML-Inhalten.",
+    "boardlive": "Kollaboratives Whiteboard in Echtzeit.",
+    "iframe": "Web-Viewer für Seiten innerhalb des Desktops.",
+    "local-web": "Speichert und startet lokale Websites offline.",
+    "file-opener": "Öffnet lokale Dateien (PDF, Bilder, Audio, Video).",
+    "directo-viewer": "Viewer für Webinhalte oder externe Ressourcen.",
+    "wikipedia-search": "Schnelle Wikipedia-Suche mit Sprachwechsel.",
+    "dice": "3D-Würfel für Zufallsauswahl.",
+    "random-spinner": "Zufallsrad für Auslosungen und Runden.",
+    "qr-code-generator": "Erzeugt QR-Codes zum Teilen von Links.",
+    "traffic-light": "Visuelle Ampel für Status und Aktivität.",
+    "sound-meter": "Visueller Pegel für den Geräuschpegel.",
+    "scoreboard": "Punktestand für Teams und Herausforderungen.",
+    "directo-vota": "Einfache Abstimmung mit sofortigen Ergebnissen.",
+    "directo-escala": "Bewertungsskala für Meinungen.",
+    "directo-nube": "Wortwolke mit kurzen Antworten.",
+    "directo-ideas": "Brainstorming mit Abstimmungen.",
+    "directo-muro": "Kollaborative Wand mit Notizen.",
+    "directo-ticket": "Exit-Tickets am Ende der Stunde.",
+    "qplay": "Interaktiver Quiz-Wettbewerb.",
+    "tic-tac-toe": "Tic-Tac-Toe für schnelle Wiederholung.",
+    "memory-game": "Paar-Memory zum Üben von Begriffen.",
+    "sliding-puzzle": "Schiebepuzzle für Logik und Aufmerksamkeit.",
+    "work-gestures": "Arbeitsgesten für Unterrichtsroutinen."
   }
 }

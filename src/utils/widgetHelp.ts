@@ -10,7 +10,7 @@ const widgetHelpText: Record<string, string> = {
     'global-clocks': 'Horarios de varias ciudades para comparar.',
     'scientific-calculator': 'Calculadora científica para cálculos avanzados.',
     'unit-converter': 'Conversor de unidades para problemas y prácticas.',
-    'markdown-text-editor': 'Editor de Markdown con fórmulas y exportación.',
+    'markdown-text-editor': 'Editor de textos en formato Markdown y fórmulas en LaTeX. Además de guardarlo en formato Markdown (.md) puedes copiar el código Markdown, copiar el código HTML para pegarlo en otros procesadores de texto y también imprimirlo en PDF.',
     'vce-community': 'Catálogo de apps educativas de la comunidad.',
     'comunidad-chatgpt-ia-edu': 'Recursos del proyecto ChatGPT-IA-edu.',
     'edumedia-iag': 'Recursos multimedia educativos con IA generativa.',
@@ -45,4 +45,60 @@ const widgetHelpText: Record<string, string> = {
     'work-gestures': 'Gestos de trabajo para dinámicas de aula.',
 };
 
-export const getWidgetHelpText = (widgetId: string) => widgetHelpText[widgetId] ?? '';
+const widgetHelpKeys: Record<string, string> = {
+    'work-list': 'widgets_help.work-list',
+    'attendance': 'widgets_help.attendance',
+    'group-generator': 'widgets_help.group-generator',
+    'calendar': 'widgets_help.calendar',
+    'program-guide': 'widgets_help.program-guide',
+    'timer': 'widgets_help.timer',
+    'stopwatch': 'widgets_help.stopwatch',
+    'metronome': 'widgets_help.metronome',
+    'global-clocks': 'widgets_help.global-clocks',
+    'scientific-calculator': 'widgets_help.scientific-calculator',
+    'unit-converter': 'widgets_help.unit-converter',
+    'markdown-text-editor': 'widgets_help.markdown-text-editor',
+    'vce-community': 'widgets_help.vce-community',
+    'comunidad-chatgpt-ia-edu': 'widgets_help.comunidad-chatgpt-ia-edu',
+    'edumedia-iag': 'widgets_help.edumedia-iag',
+    'file-manager': 'widgets_help.file-manager',
+    'notepad': 'widgets_help.notepad',
+    'drawing-pad': 'widgets_help.drawing-pad',
+    'image-carousel': 'widgets_help.image-carousel',
+    'edimarkweb': 'widgets_help.edimarkweb',
+    'html-sandbox': 'widgets_help.html-sandbox',
+    'boardlive': 'widgets_help.boardlive',
+    'iframe': 'widgets_help.iframe',
+    'local-web': 'widgets_help.local-web',
+    'file-opener': 'widgets_help.file-opener',
+    'directo-viewer': 'widgets_help.directo-viewer',
+    'wikipedia-search': 'widgets_help.wikipedia-search',
+    'dice': 'widgets_help.dice',
+    'random-spinner': 'widgets_help.random-spinner',
+    'qr-code-generator': 'widgets_help.qr-code-generator',
+    'traffic-light': 'widgets_help.traffic-light',
+    'sound-meter': 'widgets_help.sound-meter',
+    'scoreboard': 'widgets_help.scoreboard',
+    'directo-vota': 'widgets_help.directo-vota',
+    'directo-escala': 'widgets_help.directo-escala',
+    'directo-nube': 'widgets_help.directo-nube',
+    'directo-ideas': 'widgets_help.directo-ideas',
+    'directo-muro': 'widgets_help.directo-muro',
+    'directo-ticket': 'widgets_help.directo-ticket',
+    'qplay': 'widgets_help.qplay',
+    'tic-tac-toe': 'widgets_help.tic-tac-toe',
+    'memory-game': 'widgets_help.memory-game',
+    'sliding-puzzle': 'widgets_help.sliding-puzzle',
+    'work-gestures': 'widgets_help.work-gestures',
+};
+
+export const getWidgetHelpText = (widgetId: string, t?: (key: string) => string) => {
+    const key = widgetHelpKeys[widgetId];
+    if (key && t) {
+        const translated = t(key);
+        if (translated && translated !== key) {
+            return translated;
+        }
+    }
+    return widgetHelpText[widgetId] ?? '';
+};

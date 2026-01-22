@@ -632,9 +632,7 @@ export const FileManagerWidget: FC = () => {
                                 )}
                                 {entry.sourceWidgetId && (
                                     <span className="file-manager-entry-source">
-                                        {t('widgets.file_manager.saved_from', {
-                                            widget: entry.sourceWidgetTitleKey ? t(entry.sourceWidgetTitleKey) : entry.sourceWidgetId,
-                                        })}
+                                        {entry.sourceWidgetTitleKey ? t(entry.sourceWidgetTitleKey) : entry.sourceWidgetId}
                                     </span>
                                 )}
                             </button>

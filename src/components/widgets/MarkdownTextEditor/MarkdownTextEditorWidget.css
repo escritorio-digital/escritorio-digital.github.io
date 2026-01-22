@@ -26,6 +26,23 @@
     @apply px-2 text-xs font-semibold text-gray-700;
 }
 
+.markdown-toolbar-group .zoom-input {
+    width: 4.5rem;
+    text-align: center;
+    background: transparent;
+}
+
+.markdown-toolbar-group .zoom-input::-webkit-outer-spin-button,
+.markdown-toolbar-group .zoom-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.markdown-toolbar-group .zoom-input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
 .feedback-message {
     @apply text-sm text-gray-700 px-2;
 }

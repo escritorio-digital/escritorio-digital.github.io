@@ -214,7 +214,12 @@
   },
   "desktop": {
     "fullscreen_enter": "Pantalla completa",
-    "fullscreen_exit": "Sortir de pantalla completa"
+    "fullscreen_exit": "Sortir de pantalla completa",
+    "window_help": "Ajuda",
+    "window_minimize": "Minimitzar",
+    "window_maximize": "Maximitzar",
+    "window_restore": "Restaurar",
+    "window_close": "Tancar"
   },
   "credits": {
     "title": "Crèdits i Llicència",
@@ -287,7 +292,6 @@
       "root": "Arrel",
       "up": "Pujar",
       "download": "Descarregar",
-      "saved_from": "Desat des de {{widget}}",
       "empty_trash_button": "Buidar paperera",
       "empty_trash_confirm": "Voleu eliminar definitivament tot el contingut de la paperera?",
       "copy": "Copiar",
@@ -536,7 +540,11 @@
         "h3": "Subtítol Menor (H3)",
         "copy": "Copiar text",
         "upload": "Carregar nota (.md)",
-        "download": "Descarregar nota (.md)"
+        "download": "Descarregar nota (.md)",
+        "zoom_in": "Apropar zoom",
+        "zoom_out": "Allunyar zoom",
+        "zoom_reset": "Restablir zoom",
+        "zoom_edit_hint": "Doble clic per escriure el percentatge."
       },
       "unsaved_title": "Canvis sense guardar",
       "unsaved_message": "Tens canvis sense guardar. Vols guardar-los abans de tancar?",
@@ -578,7 +586,8 @@
         "open_file": "Obrir fitxer",
         "save_file": "Desar fitxer",
         "export_pdf": "Imprimir PDF",
-        "copy_html": "Copia HTML"
+        "copy_html": "Copia HTML",
+        "zoom_edit_hint": "Doble clic per escriure el percentatge."
       },
       "placeholders": {
         "text": "text",
@@ -592,7 +601,8 @@
       "source_copied": "Markdown copiat.",
       "copy_failed": "No s'ha pogut copiar el text.",
       "preview_error": "Error en renderitzar la vista prèvia.",
-      "html_copied": "HTML copiat"
+      "html_copied": "HTML copiat",
+      "help": "Editor de textos en format Markdown i formulas en LaTeX. A mes de desar-lo en format Markdown (.md) pots copiar el codi Markdown, copiar el codi HTML per enganxar-lo en altres processadors de text i tambe imprimir-lo en PDF."
     },
     "sliding_puzzle": {
       "title": "Puzzle Lliscant",
@@ -946,5 +956,51 @@
     "discard": "No guardar",
     "save": "Guardar",
     "unknown_widget": "aquest programa"
+  },
+  "widgets_help": {
+    "work-list": "Llista de tasques i recordatoris per organitzar la sessió.",
+    "attendance": "Registre ràpid d'assistència i estat del grup.",
+    "group-generator": "Crea grups aleatoris o equilibrats.",
+    "calendar": "Calendari visual per a dates i planificació.",
+    "program-guide": "Guia integrada amb el catàleg de widgets i usos.",
+    "timer": "Compte enrere per a activitats i torns.",
+    "stopwatch": "Cronòmetre per mesurar temps.",
+    "metronome": "Pols constant per a ritme i dinàmiques.",
+    "global-clocks": "Horaris de diverses ciutats per comparar.",
+    "scientific-calculator": "Calculadora científica per a càlculs avançats.",
+    "unit-converter": "Convertidor d'unitats per a problemes i pràctiques.",
+    "markdown-text-editor": "Editor de textos en format Markdown i fórmules en LaTeX. A més de desar-lo en format Markdown (.md) pots copiar el codi Markdown, copiar el codi HTML per enganxar-lo en altres processadors de text i també imprimir-lo en PDF.",
+    "vce-community": "Catàleg d'apps educatives de la comunitat.",
+    "comunidad-chatgpt-ia-edu": "Recursos del projecte ChatGPT-IA-edu.",
+    "edumedia-iag": "Recursos multimèdia educatius amb IA generativa.",
+    "file-manager": "Gestiona fitxers i carpetes desats al navegador.",
+    "notepad": "Bloc de notes ràpid per a consignes i llistes.",
+    "drawing-pad": "Pissarra de dibuix lliure i esquemes.",
+    "image-carousel": "Mostra una col·lecció d'imatges.",
+    "edimarkweb": "Processador Markdown amb vista prèvia i exportació.",
+    "html-sandbox": "Espai per mostrar contingut HTML.",
+    "boardlive": "Pissarra col·laborativa en temps real.",
+    "iframe": "Visor web per a pàgines dins l'escriptori.",
+    "local-web": "Desa i executa webs locals sense connexió.",
+    "file-opener": "Obre fitxers locals (PDF, imatges, àudio, vídeo).",
+    "directo-viewer": "Visor per a contingut web o recursos externs.",
+    "wikipedia-search": "Cerca ràpida a la Wikipedia amb canvi d'idioma.",
+    "dice": "Llançador de daus 3D per a l'atzar.",
+    "random-spinner": "Ruleta aleatòria per a sortejos i torns.",
+    "qr-code-generator": "Genera codis QR per compartir enllaços.",
+    "traffic-light": "Semàfor visual d'estat i activitat.",
+    "sound-meter": "Mesurador visual del nivell de soroll.",
+    "scoreboard": "Marcador de punts per a equips i reptes.",
+    "directo-vota": "Votació simple amb resultats immediats.",
+    "directo-escala": "Escala de valoració per a opinions.",
+    "directo-nube": "Núvol de paraules amb respostes curtes.",
+    "directo-ideas": "Pluja d'idees amb votacions.",
+    "directo-muro": "Mur col·laboratiu amb notes.",
+    "directo-ticket": "Tiquets de sortida al final de la sessió.",
+    "qplay": "Concurs interactiu amb qüestionaris.",
+    "tic-tac-toe": "Tres en ratlla per a repàs ràpid.",
+    "memory-game": "Memorama de parelles per practicar conceptes.",
+    "sliding-puzzle": "Trencaclosques lliscant per a lògica i atenció.",
+    "work-gestures": "Gestos de treball per a dinàmiques d'aula."
   }
 }

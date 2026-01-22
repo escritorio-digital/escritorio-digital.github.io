@@ -1007,7 +1007,7 @@ const DesktopUI: React.FC<{
                 const Component = config.component;
                 const isPinned = activeProfile.pinnedWidgets.includes(widget.widgetId);
                 const isActiveWindow = widget.instanceId === activeWindowId;
-                const helpText = getWidgetHelpText(widget.widgetId);
+                const helpText = getWidgetHelpText(widget.widgetId, t);
                 const windowTitle = widget.titleOverride
                     ? `${t(config.title)} — ${widget.titleOverride}`
                     : t(config.title);
@@ -1058,6 +1058,13 @@ const DesktopUI: React.FC<{
                         }}
                         pinLabel={t('toolbar.add_widget')}
                         unpinLabel={t('toolbar.remove_widget')}
+                        helpLabel={t('desktop.window_help')}
+                        minimizeLabel={t('desktop.window_minimize')}
+                        maximizeLabel={t('desktop.window_maximize')}
+                        restoreLabel={t('desktop.window_restore')}
+                        closeLabel={t('desktop.window_close')}
+                        enterFullscreenLabel={t('desktop.fullscreen_enter')}
+                        exitFullscreenLabel={t('desktop.fullscreen_exit')}
                     >
                         <Suspense
                             fallback={

@@ -92,6 +92,9 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
     const [lastSavedSnapshot, setLastSavedSnapshot] = useState<string>('');
     const [viewMode, setViewMode] = useState<ViewMode>('split');
     const [zoomLevel, setZoomLevel] = useState(1);
+    const [isZoomEditing, setIsZoomEditing] = useState(false);
+    const [zoomDraft, setZoomDraft] = useState('100');
+    const zoomClickTimer = useRef<number | null>(null);
     const [currentFilename, setCurrentFilename] = useState<string | null>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const previewRef = useRef<HTMLDivElement>(null);
@@ -130,9 +133,15 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
     };
 
     const handleZoomChange = (nextZoom: number) => {
-        const clamped = Math.min(2.5, Math.max(0.75, nextZoom));
+        const clamped = Math.min(5, Math.max(0.75, nextZoom));
         setZoomLevel(clamped);
     };
+
+    useEffect(() => {
+        if (!isZoomEditing) {
+            setZoomDraft(`${Math.round(zoomLevel * 100)}`);
+        }
+    }, [zoomLevel, isZoomEditing]);
 
     const updateSelection = (selectionStart: number, selectionEnd: number) => {
         const textarea = textareaRef.current;
@@ -561,14 +570,61 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
                         >
                             <ZoomIn size={16} />
                         </button>
-                        <button
-                            type="button"
-                            title={t('widgets.markdown_text_editor.toolbar.zoom_reset')}
-                            onClick={() => handleZoomChange(1)}
-                            className="zoom-reset"
-                        >
-                            {Math.round(zoomLevel * 100)}%
-                        </button>
+                        {isZoomEditing ? (
+                            <input
+                                type="number"
+                                min={75}
+                                max={500}
+                                step={1}
+                                value={zoomDraft}
+                                onChange={(event) => setZoomDraft(event.target.value)}
+                                onBlur={() => {
+                                    const value = Number.parseFloat(zoomDraft);
+                                    if (!Number.isNaN(value)) {
+                                        handleZoomChange(value / 100);
+                                    }
+                                    setIsZoomEditing(false);
+                                }}
+                                onKeyDown={(event) => {
+                                    if (event.key === 'Enter') {
+                                        const value = Number.parseFloat(zoomDraft);
+                                        if (!Number.isNaN(value)) {
+                                            handleZoomChange(value / 100);
+                                        }
+                                        setIsZoomEditing(false);
+                                    }
+                                    if (event.key === 'Escape') {
+                                        setIsZoomEditing(false);
+                                    }
+                                }}
+                                className="zoom-input"
+                                title={t('widgets.markdown_text_editor.toolbar.zoom_reset')}
+                            />
+                        ) : (
+                            <button
+                                type="button"
+                                title={t('widgets.markdown_text_editor.toolbar.zoom_edit_hint')}
+                                onClick={() => {
+                                    if (zoomClickTimer.current) {
+                                        window.clearTimeout(zoomClickTimer.current);
+                                    }
+                                    zoomClickTimer.current = window.setTimeout(() => {
+                                        handleZoomChange(1);
+                                        zoomClickTimer.current = null;
+                                    }, 200);
+                                }}
+                                onDoubleClick={() => {
+                                    if (zoomClickTimer.current) {
+                                        window.clearTimeout(zoomClickTimer.current);
+                                        zoomClickTimer.current = null;
+                                    }
+                                    setIsZoomEditing(true);
+                                }}
+                                className="zoom-reset"
+                            >
+                                {Math.round(zoomLevel * 100)}%
+                            </button>
+                        )}
                         <button type="button" title={t('widgets.markdown_text_editor.toolbar.formula')} onClick={handleOpenFormulaEditor}>
                             <Sigma size={16} />
                         </button>

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { FC } from 'react';
+import type { FC, CSSProperties } from 'react';
 import { useEditor, EditorContent, Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { Heading as TiptapHeadingExtension } from '@tiptap/extension-heading';
@@ -26,10 +26,29 @@ import {
   Heading2,
   Heading3,
   Clipboard,
+  ZoomIn,
+  ZoomOut,
 } from 'lucide-react';
 
-const MenuBar: FC<{ editor: Editor | null; onUpload: () => void; onDownload: () => void; }> = ({ editor, onUpload, onDownload }) => {
+const MenuBar: FC<{
+  editor: Editor | null;
+  onUpload: () => void;
+  onDownload: () => void;
+  zoomLevel: number;
+  onZoomChange: (nextZoom: number) => void;
+  onZoomReset: () => void;
+}> = ({ editor, onUpload, onDownload, zoomLevel, onZoomChange, onZoomReset }) => {
   const { t } = useTranslation();
+  const [isEditingZoom, setIsEditingZoom] = useState(false);
+  const [zoomDraft, setZoomDraft] = useState(`${Math.round(zoomLevel * 100)}`);
+  const zoomClickTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (!isEditingZoom) {
+      setZoomDraft(`${Math.round(zoomLevel * 100)}`);
+    }
+  }, [zoomLevel, isEditingZoom]);
+
   if (!editor) {
     return null;
   }
@@ -71,6 +90,76 @@ const MenuBar: FC<{ editor: Editor | null; onUpload: () => void; onDownload: () 
           <Icon size={16} />
         </button>
       ))}
+      <div className="menubar-zoom">
+        <button
+          onClick={() => onZoomChange(zoomLevel - 0.1)}
+          className="p-2 rounded hover:bg-gray-200"
+          title={t('widgets.notepad.menubar.zoom_out')}
+        >
+          <ZoomOut size={16} />
+        </button>
+        <button
+          onClick={() => onZoomChange(zoomLevel + 0.1)}
+          className="p-2 rounded hover:bg-gray-200"
+          title={t('widgets.notepad.menubar.zoom_in')}
+        >
+          <ZoomIn size={16} />
+        </button>
+        {isEditingZoom ? (
+          <input
+            type="number"
+            min={75}
+            max={500}
+            step={1}
+            value={zoomDraft}
+            onChange={(event) => setZoomDraft(event.target.value)}
+            onBlur={() => {
+              const value = Number.parseFloat(zoomDraft);
+              if (!Number.isNaN(value)) {
+                onZoomChange(value / 100);
+              }
+              setIsEditingZoom(false);
+            }}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                const value = Number.parseFloat(zoomDraft);
+                if (!Number.isNaN(value)) {
+                  onZoomChange(value / 100);
+                }
+                setIsEditingZoom(false);
+              }
+              if (event.key === 'Escape') {
+                setIsEditingZoom(false);
+              }
+            }}
+            className="zoom-input p-2 rounded border border-gray-300"
+            title={t('widgets.notepad.menubar.zoom_reset')}
+          />
+        ) : (
+          <button
+            onClick={() => {
+              if (zoomClickTimer.current) {
+                window.clearTimeout(zoomClickTimer.current);
+              }
+              zoomClickTimer.current = window.setTimeout(() => {
+                onZoomReset();
+                zoomClickTimer.current = null;
+              }, 200);
+            }}
+            onDoubleClick={() => {
+              if (zoomClickTimer.current) {
+                window.clearTimeout(zoomClickTimer.current);
+                zoomClickTimer.current = null;
+              }
+              setIsEditingZoom(true);
+            }}
+            className="p-2 rounded hover:bg-gray-200"
+            title={t('widgets.notepad.menubar.zoom_edit_hint')}
+          >
+            {Math.round(zoomLevel * 100)}%
+          </button>
+        )}
+      </div>
       <div className="menubar-actions">
         <button onClick={onUpload} className="p-2 rounded hover:bg-gray-200" title={t('widgets.notepad.menubar.upload')}>
             <FolderOpen size={16} />
@@ -92,7 +181,13 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
   const [lastSavedContent, setLastSavedContent] = useState(content);
   const [isDirty, setIsDirty] = useState(false);
   const [currentFilename, setCurrentFilename] = useState<string | null>(null);
+  const [zoomLevel, setZoomLevel] = useState(1);
   const turndownService = new TurndownService();
+
+  const handleZoomChange = (nextZoom: number) => {
+    const clamped = Math.min(5, Math.max(0.75, nextZoom));
+    setZoomLevel(clamped);
+  };
 
   const editor = useEditor({
     extensions: [
@@ -244,8 +339,18 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
   }, [resolvedInstanceId]);
 
   return (
-    <div className="flex flex-col h-full w-full notepad-widget bg-white rounded-b-md overflow-hidden">
-      <MenuBar editor={editor} onUpload={handleOpenFile} onDownload={handleDownload} />
+    <div
+      className="flex flex-col h-full w-full notepad-widget bg-white rounded-b-md overflow-hidden"
+      style={{ ['--notepad-zoom' as string]: zoomLevel } as CSSProperties}
+    >
+      <MenuBar
+        editor={editor}
+        onUpload={handleOpenFile}
+        onDownload={handleDownload}
+        zoomLevel={zoomLevel}
+        onZoomChange={handleZoomChange}
+        onZoomReset={() => setZoomLevel(1)}
+      />
       <EditorContent editor={editor} className="flex-grow overflow-auto" />
     </div>
   );
