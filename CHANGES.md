@@ -1,5 +1,10 @@
 # Cambios realizados
 
+## 2.5.1
+- Inicio: categoria Favoritos siempre visible en primer lugar.
+- Dados 3D: selector de caras, barra superior con controles, sonido persistente y ajuste de tamanos.
+- Atajos de zoom: mostrar atajos en el menu y restablecer con Ctrl+0.
+
 ## 2.5.0
 - Barra de herramientas unica por widget con menu de tres puntos integrado, ocultado suave y atajo de teclado.
 - Boton de salida de pantalla completa reposicionado y arrastrable para no tapar la barra.

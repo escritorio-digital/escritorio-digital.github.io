@@ -62,6 +62,7 @@ type CategoryIconConfig = {
 };
 
 const categoryIcons: Record<string, CategoryIconConfig> = {
+    favorites: { Icon: Star, className: 'bg-yellow-100 text-yellow-700' },
     organization: { Icon: ClipboardList, className: 'bg-emerald-100 text-emerald-700' },
     time: { Icon: Clock, className: 'bg-blue-100 text-blue-700' },
     math_science: { Icon: Sigma, className: 'bg-teal-100 text-teal-700' },
@@ -156,6 +157,10 @@ export const StartMenu: React.FC<StartMenuProps> = ({
     const visibleCategories = useMemo(
         () => widgetsByCategory.filter((category) => category.widgets.length > 0),
         [widgetsByCategory]
+    );
+    const categoriesWithFavorites = useMemo(
+        () => [{ id: 'favorites', titleKey: 'start_menu.favorites', widgets: pinnedWidgetItems }, ...visibleCategories],
+        [pinnedWidgetItems, visibleCategories]
     );
 
     useEffect(() => {
@@ -591,16 +596,26 @@ export const StartMenu: React.FC<StartMenuProps> = ({
                             }}
                         >
                             <div className="space-y-1">
-                                {visibleCategories.map((category) => {
+                                {categoriesWithFavorites.map((category) => {
                                     const iconConfig = categoryIcons[category.id] ?? categoryIcons.other;
+                                    const isFavorites = category.id === 'favorites';
                                     return (
                                         <button
                                             key={category.id}
                                             onClick={() => {
-                                                setActiveSection('widgets');
-                                                setActiveCategoryId(category.id);
+                                                if (isFavorites) {
+                                                    setActiveSection('favorites');
+                                                    setActiveCategoryId(null);
+                                                } else {
+                                                    setActiveSection('widgets');
+                                                    setActiveCategoryId(category.id);
+                                                }
                                             }}
-                                            className={`w-full text-left px-3 py-2 rounded-lg text-[0.8125rem] font-semibold border transition flex items-center gap-2 ${activeCategoryId === category.id && activeSection === 'widgets' ? 'bg-accent text-text-dark border-transparent' : 'bg-white/90 hover:bg-amber-50 border-gray-200'}`}
+                                            className={`w-full text-left px-3 py-2 rounded-lg text-[0.8125rem] font-semibold border transition flex items-center gap-2 ${
+                                                (isFavorites ? activeSection === 'favorites' : activeCategoryId === category.id && activeSection === 'widgets')
+                                                    ? 'bg-accent text-text-dark border-transparent'
+                                                    : 'bg-white/90 hover:bg-amber-50 border-gray-200'
+                                            }`}
                                         >
                                             <span className={`h-5 w-5 rounded-md flex items-center justify-center ${iconConfig.className}`}>
                                                 <iconConfig.Icon size={12} />

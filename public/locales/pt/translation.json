@@ -432,7 +432,12 @@
       "num_dice": "Número de Dados:",
       "rolling": "Lançando...",
       "roll_dice": "Lançar Dados",
-      "total": "Total:"
+      "total": "Total:",
+      "num_faces": "Faces:",
+      "sound_on": "Ativar som",
+      "sound_off": "Silenciar som",
+      "num_dice_short": "Dados",
+      "num_faces_short": "Faces"
     },
     "group_generator": {
       "title": "Gerador de Grupos",

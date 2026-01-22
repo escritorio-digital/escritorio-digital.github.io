@@ -431,7 +431,12 @@
       "num_dice": "Nombre de dés :",
       "rolling": "Lancement...",
       "roll_dice": "Lancer les dés",
-      "total": "Total :"
+      "total": "Total :",
+      "num_faces": "Faces :",
+      "sound_on": "Activer le son",
+      "sound_off": "Couper le son",
+      "num_dice_short": "Des",
+      "num_faces_short": "Faces"
     },
     "group_generator": {
       "title": "Générateur de groupes",

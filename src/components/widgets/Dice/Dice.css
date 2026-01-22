@@ -5,6 +5,7 @@
   container-type: size;
   --die-size: clamp(48px, 8vw, 120px);
   --dot-size: clamp(8px, 1.6vw, 18px);
+  --flat-font-size: clamp(18px, 4vw, 36px);
 }
 
 @supports (width: 1cqw) {
@@ -16,38 +17,49 @@
 
 /* ... (el resto de los estilos: .controls, .roll-button, etc. se mantienen igual) ... */
 
-.controls {
-  @apply flex items-center justify-between mb-4 gap-4 px-2;
+.dice-toolbar-group {
+  @apply flex items-center gap-2;
 }
 
 .dice-selector {
     @apply flex items-center gap-2;
-    color: var(--color-text-light);
+    color: #374151;
+    min-width: 0;
 }
 .dice-selector label {
-  font-size: clamp(0.85rem, 2.4cqw, 1.1rem);
+  font-size: 0.8rem;
+  white-space: nowrap;
 }
 
 .dice-selector input {
-  @apply w-16 text-center bg-transparent border-2 border-accent rounded text-text-light;
-  padding: clamp(4px, 1.6cqw, 10px);
-  font-size: clamp(0.85rem, 2.4cqw, 1.1rem);
+  @apply w-14 text-center border border-gray-300 rounded bg-white text-gray-900;
+  padding: 4px 6px;
+  font-size: 0.85rem;
 }
 
-.roll-button {
-  @apply flex items-center gap-2 bg-accent text-text-dark font-semibold py-2 px-4 rounded-lg hover:bg-[#8ec9c9] transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
-  font-size: clamp(0.85rem, 2.4cqw, 1.1rem);
-  padding: clamp(6px, 1.8cqw, 12px) clamp(10px, 2.6cqw, 16px);
+.dice-selector select {
+  @apply w-14 text-center border border-gray-300 rounded bg-white text-gray-900;
+  padding: 4px 6px;
+  font-size: 0.85rem;
 }
-.roll-button svg {
-  width: clamp(16px, 3cqw, 26px);
-  height: clamp(16px, 3cqw, 26px);
+
+.dice-toolbar-button {
+  @apply inline-flex items-center justify-center rounded-md p-1 text-gray-600 hover:bg-gray-200;
 }
+
+.dice-toolbar-action {
+  @apply inline-flex items-center gap-2 rounded-md bg-accent px-2 py-1 text-sm font-semibold text-text-dark shadow-sm hover:bg-[#8ec9c9] disabled:opacity-60 disabled:cursor-not-allowed;
+}
+
 
 .dice-container {
   @apply flex-grow flex items-center justify-center gap-8 flex-wrap p-4;
   perspective: 1000px;
   gap: clamp(8px, 3cqw, 24px);
+}
+
+.dice-container.rolling {
+  animation: dice-board-rumble 0.6s ease-in-out infinite;
 }
 
 .total {
@@ -60,6 +72,10 @@
     @apply text-yellow-300;
 }
 
+.total--hidden {
+  visibility: hidden;
+}
+
 .die-scene {
   width: var(--die-size);
   height: var(--die-size);
@@ -70,11 +86,11 @@
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 1.5s ease-out;
+  transition: transform var(--roll-duration, 1500ms) ease-out;
 }
 
 .die-3d.rolling {
-  animation: roll-3d 1.5s ease-out forwards;
+  animation: roll-3d var(--roll-duration, 1500ms) ease-out forwards;
 }
 
 .face {
@@ -102,6 +118,20 @@
 .die-3d.show-5 { transform: rotateY( 90deg); }
 .die-3d.show-6 { transform: rotateY(180deg); }
 
+.die-flat {
+  width: var(--die-size);
+  height: var(--die-size);
+  @apply flex items-center justify-center rounded-xl border border-gray-300 text-text-dark font-bold;
+  background: #f8fafc;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+  font-size: var(--flat-font-size);
+  letter-spacing: 0.02em;
+}
+
+.die-flat span {
+  @apply drop-shadow;
+}
+
 .face {
   display: grid;
   gap: clamp(2px, 0.8cqw, 6px);
@@ -125,6 +155,15 @@
 @keyframes roll-3d {
   0% { transform: rotateY(0deg) rotateX(0deg); }
   100% { transform: rotateY(1080deg) rotateX(720deg); }
+}
+
+@keyframes dice-board-rumble {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, -2px); }
+  80% { transform: translate(1px, 2px); }
+  100% { transform: translate(0, 0); }
 }
 
 

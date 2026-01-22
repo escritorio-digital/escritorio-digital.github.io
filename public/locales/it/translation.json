@@ -430,7 +430,12 @@
       "num_dice": "Numero di dadi:",
       "rolling": "Lancio...",
       "roll_dice": "Lancia i dadi",
-      "total": "Totale:"
+      "total": "Totale:",
+      "num_faces": "Facce:",
+      "sound_on": "Attiva audio",
+      "sound_off": "Disattiva audio",
+      "num_dice_short": "Dadi",
+      "num_faces_short": "Facce"
     },
     "group_generator": {
       "title": "Generatore di gruppi",

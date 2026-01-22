@@ -430,7 +430,12 @@
       "num_dice": "Nombre de Daus:",
       "rolling": "Llançant...",
       "roll_dice": "Llançar Daus",
-      "total": "Total:"
+      "total": "Total:",
+      "num_faces": "Cares:",
+      "sound_on": "Activar so",
+      "sound_off": "Silenciar so",
+      "num_dice_short": "Daus",
+      "num_faces_short": "Cares"
     },
     "group_generator": {
       "title": "Generador de Grups",

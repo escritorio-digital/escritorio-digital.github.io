@@ -13,5 +13,5 @@ export const widgetConfig: Omit<WidgetConfig, 'component'> = {
     };
     return <WidgetIcon />;
   })(),
-  defaultSize: { width: 400, height: 300 },
+  defaultSize: { width: 460, height: 320 },
 };

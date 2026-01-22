@@ -192,6 +192,9 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
   const toolbarPinText = toolbarPinLabel ?? '';
   const toolbarRevealHintText = toolbarRevealHint ?? '';
   const toolbarShortcutLabel = 'Ctrl+Shift+K';
+  const zoomInShortcutLabel = 'Ctrl++';
+  const zoomOutShortcutLabel = 'Ctrl+-';
+  const zoomResetShortcutLabel = 'Ctrl+0';
   const clearToolbarHideTimer = () => {
     if (toolbarHideTimer.current) {
       window.clearTimeout(toolbarHideTimer.current);
@@ -258,10 +261,29 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
         setIsZoomEditing(false);
         toggleToolbarPinned();
       }
+      if (!onZoomChange || !event.ctrlKey || event.altKey || event.metaKey) return;
+      const key = event.key;
+      if (key === '+' || key === '=') {
+        event.preventDefault();
+        onZoomChange(clampZoom(zoomValue + 0.1));
+        return;
+      }
+      if (key === '-' || key === '_') {
+        event.preventDefault();
+        onZoomChange(clampZoom(zoomValue - 0.1));
+      }
+      if (key === '0') {
+        event.preventDefault();
+        if (onZoomReset) {
+          onZoomReset();
+        } else {
+          onZoomChange(clampZoom(1));
+        }
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [clearToolbarHideTimer, isActive, isMinimized, toggleToolbarPinned]);
+  }, [clearToolbarHideTimer, isActive, isMinimized, onZoomChange, toggleToolbarPinned, zoomValue]);
 
   React.useEffect(() => {
     if (!isZoomEditing) {
@@ -552,8 +574,8 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
                               type="button"
                               onClick={() => onZoomChange(clampZoom(zoomValue - 0.1))}
                               className="rounded-md px-2 py-1 text-gray-700 hover:bg-gray-100"
-                              title={zoomOutLabel}
-                              aria-label={zoomOutLabel}
+                              title={`${zoomOutLabel} (${zoomOutShortcutLabel})`}
+                              aria-label={`${zoomOutLabel} (${zoomOutShortcutLabel})`}
                             >
                               <Minus size={14} />
                             </button>
@@ -561,8 +583,8 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
                               type="button"
                               onClick={() => onZoomChange(clampZoom(zoomValue + 0.1))}
                               className="rounded-md px-2 py-1 text-gray-700 hover:bg-gray-100"
-                              title={zoomInLabel}
-                              aria-label={zoomInLabel}
+                              title={`${zoomInLabel} (${zoomInShortcutLabel})`}
+                              aria-label={`${zoomInLabel} (${zoomInShortcutLabel})`}
                             >
                               <Plus size={14} />
                             </button>
@@ -576,8 +598,8 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
                                 onZoomChange?.(clampZoom(1));
                               }}
                               className="rounded-md px-2 py-1 text-gray-700 hover:bg-gray-100"
-                              title={zoomResetLabel}
-                              aria-label={zoomResetLabel}
+                              title={`${zoomResetLabel} (${zoomResetShortcutLabel})`}
+                              aria-label={`${zoomResetLabel} (${zoomResetShortcutLabel})`}
                             >
                               <RotateCcw size={14} />
                             </button>
@@ -627,6 +649,9 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
                                 {Math.round(zoomValue * 100)}%
                               </button>
                             )}
+                            <span className="ml-auto text-[10px] text-gray-400">
+                              {zoomOutShortcutLabel} / {zoomResetShortcutLabel} / {zoomInShortcutLabel}
+                            </span>
                           </div>
                         )}
                         <button
