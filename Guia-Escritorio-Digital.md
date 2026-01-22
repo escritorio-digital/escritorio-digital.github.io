@@ -35,7 +35,7 @@ Escritorio Digital es una pizarra de trabajo con “ventanas” pensada para el 
 
 - **Calculadora científica**: cálculos comunes en ciencias y matemáticas.
 - **Conversor de unidades**: convierte magnitudes para problemas y prácticas.
-- **Markdown + LaTeX**: escribe apuntes con fórmulas y formato.
+- **Editor de textos Markdown**: escribe apuntes con fórmulas y formato.
 
 ### Comunidad
 
@@ -113,7 +113,7 @@ Este widget está pensado para abrir webs hechas con IA o recursos offline para 
 ## Ideas de uso en clase
 
 - **Inicio de sesión**: Lista de tareas + Temporizador + Semáforo.
-- **Explicación**: Markdown + LaTeX + Pizarra de dibujo + Visor web.
+- **Explicación**: Editor de textos Markdown + Pizarra de dibujo + Visor web.
 - **Cooperativo**: Generador de grupos + Temporizador + Medidor de sonido.
 - **Gamificación**: Ruleta aleatoria + Dado + Marcador de puntos.
 

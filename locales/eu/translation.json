@@ -576,7 +576,8 @@
         "copy_source": "Markdown kopiatu",
         "open_file": "Ireki fitxategia",
         "save_file": "Gorde fitxategia",
-        "export_pdf": "PDF inprimatu"
+        "export_pdf": "PDF inprimatu",
+        "copy_html": "Kopiatu HTML"
       },
       "placeholders": {
         "text": "testua",
@@ -589,7 +590,8 @@
       },
       "source_copied": "Markdown kopiatua.",
       "copy_failed": "Ezin izan da testua kopiatu.",
-      "preview_error": "Errorea aurrebista errendatzean."
+      "preview_error": "Errorea aurrebista errendatzean.",
+      "html_copied": "HTML kopiatua"
     },
     "sliding_puzzle": {
       "title": "Puzzle Lerragarria",

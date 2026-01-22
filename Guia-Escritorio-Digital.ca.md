@@ -34,7 +34,7 @@ Escriptori Digital és una pissarra de treball amb “finestres” pensada per a
 
 - **Calculadora científica**: càlculs comuns en ciències i matemàtiques.
 - **Convertidor d’unitats**: converteix magnituds per a problemes i pràctiques.
-- **Markdown + LaTeX**: escriu apunts amb fórmules i format.
+- **Editor de textos Markdown**: escriu apunts amb fórmules i format.
 
 ### Comunitat
 
@@ -101,7 +101,7 @@ Aquest widget funciona com un arxivador dins del navegador.
 ## Idees d’ús a classe
 
 - **Inici de classe**: Llista de tasques + Temporitzador + Semàfor.
-- **Explicació**: Markdown + LaTeX + Pissarra de dibuix + Visor web.
+- **Explicació**: Editor de textos Markdown + Pissarra de dibuix + Visor web.
 - **Cooperatiu**: Generador de grups + Temporitzador + Mesurador de so.
 - **Gamificació**: Ruleta aleatòria + Dau + Marcador de punts.
 

@@ -34,7 +34,7 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 
 - **Scientific calculator**: common calculations in science and math.
 - **Unit converter**: convert magnitudes for problems and labs.
-- **Markdown + LaTeX**: write notes with formulas and formatting.
+- **Markdown Text Editor**: write notes with formulas and formatting.
 
 ### Community
 
@@ -100,7 +100,7 @@ This widget works as a file cabinet inside the browser.
 ## Classroom use ideas
 
 - **Start of class**: Task list + Timer + Traffic Light.
-- **Explanation**: Markdown + LaTeX + Drawing pad + Web viewer.
+- **Explanation**: Markdown Text Editor + Drawing pad + Web viewer.
 - **Cooperative work**: Group generator + Timer + Sound meter.
 - **Gamification**: Random spinner + Dice + Scoreboard.
 

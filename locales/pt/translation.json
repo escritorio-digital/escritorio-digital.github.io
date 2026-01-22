@@ -579,7 +579,8 @@
         "copy_source": "Copiar Markdown",
         "open_file": "Abrir arquivo",
         "save_file": "Salvar arquivo",
-        "export_pdf": "Imprimir PDF"
+        "export_pdf": "Imprimir PDF",
+        "copy_html": "Copiar HTML"
       },
       "placeholders": {
         "text": "texto",
@@ -592,7 +593,8 @@
       },
       "source_copied": "Markdown copiado.",
       "copy_failed": "Não foi possível copiar o texto.",
-      "preview_error": "Erro ao renderizar a visualização."
+      "preview_error": "Erro ao renderizar a visualização.",
+      "html_copied": "HTML copiado"
     },
     "sliding_puzzle": {
       "title": "Quebra-cabeça Deslizante",

@@ -577,7 +577,8 @@
         "copy_source": "Copia Markdown",
         "open_file": "Apri file",
         "save_file": "Salva file",
-        "export_pdf": "Stampa PDF"
+        "export_pdf": "Stampa PDF",
+        "copy_html": "Copia HTML"
       },
       "placeholders": {
         "text": "testo",
@@ -590,7 +591,8 @@
       },
       "source_copied": "Markdown copiato.",
       "copy_failed": "Impossibile copiare il testo.",
-      "preview_error": "Errore durante il rendering dell'anteprima."
+      "preview_error": "Errore durante il rendering dell'anteprima.",
+      "html_copied": "HTML copiato"
     },
     "sliding_puzzle": {
       "title": "Puzzle scorrevole",

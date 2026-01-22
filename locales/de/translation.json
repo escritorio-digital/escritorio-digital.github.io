@@ -577,7 +577,8 @@
         "copy_source": "Markdown kopieren",
         "open_file": "Datei oeffnen",
         "save_file": "Datei speichern",
-        "export_pdf": "PDF drucken"
+        "export_pdf": "PDF drucken",
+        "copy_html": "HTML kopieren"
       },
       "placeholders": {
         "text": "Text",
@@ -590,7 +591,8 @@
       },
       "source_copied": "Markdown kopiert.",
       "copy_failed": "Text konnte nicht kopiert werden.",
-      "preview_error": "Fehler beim Rendern der Vorschau."
+      "preview_error": "Fehler beim Rendern der Vorschau.",
+      "html_copied": "HTML kopiert"
     },
     "sliding_puzzle": {
       "title": "Schiebepuzzle",

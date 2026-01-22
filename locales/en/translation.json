@@ -577,7 +577,8 @@
         "copy_source": "Copy Markdown",
         "open_file": "Open file",
         "save_file": "Save file",
-        "export_pdf": "Print PDF"
+        "export_pdf": "Print PDF",
+        "copy_html": "Copy HTML"
       },
       "placeholders": {
         "text": "text",
@@ -590,7 +591,8 @@
       },
       "source_copied": "Markdown copied.",
       "copy_failed": "Could not copy the text.",
-      "preview_error": "Error rendering preview."
+      "preview_error": "Error rendering preview.",
+      "html_copied": "HTML copied"
     },
     "sliding_puzzle": {
       "title": "Sliding Puzzle",

@@ -32,7 +32,7 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 
 - **Calculadora científica**: cálculos comúns en ciencias e matemáticas.
 - **Conversor de unidades**: converte magnitudes para problemas e prácticas.
-- **Markdown + LaTeX**: escribe apuntes con fórmulas e formato.
+- **Editor de textos Markdown**: escribe apuntes con fórmulas e formato.
 
 ### Comunidade
 
@@ -99,7 +99,7 @@ Este widget funciona como un archivador dentro do navegador.
 ## Ideas de uso na clase
 
 - **Inicio de sesión**: Lista de tarefas + Temporizador + Semáforo.
-- **Explicación**: Markdown + LaTeX + Pizarra de debuxo + Visor web.
+- **Explicación**: Editor de textos Markdown + Pizarra de debuxo + Visor web.
 - **Cooperativo**: Xerador de grupos + Temporizador + Medidor de son.
 - **Gamificación**: Ruleta aleatoria + Dado + Marcador de puntos.
 

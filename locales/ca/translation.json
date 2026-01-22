@@ -577,7 +577,8 @@
         "copy_source": "Copiar Markdown",
         "open_file": "Obrir fitxer",
         "save_file": "Desar fitxer",
-        "export_pdf": "Imprimir PDF"
+        "export_pdf": "Imprimir PDF",
+        "copy_html": "Copia HTML"
       },
       "placeholders": {
         "text": "text",
@@ -590,7 +591,8 @@
       },
       "source_copied": "Markdown copiat.",
       "copy_failed": "No s'ha pogut copiar el text.",
-      "preview_error": "Error en renderitzar la vista prèvia."
+      "preview_error": "Error en renderitzar la vista prèvia.",
+      "html_copied": "HTML copiat"
     },
     "sliding_puzzle": {
       "title": "Puzzle Lliscant",
