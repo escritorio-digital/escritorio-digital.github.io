@@ -214,7 +214,12 @@
   },
   "desktop": {
     "fullscreen_enter": "Enter fullscreen",
-    "fullscreen_exit": "Exit fullscreen"
+    "fullscreen_exit": "Exit fullscreen",
+    "window_help": "Help",
+    "window_minimize": "Minimize",
+    "window_maximize": "Maximize",
+    "window_restore": "Restore",
+    "window_close": "Close"
   },
   "credits": {
     "title": "Credits and License",
@@ -287,7 +292,6 @@
       "root": "Root",
       "up": "Up",
       "download": "Download",
-      "saved_from": "Saved from {{widget}}",
       "empty_trash_button": "Empty trash",
       "empty_trash_confirm": "Delete everything in the trash permanently?",
       "copy": "Copy",
@@ -536,7 +540,11 @@
         "h3": "Minor Subtitle (H3)",
         "copy": "Copy text",
         "upload": "Upload note (.md)",
-        "download": "Download note (.md)"
+        "download": "Download note (.md)",
+        "zoom_in": "Zoom in",
+        "zoom_out": "Zoom out",
+        "zoom_reset": "Reset zoom",
+        "zoom_edit_hint": "Double-click to type the percentage."
       },
       "unsaved_title": "Unsaved changes",
       "unsaved_message": "You have unsaved changes. Save before closing?",
@@ -578,7 +586,8 @@
         "open_file": "Open file",
         "save_file": "Save file",
         "export_pdf": "Print PDF",
-        "copy_html": "Copy HTML"
+        "copy_html": "Copy HTML",
+        "zoom_edit_hint": "Double-click to type the percentage."
       },
       "placeholders": {
         "text": "text",
@@ -592,7 +601,8 @@
       "source_copied": "Markdown copied.",
       "copy_failed": "Could not copy the text.",
       "preview_error": "Error rendering preview.",
-      "html_copied": "HTML copied"
+      "html_copied": "HTML copied",
+      "help": "Markdown text editor with LaTeX formulas. You can save as Markdown (.md), copy the Markdown code, copy the HTML code to paste into other word processors, and print to PDF."
     },
     "sliding_puzzle": {
       "title": "Sliding Puzzle",
@@ -946,5 +956,51 @@
     "discard": "Don't save",
     "save": "Save",
     "unknown_widget": "this widget"
+  },
+  "widgets_help": {
+    "work-list": "Task list and reminders to organize the session.",
+    "attendance": "Quick attendance and group status check.",
+    "group-generator": "Create random or balanced groups.",
+    "calendar": "Visual calendar for dates and planning.",
+    "program-guide": "Built-in guide with the widget catalog and usage tips.",
+    "timer": "Countdown for activities and turns.",
+    "stopwatch": "Stopwatch to measure time.",
+    "metronome": "Steady pulse for rhythm and dynamics.",
+    "global-clocks": "Times for several cities to compare.",
+    "scientific-calculator": "Scientific calculator for advanced calculations.",
+    "unit-converter": "Unit converter for problems and practice.",
+    "markdown-text-editor": "Markdown text editor with LaTeX formulas. You can save as Markdown (.md), copy the Markdown code, copy the HTML code to paste into other word processors, and print to PDF.",
+    "vce-community": "Catalog of community educational apps.",
+    "comunidad-chatgpt-ia-edu": "Resources from the ChatGPT-IA-edu project.",
+    "edumedia-iag": "Educational multimedia resources with generative AI.",
+    "file-manager": "Manage files and folders saved in the browser.",
+    "notepad": "Quick notepad for instructions and lists.",
+    "drawing-pad": "Freehand drawing board and diagrams.",
+    "image-carousel": "Show a collection of images.",
+    "edimarkweb": "Markdown word processor with live preview and export.",
+    "html-sandbox": "Space to display HTML content.",
+    "boardlive": "Real-time collaborative whiteboard.",
+    "iframe": "Web viewer for pages inside the desktop.",
+    "local-web": "Save and run local websites offline.",
+    "file-opener": "Open local files (PDF, images, audio, video).",
+    "directo-viewer": "Viewer for web content or external resources.",
+    "wikipedia-search": "Quick Wikipedia search with language switch.",
+    "dice": "3D dice roller for random choice.",
+    "random-spinner": "Random spinner for draws and turns.",
+    "qr-code-generator": "Generate QR codes to share links.",
+    "traffic-light": "Visual traffic light for status and activity.",
+    "sound-meter": "Visual meter of noise level.",
+    "scoreboard": "Scoreboard for teams and challenges.",
+    "directo-vota": "Simple voting with instant results.",
+    "directo-escala": "Rating scale for opinions.",
+    "directo-nube": "Word cloud with short responses.",
+    "directo-ideas": "Brainstorming with voting.",
+    "directo-muro": "Collaborative wall with notes.",
+    "directo-ticket": "Exit tickets at the end of the session.",
+    "qplay": "Interactive quiz contest.",
+    "tic-tac-toe": "Tic-tac-toe for quick review.",
+    "memory-game": "Memory pairs game to practice concepts.",
+    "sliding-puzzle": "Sliding puzzle for logic and attention.",
+    "work-gestures": "Work gestures for classroom routines."
   }
 }

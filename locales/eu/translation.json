@@ -213,7 +213,12 @@
   },
   "desktop": {
     "fullscreen_enter": "Pantaila osoa",
-    "fullscreen_exit": "Pantaila osoa itxi"
+    "fullscreen_exit": "Pantaila osoa itxi",
+    "window_help": "Laguntza",
+    "window_minimize": "Minimizatu",
+    "window_maximize": "Maximizatu",
+    "window_restore": "Berrezarri",
+    "window_close": "Itxi"
   },
   "credits": {
     "title": "Kredituak eta Lizentzia",
@@ -286,7 +291,6 @@
       "root": "Erroa",
       "up": "Gora",
       "download": "Deskargatu",
-      "saved_from": "Gordeta: {{widget}}-tik",
       "empty_trash_button": "Hustu zakarrontzia",
       "empty_trash_confirm": "Zakarrontziko eduki guztia betiko ezabatu?",
       "copy": "Kopiatu",
@@ -535,7 +539,11 @@
         "h3": "Azpititulu Txikia (H3)",
         "copy": "Testua kopiatu",
         "upload": "Kargatu oharra (.md)",
-        "download": "Deskargatu oharra (.md)"
+        "download": "Deskargatu oharra (.md)",
+        "zoom_in": "Zooma handitu",
+        "zoom_out": "Zooma txikitu",
+        "zoom_reset": "Zooma berrezarri",
+        "zoom_edit_hint": "Egin klik bikoitza ehunekoa idazteko."
       },
       "unsaved_title": "Gorde gabeko aldaketak",
       "unsaved_message": "Gorde gabeko aldaketak dituzu. Itxi aurretik gorde?",
@@ -577,7 +585,8 @@
         "open_file": "Ireki fitxategia",
         "save_file": "Gorde fitxategia",
         "export_pdf": "PDF inprimatu",
-        "copy_html": "Kopiatu HTML"
+        "copy_html": "Kopiatu HTML",
+        "zoom_edit_hint": "Egin klik bikoitza ehunekoa idazteko."
       },
       "placeholders": {
         "text": "testua",
@@ -591,7 +600,8 @@
       "source_copied": "Markdown kopiatua.",
       "copy_failed": "Ezin izan da testua kopiatu.",
       "preview_error": "Errorea aurrebista errendatzean.",
-      "html_copied": "HTML kopiatua"
+      "html_copied": "HTML kopiatua",
+      "help": "Markdown formatuan eta LaTeX formulekin testuak editatzeko tresna. Markdown (.md) gorde, Markdown kodea kopiatu, HTML kodea kopiatu beste testu-prozesadoreetan itsasteko eta PDFra inprimatu dezakezu."
     },
     "sliding_puzzle": {
       "title": "Puzzle Lerragarria",
@@ -945,5 +955,51 @@
     "discard": "Ez gorde",
     "save": "Gorde",
     "unknown_widget": "programa hau"
+  },
+  "widgets_help": {
+    "work-list": "Saioa antolatzeko zereginen eta oroigarrien zerrenda.",
+    "attendance": "Taldearen asistentzia eta egoera azkar erregistratzeko.",
+    "group-generator": "Talde ausazkoak edo orekatuak sortzen ditu.",
+    "calendar": "Datak eta plangintza ikusteko egutegi bisuala.",
+    "program-guide": "Widgeten katalogoa eta erabilerak jasotzen dituen gida integratua.",
+    "timer": "Jarduera eta txandetarako atzerako kontaketa.",
+    "stopwatch": "Denborak neurtzeko kronometroa.",
+    "metronome": "Erritmo eta dinamikaetarako pultsazio konstantea.",
+    "global-clocks": "Hainbat hirietako ordutegiak konparatzeko.",
+    "scientific-calculator": "Kalkulu aurreratuetarako kalkulagailu zientifikoa.",
+    "unit-converter": "Problema eta ariketetarako unitate-bihurgailua.",
+    "markdown-text-editor": "Markdown formatuan eta LaTeX formulekin testuak editatzeko tresna. Markdown (.md) gorde, Markdown kodea kopiatu, HTML kodea kopiatu beste testu-prozesadoreetan itsasteko eta PDFra inprimatu dezakezu.",
+    "vce-community": "Komunitateko app hezigarrien katalogoa.",
+    "comunidad-chatgpt-ia-edu": "ChatGPT-IA-edu proiektuaren baliabideak.",
+    "edumedia-iag": "IA sortzailearekin hezkuntza-baliabide multimediak.",
+    "file-manager": "Nabigatzailean gordetako fitxategiak eta karpetak kudeatzen ditu.",
+    "notepad": "Oharrentzako blokeo azkarra: jarraibideak eta zerrendak.",
+    "drawing-pad": "Marrazki libreko arbela eta eskemak.",
+    "image-carousel": "Irudi bilduma bat erakusten du.",
+    "edimarkweb": "Markdown prozesadorea aurrebista eta esportazioarekin.",
+    "html-sandbox": "HTML edukia erakusteko espazioa.",
+    "boardlive": "Denbora errealeko arbela kolaboratiboa.",
+    "iframe": "Web bisorea, mahaigainaren barruko orrietarako.",
+    "local-web": "Web lokalak gorde eta offline exekutatzen ditu.",
+    "file-opener": "Fitxategi lokalak irekitzen ditu (PDF, irudiak, audioa, bideoa).",
+    "directo-viewer": "Web eduki edo kanpoko baliabideetarako bisorea.",
+    "wikipedia-search": "Wikipedia bilaketa azkarra, hizkuntza-aldaketarekin.",
+    "dice": "3D dado jaurtitzailea zorizko hautaketarako.",
+    "random-spinner": "Zozketa eta txandetarako erruleta ausazkoa.",
+    "qr-code-generator": "QR kodeak sortzen ditu estekak partekatzeko.",
+    "traffic-light": "Egoera eta jarduerarako semaforo bisuala.",
+    "sound-meter": "Zarata-mailaren neurgailu bisuala.",
+    "scoreboard": "Talde eta erronketarako puntu-markagailua.",
+    "directo-vota": "Bozketa sinplea, berehalako emaitzekin.",
+    "directo-escala": "Iritzietarako balorazio-eskala.",
+    "directo-nube": "Erantzun laburreko hitz-hodeia.",
+    "directo-ideas": "Ideia-jasa bozketeekin.",
+    "directo-muro": "Oharrekin aritzeko horma kolaboratiboa.",
+    "directo-ticket": "Saioaren amaierako irteera-txartelak.",
+    "qplay": "Galdera-sortarekin lehiaketa interaktiboa.",
+    "tic-tac-toe": "Hiru lerroan errepaso azkarrerako.",
+    "memory-game": "Bikoteen memoria-jokoa kontzeptuak praktikatzeko.",
+    "sliding-puzzle": "Puzzle labainkorra logika eta arretarako.",
+    "work-gestures": "Gelako dinamiken lan-keinuak."
   }
 }
