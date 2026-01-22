@@ -695,13 +695,6 @@
       "content_placeholder": "Le contenu de l'URL s'affichera ici.",
       "embed_notice": "Certains sites peuvent ne pas autoriser l'intégration."
     },
-    "edimarkweb": {
-      "title": "EdiMarkWeb",
-      "subtitle": "Traitement de texte Markdown",
-      "tooltip": "Traitement de texte Markdown",
-      "reload": "Recharger",
-      "open_new_tab": "Ouvrir dans un nouvel onglet"
-    },
     "directo_viewer": {
       "title": "Connexion en direct",
       "go_to_repo": "Aller au dépôt de Connexion en direct"
@@ -987,7 +980,6 @@
     "notepad": "Bloc-notes rapide pour consignes et listes.",
     "drawing-pad": "Tableau de dessin libre et schémas.",
     "image-carousel": "Affiche une collection d'images.",
-    "edimarkweb": "Traitement de texte Markdown avec aperçu et export.",
     "html-sandbox": "Espace pour afficher du contenu HTML.",
     "boardlive": "Tableau collaboratif en temps réel.",
     "iframe": "Visionneuse web pour les pages dans le bureau.",

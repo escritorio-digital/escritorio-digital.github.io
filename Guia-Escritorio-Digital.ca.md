@@ -45,7 +45,6 @@ Escriptori Digital és una pissarra de treball amb “finestres” pensada per a
 ### Pissarra i escriptura
 
 - **Bloc de notes**: notes ràpides per a consignes, idees, exemples, llistes, etc.
-- **EdiMarkWeb**: processador de textos Markdown amb previsualització en línia i exportació.
 - **Pissarra de dibuix**: dibuix a mà alçada (esquemes, gràfiques, mapes conceptuals, diagrames).
 - **Carrusel d’imatges**: mostra una col·lecció d’imatges (làmines, exercicis, fotos de laboratori, mapes…).
 - **Sandbox HTML**: espai per mostrar continguts preparats.

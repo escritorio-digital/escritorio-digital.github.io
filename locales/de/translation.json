@@ -694,13 +694,6 @@
       "content_placeholder": "Der Inhalt der URL wird hier angezeigt.",
       "embed_notice": "Einige Seiten erlauben kein Einbetten."
     },
-    "edimarkweb": {
-      "title": "EdiMarkWeb",
-      "subtitle": "Markdown-Textverarbeitung",
-      "tooltip": "Markdown-Textverarbeitung",
-      "reload": "Neu laden",
-      "open_new_tab": "In neuem Tab öffnen"
-    },
     "directo_viewer": {
       "title": "Live-Verbindung",
       "go_to_repo": "Zum Live-Verbindung-Repository"
@@ -986,7 +979,6 @@
     "notepad": "Schnelles Notizfeld für Anweisungen und Listen.",
     "drawing-pad": "Freies Zeichenbrett und Skizzen.",
     "image-carousel": "Zeigt eine Sammlung von Bildern.",
-    "edimarkweb": "Markdown-Textverarbeitung mit Live-Vorschau und Export.",
     "html-sandbox": "Bereich zum Anzeigen von HTML-Inhalten.",
     "boardlive": "Kollaboratives Whiteboard in Echtzeit.",
     "iframe": "Web-Viewer für Seiten innerhalb des Desktops.",

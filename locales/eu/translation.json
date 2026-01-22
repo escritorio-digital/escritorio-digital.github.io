@@ -693,13 +693,6 @@
       "content_placeholder": "URLaren edukia hemen erakutsiko da.",
       "embed_notice": "Baliteke webgune batzuek kapsulatzea ez onartzea."
     },
-    "edimarkweb": {
-      "title": "EdiMarkWeb",
-      "subtitle": "Markdown testu-prozesadorea",
-      "tooltip": "Markdown testu-prozesadorea",
-      "reload": "Berritu",
-      "open_new_tab": "Ireki fitxa berrian"
-    },
     "directo_viewer": {
       "title": "Zuzeneko Konexioa",
       "go_to_repo": "Joan Zuzeneko Konexioaren biltegira"
@@ -985,7 +978,6 @@
     "notepad": "Oharrentzako blokeo azkarra: jarraibideak eta zerrendak.",
     "drawing-pad": "Marrazki libreko arbela eta eskemak.",
     "image-carousel": "Irudi bilduma bat erakusten du.",
-    "edimarkweb": "Markdown prozesadorea aurrebista eta esportazioarekin.",
     "html-sandbox": "HTML edukia erakusteko espazioa.",
     "boardlive": "Denbora errealeko arbela kolaboratiboa.",
     "iframe": "Web bisorea, mahaigainaren barruko orrietarako.",

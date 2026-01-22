@@ -43,7 +43,6 @@ Digitaler Desktop ist eine Arbeitsfläche mit „Fenstern“ für den Unterricht
 ### Tafel und Schreiben
 
 - **Notizblock**: schnelle Notizen für Anweisungen, Ideen, Beispiele, Listen usw.
-- **EdiMarkWeb**: Markdown-Texteditor mit Online-Vorschau und Export.
 - **Zeichenfläche**: freihändig zeichnen (Skizzen, Diagramme, Concept Maps).
 - **Bilder‑Karussell**: Bildsammlung anzeigen (Tafeln, Aufgaben, Laborfotos, Karten …).
 - **HTML‑Sandbox**: Bereich für vorbereitete Inhalte.

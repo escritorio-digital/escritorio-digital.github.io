@@ -694,13 +694,6 @@
       "content_placeholder": "O contido da URL amosarase aquí.",
       "embed_notice": "Algúns sitios poden non permitir ser embebidos."
     },
-    "edimarkweb": {
-      "title": "EdiMarkWeb",
-      "subtitle": "Procesador de textos markdown",
-      "tooltip": "Procesador de textos markdown",
-      "reload": "Recargar",
-      "open_new_tab": "Abrir nunha nova pestana"
-    },
     "directo_viewer": {
       "title": "Conexión en Directo",
       "go_to_repo": "Ir ao repositorio de Conexión en Directo"
@@ -986,7 +979,6 @@
     "notepad": "Bloc de notas rápido para consignas e listas.",
     "drawing-pad": "Pizarra de debuxo libre e esquemas.",
     "image-carousel": "Amosa unha colección de imaxes.",
-    "edimarkweb": "Procesador Markdown con previsualización e exportación.",
     "html-sandbox": "Espazo para mostrar contido HTML.",
     "boardlive": "Pizarra colaborativa en tempo real.",
     "iframe": "Visor web para páxinas dentro do escritorio.",
