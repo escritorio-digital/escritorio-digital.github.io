@@ -1,74 +1,161 @@
 .scientific-calculator {
-  @apply w-full h-full flex flex-col bg-gray-900 text-white rounded-lg overflow-hidden;
+    --calc-shell: linear-gradient(145deg, #f7f0e3 0%, #e5f3f4 55%, #eaf0ff 100%);
+    --calc-surface: #0f172a;
+    --calc-edge: rgba(255, 255, 255, 0.08);
+    --calc-accent: #06b6d4;
+    --calc-accent-strong: #0ea5e9;
+    --calc-key: #111827;
+    --calc-key-alt: #1f2937;
+    --calc-key-func: #1e293b;
+    --calc-key-control: #7c2d12;
+    --calc-key-equals: #14b8a6;
+    --calc-key-text: #e2e8f0;
+    --calc-muted: #94a3b8;
+    --calc-key-font: clamp(0.85rem, 1rem, 1.05rem);
+    --calc-scale: 1;
+
+    @apply w-full h-full flex items-center justify-center p-3;
+    background: var(--calc-shell);
+    font-family: 'Space Grotesk', 'Noto Sans', 'Helvetica Neue', sans-serif;
+    color: var(--calc-key-text);
 }
 
-.top-bar {
-  @apply flex items-center justify-between p-2 bg-gray-900 flex-shrink-0;
+.calc-loading {
+    @apply w-full h-full flex items-center justify-center text-lg font-semibold;
 }
 
-.mode-selector {
-  @apply flex items-center justify-center;
+.calc-surface {
+    @apply w-full h-full flex flex-col;
+    background: var(--calc-surface);
+    border-radius: 18px;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.35);
+    overflow: hidden;
 }
 
-.mode-button {
-  @apply px-3 py-1 text-sm rounded-md text-gray-300 transition-colors duration-150 whitespace-nowrap;
-  @apply flex items-center justify-center gap-2;
+.calc-top {
+    @apply flex items-center justify-between px-4 pt-4;
 }
 
-.mode-button:hover { @apply bg-gray-700; }
-.mode-button.mode-active { @apply bg-accent text-text-dark font-semibold; }
-
-.angle-mode-indicator { @apply text-xs font-semibold text-gray-400; }
-
-.history-panel {
-  @apply bg-gray-900 p-3 flex flex-col-reverse gap-2 border-b border-gray-700;
-  max-height: 150px;
-  overflow-y: auto;
+.calc-tabs {
+    @apply flex gap-2;
 }
 
-.history-entry { @apply text-right text-gray-400 text-base; }
-.history-empty { @apply text-center text-gray-500 italic; }
-
-.display-area {
-  @apply flex-shrink-0 flex flex-col justify-end items-end p-4 bg-gray-900;
+.calc-tab {
+    @apply uppercase tracking-wide px-3 py-2 rounded-full transition;
+    border: 1px solid transparent;
+    background: rgba(148, 163, 184, 0.12);
+    color: var(--calc-muted);
+    font-size: calc(0.7rem * var(--calc-scale));
 }
 
-.expression {
-  @apply text-gray-400 text-lg h-6 text-right flex-grow;
+.calc-tab.is-active {
+    background: rgba(6, 182, 212, 0.22);
+    border-color: rgba(6, 182, 212, 0.55);
+    color: #e2f6ff;
 }
 
-.main-display {
-  /* Sin salto de línea y alineado a la derecha */
-  @apply font-light whitespace-nowrap text-right;
-  /* Altura mínima para evitar “baile” al reducir fuente */
-  min-height: 56px;
-  line-height: 1.15;
-  /* Oculta cualquier sobrante durante el ajuste */
-  overflow: hidden;
-  width: 100%;
-  /* Opcional: números monoespaciados más estables */
-  font-variant-numeric: tabular-nums;
+.calc-angle {
+    @apply flex items-center;
 }
 
-.top-controls { @apply grid grid-cols-2 gap-px p-1 bg-gray-900; }
-.buttons-grid { @apply grid gap-px bg-gray-700 flex-grow; }
-
-.calc-button {
-  @apply text-xl flex items-center justify-center transition-colors duration-150 ease-in-out;
-  outline: none;
-  border-radius: 4px;
+.calc-angle-pill {
+    @apply text-[0.65rem] font-semibold px-3 py-1 rounded-full;
+    background: rgba(14, 165, 233, 0.18);
+    color: #bae6fd;
+    border: 1px solid rgba(14, 165, 233, 0.4);
 }
-.calc-button:active { @apply transform scale-95; }
 
-/* --- leyenda de colores --- */
-.calc-button.function, .calc-button.number { @apply bg-gray-800 hover:bg-gray-700; }
-.calc-button.operator { @apply bg-blue-600 hover:bg-blue-700 text-white; }
-.calc-button.equals { @apply bg-green-600 hover:bg-green-700 text-white; }
-.calc-button.control { @apply bg-red-800 hover:bg-red-700; }
-.calc-button.ac { @apply bg-red-600 hover:bg-red-500; }
+.calc-display {
+    @apply px-5 py-4 flex flex-col gap-2;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.75));
+    border-bottom: 1px solid var(--calc-edge);
+}
 
-.col-span-2 { grid-column: span 2 / span 2; }
-.col-span-3 { grid-column: span 3 / span 3; }
-.col-span-4 { grid-column: span 4 / span 4; }
-.col-span-5 { grid-column: span 5 / span 5; }
+.calc-expression {
+    @apply uppercase tracking-widest;
+    min-height: 16px;
+    color: var(--calc-muted);
+    font-size: calc(0.65rem * var(--calc-scale));
+}
 
+.calc-result {
+    @apply text-right font-semibold;
+    font-variant-numeric: tabular-nums;
+    word-break: break-all;
+    font-size: calc(1.75rem * var(--calc-scale));
+}
+
+.calc-grid {
+    @apply flex-1 grid gap-2 p-4;
+}
+
+.calc-grid--basic,
+.calc-grid--standard {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.calc-grid--scientific {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.calc-key {
+    @apply rounded-xl font-semibold transition;
+    background: var(--calc-key);
+    color: var(--calc-key-text);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    min-height: 48px;
+    box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.45);
+    font-size: calc(var(--calc-key-font) * var(--calc-scale));
+    line-height: 1;
+}
+
+.calc-key:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.35);
+}
+
+.calc-key:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+.calc-key--digit {
+    background: var(--calc-key);
+}
+
+.calc-key--operator {
+    background: var(--calc-key-alt);
+    color: #e0f2fe;
+}
+
+.calc-key--function,
+.calc-key--constant {
+    background: var(--calc-key-func);
+    color: #bfdbfe;
+}
+
+.calc-key--control {
+    background: var(--calc-key-control);
+    color: #fde68a;
+}
+
+.calc-key--toggle {
+    background: rgba(6, 182, 212, 0.25);
+    color: #cffafe;
+    letter-spacing: 0.05em;
+}
+
+.calc-key--equals {
+    background: var(--calc-key-equals);
+    color: #0f172a;
+}
+
+@media (max-width: 640px) {
+    .calc-result {
+        @apply text-2xl;
+    }
+
+    .calc-key {
+        min-height: 42px;
+    }
+}

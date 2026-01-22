@@ -43,7 +43,6 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 ### Pizarra e escritura
 
 - **Bloc de notas**: notas rápidas para consignas, ideas, exemplos, listas, etc.
-- **EdiMarkWeb**: procesador de textos Markdown con previsualización en liña e exportación.
 - **Pizarra de debuxo**: debuxa a man alzada (esquemas, gráficas, mapas conceptuais, diagramas).
 - **Carrusel de imaxes**: amosa unha colección de imaxes (láminas, exercicios, fotos de laboratorio, mapas…).
 - **Sandbox HTML**: espazo para mostrar contidos preparados.

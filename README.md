@@ -43,6 +43,9 @@ Este proyecto es un entorno de escritorio virtual construido con React, que perm
 37. **QPlay:** Concurso interactivo con cuestionarios en tiempo real.
 38. **BoardLive:** Pizarra colaborativa en tiempo real con control por el anfitrión.
 39. **Vibe Coding Educativo:** Catálogo de apps creadas por docentes de la comunidad para descubrir recursos didácticos y abrirlos en el visor o en una pestaña nueva.
+40. **Comunidad ChatGPT-IA-edu:** Acceso a recursos y enlaces del proyecto ChatGPT-IA-edu.
+41. **EduMedia-IAG:** Recursos y multimedia educativa con IA generativa.
+42. **Wikipedia:** Búsqueda rápida con cambio de idioma para términos de clase.
 
 ## Uso básico
 

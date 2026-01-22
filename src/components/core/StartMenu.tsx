@@ -73,6 +73,7 @@ const categoryIcons: Record<string, CategoryIconConfig> = {
     logic_games: { Icon: Puzzle, className: 'bg-purple-100 text-purple-700' },
     gestures: { Icon: Hand, className: 'bg-orange-100 text-orange-700' },
     community: { Icon: Globe, className: 'bg-sky-100 text-sky-700' },
+    vibe_coding: { Icon: Globe, className: 'bg-sky-100 text-sky-700' },
     other: { Icon: Layers, className: 'bg-gray-100 text-gray-700' },
 };
 
@@ -162,6 +163,10 @@ export const StartMenu: React.FC<StartMenuProps> = ({
         () => [{ id: 'favorites', titleKey: 'start_menu.favorites', widgets: pinnedWidgetItems }, ...visibleCategories],
         [pinnedWidgetItems, visibleCategories]
     );
+    const sidebarCategories = useMemo(
+        () => (showSearchResults ? visibleCategories : categoriesWithFavorites),
+        [categoriesWithFavorites, showSearchResults, visibleCategories]
+    );
 
     useEffect(() => {
         if (!isOpen) return;
@@ -205,6 +210,12 @@ export const StartMenu: React.FC<StartMenuProps> = ({
             setActiveCategoryId(visibleCategories[0].id);
         }
     }, [activeCategoryId, visibleCategories]);
+
+    useEffect(() => {
+        if (showSearchResults && activeSection === 'favorites') {
+            setActiveSection('widgets');
+        }
+    }, [activeSection, showSearchResults]);
 
     useEffect(() => {
         if (!isOpen) return;
@@ -596,7 +607,7 @@ export const StartMenu: React.FC<StartMenuProps> = ({
                             }}
                         >
                             <div className="space-y-1">
-                                {categoriesWithFavorites.map((category) => {
+                                {sidebarCategories.map((category) => {
                                     const iconConfig = categoryIcons[category.id] ?? categoryIcons.other;
                                     const isFavorites = category.id === 'favorites';
                                     return (

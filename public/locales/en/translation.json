@@ -694,13 +694,6 @@
       "content_placeholder": "The URL content will be shown here.",
       "embed_notice": "Some sites may not allow being embedded."
     },
-    "edimarkweb": {
-      "title": "EdiMarkWeb",
-      "subtitle": "Markdown word processor",
-      "tooltip": "Markdown word processor",
-      "reload": "Reload",
-      "open_new_tab": "Open in new tab"
-    },
     "directo_viewer": {
       "title": "Live Connection",
       "go_to_repo": "Go to Live Connection repository"
@@ -986,7 +979,6 @@
     "notepad": "Quick notepad for instructions and lists.",
     "drawing-pad": "Freehand drawing board and diagrams.",
     "image-carousel": "Show a collection of images.",
-    "edimarkweb": "Markdown word processor with live preview and export.",
     "html-sandbox": "Space to display HTML content.",
     "boardlive": "Real-time collaborative whiteboard.",
     "iframe": "Web viewer for pages inside the desktop.",

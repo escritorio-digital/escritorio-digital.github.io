@@ -20,17 +20,7 @@ export const WIDGET_CATEGORIES: WidgetCategory[] = [
     {
         id: 'math_science',
         titleKey: 'settings.widgets.categories.math_science',
-        widgetIds: ['scientific-calculator', 'unit-converter', 'markdown-text-editor'],
-    },
-    {
-        id: 'community',
-        titleKey: 'settings.widgets.categories.community',
-        widgetIds: ['vce-community', 'comunidad-chatgpt-ia-edu', 'edumedia-iag'],
-    },
-    {
-        id: 'vibe_coding',
-        titleKey: 'settings.widgets.categories.vibe_coding',
-        widgetIds: ['vce-community', 'local-web'],
+        widgetIds: ['scientific-calculator', 'unit-converter'],
     },
     {
         id: 'board_writing',
@@ -40,7 +30,6 @@ export const WIDGET_CATEGORIES: WidgetCategory[] = [
             'markdown-text-editor',
             'drawing-pad',
             'image-carousel',
-            'edimarkweb',
             'html-sandbox',
             'boardlive',
         ],
@@ -52,16 +41,20 @@ export const WIDGET_CATEGORIES: WidgetCategory[] = [
             'file-manager',
             'iframe',
             'local-web',
-            'pdf-viewer',
             'file-opener',
             'directo-viewer',
             'wikipedia-search',
         ],
     },
     {
-        id: 'interaction',
-        titleKey: 'settings.widgets.categories.interaction',
-        widgetIds: ['dice', 'random-spinner', 'qr-code-generator', 'traffic-light', 'sound-meter', 'scoreboard'],
+        id: 'community',
+        titleKey: 'settings.widgets.categories.community',
+        widgetIds: ['vce-community', 'comunidad-chatgpt-ia-edu', 'edumedia-iag'],
+    },
+    {
+        id: 'vibe_coding',
+        titleKey: 'settings.widgets.categories.vibe_coding',
+        widgetIds: ['vce-community', 'comunidad-chatgpt-ia-edu', 'edumedia-iag', 'local-web'],
     },
     {
         id: 'participation',
@@ -74,8 +67,12 @@ export const WIDGET_CATEGORIES: WidgetCategory[] = [
             'directo-muro',
             'directo-ticket',
             'qplay',
-            'boardlive',
         ],
+    },
+    {
+        id: 'interaction',
+        titleKey: 'settings.widgets.categories.interaction',
+        widgetIds: ['dice', 'random-spinner', 'qr-code-generator', 'traffic-light', 'sound-meter', 'scoreboard'],
     },
     {
         id: 'logic_games',

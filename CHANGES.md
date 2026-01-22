@@ -1,5 +1,11 @@
 # Cambios realizados
 
+## 2.5.2
+- Calculadora científica: rediseño completo con nuevos modos, botones y lógica de cálculo.
+- Inicio: ocultar la categoría Favoritos al buscar para centrar resultados.
+- Widgets: reorganización de categorías y nueva sección Vibe Coding con duplicados.
+- Documentación e i18n: retiradas las referencias a EdiMarkWeb.
+
 ## 2.5.1
 - Inicio: categoria Favoritos siempre visible en primer lugar.
 - Dados 3D: selector de caras, barra superior con controles, sonido persistente y ajuste de tamanos.
@@ -109,7 +115,6 @@
 - El menú Inicio conserva el alto durante las búsquedas y se reajusta al panel izquierdo al cerrar el buscador o reabrir.
 
 ## 1.3.0
-- Añadido el programa EdiMarkWeb al menú Inicio con visor integrado y acceso a pestaña nueva.
 - Icono y traducciones completos en todos los idiomas para el nuevo programa.
 - Tooltip de arranque opcional para programas en menú y barra.
 

@@ -45,7 +45,6 @@ Idazmahai Digitala ikasgelarako pentsatutako “leihoekin” lan‑taula bat da.
 ### Arbela eta idazketa
 
 - **Ohar‑blokea**: oharrak azkar idazteko.
-- **EdiMarkWeb**: Markdown testu-prozesadorea lineako aurrebistarekin eta esportazioarekin.
 - **Marrazteko arbela**: eskuz marrazteko (eskemak, grafikoak, kontzeptu‑mapak, diagramak).
 - **Irudi‑karusela**: irudi bilduma bat erakutsi (laminak, ariketak, laborategiko argazkiak, mapak…).
 - **HTML Sandbox**: aurrez prestatutako edukiak erakusteko gunea.

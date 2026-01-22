@@ -43,7 +43,6 @@ Escritorio Digital è una lavagna di lavoro con “finestre” pensata per la cl
 ### Lavagna e scrittura
 
 - **Blocco note**: note rapide per consegne, idee, esempi, liste, ecc.
-- **EdiMarkWeb**: editor di testo Markdown con anteprima online ed esportazione.
 - **Lavagna di disegno**: disegno a mano libera (schemi, grafici, mappe concettuali, diagrammi).
 - **Carosello di immagini**: mostra una raccolta di immagini (tavole, esercizi, foto di laboratorio, mappe…).
 - **Sandbox HTML**: spazio per mostrare contenuti preparati.
