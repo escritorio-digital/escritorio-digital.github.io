@@ -1,1 +1,0 @@
-import{j as t}from"./index-DB1LVOJU.js";import{o as d}from"./index-DB1LVOJU.js";import{ExternalAppWidget as o}from"./ExternalAppWidget-Btwbv6oM.js";const i=()=>t.jsx(o,{url:"https://jjdeharo.github.io/directo/vota.html",titleKey:"widgets.directo_vota.title",appendLanguageParam:!0});export{i as DirectoVotaWidget,d as widgetConfig};

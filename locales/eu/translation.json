@@ -218,7 +218,12 @@
     "window_minimize": "Minimizatu",
     "window_maximize": "Maximizatu",
     "window_restore": "Berrezarri",
-    "window_close": "Itxi"
+    "window_close": "Itxi",
+    "window_menu": "Leihoaren menua",
+    "window_zoom_in": "Zooma handitu",
+    "window_zoom_out": "Zooma txikitu",
+    "window_zoom_reset": "Zooma berrezarri",
+    "window_zoom_edit_hint": "Egin klik bikoitza ehunekoa idazteko."
   },
   "credits": {
     "title": "Kredituak eta Lizentzia",
@@ -539,11 +544,7 @@
         "h3": "Azpititulu Txikia (H3)",
         "copy": "Testua kopiatu",
         "upload": "Kargatu oharra (.md)",
-        "download": "Deskargatu oharra (.md)",
-        "zoom_in": "Zooma handitu",
-        "zoom_out": "Zooma txikitu",
-        "zoom_reset": "Zooma berrezarri",
-        "zoom_edit_hint": "Egin klik bikoitza ehunekoa idazteko."
+        "download": "Deskargatu oharra (.md)"
       },
       "unsaved_title": "Gorde gabeko aldaketak",
       "unsaved_message": "Gorde gabeko aldaketak dituzu. Itxi aurretik gorde?",
@@ -577,16 +578,12 @@
         "view_split": "Ikuspegi zatitua",
         "view_editor": "Editorea bakarrik",
         "view_preview": "Aurrebista bakarrik",
-        "zoom_in": "Handitu zooma",
-        "zoom_out": "Txikitu zooma",
-        "zoom_reset": "Leheneratu zooma",
         "formula": "Formula txertatu",
         "copy_source": "Markdown kopiatu",
         "open_file": "Ireki fitxategia",
         "save_file": "Gorde fitxategia",
         "export_pdf": "PDF inprimatu",
-        "copy_html": "Kopiatu HTML",
-        "zoom_edit_hint": "Egin klik bikoitza ehunekoa idazteko."
+        "copy_html": "Kopiatu HTML"
       },
       "placeholders": {
         "text": "testua",

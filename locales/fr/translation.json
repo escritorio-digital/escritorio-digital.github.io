@@ -220,7 +220,12 @@
     "window_minimize": "Réduire",
     "window_maximize": "Agrandir",
     "window_restore": "Restaurer",
-    "window_close": "Fermer"
+    "window_close": "Fermer",
+    "window_menu": "Menu de la fenêtre",
+    "window_zoom_in": "Agrandir",
+    "window_zoom_out": "Réduire",
+    "window_zoom_reset": "Réinitialiser le zoom",
+    "window_zoom_edit_hint": "Double-cliquez pour saisir le pourcentage."
   },
   "credits": {
     "title": "Crédits et Licence",
@@ -541,11 +546,7 @@
         "h3": "Sous-titre secondaire (H3)",
         "copy": "Copier le texte",
         "upload": "Charger une note (.md)",
-        "download": "Télécharger la note (.md)",
-        "zoom_in": "Agrandir",
-        "zoom_out": "Réduire",
-        "zoom_reset": "Réinitialiser le zoom",
-        "zoom_edit_hint": "Double-cliquez pour saisir le pourcentage."
+        "download": "Télécharger la note (.md)"
       },
       "unsaved_title": "Modifications non enregistrées",
       "unsaved_message": "Vous avez des modifications non enregistrées. Enregistrer avant de fermer ?",
@@ -579,16 +580,12 @@
         "view_split": "Vue divisée",
         "view_editor": "Éditeur seul",
         "view_preview": "Aperçu seul",
-        "zoom_in": "Agrandir le zoom",
-        "zoom_out": "Réduire le zoom",
-        "zoom_reset": "Réinitialiser le zoom",
         "formula": "Insérer une formule",
         "copy_source": "Copier le Markdown",
         "open_file": "Ouvrir un fichier",
         "save_file": "Enregistrer le fichier",
         "export_pdf": "Imprimer en PDF",
-        "copy_html": "Copier HTML",
-        "zoom_edit_hint": "Double-cliquez pour saisir le pourcentage."
+        "copy_html": "Copier HTML"
       },
       "placeholders": {
         "text": "texte",
