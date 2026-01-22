@@ -430,7 +430,12 @@
       "num_dice": "Anzahl der Würfel:",
       "rolling": "Wird gewürfelt...",
       "roll_dice": "Würfeln",
-      "total": "Gesamt:"
+      "total": "Gesamt:",
+      "num_faces": "Seiten:",
+      "sound_on": "Ton einschalten",
+      "sound_off": "Ton stummschalten",
+      "num_dice_short": "Wurfel",
+      "num_faces_short": "Seiten"
     },
     "group_generator": {
       "title": "Gruppengenerator",

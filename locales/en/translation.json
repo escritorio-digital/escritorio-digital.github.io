@@ -430,7 +430,12 @@
       "num_dice": "Number of Dice:",
       "rolling": "Rolling...",
       "roll_dice": "Roll Dice",
-      "total": "Total:"
+      "total": "Total:",
+      "num_faces": "Faces:",
+      "sound_on": "Enable sound",
+      "sound_off": "Mute sound",
+      "num_dice_short": "Dice",
+      "num_faces_short": "Faces"
     },
     "group_generator": {
       "title": "Group Generator",

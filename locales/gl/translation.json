@@ -430,7 +430,12 @@
       "num_dice": "Número de Dados:",
       "rolling": "Lanzando...",
       "roll_dice": "Lanzar Dados",
-      "total": "Total:"
+      "total": "Total:",
+      "num_faces": "Caras:",
+      "sound_on": "Activar son",
+      "sound_off": "Silenciar son",
+      "num_dice_short": "Dados",
+      "num_faces_short": "Caras"
     },
     "group_generator": {
       "title": "Xerador de Grupos",

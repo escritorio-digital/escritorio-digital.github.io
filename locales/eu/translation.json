@@ -429,7 +429,12 @@
       "num_dice": "Dado Kopurua:",
       "rolling": "Botatzen...",
       "roll_dice": "Bota Dadoak",
-      "total": "Guztira:"
+      "total": "Guztira:",
+      "num_faces": "Aurpegiak:",
+      "sound_on": "Aktibatu soinua",
+      "sound_off": "Isilarazi soinua",
+      "num_dice_short": "Dadoak",
+      "num_faces_short": "Aurpegiak"
     },
     "group_generator": {
       "title": "Talde Sortzailea",
