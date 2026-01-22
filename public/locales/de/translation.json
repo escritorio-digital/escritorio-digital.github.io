@@ -219,7 +219,12 @@
     "window_minimize": "Minimieren",
     "window_maximize": "Maximieren",
     "window_restore": "Wiederherstellen",
-    "window_close": "Schließen"
+    "window_close": "Schließen",
+    "window_menu": "Fenstermenü",
+    "window_zoom_in": "Vergrößern",
+    "window_zoom_out": "Verkleinern",
+    "window_zoom_reset": "Zoom zurücksetzen",
+    "window_zoom_edit_hint": "Doppelklick, um den Prozentsatz einzugeben."
   },
   "credits": {
     "title": "Credits und Lizenz",
@@ -540,11 +545,7 @@
         "h3": "Kleiner Untertitel (H3)",
         "copy": "Text kopieren",
         "upload": "Notiz hochladen (.md)",
-        "download": "Notiz herunterladen (.md)",
-        "zoom_in": "Vergrößern",
-        "zoom_out": "Verkleinern",
-        "zoom_reset": "Zoom zurücksetzen",
-        "zoom_edit_hint": "Doppelklick, um den Prozentsatz einzugeben."
+        "download": "Notiz herunterladen (.md)"
       },
       "unsaved_title": "Nicht gespeicherte Aenderungen",
       "unsaved_message": "Du hast nicht gespeicherte Aenderungen. Vor dem Schliessen speichern?",
@@ -578,16 +579,12 @@
         "view_split": "Geteilte Ansicht",
         "view_editor": "Nur Editor",
         "view_preview": "Nur Vorschau",
-        "zoom_in": "Zoom vergroessern",
-        "zoom_out": "Zoom verkleinern",
-        "zoom_reset": "Zoom zuruecksetzen",
         "formula": "Formel einfuegen",
         "copy_source": "Markdown kopieren",
         "open_file": "Datei oeffnen",
         "save_file": "Datei speichern",
         "export_pdf": "PDF drucken",
-        "copy_html": "HTML kopieren",
-        "zoom_edit_hint": "Doppelklick, um den Prozentsatz einzugeben."
+        "copy_html": "HTML kopieren"
       },
       "placeholders": {
         "text": "Text",

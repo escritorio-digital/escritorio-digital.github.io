@@ -418,6 +418,7 @@ const DesktopUI: React.FC<{
             },
             size: { width: widthValue, height: heightValue },
             zIndex: newZ,
+            zoom: 1,
         };
         setActiveWidgets(prev => [...prev, newWidget]);
         setActiveWindowId(newWidget.instanceId);
@@ -1008,6 +1009,7 @@ const DesktopUI: React.FC<{
                 const isPinned = activeProfile.pinnedWidgets.includes(widget.widgetId);
                 const isActiveWindow = widget.instanceId === activeWindowId;
                 const helpText = getWidgetHelpText(widget.widgetId, t);
+                const zoomLevel = widget.zoom ?? 1;
                 const windowTitle = widget.titleOverride
                     ? `${t(config.title)} — ${widget.titleOverride}`
                     : t(config.title);
@@ -1018,6 +1020,7 @@ const DesktopUI: React.FC<{
                         title={windowTitle}
                         icon={config.icon}
                         helpText={helpText}
+                        zoomLevel={zoomLevel}
                         position={widget.position}
                         size={widget.size}
                         zIndex={widget.zIndex}
@@ -1059,12 +1062,27 @@ const DesktopUI: React.FC<{
                         pinLabel={t('toolbar.add_widget')}
                         unpinLabel={t('toolbar.remove_widget')}
                         helpLabel={t('desktop.window_help')}
+                        windowMenuLabel={t('desktop.window_menu')}
                         minimizeLabel={t('desktop.window_minimize')}
                         maximizeLabel={t('desktop.window_maximize')}
                         restoreLabel={t('desktop.window_restore')}
                         closeLabel={t('desktop.window_close')}
+                        zoomInLabel={t('desktop.window_zoom_in')}
+                        zoomOutLabel={t('desktop.window_zoom_out')}
+                        zoomResetLabel={t('desktop.window_zoom_reset')}
+                        zoomEditHint={t('desktop.window_zoom_edit_hint')}
                         enterFullscreenLabel={t('desktop.fullscreen_enter')}
                         exitFullscreenLabel={t('desktop.fullscreen_exit')}
+                        onZoomChange={(nextZoom) => {
+                            setActiveWidgets((prev) => prev.map((w) => (
+                                w.instanceId === widget.instanceId ? { ...w, zoom: nextZoom } : w
+                            )));
+                        }}
+                        onZoomReset={() => {
+                            setActiveWidgets((prev) => prev.map((w) => (
+                                w.instanceId === widget.instanceId ? { ...w, zoom: 1 } : w
+                            )));
+                        }}
                     >
                         <Suspense
                             fallback={

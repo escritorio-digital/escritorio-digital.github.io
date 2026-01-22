@@ -219,7 +219,12 @@
     "window_minimize": "Riduci a icona",
     "window_maximize": "Massimizza",
     "window_restore": "Ripristina",
-    "window_close": "Chiudi"
+    "window_close": "Chiudi",
+    "window_menu": "Menu finestra",
+    "window_zoom_in": "Aumenta zoom",
+    "window_zoom_out": "Riduci zoom",
+    "window_zoom_reset": "Ripristina zoom",
+    "window_zoom_edit_hint": "Doppio clic per inserire la percentuale."
   },
   "credits": {
     "title": "Crediti e Licenza",
@@ -540,11 +545,7 @@
         "h3": "Sottotitolo minore (H3)",
         "copy": "Copia testo",
         "upload": "Carica nota (.md)",
-        "download": "Scarica nota (.md)",
-        "zoom_in": "Aumenta zoom",
-        "zoom_out": "Riduci zoom",
-        "zoom_reset": "Ripristina zoom",
-        "zoom_edit_hint": "Doppio clic per inserire la percentuale."
+        "download": "Scarica nota (.md)"
       },
       "unsaved_title": "Modifiche non salvate",
       "unsaved_message": "Hai modifiche non salvate. Salvare prima di chiudere?",
@@ -578,16 +579,12 @@
         "view_split": "Vista divisa",
         "view_editor": "Solo editor",
         "view_preview": "Solo anteprima",
-        "zoom_in": "Aumenta zoom",
-        "zoom_out": "Riduci zoom",
-        "zoom_reset": "Reimposta zoom",
         "formula": "Inserisci formula",
         "copy_source": "Copia Markdown",
         "open_file": "Apri file",
         "save_file": "Salva file",
         "export_pdf": "Stampa PDF",
-        "copy_html": "Copia HTML",
-        "zoom_edit_hint": "Doppio clic per inserire la percentuale."
+        "copy_html": "Copia HTML"
       },
       "placeholders": {
         "text": "testo",

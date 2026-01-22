@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Rnd, type RndDragCallback, type RndResizeCallback } from 'react-rnd';
-import { CircleHelp, X, Minus, Maximize, Minimize, Pin, PinOff, Expand, Minimize2 } from 'lucide-react';
+import { CircleHelp, X, Minus, Maximize, Minimize, Pin, PinOff, Expand, Minimize2, MoreVertical, Plus, RotateCcw } from 'lucide-react';
 
 interface WidgetWindowProps {
   id: string;
@@ -34,18 +34,32 @@ interface WidgetWindowProps {
   closeLabel?: string;
   enterFullscreenLabel?: string;
   exitFullscreenLabel?: string;
+  windowMenuLabel?: string;
+  zoomLevel?: number;
+  zoomInLabel?: string;
+  zoomOutLabel?: string;
+  zoomResetLabel?: string;
+  zoomEditHint?: string;
+  onZoomChange?: (nextZoom: number) => void;
+  onZoomReset?: () => void;
 }
 
 export const WidgetWindow: React.FC<WidgetWindowProps> = ({ 
     id, title, icon, children, position, size, zIndex, onDragStop, onResizeStop, 
     onClose, onFocus, isMinimized, isMaximized, onToggleMinimize, onToggleMaximize, onOpenContextMenu,
     isPinned, onTogglePin, pinLabel, unpinLabel, isActive, helpText, helpLabel, minimizeLabel, maximizeLabel,
-    restoreLabel, closeLabel, enterFullscreenLabel, exitFullscreenLabel
+    restoreLabel, closeLabel, enterFullscreenLabel, exitFullscreenLabel, windowMenuLabel, zoomLevel,
+    zoomInLabel, zoomOutLabel, zoomResetLabel, zoomEditHint, onZoomChange, onZoomReset
 }) => {
   const [isHeaderHovered, setIsHeaderHovered] = React.useState(false);
   const [isHelpOpen, setIsHelpOpen] = React.useState(false);
   const [isContentFullscreen, setIsContentFullscreen] = React.useState(false);
-  const helpRef = React.useRef<HTMLDivElement>(null);
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isZoomEditing, setIsZoomEditing] = React.useState(false);
+  const [zoomDraft, setZoomDraft] = React.useState('100');
+  const zoomClickTimer = React.useRef<number | null>(null);
+  const menuCloseTimer = React.useRef<number | null>(null);
+  const menuRef = React.useRef<HTMLDivElement>(null);
   const contentFullscreenRef = React.useRef<HTMLDivElement>(null);
   const finalSize = isMinimized ? { ...size, height: 40 } : size;
   const containerStyle: React.CSSProperties = {
@@ -63,28 +77,6 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
     : icon;
 
   React.useEffect(() => {
-    if (!isHelpOpen) {
-      return undefined;
-    }
-    const handlePointerDown = (event: MouseEvent) => {
-      if (helpRef.current && !helpRef.current.contains(event.target as Node)) {
-        setIsHelpOpen(false);
-      }
-    };
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsHelpOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handlePointerDown);
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.removeEventListener('mousedown', handlePointerDown);
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isHelpOpen]);
-
-  React.useEffect(() => {
     const handleFullscreenChange = () => {
       const active = document.fullscreenElement === contentFullscreenRef.current;
       setIsContentFullscreen(active);
@@ -93,11 +85,44 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
     return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
   }, []);
 
-  const helpId = `widget-help-${id}`;
+  React.useEffect(() => {
+    if (!isMenuOpen) {
+      return undefined;
+    }
+    const handlePointerDown = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+        setIsHelpOpen(false);
+        setIsZoomEditing(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false);
+        setIsHelpOpen(false);
+        setIsZoomEditing(false);
+      }
+    };
+    document.addEventListener('mousedown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMenuOpen]);
+
+  React.useEffect(() => () => {
+    if (menuCloseTimer.current) {
+      window.clearTimeout(menuCloseTimer.current);
+    }
+  }, []);
+
   const fullscreenLabel = isContentFullscreen
     ? exitFullscreenLabel
     : enterFullscreenLabel;
   const maximizeButtonLabel = isMaximized ? restoreLabel : maximizeLabel;
+  const zoomValue = zoomLevel ?? 1;
+  const clampZoom = (value: number) => Math.min(5, Math.max(0.75, value));
   const requestContentFullscreen = async () => {
     const target = contentFullscreenRef.current;
     if (!target) return;
@@ -115,6 +140,12 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
       // ignore fullscreen errors
     }
   };
+
+  React.useEffect(() => {
+    if (!isZoomEditing) {
+      setZoomDraft(`${Math.round(zoomValue * 100)}`);
+    }
+  }, [zoomValue, isZoomEditing]);
 
   return (
       <>
@@ -152,7 +183,148 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
             </span>
             
             <div className="flex items-center gap-1">
-              {onTogglePin && (isHeaderHovered || isPinned) && (
+              {(helpText || onZoomChange) && (
+                <div
+                  ref={menuRef}
+                  className="relative"
+                  onMouseEnter={() => {
+                    if (menuCloseTimer.current) {
+                      window.clearTimeout(menuCloseTimer.current);
+                      menuCloseTimer.current = null;
+                    }
+                    setIsMenuOpen(true);
+                  }}
+                  onMouseLeave={() => {
+                    if (menuCloseTimer.current) {
+                      window.clearTimeout(menuCloseTimer.current);
+                    }
+                    menuCloseTimer.current = window.setTimeout(() => {
+                      setIsMenuOpen(false);
+                      menuCloseTimer.current = null;
+                    }, 250);
+                  }}
+                  onDoubleClick={(event) => event.stopPropagation()}
+                >
+                  <button
+                    type="button"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      setIsMenuOpen(true);
+                    }}
+                    className="hover:bg-black/20 rounded-full p-1"
+                    title={windowMenuLabel}
+                    aria-label={windowMenuLabel}
+                    aria-expanded={isMenuOpen}
+                  >
+                    <MoreVertical size={18} />
+                  </button>
+                  {isMenuOpen && (
+                    <div className="absolute right-0 top-10 z-30 w-64 rounded-md border border-gray-200 bg-white p-2 text-sm text-gray-800 shadow-lg">
+                      {helpText && (
+                        <button
+                          type="button"
+                          onClick={() => setIsHelpOpen((prev) => !prev)}
+                          className="flex w-full items-center gap-2 rounded-md px-2 py-1 text-left hover:bg-gray-100"
+                          title={helpLabel}
+                          aria-label={helpLabel}
+                        >
+                          <CircleHelp size={16} />
+                          <span>{helpLabel}</span>
+                        </button>
+                      )}
+                      {helpText && isHelpOpen && (
+                        <div className="mt-2 rounded-md bg-gray-100 px-2 py-2 text-xs text-gray-700">
+                          {helpText}
+                        </div>
+                      )}
+                      {onZoomChange && (
+                        <div className={`mt-2 flex items-center gap-1 ${helpText ? 'pt-2 border-t border-gray-200' : ''}`}>
+                          <button
+                            type="button"
+                            onClick={() => onZoomChange(clampZoom(zoomValue - 0.1))}
+                            className="rounded-md px-2 py-1 text-gray-700 hover:bg-gray-100"
+                            title={zoomOutLabel}
+                            aria-label={zoomOutLabel}
+                          >
+                            <Minus size={14} />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => onZoomChange(clampZoom(zoomValue + 0.1))}
+                            className="rounded-md px-2 py-1 text-gray-700 hover:bg-gray-100"
+                            title={zoomInLabel}
+                            aria-label={zoomInLabel}
+                          >
+                            <Plus size={14} />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (onZoomReset) {
+                                onZoomReset();
+                                return;
+                              }
+                              onZoomChange?.(clampZoom(1));
+                            }}
+                            className="rounded-md px-2 py-1 text-gray-700 hover:bg-gray-100"
+                            title={zoomResetLabel}
+                            aria-label={zoomResetLabel}
+                          >
+                            <RotateCcw size={14} />
+                          </button>
+                          {isZoomEditing ? (
+                            <input
+                              type="text"
+                              value={zoomDraft}
+                              onChange={(event) => setZoomDraft(event.target.value)}
+                              onBlur={() => {
+                                const value = Number.parseFloat(zoomDraft);
+                                if (!Number.isNaN(value) && onZoomChange) {
+                                  onZoomChange(clampZoom(value / 100));
+                                }
+                                setIsZoomEditing(false);
+                              }}
+                              onKeyDown={(event) => {
+                                if (event.key === 'Enter') {
+                                  const value = Number.parseFloat(zoomDraft);
+                                  if (!Number.isNaN(value) && onZoomChange) {
+                                    onZoomChange(clampZoom(value / 100));
+                                  }
+                                  setIsZoomEditing(false);
+                                }
+                                if (event.key === 'Escape') {
+                                  setIsZoomEditing(false);
+                                }
+                              }}
+                              className="w-16 rounded-md border border-gray-200 px-2 py-1 text-center text-xs"
+                              title={zoomEditHint}
+                              inputMode="numeric"
+                            />
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={(event) => event.stopPropagation()}
+                              onDoubleClick={(event) => {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                setIsZoomEditing(true);
+                              }}
+                              className="rounded-md px-2 py-1 text-xs font-semibold text-gray-700 hover:bg-gray-100"
+                              title={zoomEditHint || zoomResetLabel}
+                              aria-label={zoomResetLabel}
+                              onMouseDown={(event) => event.stopPropagation()}
+                              onClickCapture={(event) => event.stopPropagation()}
+                            >
+                              {Math.round(zoomValue * 100)}%
+                            </button>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+              {onTogglePin && (
                 <button
                   onClick={onTogglePin}
                   onContextMenu={onOpenContextMenu}
@@ -162,33 +334,6 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
                 >
                   {isPinned ? <PinOff size={18} /> : <Pin size={18} />}
                 </button>
-              )}
-              {helpText && (
-                <div ref={helpRef} className="relative">
-                  <button
-                    type="button"
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      setIsHelpOpen((prev) => !prev);
-                    }}
-                    className="hover:bg-black/20 rounded-full p-1"
-                    title={helpLabel}
-                    aria-label={helpLabel}
-                    aria-expanded={isHelpOpen}
-                    aria-controls={helpId}
-                  >
-                    <CircleHelp size={18} />
-                  </button>
-                  {isHelpOpen && (
-                    <div
-                      id={helpId}
-                      role="tooltip"
-                      className="absolute right-0 top-10 z-20 w-60 rounded-md bg-black/85 px-3 py-2 text-sm font-normal leading-snug text-white shadow-lg"
-                    >
-                      {helpText}
-                    </div>
-                  )}
-                </div>
               )}
               <button
                 onClick={onToggleMinimize}
@@ -245,7 +390,17 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
                   <Minimize2 size={18} />
                 </button>
               )}
-              {children}
+              <div
+                className="h-full w-full"
+                style={{
+                  transform: `scale(${zoomValue})`,
+                  transformOrigin: 'top left',
+                  width: `${100 / zoomValue}%`,
+                  height: `${100 / zoomValue}%`,
+                }}
+              >
+                {children}
+              </div>
             </div>
           )}
         </Rnd>

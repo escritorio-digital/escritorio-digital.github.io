@@ -1,5 +1,10 @@
 # Cambios realizados
 
+## 2.4.0
+- Añadido un menú de ventana (tres puntos) con ayuda siempre visible, zoom global por ventana (– / % editable / +) y botón de restablecer 100%.
+- Fullscreen real en las ventanas sin perder contenido y pin fijo en la barra de título.
+- El zoom individual del Editor Markdown y del Bloc de notas desaparece porque ya se controla desde el contenedor de ventana.
+
 ## 2.3.2
 - Guardado: reutiliza el ultimo nombre de archivo al volver a guardar.
 - Titulo de ventana: muestra el nombre del archivo abierto/guardado.

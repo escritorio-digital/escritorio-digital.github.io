@@ -4,13 +4,8 @@
 }
 
 /* Estilos base para el contenido del editor */
-.notepad-widget {
-  --notepad-zoom: 1;
-}
-
 .notepad-widget .ProseMirror {
     @apply text-text-dark; 
-    font-size: calc(1rem * var(--notepad-zoom));
     min-height: 100%;
     /* Estilos para listas: aseguran visibilidad y alineación */
     ul, ol {
@@ -77,35 +72,11 @@
   gap: 0.25rem;
 }
 
-.notepad-widget .menubar-zoom {
-  display: flex;
-  gap: 0.25rem;
-  margin-left: auto;
-}
-
-.notepad-widget .zoom-input {
-  width: 4.5rem;
-  text-align: center;
-}
-
-.notepad-widget .zoom-input::-webkit-outer-spin-button,
-.notepad-widget .zoom-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.notepad-widget .zoom-input[type="number"] {
-  -moz-appearance: textfield;
-  appearance: textfield;
-}
 
 @media (max-width: 520px) {
   .notepad-widget .menubar-actions {
     margin-left: 0;
     width: 100%;
     justify-content: flex-end;
-  }
-  .notepad-widget .menubar-zoom {
-    margin-left: 0;
   }
 }

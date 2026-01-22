@@ -28,6 +28,7 @@ export interface ActiveWidget {
   size: { width: number | string; height: number | string };
   zIndex: number;
   titleOverride?: string;
+  zoom?: number;
   
   // --- LÍNEAS AÑADIDAS ---
   isMinimized?: boolean;

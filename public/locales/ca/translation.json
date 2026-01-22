@@ -219,7 +219,12 @@
     "window_minimize": "Minimitzar",
     "window_maximize": "Maximitzar",
     "window_restore": "Restaurar",
-    "window_close": "Tancar"
+    "window_close": "Tancar",
+    "window_menu": "Menú de finestra",
+    "window_zoom_in": "Apropar zoom",
+    "window_zoom_out": "Allunyar zoom",
+    "window_zoom_reset": "Restablir zoom",
+    "window_zoom_edit_hint": "Doble clic per escriure el percentatge."
   },
   "credits": {
     "title": "Crèdits i Llicència",
@@ -540,11 +545,7 @@
         "h3": "Subtítol Menor (H3)",
         "copy": "Copiar text",
         "upload": "Carregar nota (.md)",
-        "download": "Descarregar nota (.md)",
-        "zoom_in": "Apropar zoom",
-        "zoom_out": "Allunyar zoom",
-        "zoom_reset": "Restablir zoom",
-        "zoom_edit_hint": "Doble clic per escriure el percentatge."
+        "download": "Descarregar nota (.md)"
       },
       "unsaved_title": "Canvis sense guardar",
       "unsaved_message": "Tens canvis sense guardar. Vols guardar-los abans de tancar?",
@@ -578,16 +579,12 @@
         "view_split": "Vista dividida",
         "view_editor": "Només editor",
         "view_preview": "Només vista prèvia",
-        "zoom_in": "Augmentar el zoom",
-        "zoom_out": "Reduir el zoom",
-        "zoom_reset": "Restablir el zoom",
         "formula": "Inserir fórmula",
         "copy_source": "Copiar Markdown",
         "open_file": "Obrir fitxer",
         "save_file": "Desar fitxer",
         "export_pdf": "Imprimir PDF",
-        "copy_html": "Copia HTML",
-        "zoom_edit_hint": "Doble clic per escriure el percentatge."
+        "copy_html": "Copia HTML"
       },
       "placeholders": {
         "text": "text",

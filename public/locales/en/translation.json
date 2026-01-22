@@ -219,7 +219,12 @@
     "window_minimize": "Minimize",
     "window_maximize": "Maximize",
     "window_restore": "Restore",
-    "window_close": "Close"
+    "window_close": "Close",
+    "window_menu": "Window menu",
+    "window_zoom_in": "Zoom in",
+    "window_zoom_out": "Zoom out",
+    "window_zoom_reset": "Reset zoom",
+    "window_zoom_edit_hint": "Double-click to type the percentage."
   },
   "credits": {
     "title": "Credits and License",
@@ -540,11 +545,7 @@
         "h3": "Minor Subtitle (H3)",
         "copy": "Copy text",
         "upload": "Upload note (.md)",
-        "download": "Download note (.md)",
-        "zoom_in": "Zoom in",
-        "zoom_out": "Zoom out",
-        "zoom_reset": "Reset zoom",
-        "zoom_edit_hint": "Double-click to type the percentage."
+        "download": "Download note (.md)"
       },
       "unsaved_title": "Unsaved changes",
       "unsaved_message": "You have unsaved changes. Save before closing?",
@@ -578,16 +579,12 @@
         "view_split": "Split view",
         "view_editor": "Editor only",
         "view_preview": "Preview only",
-        "zoom_in": "Zoom in",
-        "zoom_out": "Zoom out",
-        "zoom_reset": "Reset zoom",
         "formula": "Insert formula",
         "copy_source": "Copy Markdown",
         "open_file": "Open file",
         "save_file": "Save file",
         "export_pdf": "Print PDF",
-        "copy_html": "Copy HTML",
-        "zoom_edit_hint": "Double-click to type the percentage."
+        "copy_html": "Copy HTML"
       },
       "placeholders": {
         "text": "text",
