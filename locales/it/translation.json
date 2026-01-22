@@ -14,7 +14,8 @@
     "message": "Salvare in File Ed? OK = File Ed, Annulla = Disco locale.",
     "existing_files": "File in questa cartella",
     "replace_hint": "Fai clic su una cartella per aprirla o su un file per usare il nome e sostituirlo.",
-    "no_files": "Nessun file in questa cartella."
+    "no_files": "Nessun file in questa cartella.",
+    "filter_widget": "Mostra solo i file creati con {{widget}}"
   },
   "settings": {
     "title": "Impostazioni",
@@ -225,8 +226,9 @@
     "window_zoom_out": "Riduci zoom",
     "window_zoom_reset": "Ripristina zoom",
     "window_zoom_edit_hint": "Doppio clic per inserire la percentuale.",
-    "toolbar_hide": "Nascondi barra (sposta il mouse sul bordo superiore per mostrarla di nuovo).",
-    "toolbar_pin": "Fissa barra"
+    "toolbar_hide": "Nascondi barra degli strumenti",
+    "toolbar_pin": "Fissa barra",
+    "toolbar_reveal_hint": "Per rivedere la barra degli strumenti, sposta il mouse sul bordo superiore del widget."
   },
   "credits": {
     "title": "Crediti e Licenza",
@@ -439,13 +441,15 @@
       "students_per_group": "Studenti per gruppo",
       "generate_groups": "Genera gruppi",
       "generated_groups_label": "Gruppi generati",
-      "view_large": "Vista grande",
+      "view_large": "Visualizza in grande i gruppi generati",
       "close_large_view": "Chiudi vista grande",
       "copy_groups": "Copia gruppi",
       "download_groups": "Salva",
       "copied": "Copiato",
       "group_title": "Gruppo {{number}}",
-      "no_groups_message": "I gruppi appariranno qui."
+      "no_groups_message": "I gruppi appariranno qui.",
+      "hide_student_list": "Nascondi elenco studenti",
+      "show_student_list": "Mostra elenco studenti"
     },
     "qr_code_generator": {
       "title": "Generatore di QR",
@@ -946,7 +950,8 @@
     "cancel": "Annulla",
     "open_selected": "Apri selezionati",
     "open_file": "Apri file",
-    "root_folder": "File Ed"
+    "root_folder": "File Ed",
+    "filter_widget": "Mostra solo i file creati con {{widget}}"
   },
   "unsaved_modal": {
     "title": "Modifiche non salvate",

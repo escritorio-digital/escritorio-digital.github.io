@@ -14,7 +14,8 @@
     "message": "Guardar em Arquivos Ed? OK = Arquivos Ed, Cancelar = Disco local.",
     "existing_files": "Ficheiros nesta pasta",
     "replace_hint": "Clique numa pasta para a abrir ou num ficheiro para usar o nome e substituí-lo.",
-    "no_files": "Não há ficheiros nesta pasta."
+    "no_files": "Não há ficheiros nesta pasta.",
+    "filter_widget": "Ver apenas arquivos criados com {{widget}}"
   },
   "settings": {
     "title": "Configurações",
@@ -227,8 +228,9 @@
     "window_zoom_out": "Diminuir zoom",
     "window_zoom_reset": "Repor zoom",
     "window_zoom_edit_hint": "Duplo clique para escrever a percentagem.",
-    "toolbar_hide": "Ocultar barra (move o rato para a parte superior para a mostrar de novo).",
-    "toolbar_pin": "Fixar barra"
+    "toolbar_hide": "Ocultar barra de ferramentas",
+    "toolbar_pin": "Fixar barra",
+    "toolbar_reveal_hint": "Para ver a barra de ferramentas novamente, mova o mouse para a borda superior do widget."
   },
   "credits": {
     "title": "Créditos e Licença",
@@ -441,13 +443,15 @@
       "students_per_group": "Estudantes por Grupo",
       "generate_groups": "Gerar Grupos",
       "generated_groups_label": "Grupos Gerados",
-      "view_large": "Ver em grande",
+      "view_large": "Ver em grande os grupos gerados",
       "close_large_view": "Fechar vista grande",
       "copy_groups": "Copiar grupos",
       "download_groups": "Guardar",
       "copied": "Copiado",
       "group_title": "Grupo {{number}}",
-      "no_groups_message": "Os grupos aparecerão aqui."
+      "no_groups_message": "Os grupos aparecerão aqui.",
+      "hide_student_list": "Ocultar lista de estudantes",
+      "show_student_list": "Mostrar lista de estudantes"
     },
     "qr_code_generator": {
       "title": "Gerador de QR",
@@ -948,7 +952,8 @@
     "cancel": "Cancelar",
     "open_selected": "Abrir selecionados",
     "open_file": "Abrir ficheiro",
-    "root_folder": "Arquivos Ed"
+    "root_folder": "Arquivos Ed",
+    "filter_widget": "Ver apenas arquivos criados com {{widget}}"
   },
   "unsaved_modal": {
     "title": "Alterações não guardadas",

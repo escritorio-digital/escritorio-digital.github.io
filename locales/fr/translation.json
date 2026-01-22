@@ -14,7 +14,8 @@
     "message": "Enregistrer dans Fichiers Ed ? OK = Fichiers Ed, Annuler = Disque local.",
     "existing_files": "Fichiers dans ce dossier",
     "replace_hint": "Cliquez sur un dossier pour l’ouvrir ou sur un fichier pour utiliser son nom et le remplacer.",
-    "no_files": "Aucun fichier dans ce dossier."
+    "no_files": "Aucun fichier dans ce dossier.",
+    "filter_widget": "Afficher uniquement les fichiers crees avec {{widget}}"
   },
   "settings": {
     "title": "Configuration",
@@ -226,8 +227,9 @@
     "window_zoom_out": "Réduire",
     "window_zoom_reset": "Réinitialiser le zoom",
     "window_zoom_edit_hint": "Double-cliquez pour saisir le pourcentage.",
-    "toolbar_hide": "Masquer la barre (deplacez la souris vers le bord superieur pour la reafficher).",
-    "toolbar_pin": "Epingler la barre"
+    "toolbar_hide": "Masquer la barre d’outils",
+    "toolbar_pin": "Epingler la barre",
+    "toolbar_reveal_hint": "Pour revoir la barre d’outils, déplacez la souris vers le bord supérieur du widget."
   },
   "credits": {
     "title": "Crédits et Licence",
@@ -440,13 +442,15 @@
       "students_per_group": "Étudiants par groupe",
       "generate_groups": "Générer les groupes",
       "generated_groups_label": "Groupes générés",
-      "view_large": "Afficher en grand",
+      "view_large": "Voir en grand les groupes generes",
       "close_large_view": "Fermer la vue agrandie",
       "copy_groups": "Copier les groupes",
       "download_groups": "Enregistrer",
       "copied": "Copié",
       "group_title": "Groupe {{number}}",
-      "no_groups_message": "Les groupes apparaîtront ici."
+      "no_groups_message": "Les groupes apparaîtront ici.",
+      "hide_student_list": "Masquer la liste des eleves",
+      "show_student_list": "Afficher la liste des eleves"
     },
     "qr_code_generator": {
       "title": "Générateur de QR",
@@ -947,7 +951,8 @@
     "cancel": "Annuler",
     "open_selected": "Ouvrir la sélection",
     "open_file": "Ouvrir le fichier",
-    "root_folder": "Fichiers Ed"
+    "root_folder": "Fichiers Ed",
+    "filter_widget": "Afficher uniquement les fichiers crees avec {{widget}}"
   },
   "unsaved_modal": {
     "title": "Modifications non enregistrées",

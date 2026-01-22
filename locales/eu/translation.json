@@ -14,7 +14,8 @@
     "message": "Ed fitxategiak-en gorde? Ados = Ed fitxategiak, Utzi = Disko lokala.",
     "existing_files": "Karpeta honetako fitxategiak",
     "replace_hint": "Egin klik karpeta batean hura irekitzeko edo fitxategi batean haren izena erabiltzeko eta ordezkatzeko.",
-    "no_files": "Ez dago fitxategirik karpeta honetan."
+    "no_files": "Ez dago fitxategirik karpeta honetan.",
+    "filter_widget": "Erakutsi {{widget}}-ekin sortutako fitxategiak bakarrik"
   },
   "settings": {
     "title": "Ezarpenak",
@@ -224,8 +225,9 @@
     "window_zoom_out": "Zooma txikitu",
     "window_zoom_reset": "Zooma berrezarri",
     "window_zoom_edit_hint": "Egin klik bikoitza ehunekoa idazteko.",
-    "toolbar_hide": "Barra ezkutatu (eraman sagua goiko ertzera berriro erakusteko).",
-    "toolbar_pin": "Barra finkatu"
+    "toolbar_hide": "Tresna-barra ezkutatu",
+    "toolbar_pin": "Barra finkatu",
+    "toolbar_reveal_hint": "Tresna-barra berriro ikusteko, eraman sagua widgetaren goiko ertzera."
   },
   "credits": {
     "title": "Kredituak eta Lizentzia",
@@ -438,13 +440,15 @@
       "students_per_group": "Ikasle Taldeko",
       "generate_groups": "Sortu Taldeak",
       "generated_groups_label": "Sortutako Taldeak",
-      "view_large": "Ikuspegi handia",
+      "view_large": "Ikusi sortutako taldeak handian",
       "close_large_view": "Itxi ikuspegi handia",
       "copy_groups": "Taldeak kopiatu",
       "download_groups": "Gorde",
       "copied": "Kopiatua",
       "group_title": "{{number}} Taldea",
-      "no_groups_message": "Taldeak hemen agertuko dira."
+      "no_groups_message": "Taldeak hemen agertuko dira.",
+      "hide_student_list": "Ikasleen zerrenda ezkutatu",
+      "show_student_list": "Ikasleen zerrenda erakutsi"
     },
     "qr_code_generator": {
       "title": "QR Sortzailea",
@@ -945,7 +949,8 @@
     "cancel": "Utzi",
     "open_selected": "Hautatutakoak ireki",
     "open_file": "Fitxategia ireki",
-    "root_folder": "Ed fitxategiak"
+    "root_folder": "Ed fitxategiak",
+    "filter_widget": "Erakutsi {{widget}}-ekin sortutako fitxategiak bakarrik"
   },
   "unsaved_modal": {
     "title": "Gorde gabeko aldaketak",

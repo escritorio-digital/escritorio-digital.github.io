@@ -14,7 +14,8 @@
     "message": "¿Guardar en Archivos Ed? Aceptar = Archivos Ed, Cancelar = Disco local.",
     "existing_files": "Archivos en esta carpeta",
     "replace_hint": "Haz clic en una carpeta para abrirla o en un archivo para usar su nombre y reemplazarlo.",
-    "no_files": "No hay archivos en esta carpeta."
+    "no_files": "No hay archivos en esta carpeta.",
+    "filter_widget": "Ver solo archivos creados con {{widget}}"
   },
   "settings": {
     "title": "Configuración",
@@ -225,8 +226,9 @@
     "window_zoom_out": "Disminuir zoom",
     "window_zoom_reset": "Restablecer zoom",
     "window_zoom_edit_hint": "Doble clic para escribir el porcentaje.",
-    "toolbar_hide": "Ocultar barra (mueve el ratón a la parte superior para volver a mostrarla).",
-    "toolbar_pin": "Fijar barra"
+    "toolbar_hide": "Ocultar barra",
+    "toolbar_pin": "Fijar barra",
+    "toolbar_reveal_hint": "Para volver a ver la barra de herramientas, acerca el ratón al borde superior del widget."
   },
   "credits": {
     "title": "Créditos y Licencia",
@@ -439,13 +441,15 @@
       "students_per_group": "Estudiantes por Grupo",
       "generate_groups": "Generar Grupos",
       "generated_groups_label": "Grupos Generados",
-      "view_large": "Ver en grande",
+      "view_large": "Ver en grande grupos generados",
       "close_large_view": "Cerrar vista grande",
       "copy_groups": "Copiar grupos",
       "download_groups": "Guardar",
       "copied": "Copiado",
       "group_title": "Grupo {{number}}",
-      "no_groups_message": "Los grupos aparecerán aquí."
+      "no_groups_message": "Los grupos aparecerán aquí.",
+      "hide_student_list": "Esconder lista de estudiantes",
+      "show_student_list": "Mostrar lista de estudiantes"
     },
     "qr_code_generator": {
       "title": "Generador QR",
@@ -946,7 +950,8 @@
     "cancel": "Cancelar",
     "open_selected": "Abrir seleccionados",
     "open_file": "Abrir archivo",
-    "root_folder": "Archivos Ed"
+    "root_folder": "Archivos Ed",
+    "filter_widget": "Ver solo archivos creados con {{widget}}"
   },
   "unsaved_modal": {
     "title": "Cambios sin guardar",
