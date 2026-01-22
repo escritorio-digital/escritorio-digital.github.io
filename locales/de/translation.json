@@ -224,7 +224,9 @@
     "window_zoom_in": "Vergrößern",
     "window_zoom_out": "Verkleinern",
     "window_zoom_reset": "Zoom zurücksetzen",
-    "window_zoom_edit_hint": "Doppelklick, um den Prozentsatz einzugeben."
+    "window_zoom_edit_hint": "Doppelklick, um den Prozentsatz einzugeben.",
+    "toolbar_hide": "Symbolleiste ausblenden (bewege die Maus an den oberen Rand, um sie wieder einzublenden).",
+    "toolbar_pin": "Symbolleiste anheften"
   },
   "credits": {
     "title": "Credits und Lizenz",

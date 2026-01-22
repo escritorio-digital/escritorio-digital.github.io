@@ -223,7 +223,9 @@
     "window_zoom_in": "Zooma handitu",
     "window_zoom_out": "Zooma txikitu",
     "window_zoom_reset": "Zooma berrezarri",
-    "window_zoom_edit_hint": "Egin klik bikoitza ehunekoa idazteko."
+    "window_zoom_edit_hint": "Egin klik bikoitza ehunekoa idazteko.",
+    "toolbar_hide": "Barra ezkutatu (eraman sagua goiko ertzera berriro erakusteko).",
+    "toolbar_pin": "Barra finkatu"
   },
   "credits": {
     "title": "Kredituak eta Lizentzia",
