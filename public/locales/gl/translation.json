@@ -14,7 +14,8 @@
     "message": "Gardar en Arquivos Ed? Aceptar = Arquivos Ed, Cancelar = Disco local.",
     "existing_files": "Ficheiros neste cartafol",
     "replace_hint": "Preme nun cartafol para abrilo ou nun ficheiro para usar o seu nome e substituílo.",
-    "no_files": "Non hai ficheiros neste cartafol."
+    "no_files": "Non hai ficheiros neste cartafol.",
+    "filter_widget": "Ver so ficheiros creados con {{widget}}"
   },
   "settings": {
     "title": "Configuración",
@@ -225,8 +226,9 @@
     "window_zoom_out": "Diminuír zoom",
     "window_zoom_reset": "Restablecer zoom",
     "window_zoom_edit_hint": "Dobre clic para escribir a porcentaxe.",
-    "toolbar_hide": "Ocultar barra (move o rato á parte superior para volver amosala).",
-    "toolbar_pin": "Fixar barra"
+    "toolbar_hide": "Ocultar barra",
+    "toolbar_pin": "Fixar barra",
+    "toolbar_reveal_hint": "Para volver ver a barra de ferramentas, achega o rato ao bordo superior do widget."
   },
   "credits": {
     "title": "Créditos e Licenza",
@@ -439,13 +441,15 @@
       "students_per_group": "Estudantes por Grupo",
       "generate_groups": "Xerar Grupos",
       "generated_groups_label": "Grupos Xerados",
-      "view_large": "Ver en grande",
+      "view_large": "Ver en grande os grupos xerados",
       "close_large_view": "Pechar vista grande",
       "copy_groups": "Copiar grupos",
       "download_groups": "Gardar",
       "copied": "Copiado",
       "group_title": "Grupo {{number}}",
-      "no_groups_message": "Os grupos aparecerán aquí."
+      "no_groups_message": "Os grupos aparecerán aquí.",
+      "hide_student_list": "Agochar a lista de estudantes",
+      "show_student_list": "Mostrar a lista de estudantes"
     },
     "qr_code_generator": {
       "title": "Xerador QR",
@@ -946,7 +950,8 @@
     "cancel": "Cancelar",
     "open_selected": "Abrir seleccionados",
     "open_file": "Abrir ficheiro",
-    "root_folder": "Arquivos Ed"
+    "root_folder": "Arquivos Ed",
+    "filter_widget": "Ver so ficheiros creados con {{widget}}"
   },
   "unsaved_modal": {
     "title": "Cambios sen gardar",

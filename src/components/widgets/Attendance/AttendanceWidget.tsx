@@ -164,7 +164,7 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
   };
 
   const handleOpenFile = async () => {
-    const result = await requestOpenFile({ accept: '.csv' });
+    const result = await requestOpenFile({ accept: '.csv', sourceWidgetId: 'attendance' });
     if (!result) return;
     if (result.source === 'local') {
       const [file] = result.files;
@@ -230,7 +230,7 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
 
     const csv = Papa.unparse(dataToExport);
     const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-    const destination = await requestSaveDestination(currentFilename || 'asistencia_completa.csv');
+    const destination = await requestSaveDestination(currentFilename || 'asistencia_completa.csv', { sourceWidgetId: 'attendance' });
     if (!destination) return;
     if (destination?.destination === 'file-manager') {
       await saveToFileManager({

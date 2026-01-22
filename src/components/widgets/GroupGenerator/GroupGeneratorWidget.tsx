@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-// CORRECCIÓN: Se eliminaron 'Users' y 'ListCollapse' de esta línea
-import { FolderOpen, Expand, Minimize } from 'lucide-react';
+import { FolderOpen, Copy, Save, Maximize2, Minimize2 } from 'lucide-react';
 import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
 import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
 import { requestSaveDestination } from '../../../utils/saveDialog';
 import { requestOpenFile } from '../../../utils/openDialog';
+import { WidgetToolbar } from '../../core/WidgetToolbar';
 import './GroupGeneratorWidget.css';
 
 type GroupMode = 'byCount' | 'bySize';
@@ -57,7 +57,6 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
   const [groupValue, setGroupValue] = useState(3);
   const [generatedGroups, setGeneratedGroups] = useState<string[][]>([]);
   const [isLargeView, setIsLargeView] = useState(false);
-  const [copyFeedback, setCopyFeedback] = useState(false);
   const [lastSavedSnapshot, setLastSavedSnapshot] = useState<string>('');
   const [currentFilename, setCurrentFilename] = useState<string | null>(null);
   const overlayContentRef = useRef<HTMLDivElement>(null);
@@ -199,7 +198,7 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
   }, [isLargeView, generatedGroups]);
 
   const handleOpenFile = async () => {
-    const result = await requestOpenFile({ accept: '.txt' });
+    const result = await requestOpenFile({ accept: '.txt', sourceWidgetId: 'group-generator' });
     if (!result) return;
     if (result.source === 'local') {
       const [file] = result.files;
@@ -276,16 +275,14 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
         document.execCommand('copy');
         document.body.removeChild(textarea);
       }
-      setCopyFeedback(true);
-      window.setTimeout(() => setCopyFeedback(false), 1500);
     } catch {
-      setCopyFeedback(false);
+      // ignore copy failures
     }
   };
 
   const downloadGroups = async () => {
     if (generatedGroups.length === 0) return;
-    const destination = await requestSaveDestination(currentFilename || 'grupos.txt');
+    const destination = await requestSaveDestination(currentFilename || 'grupos.txt', { sourceWidgetId: 'group-generator' });
     if (!destination) return;
     if (destination?.destination === 'file-manager') {
       const snapshot: GroupGeneratorSnapshot = {
@@ -395,6 +392,45 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
 
   return (
     <div className="group-generator-widget">
+      <WidgetToolbar>
+        <div className="group-generator-toolbar">
+          <button
+            className="expand-button"
+            onClick={handleOpenFile}
+            title={t('widgets.group_generator.load_from_file')}
+            aria-label={t('widgets.group_generator.load_from_file')}
+          >
+            <FolderOpen size={16} />
+          </button>
+          <button
+            className="expand-button"
+            onClick={downloadGroups}
+            disabled={generatedGroups.length === 0}
+            title={t('widgets.group_generator.download_groups')}
+            aria-label={t('widgets.group_generator.download_groups')}
+          >
+            <Save size={16} />
+          </button>
+          <button
+            className="expand-button"
+            onClick={copyGroups}
+            disabled={generatedGroups.length === 0}
+            title={t('widgets.group_generator.copy_groups')}
+            aria-label={t('widgets.group_generator.copy_groups')}
+          >
+            <Copy size={16} />
+          </button>
+          <button
+            className="expand-button"
+            onClick={() => setIsLargeView((prev) => !prev)}
+            disabled={generatedGroups.length === 0}
+            title={isLargeView ? t('widgets.group_generator.close_large_view') : t('widgets.group_generator.view_large')}
+            aria-label={isLargeView ? t('widgets.group_generator.close_large_view') : t('widgets.group_generator.view_large')}
+          >
+            {isLargeView ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+          </button>
+        </div>
+      </WidgetToolbar>
       <div className="input-panel">
         <label className="panel-label">{t('widgets.group_generator.student_list_label')}</label>
         <textarea
@@ -402,9 +438,6 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
           onChange={(e) => setStudentList(e.target.value)}
           placeholder={t('widgets.group_generator.placeholder')}
         />
-        <button onClick={handleOpenFile} className="upload-button">
-          <FolderOpen size={16} /> {t('widgets.group_generator.load_from_file')}
-        </button>
       </div>
       <div className="controls-panel">
         <div className="mode-selection">
@@ -431,36 +464,6 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
       <div className="output-panel">
         <div className="output-header">
           <label className="panel-label">{t('widgets.group_generator.generated_groups_label')}</label>
-          <div className="flex items-center gap-2">
-            <button
-              className="expand-button"
-              onClick={copyGroups}
-              disabled={generatedGroups.length === 0}
-              title={t('widgets.group_generator.copy_groups')}
-            >
-              <span>{copyFeedback ? t('widgets.group_generator.copied') : t('widgets.group_generator.copy_groups')}</span>
-            </button>
-            <button
-              className="expand-button"
-              onClick={downloadGroups}
-              disabled={generatedGroups.length === 0}
-              title={t('widgets.group_generator.download_groups')}
-            >
-              <span>{t('widgets.group_generator.download_groups')}</span>
-            </button>
-            <button
-              className="expand-button"
-              onClick={() => setIsLargeView(!isLargeView)}
-              disabled={generatedGroups.length === 0}
-            >
-              {isLargeView ? <Minimize size={16} /> : <Expand size={16} />}
-              <span>
-                {isLargeView
-                  ? t('widgets.group_generator.close_large_view')
-                  : t('widgets.group_generator.view_large')}
-              </span>
-            </button>
-          </div>
         </div>
         <div className="groups-container">
           {generatedGroups.length > 0 ? (
@@ -487,7 +490,7 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
             <div className="groups-overlay-header" ref={overlayHeaderRef}>
               <h3>{t('widgets.group_generator.generated_groups_label')}</h3>
               <button className="expand-button" onClick={() => setIsLargeView(false)}>
-                <Minimize size={16} />
+                <Minimize2 size={16} />
                 <span>{t('widgets.group_generator.close_large_view')}</span>
               </button>
             </div>

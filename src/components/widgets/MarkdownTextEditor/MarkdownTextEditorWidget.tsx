@@ -34,7 +34,7 @@ import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
 import { requestSaveDestination } from '../../../utils/saveDialog';
 import { requestOpenFile } from '../../../utils/openDialog';
-import { HideableToolbar } from '../../shared/HideableToolbar';
+import { WidgetToolbar } from '../../core/WidgetToolbar';
 
 const EDICUATEX_ORIGIN = 'https://edicuatex.github.io';
 
@@ -266,7 +266,7 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
     const handleSaveToFile = async () => {
         const blob = new Blob([input], { type: 'text/markdown;charset=utf-8' });
         const filename = currentFilename || t('widgets.markdown_text_editor.default_filename');
-        const destination = await requestSaveDestination(filename);
+        const destination = await requestSaveDestination(filename, { sourceWidgetId: 'markdown-text-editor' });
         if (!destination) return;
         if (destination?.destination === 'file-manager') {
             await saveToFileManager({
@@ -317,7 +317,7 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
     };
 
     const handleOpenFile = async () => {
-        const result = await requestOpenFile({ accept: '.md,.txt' });
+        const result = await requestOpenFile({ accept: '.md,.txt', sourceWidgetId: 'markdown-text-editor' });
         if (!result) return;
         if (result.source === 'local') {
             const [file] = result.files;
@@ -475,8 +475,9 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
             <div
                 className={`markdown-text-editor-widget view-${viewMode}`}
             >
-                <HideableToolbar className="markdown-toolbar">
-                    <div className="markdown-toolbar-group">
+                <WidgetToolbar>
+                    <div className="markdown-toolbar">
+                        <div className="markdown-toolbar-group">
                         <button type="button" title={t('widgets.markdown_text_editor.toolbar.bold')} onClick={() => applyWrap('**', '**', t('widgets.markdown_text_editor.placeholders.text'))}>
                             <Bold size={16} />
                         </button>
@@ -513,8 +514,8 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
                         <button type="button" title={t('widgets.markdown_text_editor.toolbar.link')} onClick={applyLink}>
                             <Link2 size={16} />
                         </button>
-                    </div>
-                    <div className="markdown-toolbar-group">
+                        </div>
+                        <div className="markdown-toolbar-group">
                         {feedback && <span className="feedback-message">{feedback}</span>}
                         <button
                             type="button"
@@ -559,8 +560,9 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
                         <button type="button" title={t('widgets.markdown_text_editor.toolbar.export_pdf')} onClick={handleExportAsPdf}>
                             <FileText size={16} />
                         </button>
+                        </div>
                     </div>
-                </HideableToolbar>
+                </WidgetToolbar>
 
                 <div className="markdown-body">
                     <div className="markdown-pane markdown-editor-pane">

@@ -1,5 +1,13 @@
 # Cambios realizados
 
+## 2.5.0
+- Barra de herramientas unica por widget con menu de tres puntos integrado, ocultado suave y atajo de teclado.
+- Boton de salida de pantalla completa reposicionado y arrastrable para no tapar la barra.
+- Dialogos de abrir/guardar mas claros: rutas con migas, tamanos reales y filtro por programa.
+- Generador de grupos: acciones en barra superior y vista grande con ajuste dinamico.
+- Calendario con contraste automatico segun el tema.
+- Bloc de notas: nuevas instancias vacias y foco automatico.
+
 ## 2.4.0
 - Añadido un menú de ventana (tres puntos) con ayuda siempre visible, zoom global por ventana (– / % editable / +) y botón de restablecer 100%.
 - Fullscreen real en las ventanas sin perder contenido y pin fijo en la barra de título.

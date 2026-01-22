@@ -1,11 +1,13 @@
 import { useState, useMemo } from 'react'; // Corregido: 'React' no es necesario
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from '../../../context/ThemeContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // A. El Componente de React con toda la lógica
 export const CalendarWidget: FC = () => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
@@ -39,8 +41,35 @@ export const CalendarWidget: FC = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
   };
 
+  const isWidgetBgDark = useMemo(() => {
+    const color = theme['--color-widget-bg'];
+    if (!color) return true;
+    const hexMatch = color.trim().match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+    if (hexMatch) {
+      const hex = hexMatch[1];
+      const full = hex.length === 3
+        ? hex.split('').map((ch) => ch + ch).join('')
+        : hex;
+      const r = Number.parseInt(full.slice(0, 2), 16);
+      const g = Number.parseInt(full.slice(2, 4), 16);
+      const b = Number.parseInt(full.slice(4, 6), 16);
+      const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+      return luminance < 0.55;
+    }
+    const rgbMatch = color.trim().match(/^rgba?\(([^)]+)\)$/i);
+    if (rgbMatch) {
+      const parts = rgbMatch[1].split(',').map((part) => Number.parseFloat(part.trim()));
+      if (parts.length >= 3 && parts.every((val) => Number.isFinite(val))) {
+        const [r, g, b] = parts;
+        const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+        return luminance < 0.55;
+      }
+    }
+    return true;
+  }, [theme]);
+
   return (
-    <div className="calendar-widget">
+    <div className={`calendar-widget ${isWidgetBgDark ? 'calendar-widget--dark' : 'calendar-widget--light'}`}>
       <div className="calendar-header">
         <button onClick={goToPreviousMonth} className="calendar-nav-button">
           <ChevronLeft size={20} />
@@ -61,7 +90,7 @@ export const CalendarWidget: FC = () => {
         {calendarDays.map((d, index) => (
           <div
             key={index}
-            className={`calendar-cell ${d.isPlaceholder ? '' : 'hover:bg-accent/50'} ${d.isToday ? 'calendar-cell--today' : ''}`}
+            className={`calendar-cell ${d.isPlaceholder ? '' : 'calendar-cell--hover'} ${d.isToday ? 'calendar-cell--today' : ''}`}
           >
             {d.day}
           </div>

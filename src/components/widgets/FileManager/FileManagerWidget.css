@@ -3,7 +3,7 @@
 }
 
 .file-manager-toolbar {
-  @apply flex flex-wrap items-center gap-2 bg-white rounded-lg shadow-sm p-2;
+  @apply flex flex-wrap items-center gap-2 bg-transparent rounded-none shadow-none p-0;
 }
 
 .file-manager-button {

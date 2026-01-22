@@ -14,7 +14,8 @@
     "message": "In Ed-Dateien speichern? OK = Ed-Dateien, Abbrechen = Lokaler Datenträger.",
     "existing_files": "Dateien in diesem Ordner",
     "replace_hint": "Ordner anklicken, um ihn zu oeffnen, oder Datei anklicken, um den Namen zu verwenden und zu ersetzen.",
-    "no_files": "Keine Dateien in diesem Ordner."
+    "no_files": "Keine Dateien in diesem Ordner.",
+    "filter_widget": "Nur Dateien anzeigen, die mit {{widget}} erstellt wurden"
   },
   "settings": {
     "title": "Einstellungen",
@@ -225,8 +226,9 @@
     "window_zoom_out": "Verkleinern",
     "window_zoom_reset": "Zoom zurücksetzen",
     "window_zoom_edit_hint": "Doppelklick, um den Prozentsatz einzugeben.",
-    "toolbar_hide": "Symbolleiste ausblenden (bewege die Maus an den oberen Rand, um sie wieder einzublenden).",
-    "toolbar_pin": "Symbolleiste anheften"
+    "toolbar_hide": "Werkzeugleiste ausblenden",
+    "toolbar_pin": "Symbolleiste anheften",
+    "toolbar_reveal_hint": "Um die Werkzeugleiste wieder zu sehen, bewege die Maus an den oberen Rand des Widgets."
   },
   "credits": {
     "title": "Credits und Lizenz",
@@ -439,13 +441,15 @@
       "students_per_group": "Schüler pro Gruppe",
       "generate_groups": "Gruppen erstellen",
       "generated_groups_label": "Erstellte Gruppen",
-      "view_large": "Großansicht",
+      "view_large": "Erzeugte Gruppen gross anzeigen",
       "close_large_view": "Großansicht schließen",
       "copy_groups": "Gruppen kopieren",
       "download_groups": "Speichern",
       "copied": "Kopiert",
       "group_title": "Gruppe {{number}}",
-      "no_groups_message": "Die Gruppen erscheinen hier."
+      "no_groups_message": "Die Gruppen erscheinen hier.",
+      "hide_student_list": "Schulerliste ausblenden",
+      "show_student_list": "Schulerliste anzeigen"
     },
     "qr_code_generator": {
       "title": "QR-Code-Generator",
@@ -946,7 +950,8 @@
     "cancel": "Abbrechen",
     "open_selected": "Auswahl öffnen",
     "open_file": "Datei öffnen",
-    "root_folder": "Ed-Dateien"
+    "root_folder": "Ed-Dateien",
+    "filter_widget": "Nur Dateien anzeigen, die mit {{widget}} erstellt wurden"
   },
   "unsaved_modal": {
     "title": "Nicht gespeicherte Änderungen",

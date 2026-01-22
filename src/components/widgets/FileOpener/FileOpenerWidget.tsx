@@ -9,7 +9,7 @@ import 'katex/dist/katex.min.css';
 import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
 import { requestOpenFile } from '../../../utils/openDialog';
-import { HideableToolbar } from '../../shared/HideableToolbar';
+import { WidgetToolbar } from '../../core/WidgetToolbar';
 
 type DisplayType = 'none' | 'image' | 'pdf' | 'text' | 'markdown' | 'video' | 'audio' | 'html';
 
@@ -163,19 +163,21 @@ export const FileOpenerWidget: FC = () => {
 
   return (
     <div className="file-opener-widget">
-      <HideableToolbar className="file-opener-header">
-        <FolderOpen size={18} />
-        <span>{fileName || t('widgets.file_opener.title')}</span>
-        <div className="file-opener-spacer" />
-        <button
-          onClick={handlePick}
-          className="file-opener-icon-button"
-          title={t('widgets.file_opener.open_button')}
-          aria-label={t('widgets.file_opener.open_button')}
-        >
-          <FolderOpen size={16} />
-        </button>
-      </HideableToolbar>
+      <WidgetToolbar>
+        <div className="file-opener-header">
+          <FolderOpen size={18} />
+          <span>{fileName || t('widgets.file_opener.title')}</span>
+          <div className="file-opener-spacer" />
+          <button
+            onClick={handlePick}
+            className="file-opener-icon-button"
+            title={t('widgets.file_opener.open_button')}
+            aria-label={t('widgets.file_opener.open_button')}
+          >
+            <FolderOpen size={16} />
+          </button>
+        </div>
+      </WidgetToolbar>
       <div
         className={`file-opener-body${isDocument ? ' file-opener-body-doc' : ''}`}
         onClick={displayType === 'none' ? handlePick : undefined}

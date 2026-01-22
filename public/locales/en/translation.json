@@ -14,7 +14,8 @@
     "message": "Save in Ed Files? OK = Ed Files, Cancel = Local disk.",
     "existing_files": "Files in this folder",
     "replace_hint": "Click a folder to open it or a file to use its name and replace it.",
-    "no_files": "No files in this folder."
+    "no_files": "No files in this folder.",
+    "filter_widget": "Show only files created with {{widget}}"
   },
   "settings": {
     "title": "Settings",
@@ -225,8 +226,9 @@
     "window_zoom_out": "Zoom out",
     "window_zoom_reset": "Reset zoom",
     "window_zoom_edit_hint": "Double-click to type the percentage.",
-    "toolbar_hide": "Hide toolbar (move the mouse to the top edge to show it again).",
-    "toolbar_pin": "Pin toolbar"
+    "toolbar_hide": "Hide toolbar",
+    "toolbar_pin": "Pin toolbar",
+    "toolbar_reveal_hint": "To show the toolbar again, move the mouse to the top edge of the widget."
   },
   "credits": {
     "title": "Credits and License",
@@ -439,13 +441,15 @@
       "students_per_group": "Students per Group",
       "generate_groups": "Generate Groups",
       "generated_groups_label": "Generated Groups",
-      "view_large": "Show large view",
+      "view_large": "View generated groups full size",
       "close_large_view": "Close large view",
       "copy_groups": "Copy groups",
       "download_groups": "Save",
       "copied": "Copied",
       "group_title": "Group {{number}}",
-      "no_groups_message": "Groups will appear here."
+      "no_groups_message": "Groups will appear here.",
+      "hide_student_list": "Hide student list",
+      "show_student_list": "Show student list"
     },
     "qr_code_generator": {
       "title": "QR Code Generator",
@@ -946,7 +950,8 @@
     "cancel": "Cancel",
     "open_selected": "Open selected",
     "open_file": "Open file",
-    "root_folder": "Ed Files"
+    "root_folder": "Ed Files",
+    "filter_widget": "Show only files created with {{widget}}"
   },
   "unsaved_modal": {
     "title": "Unsaved changes",

@@ -64,6 +64,7 @@
 }
 
 .notepad-widget .menubar {
+  @apply bg-transparent border-0 p-0;
   flex-wrap: wrap;
 }
 

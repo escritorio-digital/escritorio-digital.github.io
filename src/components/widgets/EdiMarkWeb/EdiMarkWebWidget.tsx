@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { ExternalLink, RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import './EdiMarkWebWidget.css';
-import { HideableToolbar } from '../../shared/HideableToolbar';
+import { WidgetToolbar } from '../../core/WidgetToolbar';
 
 const APP_URL = 'https://edimarkweb.github.io/';
 
@@ -15,27 +15,29 @@ export const EdiMarkWebWidget: FC = () => {
 
     return (
         <div className="edimarkweb-widget">
-            <HideableToolbar className="edimarkweb-toolbar">
-                <div className="edimarkweb-heading">
-                    <p className="edimarkweb-title">EdiMarkWeb</p>
-                    <p className="edimarkweb-subtitle">{t('widgets.edimarkweb.subtitle')}</p>
+            <WidgetToolbar>
+                <div className="edimarkweb-toolbar">
+                    <div className="edimarkweb-heading">
+                        <p className="edimarkweb-title">EdiMarkWeb</p>
+                        <p className="edimarkweb-subtitle">{t('widgets.edimarkweb.subtitle')}</p>
+                    </div>
+                    <div className="edimarkweb-actions">
+                        <button type="button" className="edimarkweb-button" onClick={handleReload}>
+                            <RotateCcw size={16} />
+                            <span>{t('widgets.edimarkweb.reload')}</span>
+                        </button>
+                        <a
+                            className="edimarkweb-link"
+                            href={APP_URL}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <ExternalLink size={16} />
+                            <span>{t('widgets.edimarkweb.open_new_tab')}</span>
+                        </a>
+                    </div>
                 </div>
-                <div className="edimarkweb-actions">
-                    <button type="button" className="edimarkweb-button" onClick={handleReload}>
-                        <RotateCcw size={16} />
-                        <span>{t('widgets.edimarkweb.reload')}</span>
-                    </button>
-                    <a
-                        className="edimarkweb-link"
-                        href={APP_URL}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <ExternalLink size={16} />
-                        <span>{t('widgets.edimarkweb.open_new_tab')}</span>
-                    </a>
-                </div>
-            </HideableToolbar>
+            </WidgetToolbar>
             <div className="edimarkweb-frame">
                 <iframe
                     key={reloadKey}

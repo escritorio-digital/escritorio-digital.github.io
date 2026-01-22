@@ -3,7 +3,7 @@
 }
 
 .edimarkweb-toolbar {
-    @apply flex items-center justify-between gap-3 px-4 py-3 bg-white border-b border-gray-200 shadow-sm flex-shrink-0;
+    @apply flex items-center justify-between gap-3 px-2 py-0 bg-transparent border-0 shadow-none flex-shrink-0;
 }
 
 .edimarkweb-heading {

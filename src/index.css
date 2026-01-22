@@ -89,9 +89,28 @@ body.high-contrast {
 
 /* --- Calendar Widget (responsive) --- */
 .calendar-widget {
-  @apply w-full h-full flex flex-col text-text-dark;
+  @apply w-full h-full flex flex-col;
   container-type: size;
   padding: clamp(12px, 3cqw, 20px);
+  color: var(--calendar-text);
+}
+
+.calendar-widget--dark {
+  --calendar-text: var(--color-text-light);
+  --calendar-title-bg: rgba(0, 0, 0, 0.35);
+  --calendar-chip-bg: rgba(0, 0, 0, 0.28);
+  --calendar-chip-border: rgba(255, 255, 255, 0.2);
+  --calendar-chip-hover: rgba(255, 255, 255, 0.14);
+  --calendar-text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.calendar-widget--light {
+  --calendar-text: var(--color-text-dark);
+  --calendar-title-bg: rgba(255, 255, 255, 0.85);
+  --calendar-chip-bg: rgba(255, 255, 255, 0.9);
+  --calendar-chip-border: rgba(0, 0, 0, 0.12);
+  --calendar-chip-hover: rgba(0, 0, 0, 0.08);
+  --calendar-text-shadow: none;
 }
 
 .calendar-header {
@@ -103,9 +122,9 @@ body.high-contrast {
   @apply font-bold;
   font-size: 1.1rem;
   font-size: clamp(1rem, 3cqw, 1.6rem);
-  color: var(--color-text-light);
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
-  background: rgba(0, 0, 0, 0.25);
+  color: var(--calendar-text);
+  text-shadow: var(--calendar-text-shadow);
+  background: var(--calendar-title-bg);
   padding: clamp(4px, 1.2cqw, 8px) clamp(10px, 2.4cqw, 16px);
   border-radius: 999px;
 }
@@ -118,7 +137,7 @@ body.high-contrast {
 }
 
 .calendar-nav-button:hover {
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: var(--calendar-chip-hover);
 }
 
 .calendar-nav-button svg {
@@ -131,20 +150,20 @@ body.high-contrast {
   margin-bottom: clamp(6px, 2cqw, 12px);
   font-size: 0.85rem;
   font-size: clamp(0.75rem, 2.2cqw, 1rem);
-  color: var(--color-text-light);
+  color: var(--calendar-text);
 }
 
 .calendar-days span {
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--calendar-chip-bg);
   padding: clamp(3px, 0.8cqw, 6px) clamp(6px, 1.6cqw, 10px);
   border-radius: 999px;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  text-shadow: var(--calendar-text-shadow);
 }
 
 .calendar-grid {
   @apply grid grid-cols-7 text-center;
   gap: clamp(4px, 1.4cqw, 8px);
-  color: var(--color-text-light);
+  color: var(--calendar-text);
 }
 
 .calendar-cell {
@@ -153,15 +172,21 @@ body.high-contrast {
   height: clamp(28px, 8cqw, 54px);
   font-size: 0.85rem;
   font-size: clamp(0.75rem, 2.2cqw, 1.05rem);
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  background: var(--calendar-chip-bg);
+  border: 1px solid var(--calendar-chip-border);
+  text-shadow: var(--calendar-text-shadow);
+}
+
+.calendar-cell--hover:hover {
+  background: var(--calendar-chip-hover);
 }
 
 .calendar-cell--today {
-  @apply bg-widget-header text-text-light;
+  background: var(--color-accent);
+  color: var(--color-text-dark);
   border: none;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  text-shadow: none;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
 /* --- Work List Widget (responsive) --- */

@@ -2,6 +2,10 @@
   @apply w-full h-full grid grid-cols-2 grid-rows-[auto_1fr] gap-4 p-4 bg-gray-100 relative;
 }
 
+.group-generator-toolbar {
+  @apply flex flex-wrap items-center gap-2;
+}
+
 .input-panel {
   @apply row-span-2 flex flex-col gap-2;
 }

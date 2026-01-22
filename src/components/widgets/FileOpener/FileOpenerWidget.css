@@ -3,7 +3,7 @@
 }
 
 .file-opener-header {
-  @apply flex items-center gap-2 px-4 py-2 border-b border-gray-200 bg-gray-50 text-sm;
+  @apply flex items-center gap-2 px-2 py-0 border-0 bg-transparent text-sm;
 }
 
 .file-opener-spacer {

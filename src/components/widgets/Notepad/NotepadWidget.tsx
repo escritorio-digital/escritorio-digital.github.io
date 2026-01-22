@@ -13,7 +13,7 @@ import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
 import { requestSaveDestination } from '../../../utils/saveDialog';
 import { requestOpenFile } from '../../../utils/openDialog';
-import { HideableToolbar } from '../../shared/HideableToolbar';
+import { WidgetToolbar } from '../../core/WidgetToolbar';
 import {
   Bold,
   Italic,
@@ -65,7 +65,7 @@ const MenuBar: FC<{
   ];
 
   return (
-    <HideableToolbar className="menubar flex flex-wrap items-center gap-1 p-2 bg-gray-100 border-b border-accent">
+    <div className="menubar flex flex-wrap items-center gap-1 p-2 bg-gray-100 border-0">
       {menuButtons.map(({ Icon, action, name, title, level }) => (
         <button
           key={name + (level || '')}
@@ -84,7 +84,7 @@ const MenuBar: FC<{
             <Save size={16} />
         </button>
       </div>
-    </HideableToolbar>
+    </div>
   );
 };
 
@@ -93,13 +93,14 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
   const instanceIdRef = useRef(instanceId ?? `notepad-${Date.now()}-${Math.random().toString(16).slice(2)}`);
   const resolvedInstanceId = instanceId ?? instanceIdRef.current;
   const storageKey = `notepad-content-${resolvedInstanceId}`;
-  const [content, setContent] = useLocalStorage(storageKey, t('widgets.notepad.initial_content'));
+  const [content, setContent] = useLocalStorage(storageKey, '');
   const [lastSavedContent, setLastSavedContent] = useState(content);
   const [isDirty, setIsDirty] = useState(false);
   const [currentFilename, setCurrentFilename] = useState<string | null>(null);
   const turndownService = new TurndownService();
 
   const editor = useEditor({
+    autofocus: 'end',
     extensions: [
       StarterKit.configure({
         heading: false,
@@ -125,7 +126,7 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
 
     const blob = new Blob([markdownContent], { type: 'text/markdown;charset=utf-8;' });
     const filename = currentFilename || t('widgets.notepad.default_filename');
-    const destination = await requestSaveDestination(filename);
+    const destination = await requestSaveDestination(filename, { sourceWidgetId: 'notepad' });
     if (!destination) return;
     if (destination?.destination === 'file-manager') {
       await saveToFileManager({
@@ -175,7 +176,7 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
   };
 
   const handleOpenFile = async () => {
-    const result = await requestOpenFile({ accept: '.md,.txt' });
+    const result = await requestOpenFile({ accept: '.md,.txt', sourceWidgetId: 'notepad' });
     if (!result) return;
     if (result.source === 'local') {
       const [file] = result.files;
@@ -250,7 +251,9 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
 
   return (
     <div className="flex flex-col h-full w-full notepad-widget bg-white rounded-b-md overflow-hidden">
-      <MenuBar editor={editor} onUpload={handleOpenFile} onDownload={handleDownload} />
+      <WidgetToolbar>
+        <MenuBar editor={editor} onUpload={handleOpenFile} onDownload={handleDownload} />
+      </WidgetToolbar>
       <EditorContent editor={editor} className="flex-grow overflow-auto" />
     </div>
   );

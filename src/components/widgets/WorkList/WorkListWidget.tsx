@@ -65,7 +65,7 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
   const downloadAsCSV = async () => {
     const csv = Papa.unparse(tasks.map(t => ({ id: t.id, text: t.text, completed: t.completed })));
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const destination = await requestSaveDestination(currentFilename || 'lista_de_trabajo.csv');
+    const destination = await requestSaveDestination(currentFilename || 'lista_de_trabajo.csv', { sourceWidgetId: 'work-list' });
     if (!destination) return;
     if (destination?.destination === 'file-manager') {
       await saveToFileManager({
@@ -138,7 +138,7 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
   }, [resolvedInstanceId, setTasks, t]);
 
   const handleOpenFile = async () => {
-    const result = await requestOpenFile({ accept: '.csv' });
+    const result = await requestOpenFile({ accept: '.csv', sourceWidgetId: 'work-list' });
     if (!result) return;
     if (result.source === 'local') {
       const [file] = result.files;

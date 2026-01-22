@@ -3,7 +3,7 @@
 }
 
 .markdown-toolbar {
-    @apply flex flex-wrap items-center justify-between gap-2 p-2 bg-white border-b border-gray-200;
+    @apply flex flex-wrap items-center justify-between gap-2 p-0 bg-transparent border-0;
 }
 
 .markdown-toolbar-group {
@@ -35,7 +35,7 @@
 }
 
 .markdown-pane-header {
-    @apply text-xs font-semibold uppercase tracking-wide text-gray-500 px-3 py-2 border-b border-gray-200 bg-gray-50;
+    @apply text-xs font-semibold uppercase tracking-wide text-gray-500 px-3 py-2 bg-gray-50;
 }
 
 .markdown-preview-pane {

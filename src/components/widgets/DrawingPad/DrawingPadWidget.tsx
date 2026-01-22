@@ -665,7 +665,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
   };
 
   const handleOpenImage = async () => {
-    const result = await requestOpenFile({ accept: 'image/*' });
+    const result = await requestOpenFile({ accept: 'image/*', sourceWidgetId: 'drawing-pad' });
     if (!result) return;
     if (result.source === 'local') {
       const [file] = result.files;
@@ -697,7 +697,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
     canvas.toBlob(async (blob) => {
       if (!blob) return;
       const filename = currentFilename || t('widgets.drawing_pad.default_filename');
-      const destination = await requestSaveDestination(filename);
+      const destination = await requestSaveDestination(filename, { sourceWidgetId: 'drawing-pad' });
       if (!destination) return;
       if (destination?.destination === 'file-manager') {
         await saveToFileManager({

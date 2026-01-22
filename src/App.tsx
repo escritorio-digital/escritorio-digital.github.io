@@ -13,7 +13,7 @@ import { AboutModal } from './components/core/AboutModal';
 import { StartMenu } from './components/core/StartMenu';
 import { ThemeProvider, defaultTheme, type Theme } from './context/ThemeContext';
 import type { ActiveWidget, DesktopProfile, ProfileCollection } from './types';
-import { PlusSquare, Image, Settings, X, Users, Maximize2, Minimize2, Pin, PinOff, FolderOpen } from 'lucide-react';
+import { PlusSquare, Image, Settings, X, Users, Maximize2, Minimize2, Pin, PinOff, FolderOpen, Home } from 'lucide-react';
 import { defaultWallpaperValue, isWallpaperValueValid } from './utils/wallpapers';
 import { withBaseUrl } from './utils/assetPaths';
 import { getWidgetHelpText } from './utils/widgetHelp';
@@ -23,6 +23,20 @@ import { FILE_MANAGER_ROOT_ID, createFolder, getAllEntries, listEntriesByParent,
 import type { OpenDialogResult, OpenDialogOptions } from './utils/openDialog';
 // --- ¡AQUÍ ESTÁ EL CAMBIO! Importamos el nuevo componente ---
 import { ProfileSwitcher } from './components/core/ProfileSwitcher';
+
+const formatFileSize = (size?: number) => {
+    if (size === undefined || size === null) return '';
+    if (size < 1024) return `${size} B`;
+    const units = ['KB', 'MB', 'GB', 'TB'];
+    let value = size / 1024;
+    let unitIndex = 0;
+    while (value >= 1024 && unitIndex < units.length - 1) {
+        value /= 1024;
+        unitIndex += 1;
+    }
+    const rounded = value >= 10 ? Math.round(value) : Math.round(value * 10) / 10;
+    return `${rounded} ${units[unitIndex]}`;
+};
 
 // --- Componente Hijo que Renderiza la UI ---
 const DesktopUI: React.FC<{
@@ -38,6 +52,11 @@ const DesktopUI: React.FC<{
     const showDateTime = activeProfile.theme?.showDateTime ?? true;
     const showSystemStats = activeProfile.theme?.showSystemStats ?? false;
     const showProfileMenu = activeProfile.theme?.showProfileMenu ?? true;
+    const getWidgetLabel = useCallback((widgetId?: string) => {
+        if (!widgetId) return '';
+        const config = WIDGET_REGISTRY[widgetId];
+        return config ? t(config.title) : widgetId;
+    }, [t]);
 
     const setActiveWidgets = useCallback((updater: React.SetStateAction<ActiveWidget[]>) => {
         setProfiles((prev) => {
@@ -87,6 +106,7 @@ const DesktopUI: React.FC<{
         const resolver = saveDialogResolverRef.current;
         saveDialogResolverRef.current = null;
         setSaveDialogState({ isOpen: false });
+        setSaveDialogFilterWidget(false);
         if (resolver) resolver(result);
     }, []);
 
@@ -132,26 +152,28 @@ const DesktopUI: React.FC<{
     const fileManagerPressTimerRef = useRef<number | null>(null);
     const fileManagerPressStartRef = useRef<{ x: number; y: number } | null>(null);
     const fileManagerLongPressTriggeredRef = useRef(false);
-    const [saveDialogState, setSaveDialogState] = useState<{ isOpen: boolean }>({ isOpen: false });
+    const [saveDialogState, setSaveDialogState] = useState<{ isOpen: boolean; sourceWidgetId?: string }>({ isOpen: false });
+    const [saveDialogFilterWidget, setSaveDialogFilterWidget] = useState(false);
     const saveDialogResolverRef = useRef<((result: SaveDialogResult) => void) | null>(null);
     const [saveDialogFolderId, setSaveDialogFolderId] = useState(FILE_MANAGER_ROOT_ID);
     const [saveDialogFilename, setSaveDialogFilename] = useState('');
     const [saveDialogSuggestedFilename, setSaveDialogSuggestedFilename] = useState('');
     const [saveDialogEntries, setSaveDialogEntries] = useState<FileManagerEntry[]>([]);
-    const [saveDialogFolderLabel, setSaveDialogFolderLabel] = useState('');
-    const [saveDialogParentId, setSaveDialogParentId] = useState(FILE_MANAGER_ROOT_ID);
     const [saveDialogSelectedEntryId, setSaveDialogSelectedEntryId] = useState<string | null>(null);
+    const [saveDialogBreadcrumb, setSaveDialogBreadcrumb] = useState<FileManagerEntry[]>([]);
     const [openDialogState, setOpenDialogState] = useState<{
         isOpen: boolean;
         options: OpenDialogOptions;
     }>({ isOpen: false, options: {} });
+    const [openDialogFilterWidget, setOpenDialogFilterWidget] = useState(false);
     const openDialogResolverRef = useRef<((result: OpenDialogResult | null) => void) | null>(null);
     const [openDialogFolderId, setOpenDialogFolderId] = useState(FILE_MANAGER_ROOT_ID);
     const [openDialogEntries, setOpenDialogEntries] = useState<FileManagerEntry[]>([]);
     const [openDialogSelectedIds, setOpenDialogSelectedIds] = useState<string[]>([]);
-    const [openDialogFolderLabel, setOpenDialogFolderLabel] = useState('');
-    const [openDialogParentId, setOpenDialogParentId] = useState(FILE_MANAGER_ROOT_ID);
     const openDialogInputRef = useRef<HTMLInputElement>(null);
+    const [openDialogBreadcrumb, setOpenDialogBreadcrumb] = useState<FileManagerEntry[]>([]);
+    const openDialogWidgetLabel = getWidgetLabel(openDialogState.options.sourceWidgetId);
+    const saveDialogWidgetLabel = getWidgetLabel(saveDialogState.sourceWidgetId);
 
     useEffect(() => {
         if (fileManagerIconPosition.y >= 32) return;
@@ -223,33 +245,35 @@ const DesktopUI: React.FC<{
             const folders = allEntries.filter((entry) => entry.type === 'folder');
             const byId = new Map(folders.map((entry) => [entry.id, entry]));
             const current = byId.get(saveDialogFolderId);
-            const labelFor = (entry: FileManagerEntry) => {
-                const parts: string[] = [];
+            const pathFor = (entry: FileManagerEntry): FileManagerEntry[] => {
+                const path: FileManagerEntry[] = [];
                 let cursor: FileManagerEntry | undefined = entry;
                 while (cursor && cursor.id !== FILE_MANAGER_ROOT_ID) {
-                    parts.unshift(cursor.name);
+                    path.unshift(cursor);
                     cursor = byId.get(cursor.parentId);
                 }
-                return parts.join(' / ') || t('save_dialog.root_folder');
+                return path;
             };
-            const folderLabel = current ? labelFor(current) : t('save_dialog.root_folder');
-            const parentId = current?.parentId || FILE_MANAGER_ROOT_ID;
-            const sorted = [...entries].sort((a, b) => {
+            const filtered = entries.filter((entry) => {
+                if (entry.type === 'folder') return true;
+                if (!saveDialogFilterWidget || !saveDialogState.sourceWidgetId) return true;
+                return entry.sourceWidgetId === saveDialogState.sourceWidgetId;
+            });
+            const sorted = [...filtered].sort((a, b) => {
                 if (a.type !== b.type) return a.type === 'folder' ? -1 : 1;
                 return a.name.localeCompare(b.name);
             });
             if (isMounted) {
                 setSaveDialogEntries(sorted);
-                setSaveDialogFolderLabel(folderLabel);
-                setSaveDialogParentId(parentId);
                 setSaveDialogSelectedEntryId(null);
+                setSaveDialogBreadcrumb(current ? pathFor(current) : []);
             }
         };
         loadEntries();
         return () => {
             isMounted = false;
         };
-    }, [saveDialogFolderId, saveDialogState.isOpen, t]);
+    }, [saveDialogFilterWidget, saveDialogFolderId, saveDialogState.isOpen, saveDialogState.sourceWidgetId, t]);
 
     useEffect(() => {
         if (!openDialogState.isOpen) return;
@@ -260,29 +284,35 @@ const DesktopUI: React.FC<{
             const folders = allEntries.filter((entry) => entry.type === 'folder');
             const byId = new Map(folders.map((entry) => [entry.id, entry]));
             const current = byId.get(openDialogFolderId);
-            const labelFor = (entry: FileManagerEntry) => {
-                const parts: string[] = [];
+            const pathFor = (entry: FileManagerEntry): FileManagerEntry[] => {
+                const path: FileManagerEntry[] = [];
                 let cursor: FileManagerEntry | undefined = entry;
                 while (cursor && cursor.id !== FILE_MANAGER_ROOT_ID) {
-                    parts.unshift(cursor.name);
+                    path.unshift(cursor);
                     cursor = byId.get(cursor.parentId);
                 }
-                return parts.join(' / ') || t('open_dialog.root_folder');
+                return path;
             };
-            const folderLabel = current ? labelFor(current) : t('open_dialog.root_folder');
-            const parentId = current?.parentId || FILE_MANAGER_ROOT_ID;
+            const filtered = entries.filter((entry) => {
+                if (entry.type === 'folder') return true;
+                if (!openDialogFilterWidget || !openDialogState.options.sourceWidgetId) return true;
+                return entry.sourceWidgetId === openDialogState.options.sourceWidgetId;
+            });
+            const sorted = [...filtered].sort((a, b) => {
+                if (a.type !== b.type) return a.type === 'folder' ? -1 : 1;
+                return a.name.localeCompare(b.name);
+            });
             if (isMounted) {
-                setOpenDialogEntries(entries);
-                setOpenDialogFolderLabel(folderLabel);
-                setOpenDialogParentId(parentId);
+                setOpenDialogEntries(sorted);
                 setOpenDialogSelectedIds([]);
+                setOpenDialogBreadcrumb(current ? pathFor(current) : []);
             }
         };
         loadEntries();
         return () => {
             isMounted = false;
         };
-    }, [openDialogFolderId, openDialogState.isOpen, t]);
+    }, [openDialogFilterWidget, openDialogFolderId, openDialogState.isOpen, openDialogState.options.sourceWidgetId, t]);
 
     const normalizeFilename = useCallback((name: string) => {
         const trimmed = name.trim();
@@ -306,6 +336,7 @@ const DesktopUI: React.FC<{
     const closeOpenDialog = useCallback((result: OpenDialogResult | null) => {
         const resolver = openDialogResolverRef.current;
         openDialogResolverRef.current = null;
+        setOpenDialogFilterWidget(false);
         setOpenDialogState((prev) => ({ ...prev, isOpen: false }));
         if (resolver) resolver(result);
     }, []);
@@ -441,7 +472,7 @@ const DesktopUI: React.FC<{
 
     useEffect(() => {
         const handler = (event: Event) => {
-            const custom = event as CustomEvent<{ resolve?: (result: SaveDialogResult) => void; suggestedFilename?: string }>;
+            const custom = event as CustomEvent<{ resolve?: (result: SaveDialogResult) => void; suggestedFilename?: string; sourceWidgetId?: string }>;
             if (!custom.detail?.resolve) return;
             if (saveDialogResolverRef.current) {
                 saveDialogResolverRef.current(null);
@@ -450,7 +481,8 @@ const DesktopUI: React.FC<{
             const suggested = custom.detail.suggestedFilename?.trim() || t('save_dialog.default_filename');
             setSaveDialogSuggestedFilename(suggested);
             setSaveDialogFilename(suggested);
-            setSaveDialogState({ isOpen: true });
+            setSaveDialogFilterWidget(false);
+            setSaveDialogState({ isOpen: true, sourceWidgetId: custom.detail.sourceWidgetId });
         };
         window.addEventListener('save-dialog-request', handler as EventListener);
         return () => window.removeEventListener('save-dialog-request', handler as EventListener);
@@ -466,6 +498,7 @@ const DesktopUI: React.FC<{
             openDialogResolverRef.current = custom.detail.resolve;
             setOpenDialogSelectedIds([]);
             setOpenDialogFolderId(FILE_MANAGER_ROOT_ID);
+            setOpenDialogFilterWidget(false);
             setOpenDialogState({ isOpen: true, options: custom.detail.options ?? {} });
         };
         window.addEventListener('open-dialog-request', handler as EventListener);
@@ -1073,6 +1106,9 @@ const DesktopUI: React.FC<{
                         zoomEditHint={t('desktop.window_zoom_edit_hint')}
                         enterFullscreenLabel={t('desktop.fullscreen_enter')}
                         exitFullscreenLabel={t('desktop.fullscreen_exit')}
+                        toolbarHideLabel={t('desktop.toolbar_hide')}
+                        toolbarPinLabel={t('desktop.toolbar_pin')}
+                        toolbarRevealHint={t('desktop.toolbar_reveal_hint')}
                         onZoomChange={(nextZoom) => {
                             setActiveWidgets((prev) => prev.map((w) => (
                                 w.instanceId === widget.instanceId ? { ...w, zoom: nextZoom } : w
@@ -1254,41 +1290,38 @@ const DesktopUI: React.FC<{
                     >
                         <h3 className="text-lg font-semibold">{t('save_dialog.title')}</h3>
                         <p className="mt-2 text-sm text-gray-600">{t('save_dialog.description')}</p>
-                        <div className="mt-4">
-                            <label className="text-sm font-semibold text-gray-700" htmlFor="save-filename-input">
-                                {t('save_dialog.filename_label')}
-                            </label>
-                            <input
-                                id="save-filename-input"
-                                type="text"
-                                className="mt-2 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-gray-400 focus:outline-none"
-                                value={saveDialogFilename}
-                                onChange={(event) => setSaveDialogFilename(event.target.value)}
-                                onBlur={() => {
-                                    const normalized = normalizeFilename(saveDialogFilename);
-                                    if (normalized && normalized !== saveDialogFilename) {
-                                        setSaveDialogFilename(normalized);
-                                    }
-                                }}
-                            />
-                        </div>
-                        <div className="mt-4">
-                            <label className="text-sm font-semibold text-gray-700" htmlFor="save-folder-select">
-                                {t('save_dialog.folder_label')}
-                            </label>
-                            <div className="mt-2 flex items-center gap-2">
-                                <div className="flex-1 text-sm text-gray-600">{saveDialogFolderLabel}</div>
+                        <div className="mt-4 rounded-xl border border-gray-200 bg-gray-50/80 p-4">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <div className="text-sm font-semibold text-gray-700">{t('save_dialog.file_manager')}</div>
+                                    <div className="mt-1 flex flex-wrap items-center gap-1 text-xs text-gray-600">
+                                        <button
+                                            type="button"
+                                            className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-white/90 px-2 py-1 hover:bg-white"
+                                            onClick={() => setSaveDialogFolderId(FILE_MANAGER_ROOT_ID)}
+                                            title={t('open_dialog.root_folder')}
+                                            aria-label={t('open_dialog.root_folder')}
+                                        >
+                                            <Home size={12} />
+                                        </button>
+                                            {saveDialogBreadcrumb.map((entry) => (
+                                            <button
+                                                key={entry.id}
+                                                type="button"
+                                                className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-white/90 px-2 py-1 hover:bg-white"
+                                                onClick={() => setSaveDialogFolderId(entry.id)}
+                                                title={entry.name}
+                                            >
+                                                <span className="truncate">
+                                                    {entry.name}
+                                                </span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
                                 <button
                                     type="button"
-                                    className="rounded-full border border-gray-300 bg-white px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed"
-                                    onClick={() => setSaveDialogFolderId(saveDialogParentId)}
-                                    disabled={saveDialogFolderId === FILE_MANAGER_ROOT_ID}
-                                >
-                                    {t('open_dialog.up')}
-                                </button>
-                                <button
-                                    type="button"
-                                    className="rounded-full border border-gray-300 bg-white px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+                                    className="rounded-full border border-gray-300 bg-white px-3 py-1 text-xs font-semibold text-gray-700 hover:bg-gray-100"
                                     onClick={async () => {
                                         const name = window.prompt(t('widgets.file_manager.new_folder_prompt'));
                                         if (!name) return;
@@ -1301,11 +1334,7 @@ const DesktopUI: React.FC<{
                                     {t('save_dialog.new_folder')}
                                 </button>
                             </div>
-                        </div>
-                        <div className="mt-4">
-                            <div className="text-sm font-semibold text-gray-700">{t('save_dialog.existing_files')}</div>
-                            <p className="mt-1 text-xs text-gray-500">{t('save_dialog.replace_hint')}</p>
-                            <div className="mt-2 max-h-40 overflow-y-auto rounded-lg border border-gray-200 bg-gray-50 p-2">
+                            <div className="mt-3 max-h-48 overflow-y-auto rounded-lg border border-gray-200 bg-white p-2">
                                 {saveDialogEntries.length === 0 ? (
                                     <div className="text-xs text-gray-500">{t('save_dialog.no_files')}</div>
                                 ) : (
@@ -1333,9 +1362,9 @@ const DesktopUI: React.FC<{
                                                             {entry.type === 'folder' ? '📁 ' : '📄 '}
                                                             {entry.name}
                                                         </span>
-                                                        {entry.type === 'file' && entry.size ? (
+                                                        {entry.type === 'file' ? (
                                                             <span className="text-xs text-gray-400">
-                                                                {Math.round(entry.size / 1024)} KB
+                                                                {formatFileSize(entry.size)}
                                                             </span>
                                                         ) : null}
                                                     </button>
@@ -1345,6 +1374,36 @@ const DesktopUI: React.FC<{
                                     </ul>
                                 )}
                             </div>
+                        </div>
+                        {saveDialogState.sourceWidgetId && (
+                            <label className="mt-3 flex items-center gap-2 text-xs text-gray-600">
+                                <input
+                                    type="checkbox"
+                                    checked={saveDialogFilterWidget}
+                                    onChange={(event) => setSaveDialogFilterWidget(event.target.checked)}
+                                    className="h-3.5 w-3.5"
+                                />
+                                {t('save_dialog.filter_widget', { widget: saveDialogWidgetLabel || saveDialogState.sourceWidgetId })}
+                            </label>
+                        )}
+                        <div className="mt-4">
+                            <label className="text-sm font-semibold text-gray-700" htmlFor="save-filename-input">
+                                {t('save_dialog.filename_label')}
+                            </label>
+                            <input
+                                id="save-filename-input"
+                                type="text"
+                                className="mt-2 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-gray-400 focus:outline-none"
+                                value={saveDialogFilename}
+                                onChange={(event) => setSaveDialogFilename(event.target.value)}
+                                onBlur={() => {
+                                    const normalized = normalizeFilename(saveDialogFilename);
+                                    if (normalized && normalized !== saveDialogFilename) {
+                                        setSaveDialogFilename(normalized);
+                                    }
+                                }}
+                            />
+                            <p className="mt-2 text-xs text-gray-500">{t('save_dialog.replace_hint')}</p>
                         </div>
                         <div className="mt-6 flex flex-wrap justify-end gap-2">
                             <button
@@ -1390,74 +1449,102 @@ const DesktopUI: React.FC<{
                         <h3 className="text-lg font-semibold">{t('open_dialog.title')}</h3>
                         <p className="mt-2 text-sm text-gray-600">{t('open_dialog.description')}</p>
                         <div className="mt-4 grid gap-4 md:grid-cols-[2fr_1fr]">
-                            <div className="rounded-xl border border-gray-200 bg-gray-50/80 p-4">
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <div className="text-sm font-semibold text-gray-700">{t('open_dialog.file_manager')}</div>
-                                        <div className="text-xs text-gray-500">{openDialogFolderLabel}</div>
+                            <div className="space-y-3">
+                                <div className="rounded-xl border border-gray-200 bg-gray-50/80 p-4">
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <div className="text-sm font-semibold text-gray-700">{t('open_dialog.file_manager')}</div>
+                                            <div className="mt-1 flex flex-wrap items-center gap-1 text-xs text-gray-600">
+                                                <button
+                                                    type="button"
+                                                    className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-white/90 px-2 py-1 hover:bg-white"
+                                                    onClick={() => setOpenDialogFolderId(FILE_MANAGER_ROOT_ID)}
+                                                    title={t('open_dialog.root_folder')}
+                                                    aria-label={t('open_dialog.root_folder')}
+                                                >
+                                                    <Home size={12} />
+                                                </button>
+                                                {openDialogBreadcrumb.map((entry) => (
+                                                    <button
+                                                        key={entry.id}
+                                                        type="button"
+                                                        className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-white/90 px-2 py-1 hover:bg-white"
+                                                        onClick={() => setOpenDialogFolderId(entry.id)}
+                                                        title={entry.name}
+                                                    >
+                                                        <span className="truncate">
+                                                            {entry.name}
+                                                        </span>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <button
-                                        type="button"
-                                        className="rounded-full border border-gray-300 bg-white px-3 py-1 text-xs font-semibold text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed"
-                                        onClick={() => setOpenDialogFolderId(openDialogParentId)}
-                                        disabled={openDialogFolderId === FILE_MANAGER_ROOT_ID}
-                                    >
-                                        {t('open_dialog.up')}
-                                    </button>
-                                </div>
-                                <div className="mt-3 max-h-64 overflow-y-auto rounded-lg border border-gray-200 bg-white p-2">
-                                    {openDialogEntries.length === 0 ? (
-                                        <div className="text-sm text-gray-500">{t('open_dialog.empty_folder')}</div>
-                                    ) : (
-                                        <ul className="space-y-2">
-                                            {openDialogEntries.map((entry) => {
-                                                const isSelected = openDialogSelectedIds.includes(entry.id);
-                                                return (
-                                                    <li key={entry.id}>
-                                                        <button
-                                                            type="button"
-                                                            className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm transition ${
-                                                                isSelected ? 'bg-accent/30 ring-1 ring-accent/50' : 'hover:bg-gray-100'
-                                                            }`}
-                                                            onClick={() => {
-                                                                if (entry.type === 'folder') {
-                                                                    setOpenDialogFolderId(entry.id);
-                                                                    return;
-                                                                }
-                                                                if (openDialogState.options.multiple) {
-                                                                    setOpenDialogSelectedIds((prev) =>
-                                                                        prev.includes(entry.id)
-                                                                            ? prev.filter((id) => id !== entry.id)
-                                                                            : [...prev, entry.id]
-                                                                    );
-                                                                } else {
-                                                                    setOpenDialogSelectedIds([entry.id]);
-                                                                }
-                                                            }}
-                                                            onDoubleClick={() => {
-                                                                if (entry.type === 'folder') {
-                                                                    setOpenDialogFolderId(entry.id);
-                                                                    return;
-                                                                }
-                                                                closeOpenDialog({ source: 'file-manager', entryIds: [entry.id] });
-                                                            }}
-                                                        >
-                                                            <span className="truncate">
-                                                                {entry.type === 'folder' ? '📁 ' : '📄 '}
-                                                                {entry.name}
-                                                            </span>
-                                                            {entry.type === 'file' && (
-                                                                <span className="text-xs text-gray-400">
-                                                                    {entry.size ? `${Math.round(entry.size / 1024)} KB` : ''}
+                                    <div className="mt-3 max-h-64 overflow-y-auto rounded-lg border border-gray-200 bg-white p-2">
+                                        {openDialogEntries.length === 0 ? (
+                                            <div className="text-sm text-gray-500">{t('open_dialog.empty_folder')}</div>
+                                        ) : (
+                                            <ul className="space-y-2">
+                                                {openDialogEntries.map((entry) => {
+                                                    const isSelected = openDialogSelectedIds.includes(entry.id);
+                                                    return (
+                                                        <li key={entry.id}>
+                                                            <button
+                                                                type="button"
+                                                                className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm transition ${
+                                                                    isSelected ? 'bg-accent/30 ring-1 ring-accent/50' : 'hover:bg-gray-100'
+                                                                }`}
+                                                                onClick={() => {
+                                                                    if (entry.type === 'folder') {
+                                                                        setOpenDialogFolderId(entry.id);
+                                                                        return;
+                                                                    }
+                                                                    if (openDialogState.options.multiple) {
+                                                                        setOpenDialogSelectedIds((prev) =>
+                                                                            prev.includes(entry.id)
+                                                                                ? prev.filter((id) => id !== entry.id)
+                                                                                : [...prev, entry.id]
+                                                                        );
+                                                                    } else {
+                                                                        setOpenDialogSelectedIds([entry.id]);
+                                                                    }
+                                                                }}
+                                                                onDoubleClick={() => {
+                                                                    if (entry.type === 'folder') {
+                                                                        setOpenDialogFolderId(entry.id);
+                                                                        return;
+                                                                    }
+                                                                    closeOpenDialog({ source: 'file-manager', entryIds: [entry.id] });
+                                                                }}
+                                                            >
+                                                                <span className="truncate">
+                                                                    {entry.type === 'folder' ? '📁 ' : '📄 '}
+                                                                    {entry.name}
                                                                 </span>
-                                                            )}
-                                                        </button>
-                                                    </li>
-                                                );
-                                            })}
-                                        </ul>
-                                    )}
+                                                                {entry.type === 'file' && (
+                                                                    <span className="text-xs text-gray-400">
+                                                                        {formatFileSize(entry.size)}
+                                                                    </span>
+                                                                )}
+                                                            </button>
+                                                        </li>
+                                                    );
+                                                })}
+                                            </ul>
+                                        )}
+                                    </div>
                                 </div>
+                                {openDialogState.options.sourceWidgetId && (
+                                    <label className="flex items-center gap-2 text-xs text-gray-600">
+                                        <input
+                                            type="checkbox"
+                                            checked={openDialogFilterWidget}
+                                            onChange={(event) => setOpenDialogFilterWidget(event.target.checked)}
+                                            className="h-3.5 w-3.5"
+                                        />
+                                        {t('open_dialog.filter_widget', { widget: openDialogWidgetLabel || openDialogState.options.sourceWidgetId })}
+                                    </label>
+                                )}
                             </div>
                             <div className="rounded-xl border border-gray-200 bg-gray-50/80 p-4">
                                 <div className="text-sm font-semibold text-gray-700">{t('open_dialog.local')}</div>

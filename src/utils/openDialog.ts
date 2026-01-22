@@ -5,6 +5,7 @@ export type OpenDialogResult =
 export type OpenDialogOptions = {
     accept?: string;
     multiple?: boolean;
+    sourceWidgetId?: string;
 };
 
 type OpenDialogDetail = {

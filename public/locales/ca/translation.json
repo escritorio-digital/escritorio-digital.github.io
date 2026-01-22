@@ -14,7 +14,8 @@
     "message": "Desar a Arxius Ed? D’acord = Arxius Ed, Cancel·lar = Disc local.",
     "existing_files": "Fitxers en aquesta carpeta",
     "replace_hint": "Fes clic en una carpeta per obrir-la o en un fitxer per usar-ne el nom i reemplaçar-lo.",
-    "no_files": "No hi ha fitxers en aquesta carpeta."
+    "no_files": "No hi ha fitxers en aquesta carpeta.",
+    "filter_widget": "Veure nomes els fitxers creats amb {{widget}}"
   },
   "settings": {
     "title": "Configuració",
@@ -225,8 +226,9 @@
     "window_zoom_out": "Allunyar zoom",
     "window_zoom_reset": "Restablir zoom",
     "window_zoom_edit_hint": "Doble clic per escriure el percentatge.",
-    "toolbar_hide": "Amagar barra (mou el ratolí a la part superior per tornar-la a mostrar).",
-    "toolbar_pin": "Fixar barra"
+    "toolbar_hide": "Amaga la barra",
+    "toolbar_pin": "Fixar barra",
+    "toolbar_reveal_hint": "Per tornar a veure la barra d'eines, acosta el ratolí a la vora superior del widget."
   },
   "credits": {
     "title": "Crèdits i Llicència",
@@ -439,13 +441,15 @@
       "students_per_group": "Estudiants per Grup",
       "generate_groups": "Generar Grups",
       "generated_groups_label": "Grups Generats",
-      "view_large": "Veure en gran",
+      "view_large": "Veure en gran els grups generats",
       "close_large_view": "Tancar vista gran",
       "copy_groups": "Copiar grups",
       "download_groups": "Desar",
       "copied": "Copiat",
       "group_title": "Grup {{number}}",
-      "no_groups_message": "Els grups apareixeran aquí."
+      "no_groups_message": "Els grups apareixeran aquí.",
+      "hide_student_list": "Amaga la llista d'estudiants",
+      "show_student_list": "Mostra la llista d'estudiants"
     },
     "qr_code_generator": {
       "title": "Generador QR",
@@ -946,7 +950,8 @@
     "cancel": "Cancel·lar",
     "open_selected": "Obrir seleccionats",
     "open_file": "Obrir fitxer",
-    "root_folder": "Arxius Ed"
+    "root_folder": "Arxius Ed",
+    "filter_widget": "Veure nomes els fitxers creats amb {{widget}}"
   },
   "unsaved_modal": {
     "title": "Canvis sense guardar",
