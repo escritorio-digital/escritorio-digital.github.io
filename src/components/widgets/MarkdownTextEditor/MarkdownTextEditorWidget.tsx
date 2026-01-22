@@ -26,6 +26,7 @@ import {
     Text,
     ZoomIn,
     ZoomOut,
+    FileCode2,
 } from 'lucide-react';
 
 import 'katex/dist/katex.min.css';
@@ -47,10 +48,18 @@ type EdicuatexMessage = {
 
 type ViewMode = 'split' | 'editor' | 'preview';
 
-function renderMarkdownInto(target: HTMLElement, input: string) {
+function renderMarkdownInto(
+    target: HTMLElement,
+    input: string,
+    options: { katexOutput?: 'html' | 'mathml' | 'htmlAndMathml' } = {}
+) {
     const tokens: Array<{ token: string; html: string }> = [];
     const pushToken = (latex: string, displayMode: boolean) => {
-        const html = katex.renderToString(latex.trim(), { throwOnError: false, displayMode });
+        const html = katex.renderToString(latex.trim(), {
+            throwOnError: false,
+            displayMode,
+            output: options.katexOutput,
+        });
         const token = `%%MATH_${tokens.length}%%`;
         tokens.push({ token, html });
         return token;
@@ -225,6 +234,38 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
         navigator.clipboard
             .writeText(input)
             .then(() => showFeedback(t('widgets.markdown_text_editor.source_copied')))
+            .catch(() => showFeedback(t('widgets.markdown_text_editor.copy_failed')));
+    };
+
+    const handleCopyHtml = () => {
+        const container = document.createElement('div');
+        try {
+            renderMarkdownInto(container, input, { katexOutput: 'html' });
+        } catch (error) {
+            const message = error instanceof Error ? error.message : t('widgets.markdown_text_editor.preview_error');
+            container.innerHTML = `<div class="error-message">${message}</div>`;
+        }
+        const collectKatexCss = () => {
+            let cssText = '';
+            for (const sheet of Array.from(document.styleSheets)) {
+                try {
+                    const rules = Array.from(sheet.cssRules || []);
+                    for (const rule of rules) {
+                        if (rule.cssText.includes('.katex')) {
+                            cssText += rule.cssText;
+                        }
+                    }
+                } catch {
+                    // ignore cross-origin stylesheets
+                }
+            }
+            return cssText.trim();
+        };
+        const katexCss = collectKatexCss();
+        const htmlToCopy = katexCss ? `<style>${katexCss}</style>${container.innerHTML}` : container.innerHTML;
+        navigator.clipboard
+            .writeText(htmlToCopy)
+            .then(() => showFeedback(t('widgets.markdown_text_editor.html_copied')))
             .catch(() => showFeedback(t('widgets.markdown_text_editor.copy_failed')));
     };
 
@@ -533,6 +574,9 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
                         </button>
                         <button type="button" title={t('widgets.markdown_text_editor.toolbar.copy_source')} onClick={handleCopySource}>
                             <Clipboard size={16} />
+                        </button>
+                        <button type="button" title={t('widgets.markdown_text_editor.toolbar.copy_html')} onClick={handleCopyHtml}>
+                            <FileCode2 size={16} />
                         </button>
                         <button type="button" title={t('widgets.markdown_text_editor.toolbar.open_file')} onClick={handleOpenFile}>
                             <FolderOpen size={16} />

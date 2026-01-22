@@ -34,7 +34,7 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 
 - **Calculatrice scientifique** : calculs courants en sciences et mathématiques.
 - **Convertisseur d’unités** : conversion des grandeurs pour exercices et TP.
-- **Markdown + LaTeX** : écrire des notes avec formules et mise en forme.
+- **Éditeur de textes Markdown** : écrire des notes avec formules et mise en forme.
 
 ### Communauté
 
@@ -101,7 +101,7 @@ Ce widget fonctionne comme un classeur dans le navigateur.
 ## Idées d’usage en classe
 
 - **Début de séance** : Liste de tâches + Minuteur + Feu tricolore.
-- **Explication** : Markdown + LaTeX + Tableau de dessin + Visionneuse web.
+- **Explication** : Éditeur de textes Markdown + Tableau de dessin + Visionneuse web.
 - **Coopératif** : Générateur de groupes + Minuteur + Sonomètre.
 - **Gamification** : Roue aléatoire + Dé + Tableau de scores.
 

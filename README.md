@@ -16,7 +16,7 @@ Este proyecto es un entorno de escritorio virtual construido con React, que perm
 10. **Gestos de Trabajo:** Muestra tarjetas visuales grandes para indicar el modo de trabajo en el aula (Silencio, Parejas, Equipos, Plenaria).
 11. **Guía del programa:** Guía integrada con el catálogo de widgets y recomendaciones de uso.
 12. **HTML Sandbox:** Un lienzo con un único campo para pegar código HTML y un botón para alternar entre el editor y la vista previa.
-13. **Intérprete (MD/LaTeX):** Renderiza documentos que mezclan texto en formato Markdown con fórmulas matemáticas escritas en LaTeX.
+13. **Editor de textos Markdown:** Redacta documentos en Markdown con vista previa y soporte de fórmulas.
 14. **Lista de Trabajo:** Un gestor de tareas pendientes (to-do list) que permite añadir, marcar como completadas y eliminar tareas.
 15. **Marcador de Puntos:** Un marcador para llevar la puntuación de varios equipos o jugadores.
 16. **Medidor de Ruido:** Utiliza el micrófono para medir el nivel de ruido ambiental y lo clasifica como silencio, conversación o ruido.
@@ -149,11 +149,11 @@ Una vez que hayas creado tus archivos y reiniciado el servidor de desarrollo, tu
 * **`react-rnd`:** Librería clave que permite que las ventanas de los widgets se puedan mover, redimensionar y arrastrar.
 * **`@tiptap/react` y `@tiptap/starter-kit`:** Conjunto de herramientas que potencian el editor de texto enriquecido del "Bloc de Notas".
 * **`qrcode.react`:** Utilizada en el "Generador QR" para crear los códigos QR.
-* **`katex`:** La librería que renderiza las fórmulas matemáticas de LaTeX en el "Intérprete (MD/LaTeX)".
+* **`katex`:** La librería que renderiza las fórmulas matemáticas de LaTeX en el "Editor de textos Markdown".
 * **`marked`:** Convierte el texto de Markdown a HTML.
 * **`papaparse`:** Usada para importar y exportar datos en formato CSV.
 * **`turndown`:** Utilizada para convertir el contenido de HTML de vuelta a Markdown.
-* **`html-to-image`:** Permite convertir el contenido de un widget (como el del "Intérprete MD/LaTeX") en una imagen PNG que se puede copiar al portapapeles.
+* **`html-to-image`:** Permite convertir el contenido de un widget (como el del "Editor de textos Markdown") en una imagen PNG que se puede copiar al portapapeles.
 * **`framer-motion`:** Una potente biblioteca para crear animaciones fluidas y complejas, utilizada para las transiciones de los modales y otros efectos visuales.
 
 

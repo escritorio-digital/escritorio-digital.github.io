@@ -30,11 +30,13 @@ interface WidgetWindowProps {
 }
 
 export const WidgetWindow: React.FC<WidgetWindowProps> = ({ 
-    title, icon, children, position, size, zIndex, onDragStop, onResizeStop, 
+    id, title, icon, children, position, size, zIndex, onDragStop, onResizeStop, 
     onClose, onFocus, isMinimized, isMaximized, onToggleMinimize, onToggleMaximize, onOpenContextMenu,
     isPinned, onTogglePin, pinLabel, unpinLabel, isActive, helpText
 }) => {
   const [isHeaderHovered, setIsHeaderHovered] = React.useState(false);
+  const [isHelpOpen, setIsHelpOpen] = React.useState(false);
+  const helpRef = React.useRef<HTMLDivElement>(null);
   const finalSize = isMinimized ? { ...size, height: 40 } : size;
   const containerStyle: React.CSSProperties = {
     zIndex,
@@ -49,6 +51,30 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
   const headerIcon = typeof icon === 'string'
     ? <img src={icon} alt="" aria-hidden="true" />
     : icon;
+
+  React.useEffect(() => {
+    if (!isHelpOpen) {
+      return undefined;
+    }
+    const handlePointerDown = (event: MouseEvent) => {
+      if (helpRef.current && !helpRef.current.contains(event.target as Node)) {
+        setIsHelpOpen(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsHelpOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isHelpOpen]);
+
+  const helpId = `widget-help-${id}`;
 
   return (
       <Rnd
@@ -69,7 +95,7 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
         bounds="parent" 
       >
         <div
-          className="widget-header flex items-center justify-between h-10 bg-widget-header text-text-light font-bold px-3 absolute top-0 left-0 right-0"
+          className="widget-header relative flex items-center justify-between h-10 bg-widget-header text-text-light font-bold px-3 absolute top-0 left-0 right-0"
           onContextMenu={onOpenContextMenu}
           onDoubleClick={(event) => {
             event.stopPropagation();
@@ -97,13 +123,30 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
               </button>
             )}
             {helpText && (
-              <span
-                className="hover:bg-black/20 rounded-full p-1"
-                title={helpText}
-                aria-label={helpText}
-              >
-                <CircleHelp size={18} />
-              </span>
+              <div ref={helpRef} className="relative">
+                <button
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setIsHelpOpen((prev) => !prev);
+                  }}
+                  className="hover:bg-black/20 rounded-full p-1"
+                  aria-label={helpText}
+                  aria-expanded={isHelpOpen}
+                  aria-controls={helpId}
+                >
+                  <CircleHelp size={18} />
+                </button>
+                {isHelpOpen && (
+                  <div
+                    id={helpId}
+                    role="tooltip"
+                    className="absolute right-0 top-10 z-20 w-60 rounded-md bg-black/85 px-3 py-2 text-xs font-normal leading-snug text-white shadow-lg"
+                  >
+                    {helpText}
+                  </div>
+                )}
+              </div>
             )}
             <button onClick={onToggleMinimize} onContextMenu={onOpenContextMenu} className="hover:bg-black/20 rounded-full p-1">
               <Minus size={18} />

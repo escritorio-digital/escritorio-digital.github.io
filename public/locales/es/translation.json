@@ -577,7 +577,8 @@
         "copy_source": "Copiar Markdown",
         "open_file": "Abrir archivo",
         "save_file": "Guardar archivo",
-        "export_pdf": "Imprimir PDF"
+        "export_pdf": "Imprimir PDF",
+        "copy_html": "Copiar HTML"
       },
       "placeholders": {
         "text": "texto",
@@ -590,7 +591,8 @@
       },
       "source_copied": "Markdown copiado.",
       "copy_failed": "No se pudo copiar el texto.",
-      "preview_error": "Error al renderizar la vista previa."
+      "preview_error": "Error al renderizar la vista previa.",
+      "html_copied": "HTML copiado"
     },
     "sliding_puzzle": {
       "title": "Puzzle Deslizante",

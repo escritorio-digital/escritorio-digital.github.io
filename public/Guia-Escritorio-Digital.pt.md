@@ -32,7 +32,7 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 
 - **Calculadora científica**: cálculos comuns em ciências e matemática.
 - **Conversor de unidades**: converte grandezas para problemas e práticas.
-- **Markdown + LaTeX**: escreva apontamentos com fórmulas e formatação.
+- **Editor de textos Markdown**: escreva apontamentos com fórmulas e formatação.
 
 ### Comunidade
 
@@ -99,7 +99,7 @@ Este widget funciona como um arquivo dentro do navegador.
 ## Ideias de uso na aula
 
 - **Início da aula**: Lista de tarefas + Temporizador + Semáforo.
-- **Explicação**: Markdown + LaTeX + Quadro de desenho + Visualizador web.
+- **Explicação**: Editor de textos Markdown + Quadro de desenho + Visualizador web.
 - **Cooperativo**: Gerador de grupos + Temporizador + Medidor de som.
 - **Gamificação**: Roleta aleatória + Dado + Marcador de pontos.
 

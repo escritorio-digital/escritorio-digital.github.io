@@ -32,7 +32,7 @@ Escritorio Digital è una lavagna di lavoro con “finestre” pensata per la cl
 
 - **Calcolatrice scientifica**: calcoli comuni in scienze e matematica.
 - **Convertitore di unità**: converte grandezze per problemi e pratiche.
-- **Markdown + LaTeX**: scrivi appunti con formule e formattazione.
+- **Editor di testi Markdown**: scrivi appunti con formule e formattazione.
 
 ### Comunità
 
@@ -99,7 +99,7 @@ Questo widget funziona come un archivio nel browser.
 ## Idee d’uso in classe
 
 - **Inizio della lezione**: Lista attività + Timer + Semaforo.
-- **Spiegazione**: Markdown + LaTeX + Lavagna di disegno + Visualizzatore web.
+- **Spiegazione**: Editor di testi Markdown + Lavagna di disegno + Visualizzatore web.
 - **Cooperativo**: Generatore di gruppi + Timer + Misuratore di suono.
 - **Gamification**: Ruota casuale + Dado + Segnapunti.
 

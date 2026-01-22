@@ -34,7 +34,7 @@ Idazmahai Digitala ikasgelarako pentsatutako “leihoekin” lan‑taula bat da.
 
 - **Kalkulagailu zientifikoa**: matematika eta zientzietako kalkulu arruntak.
 - **Unitate‑bihurgailua**: magnitudeak ariketetarako eta praktiketan bihurtu.
-- **Markdown + LaTeX**: oharrak formularekin eta formatuarekin idatzi.
+- **Markdown testu editorea**: oharrak formularekin eta formatuarekin idatzi.
 
 ### Komunitatea
 
@@ -100,7 +100,7 @@ Widget honek nabigatzaile barruko artxibategi gisa funtzionatzen du.
 ## Ikasgelarako ideiak
 
 - **Saioaren hasiera**: Zereginen zerrenda + Temporizadorea + Semaforoa.
-- **Azalpena**: Markdown + LaTeX + Marrazteko arbela + Web‑bisorea.
+- **Azalpena**: Markdown testu editorea + Marrazteko arbela + Web‑bisorea.
 - **Kooperatiboa**: Talde-sortzailea + Temporizadorea + Soinu-neurgailua.
 - **Gamifikazioa**: Zorizko erruleta + Dadoa + Puntu-markagailua.
 

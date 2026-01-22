@@ -32,7 +32,7 @@ Digitaler Desktop ist eine Arbeitsfläche mit „Fenstern“ für den Unterricht
 
 - **Wissenschaftlicher Rechner**: gängige Berechnungen in Mathematik und Naturwissenschaften.
 - **Einheitenumrechner**: Größen für Aufgaben und Praktika umrechnen.
-- **Markdown + LaTeX**: Notizen mit Formeln und Formatierung schreiben.
+- **Markdown-Texteditor**: Notizen mit Formeln und Formatierung schreiben.
 
 ### Community
 
@@ -99,7 +99,7 @@ Dieses Widget funktioniert wie ein Ablagesystem im Browser.
 ## Ideen für den Unterricht
 
 - **Start der Stunde**: Aufgabenliste + Timer + Ampel.
-- **Erklärung**: Markdown + LaTeX + Zeichenfläche + Web‑Viewer.
+- **Erklärung**: Markdown-Texteditor + Zeichenfläche + Web‑Viewer.
 - **Kooperativ**: Gruppengenerator + Timer + Lautstärke-Messgerät.
 - **Gamification**: Zufalls-Spinner + Würfel + Punktestand.
 
