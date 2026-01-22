@@ -224,7 +224,9 @@
     "window_zoom_in": "Aumenta zoom",
     "window_zoom_out": "Riduci zoom",
     "window_zoom_reset": "Ripristina zoom",
-    "window_zoom_edit_hint": "Doppio clic per inserire la percentuale."
+    "window_zoom_edit_hint": "Doppio clic per inserire la percentuale.",
+    "toolbar_hide": "Nascondi barra (sposta il mouse sul bordo superiore per mostrarla di nuovo).",
+    "toolbar_pin": "Fissa barra"
   },
   "credits": {
     "title": "Crediti e Licenza",

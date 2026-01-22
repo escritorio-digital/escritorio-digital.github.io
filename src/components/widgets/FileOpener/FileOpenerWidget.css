@@ -10,8 +10,8 @@
   @apply flex-1;
 }
 
-.file-opener-button {
-  @apply inline-flex items-center justify-center px-3 py-1.5 rounded-lg bg-accent text-text-dark font-semibold hover:bg-[#8ec9c9] transition-colors text-sm;
+.file-opener-icon-button {
+  @apply inline-flex items-center justify-center rounded-md bg-gray-200 hover:bg-gray-300 px-3 py-2;
 }
 
 .file-opener-body {

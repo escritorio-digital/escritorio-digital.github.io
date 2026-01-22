@@ -224,7 +224,9 @@
     "window_zoom_in": "Apropar zoom",
     "window_zoom_out": "Allunyar zoom",
     "window_zoom_reset": "Restablir zoom",
-    "window_zoom_edit_hint": "Doble clic per escriure el percentatge."
+    "window_zoom_edit_hint": "Doble clic per escriure el percentatge.",
+    "toolbar_hide": "Amagar barra (mou el ratolí a la part superior per tornar-la a mostrar).",
+    "toolbar_pin": "Fixar barra"
   },
   "credits": {
     "title": "Crèdits i Llicència",

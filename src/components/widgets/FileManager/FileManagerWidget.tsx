@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Folder, File, Trash2, UploadCloud, FolderPlus, ArrowUp, Download, Copy, Scissors, ClipboardPaste, XCircle, Pencil } from 'lucide-react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { withBaseUrl } from '../../../utils/assetPaths';
+import { HideableToolbar } from '../../shared/HideableToolbar';
 import {
     FILE_MANAGER_ROOT_ID,
     copyEntries,
@@ -495,7 +496,7 @@ export const FileManagerWidget: FC = () => {
             onDragOver={(event) => event.preventDefault()}
             onDrop={handleDrop}
         >
-            <div className="file-manager-toolbar">
+            <HideableToolbar className="file-manager-toolbar">
                 <button
                     className="file-manager-button"
                     onClick={handleNavigateUp}
@@ -542,7 +543,7 @@ export const FileManagerWidget: FC = () => {
                         {t('widgets.file_manager.empty_trash_button')}
                     </button>
                 )}
-            </div>
+            </HideableToolbar>
 
             <div className="file-manager-usage">
                 <div className="file-manager-usage-bar">

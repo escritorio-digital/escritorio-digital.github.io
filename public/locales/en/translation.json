@@ -224,7 +224,9 @@
     "window_zoom_in": "Zoom in",
     "window_zoom_out": "Zoom out",
     "window_zoom_reset": "Reset zoom",
-    "window_zoom_edit_hint": "Double-click to type the percentage."
+    "window_zoom_edit_hint": "Double-click to type the percentage.",
+    "toolbar_hide": "Hide toolbar (move the mouse to the top edge to show it again).",
+    "toolbar_pin": "Pin toolbar"
   },
   "credits": {
     "title": "Credits and License",

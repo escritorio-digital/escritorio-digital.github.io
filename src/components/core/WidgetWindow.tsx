@@ -44,20 +44,50 @@ interface WidgetWindowProps {
   onZoomReset?: () => void;
 }
 
-export const WidgetWindow: React.FC<WidgetWindowProps> = ({ 
-    id, title, icon, children, position, size, zIndex, onDragStop, onResizeStop, 
-    onClose, onFocus, isMinimized, isMaximized, onToggleMinimize, onToggleMaximize, onOpenContextMenu,
-    isPinned, onTogglePin, pinLabel, unpinLabel, isActive, helpText, helpLabel, minimizeLabel, maximizeLabel,
-    restoreLabel, closeLabel, enterFullscreenLabel, exitFullscreenLabel, windowMenuLabel, zoomLevel,
-    zoomInLabel, zoomOutLabel, zoomResetLabel, zoomEditHint, onZoomChange, onZoomReset
+export const WidgetWindow: React.FC<WidgetWindowProps> = ({
+    id,
+    title,
+    icon,
+    children,
+    position,
+    size,
+    zIndex,
+    onDragStop,
+    onResizeStop,
+    onClose,
+    onFocus,
+    isMinimized,
+    isMaximized,
+    onToggleMinimize,
+    onToggleMaximize,
+    onOpenContextMenu,
+    isPinned,
+    onTogglePin,
+    pinLabel,
+    unpinLabel,
+    isActive,
+    helpText,
+    helpLabel,
+    minimizeLabel,
+    maximizeLabel,
+    restoreLabel,
+    closeLabel,
+    enterFullscreenLabel,
+    exitFullscreenLabel,
+    windowMenuLabel,
+    zoomLevel,
+    zoomInLabel,
+    zoomOutLabel,
+    zoomResetLabel,
+    zoomEditHint,
+    onZoomChange,
+    onZoomReset,
 }) => {
-  const [isHeaderHovered, setIsHeaderHovered] = React.useState(false);
   const [isHelpOpen, setIsHelpOpen] = React.useState(false);
   const [isContentFullscreen, setIsContentFullscreen] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isZoomEditing, setIsZoomEditing] = React.useState(false);
   const [zoomDraft, setZoomDraft] = React.useState('100');
-  const zoomClickTimer = React.useRef<number | null>(null);
   const menuCloseTimer = React.useRef<number | null>(null);
   const menuRef = React.useRef<HTMLDivElement>(null);
   const contentFullscreenRef = React.useRef<HTMLDivElement>(null);
@@ -75,6 +105,7 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
   const headerIcon = typeof icon === 'string'
     ? <img src={icon} alt="" aria-hidden="true" />
     : icon;
+  const menuId = `window-menu-${id}`;
 
   React.useEffect(() => {
     const handleFullscreenChange = () => {
@@ -110,6 +141,12 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isMenuOpen]);
+
+  React.useEffect(() => () => {
+    if (menuCloseTimer.current) {
+      window.clearTimeout(menuCloseTimer.current);
+    }
+  }, []);
 
   React.useEffect(() => () => {
     if (menuCloseTimer.current) {
@@ -173,8 +210,6 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
               event.stopPropagation();
               onToggleMaximize();
             }}
-            onMouseEnter={() => setIsHeaderHovered(true)}
-            onMouseLeave={() => setIsHeaderHovered(false)}
           >
             {/* --- LÍNEA MODIFICADA: Se han añadido clases de flexbox para centrar --- */}
             <span className="widget-header-drag-handle flex-grow h-full cursor-move flex items-center gap-2">
@@ -186,6 +221,7 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
               {(helpText || onZoomChange) && (
                 <div
                   ref={menuRef}
+                  id={menuId}
                   className="relative"
                   onMouseEnter={() => {
                     if (menuCloseTimer.current) {

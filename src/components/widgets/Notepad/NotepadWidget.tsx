@@ -13,6 +13,7 @@ import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
 import { requestSaveDestination } from '../../../utils/saveDialog';
 import { requestOpenFile } from '../../../utils/openDialog';
+import { HideableToolbar } from '../../shared/HideableToolbar';
 import {
   Bold,
   Italic,
@@ -64,7 +65,7 @@ const MenuBar: FC<{
   ];
 
   return (
-    <div className="menubar flex flex-wrap items-center gap-1 p-2 bg-gray-100 border-b border-accent">
+    <HideableToolbar className="menubar flex flex-wrap items-center gap-1 p-2 bg-gray-100 border-b border-accent">
       {menuButtons.map(({ Icon, action, name, title, level }) => (
         <button
           key={name + (level || '')}
@@ -83,7 +84,7 @@ const MenuBar: FC<{
             <Save size={16} />
         </button>
       </div>
-    </div>
+    </HideableToolbar>
   );
 };
 

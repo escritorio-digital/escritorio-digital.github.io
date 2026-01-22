@@ -224,7 +224,9 @@
     "window_zoom_in": "Aumentar zoom",
     "window_zoom_out": "Diminuír zoom",
     "window_zoom_reset": "Restablecer zoom",
-    "window_zoom_edit_hint": "Dobre clic para escribir a porcentaxe."
+    "window_zoom_edit_hint": "Dobre clic para escribir a porcentaxe.",
+    "toolbar_hide": "Ocultar barra (move o rato á parte superior para volver amosala).",
+    "toolbar_pin": "Fixar barra"
   },
   "credits": {
     "title": "Créditos e Licenza",

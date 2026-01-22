@@ -226,7 +226,9 @@
     "window_zoom_in": "Aumentar zoom",
     "window_zoom_out": "Diminuir zoom",
     "window_zoom_reset": "Repor zoom",
-    "window_zoom_edit_hint": "Duplo clique para escrever a percentagem."
+    "window_zoom_edit_hint": "Duplo clique para escrever a percentagem.",
+    "toolbar_hide": "Ocultar barra (move o rato para a parte superior para a mostrar de novo).",
+    "toolbar_pin": "Fixar barra"
   },
   "credits": {
     "title": "Créditos e Licença",

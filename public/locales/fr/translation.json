@@ -225,7 +225,9 @@
     "window_zoom_in": "Agrandir",
     "window_zoom_out": "Réduire",
     "window_zoom_reset": "Réinitialiser le zoom",
-    "window_zoom_edit_hint": "Double-cliquez pour saisir le pourcentage."
+    "window_zoom_edit_hint": "Double-cliquez pour saisir le pourcentage.",
+    "toolbar_hide": "Masquer la barre (deplacez la souris vers le bord superieur pour la reafficher).",
+    "toolbar_pin": "Epingler la barre"
   },
   "credits": {
     "title": "Crédits et Licence",

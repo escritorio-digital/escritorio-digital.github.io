@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { ExternalLink, RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import './EdiMarkWebWidget.css';
+import { HideableToolbar } from '../../shared/HideableToolbar';
 
 const APP_URL = 'https://edimarkweb.github.io/';
 
@@ -14,7 +15,7 @@ export const EdiMarkWebWidget: FC = () => {
 
     return (
         <div className="edimarkweb-widget">
-            <div className="edimarkweb-toolbar">
+            <HideableToolbar className="edimarkweb-toolbar">
                 <div className="edimarkweb-heading">
                     <p className="edimarkweb-title">EdiMarkWeb</p>
                     <p className="edimarkweb-subtitle">{t('widgets.edimarkweb.subtitle')}</p>
@@ -34,7 +35,7 @@ export const EdiMarkWebWidget: FC = () => {
                         <span>{t('widgets.edimarkweb.open_new_tab')}</span>
                     </a>
                 </div>
-            </div>
+            </HideableToolbar>
             <div className="edimarkweb-frame">
                 <iframe
                     key={reloadKey}

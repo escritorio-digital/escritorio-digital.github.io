@@ -34,6 +34,7 @@ import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
 import { requestSaveDestination } from '../../../utils/saveDialog';
 import { requestOpenFile } from '../../../utils/openDialog';
+import { HideableToolbar } from '../../shared/HideableToolbar';
 
 const EDICUATEX_ORIGIN = 'https://edicuatex.github.io';
 
@@ -474,7 +475,7 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
             <div
                 className={`markdown-text-editor-widget view-${viewMode}`}
             >
-                <div className="markdown-toolbar">
+                <HideableToolbar className="markdown-toolbar">
                     <div className="markdown-toolbar-group">
                         <button type="button" title={t('widgets.markdown_text_editor.toolbar.bold')} onClick={() => applyWrap('**', '**', t('widgets.markdown_text_editor.placeholders.text'))}>
                             <Bold size={16} />
@@ -559,7 +560,7 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
                             <FileText size={16} />
                         </button>
                     </div>
-                </div>
+                </HideableToolbar>
 
                 <div className="markdown-body">
                     <div className="markdown-pane markdown-editor-pane">
