@@ -21,7 +21,7 @@ Escriptori Digital és una pissarra de treball amb “finestres” pensada per a
 - **Control d’assistència**: registre ràpid d’assistència i estat del grup.
 - **Generador de grups**: crea grups de manera aleatòria o equilibrada per al treball cooperatiu.
 - **Calendari**: suport visual per a dates, lliuraments i planificació.
-- **Guia del programa**: guia integrada amb el catàleg de widgets i recomanacions d’ús.
+- **Guia d'eines**: guia integrada amb el catàleg de widgets i recomanacions d’ús.
 
 ### Temps i ritme
 
@@ -65,7 +65,7 @@ Aquest widget funciona com un arxivador dins del navegador.
 
 - **Desar**: des d’altres widgets pots triar desar a Arxius Ed o al disc local.
 - **Organitzar**: crea carpetes, mou elements amb arrossegar i deixar anar i usa la paperera amb esborrat diferit.
-- **Obrir**: doble clic per obrir fitxers amb el programa associat.
+- **Obrir**: doble clic per obrir fitxers amb l'eina associada.
 
 ### Eines participatives
 

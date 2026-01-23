@@ -19,7 +19,7 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 - **Assiduidade**: registo rápido de presença e estado do grupo.
 - **Gerador de grupos**: cria grupos de forma aleatória ou equilibrada para trabalho cooperativo.
 - **Calendário**: apoio visual para datas, entregas e planeamento.
-- **Guia do programa**: guia integrada com o catálogo de widgets e dicas de uso.
+- **Guia de ferramentas**: guia integrada com o catálogo de widgets e dicas de uso.
 
 ### Tempo e ritmo
 
@@ -63,7 +63,7 @@ Este widget funciona como um arquivo dentro do navegador.
 
 - **Guardar**: em outros widgets, escolhe Arquivos Ed ou o disco local.
 - **Organizar**: cria pastas, move com arrastar e soltar e usa o lixo.
-- **Abrir**: duplo clique para abrir ficheiros com o programa associado.
+- **Abrir**: duplo clique para abrir ficheiros com a ferramenta associada.
 
 ### Ferramentas participativas
 

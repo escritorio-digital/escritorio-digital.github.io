@@ -23,7 +23,7 @@
     "tabs": {
       "general": "Orokorra",
       "profiles": "Profilak",
-      "widgets": "Programak",
+      "widgets": "Tresnak",
       "theme": "Itxura"
     },
     "general": {
@@ -35,7 +35,7 @@
         "eu": "Euskara"
       },
       "reset_title": "Aplikazioa berrezarri",
-      "reset_description": "Gordetako datu guztiak ezabatzen ditu (profilak, programak eta lehentasunak) eta lehen aldia balitz bezala berrabiarazten du.",
+      "reset_description": "Gordetako datu guztiak ezabatzen ditu (profilak, tresnak eta lehentasunak) eta lehen aldia balitz bezala berrabiarazten du.",
       "reset_button": "Fabrikako balioetara berrezarri",
       "reset_confirm": "Ziur zaude lehentasun eta datu lokal guztiak ezabatu nahi dituzula? Ekintza hau ezin da desegin.",
       "version_value": "v1.6.3 (Enero 2026)"
@@ -66,11 +66,11 @@
       "create_mode_clone": "Unekoa klonatu"
     },
     "widgets": {
-      "search": "Bilatu programa-a...",
-      "pinned_info": "Hautatu zure tresna-barran nahi dituzun programak. ({{count}}/{{max}}) {{total}}tik",
+      "search": "Bilatu tresna...",
+      "pinned_info": "Hautatu zure tresna-barran nahi dituzun tresnak. ({{count}}/{{max}}) {{total}}tik",
       "add": "Gehitu",
       "remove": "Kendu",
-      "max_widgets_alert": "Ezin dira {{max}} programa baino gehiago finkatu.",
+      "max_widgets_alert": "Ezin dira {{max}} tresna baino gehiago finkatu.",
       "view_label": "Ikusi honela",
       "view_by_theme": "Gaiak",
       "view_alphabetical": "Alfabetikoki",
@@ -93,8 +93,8 @@
       "theme_colors_title": "Gaiaren koloreak",
       "colors": {
         "desktop_bg": "Idazmahai-atzealdea",
-        "widget_bg": "Programa-atzealdea",
-        "widget_header": "Programa-goiburua",
+        "widget_bg": "Tresna-atzealdea",
+        "widget_header": "Tresna-goiburua",
         "accent": "Azentua",
         "text_light": "Testu argia",
         "text_dark": "Testu iluna"
@@ -146,7 +146,7 @@
   "toolbar": {
     "start": "Hasiera",
     "settings": "Ezarpenak",
-    "widgetLibrary": "Programa Liburutegia",
+    "widgetLibrary": "Tresna Liburutegia",
     "add_widget": "Gehitu gogokoetara",
     "remove_widget": "Gogokoetatik kendu",
     "no_open_windows": "Ez dago leiho irekirik"
@@ -163,7 +163,7 @@
     "close": "Itxi",
     "favorites": "Gogokoak",
     "shortcuts": "Lasterbideak",
-    "widgets": "Programak",
+    "widgets": "Tresnak",
     "help": "Laguntza",
     "no_results": "Emaitzarik ez",
     "remove_favorite": "Gogokoetatik kendu",
@@ -225,15 +225,19 @@
     "window_zoom_out": "Zooma txikitu",
     "window_zoom_reset": "Zooma berrezarri",
     "window_zoom_edit_hint": "Egin klik bikoitza ehunekoa idazteko.",
+    "tool_settings": "Tresnaren ezarpenak",
+    "tool_settings_description": "Gorde zooma eta barra-ikusgarritasuna.",
+    "tool_settings_save": "Gorde konfigurazio hau",
+    "tool_settings_saved": "Konfigurazioa gordeta.",
     "toolbar_hide": "Tresna-barra ezkutatu",
     "toolbar_pin": "Barra finkatu",
     "toolbar_reveal_hint": "Tresna-barra berriro ikusteko, eraman sagua widgetaren goiko ertzera."
   },
   "credits": {
     "title": "Kredituak eta Lizentzia",
-    "tooltip": "Kredituak, lizentzia eta programaren gida",
-    "user_guide_title": "Programaren gida",
-    "user_guide_link": "Programaen gida ireki",
+    "tooltip": "Kredituak, lizentzia eta tresnen gida",
+    "user_guide_title": "Tresnen gida",
+    "user_guide_link": "Tresnen gida ireki",
     "original_project": "<strong>Ikasgelarako Idazmahai Interaktiboa</strong> jatorrizko proiektua eta bere ideia <strong>María Teresa González</strong>enak dira.",
     "original_link": "Jatorrizko aplikazioa hemen bisita dezakezu:",
     "new_version": "Bertsio berri hau <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> eta <strong>Pablo G. Guízar</strong>-en artean garatu zen. Proiektu honen biltegia hemen dago:",
@@ -277,7 +281,7 @@
   },
   "widgets": {
     "program_guide": {
-      "title": "Programaren gida",
+      "title": "Tresnen gida",
       "load_error": "Ezin izan da gida kargatu."
     },
     "file_manager": {
@@ -701,7 +705,80 @@
       "title": "Bozketa sinplea"
     },
     "directo_escala": {
-      "title": "Balorazio eskala"
+      "title": "Balorazio eskala",
+      "landing_title": "Aurkezlea zara ala parte-hartzailea?",
+      "landing_subtitle": "Aukeratu nola sartu nahi duzun.",
+      "landing_presenter": "Aurkezlea",
+      "landing_participant": "Parte-hartzailea",
+      "create_title": "Eskala berri bat sortu",
+      "question_label": "Adierazpena edo galdera:",
+      "question_placeholder": "Adib: Baloratu gaurko saioa",
+      "theme_color_label": "Kolorea:",
+      "scale_type_label": "Eskala mota:",
+      "scale_satisfaction": "Gogobetetasuna (5 maila)",
+      "scale_agreement": "Adostasuna (5 maila)",
+      "scale_frequency": "Maiztasuna (5 maila)",
+      "scale_trafficlight": "Ulermena / Semaforoa (3 maila)",
+      "scale_numeric": "Zenbakizkoa (1-10)",
+      "scale_custom": "Pertsonalizatua",
+      "custom_scale_label": "Etiketa pertsonalizatuak:",
+      "custom_label_placeholder": "Etiketa {{index}}",
+      "add_label_btn": "+ Gehitu etiketa",
+      "prepare_session_btn": "Saioa prestatu",
+      "start_session_btn": "Saioa Hasi",
+      "switch_to_participant": "Saio batean sartu nahi duzu?",
+      "projection_btn_text": "Proiektatu",
+      "stop_voting_btn": "Gelditu",
+      "resume_voting_btn": "Berrekin",
+      "scan_qr_label": "1. Eskaneatu QR-a",
+      "direct_link_label": "2. Edo partekatu esteka",
+      "or_go_to": "Edo joan hona",
+      "and_enter_code": "eta sartu kodea:",
+      "total_votes_label": "Botoak guztira",
+      "join_title": "Balorazio batean sartu",
+      "session_code_label": "Saioaren kodea:",
+      "code_input_placeholder": "Sartu kodea",
+      "join_btn": "Sartu",
+      "switch_to_presenter": "Aurkezlea zara?",
+      "voted_title": "Eskerrik asko zure balorazioagatik!",
+      "voted_subtitle": "Emaitzak pantaila nagusian.",
+      "voting_paused_title": "Balorazioa pausatuta",
+      "voting_paused_subtitle": "Aurkezleak erantzunak aldi baterako gelditu ditu.",
+      "alert_no_question": "Sartu galdera bat.",
+      "alert_min_options": "Eskalak gutxienez 2 aukera izan behar ditu.",
+      "join_error_text": "Errorea. Egiaztatu kodea.",
+      "shareable_link_title": "Prestatzeko esteka:",
+      "link_copied_toast": "Esteka kopiatu da",
+      "code_copied_toast": "Kodea kopiatu da",
+      "qr_expand_hint": "Egin klik handitzeko",
+      "scales": {
+        "satisfaction": [
+          "😠",
+          "🙁",
+          "😐",
+          "🙂",
+          "😄"
+        ],
+        "agreement": [
+          "Guztiz ados ez",
+          "Ados ez",
+          "Neutrala",
+          "Ados",
+          "Guztiz ados"
+        ],
+        "frequency": [
+          "Inoiz ez",
+          "Gutxitan",
+          "Batzuetan",
+          "Maiz",
+          "Beti"
+        ],
+        "trafficlight": [
+          "Ez dut ulertzen",
+          "Zalantzak ditut",
+          "Ulertzen dut"
+        ]
+      }
     },
     "directo_nube": {
       "title": "Hitz hodeia"
@@ -776,16 +853,20 @@
       "description": "Inportatu zure web lokala Ed-en exekutatzeko",
       "tooltip": "Inportatu zure web lokala Ed-en exekutatzeko"
     },
+    "external_app": {
+      "popup_hint": "Tresna hau leiho berri batean irekitzen da ondo funtzionatzeko. Sakatu botoia irekitzeko.",
+      "popup_button": "Leiho berri batean ireki"
+    },
     "vce": {
       "title": "Komunitateko aplikazioak",
       "start_tooltip": "Vibe Coding Educativo komunitateak sortutako aplikazioak.",
       "search_keywords": "vibe coding, vibe coding educativo, komunitateko appak, biltegia",
-      "subtitle": "Vibe Coding Educativo Telegram komunitateko programak",
+      "subtitle": "Vibe Coding Educativo Telegram komunitateko tresnak",
       "search_placeholder": "Bilatu izenburu, egile edo deskribapenaren arabera",
       "filter_level_all": "Maila guztiak",
       "filter_area_all": "Arlo guztiak",
-      "no_results": "Ez dago programa egokirik iragazki hauekin.",
-      "no_selection": "Hautatu programa bat ikusteko.",
+      "no_results": "Ez dago tresna egokirik iragazki hauekin.",
+      "no_selection": "Hautatu tresna bat ikusteko.",
       "open_new_tab": "Ireki fitxa berrian",
       "loading": "Zerrenda kargatzen...",
       "load_error": "Ezin izan da zerrenda kargatu.",
@@ -806,10 +887,10 @@
       "intro_info_link": "Taldeari buruzko informazioa",
       "intro_how_title": "Ikuslea nola erabili",
       "intro_step1": "Iragazi mailaren eta arloaren arabera.",
-      "intro_step2": "Aukeratu programa bat ezkerreko zerrendan.",
+      "intro_step2": "Aukeratu tresna bat ezkerreko zerrendan.",
       "intro_step3": "Ireki ikuslean edo fitxa berri batean.",
       "intro_step4": "Kargatze-errorea agertzen bada, erabili fitxa berria.",
-      "intro_step5": "Gogokoek hautatutako programak zerrendaren goialdean ikusgai mantentzen dituzte.",
+      "intro_step5": "Gogokoek hautatutako tresnak zerrendaren goialdean ikusgai mantentzen dituzte.",
       "less": "gutxiago...",
       "move_up": "Mugitu gogokoa gora",
       "move_down": "Mugitu gogokoa behera"
@@ -891,7 +972,7 @@
   "backup": {
     "title": "Profilak gorde edo kargatu",
     "include_profiles": "Profilak eta diseinua (leihoak, horma-irudiak, barra)",
-    "include_widgets": "Programaen ezarpenak eta datuak",
+    "include_widgets": "Tresnen ezarpenak eta datuak",
     "include_local_web": "Web lokalak",
     "export_button": "Fitxategia gorde",
     "import_button": "Fitxategia kargatu",
@@ -956,7 +1037,7 @@
     "cancel": "Utzi",
     "discard": "Ez gorde",
     "save": "Gorde",
-    "unknown_widget": "programa hau"
+    "unknown_widget": "tresna hau"
   },
   "widgets_help": {
     "work-list": "Saioa antolatzeko zereginen eta oroigarrien zerrenda.",

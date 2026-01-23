@@ -23,7 +23,7 @@
     "tabs": {
       "general": "Allgemein",
       "profiles": "Profile",
-      "widgets": "Programme",
+      "widgets": "Werkzeuge",
       "theme": "Erscheinungsbild"
     },
     "general": {
@@ -36,7 +36,7 @@
         "eu": "Baskisch"
       },
       "reset_title": "Anwendung zurücksetzen",
-      "reset_description": "Entfernt alle gespeicherten Daten (Profile, Programme und Einstellungen) und startet wie beim ersten Mal.",
+      "reset_description": "Entfernt alle gespeicherten Daten (Profile, Werkzeuge und Einstellungen) und startet wie beim ersten Mal.",
       "reset_button": "Auf Werkseinstellungen zurücksetzen",
       "reset_confirm": "Möchtest du wirklich alle lokalen Einstellungen und Daten entfernen? Dies kann nicht rückgängig gemacht werden.",
       "version_value": "v1.6.3 (Enero 2026)"
@@ -67,11 +67,11 @@
       "create_mode_clone": "Aktuelles klonen"
     },
     "widgets": {
-      "search": "Programm suchen...",
-      "pinned_info": "Wähle die Programme aus, die in deiner Werkzeugleiste erscheinen sollen. ({{count}}/{{max}}) von {{total}}",
+      "search": "Werkzeug suchen...",
+      "pinned_info": "Wähle die Werkzeuge aus, die in deiner Werkzeugleiste erscheinen sollen. ({{count}}/{{max}}) von {{total}}",
       "add": "Hinzufügen",
       "remove": "Entfernen",
-      "max_widgets_alert": "Du kannst nicht mehr als {{max}} Programme anheften.",
+      "max_widgets_alert": "Du kannst nicht mehr als {{max}} Werkzeuge anheften.",
       "view_label": "Ansicht",
       "view_by_theme": "Themen",
       "view_alphabetical": "Alphabetisch",
@@ -94,8 +94,8 @@
       "theme_colors_title": "Themenfarben",
       "colors": {
         "desktop_bg": "Desktop-Hintergrund",
-        "widget_bg": "Programm-Hintergrund",
-        "widget_header": "Programm-Kopfzeile",
+        "widget_bg": "Werkzeug-Hintergrund",
+        "widget_header": "Werkzeug-Kopfzeile",
         "accent": "Akzent",
         "text_light": "Heller Text",
         "text_dark": "Dunkler Text"
@@ -147,7 +147,7 @@
   "toolbar": {
     "start": "Start",
     "settings": "Einstellungen",
-    "widgetLibrary": "Programm-Bibliothek",
+    "widgetLibrary": "Werkzeug-Bibliothek",
     "add_widget": "Zu Favoriten hinzufügen",
     "remove_widget": "Aus Favoriten entfernen",
     "no_open_windows": "Keine offenen Fenster"
@@ -164,7 +164,7 @@
     "close": "Schließen",
     "favorites": "Favoriten",
     "shortcuts": "Schnellzugriffe",
-    "widgets": "Programme",
+    "widgets": "Werkzeuge",
     "help": "Hilfe",
     "no_results": "Keine Ergebnisse",
     "remove_favorite": "Aus Favoriten entfernen",
@@ -226,15 +226,19 @@
     "window_zoom_out": "Verkleinern",
     "window_zoom_reset": "Zoom zurücksetzen",
     "window_zoom_edit_hint": "Doppelklick, um den Prozentsatz einzugeben.",
+    "tool_settings": "Werkzeug-Einstellungen",
+    "tool_settings_description": "Speichert den Zoom und die Sichtbarkeit der Leiste.",
+    "tool_settings_save": "Diese Konfiguration speichern",
+    "tool_settings_saved": "Konfiguration gespeichert.",
     "toolbar_hide": "Werkzeugleiste ausblenden",
     "toolbar_pin": "Symbolleiste anheften",
     "toolbar_reveal_hint": "Um die Werkzeugleiste wieder zu sehen, bewege die Maus an den oberen Rand des Widgets."
   },
   "credits": {
     "title": "Credits und Lizenz",
-    "tooltip": "Credits, Lizenz und Programmleitfaden",
-    "user_guide_title": "Programmleitfaden",
-    "user_guide_link": "Programm-Leitfaden öffnen",
+    "tooltip": "Credits, Lizenz und Werkzeugleitfaden",
+    "user_guide_title": "Werkzeugleitfaden",
+    "user_guide_link": "Werkzeug-Leitfaden öffnen",
     "original_project": "Das Originalprojekt <strong>Interaktiver Klassenraum-Desktop</strong> und seine Idee gehören <strong>María Teresa González</strong>.",
     "original_link": "Du kannst die Originalanwendung hier besuchen:",
     "new_version": "Diese neue Version wurde in Zusammenarbeit von <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> und <strong>Pablo G. Guízar</strong> entwickelt. Das Repository dieses Projekts findest du unter:",
@@ -278,7 +282,7 @@
   },
   "widgets": {
     "program_guide": {
-      "title": "Programmleitfaden",
+      "title": "Werkzeugleitfaden",
       "load_error": "Der Leitfaden konnte nicht geladen werden."
     },
     "file_manager": {
@@ -702,7 +706,80 @@
       "title": "Einfache Abstimmung"
     },
     "directo_escala": {
-      "title": "Bewertungsskala"
+      "title": "Bewertungsskala",
+      "landing_title": "Bist du der Präsentator oder ein Teilnehmer?",
+      "landing_subtitle": "Wähle, wie du beitreten möchtest.",
+      "landing_presenter": "Präsentator",
+      "landing_participant": "Teilnehmer",
+      "create_title": "Neue Skala erstellen",
+      "question_label": "Aussage oder Frage:",
+      "question_placeholder": "Z. B.: Bewerte die heutige Sitzung",
+      "theme_color_label": "Farbe:",
+      "scale_type_label": "Skalentyp:",
+      "scale_satisfaction": "Zufriedenheit (5 Stufen)",
+      "scale_agreement": "Zustimmung (5 Stufen)",
+      "scale_frequency": "Häufigkeit (5 Stufen)",
+      "scale_trafficlight": "Verständnis / Ampel (3 Stufen)",
+      "scale_numeric": "Numerisch (1-10)",
+      "scale_custom": "Benutzerdefiniert",
+      "custom_scale_label": "Individuelle Beschriftungen:",
+      "custom_label_placeholder": "Label {{index}}",
+      "add_label_btn": "+ Label hinzufügen",
+      "prepare_session_btn": "Vorbereiten",
+      "start_session_btn": "Starten",
+      "switch_to_participant": "Einer Sitzung beitreten?",
+      "projection_btn_text": "Projizieren",
+      "stop_voting_btn": "Stoppen",
+      "resume_voting_btn": "Fortsetzen",
+      "scan_qr_label": "1. QR scannen",
+      "direct_link_label": "2. Link teilen",
+      "or_go_to": "Oder gehe zu",
+      "and_enter_code": "und gib den Code ein:",
+      "total_votes_label": "Gesamtstimmen",
+      "join_title": "Einer Bewertung beitreten",
+      "session_code_label": "Sitzungscode:",
+      "code_input_placeholder": "Code eingeben",
+      "join_btn": "Beitreten",
+      "switch_to_presenter": "Bist du der Präsentator?",
+      "voted_title": "Danke für deine Bewertung!",
+      "voted_subtitle": "Ergebnisse auf dem Hauptbildschirm.",
+      "voting_paused_title": "Abstimmung pausiert",
+      "voting_paused_subtitle": "Der Präsentator hat die Antworten gestoppt.",
+      "alert_no_question": "Gib eine Frage ein.",
+      "alert_min_options": "Die Skala muss mindestens 2 Optionen haben.",
+      "join_error_text": "Fehler. Prüfe den Code.",
+      "shareable_link_title": "Vorbereitungslink:",
+      "link_copied_toast": "Link kopiert",
+      "code_copied_toast": "Code kopiert",
+      "qr_expand_hint": "Zum Vergrößern klicken",
+      "scales": {
+        "satisfaction": [
+          "😠",
+          "🙁",
+          "😐",
+          "🙂",
+          "😄"
+        ],
+        "agreement": [
+          "Stimme überhaupt nicht zu",
+          "Stimme nicht zu",
+          "Neutral",
+          "Stimme zu",
+          "Stimme voll zu"
+        ],
+        "frequency": [
+          "Nie",
+          "Selten",
+          "Manchmal",
+          "Häufig",
+          "Immer"
+        ],
+        "trafficlight": [
+          "Ich verstehe es nicht",
+          "Ich habe Zweifel",
+          "Ich verstehe es"
+        ]
+      }
     },
     "directo_nube": {
       "title": "Wortwolke"
@@ -777,6 +854,10 @@
       "description": "Importiere deine lokale Website, um sie in Ed auszufuhren",
       "tooltip": "Importiere deine lokale Website, um sie in Ed auszufuhren"
     },
+    "external_app": {
+      "popup_hint": "Dieses Werkzeug wird in einem neuen Fenster geöffnet, damit es richtig funktioniert. Klicke auf die Schaltfläche, um es zu öffnen.",
+      "popup_button": "In neuem Fenster öffnen"
+    },
     "vce": {
       "title": "Apps der Community",
       "start_tooltip": "Apps, die von der Community Vibe Coding Educativo erstellt wurden.",
@@ -807,10 +888,10 @@
       "intro_info_link": "Informationen zur Gruppe",
       "intro_how_title": "So benutzt du den Viewer",
       "intro_step1": "Filtere nach Niveau und Fachbereich.",
-      "intro_step2": "Wähle ein Programm in der linken Liste.",
+      "intro_step2": "Wähle ein Werkzeug in der linken Liste.",
       "intro_step3": "Öffne es im Viewer oder in einem neuen Tab.",
       "intro_step4": "Wenn ein Ladefehler erscheint, nutze den neuen Tab.",
-      "intro_step5": "Favoriten halten die ausgewählten Programme oben in der Liste sichtbar.",
+      "intro_step5": "Favoriten halten die ausgewählten Werkzeuge oben in der Liste sichtbar.",
       "less": "weniger...",
       "move_up": "Favorit nach oben",
       "move_down": "Favorit nach unten"
@@ -892,7 +973,7 @@
   "backup": {
     "title": "Profile speichern oder laden",
     "include_profiles": "Profile und Layout (Fenster, Hintergründe, Leiste)",
-    "include_widgets": "Programm-Einstellungen und Daten",
+    "include_widgets": "Werkzeug-Einstellungen und Daten",
     "include_local_web": "Lokale Websites",
     "export_button": "Datei speichern",
     "import_button": "Datei laden",
@@ -957,7 +1038,7 @@
     "cancel": "Abbrechen",
     "discard": "Nicht speichern",
     "save": "Speichern",
-    "unknown_widget": "dieses Programm"
+    "unknown_widget": "dieses Werkzeug"
   },
   "widgets_help": {
     "work-list": "Aufgabenliste und Erinnerungen zur Organisation der Stunde.",

@@ -19,7 +19,7 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 - **Control de asistencia**: rexistro rápido de asistencia e estado do grupo.
 - **Xerador de grupos**: crea grupos de forma aleatoria ou equilibrada para traballo cooperativo.
 - **Calendario**: apoio visual para datas, entregas e planificación.
-- **Guía do programa**: guía integrada co catálogo de widgets e recomendacións de uso.
+- **Guía de ferramentas**: guía integrada co catálogo de widgets e recomendacións de uso.
 
 ### Tempo e ritmo
 
@@ -63,7 +63,7 @@ Este widget funciona como un archivador dentro do navegador.
 
 - **Gardar**: desde outros widgets podes escoller gardar en Arquivos Ed ou no disco local.
 - **Organizar**: crea cartafoles, move elementos con arrastrar e soltar e usa a papeleira con borrado diferido.
-- **Abrir**: dobre clic para abrir ficheiros co programa asociado.
+- **Abrir**: dobre clic para abrir ficheiros coa ferramenta asociada.
 
 ### Ferramentas participativas
 

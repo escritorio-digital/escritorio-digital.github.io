@@ -6,7 +6,7 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 
 - **On-screen date and time**: shown in the top-right corner. You can disable it in **Tools → Appearance**.
 
-- **Start menu**: click the Start button in the bottom-left to open programs, favorites, settings, and help.
+- **Start menu**: click the Start button in the bottom-left to open tools, favorites, settings, and help.
 
 - **Open a widget**: from the bottom bar, the **Start menu**, or the **Widget Library**.
 - **Close everything**: from the desktop context menu.
@@ -21,7 +21,7 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 - **Attendance**: quick attendance and class status record.
 - **Group generator**: create groups randomly or balanced for cooperative work.
 - **Calendar**: visual support for dates, deadlines, and planning.
-- **Program guide**: built-in guide with the widget catalog and usage tips.
+- **Tools guide**: built-in guide with the widget catalog and usage tips.
 
 ### Time and rhythm
 
@@ -65,7 +65,7 @@ This widget works as a file cabinet inside the browser.
 
 - **Save**: from other widgets you can choose to save in Ed Files or on your local disk.
 - **Organize**: create folders, move items by drag and drop, and use the trash with delayed deletion.
-- **Open**: double click to open files with their associated program.
+- **Open**: double click to open files with their associated tool.
 
 ### Participation tools
 

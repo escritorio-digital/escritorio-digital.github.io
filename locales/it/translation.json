@@ -23,7 +23,7 @@
     "tabs": {
       "general": "Generale",
       "profiles": "Profili",
-      "widgets": "Programma",
+      "widgets": "Strumenti",
       "theme": "Aspetto"
     },
     "general": {
@@ -36,7 +36,7 @@
         "eu": "Basco"
       },
       "reset_title": "Ripristina applicazione",
-      "reset_description": "Rimuove tutti i dati salvati (profili, programma e preferenze) e riavvia come al primo avvio.",
+      "reset_description": "Rimuove tutti i dati salvati (profili, strumenti e preferenze) e riavvia come al primo avvio.",
       "reset_button": "Ripristino impostazioni di fabbrica",
       "reset_confirm": "Sei sicuro di voler eliminare tutte le preferenze e i dati locali? Questa azione non può essere annullata.",
       "version_value": "v1.6.3 (Enero 2026)"
@@ -67,11 +67,11 @@
       "create_mode_clone": "Clona quello attuale"
     },
     "widgets": {
-      "search": "Cerca programma...",
-      "pinned_info": "Seleziona i programmi che vuoi nella barra degli strumenti. ({{count}}/{{max}}) di {{total}}",
+      "search": "Cerca strumento...",
+      "pinned_info": "Seleziona gli strumenti che vuoi nella barra degli strumenti. ({{count}}/{{max}}) di {{total}}",
       "add": "Aggiungi",
       "remove": "Rimuovi",
-      "max_widgets_alert": "Non è possibile fissare più di {{max}} programma.",
+      "max_widgets_alert": "Non è possibile fissare più di {{max}} strumenti.",
       "view_label": "Mostra per",
       "view_by_theme": "Temi",
       "view_alphabetical": "Alfabetico",
@@ -94,8 +94,8 @@
       "theme_colors_title": "Colori del tema",
       "colors": {
         "desktop_bg": "Sfondo desktop",
-        "widget_bg": "Sfondo programma",
-        "widget_header": "Intestazione programma",
+        "widget_bg": "Sfondo strumento",
+        "widget_header": "Intestazione strumento",
         "accent": "Accento",
         "text_light": "Testo chiaro",
         "text_dark": "Testo scuro"
@@ -147,7 +147,7 @@
   "toolbar": {
     "start": "Avvio",
     "settings": "Impostazioni",
-    "widgetLibrary": "Libreria dei programma",
+    "widgetLibrary": "Libreria degli strumenti",
     "add_widget": "Aggiungi ai preferiti",
     "remove_widget": "Rimuovi dai preferiti",
     "no_open_windows": "Nessuna finestra aperta"
@@ -164,7 +164,7 @@
     "close": "Chiudi",
     "favorites": "Preferiti",
     "shortcuts": "Scorciatoie",
-    "widgets": "Programma",
+    "widgets": "Strumenti",
     "help": "Aiuto",
     "no_results": "Nessun risultato",
     "remove_favorite": "Rimuovi dai preferiti",
@@ -226,15 +226,19 @@
     "window_zoom_out": "Riduci zoom",
     "window_zoom_reset": "Ripristina zoom",
     "window_zoom_edit_hint": "Doppio clic per inserire la percentuale.",
+    "tool_settings": "Impostazioni dello strumento",
+    "tool_settings_description": "Salva lo zoom e la visibilita della barra.",
+    "tool_settings_save": "Salva questa configurazione",
+    "tool_settings_saved": "Configurazione salvata.",
     "toolbar_hide": "Nascondi barra degli strumenti",
     "toolbar_pin": "Fissa barra",
     "toolbar_reveal_hint": "Per rivedere la barra degli strumenti, sposta il mouse sul bordo superiore del widget."
   },
   "credits": {
     "title": "Crediti e Licenza",
-    "tooltip": "Crediti, licenza e guida del programma",
-    "user_guide_title": "Guida del programma",
-    "user_guide_link": "Apri la guida dei programma",
+    "tooltip": "Crediti, licenza e guida degli strumenti",
+    "user_guide_title": "Guida degli strumenti",
+    "user_guide_link": "Apri la guida degli strumenti",
     "original_project": "Il progetto originale <strong>Desktop Interattivo per l'Aula</strong> e la sua idea appartengono a <strong>María Teresa González</strong>.",
     "original_link": "Puoi visitare l'applicazione originale qui:",
     "new_version": "Questa nuova versione è stata sviluppata in collaborazione da <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> e <strong>Pablo G. Guízar</strong>. Il repository di questo progetto si trova su:",
@@ -278,7 +282,7 @@
   },
   "widgets": {
     "program_guide": {
-      "title": "Guida del programma",
+      "title": "Guida degli strumenti",
       "load_error": "Impossibile caricare la guida."
     },
     "file_manager": {
@@ -702,7 +706,80 @@
       "title": "Votazione semplice"
     },
     "directo_escala": {
-      "title": "Scala di valutazione"
+      "title": "Scala di valutazione",
+      "landing_title": "Sei il presentatore o un partecipante?",
+      "landing_subtitle": "Scegli come vuoi entrare.",
+      "landing_presenter": "Presentatore",
+      "landing_participant": "Partecipante",
+      "create_title": "Crea una nuova scala",
+      "question_label": "Affermazione o domanda:",
+      "question_placeholder": "Es: Valuta la sessione di oggi",
+      "theme_color_label": "Colore:",
+      "scale_type_label": "Tipo di scala:",
+      "scale_satisfaction": "Soddisfazione (5 livelli)",
+      "scale_agreement": "Accordo (5 livelli)",
+      "scale_frequency": "Frequenza (5 livelli)",
+      "scale_trafficlight": "Comprensione / Semaforo (3 livelli)",
+      "scale_numeric": "Numerica (1-10)",
+      "scale_custom": "Personalizzata",
+      "custom_scale_label": "Etichette personalizzate:",
+      "custom_label_placeholder": "Etichetta {{index}}",
+      "add_label_btn": "+ Aggiungi etichetta",
+      "prepare_session_btn": "Prepara",
+      "start_session_btn": "Avvia",
+      "switch_to_participant": "Unirti a una sessione?",
+      "projection_btn_text": "Proietta",
+      "stop_voting_btn": "Ferma",
+      "resume_voting_btn": "Riprendi",
+      "scan_qr_label": "1. Scansiona QR",
+      "direct_link_label": "2. Condividi link",
+      "or_go_to": "Oppure vai su",
+      "and_enter_code": "e inserisci il codice:",
+      "total_votes_label": "Voti totali",
+      "join_title": "Unisciti a una valutazione",
+      "session_code_label": "Codice sessione:",
+      "code_input_placeholder": "Inserisci il codice",
+      "join_btn": "Unisciti",
+      "switch_to_presenter": "Sei il presentatore?",
+      "voted_title": "Grazie per la tua valutazione!",
+      "voted_subtitle": "Risultati sullo schermo principale.",
+      "voting_paused_title": "Votazione in pausa",
+      "voting_paused_subtitle": "Il presentatore ha fermato le risposte.",
+      "alert_no_question": "Inserisci una domanda.",
+      "alert_min_options": "La scala deve avere almeno 2 opzioni.",
+      "join_error_text": "Errore. Verifica il codice.",
+      "shareable_link_title": "Link di preparazione:",
+      "link_copied_toast": "Link copiato",
+      "code_copied_toast": "Codice copiato",
+      "qr_expand_hint": "Clicca per ingrandire",
+      "scales": {
+        "satisfaction": [
+          "😠",
+          "🙁",
+          "😐",
+          "🙂",
+          "😄"
+        ],
+        "agreement": [
+          "Totalmente in disaccordo",
+          "In disaccordo",
+          "Neutrale",
+          "D'accordo",
+          "Totalmente d'accordo"
+        ],
+        "frequency": [
+          "Mai",
+          "Raramente",
+          "A volte",
+          "Spesso",
+          "Sempre"
+        ],
+        "trafficlight": [
+          "Non lo capisco",
+          "Ho dei dubbi",
+          "Lo capisco"
+        ]
+      }
     },
     "directo_nube": {
       "title": "Nuvola di parole"
@@ -777,6 +854,10 @@
       "description": "Importa il tuo sito locale per eseguirlo in Ed",
       "tooltip": "Importa il tuo sito locale per eseguirlo in Ed"
     },
+    "external_app": {
+      "popup_hint": "Questo strumento si apre in una nuova finestra per funzionare correttamente. Clicca sul pulsante per aprirlo.",
+      "popup_button": "Apri in nuova finestra"
+    },
     "vce": {
       "title": "App della comunità",
       "start_tooltip": "App create dalla comunità Vibe Coding Educativo.",
@@ -807,10 +888,10 @@
       "intro_info_link": "Informazioni sul gruppo",
       "intro_how_title": "Come usare il visore",
       "intro_step1": "Filtra per livello e area.",
-      "intro_step2": "Seleziona un programma dalla lista a sinistra.",
+      "intro_step2": "Seleziona uno strumento dalla lista a sinistra.",
       "intro_step3": "Aprilo nel visore o in una nuova scheda.",
       "intro_step4": "Se compare un errore di caricamento, usa la nuova scheda.",
-      "intro_step5": "I preferiti mantengono i programmi selezionati visibili in cima alla lista.",
+      "intro_step5": "I preferiti mantengono gli strumenti selezionati visibili in cima alla lista.",
       "less": "meno...",
       "move_up": "Sposta il preferito su",
       "move_down": "Sposta il preferito giu"
@@ -892,7 +973,7 @@
   "backup": {
     "title": "Salvare o caricare profili",
     "include_profiles": "Profili e disposizione (finestre, sfondi, barra)",
-    "include_widgets": "Impostazioni e dati dei programma",
+    "include_widgets": "Impostazioni e dati degli strumenti",
     "include_local_web": "Siti locali",
     "export_button": "Salvare file",
     "import_button": "Caricare file",
@@ -957,7 +1038,7 @@
     "cancel": "Annulla",
     "discard": "Non salvare",
     "save": "Salva",
-    "unknown_widget": "questo programma"
+    "unknown_widget": "questo strumento"
   },
   "widgets_help": {
     "work-list": "Lista di attività e promemoria per organizzare la sessione.",
