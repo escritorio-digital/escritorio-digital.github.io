@@ -5,6 +5,7 @@ export const QPlayWidget = () => (
         url="https://jjdeharo.github.io/qplay/"
         titleKey="widgets.qplay.title"
         appendLanguageParam
+        openInPopup
     />
 );
 

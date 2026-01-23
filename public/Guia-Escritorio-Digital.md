@@ -6,7 +6,7 @@ Escritorio Digital es una pizarra de trabajo con “ventanas” pensada para el 
 
 - **Fecha y hora en pantalla**: visibles en la esquina superior derecha. Se pueden desactivar en **Herramientas → Apariencia**.
 
-- **Menú Inicio**: pulsa el botón Inicio en la esquina inferior izquierda para abrir el menú de programas, favoritos, ajustes y ayuda.
+- **Menú Inicio**: pulsa el botón Inicio en la esquina inferior izquierda para abrir el menú de herramientas, favoritos, ajustes y ayuda.
 - **Estadísticas del sistema**: panel con almacenamiento, RAM/CPU (si el navegador lo permite) y pantalla. Se puede ocultar en **Herramientas → Apariencia** o con clic derecho.
 
 - **Abrir un widget**: desde la barra inferior, el menú Inicio o la **Librería de widgets**.
@@ -22,7 +22,7 @@ Escritorio Digital es una pizarra de trabajo con “ventanas” pensada para el 
 - **Control de asistencia**: registro rápido de asistencia y estado del grupo.
 - **Generador de grupos**: crea grupos de forma aleatoria o equilibrada para trabajo cooperativo.
 - **Calendario**: apoyo visual para fechas, entregas y planificación.
-- **Guía del programa**: guía integrada con el catálogo de widgets y recomendaciones de uso.
+- **Guía de herramientas**: guía integrada con el catálogo de widgets y recomendaciones de uso.
 
 ### Tiempo y ritmo
 
@@ -66,7 +66,7 @@ Este widget funciona como un archivador dentro del navegador.
 
 - **Guardar**: desde otros widgets puedes elegir guardar en Archivos Ed o en el disco local.
 - **Organizar**: crea carpetas, mueve archivos con arrastrar y soltar y usa papelera con borrado diferido.
-- **Abrir**: doble clic para abrir archivos con su programa asociado.
+- **Abrir**: doble clic para abrir archivos con su herramienta asociada.
 
 #### Web local: cómo usarlo
 

@@ -8,5 +8,5 @@ export const widgetConfig: Omit<WidgetConfig, 'component'> = {
       const Icon = () => <img src={withBaseUrl('icons/QPlay.png')} alt="" width={52} height={52} />;
       return <Icon />;
     })(),
-    defaultSize: { width: 900, height: 600 },
+    defaultSize: { width: 560, height: 360 },
 };

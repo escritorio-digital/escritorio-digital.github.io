@@ -38,6 +38,16 @@ const formatFileSize = (size?: number) => {
     return `${rounded} ${units[unitIndex]}`;
 };
 
+const POPUP_WIDGET_IDS = new Set([
+    'directo-vota',
+    'directo-escala',
+    'directo-nube',
+    'directo-ideas',
+    'directo-muro',
+    'directo-ticket',
+    'qplay',
+]);
+
 // --- Componente Hijo que Renderiza la UI ---
 const DesktopUI: React.FC<{
     profiles: ProfileCollection;
@@ -80,6 +90,45 @@ const DesktopUI: React.FC<{
             return {
                 ...prev,
                 [activeProfileName]: { ...profile, pinnedWidgets: nextPinned },
+            };
+        });
+    }, [activeProfile, activeProfileName, setProfiles]);
+
+    const updateWidgetPreferences = useCallback((widgetId: string, settings: { zoom: number; toolbarPinned: boolean }) => {
+        setProfiles((prev) => {
+            const profile = prev[activeProfileName] || activeProfile;
+            if (!profile) return prev;
+            const nextPreferences = {
+                ...(profile.widgetPreferences ?? {}),
+                [widgetId]: {
+                    ...profile.widgetPreferences?.[widgetId],
+                    ...settings,
+                },
+            };
+            return {
+                ...prev,
+                [activeProfileName]: { ...profile, widgetPreferences: nextPreferences },
+            };
+        });
+    }, [activeProfile, activeProfileName, setProfiles]);
+
+    const saveWidgetSettings = useCallback((widgetId: string, settings: { zoom: number; toolbarPinned: boolean }) => {
+        setProfiles((prev) => {
+            const profile = prev[activeProfileName] || activeProfile;
+            if (!profile) return prev;
+            const nextPreferences = {
+                ...(profile.widgetPreferences ?? {}),
+                [widgetId]: {
+                    ...profile.widgetPreferences?.[widgetId],
+                    ...settings,
+                },
+            };
+            const nextWidgets = profile.activeWidgets.map((w) =>
+                w.widgetId === widgetId ? { ...w, zoom: settings.zoom, toolbarPinned: settings.toolbarPinned } : w
+            );
+            return {
+                ...prev,
+                [activeProfileName]: { ...profile, widgetPreferences: nextPreferences, activeWidgets: nextWidgets },
             };
         });
     }, [activeProfile, activeProfileName, setProfiles]);
@@ -428,6 +477,7 @@ const DesktopUI: React.FC<{
         if (!widgetConfig) return;
         const newZ = highestZ + 1;
         setHighestZ(newZ);
+        const widgetDefaults = activeProfile.widgetPreferences?.[widgetId];
         const { margin, maxWidth, maxHeight } = getViewportBounds();
         const widthValue = typeof widgetConfig.defaultSize.width === 'number'
             ? Math.min(widgetConfig.defaultSize.width, maxWidth)
@@ -449,7 +499,8 @@ const DesktopUI: React.FC<{
             },
             size: { width: widthValue, height: heightValue },
             zIndex: newZ,
-            zoom: 1,
+            zoom: widgetDefaults?.zoom ?? 1,
+            toolbarPinned: widgetDefaults?.toolbarPinned ?? !POPUP_WIDGET_IDS.has(widgetId),
         };
         setActiveWidgets(prev => [...prev, newWidget]);
         setActiveWindowId(newWidget.instanceId);
@@ -1042,7 +1093,9 @@ const DesktopUI: React.FC<{
                 const isPinned = activeProfile.pinnedWidgets.includes(widget.widgetId);
                 const isActiveWindow = widget.instanceId === activeWindowId;
                 const helpText = getWidgetHelpText(widget.widgetId, t);
-                const zoomLevel = widget.zoom ?? 1;
+                const widgetDefaults = activeProfile.widgetPreferences?.[widget.widgetId];
+                const zoomLevel = widget.zoom ?? widgetDefaults?.zoom ?? 1;
+                const toolbarPinned = widget.toolbarPinned ?? widgetDefaults?.toolbarPinned ?? true;
                 const windowTitle = widget.titleOverride
                     ? `${t(config.title)} — ${widget.titleOverride}`
                     : t(config.title);
@@ -1054,6 +1107,7 @@ const DesktopUI: React.FC<{
                         icon={config.icon}
                         helpText={helpText}
                         zoomLevel={zoomLevel}
+                        toolbarPinned={toolbarPinned}
                         position={widget.position}
                         size={widget.size}
                         zIndex={widget.zIndex}
@@ -1109,6 +1163,10 @@ const DesktopUI: React.FC<{
                         toolbarHideLabel={t('desktop.toolbar_hide')}
                         toolbarPinLabel={t('desktop.toolbar_pin')}
                         toolbarRevealHint={t('desktop.toolbar_reveal_hint')}
+                        toolSettingsLabel={t('desktop.tool_settings')}
+                        toolSettingsDescription={t('desktop.tool_settings_description')}
+                        toolSettingsSaveLabel={t('desktop.tool_settings_save')}
+                        toolSettingsSavedLabel={t('desktop.tool_settings_saved')}
                         onZoomChange={(nextZoom) => {
                             setActiveWidgets((prev) => prev.map((w) => (
                                 w.instanceId === widget.instanceId ? { ...w, zoom: nextZoom } : w
@@ -1118,6 +1176,14 @@ const DesktopUI: React.FC<{
                             setActiveWidgets((prev) => prev.map((w) => (
                                 w.instanceId === widget.instanceId ? { ...w, zoom: 1 } : w
                             )));
+                        }}
+                        onToolbarPinnedChange={(nextValue) => {
+                            setActiveWidgets((prev) => prev.map((w) => (
+                                w.instanceId === widget.instanceId ? { ...w, toolbarPinned: nextValue } : w
+                            )));
+                        }}
+                        onSaveToolSettings={(settings) => {
+                            saveWidgetSettings(widget.widgetId, settings);
                         }}
                     >
                         <Suspense

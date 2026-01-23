@@ -14,7 +14,7 @@ Este proyecto es un entorno de escritorio virtual construido con React, que perm
 8.  **Generador de Grupos:** Permite crear grupos aleatorios a partir de una lista de nombres, ya sea especificando el número de grupos o el número de integrantes por grupo.
 9.  **Generador QR:** Crea un código QR a partir de un texto o una URL que introduzcas.
 10. **Gestos de Trabajo:** Muestra tarjetas visuales grandes para indicar el modo de trabajo en el aula (Silencio, Parejas, Equipos, Plenaria).
-11. **Guía del programa:** Guía integrada con el catálogo de widgets y recomendaciones de uso.
+11. **Guía de herramientas:** Guía integrada con el catálogo de widgets y recomendaciones de uso.
 12. **HTML Sandbox:** Un lienzo con un único campo para pegar código HTML y un botón para alternar entre el editor y la vista previa.
 13. **Editor de textos Markdown:** Redacta documentos en Markdown con vista previa y soporte de fórmulas.
 14. **Lista de Trabajo:** Un gestor de tareas pendientes (to-do list) que permite añadir, marcar como completadas y eliminar tareas.
@@ -50,7 +50,7 @@ Este proyecto es un entorno de escritorio virtual construido con React, que perm
 ## Uso básico
 
 - **Menú Inicio:** abre el menú con el botón Inicio de la esquina inferior izquierda.
-- **Buscar y filtrar:** usa el buscador para localizar programas por nombre.
+- **Buscar y filtrar:** usa el buscador para localizar herramientas por nombre.
 - **Categorías:** cambia de categoría en la columna izquierda.
 - **Favoritos y ajustes rápidos:** en la cabecera del menú puedes ir a Favoritos, Ajustes y Ayuda.
 - **Idioma:** cambia el idioma desde el icono de idiomas del menú Inicio.

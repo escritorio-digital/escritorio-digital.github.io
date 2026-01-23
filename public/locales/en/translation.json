@@ -23,7 +23,7 @@
     "tabs": {
       "general": "General",
       "profiles": "Profiles",
-      "widgets": "Programs",
+      "widgets": "Tools",
       "theme": "Appearance"
     },
     "general": {
@@ -36,7 +36,7 @@
         "eu": "Basque"
       },
       "reset_title": "Reset Application",
-      "reset_description": "Removes all saved data (profiles, programs, and preferences) and restarts as first run.",
+      "reset_description": "Removes all saved data (profiles, tools, and preferences) and restarts as first run.",
       "reset_button": "Factory Reset",
       "reset_confirm": "Are you sure you want to remove all local preferences and data? This cannot be undone.",
       "version_value": "v1.6.3 (Enero 2026)"
@@ -67,11 +67,11 @@
       "create_mode_clone": "Clone current"
     },
     "widgets": {
-      "search": "Search program...",
-      "pinned_info": "Select the programs you want on your toolbar. ({{count}}/{{max}}) of {{total}}",
+      "search": "Search tool...",
+      "pinned_info": "Select the tools you want on your toolbar. ({{count}}/{{max}}) of {{total}}",
       "add": "Add",
       "remove": "Remove",
-      "max_widgets_alert": "You cannot pin more than {{max}} programs.",
+      "max_widgets_alert": "You cannot pin more than {{max}} tools.",
       "view_label": "View",
       "view_by_theme": "Themes",
       "view_alphabetical": "Alphabetical",
@@ -94,8 +94,8 @@
       "theme_colors_title": "Theme Colors",
       "colors": {
         "desktop_bg": "Desktop Background",
-        "widget_bg": "Program Background",
-        "widget_header": "Program Header",
+        "widget_bg": "Tool Background",
+        "widget_header": "Tool Header",
         "accent": "Accent",
         "text_light": "Light Text",
         "text_dark": "Dark Text"
@@ -147,7 +147,7 @@
   "toolbar": {
     "start": "Start",
     "settings": "Settings",
-    "widgetLibrary": "Program Library",
+    "widgetLibrary": "Tool Library",
     "add_widget": "Add to favorites",
     "remove_widget": "Remove from favorites",
     "no_open_windows": "No open windows"
@@ -164,7 +164,7 @@
     "close": "Close",
     "favorites": "Favorites",
     "shortcuts": "Shortcuts",
-    "widgets": "Programs",
+    "widgets": "Tools",
     "help": "Help",
     "no_results": "No results",
     "remove_favorite": "Remove from favorites",
@@ -226,15 +226,19 @@
     "window_zoom_out": "Zoom out",
     "window_zoom_reset": "Reset zoom",
     "window_zoom_edit_hint": "Double-click to type the percentage.",
+    "tool_settings": "Tool settings",
+    "tool_settings_description": "Save the zoom and toolbar visibility.",
+    "tool_settings_save": "Save this configuration",
+    "tool_settings_saved": "Configuration saved.",
     "toolbar_hide": "Hide toolbar",
     "toolbar_pin": "Pin toolbar",
     "toolbar_reveal_hint": "To show the toolbar again, move the mouse to the top edge of the widget."
   },
   "credits": {
     "title": "Credits and License",
-    "tooltip": "Credits, license, and program guide",
-    "user_guide_title": "Program guide",
-    "user_guide_link": "Open program guide",
+    "tooltip": "Credits, license, and tools guide",
+    "user_guide_title": "Tools guide",
+    "user_guide_link": "Open tools guide",
     "original_project": "The original project <strong>Interactive Classroom Desktop</strong> and its idea belong to <strong>María Teresa González</strong>.",
     "original_link": "You can visit the original application at:",
     "new_version": "This new version was developed in collaboration by <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong>, and <strong>Pablo G. Guízar</strong>. The repository for this project is located at:",
@@ -278,7 +282,7 @@
   },
   "widgets": {
     "program_guide": {
-      "title": "Program guide",
+      "title": "Tools guide",
       "load_error": "Unable to load the guide."
     },
     "file_manager": {
@@ -702,7 +706,80 @@
       "title": "Simple voting"
     },
     "directo_escala": {
-      "title": "Rating scale"
+      "title": "Rating scale",
+      "landing_title": "Are you the presenter or a participant?",
+      "landing_subtitle": "Choose how you want to join.",
+      "landing_presenter": "Presenter",
+      "landing_participant": "Participant",
+      "create_title": "Create a new scale",
+      "question_label": "Statement or question:",
+      "question_placeholder": "E.g., Rate today's session",
+      "theme_color_label": "Theme color:",
+      "scale_type_label": "Scale type:",
+      "scale_satisfaction": "Satisfaction (5 levels)",
+      "scale_agreement": "Agreement (5 levels)",
+      "scale_frequency": "Frequency (5 levels)",
+      "scale_trafficlight": "Understanding / Traffic Light (3 levels)",
+      "scale_numeric": "Numeric (1-10)",
+      "scale_custom": "Custom",
+      "custom_scale_label": "Custom labels:",
+      "custom_label_placeholder": "Label {{index}}",
+      "add_label_btn": "+ Add label",
+      "prepare_session_btn": "Prepare",
+      "start_session_btn": "Start",
+      "switch_to_participant": "Joining a session?",
+      "projection_btn_text": "Project",
+      "stop_voting_btn": "Stop",
+      "resume_voting_btn": "Resume",
+      "scan_qr_label": "1. Scan QR",
+      "direct_link_label": "2. Share link",
+      "or_go_to": "Or go to",
+      "and_enter_code": "and enter the code:",
+      "total_votes_label": "Total votes",
+      "join_title": "Join a rating session",
+      "session_code_label": "Session code:",
+      "code_input_placeholder": "Enter code",
+      "join_btn": "Join",
+      "switch_to_presenter": "Are you the presenter?",
+      "voted_title": "Thanks for your rating!",
+      "voted_subtitle": "Results are on the main screen.",
+      "voting_paused_title": "Voting paused",
+      "voting_paused_subtitle": "The presenter has paused responses.",
+      "alert_no_question": "Please enter a question.",
+      "alert_min_options": "The scale must have at least 2 options.",
+      "join_error_text": "Error. Check the code.",
+      "shareable_link_title": "Preparation link:",
+      "link_copied_toast": "Link copied",
+      "code_copied_toast": "Code copied",
+      "qr_expand_hint": "Click to enlarge",
+      "scales": {
+        "satisfaction": [
+          "😠",
+          "🙁",
+          "😐",
+          "🙂",
+          "😄"
+        ],
+        "agreement": [
+          "Strongly Disagree",
+          "Disagree",
+          "Neutral",
+          "Agree",
+          "Strongly Agree"
+        ],
+        "frequency": [
+          "Never",
+          "Rarely",
+          "Sometimes",
+          "Often",
+          "Always"
+        ],
+        "trafficlight": [
+          "I don't get it",
+          "I have doubts",
+          "I get it"
+        ]
+      }
     },
     "directo_nube": {
       "title": "Word cloud"
@@ -777,6 +854,10 @@
       "description": "Import your local website to run it in Ed",
       "tooltip": "Import your local website to run it in Ed"
     },
+    "external_app": {
+      "popup_hint": "This tool opens in a new window to work properly. Click the button to open it.",
+      "popup_button": "Open in new window"
+    },
     "vce": {
       "title": "Community apps",
       "start_tooltip": "Apps created by the Vibe Coding Educativo community.",
@@ -807,10 +888,10 @@
       "intro_info_link": "Information about the group",
       "intro_how_title": "How to use the viewer",
       "intro_step1": "Filter by level and area.",
-      "intro_step2": "Select a program from the left list.",
+      "intro_step2": "Select a tool from the left list.",
       "intro_step3": "Open it in the viewer or in a new tab.",
       "intro_step4": "If a loading error appears, use the new tab.",
-      "intro_step5": "Favorites keep the selected programs visible at the top of the list.",
+      "intro_step5": "Favorites keep the selected tools visible at the top of the list.",
       "less": "less...",
       "move_up": "Move favorite up",
       "move_down": "Move favorite down"
@@ -892,7 +973,7 @@
   "backup": {
     "title": "Save or load profiles",
     "include_profiles": "Profiles and layout (windows, backgrounds, bar)",
-    "include_widgets": "Program settings and data",
+    "include_widgets": "Tool settings and data",
     "include_local_web": "Local websites",
     "export_button": "Save file",
     "import_button": "Load file",

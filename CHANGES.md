@@ -1,5 +1,10 @@
 # Cambios realizados
 
+## 2.5.3
+- Herramientas participativas: apertura en ventana nueva con aviso y tamanos mas compactos; barra de herramientas oculta por defecto.
+- Menu de ventana: configuracion de herramienta simplificada con guardado y aviso de confirmacion.
+- Copia: "programas" pasa a "herramientas" en interfaz y guias.
+
 ## 2.5.2
 - Calculadora científica: rediseño completo con nuevos modos, botones y lógica de cálculo.
 - Inicio: ocultar la categoría Favoritos al buscar para centrar resultados.
@@ -14,7 +19,7 @@
 ## 2.5.0
 - Barra de herramientas unica por widget con menu de tres puntos integrado, ocultado suave y atajo de teclado.
 - Boton de salida de pantalla completa reposicionado y arrastrable para no tapar la barra.
-- Dialogos de abrir/guardar mas claros: rutas con migas, tamanos reales y filtro por programa.
+- Dialogos de abrir/guardar mas claros: rutas con migas, tamanos reales y filtro por herramienta.
 - Generador de grupos: acciones en barra superior y vista grande con ajuste dinamico.
 - Calendario con contraste automatico segun el tema.
 - Bloc de notas: nuevas instancias vacias y foco automatico.
@@ -67,7 +72,7 @@
 
 
 ## 1.6.2
-- Archivos Ed: evita duplicados de la Guia del programa en la lista.
+- Archivos Ed: evita duplicados de la Guia de herramientas en la lista.
 
 
 ## 1.6.1
@@ -78,23 +83,23 @@
 - Archivos Ed: gestor de archivos con carpetas, papelera, copia/pega, selección múltiple y arrastrar/soltar.
 - Guardar y abrir: selector de ubicación con nombre de archivo y acceso a Archivos Ed o disco local.
 - Web local: nuevo acceso desde Archivos Ed y descripción actualizada.
-- Guía del programa: Archivos Ed añadido en todas las guías.
+- Guía de herramientas: Archivos Ed añadido en todas las guías.
 - Perfiles: exportación/importación opcional de Archivos Ed con tamaño estimado.
 
 ## 1.5.1
 - Generador de grupos: opciones para copiar y guardar los grupos como .txt.
 
 ## 1.5.0
-- Ventanas: icono de ayuda con descripción breve de cada programa.
+- Ventanas: icono de ayuda con descripción breve de cada herramienta.
 - Ventanas: el icono de fijado permanece visible cuando la ventana está fijada.
 
 ## 1.4.1
-- Guía del programa: catálogo actualizado para incluir todos los widgets y secciones alineadas con el menú Inicio.
+- Guía de herramientas: catálogo actualizado para incluir todos los widgets y secciones alineadas con el menú Inicio.
 
 ## 1.4.0
 - Apariencia: nuevos temas de accesibilidad para daltonismo (protanopia, deuteranopia y tritanopia).
 - Apariencia: el botón de temas ahora indica que incluye accesibilidad.
-- Inicio: nuevo acceso rápido a la guía del programa en Ayuda.
+- Inicio: nuevo acceso rápido a la guía de herramientas en Ayuda.
 
 ## 1.3.7
 - Menú de perfiles: opción para mostrar/ocultar desde Apariencia.
@@ -102,8 +107,8 @@
 - Menú de perfiles: se oculta en pantallas estrechas como la barra inferior.
 
 ## 1.3.6
-- Configuración de programas: foco automático en el buscador al abrir la pestaña.
-- Configuración de programas: muestra el total de programas disponibles junto al límite.
+- Configuración de herramientas: foco automático en el buscador al abrir la pestaña.
+- Configuración de herramientas: muestra el total de herramientas disponibles junto al límite.
 
 ## 1.3.4
 - Barra inferior oculta en pantallas estrechas para evitar desbordes y mantener solo el botón Inicio.
@@ -115,8 +120,8 @@
 - El menú Inicio conserva el alto durante las búsquedas y se reajusta al panel izquierdo al cerrar el buscador o reabrir.
 
 ## 1.3.0
-- Icono y traducciones completos en todos los idiomas para el nuevo programa.
-- Tooltip de arranque opcional para programas en menú y barra.
+- Icono y traducciones completos en todos los idiomas para la nueva herramienta.
+- Tooltip de arranque opcional para herramientas en menú y barra.
 
 ## Configuración
 - Al abrir «Configurar ED» desde el menú contextual del fondo, se muestra directamente la pestaña General (sin que se superponga el modal de temas en la primera apertura).

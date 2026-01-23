@@ -5,6 +5,7 @@ export const DirectoEscalaWidget = () => (
         url="https://jjdeharo.github.io/directo/escala.html"
         titleKey="widgets.directo_escala.title"
         appendLanguageParam
+        openInPopup
     />
 );
 

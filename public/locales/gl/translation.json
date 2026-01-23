@@ -23,7 +23,7 @@
     "tabs": {
       "general": "Xeral",
       "profiles": "Perfís",
-      "widgets": "Programas",
+      "widgets": "Ferramentas",
       "theme": "Aparencia"
     },
     "general": {
@@ -36,7 +36,7 @@
         "eu": "Éuscaro"
       },
       "reset_title": "Restablecer aplicación",
-      "reset_description": "Elimina todos os datos gardados (perfís, programas e preferencias) e reinicia como se fose a primeira vez.",
+      "reset_description": "Elimina todos os datos gardados (perfís, ferramentas e preferencias) e reinicia como se fose a primeira vez.",
       "reset_button": "Restablecer a valores de fábrica",
       "reset_confirm": "¿Seguro que queres eliminar todas as preferencias e datos locais? Esta acción non se pode desfacer.",
       "version_value": "v1.6.3 (Enero 2026)"
@@ -67,11 +67,11 @@
       "create_mode_clone": "Clon do actual"
     },
     "widgets": {
-      "search": "Buscar programa...",
-      "pinned_info": "Selecciona os programas que queres na túa barra de ferramentas. ({{count}}/{{max}}) de {{total}}",
+      "search": "Buscar ferramenta...",
+      "pinned_info": "Selecciona as ferramentas que queres na túa barra de ferramentas. ({{count}}/{{max}}) de {{total}}",
       "add": "Engadir",
       "remove": "Quitar",
-      "max_widgets_alert": "Non se poden fixar máis de {{max}} programas.",
+      "max_widgets_alert": "Non se poden fixar máis de {{max}} ferramentas.",
       "view_label": "Ver por",
       "view_by_theme": "Temas",
       "view_alphabetical": "Alfabético",
@@ -94,8 +94,8 @@
       "theme_colors_title": "Cores do Tema",
       "colors": {
         "desktop_bg": "Fondo de Escritorio",
-        "widget_bg": "Fondo de Programa",
-        "widget_header": "Cabeceira de Programa",
+        "widget_bg": "Fondo de Ferramenta",
+        "widget_header": "Cabeceira de Ferramenta",
         "accent": "Acento",
         "text_light": "Texto Claro",
         "text_dark": "Texto Escuro"
@@ -147,7 +147,7 @@
   "toolbar": {
     "start": "Inicio",
     "settings": "Configuración",
-    "widgetLibrary": "Libraría de Programas",
+    "widgetLibrary": "Libraría de Ferramentas",
     "add_widget": "Engadir a favoritos",
     "remove_widget": "Eliminar de favoritos",
     "no_open_windows": "Sen ventás abertas"
@@ -164,7 +164,7 @@
     "close": "Pechar",
     "favorites": "Favoritos",
     "shortcuts": "Accesos",
-    "widgets": "Programas",
+    "widgets": "Ferramentas",
     "help": "Axuda",
     "no_results": "Sen resultados",
     "remove_favorite": "Quitar de favoritos",
@@ -226,15 +226,19 @@
     "window_zoom_out": "Diminuír zoom",
     "window_zoom_reset": "Restablecer zoom",
     "window_zoom_edit_hint": "Dobre clic para escribir a porcentaxe.",
+    "tool_settings": "Configuración da ferramenta",
+    "tool_settings_description": "Garda o zoom e a visibilidade da barra.",
+    "tool_settings_save": "Gardar esta configuración",
+    "tool_settings_saved": "Configuración gardada.",
     "toolbar_hide": "Ocultar barra",
     "toolbar_pin": "Fixar barra",
     "toolbar_reveal_hint": "Para volver ver a barra de ferramentas, achega o rato ao bordo superior do widget."
   },
   "credits": {
     "title": "Créditos e Licenza",
-    "tooltip": "Créditos, licenza e guía do programa",
-    "user_guide_title": "Guía do programa",
-    "user_guide_link": "Abrir guía de programas",
+    "tooltip": "Créditos, licenza e guía de ferramentas",
+    "user_guide_title": "Guía de ferramentas",
+    "user_guide_link": "Abrir guía de ferramentas",
     "original_project": "O proxecto orixinal <strong>Escritorio Interactivo para a Aula</strong> e a súa idea pertencen a <strong>María Teresa González</strong>.",
     "original_link": "Podes visitar a aplicación orixinal en:",
     "new_version": "Esta nova versión foi desenvolvida en colaboración por <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> e <strong>Pablo G. Guízar</strong>. O repositorio deste proxecto atópase en:",
@@ -278,7 +282,7 @@
   },
   "widgets": {
     "program_guide": {
-      "title": "Guía do programa",
+      "title": "Guía de ferramentas",
       "load_error": "Non foi posible cargar a guía."
     },
     "file_manager": {
@@ -702,7 +706,80 @@
       "title": "Votación simple"
     },
     "directo_escala": {
-      "title": "Escala de valoración"
+      "title": "Escala de valoración",
+      "landing_title": "Es o presentador ou un dos participantes?",
+      "landing_subtitle": "Escolle como queres entrar.",
+      "landing_presenter": "Presentador",
+      "landing_participant": "Participante",
+      "create_title": "Crear unha nova escala",
+      "question_label": "Afirmación ou pregunta:",
+      "question_placeholder": "Ex: Valora a sesión de hoxe",
+      "theme_color_label": "Cor:",
+      "scale_type_label": "Tipo de escala:",
+      "scale_satisfaction": "Satisfacción (5 niveis)",
+      "scale_agreement": "Acordo (5 niveis)",
+      "scale_frequency": "Frecuencia (5 niveis)",
+      "scale_trafficlight": "Comprensión / Semáforo (3 niveis)",
+      "scale_numeric": "Numérica (1-10)",
+      "scale_custom": "Personalizada",
+      "custom_scale_label": "Etiquetas personalizadas:",
+      "custom_label_placeholder": "Etiqueta {{index}}",
+      "add_label_btn": "+ Engadir etiqueta",
+      "prepare_session_btn": "Preparar",
+      "start_session_btn": "Iniciar",
+      "switch_to_participant": "Unirse a unha sesión?",
+      "projection_btn_text": "Proxectar",
+      "stop_voting_btn": "Deter",
+      "resume_voting_btn": "Retomar",
+      "scan_qr_label": "1. Escanea o QR",
+      "direct_link_label": "2. Comparte ligazón",
+      "or_go_to": "Ou vai a",
+      "and_enter_code": "e introduce o código:",
+      "total_votes_label": "Votos totais",
+      "join_title": "Unirse a unha valoración",
+      "session_code_label": "Código de sesión:",
+      "code_input_placeholder": "Introduce o código",
+      "join_btn": "Unirse",
+      "switch_to_presenter": "Es presentador?",
+      "voted_title": "Grazas pola túa valoración!",
+      "voted_subtitle": "Resultados na pantalla principal.",
+      "voting_paused_title": "Votación en pausa",
+      "voting_paused_subtitle": "O presentador detivo as respostas.",
+      "alert_no_question": "Introduce unha pregunta.",
+      "alert_min_options": "A escala debe ter polo menos 2 opcións.",
+      "join_error_text": "Erro. Verifica o código.",
+      "shareable_link_title": "Ligazón de preparación:",
+      "link_copied_toast": "Ligazón copiada",
+      "code_copied_toast": "Código copiado",
+      "qr_expand_hint": "Preme para ampliar",
+      "scales": {
+        "satisfaction": [
+          "😠",
+          "🙁",
+          "😐",
+          "🙂",
+          "😄"
+        ],
+        "agreement": [
+          "Totalmente en desacordo",
+          "En desacordo",
+          "Neutral",
+          "De acordo",
+          "Totalmente de acordo"
+        ],
+        "frequency": [
+          "Nunca",
+          "Raramente",
+          "Ás veces",
+          "Frecuentemente",
+          "Sempre"
+        ],
+        "trafficlight": [
+          "Non o entendo",
+          "Teño dúbidas",
+          "Enténdoo"
+        ]
+      }
     },
     "directo_nube": {
       "title": "Nube de palabras"
@@ -777,16 +854,20 @@
       "description": "Importa a tua web local para executala en Ed",
       "tooltip": "Importa a tua web local para executala en Ed"
     },
+    "external_app": {
+      "popup_hint": "Esta ferramenta ábrese nunha xanela nova para funcionar correctamente. Preme o botón para abrila.",
+      "popup_button": "Abrir en xanela nova"
+    },
     "vce": {
       "title": "Aplicacións da comunidade",
       "start_tooltip": "Aplicacións feitas pola comunidade Vibe Coding Educativo.",
       "search_keywords": "vibe coding, vibe coding educativo, apps comunidade, repositorio",
-      "subtitle": "Programas da comunidade de Telegram Vibe Coding Educativo",
+      "subtitle": "Ferramentas da comunidade de Telegram Vibe Coding Educativo",
       "search_placeholder": "Buscar por título, autor ou descrición",
       "filter_level_all": "Todos os niveis",
       "filter_area_all": "Todas as áreas",
-      "no_results": "Non hai programas con estes filtros.",
-      "no_selection": "Selecciona un programa para velo.",
+      "no_results": "Non hai ferramentas con estes filtros.",
+      "no_selection": "Selecciona unha ferramenta para vela.",
       "open_new_tab": "Abrir nunha nova lapela",
       "loading": "Cargando a lista...",
       "load_error": "Non se puido cargar a lista.",
@@ -807,10 +888,10 @@
       "intro_info_link": "Información sobre o grupo",
       "intro_how_title": "Como usar o visor",
       "intro_step1": "Filtra por nivel e área.",
-      "intro_step2": "Selecciona un programa na lista da esquerda.",
+      "intro_step2": "Selecciona unha ferramenta na lista da esquerda.",
       "intro_step3": "Ábreo no visor ou nunha nova pestana.",
       "intro_step4": "Se aparece un erro de carga, usa a nova pestana.",
-      "intro_step5": "Os favoritos manteñen os programas seleccionados visibles na parte superior da lista.",
+      "intro_step5": "Os favoritos manteñen as ferramentas seleccionadas visibles na parte superior da lista.",
       "less": "menos...",
       "move_up": "Mover favorito arriba",
       "move_down": "Mover favorito abaixo"
@@ -892,7 +973,7 @@
   "backup": {
     "title": "Gardar ou cargar perfís",
     "include_profiles": "Perfís e disposición (xanelas, fondos, barra)",
-    "include_widgets": "Axustes e datos dos programas",
+    "include_widgets": "Axustes e datos das ferramentas",
     "include_local_web": "Webs locais",
     "export_button": "Gardar ficheiro",
     "import_button": "Cargar ficheiro",
@@ -957,7 +1038,7 @@
     "cancel": "Cancelar",
     "discard": "Non gardar",
     "save": "Gardar",
-    "unknown_widget": "este programa"
+    "unknown_widget": "esta ferramenta"
   },
   "widgets_help": {
     "work-list": "Lista de tarefas e recordatorios para organizar a sesión.",

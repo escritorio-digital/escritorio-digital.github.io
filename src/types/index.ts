@@ -29,6 +29,7 @@ export interface ActiveWidget {
   zIndex: number;
   titleOverride?: string;
   zoom?: number;
+  toolbarPinned?: boolean;
   
   // --- LÍNEAS AÑADIDAS ---
   isMinimized?: boolean;
@@ -47,6 +48,7 @@ export interface DesktopProfile {
   activeWidgets: ActiveWidget[];
   pinnedWidgets: string[];
   vceFavorites?: string[];
+  widgetPreferences?: Record<string, { zoom?: number; toolbarPinned?: boolean }>;
 }
 
 /**

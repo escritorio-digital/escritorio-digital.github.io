@@ -5,6 +5,7 @@ export const DirectoVotaWidget = () => (
         url="https://jjdeharo.github.io/directo/vota.html"
         titleKey="widgets.directo_vota.title"
         appendLanguageParam
+        openInPopup
     />
 );
 

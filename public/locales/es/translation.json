@@ -23,7 +23,7 @@
     "tabs": {
       "general": "General",
       "profiles": "Perfiles",
-      "widgets": "Programas",
+      "widgets": "Herramientas",
       "theme": "Apariencia"
     },
     "general": {
@@ -36,7 +36,7 @@
         "eu": "Euskera"
       },
       "reset_title": "Restablecer aplicación",
-      "reset_description": "Elimina todos los datos guardados (perfiles, programas y preferencias) y reinicia como si fuera la primera vez.",
+      "reset_description": "Elimina todos los datos guardados (perfiles, herramientas y preferencias) y reinicia como si fuera la primera vez.",
       "reset_button": "Restablecer a valores de fábrica",
       "reset_confirm": "¿Seguro que quieres eliminar todas las preferencias y datos locales? Esta acción no se puede deshacer.",
       "version_value": "v1.6.3 (Enero 2026)"
@@ -67,11 +67,11 @@
       "create_mode_clone": "Clon del actual"
     },
     "widgets": {
-      "search": "Buscar programa...",
-      "pinned_info": "Selecciona los programas que quieres en tu barra de herramientas. ({{count}}/{{max}}) de {{total}}",
+      "search": "Buscar herramienta...",
+      "pinned_info": "Selecciona las herramientas que quieres en tu barra de herramientas. ({{count}}/{{max}}) de {{total}}",
       "add": "Añadir",
       "remove": "Quitar",
-      "max_widgets_alert": "No se pueden fijar más de {{max}} programas.",
+      "max_widgets_alert": "No se pueden fijar más de {{max}} herramientas.",
       "view_label": "Ver por",
       "view_by_theme": "Temas",
       "view_alphabetical": "Alfabético",
@@ -94,8 +94,8 @@
       "theme_colors_title": "Colores del Tema",
       "colors": {
         "desktop_bg": "Fondo de Escritorio",
-        "widget_bg": "Fondo de Programa",
-        "widget_header": "Cabecera de Programa",
+        "widget_bg": "Fondo de Herramienta",
+        "widget_header": "Cabecera de Herramienta",
         "accent": "Acento",
         "text_light": "Texto Claro",
         "text_dark": "Texto Oscuro"
@@ -147,7 +147,7 @@
   "toolbar": {
     "start": "Inicio",
     "settings": "Configuración",
-    "widgetLibrary": "Librería de Programas",
+    "widgetLibrary": "Librería de Herramientas",
     "add_widget": "Añadir a favoritos",
     "remove_widget": "Eliminar de favoritos",
     "no_open_windows": "Sin ventanas abiertas"
@@ -164,7 +164,7 @@
     "close": "Cerrar",
     "favorites": "Favoritos",
     "shortcuts": "Accesos",
-    "widgets": "Programas",
+    "widgets": "Herramientas",
     "help": "Ayuda",
     "no_results": "Sin resultados",
     "remove_favorite": "Quitar de favoritos",
@@ -226,15 +226,19 @@
     "window_zoom_out": "Disminuir zoom",
     "window_zoom_reset": "Restablecer zoom",
     "window_zoom_edit_hint": "Doble clic para escribir el porcentaje.",
+    "tool_settings": "Configuración de herramienta",
+    "tool_settings_description": "Guarda el zoom y la visibilidad de la barra.",
+    "tool_settings_save": "Guardar esta configuración",
+    "tool_settings_saved": "Configuración guardada.",
     "toolbar_hide": "Ocultar barra",
     "toolbar_pin": "Fijar barra",
     "toolbar_reveal_hint": "Para volver a ver la barra de herramientas, acerca el ratón al borde superior del widget."
   },
   "credits": {
     "title": "Créditos y Licencia",
-    "tooltip": "Créditos, licencia y guía del programa",
-    "user_guide_title": "Guía del programa",
-    "user_guide_link": "Abrir guía de programas",
+    "tooltip": "Créditos, licencia y guía de herramientas",
+    "user_guide_title": "Guía de herramientas",
+    "user_guide_link": "Abrir guía de herramientas",
     "original_project": "El proyecto original <strong>Escritorio Interactivo para el Aula</strong> y su idea pertenecen a <strong>María Teresa González</strong>.",
     "original_link": "Puedes visitar la aplicación original en:",
     "new_version": "Esta nueva versión fue desarrollada en colaboración por <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> y <strong>Pablo G. Guízar</strong>. El repositorio de este proyecto se encuentra en:",
@@ -278,7 +282,7 @@
   },
   "widgets": {
     "program_guide": {
-      "title": "Guía del programa",
+      "title": "Guía de herramientas",
       "load_error": "No se pudo cargar la guía."
     },
     "file_manager": {
@@ -702,7 +706,80 @@
       "title": "Votación simple"
     },
     "directo_escala": {
-      "title": "Escala de valoración"
+      "title": "Escala de valoración",
+      "landing_title": "¿Eres el presentador o uno de los participantes?",
+      "landing_subtitle": "Elige cómo quieres entrar.",
+      "landing_presenter": "Presentador",
+      "landing_participant": "Participante",
+      "create_title": "Crear una nueva escala",
+      "question_label": "Afirmación o pregunta:",
+      "question_placeholder": "Ej: Valora la sesión de hoy",
+      "theme_color_label": "Color:",
+      "scale_type_label": "Tipo de escala:",
+      "scale_satisfaction": "Satisfacción (5 niveles)",
+      "scale_agreement": "Acuerdo (5 niveles)",
+      "scale_frequency": "Frecuencia (5 niveles)",
+      "scale_trafficlight": "Comprensión / Semáforo (3 niveles)",
+      "scale_numeric": "Numérica (1-10)",
+      "scale_custom": "Personalizada",
+      "custom_scale_label": "Etiquetas personalizadas:",
+      "custom_label_placeholder": "Etiqueta {{index}}",
+      "add_label_btn": "+ Añadir etiqueta",
+      "prepare_session_btn": "Preparar",
+      "start_session_btn": "Iniciar",
+      "switch_to_participant": "¿Unirte a una sesión?",
+      "projection_btn_text": "Proyectar",
+      "stop_voting_btn": "Detener",
+      "resume_voting_btn": "Reanudar",
+      "scan_qr_label": "1. Escanea QR",
+      "direct_link_label": "2. Comparte enlace",
+      "or_go_to": "O ve a",
+      "and_enter_code": "e introduce el código:",
+      "total_votes_label": "Votos totales",
+      "join_title": "Unirse a una valoración",
+      "session_code_label": "Código de sesión:",
+      "code_input_placeholder": "Introduce el código",
+      "join_btn": "Unirse",
+      "switch_to_presenter": "¿Eres presentador?",
+      "voted_title": "¡Gracias por tu valoración!",
+      "voted_subtitle": "Resultados en la pantalla principal.",
+      "voting_paused_title": "Votación en pausa",
+      "voting_paused_subtitle": "El presentador ha detenido las respuestas.",
+      "alert_no_question": "Introduce una pregunta.",
+      "alert_min_options": "La escala debe tener al menos 2 opciones.",
+      "join_error_text": "Error. Verifica el código.",
+      "shareable_link_title": "Enlace de preparación:",
+      "link_copied_toast": "Enlace copiado",
+      "code_copied_toast": "Código copiado",
+      "qr_expand_hint": "Haz clic para ampliar",
+      "scales": {
+        "satisfaction": [
+          "😠",
+          "🙁",
+          "😐",
+          "🙂",
+          "😄"
+        ],
+        "agreement": [
+          "Totalmente en desacuerdo",
+          "En desacuerdo",
+          "Neutral",
+          "De acuerdo",
+          "Totalmente de acuerdo"
+        ],
+        "frequency": [
+          "Nunca",
+          "Rara vez",
+          "A veces",
+          "Frecuentemente",
+          "Siempre"
+        ],
+        "trafficlight": [
+          "No lo entiendo",
+          "Tengo dudas",
+          "Lo entiendo"
+        ]
+      }
     },
     "directo_nube": {
       "title": "Nube de palabras"
@@ -777,16 +854,20 @@
       "description": "Importa tu web local para ejecutarla en Ed",
       "tooltip": "Importa tu web local para ejecutarla en Ed"
     },
+    "external_app": {
+      "popup_hint": "Esta herramienta se abre en una ventana nueva para funcionar correctamente. Pulsa el botón para abrirla.",
+      "popup_button": "Abrir en ventana nueva"
+    },
     "vce": {
       "title": "Aplicaciones de la comunidad",
       "start_tooltip": "Aplicaciones realizadas por la comunidad Vibe Coding Educativo.",
       "search_keywords": "vibe coding, vibe coding educativo, apps comunidad, repositorio",
-      "subtitle": "Programas de la comunidad Telegram Vibe Coding Educativo",
+      "subtitle": "Herramientas de la comunidad Telegram Vibe Coding Educativo",
       "search_placeholder": "Buscar por título, autor o descripción",
       "filter_level_all": "Todos los niveles",
       "filter_area_all": "Todas las áreas",
-      "no_results": "No hay programas con estos filtros.",
-      "no_selection": "Selecciona un programa para verlo.",
+      "no_results": "No hay herramientas con estos filtros.",
+      "no_selection": "Selecciona una herramienta para verla.",
       "open_new_tab": "Abrir en pestaña nueva",
       "loading": "Cargando listado...",
       "load_error": "No se pudo cargar el listado.",
@@ -807,10 +888,10 @@
       "intro_info_link": "Información sobre el grupo",
       "intro_how_title": "Cómo usar el visor",
       "intro_step1": "Filtra por nivel y área.",
-      "intro_step2": "Selecciona un programa en la lista de la izquierda.",
+      "intro_step2": "Selecciona una herramienta en la lista de la izquierda.",
       "intro_step3": "Ábrelo en el visor o en una pestaña nueva.",
       "intro_step4": "Si aparece un error de carga, utiliza la pestaña nueva.",
-      "intro_step5": "Los favoritos permiten mantener los programas seleccionados visibles en la parte superior de la lista.",
+      "intro_step5": "Los favoritos permiten mantener las herramientas seleccionadas visibles en la parte superior de la lista.",
       "less": "menos...",
       "move_up": "Mover favorito arriba",
       "move_down": "Mover favorito abajo"
@@ -892,7 +973,7 @@
   "backup": {
     "title": "Guardar o cargar perfiles",
     "include_profiles": "Perfiles y disposición (ventanas, fondos, barra)",
-    "include_widgets": "Ajustes y datos de programas",
+    "include_widgets": "Ajustes y datos de herramientas",
     "include_local_web": "Webs locales",
     "export_button": "Guardar archivo",
     "import_button": "Cargar archivo",
@@ -957,7 +1038,7 @@
     "cancel": "Cancelar",
     "discard": "No guardar",
     "save": "Guardar",
-    "unknown_widget": "este programa"
+    "unknown_widget": "esta herramienta"
   },
   "widgets_help": {
     "work-list": "Lista de tareas y recordatorios para organizar la sesión.",

@@ -23,7 +23,7 @@
     "tabs": {
       "general": "Général",
       "profiles": "Profils",
-      "widgets": "Programmes",
+      "widgets": "Outils",
       "theme": "Apparence"
     },
     "general": {
@@ -37,7 +37,7 @@
         "fr": "Français"
       },
       "reset_title": "Réinitialiser l'application",
-      "reset_description": "Supprime toutes les données enregistrées (profils, programmes et préférences) et redémarre comme si c'était la première fois.",
+      "reset_description": "Supprime toutes les données enregistrées (profils, outils et préférences) et redémarre comme si c'était la première fois.",
       "reset_button": "Réinitialiser aux valeurs d'usine",
       "reset_confirm": "Êtes-vous sûr de vouloir supprimer toutes les préférences et données locales ? Cette action est irréversible.",
       "version_value": "v1.6.3 (Enero 2026)"
@@ -68,11 +68,11 @@
       "create_mode_clone": "Cloner l'actuel"
     },
     "widgets": {
-      "search": "Rechercher un programme...",
-      "pinned_info": "Sélectionnez les programmes que vous voulez dans votre barre d'outils. ({{count}}/{{max}}) sur {{total}}",
+      "search": "Rechercher un outil...",
+      "pinned_info": "Sélectionnez les outils que vous voulez dans votre barre d'outils. ({{count}}/{{max}}) sur {{total}}",
       "add": "Ajouter",
       "remove": "Retirer",
-      "max_widgets_alert": "Vous ne pouvez pas épingler plus de {{max}} programmes.",
+      "max_widgets_alert": "Vous ne pouvez pas épingler plus de {{max}} outils.",
       "view_label": "Afficher par",
       "view_by_theme": "Thèmes",
       "view_alphabetical": "Alphabétique",
@@ -95,8 +95,8 @@
       "theme_colors_title": "Couleurs du thème",
       "colors": {
         "desktop_bg": "Fond d'écran du bureau",
-        "widget_bg": "Fond du programme",
-        "widget_header": "En-tête du programme",
+        "widget_bg": "Fond de l'outil",
+        "widget_header": "En-tête de l'outil",
         "accent": "Accentuation",
         "text_light": "Texte clair",
         "text_dark": "Texte foncé"
@@ -148,7 +148,7 @@
   "toolbar": {
     "start": "Démarrer",
     "settings": "Configuration",
-    "widgetLibrary": "Bibliothèque de programmes",
+    "widgetLibrary": "Bibliothèque d'outils",
     "add_widget": "Ajouter aux favoris",
     "remove_widget": "Retirer des favoris",
     "no_open_windows": "Aucune fenêtre ouverte"
@@ -165,7 +165,7 @@
     "close": "Fermer",
     "favorites": "Favoris",
     "shortcuts": "Accès rapides",
-    "widgets": "Programmes",
+    "widgets": "Outils",
     "help": "Aide",
     "no_results": "Aucun résultat",
     "remove_favorite": "Retirer des favoris",
@@ -227,15 +227,19 @@
     "window_zoom_out": "Réduire",
     "window_zoom_reset": "Réinitialiser le zoom",
     "window_zoom_edit_hint": "Double-cliquez pour saisir le pourcentage.",
+    "tool_settings": "Paramètres de l'outil",
+    "tool_settings_description": "Enregistre le zoom et la visibilité de la barre.",
+    "tool_settings_save": "Enregistrer cette configuration",
+    "tool_settings_saved": "Configuration enregistrée.",
     "toolbar_hide": "Masquer la barre d’outils",
     "toolbar_pin": "Epingler la barre",
     "toolbar_reveal_hint": "Pour revoir la barre d’outils, déplacez la souris vers le bord supérieur du widget."
   },
   "credits": {
     "title": "Crédits et Licence",
-    "tooltip": "Crédits, licence et guide du programme",
-    "user_guide_title": "Guide du programme",
-    "user_guide_link": "Ouvrir le guide des programmes",
+    "tooltip": "Crédits, licence et guide des outils",
+    "user_guide_title": "Guide des outils",
+    "user_guide_link": "Ouvrir le guide des outils",
     "original_project": "Le projet original <strong>Bureau Interactif pour la Salle de Classe</strong> et son idée appartiennent à <strong>María Teresa González</strong>.",
     "original_link": "Vous pouvez visiter l'application originale à l'adresse suivante :",
     "new_version": "Cette nouvelle version a été développée en collaboration par <strong>María Teresa González</strong>, <strong>Juan José de Haro</strong> et <strong>Pablo G. Guízar</strong>. Le dépôt de ce projet se trouve à l'adresse suivante :",
@@ -279,7 +283,7 @@
   },
   "widgets": {
     "program_guide": {
-      "title": "Guide du programme",
+      "title": "Guide des outils",
       "load_error": "Impossible de charger le guide."
     },
     "file_manager": {
@@ -703,7 +707,80 @@
       "title": "Vote simple"
     },
     "directo_escala": {
-      "title": "Échelle d'évaluation"
+      "title": "Échelle d'évaluation",
+      "landing_title": "Êtes-vous le présentateur ou un participant ?",
+      "landing_subtitle": "Choisissez comment vous souhaitez entrer.",
+      "landing_presenter": "Présentateur",
+      "landing_participant": "Participant",
+      "create_title": "Créer une nouvelle échelle",
+      "question_label": "Affirmation ou question :",
+      "question_placeholder": "Ex : Évalue la session d'aujourd'hui",
+      "theme_color_label": "Couleur :",
+      "scale_type_label": "Type d'échelle :",
+      "scale_satisfaction": "Satisfaction (5 niveaux)",
+      "scale_agreement": "Accord (5 niveaux)",
+      "scale_frequency": "Fréquence (5 niveaux)",
+      "scale_trafficlight": "Compréhension / Feu tricolore (3 niveaux)",
+      "scale_numeric": "Numérique (1-10)",
+      "scale_custom": "Personnalisée",
+      "custom_scale_label": "Libellés personnalisés :",
+      "custom_label_placeholder": "Étiquette {{index}}",
+      "add_label_btn": "+ Ajouter une étiquette",
+      "prepare_session_btn": "Préparer",
+      "start_session_btn": "Démarrer",
+      "switch_to_participant": "Rejoindre une session ?",
+      "projection_btn_text": "Projeter",
+      "stop_voting_btn": "Arrêter",
+      "resume_voting_btn": "Reprendre",
+      "scan_qr_label": "1. Scanner le QR",
+      "direct_link_label": "2. Partager le lien",
+      "or_go_to": "Ou aller sur",
+      "and_enter_code": "et saisir le code :",
+      "total_votes_label": "Votes totaux",
+      "join_title": "Rejoindre une évaluation",
+      "session_code_label": "Code de session :",
+      "code_input_placeholder": "Saisir le code",
+      "join_btn": "Rejoindre",
+      "switch_to_presenter": "Vous êtes le présentateur ?",
+      "voted_title": "Merci pour votre évaluation !",
+      "voted_subtitle": "Résultats sur l'écran principal.",
+      "voting_paused_title": "Vote en pause",
+      "voting_paused_subtitle": "Le présentateur a mis en pause les réponses.",
+      "alert_no_question": "Saisissez une question.",
+      "alert_min_options": "L'échelle doit avoir au moins 2 options.",
+      "join_error_text": "Erreur. Vérifiez le code.",
+      "shareable_link_title": "Lien de préparation :",
+      "link_copied_toast": "Lien copié",
+      "code_copied_toast": "Code copié",
+      "qr_expand_hint": "Cliquez pour agrandir",
+      "scales": {
+        "satisfaction": [
+          "😠",
+          "🙁",
+          "😐",
+          "🙂",
+          "😄"
+        ],
+        "agreement": [
+          "Tout à fait en désaccord",
+          "En désaccord",
+          "Neutre",
+          "D'accord",
+          "Tout à fait d'accord"
+        ],
+        "frequency": [
+          "Jamais",
+          "Rarement",
+          "Parfois",
+          "Souvent",
+          "Toujours"
+        ],
+        "trafficlight": [
+          "Je ne comprends pas",
+          "J'ai des doutes",
+          "Je comprends"
+        ]
+      }
     },
     "directo_nube": {
       "title": "Nuage de mots"
@@ -778,6 +855,10 @@
       "description": "Importez votre site local pour l'executer dans Ed",
       "tooltip": "Importez votre site local pour l'executer dans Ed"
     },
+    "external_app": {
+      "popup_hint": "Cet outil s'ouvre dans une nouvelle fenêtre pour fonctionner correctement. Cliquez sur le bouton pour l'ouvrir.",
+      "popup_button": "Ouvrir dans une nouvelle fenêtre"
+    },
     "vce": {
       "title": "Applications de la communauté",
       "start_tooltip": "Applications créées par la communauté Vibe Coding Educativo.",
@@ -808,10 +889,10 @@
       "intro_info_link": "Informations sur le groupe",
       "intro_how_title": "Comment utiliser le lecteur",
       "intro_step1": "Filtre par niveau et domaine.",
-      "intro_step2": "Sélectionne un programme dans la liste de gauche.",
+      "intro_step2": "Sélectionne un outil dans la liste de gauche.",
       "intro_step3": "Ouvre-le dans le lecteur ou dans un nouvel onglet.",
       "intro_step4": "Si un erreur de chargement apparaît, utilise le nouvel onglet.",
-      "intro_step5": "Les favoris gardent les programmes sélectionnés visibles en haut de la liste.",
+      "intro_step5": "Les favoris gardent les outils sélectionnés visibles en haut de la liste.",
       "less": "moins...",
       "move_up": "Monter le favori",
       "move_down": "Descendre le favori"
@@ -893,7 +974,7 @@
   "backup": {
     "title": "Enregistrer ou charger des profils",
     "include_profiles": "Profils et disposition (fenêtres, fonds, barre)",
-    "include_widgets": "Réglages et données des programmes",
+    "include_widgets": "Réglages et données des outils",
     "include_local_web": "Sites locaux",
     "export_button": "Enregistrer le fichier",
     "import_button": "Charger le fichier",
@@ -958,7 +1039,7 @@
     "cancel": "Annuler",
     "discard": "Ne pas enregistrer",
     "save": "Enregistrer",
-    "unknown_widget": "ce programme"
+    "unknown_widget": "cet outil"
   },
   "widgets_help": {
     "work-list": "Liste de tâches et rappels pour organiser la séance.",

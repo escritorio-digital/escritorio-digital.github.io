@@ -6,7 +6,7 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 
 - **Date et heure à l’écran** : visibles en haut à droite. Désactivation dans **Outils → Apparence**.
 
-- **Menu Démarrer** : cliquez sur le bouton Démarrer en bas à gauche pour ouvrir le menu des programmes, favoris, réglages et aide.
+- **Menu Démarrer** : cliquez sur le bouton Démarrer en bas à gauche pour ouvrir le menu des outils, favoris, réglages et aide.
 
 - **Ouvrir un widget** : depuis la barre inférieure, le menu Démarrer ou la **Bibliothèque de widgets**.
 - **Tout fermer** : via le menu contextuel du bureau.
@@ -21,7 +21,7 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 - **Présences** : enregistrement rapide des présences et de l’état du groupe.
 - **Générateur de groupes** : crée des groupes aléatoires ou équilibrés pour le travail coopératif.
 - **Calendrier** : support visuel pour dates, échéances et planification.
-- **Guide du programme** : guide intégré avec le catalogue des widgets et des conseils d’usage.
+- **Guide des outils** : guide intégré avec le catalogue des widgets et des conseils d’usage.
 
 ### Temps et rythme
 
@@ -65,7 +65,7 @@ Ce widget fonctionne comme un classeur dans le navigateur.
 
 - **Enregistrer** : depuis d’autres widgets, choisissez Fichiers Ed ou le disque local.
 - **Organiser** : créez des dossiers, déplacez par glisser-déposer et utilisez la corbeille.
-- **Ouvrir** : double‑clic pour ouvrir les fichiers avec leur programme associé.
+- **Ouvrir** : double‑clic pour ouvrir les fichiers avec leur outil associé.
 
 ### Outils participatifs
 

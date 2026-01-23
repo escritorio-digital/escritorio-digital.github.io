@@ -5,6 +5,7 @@ export const DirectoMuroWidget = () => (
         url="https://jjdeharo.github.io/directo/muro.html"
         titleKey="widgets.directo_muro.title"
         appendLanguageParam
+        openInPopup
     />
 );
 

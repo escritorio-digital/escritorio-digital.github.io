@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Rnd, type RndDragCallback, type RndResizeCallback } from 'react-rnd';
-import { CircleHelp, X, Minus, Maximize, Minimize, Pin, PinOff, Expand, Minimize2, MoreVertical, Plus, RotateCcw, Eye, EyeOff } from 'lucide-react';
+import { CircleHelp, X, Minus, Maximize, Minimize, Pin, PinOff, Expand, Minimize2, MoreVertical, Plus, RotateCcw, Eye, EyeOff, CheckCircle } from 'lucide-react';
 import { WidgetToolbarProvider } from './WidgetToolbar';
 
 interface WidgetWindowProps {
@@ -46,6 +46,13 @@ interface WidgetWindowProps {
   toolbarHideLabel?: string;
   toolbarPinLabel?: string;
   toolbarRevealHint?: string;
+  toolbarPinned?: boolean;
+  onToolbarPinnedChange?: (nextValue: boolean) => void;
+  toolSettingsLabel?: string;
+  toolSettingsDescription?: string;
+  toolSettingsSaveLabel?: string;
+  toolSettingsSavedLabel?: string;
+  onSaveToolSettings?: (settings: { zoom: number; toolbarPinned: boolean }) => void;
 }
 
 export const WidgetWindow: React.FC<WidgetWindowProps> = ({
@@ -89,21 +96,30 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
     toolbarHideLabel,
     toolbarPinLabel,
     toolbarRevealHint,
+    toolbarPinned,
+    onToolbarPinnedChange,
+    toolSettingsLabel,
+    toolSettingsDescription,
+    toolSettingsSaveLabel,
+    toolSettingsSavedLabel,
+    onSaveToolSettings,
 }) => {
   const [isHelpOpen, setIsHelpOpen] = React.useState(false);
   const [isContentFullscreen, setIsContentFullscreen] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [isToolbarPinned, setIsToolbarPinned] = React.useState(true);
+  const [isToolbarPinned, setIsToolbarPinned] = React.useState(toolbarPinned ?? true);
   const [isToolbarHovering, setIsToolbarHovering] = React.useState(false);
   const [isToolbarHintVisible, setIsToolbarHintVisible] = React.useState(false);
   const [isZoomEditing, setIsZoomEditing] = React.useState(false);
   const [zoomDraft, setZoomDraft] = React.useState('100');
+  const [isSaveNoticeVisible, setIsSaveNoticeVisible] = React.useState(false);
   const [toolbarContent, setToolbarContent] = React.useState<React.ReactNode | null>(null);
   const [toolbarHeight, setToolbarHeight] = React.useState(36);
   const [fullscreenButtonPos, setFullscreenButtonPos] = React.useState({ x: 12, y: 12 });
   const menuCloseTimer = React.useRef<number | null>(null);
   const toolbarHideTimer = React.useRef<number | null>(null);
   const toolbarHintTimer = React.useRef<number | null>(null);
+  const saveNoticeTimer = React.useRef<number | null>(null);
   const menuRef = React.useRef<HTMLDivElement>(null);
   const toolbarRef = React.useRef<HTMLDivElement>(null);
   const contentFullscreenRef = React.useRef<HTMLDivElement>(null);
@@ -145,6 +161,7 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
         setIsMenuOpen(false);
         setIsHelpOpen(false);
         setIsZoomEditing(false);
+        setIsToolSettingsOpen(false);
       }
     };
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -152,6 +169,7 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
         setIsMenuOpen(false);
         setIsHelpOpen(false);
         setIsZoomEditing(false);
+        setIsToolSettingsOpen(false);
       }
     };
     document.addEventListener('mousedown', handlePointerDown);
@@ -178,6 +196,9 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
     if (toolbarHintTimer.current) {
       window.clearTimeout(toolbarHintTimer.current);
     }
+    if (saveNoticeTimer.current) {
+      window.clearTimeout(saveNoticeTimer.current);
+    }
   }, []);
 
   const fullscreenLabel = isContentFullscreen
@@ -185,6 +206,23 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
     : enterFullscreenLabel;
   const maximizeButtonLabel = isMaximized ? restoreLabel : maximizeLabel;
   const zoomValue = zoomLevel ?? 1;
+  const handleSaveToolSettings = React.useCallback(() => {
+    if (!onSaveToolSettings) return;
+    const payload = { zoom: zoomValue, toolbarPinned: isToolbarPinned };
+    if (typeof queueMicrotask === 'function') {
+      queueMicrotask(() => onSaveToolSettings(payload));
+    } else {
+      window.setTimeout(() => onSaveToolSettings(payload), 0);
+    }
+    setIsSaveNoticeVisible(true);
+    if (saveNoticeTimer.current) {
+      window.clearTimeout(saveNoticeTimer.current);
+    }
+    saveNoticeTimer.current = window.setTimeout(() => {
+      setIsSaveNoticeVisible(false);
+      saveNoticeTimer.current = null;
+    }, 1800);
+  }, [isToolbarPinned, onSaveToolSettings, zoomValue]);
   const clampZoom = (value: number) => Math.min(5, Math.max(0.75, value));
   const toolbarVisible = isToolbarPinned || isToolbarHovering || isMenuOpen;
   const toolbarOffset = toolbarVisible ? toolbarHeight : 0;
@@ -220,6 +258,13 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
         showToolbarHint();
       } else {
         setIsToolbarHovering(true);
+      }
+      if (onToolbarPinnedChange) {
+        if (typeof queueMicrotask === 'function') {
+          queueMicrotask(() => onToolbarPinnedChange(next));
+        } else {
+          window.setTimeout(() => onToolbarPinnedChange(next), 0);
+        }
       }
       return next;
     });
@@ -290,6 +335,11 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
       setZoomDraft(`${Math.round(zoomValue * 100)}`);
     }
   }, [zoomValue, isZoomEditing]);
+
+  React.useEffect(() => {
+    if (typeof toolbarPinned !== 'boolean') return;
+    setIsToolbarPinned(toolbarPinned);
+  }, [toolbarPinned]);
 
   React.useEffect(() => {
     const element = toolbarRef.current;
@@ -649,9 +699,6 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
                                 {Math.round(zoomValue * 100)}%
                               </button>
                             )}
-                            <span className="ml-auto text-[10px] text-gray-400">
-                              {zoomOutShortcutLabel} / {zoomResetShortcutLabel} / {zoomInShortcutLabel}
-                            </span>
                           </div>
                         )}
                         <button
@@ -664,7 +711,7 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
                             toggleToolbarPinned();
                           }}
                           className={`flex w-full items-center gap-2 rounded-md px-2 py-1 text-left hover:bg-gray-100 ${
-                            helpText || onZoomChange ? 'mt-2 border-t border-gray-200 pt-2' : ''
+                            helpText || onZoomChange || onSaveToolSettings ? 'mt-2 border-t border-gray-200 pt-2' : ''
                           }`}
                           title={isToolbarPinned ? toolbarHideText : toolbarPinText}
                           aria-label={isToolbarPinned ? toolbarHideText : toolbarPinText}
@@ -673,6 +720,25 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
                           <span>{isToolbarPinned ? toolbarHideText : toolbarPinText}</span>
                           <span className="ml-auto text-xs text-gray-400">{toolbarShortcutLabel}</span>
                         </button>
+                        {onSaveToolSettings && toolSettingsLabel && toolSettingsSaveLabel && (
+                          <div className="mt-2">
+                            <button
+                              type="button"
+                              onClick={handleSaveToolSettings}
+                              className="flex w-full items-center gap-2 rounded-md px-2 py-1 text-left hover:bg-gray-100"
+                              title={toolSettingsDescription || toolSettingsLabel}
+                              aria-label={toolSettingsDescription || toolSettingsLabel}
+                            >
+                              <CheckCircle size={16} />
+                              <span>{toolSettingsSaveLabel}</span>
+                            </button>
+                            {isSaveNoticeVisible && toolSettingsSavedLabel && (
+                              <div className="mt-1 text-center text-xs font-semibold text-green-700">
+                                {toolSettingsSavedLabel}
+                              </div>
+                            )}
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>

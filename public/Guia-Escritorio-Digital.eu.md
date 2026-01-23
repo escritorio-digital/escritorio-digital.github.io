@@ -21,7 +21,7 @@ Idazmahai Digitala ikasgelarako pentsatutako “leihoekin” lan‑taula bat da.
 - **Asistentzia**: asistentzia eta talde‑egoera erregistro azkarra.
 - **Talde‑sortzailea**: taldeak ausaz edo orekatuta sortu lan kooperatiborako.
 - **Egutegia**: datak, entregak eta plangintza ikusteko laguntza bisuala.
-- **Programaren gida**: widgeten katalogoa eta erabilera‑gomendioak biltzen dituen gida integratua.
+- **Tresnen gida**: widgeten katalogoa eta erabilera‑gomendioak biltzen dituen gida integratua.
 
 ### Denbora eta erritmoa
 
@@ -65,7 +65,7 @@ Widget honek nabigatzaile barruko artxibategi gisa funtzionatzen du.
 
 - **Gorde**: beste widgetetatik Ed fitxategiak edo disko lokala aukeratu.
 - **Antolatu**: sortu karpetak, mugitu elementuak arrastatu eta askatuz eta erabili zakarrontzia.
-- **Ireki**: egin klik bikoitza fitxategiak programarekin irekitzeko.
+- **Ireki**: egin klik bikoitza fitxategiak tresnarekin irekitzeko.
 
 ### Parte-hartzeko tresnak
 

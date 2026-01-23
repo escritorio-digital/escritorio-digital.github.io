@@ -5,6 +5,7 @@ export const DirectoNubeWidget = () => (
         url="https://jjdeharo.github.io/directo/nube.html"
         titleKey="widgets.directo_nube.title"
         appendLanguageParam
+        openInPopup
     />
 );
 
