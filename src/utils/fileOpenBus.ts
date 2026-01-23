@@ -1,5 +1,6 @@
 type FileOpenPayload = {
     entryId: string;
+    instanceId?: string;
 };
 
 const target = new EventTarget();

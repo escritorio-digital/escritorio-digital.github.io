@@ -414,7 +414,8 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
     }, [input, lastSavedSnapshot]);
 
     useEffect(() => {
-        const unsubscribe = subscribeFileOpen('markdown-text-editor', async ({ entryId }) => {
+        const unsubscribe = subscribeFileOpen('markdown-text-editor', async ({ entryId, instanceId }) => {
+            if (instanceId && instanceId !== resolvedInstanceId) return;
             const entry = await getEntry(entryId);
             if (!entry?.blob) return;
             const content = await entry.blob.text();

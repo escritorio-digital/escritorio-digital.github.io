@@ -584,7 +584,7 @@ const DesktopUI: React.FC<{
 
     const addWidget = (widgetId: string) => {
         const widgetConfig = WIDGET_REGISTRY[widgetId];
-        if (!widgetConfig) return;
+        if (!widgetConfig) return null;
         const newZ = highestZ + 1;
         setHighestZ(newZ);
         const widgetDefaults = activeProfile.widgetPreferences?.[widgetId];
@@ -614,6 +614,7 @@ const DesktopUI: React.FC<{
         };
         setActiveWidgets(prev => [...prev, newWidget]);
         setActiveWindowId(newWidget.instanceId);
+        return newWidget.instanceId;
     };
 
     const addWidgetRef = useRef(addWidget);
@@ -720,6 +721,13 @@ const DesktopUI: React.FC<{
         const handler = (event: Event) => {
             const custom = event as CustomEvent<{ widgetId: string; entryId: string }>;
             if (!custom.detail?.widgetId) return;
+            if (custom.detail.widgetId === 'markdown-text-editor') {
+                const instanceId = addWidgetRef.current(custom.detail.widgetId);
+                window.setTimeout(() => {
+                    emitFileOpen(custom.detail.widgetId, { entryId: custom.detail.entryId, instanceId: instanceId ?? undefined });
+                }, 50);
+                return;
+            }
             const sameWidgets = activeProfile.activeWidgets.filter((widget) => widget.widgetId === custom.detail.widgetId);
             if (sameWidgets.length > 0) {
                 const target = sameWidgets.reduce((acc, item) => (item.zIndex > acc.zIndex ? item : acc));
