@@ -20,6 +20,7 @@ import {
     Clipboard,
     FolderOpen,
     Save,
+    SaveAll,
     FileText,
     Eye,
     Columns2,
@@ -91,6 +92,8 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
     const [lastSavedSnapshot, setLastSavedSnapshot] = useState<string>('');
     const [viewMode, setViewMode] = useState<ViewMode>('split');
     const [currentFilename, setCurrentFilename] = useState<string | null>(null);
+    const [currentParentId, setCurrentParentId] = useState<string | null>(null);
+    const [currentEntryId, setCurrentEntryId] = useState<string | null>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const previewRef = useRef<HTMLDivElement>(null);
     const printRef = useRef<HTMLDivElement>(null);
@@ -263,7 +266,7 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
             .catch(() => showFeedback(t('widgets.markdown_text_editor.copy_failed')));
     };
 
-    const handleSaveToFile = async () => {
+    const handleSaveAs = async () => {
         const blob = new Blob([input], { type: 'text/markdown;charset=utf-8' });
         const filename = currentFilename || t('widgets.markdown_text_editor.default_filename');
         const destination = await requestSaveDestination(filename, { sourceWidgetId: 'markdown-text-editor' });
@@ -276,8 +279,10 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
                 sourceWidgetTitleKey: 'widgets.markdown_text_editor.title',
                 parentId: destination.parentId,
             });
+            setCurrentParentId(destination.parentId);
         } else if (destination?.destination === 'download') {
             downloadBlob(blob, destination.filename);
+            setCurrentParentId(null);
         }
         window.dispatchEvent(
             new CustomEvent('widget-title-update', {
@@ -299,7 +304,39 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
         );
     };
 
-    const loadFromFile = async (file: File) => {
+    const handleSave = async () => {
+        let parentId = currentParentId;
+        if (!parentId && currentEntryId) {
+            const entry = await getEntry(currentEntryId);
+            parentId = entry?.parentId ?? null;
+        }
+        if (currentFilename && parentId) {
+            const blob = new Blob([input], { type: 'text/markdown;charset=utf-8' });
+            await saveToFileManager({
+                blob,
+                filename: currentFilename,
+                sourceWidgetId: 'markdown-text-editor',
+                sourceWidgetTitleKey: 'widgets.markdown_text_editor.title',
+                parentId,
+            });
+            window.dispatchEvent(
+                new CustomEvent('widget-dirty-state', {
+                    detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor', isDirty: false },
+                })
+            );
+            const snapshot = JSON.stringify({ input });
+            setLastSavedSnapshot(snapshot);
+            window.dispatchEvent(
+                new CustomEvent('widget-save-complete', {
+                    detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor' },
+                })
+            );
+            return;
+        }
+        await handleSaveAs();
+    };
+
+    const loadFromFile = async (file: File, parentId?: string | null, entryId?: string | null) => {
         const text = await file.text();
         setInput(text);
         setLastSavedSnapshot(JSON.stringify({ input: text }));
@@ -309,6 +346,8 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
             })
         );
         setCurrentFilename(file.name);
+        setCurrentParentId(parentId ?? null);
+        setCurrentEntryId(entryId ?? null);
         window.dispatchEvent(
             new CustomEvent('widget-dirty-state', {
                 detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor', isDirty: false },
@@ -321,7 +360,7 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
         if (!result) return;
         if (result.source === 'local') {
             const [file] = result.files;
-            if (file) await loadFromFile(file);
+            if (file) await loadFromFile(file, null, null);
             return;
         }
         const [entryId] = result.entryIds;
@@ -329,7 +368,7 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
         const entry = await getEntry(entryId);
         if (!entry?.blob) return;
         const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
-        await loadFromFile(file);
+        await loadFromFile(file, entry.parentId, entry.id);
     };
 
     const handleExportAsPdf = async () => {
@@ -427,6 +466,8 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
                 })
             );
             setCurrentFilename(entry.name);
+            setCurrentParentId(entry.parentId);
+            setCurrentEntryId(entry.id);
             window.dispatchEvent(
                 new CustomEvent('widget-dirty-state', {
                     detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor', isDirty: false },
@@ -436,26 +477,27 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
         return unsubscribe;
     }, []);
 
+    const snapshot = useMemo(() => JSON.stringify({ input }), [input]);
+    const isDirty = lastSavedSnapshot !== '' && snapshot !== lastSavedSnapshot;
+
     useEffect(() => {
-        const snapshot = JSON.stringify({ input });
-        const isDirty = lastSavedSnapshot !== '' && snapshot !== lastSavedSnapshot;
         window.dispatchEvent(
             new CustomEvent('widget-dirty-state', {
                 detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor', isDirty },
             })
         );
-    }, [input, lastSavedSnapshot, resolvedInstanceId]);
+    }, [isDirty, resolvedInstanceId]);
 
     useEffect(() => {
         const handler = (event: Event) => {
             const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
             if (custom.detail?.instanceId !== resolvedInstanceId) return;
             if (custom.detail?.widgetId && custom.detail.widgetId !== 'markdown-text-editor') return;
-            handleSaveToFile();
+            handleSave();
         };
         window.addEventListener('widget-save-request', handler as EventListener);
         return () => window.removeEventListener('widget-save-request', handler as EventListener);
-    }, [handleSaveToFile, resolvedInstanceId]);
+    }, [handleSave, resolvedInstanceId]);
 
     useEffect(() => {
         return () => {
@@ -555,8 +597,14 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
                         <button type="button" title={t('widgets.markdown_text_editor.toolbar.open_file')} onClick={handleOpenFile}>
                             <FolderOpen size={16} />
                         </button>
-                        <button type="button" title={t('widgets.markdown_text_editor.toolbar.save_file')} onClick={handleSaveToFile}>
-                            <Save size={16} />
+                        <button type="button" title={t('actions.save')} onClick={handleSave} className="save-indicator-button">
+                            <span className="save-indicator-icon">
+                                <Save size={16} />
+                                {isDirty && <span className="save-indicator-dot" aria-hidden="true" />}
+                            </span>
+                        </button>
+                        <button type="button" title={t('actions.save_as')} onClick={handleSaveAs}>
+                            <SaveAll size={16} />
                         </button>
                         <button type="button" title={t('widgets.markdown_text_editor.toolbar.export_pdf')} onClick={handleExportAsPdf}>
                             <FileText size={16} />

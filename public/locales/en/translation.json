@@ -1,5 +1,10 @@
 {
   "loading": "Loading...",
+  "actions": {
+    "save": "Save",
+    "save_as": "Save as",
+    "saved": "Saved."
+  },
   "save_dialog": {
     "title": "Save file",
     "description": "Where do you want to save it?",

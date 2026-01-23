@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import Papa from 'papaparse';
-import { Users, Badge, UserPlus, FolderOpen, Download, RotateCcw, AlertTriangle } from 'lucide-react';
+import { Users, Badge, UserPlus, FolderOpen, RotateCcw, AlertTriangle, Save, SaveAll } from 'lucide-react';
 import './Attendance.css';
 import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
 import { getEntry } from '../../../utils/fileManagerDb';
@@ -48,6 +48,8 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
   const [newStudentName, setNewStudentName] = useState('');
   const [lastSavedSignature, setLastSavedSignature] = useState<string>('');
   const [currentFilename, setCurrentFilename] = useState<string | null>(null);
+  const [currentParentId, setCurrentParentId] = useState<string | null>(null);
+  const [currentEntryId, setCurrentEntryId] = useState<string | null>(null);
 
   // Constantes traducidas
   const AVAILABLE_BADGES: BadgeInfo[] = [
@@ -131,7 +133,7 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
     updateStudentsForDate(updatedStudents);
   };
   
-  const loadCsvFile = (file: File, filename?: string) => {
+  const loadCsvFile = (file: File, filename?: string, parentId?: string | null, entryId?: string | null) => {
     Papa.parse<any>(file, {
       header: true,
       skipEmptyLines: true,
@@ -153,6 +155,8 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
             })
           );
           setCurrentFilename(title);
+          setCurrentParentId(parentId ?? null);
+          setCurrentEntryId(entryId ?? null);
         }
         window.dispatchEvent(
           new CustomEvent('widget-dirty-state', {
@@ -168,7 +172,7 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
     if (!result) return;
     if (result.source === 'local') {
       const [file] = result.files;
-      if (file) loadCsvFile(file);
+      if (file) loadCsvFile(file, undefined, null, null);
       return;
     }
     const [entryId] = result.entryIds;
@@ -176,22 +180,22 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
     const entry = await getEntry(entryId);
     if (!entry?.blob) return;
     const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
-    loadCsvFile(file, entry.name);
+    loadCsvFile(file, entry.name, entry.parentId, entry.id);
   };
+
+  const isDirty = lastSavedSignature !== '' && JSON.stringify(records) !== lastSavedSignature;
 
   useEffect(() => {
     if (!lastSavedSignature) {
       setLastSavedSignature(JSON.stringify(records));
       return;
     }
-    const signature = JSON.stringify(records);
-    const isDirty = signature !== lastSavedSignature;
     window.dispatchEvent(
       new CustomEvent('widget-dirty-state', {
         detail: { instanceId: resolvedInstanceId, widgetId: 'attendance', isDirty },
       })
     );
-  }, [lastSavedSignature, records, resolvedInstanceId]);
+  }, [isDirty, lastSavedSignature, records, resolvedInstanceId]);
 
   useEffect(() => {
     return () => {
@@ -208,12 +212,12 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
       const entry = await getEntry(entryId);
       if (!entry?.blob) return;
       const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
-      loadCsvFile(file, entry.name);
+      loadCsvFile(file, entry.name, entry.parentId, entry.id);
     });
     return unsubscribe;
   }, []);
 
-  const handleExport = async () => {
+  const buildExportBlob = () => {
     const dataToExport: any[] = [];
     Object.keys(records).sort().forEach(date => {
         records[date].forEach(s => {
@@ -229,7 +233,11 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
     });
 
     const csv = Papa.unparse(dataToExport);
-    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+    return new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  };
+
+  const handleSaveAs = async () => {
+    const blob = buildExportBlob();
     const destination = await requestSaveDestination(currentFilename || 'asistencia_completa.csv', { sourceWidgetId: 'attendance' });
     if (!destination) return;
     if (destination?.destination === 'file-manager') {
@@ -240,8 +248,10 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
         sourceWidgetTitleKey: 'widgets.attendance.title',
         parentId: destination.parentId,
       });
+      setCurrentParentId(destination.parentId);
     } else if (destination?.destination === 'download') {
       downloadBlob(blob, destination.filename);
+      setCurrentParentId(null);
     }
     window.dispatchEvent(
       new CustomEvent('widget-title-update', {
@@ -258,16 +268,43 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
     window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'attendance' } }));
   };
 
+  const handleSave = async () => {
+    let parentId = currentParentId;
+    if (!parentId && currentEntryId) {
+      const entry = await getEntry(currentEntryId);
+      parentId = entry?.parentId ?? null;
+    }
+    if (currentFilename && parentId) {
+      const blob = buildExportBlob();
+      await saveToFileManager({
+        blob,
+        filename: currentFilename,
+        sourceWidgetId: 'attendance',
+        sourceWidgetTitleKey: 'widgets.attendance.title',
+        parentId,
+      });
+      window.dispatchEvent(
+        new CustomEvent('widget-dirty-state', {
+          detail: { instanceId: resolvedInstanceId, widgetId: 'attendance', isDirty: false },
+        })
+      );
+      setLastSavedSignature(JSON.stringify(records));
+      window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'attendance' } }));
+      return;
+    }
+    await handleSaveAs();
+  };
+
   useEffect(() => {
     const handler = (event: Event) => {
       const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
       if (custom.detail?.instanceId !== resolvedInstanceId) return;
       if (custom.detail?.widgetId && custom.detail.widgetId !== 'attendance') return;
-      handleExport();
+      handleSave();
     };
     window.addEventListener('widget-save-request', handler as EventListener);
     return () => window.removeEventListener('widget-save-request', handler as EventListener);
-  }, [handleExport, resolvedInstanceId]);
+  }, [handleSave, resolvedInstanceId]);
 
   const resetAll = () => {
     if (window.confirm(t('widgets.attendance.reset_confirm'))) {
@@ -366,7 +403,13 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
         </div>
         <div className="actions-group">
             <button onClick={handleOpenFile} className="action-btn" title={t('widgets.attendance.import_csv_tooltip')}><FolderOpen size={16}/></button>
-            <button onClick={handleExport} className="action-btn" title={t('widgets.attendance.export_records_tooltip')}><Download size={16}/></button>
+            <button onClick={handleSave} className="action-btn save-indicator-button" title={t('actions.save')}>
+              <span className="save-indicator-icon">
+                <Save size={16}/>
+                {isDirty && <span className="save-indicator-dot" aria-hidden="true" />}
+              </span>
+            </button>
+            <button onClick={handleSaveAs} className="action-btn" title={t('actions.save_as')}><SaveAll size={16}/></button>
             <button onClick={resetAll} className="action-btn danger" title={t('widgets.attendance.delete_all_tooltip')}><RotateCcw size={16}/></button>
         </div>
       </div>

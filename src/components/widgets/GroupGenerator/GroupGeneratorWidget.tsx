@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FolderOpen, Copy, Save, Maximize2, Minimize2 } from 'lucide-react';
+import { FolderOpen, Copy, Save, SaveAll, Maximize2, Minimize2 } from 'lucide-react';
 import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
 import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
@@ -59,6 +59,8 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
   const [isLargeView, setIsLargeView] = useState(false);
   const [lastSavedSnapshot, setLastSavedSnapshot] = useState<string>('');
   const [currentFilename, setCurrentFilename] = useState<string | null>(null);
+  const [currentParentId, setCurrentParentId] = useState<string | null>(null);
+  const [currentEntryId, setCurrentEntryId] = useState<string | null>(null);
   const overlayContentRef = useRef<HTMLDivElement>(null);
   const overlayHeaderRef = useRef<HTMLDivElement>(null);
   const overlayGroupsRef = useRef<HTMLDivElement>(null);
@@ -94,7 +96,7 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
     }));
   }, [applySnapshot, groupValue, mode]);
 
-  const loadFromBlob = useCallback(async (blob: Blob, filename?: string) => {
+  const loadFromBlob = useCallback(async (blob: Blob, filename?: string, parentId?: string | null, entryId?: string | null) => {
     const text = await blob.text();
     loadFromText(text);
     const title = filename?.trim();
@@ -112,6 +114,8 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
     );
     if (title) {
       setCurrentFilename(title);
+      setCurrentParentId(parentId ?? null);
+      setCurrentEntryId(entryId ?? null);
     }
   }, [loadFromText, resolvedInstanceId]);
 
@@ -202,21 +206,21 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
     if (!result) return;
     if (result.source === 'local') {
       const [file] = result.files;
-      if (file) await loadFromBlob(file, file.name);
+      if (file) await loadFromBlob(file, file.name, null, null);
       return;
     }
     const [entryId] = result.entryIds;
     if (!entryId) return;
     const entry = await getEntry(entryId);
     if (!entry?.blob) return;
-    await loadFromBlob(entry.blob, entry.name);
+    await loadFromBlob(entry.blob, entry.name, entry.parentId, entry.id);
   };
 
   useEffect(() => {
     const unsubscribe = subscribeFileOpen('group-generator', async ({ entryId }) => {
       const entry = await getEntry(entryId);
       if (!entry?.blob) return;
-      await loadFromBlob(entry.blob, entry.name);
+      await loadFromBlob(entry.blob, entry.name, entry.parentId, entry.id);
     });
     return unsubscribe;
   }, [loadFromBlob]);
@@ -280,7 +284,7 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
     }
   };
 
-  const downloadGroups = async () => {
+  const handleSaveAs = async () => {
     if (generatedGroups.length === 0) return;
     const destination = await requestSaveDestination(currentFilename || 'grupos.txt', { sourceWidgetId: 'group-generator' });
     if (!destination) return;
@@ -307,6 +311,7 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
         })
       );
       setCurrentFilename(destination.filename);
+      setCurrentParentId(destination.parentId);
       window.dispatchEvent(
         new CustomEvent('widget-dirty-state', {
           detail: { instanceId: resolvedInstanceId, widgetId: 'group-generator', isDirty: false },
@@ -333,6 +338,7 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
         })
       );
       setCurrentFilename(destination.filename);
+      setCurrentParentId(null);
       window.dispatchEvent(
         new CustomEvent('widget-dirty-state', {
           detail: { instanceId: resolvedInstanceId, widgetId: 'group-generator', isDirty: false },
@@ -342,43 +348,72 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
     }
   };
 
-  useEffect(() => {
-    if (!lastSavedSnapshot) {
-      const snapshot = JSON.stringify({
+  const handleSave = async () => {
+    if (generatedGroups.length === 0) return;
+    let parentId = currentParentId;
+    if (!parentId && currentEntryId) {
+      const entry = await getEntry(currentEntryId);
+      parentId = entry?.parentId ?? null;
+    }
+    if (currentFilename && parentId) {
+      const snapshot: GroupGeneratorSnapshot = {
         version: 1,
         studentList,
         generatedGroups,
         mode,
         groupValue,
+      };
+      const blob = new Blob([JSON.stringify(snapshot, null, 2)], { type: 'application/json;charset=utf-8' });
+      await saveToFileManager({
+        blob,
+        filename: currentFilename,
+        sourceWidgetId: 'group-generator',
+        sourceWidgetTitleKey: 'widgets.group_generator.title',
+        parentId,
       });
+      setLastSavedSnapshot(JSON.stringify(snapshot));
+      window.dispatchEvent(
+        new CustomEvent('widget-dirty-state', {
+          detail: { instanceId: resolvedInstanceId, widgetId: 'group-generator', isDirty: false },
+        })
+      );
+      window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'group-generator' } }));
+      return;
+    }
+    await handleSaveAs();
+  };
+
+  const snapshot = JSON.stringify({
+    version: 1,
+    studentList,
+    generatedGroups,
+    mode,
+    groupValue,
+  });
+  const isDirty = lastSavedSnapshot !== '' && snapshot !== lastSavedSnapshot;
+
+  useEffect(() => {
+    if (!lastSavedSnapshot) {
       setLastSavedSnapshot(snapshot);
       return;
     }
-    const snapshot = JSON.stringify({
-      version: 1,
-      studentList,
-      generatedGroups,
-      mode,
-      groupValue,
-    });
-    const isDirty = snapshot !== lastSavedSnapshot;
     window.dispatchEvent(
       new CustomEvent('widget-dirty-state', {
         detail: { instanceId: resolvedInstanceId, widgetId: 'group-generator', isDirty },
       })
     );
-  }, [generatedGroups, groupValue, lastSavedSnapshot, mode, resolvedInstanceId, studentList]);
+  }, [isDirty, lastSavedSnapshot, resolvedInstanceId, snapshot]);
 
   useEffect(() => {
     const handler = (event: Event) => {
       const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
       if (custom.detail?.instanceId !== resolvedInstanceId) return;
       if (custom.detail?.widgetId && custom.detail.widgetId !== 'group-generator') return;
-      downloadGroups();
+      handleSave();
     };
     window.addEventListener('widget-save-request', handler as EventListener);
     return () => window.removeEventListener('widget-save-request', handler as EventListener);
-  }, [downloadGroups, resolvedInstanceId]);
+  }, [handleSave, resolvedInstanceId]);
 
   useEffect(() => {
     return () => {
@@ -404,12 +439,24 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
           </button>
           <button
             className="expand-button"
-            onClick={downloadGroups}
+            onClick={handleSave}
             disabled={generatedGroups.length === 0}
-            title={t('widgets.group_generator.download_groups')}
-            aria-label={t('widgets.group_generator.download_groups')}
+            title={t('actions.save')}
+            aria-label={t('actions.save')}
           >
-            <Save size={16} />
+            <span className="save-indicator-icon">
+              <Save size={16} />
+              {isDirty && <span className="save-indicator-dot" aria-hidden="true" />}
+            </span>
+          </button>
+          <button
+            className="expand-button"
+            onClick={handleSaveAs}
+            disabled={generatedGroups.length === 0}
+            title={t('actions.save_as')}
+            aria-label={t('actions.save_as')}
+          >
+            <SaveAll size={16} />
           </button>
           <button
             className="expand-button"

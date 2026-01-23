@@ -204,13 +204,21 @@ body.high-contrast {
 }
 
 .work-list-icon-button {
-  @apply bg-accent rounded hover:bg-[#8ec9c9] transition-colors;
+  @apply relative bg-accent rounded hover:bg-[#8ec9c9] transition-colors;
   padding: clamp(6px, 1.8cqw, 12px);
+}
+
+.work-list-icon-button .save-indicator-icon {
+  @apply relative inline-flex;
 }
 
 .work-list-icon-button svg {
   width: clamp(16px, 3cqw, 22px);
   height: clamp(16px, 3cqw, 22px);
+}
+
+.work-list-icon-button .save-indicator-dot {
+  @apply absolute -top-1 -right-1 h-2 w-2 rounded-full bg-red-500;
 }
 
 .work-list-items {

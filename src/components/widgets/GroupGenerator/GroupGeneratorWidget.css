@@ -6,6 +6,18 @@
   @apply flex flex-wrap items-center gap-2;
 }
 
+.expand-button {
+  @apply relative;
+}
+
+.save-indicator-icon {
+  @apply relative inline-flex;
+}
+
+.save-indicator-dot {
+  @apply absolute -top-1 -right-1 h-2 w-2 rounded-full bg-red-500;
+}
+
 .input-panel {
   @apply row-span-2 flex flex-col gap-2;
 }

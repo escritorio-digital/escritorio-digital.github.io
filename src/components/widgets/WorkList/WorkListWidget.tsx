@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { X, Edit, Download, FolderOpen } from 'lucide-react';
+import { X, Edit, FolderOpen, Save, SaveAll } from 'lucide-react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import Papa from 'papaparse';
 import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
@@ -25,6 +25,8 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
   const [editingTaskText, setEditingTaskText] = useState('');
   const [lastSavedSignature, setLastSavedSignature] = useState<string>('');
   const [currentFilename, setCurrentFilename] = useState<string | null>(null);
+  const [currentParentId, setCurrentParentId] = useState<string | null>(null);
+  const [currentEntryId, setCurrentEntryId] = useState<string | null>(null);
 
   const addTask = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && newTask.trim() !== '') {
@@ -62,7 +64,7 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
     }
   };
 
-  const downloadAsCSV = async () => {
+  const handleSaveAs = async () => {
     const csv = Papa.unparse(tasks.map(t => ({ id: t.id, text: t.text, completed: t.completed })));
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const destination = await requestSaveDestination(currentFilename || 'lista_de_trabajo.csv', { sourceWidgetId: 'work-list' });
@@ -75,8 +77,10 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
         sourceWidgetTitleKey: 'widgets.work_list.title',
         parentId: destination.parentId,
       });
+      setCurrentParentId(destination.parentId);
     } else if (destination?.destination === 'download') {
       downloadBlob(blob, destination.filename);
+      setCurrentParentId(null);
     }
     window.dispatchEvent(
       new CustomEvent('widget-title-update', {
@@ -94,7 +98,36 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
     window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'work-list' } }));
   };
 
-  const loadCsvFile = useCallback((file: File, filename?: string) => {
+  const handleSave = async () => {
+    let parentId = currentParentId;
+    if (!parentId && currentEntryId) {
+      const entry = await getEntry(currentEntryId);
+      parentId = entry?.parentId ?? null;
+    }
+    if (currentFilename && parentId) {
+      const csv = Papa.unparse(tasks.map(t => ({ id: t.id, text: t.text, completed: t.completed })));
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      await saveToFileManager({
+        blob,
+        filename: currentFilename,
+        sourceWidgetId: 'work-list',
+        sourceWidgetTitleKey: 'widgets.work_list.title',
+        parentId,
+      });
+      window.dispatchEvent(
+        new CustomEvent('widget-dirty-state', {
+          detail: { instanceId: resolvedInstanceId, widgetId: 'work-list', isDirty: false },
+        })
+      );
+      const signature = JSON.stringify(tasks);
+      setLastSavedSignature(signature);
+      window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'work-list' } }));
+      return;
+    }
+    await handleSaveAs();
+  };
+
+  const loadCsvFile = useCallback((file: File, filename?: string, parentId?: string | null, entryId?: string | null) => {
     Papa.parse<Task>(file, {
         header: true,
         skipEmptyLines: true,
@@ -123,6 +156,8 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
               })
             );
             setCurrentFilename(title);
+            setCurrentParentId(parentId ?? null);
+            setCurrentEntryId(entryId ?? null);
           }
           window.dispatchEvent(
             new CustomEvent('widget-dirty-state', {
@@ -142,7 +177,7 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
     if (!result) return;
     if (result.source === 'local') {
       const [file] = result.files;
-      if (file) loadCsvFile(file);
+      if (file) loadCsvFile(file, undefined, null, null);
       return;
     }
     const [entryId] = result.entryIds;
@@ -150,7 +185,7 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
     const entry = await getEntry(entryId);
     if (!entry?.blob) return;
     const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
-    loadCsvFile(file, entry.name);
+    loadCsvFile(file, entry.name, entry.parentId, entry.id);
   };
 
 
@@ -159,35 +194,35 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
       const entry = await getEntry(entryId);
       if (!entry?.blob) return;
       const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
-      loadCsvFile(file, entry.name);
+      loadCsvFile(file, entry.name, entry.parentId, entry.id);
     });
     return unsubscribe;
   }, [loadCsvFile]);
+
+  const isDirty = lastSavedSignature !== '' && JSON.stringify(tasks) !== lastSavedSignature;
 
   useEffect(() => {
     if (!lastSavedSignature) {
       setLastSavedSignature(JSON.stringify(tasks));
       return;
     }
-    const signature = JSON.stringify(tasks);
-    const isDirty = signature !== lastSavedSignature;
     window.dispatchEvent(
       new CustomEvent('widget-dirty-state', {
         detail: { instanceId: resolvedInstanceId, widgetId: 'work-list', isDirty },
       })
     );
-  }, [lastSavedSignature, resolvedInstanceId, tasks]);
+  }, [isDirty, lastSavedSignature, resolvedInstanceId, tasks]);
 
   useEffect(() => {
     const handler = (event: Event) => {
       const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
       if (custom.detail?.instanceId !== resolvedInstanceId) return;
       if (custom.detail?.widgetId && custom.detail.widgetId !== 'work-list') return;
-      downloadAsCSV();
+      handleSave();
     };
     window.addEventListener('widget-save-request', handler as EventListener);
     return () => window.removeEventListener('widget-save-request', handler as EventListener);
-  }, [downloadAsCSV, resolvedInstanceId]);
+  }, [handleSave, resolvedInstanceId]);
 
   useEffect(() => {
     return () => {
@@ -230,11 +265,21 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
           <FolderOpen size={20} />
         </button>
         <button 
-          onClick={downloadAsCSV}
+          onClick={handleSave}
           className="work-list-icon-button"
-          title={t('widgets.work_list.download_csv')}
+          title={t('actions.save')}
         >
-          <Download size={20} />
+          <span className="save-indicator-icon">
+            <Save size={20} />
+            {isDirty && <span className="save-indicator-dot" aria-hidden="true" />}
+          </span>
+        </button>
+        <button 
+          onClick={handleSaveAs}
+          className="work-list-icon-button"
+          title={t('actions.save_as')}
+        >
+          <SaveAll size={20} />
         </button>
       </div>
       

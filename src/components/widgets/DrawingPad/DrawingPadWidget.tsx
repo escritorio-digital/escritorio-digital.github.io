@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 // Importamos todos los iconos necesarios, incluyendo Type para la herramienta de texto y iconos de navegación
-import { Paintbrush, Eraser, Trash2, Pen, Highlighter, SprayCan, Image as ImageIcon, Save as SaveIcon, LineChart, Square, Circle, ArrowRight, Type, RotateCcw, Move } from 'lucide-react';
+import { Paintbrush, Eraser, Trash2, Pen, Highlighter, SprayCan, Image as ImageIcon, Save as SaveIcon, SaveAll as SaveAllIcon, LineChart, Square, Circle, ArrowRight, Type, RotateCcw, Move } from 'lucide-react';
 import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
 import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
@@ -44,6 +44,9 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
   const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
   const [isPanning, setIsPanning] = useState(false);
   const [currentFilename, setCurrentFilename] = useState<string | null>(null);
+  const [currentParentId, setCurrentParentId] = useState<string | null>(null);
+  const [currentEntryId, setCurrentEntryId] = useState<string | null>(null);
+  const [isDirty, setIsDirty] = useState(false);
   
   // Canvas oculto para mantener el contenido completo durante redimensionamientos
   const backupCanvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -405,6 +408,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
       contextRef.current.moveTo(offsetX, offsetY);
     }
     setIsDrawing(true); // isDrawing se usa para arrastrar, pero aquí también para indicar que una acción está en curso
+    setIsDirty(true);
   };
 
   // Función auxiliar para dibujar una cabeza de flecha
@@ -636,11 +640,12 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
         setHasBackupContent(false);
         setPanOffset({ x: 0, y: 0 });
         setPanDragStart(null);
+        setIsDirty(true);
       }
     }
   };
 
-  const loadImageFile = (file: File) => {
+  const loadImageFile = (file: File, parentId?: string | null, entryId?: string | null) => {
     // Ocultar mensaje inicial al subir una imagen
     hideInitialMessage();
     
@@ -663,6 +668,9 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
       })
     );
     setCurrentFilename(file.name);
+    setCurrentParentId(parentId ?? null);
+    setCurrentEntryId(entryId ?? null);
+    setIsDirty(false);
   };
 
   const handleOpenImage = async () => {
@@ -670,7 +678,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
     if (!result) return;
     if (result.source === 'local') {
       const [file] = result.files;
-      if (file) loadImageFile(file);
+      if (file) loadImageFile(file, null, null);
       return;
     }
     const [entryId] = result.entryIds;
@@ -678,7 +686,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
     const entry = await getEntry(entryId);
     if (!entry?.blob) return;
     const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
-    loadImageFile(file);
+    loadImageFile(file, entry.parentId, entry.id);
   };
 
   useEffect(() => {
@@ -686,13 +694,12 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
       const entry = await getEntry(entryId);
       if (!entry?.blob) return;
       const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
-      loadImageFile(file);
+      loadImageFile(file, entry.parentId, entry.id);
     });
     return unsubscribe;
   }, []);
 
-  // Manejador para guardar el dibujo
-  const handleSaveDrawing = () => {
+  const handleSaveAsDrawing = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     canvas.toBlob(async (blob) => {
@@ -714,10 +721,13 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
           })
         );
         setCurrentFilename(destination.filename);
+        setCurrentParentId(destination.parentId);
+        setIsDirty(false);
         return;
       }
       if (destination?.destination === 'download') {
         downloadBlob(blob, destination.filename);
+        setCurrentParentId(null);
       }
       window.dispatchEvent(
         new CustomEvent('widget-title-update', {
@@ -725,7 +735,33 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
         })
       );
       setCurrentFilename(destination.filename);
+      setIsDirty(false);
     }, 'image/png');
+  };
+
+  const handleSaveDrawing = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    let parentId = currentParentId;
+    if (!parentId && currentEntryId) {
+      const entry = await getEntry(currentEntryId);
+      parentId = entry?.parentId ?? null;
+    }
+    if (currentFilename && parentId) {
+      canvas.toBlob(async (blob) => {
+        if (!blob) return;
+        await saveToFileManager({
+          blob,
+          filename: currentFilename,
+          sourceWidgetId: 'drawing-pad',
+          sourceWidgetTitleKey: 'widgets.drawing_pad.title',
+          parentId,
+        });
+        setIsDirty(false);
+      }, 'image/png');
+      return;
+    }
+    handleSaveAsDrawing();
   };
 
   // NUEVA FUNCIÓN: Dibujar el texto en el canvas de forma permanente
@@ -848,8 +884,14 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
         </button>
 
         {/* Botón: Guardar Dibujo */}
-        <button onClick={handleSaveDrawing} className="p-2 rounded-md hover:bg-green-300" title={t('widgets.drawing_pad.save_drawing')}>
-          <SaveIcon size={20} />
+        <button onClick={handleSaveDrawing} className="p-2 rounded-md hover:bg-green-300 relative" title={t('actions.save')}>
+          <span className="relative inline-flex">
+            <SaveIcon size={20} />
+            {isDirty && <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-red-500" aria-hidden="true" />}
+          </span>
+        </button>
+        <button onClick={handleSaveAsDrawing} className="p-2 rounded-md hover:bg-green-300" title={t('actions.save_as')}>
+          <SaveAllIcon size={20} />
         </button>
 
         {/* Botón: Limpiar Todo */}

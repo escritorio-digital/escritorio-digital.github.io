@@ -131,3 +131,15 @@
 .action-btn.danger:hover {
   @apply bg-red-500 text-white;
 }
+
+.save-indicator-button {
+  @apply relative;
+}
+
+.save-indicator-icon {
+  @apply relative inline-flex;
+}
+
+.save-indicator-dot {
+  @apply absolute -top-1 -right-1 h-2 w-2 rounded-full bg-red-500;
+}

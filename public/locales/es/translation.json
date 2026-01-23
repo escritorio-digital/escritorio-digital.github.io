@@ -1,5 +1,10 @@
 {
   "loading": "Cargando...",
+  "actions": {
+    "save": "Guardar",
+    "save_as": "Guardar como",
+    "saved": "Guardado."
+  },
   "save_dialog": {
     "title": "Guardar archivo",
     "description": "¿Dónde quieres guardarlo?",

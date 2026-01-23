@@ -22,6 +22,7 @@ import {
   ListOrdered,
   FolderOpen,
   Save,
+  SaveAll,
   Text,
   Heading1,
   Heading2,
@@ -32,8 +33,10 @@ import {
 const MenuBar: FC<{
   editor: Editor | null;
   onUpload: () => void;
-  onDownload: () => void;
-}> = ({ editor, onUpload, onDownload }) => {
+  onSave: () => void;
+  onSaveAs: () => void;
+  isDirty: boolean;
+}> = ({ editor, onUpload, onSave, onSaveAs, isDirty }) => {
   const { t } = useTranslation();
   if (!editor) {
     return null;
@@ -80,8 +83,14 @@ const MenuBar: FC<{
         <button onClick={onUpload} className="p-2 rounded hover:bg-gray-200" title={t('widgets.notepad.menubar.upload')}>
             <FolderOpen size={16} />
         </button>
-        <button onClick={onDownload} className="p-2 rounded hover:bg-gray-200" title={t('widgets.notepad.menubar.download')}>
-            <Save size={16} />
+        <button onClick={onSave} className="p-2 rounded hover:bg-gray-200 save-indicator-button" title={t('actions.save')}>
+            <span className="save-indicator-icon">
+              <Save size={16} />
+              {isDirty && <span className="save-indicator-dot" aria-hidden="true" />}
+            </span>
+        </button>
+        <button onClick={onSaveAs} className="p-2 rounded hover:bg-gray-200" title={t('actions.save_as')}>
+            <SaveAll size={16} />
         </button>
       </div>
     </div>
@@ -97,6 +106,8 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
   const [lastSavedContent, setLastSavedContent] = useState(content);
   const [isDirty, setIsDirty] = useState(false);
   const [currentFilename, setCurrentFilename] = useState<string | null>(null);
+  const [currentParentId, setCurrentParentId] = useState<string | null>(null);
+  const [currentEntryId, setCurrentEntryId] = useState<string | null>(null);
   const turndownService = new TurndownService();
 
   const editor = useEditor({
@@ -119,7 +130,7 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
     },
   });
 
-  const handleDownload = useCallback(async () => {
+  const handleSaveAs = useCallback(async () => {
     if (!editor) return;
     const htmlContent = editor.getHTML();
     const markdownContent = turndownService.turndown(htmlContent);
@@ -136,8 +147,10 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
         sourceWidgetTitleKey: 'widgets.notepad.title',
         parentId: destination.parentId,
       });
+      setCurrentParentId(destination.parentId);
     } else if (destination?.destination === 'download') {
       downloadBlob(blob, destination.filename);
+      setCurrentParentId(null);
     }
     window.dispatchEvent(
       new CustomEvent('widget-title-update', {
@@ -153,9 +166,40 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
     setLastSavedContent(htmlContent);
     setIsDirty(false);
     window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'notepad' } }));
-  }, [editor, resolvedInstanceId, t, turndownService]);
+  }, [editor, currentFilename, resolvedInstanceId, t, turndownService]);
 
-  const loadFromFile = async (file: File) => {
+  const handleSave = useCallback(async () => {
+    if (!editor) return;
+    let parentId = currentParentId;
+    if (!parentId && currentEntryId) {
+      const entry = await getEntry(currentEntryId);
+      parentId = entry?.parentId ?? null;
+    }
+    if (currentFilename && parentId) {
+      const htmlContent = editor.getHTML();
+      const markdownContent = turndownService.turndown(htmlContent);
+      const blob = new Blob([markdownContent], { type: 'text/markdown;charset=utf-8;' });
+      await saveToFileManager({
+        blob,
+        filename: currentFilename,
+        sourceWidgetId: 'notepad',
+        sourceWidgetTitleKey: 'widgets.notepad.title',
+        parentId,
+      });
+      window.dispatchEvent(
+        new CustomEvent('widget-dirty-state', {
+          detail: { instanceId: resolvedInstanceId, widgetId: 'notepad', isDirty: false },
+        })
+      );
+      setLastSavedContent(htmlContent);
+      setIsDirty(false);
+      window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'notepad' } }));
+      return;
+    }
+    await handleSaveAs();
+  }, [editor, currentFilename, currentEntryId, currentParentId, resolvedInstanceId, turndownService, handleSaveAs]);
+
+  const loadFromFile = async (file: File, parentId?: string | null, entryId?: string | null) => {
     if (!editor) return;
     const text = await file.text();
     const htmlContent = await marked.parse(text);
@@ -168,6 +212,8 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
       })
     );
     setCurrentFilename(file.name);
+    setCurrentParentId(parentId ?? null);
+    setCurrentEntryId(entryId ?? null);
     window.dispatchEvent(
       new CustomEvent('widget-dirty-state', {
         detail: { instanceId: resolvedInstanceId, widgetId: 'notepad', isDirty: false },
@@ -180,7 +226,7 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
     if (!result) return;
     if (result.source === 'local') {
       const [file] = result.files;
-      if (file) await loadFromFile(file);
+      if (file) await loadFromFile(file, null, null);
       return;
     }
     const [entryId] = result.entryIds;
@@ -188,7 +234,7 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
     const entry = await getEntry(entryId);
     if (!entry?.blob) return;
     const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
-    await loadFromFile(file);
+    await loadFromFile(file, entry.parentId, entry.id);
   };
 
   useEffect(() => {
@@ -207,6 +253,8 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
         })
       );
       setCurrentFilename(entry.name);
+      setCurrentParentId(entry.parentId);
+      setCurrentEntryId(entry.id);
       window.dispatchEvent(
         new CustomEvent('widget-dirty-state', {
           detail: { instanceId: resolvedInstanceId, widgetId: 'notepad', isDirty: false },
@@ -221,11 +269,11 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
       const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
       if (custom.detail?.instanceId !== resolvedInstanceId) return;
       if (custom.detail?.widgetId && custom.detail.widgetId !== 'notepad') return;
-      handleDownload();
+      handleSave();
     };
     window.addEventListener('widget-save-request', handler as EventListener);
     return () => window.removeEventListener('widget-save-request', handler as EventListener);
-  }, [handleDownload, resolvedInstanceId]);
+  }, [handleSave, resolvedInstanceId]);
 
   useEffect(() => {
     setIsDirty(content !== lastSavedContent);
@@ -252,7 +300,13 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
   return (
     <div className="flex flex-col h-full w-full notepad-widget bg-white rounded-b-md overflow-hidden">
       <WidgetToolbar>
-        <MenuBar editor={editor} onUpload={handleOpenFile} onDownload={handleDownload} />
+        <MenuBar
+          editor={editor}
+          onUpload={handleOpenFile}
+          onSave={handleSave}
+          onSaveAs={handleSaveAs}
+          isDirty={isDirty}
+        />
       </WidgetToolbar>
       <EditorContent editor={editor} className="flex-grow overflow-auto" />
     </div>

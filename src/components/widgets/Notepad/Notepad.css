@@ -73,6 +73,18 @@
   gap: 0.25rem;
 }
 
+.notepad-widget .save-indicator-button {
+  @apply relative;
+}
+
+.notepad-widget .save-indicator-icon {
+  @apply relative inline-flex;
+}
+
+.notepad-widget .save-indicator-dot {
+  @apply absolute -top-1 -right-1 h-2 w-2 rounded-full bg-red-500;
+}
+
 
 @media (max-width: 520px) {
   .notepad-widget .menubar-actions {

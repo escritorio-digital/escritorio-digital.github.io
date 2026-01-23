@@ -1,5 +1,10 @@
 {
   "loading": "Chargement...",
+  "actions": {
+    "save": "Enregistrer",
+    "save_as": "Enregistrer sous",
+    "saved": "Enregistré."
+  },
   "save_dialog": {
     "title": "Enregistrer le fichier",
     "description": "Où voulez-vous l'enregistrer ?",
