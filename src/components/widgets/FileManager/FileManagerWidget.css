@@ -97,6 +97,22 @@
   @apply flex items-center gap-3 text-left flex-1 min-w-0 cursor-default;
 }
 
+.file-manager-entry-icon {
+  @apply flex items-center justify-center shrink-0 text-gray-600;
+  width: 20px;
+  height: 20px;
+}
+
+.file-manager-entry-icon img,
+.file-manager-entry-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.file-manager-entry-icon img {
+  object-fit: contain;
+}
+
 .file-manager-entry.selected {
   @apply bg-accent bg-opacity-20 rounded-md;
 }

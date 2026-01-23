@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Folder, File, Trash2, UploadCloud, FolderPlus, ArrowUp, Download, Copy, Scissors, ClipboardPaste, XCircle, Pencil } from 'lucide-react';
+import { Folder, File, Trash2, UploadCloud, FolderPlus, ArrowUp, Download, Copy, Scissors, ClipboardPaste, XCircle, Pencil, Image, Music, Film } from 'lucide-react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { withBaseUrl } from '../../../utils/assetPaths';
 import { WidgetToolbar } from '../../core/WidgetToolbar';
+import { WIDGET_REGISTRY } from '../index';
 import {
     FILE_MANAGER_ROOT_ID,
     copyEntries,
@@ -226,6 +227,49 @@ export const FileManagerWidget: FC = () => {
         });
         return items;
     }, [entries]);
+
+    const renderEntryIcon = useCallback((entry: FileManagerEntry) => {
+        if (entry.type === 'folder') {
+            return (
+                <span className="file-manager-entry-icon">
+                    <Folder size={18} />
+                </span>
+            );
+        }
+        const widgetConfig = entry.sourceWidgetId ? WIDGET_REGISTRY[entry.sourceWidgetId] : undefined;
+        if (widgetConfig?.icon) {
+            const iconNode = typeof widgetConfig.icon === 'string'
+                ? <img src={withBaseUrl(widgetConfig.icon)} alt="" />
+                : widgetConfig.icon;
+            return <span className="file-manager-entry-icon">{iconNode}</span>;
+        }
+        if (entry.mime?.startsWith('image/')) {
+            return (
+                <span className="file-manager-entry-icon">
+                    <Image size={18} />
+                </span>
+            );
+        }
+        if (entry.mime?.startsWith('audio/')) {
+            return (
+                <span className="file-manager-entry-icon">
+                    <Music size={18} />
+                </span>
+            );
+        }
+        if (entry.mime?.startsWith('video/')) {
+            return (
+                <span className="file-manager-entry-icon">
+                    <Film size={18} />
+                </span>
+            );
+        }
+        return (
+            <span className="file-manager-entry-icon">
+                <File size={18} />
+            </span>
+        );
+    }, []);
 
     const usagePercent = useMemo(() => {
         if (storageEstimate.usage == null || storageEstimate.quota == null) return null;
@@ -628,7 +672,7 @@ export const FileManagerWidget: FC = () => {
                                 }}
                                 onContextMenu={(event) => handleContextMenu(event, entry, index)}
                             >
-                                {entry.type === 'folder' ? <Folder size={18} /> : <File size={18} />}
+                                {renderEntryIcon(entry)}
                                 <span className="file-manager-entry-name">{entry.name}</span>
                                 {entry.type === 'file' && entry.size != null && (
                                     <span className="file-manager-entry-size">{formatBytes(entry.size)}</span>

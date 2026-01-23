@@ -13,7 +13,7 @@ import { AboutModal } from './components/core/AboutModal';
 import { StartMenu } from './components/core/StartMenu';
 import { ThemeProvider, defaultTheme, type Theme } from './context/ThemeContext';
 import type { ActiveWidget, DesktopProfile, ProfileCollection } from './types';
-import { PlusSquare, Image, Settings, X, Users, Maximize2, Minimize2, Pin, PinOff, FolderOpen, Home, Bell, BellRing } from 'lucide-react';
+import { PlusSquare, Image, Settings, X, Users, Maximize2, Minimize2, Pin, PinOff, FolderOpen, Home, Bell, BellRing, Folder, File, Music, Film } from 'lucide-react';
 import { defaultWallpaperValue, isWallpaperValueValid } from './utils/wallpapers';
 import { withBaseUrl } from './utils/assetPaths';
 import { getWidgetHelpText } from './utils/widgetHelp';
@@ -123,6 +123,22 @@ const DesktopUI: React.FC<{
             };
         });
     }, [activeProfile, activeProfileName, setProfiles]);
+
+    const renderDialogEntryIcon = useCallback((entry: FileManagerEntry) => {
+        if (entry.type === 'folder') {
+            return <Folder size={16} className="text-gray-500" />;
+        }
+        const widgetConfig = entry.sourceWidgetId ? WIDGET_REGISTRY[entry.sourceWidgetId] : undefined;
+        if (widgetConfig?.icon) {
+            return typeof widgetConfig.icon === 'string'
+                ? <img src={withBaseUrl(widgetConfig.icon)} alt="" className="h-4 w-4" />
+                : <span className="h-4 w-4">{widgetConfig.icon}</span>;
+        }
+        if (entry.mime?.startsWith('image/')) return <Image size={16} className="text-gray-500" />;
+        if (entry.mime?.startsWith('audio/')) return <Music size={16} className="text-gray-500" />;
+        if (entry.mime?.startsWith('video/')) return <Film size={16} className="text-gray-500" />;
+        return <File size={16} className="text-gray-500" />;
+    }, []);
 
     const saveWidgetSettings = useCallback((widgetId: string, settings: { zoom: number; toolbarPinned: boolean }) => {
         setProfiles((prev) => {
@@ -669,7 +685,7 @@ const DesktopUI: React.FC<{
             const suggested = custom.detail.suggestedFilename?.trim() || t('save_dialog.default_filename');
             setSaveDialogSuggestedFilename(suggested);
             setSaveDialogFilename(suggested);
-            setSaveDialogFilterWidget(false);
+            setSaveDialogFilterWidget(Boolean(custom.detail.sourceWidgetId));
             setSaveDialogState({ isOpen: true, sourceWidgetId: custom.detail.sourceWidgetId });
         };
         window.addEventListener('save-dialog-request', handler as EventListener);
@@ -686,7 +702,7 @@ const DesktopUI: React.FC<{
             openDialogResolverRef.current = custom.detail.resolve;
             setOpenDialogSelectedIds([]);
             setOpenDialogFolderId(FILE_MANAGER_ROOT_ID);
-            setOpenDialogFilterWidget(false);
+            setOpenDialogFilterWidget(Boolean(custom.detail.options?.sourceWidgetId));
             setOpenDialogState({ isOpen: true, options: custom.detail.options ?? {} });
         };
         window.addEventListener('open-dialog-request', handler as EventListener);
@@ -1599,9 +1615,9 @@ const DesktopUI: React.FC<{
                                                         }}
                                                         title={entry.name}
                                                     >
-                                                        <span className="truncate">
-                                                            {entry.type === 'folder' ? '📁 ' : '📄 '}
-                                                            {entry.name}
+                                                        <span className="flex min-w-0 items-center gap-2">
+                                                            {renderDialogEntryIcon(entry)}
+                                                            <span className="truncate">{entry.name}</span>
                                                         </span>
                                                         {entry.type === 'file' ? (
                                                             <span className="text-xs text-gray-400">
@@ -1758,9 +1774,9 @@ const DesktopUI: React.FC<{
                                                                     closeOpenDialog({ source: 'file-manager', entryIds: [entry.id] });
                                                                 }}
                                                             >
-                                                                <span className="truncate">
-                                                                    {entry.type === 'folder' ? '📁 ' : '📄 '}
-                                                                    {entry.name}
+                                                                <span className="flex min-w-0 items-center gap-2">
+                                                                    {renderDialogEntryIcon(entry)}
+                                                                    <span className="truncate">{entry.name}</span>
                                                                 </span>
                                                                 {entry.type === 'file' && (
                                                                     <span className="text-xs text-gray-400">
