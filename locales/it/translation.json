@@ -526,7 +526,10 @@
       "access_denied": "Accesso al microfono negato.",
       "enable_browser_settings": "Devi consentire l'accesso nelle impostazioni del browser.",
       "permission_needed": "È necessario il permesso per usare il microfono.",
-      "activate_meter": "Attiva misuratore"
+      "inactive_hint": "Clicca su Attiva per avviare il misuratore.",
+      "activate_meter": "Attiva misuratore",
+      "deactivate_meter": "Disattiva misuratore",
+      "sensitivity_label": "Sensibilità"
     },
     "memory_game": {
       "title": "Gioco di memoria",
@@ -620,6 +623,8 @@
       "title": "Puzzle scorrevole",
       "icon_alt": "Puzzle scorrevole",
       "upload_prompt": "Carica un'immagine per iniziare",
+      "upload_rule": "Le immagini quadrate funzionano meglio.",
+      "upload_button": "Carica un'immagine",
       "solved_overlay": "Risolto!",
       "complexity_label": "Complessità:",
       "difficulty": {
@@ -1065,7 +1070,6 @@
     "iframe": "Visore web per pagine all'interno del desktop.",
     "local-web": "Salva ed esegue siti web locali offline.",
     "file-opener": "Apri file locali (PDF, immagini, audio, video).",
-    "directo-viewer": "Visore per contenuti web o risorse esterne.",
     "wikipedia-search": "Ricerca rapida su Wikipedia con cambio lingua.",
     "dice": "Lanciadadi 3D per il caso.",
     "random-spinner": "Ruota casuale per sorteggi e turni.",

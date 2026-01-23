@@ -526,7 +526,10 @@
       "access_denied": "Accés al micròfon denegat.",
       "enable_browser_settings": "Has de permetre l'accés a la configuració del teu navegador.",
       "permission_needed": "Es necessita permís per utilitzar el micròfon.",
-      "activate_meter": "Activar Mesurador"
+      "inactive_hint": "Prem Activar per iniciar el mesurador.",
+      "activate_meter": "Activar mesurador",
+      "deactivate_meter": "Desactivar mesurador",
+      "sensitivity_label": "Sensibilitat"
     },
     "memory_game": {
       "title": "Memorama",
@@ -620,6 +623,8 @@
       "title": "Puzzle Lliscant",
       "icon_alt": "Puzzle Lliscant",
       "upload_prompt": "Puja una imatge per començar",
+      "upload_rule": "Millor si la imatge és quadrada.",
+      "upload_button": "Puja una imatge",
       "solved_overlay": "Resolt!",
       "complexity_label": "Complexitat:",
       "difficulty": {
@@ -1065,7 +1070,6 @@
     "iframe": "Visor web per a pàgines dins l'escriptori.",
     "local-web": "Desa i executa webs locals sense connexió.",
     "file-opener": "Obre fitxers locals (PDF, imatges, àudio, vídeo).",
-    "directo-viewer": "Visor per a contingut web o recursos externs.",
     "wikipedia-search": "Cerca ràpida a la Wikipedia amb canvi d'idioma.",
     "dice": "Llançador de daus 3D per a l'atzar.",
     "random-spinner": "Ruleta aleatòria per a sortejos i torns.",

@@ -526,7 +526,10 @@
       "access_denied": "Zugriff auf das Mikrofon verweigert.",
       "enable_browser_settings": "Du musst den Zugriff in den Browsereinstellungen erlauben.",
       "permission_needed": "Es wird eine Berechtigung benötigt, um das Mikrofon zu verwenden.",
-      "activate_meter": "Messgerät aktivieren"
+      "inactive_hint": "Klicke auf Aktivieren, um das Messgerät zu starten.",
+      "activate_meter": "Messgerät aktivieren",
+      "deactivate_meter": "Messgerät deaktivieren",
+      "sensitivity_label": "Empfindlichkeit"
     },
     "memory_game": {
       "title": "Memory",
@@ -620,6 +623,8 @@
       "title": "Schiebepuzzle",
       "icon_alt": "Schiebepuzzle",
       "upload_prompt": "Lade ein Bild hoch, um zu starten",
+      "upload_rule": "Quadratische Bilder funktionieren am besten.",
+      "upload_button": "Bild hochladen",
       "solved_overlay": "Gelöst!",
       "complexity_label": "Komplexität:",
       "difficulty": {
@@ -1065,7 +1070,6 @@
     "iframe": "Web-Viewer für Seiten innerhalb des Desktops.",
     "local-web": "Speichert und startet lokale Websites offline.",
     "file-opener": "Öffnet lokale Dateien (PDF, Bilder, Audio, Video).",
-    "directo-viewer": "Viewer für Webinhalte oder externe Ressourcen.",
     "wikipedia-search": "Schnelle Wikipedia-Suche mit Sprachwechsel.",
     "dice": "3D-Würfel für Zufallsauswahl.",
     "random-spinner": "Zufallsrad für Auslosungen und Runden.",

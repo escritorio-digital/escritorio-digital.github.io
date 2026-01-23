@@ -528,7 +528,10 @@
       "access_denied": "Acesso ao microfone negado.",
       "enable_browser_settings": "Você deve permitir o acesso nas configurações do navegador.",
       "permission_needed": "É necessário permissão para usar o microfone.",
-      "activate_meter": "Ativar Medidor"
+      "inactive_hint": "Clica em Ativar para iniciar o medidor.",
+      "activate_meter": "Ativar medidor",
+      "deactivate_meter": "Desativar medidor",
+      "sensitivity_label": "Sensibilidade"
     },
     "memory_game": {
       "title": "Jogo da Memória",
@@ -622,6 +625,8 @@
       "title": "Quebra-cabeça Deslizante",
       "icon_alt": "Quebra-cabeça Deslizante",
       "upload_prompt": "Envie uma imagem para começar",
+      "upload_rule": "Imagens quadradas funcionam melhor.",
+      "upload_button": "Carregar uma imagem",
       "solved_overlay": "Resolvido!",
       "complexity_label": "Complexidade:",
       "difficulty": {
@@ -1067,7 +1072,6 @@
     "iframe": "Visualizador web para páginas dentro do desktop.",
     "local-web": "Guarda e executa webs locais sem ligação.",
     "file-opener": "Abre ficheiros locais (PDF, imagens, áudio, vídeo).",
-    "directo-viewer": "Visualizador para conteúdo web ou recursos externos.",
     "wikipedia-search": "Pesquisa rápida na Wikipedia com mudança de idioma.",
     "dice": "Lançador de dados 3D para sorteio.",
     "random-spinner": "Roleta aleatória para sorteios e turnos.",
