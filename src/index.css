@@ -250,3 +250,24 @@ body.high-contrast {
   font-size: clamp(0.75rem, 1.8cqw, 0.95rem);
   margin-top: clamp(6px, 1.6cqw, 12px);
 }
+
+.alarm-toast-stack {
+  @apply fixed bottom-4 right-4 z-[10004] flex flex-col gap-3;
+}
+
+.alarm-toast {
+  @apply flex items-center justify-between gap-3 rounded-xl border border-green-600 bg-gray-900/95 px-4 py-3 text-white shadow-lg;
+  min-width: min(320px, 90vw);
+}
+
+.alarm-toast-title {
+  @apply text-xs uppercase tracking-wide text-green-300 font-semibold;
+}
+
+.alarm-toast-message {
+  @apply text-sm font-semibold;
+}
+
+.alarm-toast-action {
+  @apply rounded-full border border-green-400 px-3 py-1 text-xs font-semibold text-green-200 hover:bg-green-500/20 transition;
+}

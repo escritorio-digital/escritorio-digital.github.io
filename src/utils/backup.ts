@@ -18,6 +18,7 @@ export const WIDGET_DATA_KEYS = [
   'attendance-records',
   'traffic-light-state',
   'scoreboard-players',
+  'alarm-widget-alarms',
   'toolbar-hidden',
   'i18nextLng',
   'profile-order',

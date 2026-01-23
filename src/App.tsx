@@ -13,7 +13,7 @@ import { AboutModal } from './components/core/AboutModal';
 import { StartMenu } from './components/core/StartMenu';
 import { ThemeProvider, defaultTheme, type Theme } from './context/ThemeContext';
 import type { ActiveWidget, DesktopProfile, ProfileCollection } from './types';
-import { PlusSquare, Image, Settings, X, Users, Maximize2, Minimize2, Pin, PinOff, FolderOpen, Home } from 'lucide-react';
+import { PlusSquare, Image, Settings, X, Users, Maximize2, Minimize2, Pin, PinOff, FolderOpen, Home, Bell, BellRing } from 'lucide-react';
 import { defaultWallpaperValue, isWallpaperValueValid } from './utils/wallpapers';
 import { withBaseUrl } from './utils/assetPaths';
 import { getWidgetHelpText } from './utils/widgetHelp';
@@ -21,6 +21,7 @@ import { emitFileOpen } from './utils/fileOpenBus';
 import type { SaveDialogResult } from './utils/saveDialog';
 import { FILE_MANAGER_ROOT_ID, createFolder, getAllEntries, listEntriesByParent, type FileManagerEntry } from './utils/fileManagerDb';
 import type { OpenDialogResult, OpenDialogOptions } from './utils/openDialog';
+import { getStoredAlarms, setStoredAlarms, subscribeAlarmStore, updateStoredAlarms, type AlarmItem } from './utils/alarmStore';
 // --- ¡AQUÍ ESTÁ EL CAMBIO! Importamos el nuevo componente ---
 import { ProfileSwitcher } from './components/core/ProfileSwitcher';
 
@@ -36,6 +37,17 @@ const formatFileSize = (size?: number) => {
     }
     const rounded = value >= 10 ? Math.round(value) : Math.round(value * 10) / 10;
     return `${rounded} ${units[unitIndex]}`;
+};
+
+const formatRemainingTime = (ms: number): string => {
+    const totalSeconds = Math.max(0, Math.floor(ms / 1000));
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    if (hours > 0) {
+        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 };
 
 const POPUP_WIDGET_IDS = new Set([
@@ -54,7 +66,6 @@ const POPUP_WIDGET_IDS = new Set([
     'stopwatch',
     'metronome',
     'global-clocks',
-    'timer',
     'boardlive',
     'wikipedia-search',
     'scoreboard',
@@ -63,6 +74,7 @@ const POPUP_WIDGET_IDS = new Set([
     'memory-game',
     'sliding-puzzle',
     'tic-tac-toe',
+    'alarm',
 ]);
 
 // --- Componente Hijo que Renderiza la UI ---
@@ -222,11 +234,84 @@ const DesktopUI: React.FC<{
     const [openDialogBreadcrumb, setOpenDialogBreadcrumb] = useState<FileManagerEntry[]>([]);
     const openDialogWidgetLabel = getWidgetLabel(openDialogState.options.sourceWidgetId);
     const saveDialogWidgetLabel = getWidgetLabel(saveDialogState.sourceWidgetId);
+    const [alarmItems, setAlarmItems] = useState<AlarmItem[]>(() => getStoredAlarms());
+    const alarmAudioContextRef = useRef<AudioContext | null>(null);
+    const alarmSoundTimerRef = useRef<number | null>(null);
+    const activeAlarmAlerts = alarmItems.filter((alarm) => alarm.triggered);
 
     useEffect(() => {
         if (fileManagerIconPosition.y >= 32) return;
         setFileManagerIconPosition((prev) => ({ ...prev, y: 32 }));
     }, [fileManagerIconPosition.y, setFileManagerIconPosition]);
+
+    useEffect(() => subscribeAlarmStore(setAlarmItems), []);
+
+    useEffect(() => {
+        const interval = window.setInterval(() => {
+            const alarms = getStoredAlarms();
+            if (alarms.length === 0) return;
+            const now = Date.now();
+            let updated = false;
+            const next = alarms.map((alarm) => {
+                if (!alarm.triggered && alarm.targetTime <= now) {
+                    updated = true;
+                    return { ...alarm, triggered: true };
+                }
+                return alarm;
+            });
+            if (updated) setStoredAlarms(next);
+        }, 1000);
+        return () => window.clearInterval(interval);
+    }, []);
+
+    const playAlarmBeep = useCallback(() => {
+        const AudioContextClass = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+        if (!AudioContextClass) return;
+        if (!alarmAudioContextRef.current) {
+            alarmAudioContextRef.current = new AudioContextClass();
+        }
+        const context = alarmAudioContextRef.current;
+        if (context.state === 'suspended') {
+            context.resume().catch(() => undefined);
+        }
+        const oscillator = context.createOscillator();
+        const gainNode = context.createGain();
+        oscillator.type = 'square';
+        oscillator.frequency.setValueAtTime(620, context.currentTime);
+        oscillator.frequency.linearRampToValueAtTime(920, context.currentTime + 0.45);
+        oscillator.frequency.linearRampToValueAtTime(680, context.currentTime + 0.95);
+        const now = context.currentTime;
+        gainNode.gain.setValueAtTime(0.001, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.28, now + 0.04);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+        oscillator.connect(gainNode);
+        gainNode.connect(context.destination);
+        oscillator.start(now);
+        oscillator.stop(now + 1.3);
+    }, []);
+
+    const startAlarmSound = useCallback(() => {
+        if (alarmSoundTimerRef.current !== null) return;
+        playAlarmBeep();
+        alarmSoundTimerRef.current = window.setInterval(playAlarmBeep, 1600);
+    }, [playAlarmBeep]);
+
+    const stopAlarmSound = useCallback(() => {
+        if (alarmSoundTimerRef.current === null) return;
+        window.clearInterval(alarmSoundTimerRef.current);
+        alarmSoundTimerRef.current = null;
+    }, []);
+
+    useEffect(() => {
+        const shouldSound = alarmItems.some((alarm) => alarm.triggered && alarm.soundEnabled);
+        if (shouldSound) {
+            startAlarmSound();
+        } else {
+            stopAlarmSound();
+        }
+    }, [alarmItems, startAlarmSound, stopAlarmSound]);
+
+    useEffect(() => () => stopAlarmSound(), [stopAlarmSound]);
 
     useEffect(() => {
         const handlePointerDown = (event: MouseEvent) => {
@@ -532,9 +617,13 @@ const DesktopUI: React.FC<{
     };
 
     const addWidgetRef = useRef(addWidget);
+    const clampWidgetToViewportRef = useRef(clampWidgetToViewport);
     useEffect(() => {
         addWidgetRef.current = addWidget;
     }, [addWidget]);
+    useEffect(() => {
+        clampWidgetToViewportRef.current = clampWidgetToViewport;
+    }, [clampWidgetToViewport]);
 
     useEffect(() => {
         const handler = (event: Event) => {
@@ -545,6 +634,27 @@ const DesktopUI: React.FC<{
         window.addEventListener('open-widget', handler as EventListener);
         return () => window.removeEventListener('open-widget', handler as EventListener);
     }, []);
+
+    useEffect(() => {
+        const handler = (event: Event) => {
+            const custom = event as CustomEvent<{ instanceId?: string; size?: { width?: number; height?: number } }>;
+            if (!custom.detail?.instanceId || !custom.detail.size) return;
+            const { instanceId, size } = custom.detail;
+            setActiveWidgets((prev) =>
+                prev.map((widget) => {
+                    if (widget.instanceId !== instanceId) return widget;
+                    if (widget.isMaximized) return widget;
+                    const nextSize = {
+                        width: size.width ?? widget.size.width,
+                        height: size.height ?? widget.size.height,
+                    };
+                    return clampWidgetToViewportRef.current({ ...widget, size: nextSize });
+                })
+            );
+        };
+        window.addEventListener('widget-resize-request', handler as EventListener);
+        return () => window.removeEventListener('widget-resize-request', handler as EventListener);
+    }, [setActiveWidgets]);
 
     useEffect(() => {
         const handler = (event: Event) => {
@@ -927,6 +1037,8 @@ const DesktopUI: React.FC<{
         minute: '2-digit',
     }).format(now);
     const isClockColonOn = now.getSeconds() % 2 === 0;
+    const activeAlarms = alarmItems.filter((alarm) => !alarm.triggered).sort((a, b) => a.targetTime - b.targetTime);
+    const ringingAlarmCount = alarmItems.filter((alarm) => alarm.triggered).length;
 
     const renderClockTime = (time: string) => {
         const parts = time.split(':');
@@ -968,7 +1080,7 @@ const DesktopUI: React.FC<{
             window.cancelAnimationFrame(rafId);
             window.removeEventListener('resize', updateClockBottom);
         };
-    }, [showDateTime, formattedDate, formattedTime, i18n.language]);
+    }, [showDateTime, formattedDate, formattedTime, i18n.language, activeAlarms.length, ringingAlarmCount]);
 
     useEffect(() => {
         const updateStorage = async () => {
@@ -1092,6 +1204,30 @@ const DesktopUI: React.FC<{
                 >
                     <div className="text-lg opacity-90">{formattedDate}</div>
                     <div className="text-4xl font-semibold leading-tight">{renderClockTime(formattedTime)}</div>
+                    {(ringingAlarmCount > 0 || activeAlarms.length > 0) && (
+                        <div className="mt-2 flex flex-col gap-1 text-sm font-semibold text-white/90">
+                            {ringingAlarmCount > 0 && (
+                                <div className="flex items-center gap-2">
+                                    <BellRing size={16} />
+                                    <span>{t('widgets.alarm.clock_triggered', { count: ringingAlarmCount })}</span>
+                                </div>
+                            )}
+                            {activeAlarms.slice(0, 3).map((alarm) => {
+                                const label = alarm.label || t('widgets.alarm.default_label');
+                                return (
+                                    <div key={alarm.id} className="flex items-center gap-2">
+                                        <Bell size={14} />
+                                        <span>{label}: {formatRemainingTime(alarm.targetTime - now.getTime())}</span>
+                                    </div>
+                                );
+                            })}
+                            {activeAlarms.length > 3 && (
+                                <div className="flex items-center gap-2 pl-5 text-xs text-white/80">
+                                    <span>+{activeAlarms.length - 3}</span>
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </div>
             )}
             {showSystemStats && statsRows.length > 0 && (
@@ -1820,6 +1956,30 @@ const DesktopUI: React.FC<{
                     </div>
                 </div>
             )}
+            {activeAlarmAlerts.length > 0 && (
+                <div className="alarm-toast-stack" aria-live="polite">
+                    {activeAlarmAlerts.map((alarm) => {
+                        const label = alarm.label ? alarm.label : t('widgets.alarm.default_label');
+                        return (
+                            <div key={alarm.id} className="alarm-toast">
+                                <div className="alarm-toast-text">
+                                    <div className="alarm-toast-title">{t('widgets.alarm.toast_title')}</div>
+                                    <div className="alarm-toast-message">
+                                        {t('widgets.alarm.toast_label', { label })}
+                                    </div>
+                                </div>
+                                <button
+                                    type="button"
+                                    className="alarm-toast-action"
+                                    onClick={() => updateStoredAlarms((prev) => prev.filter((item) => item.id !== alarm.id))}
+                                >
+                                    {t('widgets.alarm.dismiss')}
+                                </button>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
 
             {contextMenu.isOpen && (
                 <div
@@ -2028,7 +2188,7 @@ function App() {
         'Escritorio Principal': {
             theme: defaultTheme,
             activeWidgets: [],
-            pinnedWidgets: ['work-list', 'timer', 'file-opener', 'vce-community'],
+            pinnedWidgets: ['work-list', 'alarm', 'file-opener', 'vce-community'],
             vceFavorites: [],
         },
     });
@@ -2039,6 +2199,58 @@ function App() {
     );
 
     useEffect(() => {
+        setProfiles((prev) => {
+            let changed = false;
+            const nextProfiles: ProfileCollection = {};
+            for (const [name, profile] of Object.entries(prev)) {
+                let profileChanged = false;
+                let pinnedWidgets = profile.pinnedWidgets;
+                if (pinnedWidgets.includes('timer')) {
+                    const nextPinned = pinnedWidgets.filter((id) => id !== 'timer');
+                    if (!nextPinned.includes('alarm')) {
+                        nextPinned.splice(1, 0, 'alarm');
+                    }
+                    pinnedWidgets = nextPinned;
+                    profileChanged = true;
+                }
+                if (pinnedWidgets.includes('alarm-display')) {
+                    pinnedWidgets = pinnedWidgets.filter((id) => id !== 'alarm-display');
+                    profileChanged = true;
+                }
+                let activeWidgets = profile.activeWidgets;
+                if (activeWidgets.some((widget) => widget.widgetId === 'timer')) {
+                    activeWidgets = activeWidgets.map((widget) =>
+                        widget.widgetId === 'timer' ? { ...widget, widgetId: 'alarm' } : widget
+                    );
+                    profileChanged = true;
+                }
+                if (activeWidgets.some((widget) => widget.widgetId === 'alarm-display')) {
+                    activeWidgets = activeWidgets.filter((widget) => widget.widgetId !== 'alarm-display');
+                    profileChanged = true;
+                }
+                let widgetPreferences = profile.widgetPreferences;
+                if (widgetPreferences && widgetPreferences.timer) {
+                    const { timer, ...rest } = widgetPreferences;
+                    widgetPreferences = rest;
+                    if (!widgetPreferences.alarm) {
+                        widgetPreferences = { ...widgetPreferences, alarm: timer };
+                    }
+                    profileChanged = true;
+                }
+                if (widgetPreferences && widgetPreferences['alarm-display']) {
+                    const { ['alarm-display']: _, ...rest } = widgetPreferences;
+                    widgetPreferences = rest;
+                    profileChanged = true;
+                }
+                if (profileChanged) {
+                    changed = true;
+                    nextProfiles[name] = { ...profile, pinnedWidgets, activeWidgets, widgetPreferences };
+                } else {
+                    nextProfiles[name] = profile;
+                }
+            }
+            return changed ? nextProfiles : prev;
+        });
         const handleVceFavoritesUpdate = (event: Event) => {
             const detail = (event as CustomEvent<{ profileName?: string; favorites?: string[] }>).detail;
             if (!detail || !detail.profileName || !detail.favorites) return;

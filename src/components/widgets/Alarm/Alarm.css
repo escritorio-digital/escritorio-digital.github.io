@@ -1,0 +1,119 @@
+.alarm-widget {
+  @apply w-full h-full p-3 bg-gray-100 text-text-dark;
+  container-type: size;
+}
+
+.alarm-content {
+  @apply w-full grid gap-3;
+  grid-template-columns: minmax(240px, 1fr) minmax(280px, 1.1fr);
+}
+
+.alarm-form {
+  @apply rounded-xl border border-gray-200 bg-white/85 p-3 flex flex-col gap-2 shadow-sm;
+}
+
+.alarm-section-title {
+  @apply text-sm font-semibold uppercase tracking-wide text-gray-600;
+}
+
+.alarm-mode-toggle {
+  @apply flex gap-2;
+}
+
+.alarm-mode-toggle button {
+  @apply flex-1 flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-semibold text-gray-700 transition;
+}
+
+.alarm-mode-toggle button.active {
+  @apply bg-accent text-text-dark border-transparent;
+}
+
+.alarm-field {
+  @apply flex flex-col gap-1 text-sm font-semibold text-gray-700;
+}
+
+.alarm-field input {
+  @apply rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-gray-400 focus:outline-none;
+}
+
+.alarm-countdown-grid {
+  @apply grid gap-3 sm:grid-cols-2;
+}
+
+.alarm-sound-toggle {
+  @apply flex items-center gap-2 text-sm font-semibold text-gray-700;
+}
+
+.alarm-sound-toggle input {
+  @apply h-4 w-4;
+}
+
+.alarm-error {
+  @apply rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm font-semibold text-red-700;
+}
+
+.alarm-submit {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-text-dark shadow-sm transition hover:opacity-90;
+}
+
+.alarm-empty-inline {
+  @apply text-sm font-semibold text-gray-500;
+}
+
+.alarm-list {
+  @apply rounded-xl border border-gray-200 bg-white/80 p-3 shadow-sm;
+}
+
+.alarm-empty {
+  @apply text-sm text-gray-500;
+}
+
+.alarm-items {
+  @apply mt-3 grid gap-3;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.alarm-item {
+  @apply rounded-xl border border-gray-200 bg-white px-3 py-3 flex flex-col gap-3;
+}
+
+.alarm-item.is-triggered {
+  @apply border-green-500 bg-green-50;
+}
+
+.alarm-item-title {
+  @apply text-sm font-semibold text-gray-900;
+}
+
+.alarm-item-title-input {
+  @apply w-full rounded-md border border-gray-200 bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm focus:border-gray-400 focus:outline-none;
+}
+
+.alarm-item-meta {
+  @apply text-xs font-semibold text-gray-600;
+}
+
+.alarm-item-time {
+  @apply text-xs text-gray-500;
+}
+
+.alarm-item-actions {
+  @apply flex flex-wrap gap-2;
+}
+
+.alarm-action {
+  @apply inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 hover:bg-gray-100 transition;
+}
+
+.alarm-action.danger {
+  @apply border-red-200 text-red-600 hover:bg-red-50;
+}
+
+.alarm-content {
+  align-items: start;
+}
+
+.alarm-form,
+.alarm-list {
+  height: max-content;
+}

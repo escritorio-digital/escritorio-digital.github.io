@@ -15,7 +15,7 @@ export const WIDGET_CATEGORIES: WidgetCategory[] = [
     {
         id: 'time',
         titleKey: 'settings.widgets.categories.time',
-        widgetIds: ['timer', 'stopwatch', 'metronome', 'global-clocks'],
+        widgetIds: ['alarm', 'stopwatch', 'metronome', 'global-clocks'],
     },
     {
         id: 'math_science',
