@@ -1,5 +1,8 @@
 # Cambios realizados
 
+## 2.5.4
+- Menu de configuracion: feedback de guardado integrado en el boton.
+
 ## 2.5.3
 - Herramientas participativas: apertura en ventana nueva con aviso y tamanos mas compactos; barra de herramientas oculta por defecto.
 - Menu de ventana: configuracion de herramienta simplificada con guardado y aviso de confirmacion.

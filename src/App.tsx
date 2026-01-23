@@ -1076,6 +1076,9 @@ const DesktopUI: React.FC<{
                 const isActiveWindow = widget.instanceId === activeWindowId;
                 const helpText = getWidgetHelpText(widget.widgetId, t);
                 const widgetDefaults = activeProfile.widgetPreferences?.[widget.widgetId];
+                const defaultToolbarPinned = !POPUP_WIDGET_IDS.has(widget.widgetId);
+                const savedZoom = widgetDefaults?.zoom ?? 1;
+                const savedToolbarPinned = widgetDefaults?.toolbarPinned ?? defaultToolbarPinned;
                 const zoomLevel = widget.zoom ?? widgetDefaults?.zoom ?? 1;
                 const toolbarPinned = widget.toolbarPinned ?? widgetDefaults?.toolbarPinned ?? true;
                 const windowTitle = widget.titleOverride
@@ -1149,6 +1152,8 @@ const DesktopUI: React.FC<{
                         toolSettingsDescription={t('desktop.tool_settings_description')}
                         toolSettingsSaveLabel={t('desktop.tool_settings_save')}
                         toolSettingsSavedLabel={t('desktop.tool_settings_saved')}
+                        toolSettingsSavedZoom={savedZoom}
+                        toolSettingsSavedToolbarPinned={savedToolbarPinned}
                         onZoomChange={(nextZoom) => {
                             setActiveWidgets((prev) => prev.map((w) => (
                                 w.instanceId === widget.instanceId ? { ...w, zoom: nextZoom } : w

@@ -52,6 +52,8 @@ interface WidgetWindowProps {
   toolSettingsDescription?: string;
   toolSettingsSaveLabel?: string;
   toolSettingsSavedLabel?: string;
+  toolSettingsSavedZoom?: number;
+  toolSettingsSavedToolbarPinned?: boolean;
   onSaveToolSettings?: (settings: { zoom: number; toolbarPinned: boolean }) => void;
 }
 
@@ -102,6 +104,8 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
     toolSettingsDescription,
     toolSettingsSaveLabel,
     toolSettingsSavedLabel,
+    toolSettingsSavedZoom,
+    toolSettingsSavedToolbarPinned,
     onSaveToolSettings,
 }) => {
   const [isHelpOpen, setIsHelpOpen] = React.useState(false);
@@ -231,6 +235,12 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
   const zoomInShortcutLabel = 'Ctrl++';
   const zoomOutShortcutLabel = 'Ctrl+-';
   const zoomResetShortcutLabel = 'Ctrl+0';
+  const savedZoom = toolSettingsSavedZoom ?? 1;
+  const savedToolbarPinned = toolSettingsSavedToolbarPinned ?? true;
+  const hasToolSettingsChanges = Math.abs(zoomValue - savedZoom) > 0.001 || isToolbarPinned !== savedToolbarPinned;
+  const showToolSettingsSave = Boolean(
+    onSaveToolSettings && toolSettingsLabel && toolSettingsSaveLabel && (hasToolSettingsChanges || isSaveNoticeVisible)
+  );
   const clearToolbarHideTimer = () => {
     if (toolbarHideTimer.current) {
       window.clearTimeout(toolbarHideTimer.current);
@@ -718,7 +728,7 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
                           <span>{isToolbarPinned ? toolbarHideText : toolbarPinText}</span>
                           <span className="ml-auto text-xs text-gray-400">{toolbarShortcutLabel}</span>
                         </button>
-                        {onSaveToolSettings && toolSettingsLabel && toolSettingsSaveLabel && (
+                        {showToolSettingsSave && (
                           <div className="mt-2">
                             <button
                               type="button"
@@ -727,14 +737,11 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
                               title={toolSettingsDescription || toolSettingsLabel}
                               aria-label={toolSettingsDescription || toolSettingsLabel}
                             >
-                              <CheckCircle size={16} />
-                              <span>{toolSettingsSaveLabel}</span>
+                              <CheckCircle size={16} className={isSaveNoticeVisible ? 'text-green-700' : undefined} />
+                              <span className={isSaveNoticeVisible ? 'text-green-700' : undefined}>
+                                {isSaveNoticeVisible ? (toolSettingsSavedLabel || toolSettingsSaveLabel) : toolSettingsSaveLabel}
+                              </span>
                             </button>
-                            {isSaveNoticeVisible && toolSettingsSavedLabel && (
-                              <div className="mt-1 text-center text-xs font-semibold text-green-700">
-                                {toolSettingsSavedLabel}
-                              </div>
-                            )}
                           </div>
                         )}
                       </div>
