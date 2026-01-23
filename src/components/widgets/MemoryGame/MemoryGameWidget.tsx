@@ -6,8 +6,6 @@ import { Upload, RotateCcw } from 'lucide-react';
 import { getEntry } from '../../../utils/fileManagerDb';
 import { requestOpenFile } from '../../../utils/openDialog';
 import './MemoryGame.css';
-import { WidgetToolbar } from '../../core/WidgetToolbar';
-
 // Interfaz para representar cada carta
 interface Card {
   id: number;
