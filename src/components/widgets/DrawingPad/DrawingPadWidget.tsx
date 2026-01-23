@@ -739,7 +739,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
     }, 'image/png');
   };
 
-  const handleSaveDrawing = () => {
+  const handleSaveDrawing = async () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     let parentId = currentParentId;
