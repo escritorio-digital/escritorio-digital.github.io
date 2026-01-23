@@ -1,5 +1,10 @@
 {
   "loading": "Kargatzen...",
+  "actions": {
+    "save": "Gorde",
+    "save_as": "Gorde honela",
+    "saved": "Gordeta."
+  },
   "save_dialog": {
     "title": "Fitxategia gorde",
     "description": "Non gorde nahi duzu?",
