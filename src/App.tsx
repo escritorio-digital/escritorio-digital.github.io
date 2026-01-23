@@ -75,6 +75,7 @@ const POPUP_WIDGET_IDS = new Set([
     'sliding-puzzle',
     'tic-tac-toe',
     'alarm',
+    'alarm-display',
 ]);
 
 // --- Componente Hijo que Renderiza la UI ---
@@ -2221,19 +2222,11 @@ function App() {
                     pinnedWidgets = nextPinned;
                     profileChanged = true;
                 }
-                if (pinnedWidgets.includes('alarm-display')) {
-                    pinnedWidgets = pinnedWidgets.filter((id) => id !== 'alarm-display');
-                    profileChanged = true;
-                }
                 let activeWidgets = profile.activeWidgets;
                 if (activeWidgets.some((widget) => widget.widgetId === 'timer')) {
                     activeWidgets = activeWidgets.map((widget) =>
                         widget.widgetId === 'timer' ? { ...widget, widgetId: 'alarm' } : widget
                     );
-                    profileChanged = true;
-                }
-                if (activeWidgets.some((widget) => widget.widgetId === 'alarm-display')) {
-                    activeWidgets = activeWidgets.filter((widget) => widget.widgetId !== 'alarm-display');
                     profileChanged = true;
                 }
                 let widgetPreferences = profile.widgetPreferences;
@@ -2243,11 +2236,6 @@ function App() {
                     if (!widgetPreferences.alarm) {
                         widgetPreferences = { ...widgetPreferences, alarm: timer };
                     }
-                    profileChanged = true;
-                }
-                if (widgetPreferences && widgetPreferences['alarm-display']) {
-                    const { ['alarm-display']: _, ...rest } = widgetPreferences;
-                    widgetPreferences = rest;
                     profileChanged = true;
                 }
                 if (profileChanged) {

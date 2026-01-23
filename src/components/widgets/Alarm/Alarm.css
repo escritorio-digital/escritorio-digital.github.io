@@ -56,6 +56,10 @@
   @apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-text-dark shadow-sm transition hover:opacity-90;
 }
 
+.alarm-display-launch {
+  @apply inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition;
+}
+
 .alarm-empty-inline {
   @apply text-sm font-semibold text-gray-500;
 }
@@ -71,6 +75,18 @@
 .alarm-items {
   @apply mt-3 grid gap-3;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.alarm-empty-panel {
+  @apply mt-3 rounded-xl border border-dashed border-gray-300 bg-white/70 px-4 py-4 text-sm text-gray-600;
+}
+
+.alarm-empty-panel p {
+  @apply font-semibold text-gray-700;
+}
+
+.alarm-empty-panel ul {
+  @apply mt-2 list-disc pl-5 space-y-1;
 }
 
 .alarm-item {

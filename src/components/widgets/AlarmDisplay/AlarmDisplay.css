@@ -1,0 +1,56 @@
+.alarm-display-widget {
+  @apply w-full h-full flex flex-col gap-4 p-6 bg-[#0f172a] text-white;
+  container-type: size;
+}
+
+.alarm-display-header {
+  @apply text-xs uppercase tracking-[0.3em] text-slate-300 font-semibold;
+}
+
+.alarm-display-alert {
+  @apply rounded-2xl border border-amber-400 bg-amber-200/20 px-5 py-4 text-amber-100 shadow-lg;
+}
+
+.alarm-display-alert-title {
+  @apply text-lg font-bold uppercase tracking-wide text-amber-200;
+}
+
+.alarm-display-alert-message {
+  @apply text-base font-semibold;
+  font-size: clamp(1.1rem, 3.2cqw, 1.6rem);
+}
+
+.alarm-display-empty {
+  @apply flex-1 flex items-center justify-center text-slate-300 text-lg;
+}
+
+.alarm-display-grid {
+  @apply flex-1 grid gap-4;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.alarm-display-more {
+  @apply text-sm font-semibold text-slate-300 text-center;
+}
+
+.alarm-display-card {
+  @apply rounded-2xl bg-slate-900/70 border border-slate-700 p-5 flex flex-col items-center justify-center gap-2 shadow-lg;
+}
+
+.alarm-display-time {
+  @apply font-mono font-bold text-4xl text-amber-200 text-center w-full;
+  font-size: clamp(2.2rem, 8cqw, 5rem);
+  line-height: 1;
+  padding: 0 8px;
+  white-space: nowrap;
+}
+
+.alarm-display-label {
+  @apply text-base text-slate-200 text-center font-semibold;
+  font-size: clamp(1rem, 3.2cqw, 1.5rem);
+}
+
+.alarm-display-label-input {
+  @apply w-full rounded-lg border border-slate-700 bg-slate-900/70 px-3 py-2 text-center text-slate-100 font-semibold focus:border-amber-300 focus:outline-none;
+  font-size: clamp(1rem, 3.2cqw, 1.5rem);
+}

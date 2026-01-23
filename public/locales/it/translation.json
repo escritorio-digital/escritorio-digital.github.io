@@ -705,9 +705,23 @@
       "toast_title": "Allarme",
       "toast_label": "Allarme: {{label}}",
       "default_label": "Allarme",
+      "open_display": "Apri schermo conto alla rovescia",
       "clock_active": "Allarmi: {{count}}",
       "clock_triggered": "Allarme! ({{count}})",
-      "clock_next": "{{label}}: {{time}}"
+      "clock_next": "{{label}}: {{time}}",
+      "empty_tip_title": "Consigli utili",
+      "empty_tip_persist": "Gli allarmi continuano a funzionare anche se chiudi questo strumento.",
+      "empty_tip_profiles": "Funzionano anche se cambi profilo.",
+      "empty_tip_sound": "Puoi attivare o disattivare il suono per ogni allarme.",
+      "empty_tip_clock": "I conteggi alla rovescia si vedono nell'orologio in alto a destra."
+    },
+    "alarm_display": {
+      "title": "Conto alla rovescia",
+      "none": "Nessun allarme attivo.",
+      "alert_title": "Tempo!",
+      "alert_single": "Terminato: {{label}}",
+      "alert_multi": "{{count}} allarmi terminati.",
+      "more_count": "+{{count}} in più"
     },
     "tic_tac_toe": {
       "title": "Tic-Tac-Toe",

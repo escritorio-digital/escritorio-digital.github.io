@@ -78,7 +78,7 @@ const categoryIcons: Record<string, CategoryIconConfig> = {
 };
 
 const MAX_FAVORITES = 20;
-const HIDDEN_START_MENU_WIDGET_IDS = new Set(['program-guide']);
+const HIDDEN_START_MENU_WIDGET_IDS = new Set(['program-guide', 'alarm-display']);
 
 export const StartMenu: React.FC<StartMenuProps> = ({
     isOpen,

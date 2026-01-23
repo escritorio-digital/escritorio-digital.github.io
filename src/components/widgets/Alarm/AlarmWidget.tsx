@@ -259,12 +259,19 @@ export const AlarmWidget: FC<AlarmWidgetProps> = ({ instanceId }) => {
                     <Plus size={16} />
                     {t('widgets.alarm.add_alarm')}
                 </button>
+                <button
+                    type="button"
+                    className="alarm-display-launch"
+                    onClick={() => window.dispatchEvent(new CustomEvent('open-widget', { detail: { widgetId: 'alarm-display' } }))}
+                >
+                    {t('widgets.alarm.open_display')}
+                </button>
                 {!hasAlarms && <p className="alarm-empty-inline">{t('widgets.alarm.none')}</p>}
             </div>
 
-                {hasAlarms && (
-                    <div className="alarm-list">
-                        <div className="alarm-section-title">{t('widgets.alarm.active_alarms')}</div>
+                <div className="alarm-list">
+                    <div className="alarm-section-title">{t('widgets.alarm.active_alarms')}</div>
+                    {hasAlarms ? (
                         <div className="alarm-items">
                             {formattedAlarms.map((alarm) => {
                                 const remaining = alarm.targetTime - now;
@@ -275,13 +282,13 @@ export const AlarmWidget: FC<AlarmWidgetProps> = ({ instanceId }) => {
                                         className={`alarm-item${alarm.triggered ? ' is-triggered' : ''}`}
                                     >
                                         <div className="alarm-item-main">
-                                        <input
-                                            className="alarm-item-title-input"
-                                            value={labelText}
-                                            onChange={(event) => updateLabel(alarm.id, event.target.value)}
-                                            placeholder={t('widgets.alarm.default_label')}
-                                        />
-                                        <div className="alarm-item-meta">
+                                            <input
+                                                className="alarm-item-title-input"
+                                                value={labelText}
+                                                onChange={(event) => updateLabel(alarm.id, event.target.value)}
+                                                placeholder={t('widgets.alarm.default_label')}
+                                            />
+                                            <div className="alarm-item-meta">
                                                 {alarm.triggered
                                                     ? t('widgets.alarm.triggered')
                                                     : t('widgets.alarm.remaining', { time: formatRemaining(remaining) })}
@@ -312,8 +319,18 @@ export const AlarmWidget: FC<AlarmWidgetProps> = ({ instanceId }) => {
                                 );
                             })}
                         </div>
-                    </div>
-                )}
+                    ) : (
+                        <div className="alarm-empty-panel">
+                            <p>{t('widgets.alarm.empty_tip_title')}</p>
+                            <ul>
+                                <li>{t('widgets.alarm.empty_tip_persist')}</li>
+                                <li>{t('widgets.alarm.empty_tip_profiles')}</li>
+                                <li>{t('widgets.alarm.empty_tip_sound')}</li>
+                                <li>{t('widgets.alarm.empty_tip_clock')}</li>
+                            </ul>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

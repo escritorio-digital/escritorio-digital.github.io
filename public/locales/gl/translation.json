@@ -705,9 +705,23 @@
       "toast_title": "Alarma",
       "toast_label": "Alarma: {{label}}",
       "default_label": "Alarma",
+      "open_display": "Abrir pantalla de conta atrás",
       "clock_active": "Alarmas: {{count}}",
       "clock_triggered": "Alarma! ({{count}})",
-      "clock_next": "{{label}}: {{time}}"
+      "clock_next": "{{label}}: {{time}}",
+      "empty_tip_title": "Consellos útiles",
+      "empty_tip_persist": "As alarmas seguen funcionando aínda que peches esta ferramenta.",
+      "empty_tip_profiles": "Funcionan mesmo se cambias de perfil.",
+      "empty_tip_sound": "Podes activar ou desactivar o son por alarma.",
+      "empty_tip_clock": "As contas atrás vense no reloxo da esquina superior dereita."
+    },
+    "alarm_display": {
+      "title": "Conta atrás",
+      "none": "Non hai alarmas activas.",
+      "alert_title": "Tempo!",
+      "alert_single": "Rematou: {{label}}",
+      "alert_multi": "Remataron {{count}} alarmas.",
+      "more_count": "+{{count}} máis"
     },
     "tic_tac_toe": {
       "title": "Tic-Tac-Toe",
