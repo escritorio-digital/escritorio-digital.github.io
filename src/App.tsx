@@ -1,6 +1,6 @@
 // src/App.tsx
 
-import { Suspense, useState, useEffect, useRef, useCallback } from 'react';
+import { Suspense, useState, useEffect, useRef, useCallback, cloneElement, isValidElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Rnd } from 'react-rnd';
 import { WIDGET_REGISTRY } from './components/widgets';
@@ -130,9 +130,22 @@ const DesktopUI: React.FC<{
         }
         const widgetConfig = entry.sourceWidgetId ? WIDGET_REGISTRY[entry.sourceWidgetId] : undefined;
         if (widgetConfig?.icon) {
-            return typeof widgetConfig.icon === 'string'
-                ? <img src={withBaseUrl(widgetConfig.icon)} alt="" className="h-4 w-4" />
-                : <span className="h-4 w-4">{widgetConfig.icon}</span>;
+            if (typeof widgetConfig.icon === 'string') {
+                return <img src={withBaseUrl(widgetConfig.icon)} alt="" className="h-4 w-4" />;
+            }
+            if (isValidElement(widgetConfig.icon)) {
+                const existingClassName = (widgetConfig.icon.props as { className?: string }).className ?? '';
+                const className = `${existingClassName} h-4 w-4`.trim();
+                const prevStyle = (widgetConfig.icon.props as { style?: Record<string, number | string> }).style;
+                const nextProps = {
+                    className,
+                    width: 16,
+                    height: 16,
+                    style: { ...(prevStyle ?? {}), width: 16, height: 16 },
+                };
+                return cloneElement(widgetConfig.icon, nextProps);
+            }
+            return <span className="h-4 w-4">{widgetConfig.icon}</span>;
         }
         if (entry.mime?.startsWith('image/')) return <Image size={16} className="text-gray-500" />;
         if (entry.mime?.startsWith('audio/')) return <Music size={16} className="text-gray-500" />;
@@ -470,9 +483,12 @@ const DesktopUI: React.FC<{
             };
             const filtered = entries.filter((entry) => {
                 if (entry.type === 'folder') return true;
-                if (!matchesAcceptRule(entry)) return false;
-                if (!openDialogFilterWidget || !openDialogState.options.sourceWidgetId) return true;
-                return entry.sourceWidgetId === openDialogState.options.sourceWidgetId;
+                if (openDialogFilterWidget) {
+                    if (!matchesAcceptRule(entry)) return false;
+                    if (!openDialogState.options.sourceWidgetId) return true;
+                    return entry.sourceWidgetId === openDialogState.options.sourceWidgetId;
+                }
+                return true;
             });
             const sorted = [...filtered].sort((a, b) => {
                 if (a.type !== b.type) return a.type === 'folder' ? -1 : 1;
