@@ -706,9 +706,23 @@
       "toast_title": "Alarme",
       "toast_label": "Alarme : {{label}}",
       "default_label": "Alarme",
+      "open_display": "Ouvrir l'écran de compte à rebours",
       "clock_active": "Alarmes : {{count}}",
       "clock_triggered": "Alarme ! ({{count}})",
-      "clock_next": "{{label}} : {{time}}"
+      "clock_next": "{{label}} : {{time}}",
+      "empty_tip_title": "Astuces utiles",
+      "empty_tip_persist": "Les alarmes continuent même si tu fermes cet outil.",
+      "empty_tip_profiles": "Elles fonctionnent aussi quand tu changes de profil.",
+      "empty_tip_sound": "Tu peux activer ou désactiver le son pour chaque alarme.",
+      "empty_tip_clock": "Les comptes à rebours apparaissent dans l'horloge en haut à droite."
+    },
+    "alarm_display": {
+      "title": "Compte à rebours",
+      "none": "Aucune alarme active.",
+      "alert_title": "Temps !",
+      "alert_single": "Terminé : {{label}}",
+      "alert_multi": "{{count}} alarmes terminées.",
+      "more_count": "+{{count}} de plus"
     },
     "tic_tac_toe": {
       "title": "Tic-Tac-Toe",

@@ -705,9 +705,23 @@
       "toast_title": "Alarm",
       "toast_label": "Alarm: {{label}}",
       "default_label": "Alarm",
+      "open_display": "Open countdown screen",
       "clock_active": "Alarms: {{count}}",
       "clock_triggered": "Alarm! ({{count}})",
-      "clock_next": "{{label}}: {{time}}"
+      "clock_next": "{{label}}: {{time}}",
+      "empty_tip_title": "Quick tips",
+      "empty_tip_persist": "Alarms keep running even if you close this tool.",
+      "empty_tip_profiles": "They also work when you switch profiles.",
+      "empty_tip_sound": "You can enable or disable sound per alarm.",
+      "empty_tip_clock": "Countdowns appear in the clock at the top right."
+    },
+    "alarm_display": {
+      "title": "Countdown",
+      "none": "No active alarms.",
+      "alert_title": "Time!",
+      "alert_single": "Finished: {{label}}",
+      "alert_multi": "{{count}} alarms finished.",
+      "more_count": "+{{count}} more"
     },
     "tic_tac_toe": {
       "title": "Tic-Tac-Toe",

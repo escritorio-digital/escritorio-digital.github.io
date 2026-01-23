@@ -705,9 +705,23 @@
       "toast_title": "Alarma",
       "toast_label": "Alarma: {{label}}",
       "default_label": "Alarma",
+      "open_display": "Obrir pantalla de compte enrere",
       "clock_active": "Alarmes: {{count}}",
       "clock_triggered": "Alarma! ({{count}})",
-      "clock_next": "{{label}}: {{time}}"
+      "clock_next": "{{label}}: {{time}}",
+      "empty_tip_title": "Consells útils",
+      "empty_tip_persist": "Les alarmes continuen funcionant encara que tanquis aquesta eina.",
+      "empty_tip_profiles": "Funcionen encara que canviïs de perfil.",
+      "empty_tip_sound": "Pots activar o desactivar el so per alarma.",
+      "empty_tip_clock": "Els comptes enrere es veuen al rellotge de la part superior dreta."
+    },
+    "alarm_display": {
+      "title": "Compte enrere",
+      "none": "No hi ha alarmes actives.",
+      "alert_title": "Temps!",
+      "alert_single": "Ha acabat: {{label}}",
+      "alert_multi": "Han acabat {{count}} alarmes.",
+      "more_count": "+{{count}} més"
     },
     "tic_tac_toe": {
       "title": "Tres en Ratlla",

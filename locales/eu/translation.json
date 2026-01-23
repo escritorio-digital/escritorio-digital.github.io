@@ -704,9 +704,23 @@
       "toast_title": "Alarma",
       "toast_label": "Alarma: {{label}}",
       "default_label": "Alarma",
+      "open_display": "Ireki kontu atzerako pantaila",
       "clock_active": "Alarmak: {{count}}",
       "clock_triggered": "Alarma! ({{count}})",
-      "clock_next": "{{label}}: {{time}}"
+      "clock_next": "{{label}}: {{time}}",
+      "empty_tip_title": "Aholku erabilgarriak",
+      "empty_tip_persist": "Alarmek lanean jarraitzen dute tresna itxi arren.",
+      "empty_tip_profiles": "Profila aldatuta ere funtzionatzen dute.",
+      "empty_tip_sound": "Alarma bakoitzean soinua aktiba edo desaktiba dezakezu.",
+      "empty_tip_clock": "Kontu atzerak goiko eskuineko erlojuan ikusiko dituzu."
+    },
+    "alarm_display": {
+      "title": "Kontu atzera",
+      "none": "Ez dago alarma aktiborik.",
+      "alert_title": "Denbora!",
+      "alert_single": "Amaitu da: {{label}}",
+      "alert_multi": "{{count}} alarma amaitu dira.",
+      "more_count": "+{{count}} gehiago"
     },
     "tic_tac_toe": {
       "title": "Hiru marratan",

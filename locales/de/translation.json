@@ -705,9 +705,23 @@
       "toast_title": "Alarm",
       "toast_label": "Alarm: {{label}}",
       "default_label": "Alarm",
+      "open_display": "Countdown-Anzeige öffnen",
       "clock_active": "Alarme: {{count}}",
       "clock_triggered": "Alarm! ({{count}})",
-      "clock_next": "{{label}}: {{time}}"
+      "clock_next": "{{label}}: {{time}}",
+      "empty_tip_title": "Hinweise",
+      "empty_tip_persist": "Alarme laufen weiter, auch wenn du dieses Werkzeug schließt.",
+      "empty_tip_profiles": "Sie funktionieren auch beim Profilwechsel.",
+      "empty_tip_sound": "Du kannst den Ton pro Alarm ein- oder ausschalten.",
+      "empty_tip_clock": "Die Countdowns siehst du in der Uhr oben rechts."
+    },
+    "alarm_display": {
+      "title": "Countdown",
+      "none": "Keine aktiven Alarme.",
+      "alert_title": "Zeit!",
+      "alert_single": "Beendet: {{label}}",
+      "alert_multi": "{{count}} Alarme beendet.",
+      "more_count": "+{{count}} weitere"
     },
     "tic_tac_toe": {
       "title": "Tic-Tac-Toe",

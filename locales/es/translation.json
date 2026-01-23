@@ -706,9 +706,23 @@
       "toast_title": "Alarma",
       "toast_label": "Alarma: {{label}}",
       "default_label": "Alarma",
+      "open_display": "Abrir pantalla de cuenta atrás",
       "clock_active": "Alarmas: {{count}}",
       "clock_triggered": "¡Alarma! ({{count}})",
-      "clock_next": "{{label}}: {{time}}"
+      "clock_next": "{{label}}: {{time}}",
+      "empty_tip_title": "Consejos útiles",
+      "empty_tip_persist": "Las alarmas siguen funcionando aunque cierres esta herramienta.",
+      "empty_tip_profiles": "Funcionan aunque cambies de perfil.",
+      "empty_tip_sound": "Puedes activar o desactivar el sonido por alarma.",
+      "empty_tip_clock": "Las cuentas atrás se ven en el reloj de la esquina superior derecha."
+    },
+    "alarm_display": {
+      "title": "Cuenta atrás",
+      "none": "No hay alarmas activas.",
+      "alert_title": "¡Tiempo!",
+      "alert_single": "Ha terminado: {{label}}",
+      "alert_multi": "Han terminado {{count}} alarmas.",
+      "more_count": "+{{count}} más"
     },
     "tic_tac_toe": {
       "title": "Tres en ralla",

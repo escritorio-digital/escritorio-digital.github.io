@@ -707,9 +707,23 @@
       "toast_title": "Alarme",
       "toast_label": "Alarme: {{label}}",
       "default_label": "Alarme",
+      "open_display": "Abrir ecrã de contagem decrescente",
       "clock_active": "Alarmes: {{count}}",
       "clock_triggered": "Alarme! ({{count}})",
-      "clock_next": "{{label}}: {{time}}"
+      "clock_next": "{{label}}: {{time}}",
+      "empty_tip_title": "Dicas úteis",
+      "empty_tip_persist": "Os alarmes continuam a funcionar mesmo que feches esta ferramenta.",
+      "empty_tip_profiles": "Funcionam mesmo se mudares de perfil.",
+      "empty_tip_sound": "Podes ativar ou desativar o som por alarme.",
+      "empty_tip_clock": "As contagens decrescentes aparecem no relógio no canto superior direito."
+    },
+    "alarm_display": {
+      "title": "Contagem decrescente",
+      "none": "Não há alarmes ativos.",
+      "alert_title": "Tempo!",
+      "alert_single": "Terminou: {{label}}",
+      "alert_multi": "{{count}} alarmes terminaram.",
+      "more_count": "+{{count}} a mais"
     },
     "tic_tac_toe": {
       "title": "Jogo da Velha",
