@@ -161,7 +161,6 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
         setIsMenuOpen(false);
         setIsHelpOpen(false);
         setIsZoomEditing(false);
-        setIsToolSettingsOpen(false);
       }
     };
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -169,7 +168,6 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
         setIsMenuOpen(false);
         setIsHelpOpen(false);
         setIsZoomEditing(false);
-        setIsToolSettingsOpen(false);
       }
     };
     document.addEventListener('mousedown', handlePointerDown);

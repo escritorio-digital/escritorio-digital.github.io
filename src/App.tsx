@@ -94,24 +94,6 @@ const DesktopUI: React.FC<{
         });
     }, [activeProfile, activeProfileName, setProfiles]);
 
-    const updateWidgetPreferences = useCallback((widgetId: string, settings: { zoom: number; toolbarPinned: boolean }) => {
-        setProfiles((prev) => {
-            const profile = prev[activeProfileName] || activeProfile;
-            if (!profile) return prev;
-            const nextPreferences = {
-                ...(profile.widgetPreferences ?? {}),
-                [widgetId]: {
-                    ...profile.widgetPreferences?.[widgetId],
-                    ...settings,
-                },
-            };
-            return {
-                ...prev,
-                [activeProfileName]: { ...profile, widgetPreferences: nextPreferences },
-            };
-        });
-    }, [activeProfile, activeProfileName, setProfiles]);
-
     const saveWidgetSettings = useCallback((widgetId: string, settings: { zoom: number; toolbarPinned: boolean }) => {
         setProfiles((prev) => {
             const profile = prev[activeProfileName] || activeProfile;
