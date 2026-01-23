@@ -526,7 +526,10 @@
       "access_denied": "Microphone access denied.",
       "enable_browser_settings": "You must allow access in your browser settings.",
       "permission_needed": "Permission is needed to use the microphone.",
-      "activate_meter": "Activate Meter"
+      "inactive_hint": "Click Activate to start the meter.",
+      "activate_meter": "Activate meter",
+      "deactivate_meter": "Deactivate meter",
+      "sensitivity_label": "Sensitivity"
     },
     "memory_game": {
       "title": "Memory Game",
@@ -620,6 +623,8 @@
       "title": "Sliding Puzzle",
       "icon_alt": "Sliding Puzzle",
       "upload_prompt": "Upload an image to start",
+      "upload_rule": "Square images work best.",
+      "upload_button": "Upload an image",
       "solved_overlay": "Solved!",
       "complexity_label": "Complexity:",
       "difficulty": {
@@ -1065,7 +1070,6 @@
     "iframe": "Web viewer for pages inside the desktop.",
     "local-web": "Save and run local websites offline.",
     "file-opener": "Open local files (PDF, images, audio, video).",
-    "directo-viewer": "Viewer for web content or external resources.",
     "wikipedia-search": "Quick Wikipedia search with language switch.",
     "dice": "3D dice roller for random choice.",
     "random-spinner": "Random spinner for draws and turns.",

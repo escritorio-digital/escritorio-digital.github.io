@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Papa from 'papaparse';
 import './VceCommunityWidget.css';
 import { ChevronDown, ChevronUp, Star } from 'lucide-react';
+import { WidgetToolbar } from '../../core/WidgetToolbar';
 
 type VceApp = {
     title: string;
@@ -300,48 +301,50 @@ export const VceCommunityWidget = () => {
 
     return (
         <div className="vce-widget">
-            <div className="vce-header">
-                <div>
-                    <div className="vce-title">{t('widgets.vce.title')}</div>
-                    <div className="vce-subtitle">{t('widgets.vce.subtitle')}</div>
-                </div>
-                <div className="vce-actions">
-                    <button
-                        type="button"
-                        className="vce-open"
-                        onClick={() => window.open(COMMUNITY_URL, '_blank', 'noopener,noreferrer')}
-                    >
-                        {t('widgets.vce.community_link')}
-                    </button>
-                    <button
-                        type="button"
-                        className="vce-open"
-                        onClick={() => {
-                            if (activeApp) {
-                                window.open(activeApp.url, '_blank', 'noopener,noreferrer');
-                            }
-                        }}
-                        disabled={!activeApp}
-                    >
-                        {t('widgets.vce.open_new_tab')}
-                    </button>
-                    {activeApp && (
+            <WidgetToolbar>
+                <div className="vce-header">
+                    <div>
+                        <div className="vce-title">{t('widgets.vce.title')}</div>
+                        <div className="vce-subtitle">{t('widgets.vce.subtitle')}</div>
+                    </div>
+                    <div className="vce-actions">
                         <button
                             type="button"
-                            className="vce-fav-toggle"
-                            onClick={() => toggleFavorite(activeApp.url)}
-                            title={favoriteSet.has(activeApp.url)
-                                ? t('widgets.vce.remove_favorite')
-                                : t('widgets.vce.add_favorite')}
-                            aria-label={favoriteSet.has(activeApp.url)
-                                ? t('widgets.vce.remove_favorite')
-                                : t('widgets.vce.add_favorite')}
+                            className="vce-open"
+                            onClick={() => window.open(COMMUNITY_URL, '_blank', 'noopener,noreferrer')}
                         >
-                            <Star size={16} fill={favoriteSet.has(activeApp.url) ? 'currentColor' : 'none'} />
+                            {t('widgets.vce.community_link')}
                         </button>
-                    )}
+                        <button
+                            type="button"
+                            className="vce-open"
+                            onClick={() => {
+                                if (activeApp) {
+                                    window.open(activeApp.url, '_blank', 'noopener,noreferrer');
+                                }
+                            }}
+                            disabled={!activeApp}
+                        >
+                            {t('widgets.vce.open_new_tab')}
+                        </button>
+                        {activeApp && (
+                            <button
+                                type="button"
+                                className="vce-fav-toggle"
+                                onClick={() => toggleFavorite(activeApp.url)}
+                                title={favoriteSet.has(activeApp.url)
+                                    ? t('widgets.vce.remove_favorite')
+                                    : t('widgets.vce.add_favorite')}
+                                aria-label={favoriteSet.has(activeApp.url)
+                                    ? t('widgets.vce.remove_favorite')
+                                    : t('widgets.vce.add_favorite')}
+                            >
+                                <Star size={16} fill={favoriteSet.has(activeApp.url) ? 'currentColor' : 'none'} />
+                            </button>
+                        )}
+                    </div>
                 </div>
-            </div>
+            </WidgetToolbar>
 
             <div className="vce-filters">
                 <input

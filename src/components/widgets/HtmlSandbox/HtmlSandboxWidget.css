@@ -4,7 +4,7 @@
 }
 
 .toggle-view-button {
-  @apply absolute top-2 right-2 z-10 p-2 rounded-full bg-widget-header text-text-light hover:bg-opacity-80 transition-colors;
+  @apply p-2 rounded-full bg-widget-header text-text-light hover:bg-opacity-80 transition-colors;
 }
 
 .editor-area {

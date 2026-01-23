@@ -5,6 +5,7 @@ export const BoardLiveWidget = () => (
         url="https://boardlive.github.io/"
         titleKey="widgets.boardlive.title"
         appendLanguageParam
+        openInPopup
     />
 );
 

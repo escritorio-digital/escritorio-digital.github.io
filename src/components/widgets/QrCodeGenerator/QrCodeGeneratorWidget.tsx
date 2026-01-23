@@ -4,6 +4,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import { QrCode } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import './QrCodeGenerator.css';
+import { WidgetToolbar } from '../../core/WidgetToolbar';
 
 export const QrCodeGeneratorWidget: FC = () => {
   const { t } = useTranslation();
@@ -16,6 +17,11 @@ export const QrCodeGeneratorWidget: FC = () => {
 
   return (
     <div className="qr-generator-widget">
+      <WidgetToolbar>
+        <button onClick={handleGenerate} className="generate-button">
+          {t('widgets.qr_code_generator.generate_button')}
+        </button>
+      </WidgetToolbar>
       <div className="qr-display-area">
         {qrValue ? (
           <QRCodeSVG
@@ -41,9 +47,6 @@ export const QrCodeGeneratorWidget: FC = () => {
           placeholder={t('widgets.qr_code_generator.input_placeholder')}
           className="qr-input"
         />
-        <button onClick={handleGenerate} className="generate-button">
-          {t('widgets.qr_code_generator.generate_button')}
-        </button>
       </div>
     </div>
   );

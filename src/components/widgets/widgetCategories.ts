@@ -42,7 +42,6 @@ export const WIDGET_CATEGORIES: WidgetCategory[] = [
             'iframe',
             'local-web',
             'file-opener',
-            'directo-viewer',
             'wikipedia-search',
         ],
     },
@@ -54,7 +53,7 @@ export const WIDGET_CATEGORIES: WidgetCategory[] = [
     {
         id: 'vibe_coding',
         titleKey: 'settings.widgets.categories.vibe_coding',
-        widgetIds: ['vce-community', 'comunidad-chatgpt-ia-edu', 'edumedia-iag', 'local-web'],
+        widgetIds: ['vce-community', 'local-web'],
     },
     {
         id: 'participation',

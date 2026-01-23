@@ -526,12 +526,16 @@
       "access_denied": "Acceso al micrófono denegado.",
       "enable_browser_settings": "Debes permitir el acceso en la configuración de tu navegador.",
       "permission_needed": "Se necesita permiso para usar el micrófono.",
-      "activate_meter": "Activar Medidor"
+      "inactive_hint": "Pulsa Activar para iniciar el medidor.",
+      "activate_meter": "Activar medidor",
+      "deactivate_meter": "Desactivar medidor",
+      "sensitivity_label": "Sensibilidad"
     },
     "memory_game": {
       "title": "Memorama",
       "min_images_alert": "Por favor, selecciona al menos 2 imágenes para jugar.",
       "upload_prompt": "Sube imágenes para crear el memorama",
+      "upload_button": "Sube imágenes",
       "upload_rule": "Selecciona de 2 a 10 imágenes",
       "moves": "Movimientos: {{count}}",
       "start_over": "Empezar de Nuevo",
@@ -620,6 +624,8 @@
       "title": "Puzzle Deslizante",
       "icon_alt": "Puzzle Deslizante",
       "upload_prompt": "Sube una imagen para empezar",
+      "upload_rule": "Mejor si la imagen es cuadrada.",
+      "upload_button": "Sube una imagen",
       "solved_overlay": "¡Resuelto!",
       "complexity_label": "Complejidad:",
       "difficulty": {
@@ -680,7 +686,7 @@
       "finished": "¡FIN!"
     },
     "tic_tac_toe": {
-      "title": "Tic-Tac-Toe",
+      "title": "Tres en ralla",
       "player_1": "Jugador 1",
       "player_2": "Jugador 2",
       "reset_confirm": "¿Seguro que quieres reiniciar el juego y los marcadores?",
@@ -1065,7 +1071,6 @@
     "iframe": "Visor web para páginas dentro del escritorio.",
     "local-web": "Guarda y ejecuta webs locales sin conexión.",
     "file-opener": "Abre archivos locales (PDF, imágenes, audio, vídeo).",
-    "directo-viewer": "Visor para contenido web o recursos externos.",
     "wikipedia-search": "Búsqueda rápida en Wikipedia con cambio de idioma.",
     "dice": "Lanzador de dados 3D para azar.",
     "random-spinner": "Ruleta aleatoria para sorteos y turnos.",

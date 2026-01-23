@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { Eye, Code } from 'lucide-react';
 import './HtmlSandboxWidget.css';
 import { useTranslation } from 'react-i18next';
+import { WidgetToolbar } from '../../core/WidgetToolbar';
 
 export const HtmlSandboxWidget: FC = () => {
   const { t } = useTranslation();
@@ -13,13 +14,15 @@ export const HtmlSandboxWidget: FC = () => {
 
   return (
     <div className="html-sandbox-widget">
-      <button
-        onClick={() => setIsEditorVisible(!isEditorVisible)}
-        className="toggle-view-button"
-        title={isEditorVisible ? t('widgets.html_sandbox.show_preview') : t('widgets.html_sandbox.show_code')}
-      >
-        {isEditorVisible ? <Eye size={20} /> : <Code size={20} />}
-      </button>
+      <WidgetToolbar>
+        <button
+          onClick={() => setIsEditorVisible(!isEditorVisible)}
+          className="toggle-view-button"
+          title={isEditorVisible ? t('widgets.html_sandbox.show_preview') : t('widgets.html_sandbox.show_code')}
+        >
+          {isEditorVisible ? <Eye size={20} /> : <Code size={20} />}
+        </button>
+      </WidgetToolbar>
 
       {isEditorVisible && (
         <div className="editor-area">

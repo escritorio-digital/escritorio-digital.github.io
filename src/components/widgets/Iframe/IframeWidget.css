@@ -3,7 +3,7 @@
 }
 
 .controls-container {
-  @apply flex items-center gap-2 mb-3 pb-3 border-b border-gray-300 flex-shrink-0;
+  @apply flex items-center gap-2 flex-shrink-0;
 }
 
 .url-icon {

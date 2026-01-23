@@ -6,6 +6,7 @@ import { getEntry } from '../../../utils/fileManagerDb';
 import { requestOpenFile } from '../../../utils/openDialog';
 import { unzipSync } from 'fflate';
 import './LocalWebWidget.css';
+import { WidgetToolbar } from '../../core/WidgetToolbar';
 
 type SiteMeta = {
     id: string;
@@ -726,37 +727,39 @@ export const LocalWebWidget: FC = () => {
 
     return (
         <div className="local-web-widget">
-            <div className="local-web-header">
-                <div className="local-web-title">
-                    <FolderOpen size={18} />
-                    <span>{t('widgets.local_web.title')}</span>
+            <WidgetToolbar>
+                <div className="local-web-header">
+                    <div className="local-web-title">
+                        <FolderOpen size={18} />
+                        <span>{t('widgets.local_web.title')}</span>
+                    </div>
+                    <div className="local-web-description">
+                        {t('widgets.local_web.description')}
+                    </div>
+                    <div className="local-web-actions">
+                        <button
+                            className="local-web-button local-web-button-secondary"
+                            onClick={() => setIsListCollapsed((prev) => !prev)}
+                        >
+                            {isListCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+                            {isListCollapsed ? t('widgets.local_web.expand_list') : t('widgets.local_web.collapse_list')}
+                        </button>
+                        <button
+                            className="local-web-button"
+                            onClick={handleOpenZip}
+                        >
+                            <UploadCloud size={16} />
+                            {t('widgets.local_web.import_zip')}
+                        </button>
+                        <button
+                            className="local-web-button"
+                            onClick={() => folderInputRef.current?.click()}
+                        >
+                            {t('widgets.local_web.import_folder')}
+                        </button>
+                    </div>
                 </div>
-                <div className="local-web-description">
-                    {t('widgets.local_web.description')}
-                </div>
-                <div className="local-web-actions">
-                    <button
-                        className="local-web-button local-web-button-secondary"
-                        onClick={() => setIsListCollapsed((prev) => !prev)}
-                    >
-                        {isListCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
-                        {isListCollapsed ? t('widgets.local_web.expand_list') : t('widgets.local_web.collapse_list')}
-                    </button>
-                    <button
-                        className="local-web-button"
-                        onClick={handleOpenZip}
-                    >
-                        <UploadCloud size={16} />
-                        {t('widgets.local_web.import_zip')}
-                    </button>
-                    <button
-                        className="local-web-button"
-                        onClick={() => folderInputRef.current?.click()}
-                    >
-                        {t('widgets.local_web.import_folder')}
-                    </button>
-                </div>
-            </div>
+            </WidgetToolbar>
 
             <div className={`local-web-storage ${storageClass}`}>
                 <div className="local-web-storage-text">{storageLabel}</div>

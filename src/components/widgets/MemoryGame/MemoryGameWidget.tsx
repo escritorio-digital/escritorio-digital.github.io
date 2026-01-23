@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 // 'Shuffle' ha sido eliminado de esta línea
-import { Upload, RotateCcw } from 'lucide-react'; 
+import { Upload, RotateCcw } from 'lucide-react';
 import { getEntry } from '../../../utils/fileManagerDb';
 import { requestOpenFile } from '../../../utils/openDialog';
 import './MemoryGame.css';
+import { WidgetToolbar } from '../../core/WidgetToolbar';
 
 // Interfaz para representar cada carta
 interface Card {
@@ -42,7 +43,11 @@ export const MemoryGameWidget: FC = () => {
         gameCards.push({ id: index * 2 + 1, pairId: index, content: image, isFlipped: false, isMatched: false });
       });
 
-      setCards(gameCards.sort(() => Math.random() - 0.5));
+      for (let i = gameCards.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [gameCards[i], gameCards[j]] = [gameCards[j], gameCards[i]];
+      }
+      setCards(gameCards);
       setMoves(0);
       setFlippedIndices([]);
     });
@@ -114,13 +119,18 @@ export const MemoryGameWidget: FC = () => {
 
   if (cards.length === 0) {
     return (
-      <div className="memory-placeholder">
-        <Upload size={48} />
-        <p>{t('widgets.memory_game.upload_prompt')}</p>
-        <small>{t('widgets.memory_game.upload_rule')}</small>
-        <button className="memory-upload-button" onClick={handleOpenImages}>
-          {t('widgets.memory_game.upload_prompt')}
-        </button>
+      <div className="memory-game-widget memory-empty">
+        <div className="memory-placeholder">
+          <div className="memory-placeholder-icon">
+            <Upload size={56} />
+          </div>
+          <h3>{t('widgets.memory_game.upload_prompt')}</h3>
+          <p>{t('widgets.memory_game.upload_rule')}</p>
+          <button className="memory-upload-button" onClick={handleOpenImages}>
+            <Upload size={18} />
+            {t('widgets.memory_game.upload_button')}
+          </button>
+        </div>
       </div>
     );
   }

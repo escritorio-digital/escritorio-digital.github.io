@@ -7,6 +7,7 @@ import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
 import { requestSaveDestination } from '../../../utils/saveDialog';
 import { requestOpenFile } from '../../../utils/openDialog';
+import { WidgetToolbar } from '../../core/WidgetToolbar';
 // Asumiendo que WidgetConfig existe en tu proyecto. Si no, puedes quitar esta línea o definirla.
 
 // --- El Componente Principal del Widget de Dibujo ---
@@ -770,7 +771,8 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
 
   return (
     <div className="w-full h-full flex flex-col bg-gray-100 rounded-lg shadow-md overflow-hidden">
-      <div className="p-2 bg-gray-200 flex items-center gap-2 border-b flex-wrap">
+      <WidgetToolbar>
+        <div className="flex items-center gap-2 flex-wrap">
         {/* Modo Dibujar/Borrar */}
         <div className="flex items-center gap-2 border-r pr-2">
           <button onClick={() => { hideInitialMessage(); setMode('draw'); }} className={`p-2 rounded-md ${mode === 'draw' ? 'bg-blue-500 text-white' : 'hover:bg-gray-300'}`} title={t('widgets.drawing_pad.brush')}>
@@ -868,7 +870,8 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
             <RotateCcw size={20} />
           </button>
         </div>
-      </div>
+        </div>
+      </WidgetToolbar>
 
       {/* Área del Canvas */}
       <div className="flex-grow w-full h-full relative bg-white">

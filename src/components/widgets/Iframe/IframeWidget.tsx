@@ -5,6 +5,7 @@ import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'lucide-react';
 import './IframeWidget.css';
+import { WidgetToolbar } from '../../core/WidgetToolbar';
 
 export const IframeWidget: FC = () => {
   const { t } = useTranslation();
@@ -19,20 +20,22 @@ export const IframeWidget: FC = () => {
 
   return (
     <div className="iframe-widget">
-      <div className="controls-container">
-        <Link size={20} className="url-icon" />
-        <input
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          placeholder={t('widgets.iframe.url_placeholder')}
-          onKeyPress={(e) => e.key === 'Enter' && handleApplyUrl()}
-          className="url-input"
-        />
-        <button onClick={handleApplyUrl} className="apply-button">
-          {t('widgets.iframe.load')}
-        </button>
-      </div>
+      <WidgetToolbar>
+        <div className="controls-container">
+          <Link size={20} className="url-icon" />
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder={t('widgets.iframe.url_placeholder')}
+            onKeyPress={(e) => e.key === 'Enter' && handleApplyUrl()}
+            className="url-input"
+          />
+          <button onClick={handleApplyUrl} className="apply-button">
+            {t('widgets.iframe.load')}
+          </button>
+        </div>
+      </WidgetToolbar>
       <div className="iframe-container">
         {url ? (
           <iframe

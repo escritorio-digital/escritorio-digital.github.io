@@ -104,12 +104,18 @@ export const SlidingPuzzleWidget: FC = () => {
 
   if (!image) {
     return (
-      <div className="puzzle-placeholder">
-        <Upload size={48} />
-        <p>{t('widgets.sliding_puzzle.upload_prompt')}</p>
-        <button className="puzzle-upload-button" onClick={handleOpenImage}>
-          {t('widgets.sliding_puzzle.upload_prompt')}
-        </button>
+      <div className="sliding-puzzle-widget puzzle-empty">
+        <div className="puzzle-placeholder">
+          <div className="puzzle-placeholder-icon">
+            <Upload size={56} />
+          </div>
+          <h3>{t('widgets.sliding_puzzle.upload_prompt')}</h3>
+          <p>{t('widgets.sliding_puzzle.upload_rule')}</p>
+          <button className="puzzle-upload-button" onClick={handleOpenImage}>
+            <Upload size={18} />
+            {t('widgets.sliding_puzzle.upload_button')}
+          </button>
+        </div>
       </div>
     );
   }

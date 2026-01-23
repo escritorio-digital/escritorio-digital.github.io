@@ -527,7 +527,10 @@
       "access_denied": "Accès au microphone refusé.",
       "enable_browser_settings": "Vous devez autoriser l'accès dans les paramètres de votre navigateur.",
       "permission_needed": "L'autorisation d'utiliser le microphone est requise.",
-      "activate_meter": "Activer le sonomètre"
+      "inactive_hint": "Cliquez sur Activer pour démarrer le sonomètre.",
+      "activate_meter": "Activer le sonomètre",
+      "deactivate_meter": "Désactiver le sonomètre",
+      "sensitivity_label": "Sensibilité"
     },
     "memory_game": {
       "title": "Jeu de mémoire",
@@ -621,6 +624,8 @@
       "title": "Puzzle coulissant",
       "icon_alt": "Puzzle coulissant",
       "upload_prompt": "Téléchargez une image pour commencer",
+      "upload_rule": "Les images carrées fonctionnent mieux.",
+      "upload_button": "Téléverser une image",
       "solved_overlay": "Résolu !",
       "complexity_label": "Complexité :",
       "difficulty": {
@@ -1066,7 +1071,6 @@
     "iframe": "Visionneuse web pour les pages dans le bureau.",
     "local-web": "Enregistre et exécute des sites locaux hors ligne.",
     "file-opener": "Ouvre des fichiers locaux (PDF, images, audio, vidéo).",
-    "directo-viewer": "Visionneuse pour contenu web ou ressources externes.",
     "wikipedia-search": "Recherche rapide sur Wikipedia avec changement de langue.",
     "dice": "Lanceur de dés 3D pour le hasard.",
     "random-spinner": "Roulette aléatoire pour tirages et tours.",

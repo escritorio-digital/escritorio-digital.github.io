@@ -46,6 +46,23 @@ const POPUP_WIDGET_IDS = new Set([
     'directo-muro',
     'directo-ticket',
     'qplay',
+    'scientific-calculator',
+    'calendar',
+    'unit-converter',
+    'attendance',
+    'work-list',
+    'stopwatch',
+    'metronome',
+    'global-clocks',
+    'timer',
+    'boardlive',
+    'wikipedia-search',
+    'scoreboard',
+    'random-spinner',
+    'traffic-light',
+    'memory-game',
+    'sliding-puzzle',
+    'tic-tac-toe',
 ]);
 
 // --- Componente Hijo que Renderiza la UI ---
@@ -324,8 +341,34 @@ const DesktopUI: React.FC<{
                 }
                 return path;
             };
+            const acceptRules = (openDialogState.options.accept || '')
+                .split(',')
+                .map((rule) => rule.trim().toLowerCase())
+                .filter(Boolean);
+            const matchesAcceptRule = (entry: FileManagerEntry): boolean => {
+                if (acceptRules.length === 0) return true;
+                const name = entry.name.toLowerCase();
+                const extensionIndex = name.lastIndexOf('.');
+                const extension = extensionIndex >= 0 ? name.slice(extensionIndex) : '';
+                const mime = entry.mime ? entry.mime.toLowerCase() : '';
+                return acceptRules.some((rule) => {
+                    if (rule === '*/*') return true;
+                    if (rule.startsWith('.')) {
+                        return extension === rule;
+                    }
+                    if (rule.endsWith('/*')) {
+                        const prefix = rule.slice(0, -1);
+                        return mime.startsWith(prefix);
+                    }
+                    if (rule.includes('/')) {
+                        return mime === rule;
+                    }
+                    return false;
+                });
+            };
             const filtered = entries.filter((entry) => {
                 if (entry.type === 'folder') return true;
+                if (!matchesAcceptRule(entry)) return false;
                 if (!openDialogFilterWidget || !openDialogState.options.sourceWidgetId) return true;
                 return entry.sourceWidgetId === openDialogState.options.sourceWidgetId;
             });

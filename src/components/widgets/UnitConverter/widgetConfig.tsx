@@ -12,5 +12,5 @@ export const widgetConfig: Omit<WidgetConfig, 'component'> = {
   id: 'unit-converter',
   title: 'widgets.unit_converter.title',
   icon: <WidgetIcon />,
-  defaultSize: { width: 450, height: 200 },
+  defaultSize: { width: 640, height: 420 },
 };

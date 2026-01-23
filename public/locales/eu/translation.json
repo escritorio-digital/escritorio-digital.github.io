@@ -525,7 +525,10 @@
       "access_denied": "Mikrofonoaren sarbidea ukatuta.",
       "enable_browser_settings": "Sarbidea baimendu behar duzu zure nabigatzailearen ezarpenetan.",
       "permission_needed": "Baimena behar da mikrofonoa erabiltzeko.",
-      "activate_meter": "Aktibatu Neurgailua"
+      "inactive_hint": "Sakatu Aktibatu neurgailua martxan jartzeko.",
+      "activate_meter": "Aktibatu neurgailua",
+      "deactivate_meter": "Desaktibatu neurgailua",
+      "sensitivity_label": "Sentsibilitatea"
     },
     "memory_game": {
       "title": "Memorama",
@@ -619,6 +622,8 @@
       "title": "Puzzle Lerragarria",
       "icon_alt": "Puzzle Lerragarria",
       "upload_prompt": "Igo irudi bat hasteko",
+      "upload_rule": "Irudi karratuak hobeto funtzionatzen dute.",
+      "upload_button": "Igo irudi bat",
       "solved_overlay": "Ebatzi da!",
       "complexity_label": "Konplexutasuna:",
       "difficulty": {
@@ -1064,7 +1069,6 @@
     "iframe": "Web bisorea, mahaigainaren barruko orrietarako.",
     "local-web": "Web lokalak gorde eta offline exekutatzen ditu.",
     "file-opener": "Fitxategi lokalak irekitzen ditu (PDF, irudiak, audioa, bideoa).",
-    "directo-viewer": "Web eduki edo kanpoko baliabideetarako bisorea.",
     "wikipedia-search": "Wikipedia bilaketa azkarra, hizkuntza-aldaketarekin.",
     "dice": "3D dado jaurtitzailea zorizko hautaketarako.",
     "random-spinner": "Zozketa eta txandetarako erruleta ausazkoa.",

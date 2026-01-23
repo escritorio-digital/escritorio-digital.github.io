@@ -3,6 +3,8 @@ import type { FC } from 'react'; // <-- Se ha separado la importación del tipo 
 import { useTranslation } from 'react-i18next';
 import { Mic, MicOff } from 'lucide-react';
 import './SoundMeter.css';
+import { WidgetToolbar } from '../../core/WidgetToolbar';
+import { useLocalStorage } from '../../../hooks/useLocalStorage';
 
 // ... (El resto del archivo no necesita cambios)
 type NoiseLevel = 'silence' | 'conversation' | 'noise';
@@ -35,15 +37,22 @@ export const SoundMeterWidget: FC = () => {
   const { t } = useTranslation();
   const [currentLevel, setCurrentLevel] = useState<NoiseLevel>('silence');
   const [permission, setPermission] = useState<'granted' | 'denied' | 'prompt'>('prompt');
+  const [isActive, setIsActive] = useState(false);
+  const [sensitivity, setSensitivity] = useLocalStorage<number>('sound-meter-sensitivity', 50);
   
   const audioContextRef = useRef<AudioContext | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
+  const smoothedLevelRef = useRef<number>(0);
+  const levelHoldRef = useRef<NoiseLevel>('silence');
+  const lastLevelChangeRef = useRef<number>(0);
   
   const animationFrameRef = useRef<number | undefined>(undefined);
 
   const getLevelFromVolume = (volume: number): NoiseLevel => {
-    if (volume < 15) return 'silence';
-    if (volume < 45) return 'conversation';
+    const noiseThreshold = 30 + (80 - sensitivity);
+    const silenceThreshold = Math.max(6, noiseThreshold * 0.4);
+    if (volume < silenceThreshold) return 'silence';
+    if (volume < noiseThreshold) return 'conversation';
     return 'noise';
   };
   
@@ -61,18 +70,36 @@ export const SoundMeterWidget: FC = () => {
       const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
       audioContextRef.current = new AudioContext();
       const analyser = audioContextRef.current.createAnalyser();
+      analyser.fftSize = 1024;
+      analyser.smoothingTimeConstant = 0.85;
       
       const source = audioContextRef.current.createMediaStreamSource(stream);
       source.connect(analyser);
       
       setPermission('granted');
+      setIsActive(true);
       
-      const dataArray = new Uint8Array(analyser.frequencyBinCount);
+      const dataArray = new Uint8Array(analyser.fftSize);
       
       const updateVolume = () => {
-        analyser.getByteFrequencyData(dataArray);
-        const average = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
-        setCurrentLevel(getLevelFromVolume(average));
+        analyser.getByteTimeDomainData(dataArray);
+        let sumSquares = 0;
+        for (let i = 0; i < dataArray.length; i += 1) {
+          const normalized = (dataArray[i] - 128) / 128;
+          sumSquares += normalized * normalized;
+        }
+        const rms = Math.sqrt(sumSquares / dataArray.length);
+        const gain = 0.7 + (sensitivity / 100) * 0.9;
+        const level = Math.min(100, rms * 120 * gain);
+        const smoothed = smoothedLevelRef.current * 0.85 + level * 0.15;
+        smoothedLevelRef.current = smoothed;
+        const nextLevel = getLevelFromVolume(smoothed);
+        const now = Date.now();
+        if (nextLevel !== levelHoldRef.current && now - lastLevelChangeRef.current > 700) {
+          levelHoldRef.current = nextLevel;
+          lastLevelChangeRef.current = now;
+        }
+        setCurrentLevel(levelHoldRef.current);
         animationFrameRef.current = requestAnimationFrame(updateVolume);
       };
       
@@ -81,6 +108,7 @@ export const SoundMeterWidget: FC = () => {
     } catch (err) {
       console.error(t('widgets.sound_meter.microphone_error'), err);
       setPermission('denied');
+      setIsActive(false);
     }
   };
 
@@ -90,6 +118,7 @@ export const SoundMeterWidget: FC = () => {
     if (audioContextRef.current && audioContextRef.current.state !== 'closed') {
       audioContextRef.current.close();
     }
+    setIsActive(false);
   };
 
   useEffect(() => {
@@ -98,7 +127,8 @@ export const SoundMeterWidget: FC = () => {
 
   const renderContent = () => {
     if (permission === 'granted') {
-      const { labelKey, emoji, className } = LEVEL_CONFIG[currentLevel];
+      const levelKey = isActive ? currentLevel : 'silence';
+      const { labelKey, emoji, className } = LEVEL_CONFIG[levelKey];
       return (
         <div className={`level-card ${className}`}>
           <span className="emoji">{emoji}</span>
@@ -119,9 +149,6 @@ export const SoundMeterWidget: FC = () => {
           <>
             <Mic size={48} />
             <p>{t('widgets.sound_meter.permission_needed')}</p>
-            <button onClick={startMeter} className="permission-button">
-              {t('widgets.sound_meter.activate_meter')}
-            </button>
           </>
         )}
       </div>
@@ -130,6 +157,29 @@ export const SoundMeterWidget: FC = () => {
 
   return (
     <div className="sound-meter-widget">
+      <WidgetToolbar>
+        <button
+          type="button"
+          onClick={() => (isActive ? stopMeter() : startMeter())}
+          className="sound-meter-toggle"
+          title={isActive ? t('widgets.sound_meter.deactivate_meter') : t('widgets.sound_meter.activate_meter')}
+        >
+          {isActive ? <MicOff size={18} /> : <Mic size={18} />}
+          <span>{isActive ? t('widgets.sound_meter.deactivate_meter') : t('widgets.sound_meter.activate_meter')}</span>
+        </button>
+        <div className="sound-meter-threshold">
+          <label htmlFor="sound-meter-threshold">{t('widgets.sound_meter.sensitivity_label')}</label>
+          <input
+            id="sound-meter-threshold"
+            type="range"
+            min="0"
+            max="100"
+            value={sensitivity}
+            onChange={(event) => setSensitivity(Number(event.target.value))}
+          />
+          <span className="sound-meter-threshold-value">{sensitivity}</span>
+        </div>
+      </WidgetToolbar>
       {renderContent()}
     </div>
   );

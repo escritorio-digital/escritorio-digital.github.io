@@ -526,7 +526,10 @@
       "access_denied": "Acceso ao micrófono denegado.",
       "enable_browser_settings": "Debes permitir o acceso na configuración do teu navegador.",
       "permission_needed": "Necesítase permiso para usar o micrófono.",
-      "activate_meter": "Activar Medidor"
+      "inactive_hint": "Preme Activar para iniciar o medidor.",
+      "activate_meter": "Activar medidor",
+      "deactivate_meter": "Desactivar medidor",
+      "sensitivity_label": "Sensibilidade"
     },
     "memory_game": {
       "title": "Memorama",
@@ -620,6 +623,8 @@
       "title": "Puzzle Deslizante",
       "icon_alt": "Puzzle Deslizante",
       "upload_prompt": "Sube unha imaxe para comezar",
+      "upload_rule": "As imaxes cadradas funcionan mellor.",
+      "upload_button": "Sube unha imaxe",
       "solved_overlay": "¡Resolto!",
       "complexity_label": "Complexidade:",
       "difficulty": {
@@ -1065,7 +1070,6 @@
     "iframe": "Visor web para páxinas dentro do escritorio.",
     "local-web": "Garda e executa webs locais sen conexión.",
     "file-opener": "Abre ficheiros locais (PDF, imaxes, audio, vídeo).",
-    "directo-viewer": "Visor para contido web ou recursos externos.",
     "wikipedia-search": "Busca rápida na Wikipedia con cambio de idioma.",
     "dice": "Lanzador de dados 3D para azar.",
     "random-spinner": "Ruleta aleatoria para sorteos e quendas.",

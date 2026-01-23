@@ -3,6 +3,22 @@
   container-type: size;
 }
 
+.sound-meter-toggle {
+  @apply inline-flex items-center gap-2 rounded-lg bg-accent px-3 py-1 text-xs font-semibold text-text-dark hover:bg-[#8ec9c9] transition-colors;
+}
+
+.sound-meter-threshold {
+  @apply ml-2 flex items-center gap-2 text-xs text-gray-700;
+}
+
+.sound-meter-threshold input[type="range"] {
+  @apply h-2 w-28 cursor-pointer;
+}
+
+.sound-meter-threshold-value {
+  @apply w-8 text-center text-xs font-semibold text-gray-700;
+}
+
 /* --- Pantalla de Permisos (sin cambios) --- */
 .permission-screen {
   @apply flex flex-col items-center justify-center text-center gap-4 text-text-dark;
@@ -14,13 +30,6 @@
 .permission-screen p {
   font-size: 1.1rem;
   font-size: clamp(1rem, 3cqw, 1.6rem);
-}
-
-.permission-button {
-  @apply bg-accent text-text-dark font-semibold py-2 px-4 rounded-lg hover:bg-[#8ec9c9] transition-colors;
-  font-size: 0.95rem;
-  font-size: clamp(0.9rem, 2.5cqw, 1.2rem);
-  padding: clamp(8px, 2cqw, 14px) clamp(12px, 3cqw, 20px);
 }
 
 .permission-screen small {
