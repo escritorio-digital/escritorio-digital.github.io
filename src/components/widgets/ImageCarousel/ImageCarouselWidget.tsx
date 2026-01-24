@@ -2,9 +2,10 @@ import { useState, useEffect, useCallback } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
-import { Upload, ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Image as ImageIcon, FolderOpen } from 'lucide-react';
 import { getEntry } from '../../../utils/fileManagerDb';
 import { requestOpenFile } from '../../../utils/openDialog';
+import { WidgetToolbar } from '../../core/WidgetToolbar';
 import './ImageCarousel.css';
 
 // El componente principal del carrusel de imágenes
@@ -91,13 +92,23 @@ export const ImageCarouselWidget: FC = () => {
 
   return (
     <div className="image-carousel-widget">
+      <WidgetToolbar>
+        <button
+          type="button"
+          onClick={handleOpenImages}
+          className="image-carousel-toolbar-button"
+          title={t('widgets.image_carousel.select_new_images')}
+        >
+          <FolderOpen size={18} />
+        </button>
+      </WidgetToolbar>
       {images.length === 0 ? (
         // Vista cuando no hay imágenes cargadas
         <div className="placeholder-view">
           <ImageIcon size={64} className="text-gray-400" />
           <p className="mt-4 text-center">{t('widgets.image_carousel.no_images')}</p>
           <button onClick={handleOpenImages} className="upload-button">
-            <Upload size={18} />
+            <FolderOpen size={18} />
             {t('widgets.image_carousel.select_images')}
           </button>
         </div>
@@ -134,14 +145,6 @@ export const ImageCarouselWidget: FC = () => {
             </div>
           )}
           
-          {/* Botón para cambiar las imágenes */}
-          <button 
-            onClick={handleOpenImages} 
-            className="change-images-button" 
-            title={t('widgets.image_carousel.select_new_images')}
-          >
-            <Upload size={16} />
-          </button>
         </div>
       )}
     </div>

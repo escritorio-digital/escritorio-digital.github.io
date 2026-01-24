@@ -11,6 +11,10 @@
   @apply mt-4 flex items-center gap-2 bg-accent text-text-dark font-semibold py-2 px-4 rounded-lg hover:bg-[#8ec9c9] transition-colors;
 }
 
+.image-carousel-toolbar-button {
+  @apply p-2 rounded-full bg-widget-header text-text-light hover:bg-opacity-80 transition-colors;
+}
+
 /* --- Vista del Carrusel --- */
 .carousel-view {
   @apply w-full h-full relative;
@@ -50,8 +54,4 @@
 
 .indicator-dot.active {
   @apply bg-white scale-125;
-}
-
-.change-images-button {
-  @apply absolute top-2 right-2 bg-black/30 text-white p-2 rounded-full hover:bg-black/60 transition-colors;
 }

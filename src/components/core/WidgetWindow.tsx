@@ -8,12 +8,13 @@ import { WidgetToolbarProvider } from './WidgetToolbar';
 interface WidgetWindowProps {
   id: string;
   title: string;
+  menuTitle?: string;
   icon?: React.ReactNode | string;
   children: React.ReactNode;
   position: { x: number; y: number };
   size: { width: number | string; height: number | string };
   zIndex: number;
-  windowStyle?: 'default' | 'overlay';
+  windowStyle?: 'default' | 'overlay' | 'floating';
   onDragStop: RndDragCallback;
   onResizeStop: RndResizeCallback;
   onClose: () => void;
@@ -61,6 +62,7 @@ interface WidgetWindowProps {
 export const WidgetWindow: React.FC<WidgetWindowProps> = ({
     id,
     title,
+    menuTitle,
     icon,
     children,
     position,
@@ -111,6 +113,7 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
     onSaveToolSettings,
 }) => {
   const isOverlay = windowStyle === 'overlay';
+  const isFloating = windowStyle === 'floating';
   const [isHelpOpen, setIsHelpOpen] = React.useState(false);
   const [isContentFullscreen, setIsContentFullscreen] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -149,6 +152,7 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
     ? <img src={icon} alt="" aria-hidden="true" />
     : icon;
   const menuId = `window-menu-${id}`;
+  const menuTitleText = menuTitle ?? title;
 
   React.useEffect(() => {
     const handleFullscreenChange = () => {
@@ -229,8 +233,8 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
     }, 1800);
   }, [isToolbarPinned, onSaveToolSettings, zoomValue]);
   const clampZoom = (value: number) => Math.min(5, Math.max(0.75, value));
-  const showHeader = !isOverlay && !isContentFullscreen;
-  const toolbarEnabled = !isOverlay;
+  const showHeader = windowStyle === 'default' && !isContentFullscreen;
+  const toolbarEnabled = !isOverlay && !isFloating;
   const allowResize = !isOverlay;
   const toolbarVisible = isToolbarPinned || isToolbarHovering || isMenuOpen;
   const toolbarOffset = toolbarEnabled ? (toolbarVisible ? toolbarHeight : 0) : 0;
@@ -457,8 +461,8 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
           onMouseDown={onFocus}
           onMouseDownCapture={onFocus}
           onDragStart={() => onFocus()}
-          className={`widget-window relative ${isOverlay ? 'bg-transparent border-transparent rounded-none shadow-none' : 'bg-widget-bg rounded-lg border-2 border-widget-header'} ${isOverlay ? '' : (isActive ? 'ring-2 ring-accent/70 shadow-2xl' : 'shadow-xl')}`}
-          dragHandleClassName="widget-header-drag-handle"
+          className={`widget-window relative ${isActive ? 'is-active' : 'is-inactive'} ${isOverlay || isFloating ? 'bg-transparent border-transparent rounded-none shadow-none' : 'bg-widget-bg rounded-lg border-2 border-widget-header'} ${isOverlay || isFloating ? '' : (isActive ? 'ring-2 ring-accent/70 shadow-2xl' : 'shadow-xl')}`}
+          dragHandleClassName={isFloating ? undefined : 'widget-header-drag-handle'}
           bounds="parent" 
         >
           {showHeader && (
@@ -628,7 +632,7 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
                                 aria-label={helpLabel}
                               >
                                 <CircleHelp size={16} />
-                                <span>{title}</span>
+                                <span>{menuTitleText}</span>
                               </button>
                             )}
                             {helpText && isHelpOpen && (

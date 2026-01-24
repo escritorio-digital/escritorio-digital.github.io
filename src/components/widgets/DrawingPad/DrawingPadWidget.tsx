@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 // Importamos todos los iconos necesarios, incluyendo Type para la herramienta de texto y iconos de navegación
-import { Paintbrush, Eraser, Trash2, Pen, Highlighter, SprayCan, Image as ImageIcon, Save as SaveIcon, SaveAll as SaveAllIcon, LineChart, Square, Circle, ArrowRight, Type, RotateCcw, Move } from 'lucide-react';
+import { Paintbrush, Eraser, Trash2, Pen, Highlighter, SprayCan, FolderOpen, Save as SaveIcon, SaveAll as SaveAllIcon, LineChart, Square, Circle, ArrowRight, Type, RotateCcw, Move } from 'lucide-react';
 import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
 import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
@@ -218,10 +218,11 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
     }, [panOffset]);
 
   // Función para redibujar el contenido del canvas (imagen de fondo y, eventualmente, trazos guardados)
-  const drawCanvasContent = useCallback((preserveDrawings = false) => {
+  const drawCanvasContent = useCallback((preserveDrawings = false, imageOverride?: HTMLImageElement | null) => {
     const canvas = canvasRef.current;
     const context = contextRef.current;
     if (!canvas || !context) return;
+    const activeImage = imageOverride ?? backgroundImage;
 
     // Guardar el contenido actual si queremos preservar los dibujos
     let savedContent: ImageData | null = null;
@@ -235,13 +236,13 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
     }
 
     // Dibuja la imagen de fondo si existe, escalándola para que encaje
-    if (backgroundImage) {
-      const hRatio = canvas.width / backgroundImage.width;
-      const vRatio = canvas.height / backgroundImage.height;
+    if (activeImage) {
+      const hRatio = canvas.width / activeImage.width;
+      const vRatio = canvas.height / activeImage.height;
       const ratio = Math.min(hRatio, vRatio);
 
-      const centerShift_x = (canvas.width - backgroundImage.width * ratio) / 2;
-      const centerShift_y = (canvas.height - backgroundImage.height * ratio) / 2;
+      const centerShift_x = (canvas.width - activeImage.width * ratio) / 2;
+      const centerShift_y = (canvas.height - activeImage.height * ratio) / 2;
 
       // Si estamos preservando dibujos, crear un canvas temporal para la imagen de fondo
       if (preserveDrawings && savedContent) {
@@ -252,8 +253,8 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
         
         if (tempContext) {
           // Dibujar imagen de fondo en canvas temporal
-          tempContext.drawImage(backgroundImage, 0, 0, backgroundImage.width, backgroundImage.height,
-                            centerShift_x, centerShift_y, backgroundImage.width * ratio, backgroundImage.height * ratio);
+          tempContext.drawImage(activeImage, 0, 0, activeImage.width, activeImage.height,
+                            centerShift_x, centerShift_y, activeImage.width * ratio, activeImage.height * ratio);
           
           // Restaurar los dibujos encima
           tempContext.putImageData(savedContent, 0, 0);
@@ -263,8 +264,8 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
           context.drawImage(tempCanvas, 0, 0);
         }
       } else {
-        context.drawImage(backgroundImage, 0, 0, backgroundImage.width, backgroundImage.height,
-                          centerShift_x, centerShift_y, backgroundImage.width * ratio, backgroundImage.height * ratio);
+        context.drawImage(activeImage, 0, 0, activeImage.width, activeImage.height,
+                          centerShift_x, centerShift_y, activeImage.width * ratio, activeImage.height * ratio);
       }
     } else if (preserveDrawings && savedContent) {
       // Si no hay imagen de fondo pero queremos preservar los dibujos, simplemente los restauramos
@@ -654,7 +655,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
       const img = new Image();
       img.onload = () => {
         setBackgroundImage(img); // Establece la imagen de fondo
-        drawCanvasContent(); // Redibuja el canvas con la nueva imagen
+        drawCanvasContent(false, img); // Redibuja el canvas con la nueva imagen
         
         // Guardar en backup después de cargar imagen
         saveToBackup();
@@ -880,7 +881,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
 
         {/* Botón para subir imagen */}
         <button onClick={handleOpenImage} className="p-2 rounded-md hover:bg-gray-300" title={t('widgets.drawing_pad.upload_image')}>
-          <ImageIcon size={20} />
+          <FolderOpen size={20} />
         </button>
 
         {/* Botón: Guardar Dibujo */}

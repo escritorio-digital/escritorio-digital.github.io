@@ -15,7 +15,7 @@ export interface WidgetConfig {
   defaultSize: { width: number; height: number };
   startTooltip?: string;
   searchKeywords?: string[];
-  windowStyle?: 'default' | 'overlay';
+  windowStyle?: 'default' | 'overlay' | 'floating';
   defaultMaximized?: boolean;
   component: WidgetComponent; // El componente de React como una función (cargado bajo demanda)
 }
@@ -38,6 +38,7 @@ export interface ActiveWidget {
   isMaximized?: boolean;
   previousPosition?: { x: number; y: number };
   previousSize?: { width: number | string; height: number | string };
+  windowStyleOverride?: 'default' | 'overlay' | 'floating';
   // --- FIN DE LÍNEAS AÑADIDAS ---
 }
 
@@ -50,7 +51,7 @@ export interface DesktopProfile {
   activeWidgets: ActiveWidget[];
   pinnedWidgets: string[];
   vceFavorites?: string[];
-  widgetPreferences?: Record<string, { zoom?: number; toolbarPinned?: boolean }>;
+  widgetPreferences?: Record<string, { zoom?: number; toolbarPinned?: boolean; floating?: boolean }>;
 }
 
 /**

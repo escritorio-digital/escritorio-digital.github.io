@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { FC, PointerEvent as ReactPointerEvent, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, Circle, Eraser, GripVertical, Highlighter, Minus, Pencil, RotateCcw, RotateCw, Square, Trash2, X } from 'lucide-react';
+import { ArrowRight, Circle, CircleHelp, Eraser, GripVertical, Highlighter, Minus, Pencil, RotateCcw, RotateCw, Square, Trash2, X } from 'lucide-react';
 import './ScreenAnnotatorWidget.css';
 
 type Tool = 'pen' | 'highlighter' | 'eraser' | 'line' | 'rectangle' | 'ellipse' | 'arrow';
@@ -79,6 +79,7 @@ export const ScreenAnnotatorWidget: FC<{ instanceId?: string }> = ({ instanceId 
     );
     const [fillShapes, setFillShapes] = useState(initialDraftRef.current?.fillShapes ?? false);
     const [toolbarPos, setToolbarPos] = useState(initialDraftRef.current?.toolbarPos ?? { x: 24, y: 24 });
+    const [isHelpOpen, setIsHelpOpen] = useState(false);
     const activeSettings = toolSettings[tool] ?? { color: DEFAULT_COLOR, size: DEFAULT_SIZE, opacity: 1 };
 
     const toolButtons: { id: Tool; icon: ReactNode; label: string }[] = useMemo(() => [
@@ -457,17 +458,33 @@ export const ScreenAnnotatorWidget: FC<{ instanceId?: string }> = ({ instanceId 
             >
                 <div className="screen-annotator-toolbar-section">
                     <div className="screen-annotator-toolbar-header">
+                        <div className="screen-annotator-toolbar-title">
+                            <button
+                                type="button"
+                                className="screen-annotator-handle"
+                                title={t('widgets.screen_annotator.toolbar_drag')}
+                                aria-label={t('widgets.screen_annotator.toolbar_drag')}
+                                onPointerDown={handleToolbarPointerDown}
+                            >
+                                <GripVertical size={16} />
+                            </button>
+                            <span>{t('widgets.screen_annotator.title')}</span>
+                        </div>
                         <button
                             type="button"
-                            className="screen-annotator-handle"
-                            title={t('widgets.screen_annotator.toolbar_drag')}
-                            aria-label={t('widgets.screen_annotator.toolbar_drag')}
-                            onPointerDown={handleToolbarPointerDown}
+                            className={`screen-annotator-help${isHelpOpen ? ' is-active' : ''}`}
+                            onClick={() => setIsHelpOpen((prev) => !prev)}
+                            title={t('desktop.window_help')}
+                            aria-label={t('desktop.window_help')}
                         >
-                            <GripVertical size={16} />
+                            <CircleHelp size={14} />
                         </button>
-                        <span>{t('widgets.screen_annotator.section_tools')}</span>
                     </div>
+                    {isHelpOpen && (
+                        <div className="screen-annotator-help-text">
+                            {t('widgets_help.screen-annotator')}
+                        </div>
+                    )}
                     <div className="screen-annotator-toolbar-row tools">
                         {toolButtons.map((button) => (
                             <button
@@ -485,9 +502,6 @@ export const ScreenAnnotatorWidget: FC<{ instanceId?: string }> = ({ instanceId 
                 </div>
                 <div className="screen-annotator-divider" />
                 <div className="screen-annotator-toolbar-section">
-                    <div className="screen-annotator-toolbar-header">
-                        <span>{t('widgets.screen_annotator.section_properties')}</span>
-                    </div>
                     <div className="screen-annotator-toolbar-row settings">
                         <label className="screen-annotator-field">
                             <span>{t('widgets.screen_annotator.color_label')}</span>
@@ -553,9 +567,6 @@ export const ScreenAnnotatorWidget: FC<{ instanceId?: string }> = ({ instanceId 
                 </div>
                 <div className="screen-annotator-divider" />
                 <div className="screen-annotator-toolbar-section">
-                    <div className="screen-annotator-toolbar-header">
-                        <span>{t('widgets.screen_annotator.section_actions')}</span>
-                    </div>
                     <div className="screen-annotator-toolbar-row actions">
                         <button
                             type="button"

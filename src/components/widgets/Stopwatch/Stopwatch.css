@@ -48,7 +48,7 @@
   @apply flex-shrink-0 h-32 bg-black/30 rounded-lg overflow-y-auto;
 }
 .laps-list {
-  @apply p-2 font-mono text-sm;
+  @apply p-2 font-mono;
 }
 .lap-item {
   @apply flex justify-between p-1 border-b border-gray-700;

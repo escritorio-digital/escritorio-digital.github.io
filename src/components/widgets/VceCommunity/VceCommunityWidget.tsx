@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Papa from 'papaparse';
 import './VceCommunityWidget.css';
-import { ChevronDown, ChevronUp, Star } from 'lucide-react';
+import { ChevronDown, ChevronUp, PanelLeftClose, PanelLeftOpen, Star } from 'lucide-react';
 import { WidgetToolbar } from '../../core/WidgetToolbar';
 
 type VceApp = {
@@ -81,6 +81,7 @@ export const VceCommunityWidget = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
     const [iframeBlocked, setIframeBlocked] = useState(false);
+    const [isListCollapsed, setIsListCollapsed] = useState(false);
     const iframeRef = useRef<HTMLIFrameElement | null>(null);
     const [activeProfileName, setActiveProfileName] = useState(() => readActiveProfileName());
     const [favoriteUrls, setFavoriteUrls] = useState<string[]>(() => (
@@ -302,82 +303,92 @@ export const VceCommunityWidget = () => {
     return (
         <div className="vce-widget">
             <WidgetToolbar>
-                <div className="vce-header">
-                    <div>
-                        <div className="vce-title">{t('widgets.vce.title')}</div>
-                        <div className="vce-subtitle">{t('widgets.vce.subtitle')}</div>
-                    </div>
-                    <div className="vce-actions">
-                        <button
-                            type="button"
-                            className="vce-open"
-                            onClick={() => window.open(COMMUNITY_URL, '_blank', 'noopener,noreferrer')}
-                        >
-                            {t('widgets.vce.community_link')}
-                        </button>
-                        <button
-                            type="button"
-                            className="vce-open"
-                            onClick={() => {
-                                if (activeApp) {
-                                    window.open(activeApp.url, '_blank', 'noopener,noreferrer');
-                                }
-                            }}
-                            disabled={!activeApp}
-                        >
-                            {t('widgets.vce.open_new_tab')}
-                        </button>
-                        {activeApp && (
+                <div className="vce-toolbar">
+                    <div className="vce-header">
+                        <div>
+                            <div className="vce-title">{t('widgets.vce.title')}</div>
+                            <div className="vce-subtitle">{t('widgets.vce.subtitle')}</div>
+                        </div>
+                        <div className="vce-actions">
                             <button
                                 type="button"
-                                className="vce-fav-toggle"
-                                onClick={() => toggleFavorite(activeApp.url)}
-                                title={favoriteSet.has(activeApp.url)
-                                    ? t('widgets.vce.remove_favorite')
-                                    : t('widgets.vce.add_favorite')}
-                                aria-label={favoriteSet.has(activeApp.url)
-                                    ? t('widgets.vce.remove_favorite')
-                                    : t('widgets.vce.add_favorite')}
+                                className="vce-toggle-list"
+                                onClick={() => setIsListCollapsed((prev) => !prev)}
+                                title={isListCollapsed ? t('widgets.vce.expand_list') : t('widgets.vce.collapse_list')}
+                                aria-label={isListCollapsed ? t('widgets.vce.expand_list') : t('widgets.vce.collapse_list')}
                             >
-                                <Star size={16} fill={favoriteSet.has(activeApp.url) ? 'currentColor' : 'none'} />
+                                {isListCollapsed ? <PanelLeftOpen size={16} /> : <PanelLeftClose size={16} />}
                             </button>
-                        )}
+                            <button
+                                type="button"
+                                className="vce-open"
+                                onClick={() => window.open(COMMUNITY_URL, '_blank', 'noopener,noreferrer')}
+                            >
+                                {t('widgets.vce.community_link')}
+                            </button>
+                            <button
+                                type="button"
+                                className="vce-open"
+                                onClick={() => {
+                                    if (activeApp) {
+                                        window.open(activeApp.url, '_blank', 'noopener,noreferrer');
+                                    }
+                                }}
+                                disabled={!activeApp}
+                            >
+                                {t('widgets.vce.open_new_tab')}
+                            </button>
+                            {activeApp && (
+                                <button
+                                    type="button"
+                                    className="vce-fav-toggle"
+                                    onClick={() => toggleFavorite(activeApp.url)}
+                                    title={favoriteSet.has(activeApp.url)
+                                        ? t('widgets.vce.remove_favorite')
+                                        : t('widgets.vce.add_favorite')}
+                                    aria-label={favoriteSet.has(activeApp.url)
+                                        ? t('widgets.vce.remove_favorite')
+                                        : t('widgets.vce.add_favorite')}
+                                >
+                                    <Star size={16} fill={favoriteSet.has(activeApp.url) ? 'currentColor' : 'none'} />
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                    <div className="vce-filters">
+                        <input
+                            type="text"
+                            className="vce-search"
+                            value={searchTerm}
+                            onChange={(event) => setSearchTerm(event.target.value)}
+                            placeholder={t('widgets.vce.search_placeholder')}
+                        />
+                        <select
+                            className="vce-select"
+                            value={levelFilter}
+                            onChange={(event) => setLevelFilter(event.target.value)}
+                        >
+                            <option value="">{t('widgets.vce.filter_level_all')}</option>
+                            {levels.map((level) => (
+                                <option key={level} value={level}>{level}</option>
+                            ))}
+                        </select>
+                        <select
+                            className="vce-select"
+                            value={areaFilter}
+                            onChange={(event) => setAreaFilter(event.target.value)}
+                        >
+                            <option value="">{t('widgets.vce.filter_area_all')}</option>
+                            {areas.map((area) => (
+                                <option key={area} value={area}>{area}</option>
+                            ))}
+                        </select>
                     </div>
                 </div>
             </WidgetToolbar>
 
-            <div className="vce-filters">
-                <input
-                    type="text"
-                    className="vce-search"
-                    value={searchTerm}
-                    onChange={(event) => setSearchTerm(event.target.value)}
-                    placeholder={t('widgets.vce.search_placeholder')}
-                />
-                <select
-                    className="vce-select"
-                    value={levelFilter}
-                    onChange={(event) => setLevelFilter(event.target.value)}
-                >
-                    <option value="">{t('widgets.vce.filter_level_all')}</option>
-                    {levels.map((level) => (
-                        <option key={level} value={level}>{level}</option>
-                    ))}
-                </select>
-                <select
-                    className="vce-select"
-                    value={areaFilter}
-                    onChange={(event) => setAreaFilter(event.target.value)}
-                >
-                    <option value="">{t('widgets.vce.filter_area_all')}</option>
-                    {areas.map((area) => (
-                        <option key={area} value={area}>{area}</option>
-                    ))}
-                </select>
-            </div>
-
-            <div className="vce-body">
-                <div className="vce-list">
+            <div className={`vce-body${isListCollapsed ? ' is-collapsed' : ''}`}>
+                <div className={`vce-list${isListCollapsed ? ' is-collapsed' : ''}`}>
                     {isLoading && (
                         <div className="vce-empty">{t('widgets.vce.loading')}</div>
                     )}

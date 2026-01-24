@@ -29,6 +29,13 @@ export const IframeWidget: FC = () => {
             onChange={(e) => setInputValue(e.target.value)}
             placeholder={t('widgets.iframe.url_placeholder')}
             onKeyPress={(e) => e.key === 'Enter' && handleApplyUrl()}
+            onFocus={(e) => e.target.select()}
+            onClick={(e) => {
+              const target = e.currentTarget;
+              if (target.selectionStart !== 0 || target.selectionEnd !== target.value.length) {
+                target.select();
+              }
+            }}
             className="url-input"
           />
           <button onClick={handleApplyUrl} className="apply-button">
@@ -38,12 +45,12 @@ export const IframeWidget: FC = () => {
       </WidgetToolbar>
       <div className="iframe-container">
         {url ? (
-          <iframe
-            src={url}
-            title={t('widgets.iframe.embedded_content')}
-            className="embedded-iframe"
-            sandbox="allow-scripts allow-forms allow-popups"
-          />
+            <iframe
+              src={url}
+              title={t('widgets.iframe.embedded_content')}
+              className="embedded-iframe"
+              sandbox="allow-scripts allow-forms allow-popups allow-same-origin"
+            />
         ) : (
           <div className="placeholder">
             <p>{t('widgets.iframe.content_placeholder')}</p>

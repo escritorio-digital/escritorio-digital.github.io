@@ -22,6 +22,7 @@ export const StopwatchWidget: FC = () => {
   const displayRef = useRef<HTMLDivElement>(null);
   const [timeFontSize, setTimeFontSize] = useState(48);
   const lastFontSizeRef = useRef(48);
+  const lapFontSize = Math.max(12, Math.min(26, Math.round(timeFontSize * 0.28)));
 
   useEffect(() => {
     if (isActive) {
@@ -100,16 +101,18 @@ export const StopwatchWidget: FC = () => {
         </button>
       </div>
       
-      <div className="laps-container">
-        <ul className="laps-list">
-          {laps.map((lap, index) => (
-            <li key={index} className="lap-item">
-              <span>{t('widgets.stopwatch.lap')} {laps.length - index}</span>
-              <span>{formatTime(lap)}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {laps.length > 0 && (
+        <div className="laps-container">
+          <ul className="laps-list" style={{ fontSize: `${lapFontSize}px` }}>
+            {laps.map((lap, index) => (
+              <li key={index} className="lap-item">
+                <span>{t('widgets.stopwatch.lap')} {laps.length - index}</span>
+                <span>{formatTime(lap)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

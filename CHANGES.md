@@ -1,5 +1,14 @@
 # Cambios realizados
 
+## 2.6.2
+- Calculadora: modo flotante persistente, teclado basico y ajustes de tamaño inicial.
+- Alarma/temporizador: fecha para alarmas, selector rápido de minutos y mejoras móviles.
+- Sonido: alarma por defecto con audio dedicado.
+- Pizarra transparente: ayuda en el panel, sin blur sobre ventanas y ajustes de interfaz.
+- Visor web: sandbox con `allow-same-origin` y selección completa de URL.
+- Comunidad VCE: filtros en barra superior y lista lateral plegable.
+- Otros: carrusel con botón de abrir en barra, bloc de notas con indicador de cambios, cronómetro y lista de vueltas adaptativos.
+
 ## 2.6.1
 - Alarma/Temporizador: selector de fecha y hora para alarmas por hora.
 - Cuenta atrás: selector rapido de minutos con opciones de 5 a 60 y campo editable sin spinners.

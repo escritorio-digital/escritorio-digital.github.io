@@ -8,7 +8,7 @@
 }
 
 .screen-annotator-toolbar {
-  @apply absolute z-20 flex flex-col gap-2 rounded-xl border border-gray-200 bg-white/90 px-2 py-2 text-sm text-gray-700 shadow-xl backdrop-blur;
+  @apply absolute z-20 flex flex-col gap-2 rounded-xl border border-gray-200 bg-white/95 px-2 py-2 text-sm text-gray-700 shadow-xl;
   max-width: 520px;
   align-items: flex-start;
 }
@@ -19,7 +19,24 @@
 
 .screen-annotator-toolbar-header {
   @apply flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500;
-  justify-content: flex-start;
+  justify-content: space-between;
+}
+
+.screen-annotator-toolbar-title {
+  @apply flex items-center gap-2;
+}
+
+.screen-annotator-help {
+  @apply inline-flex items-center justify-center rounded-md border border-gray-200 bg-white p-1 text-gray-500 hover:bg-gray-100 transition-colors;
+}
+
+.screen-annotator-help.is-active {
+  @apply bg-accent text-text-dark border-transparent;
+}
+
+.screen-annotator-help-text {
+  @apply rounded-md border border-gray-200 bg-white/80 px-2 py-2 text-xs text-gray-700;
+  max-width: 280px;
 }
 
 .screen-annotator-divider {

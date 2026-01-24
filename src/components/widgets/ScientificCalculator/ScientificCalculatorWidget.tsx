@@ -3,6 +3,11 @@ import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import './ScientificCalculatorWidget.css';
 
+type ScientificCalculatorWidgetProps = {
+    instanceId?: string;
+    windowStyle?: 'default' | 'overlay' | 'floating';
+};
+
 type Mode = 'basic' | 'standard' | 'scientific';
 
 type ButtonKind = 'digit' | 'operator' | 'function' | 'control' | 'equals' | 'constant' | 'toggle';
@@ -361,7 +366,10 @@ const removeLastToken = (value: string) => {
     return value.slice(0, -1);
 };
 
-export const ScientificCalculatorWidget: FC = () => {
+export const ScientificCalculatorWidget: FC<ScientificCalculatorWidgetProps> = ({
+    instanceId,
+    windowStyle,
+}) => {
     const { t, ready } = useTranslation();
     const [mode, setMode] = useState<Mode>('scientific');
     const [angleMode, setAngleMode] = useState<AngleMode>('deg');
@@ -371,6 +379,7 @@ export const ScientificCalculatorWidget: FC = () => {
     const [lastAnswer, setLastAnswer] = useState(0);
     const [lastInputWasEval, setLastInputWasEval] = useState(false);
     const wrapperRef = useRef<HTMLDivElement>(null);
+    const isFloating = windowStyle === 'floating';
 
     useLayoutEffect(() => {
         const node = wrapperRef.current;
@@ -548,12 +557,67 @@ export const ScientificCalculatorWidget: FC = () => {
         handleOperator(button.value);
     };
 
+    const handleToggleFloating = () => {
+        if (!instanceId) return;
+        window.dispatchEvent(
+            new CustomEvent('widget-toggle-floating', {
+                detail: { instanceId, enable: !isFloating },
+            })
+        );
+    };
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (event.ctrlKey || event.metaKey || event.altKey) return;
+        const { key } = event;
+
+        if (/^\d$/.test(key)) {
+            event.preventDefault();
+            handleNumber(key);
+            return;
+        }
+        if (key === '.' || key === ',') {
+            event.preventDefault();
+            handleNumber('.');
+            return;
+        }
+        if (key === '+' || key === '-' || key === '*' || key === '/') {
+            event.preventDefault();
+            handleOperator(key);
+            return;
+        }
+        if (key === 'x' || key === 'X') {
+            event.preventDefault();
+            handleOperator('*');
+            return;
+        }
+        if (key === 'Enter' || key === '=') {
+            event.preventDefault();
+            handleOperator('=');
+            return;
+        }
+        if (key === 'Backspace') {
+            event.preventDefault();
+            handleOperator('backspace');
+            return;
+        }
+        if (key === 'Delete') {
+            event.preventDefault();
+            handleOperator('clear');
+        }
+    };
+
     if (!ready) {
         return <div className="calc-loading">{t('loading')}</div>;
     }
 
     return (
-        <div className="scientific-calculator" ref={wrapperRef}>
+        <div
+            className={`scientific-calculator${isFloating ? ' is-floating' : ''}`}
+            ref={wrapperRef}
+            tabIndex={0}
+            onKeyDown={handleKeyDown}
+            onPointerDown={() => wrapperRef.current?.focus()}
+        >
             <div className="calc-surface">
                 <div className="calc-top">
                     <div className="calc-tabs">
@@ -583,6 +647,15 @@ export const ScientificCalculatorWidget: FC = () => {
                         {mode === 'scientific' && (
                             <span className="calc-angle-pill">{angleMode.toUpperCase()}</span>
                         )}
+                        <button
+                            type="button"
+                            className={`calc-floating-toggle${isFloating ? ' is-active' : ''}`}
+                            onClick={handleToggleFloating}
+                            aria-label={isFloating ? t('widgets.scientific_calculator.floating_off') : t('widgets.scientific_calculator.floating_on')}
+                            title={isFloating ? t('widgets.scientific_calculator.floating_off') : t('widgets.scientific_calculator.floating_on')}
+                        >
+                            {isFloating ? t('widgets.scientific_calculator.floating_off') : t('widgets.scientific_calculator.floating_on')}
+                        </button>
                     </div>
                 </div>
 

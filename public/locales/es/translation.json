@@ -368,7 +368,9 @@
       "history": "Historial",
       "no_history": "No hay historial.",
       "error": "Error",
-      "infinity": "Infinity"
+      "infinity": "Infinity",
+      "floating_on": "Flotante",
+      "floating_off": "Ventana"
     },
     "calendar": {
       "title": "Calendario",
@@ -946,7 +948,9 @@
       "intro_step5": "Los favoritos permiten mantener las herramientas seleccionadas visibles en la parte superior de la lista.",
       "less": "menos...",
       "move_up": "Mover favorito arriba",
-      "move_down": "Mover favorito abajo"
+      "move_down": "Mover favorito abajo",
+      "collapse_list": "Ocultar lista",
+      "expand_list": "Mostrar lista"
     },
     "chatgpt_ia_edu": {
       "title": "Comunidad ChatGPT-IA-edu",

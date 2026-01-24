@@ -174,6 +174,40 @@ const DesktopUI: React.FC<{
         });
     }, [activeProfile, activeProfileName, setProfiles]);
 
+    const toggleWidgetFloating = useCallback((instanceId: string, enable?: boolean) => {
+        setProfiles((prev) => {
+            const profile = prev[activeProfileName] || activeProfile;
+            if (!profile) return prev;
+            const target = profile.activeWidgets.find((widget) => widget.instanceId === instanceId);
+            if (!target) return prev;
+            const nextEnable = typeof enable === 'boolean' ? enable : target.windowStyleOverride !== 'floating';
+            const nextWidgets = profile.activeWidgets.map((widget) => {
+                if (widget.instanceId !== instanceId) return widget;
+                let nextWidget = { ...widget, windowStyleOverride: nextEnable ? 'floating' : undefined };
+                if (nextEnable && widget.isMaximized) {
+                    nextWidget = {
+                        ...nextWidget,
+                        isMaximized: false,
+                        position: widget.previousPosition ?? widget.position,
+                        size: widget.previousSize ?? widget.size,
+                    };
+                }
+                return nextWidget;
+            });
+            const nextPreferences = {
+                ...(profile.widgetPreferences ?? {}),
+                [target.widgetId]: {
+                    ...profile.widgetPreferences?.[target.widgetId],
+                    floating: nextEnable,
+                },
+            };
+            return {
+                ...prev,
+                [activeProfileName]: { ...profile, activeWidgets: nextWidgets, widgetPreferences: nextPreferences },
+            };
+        });
+    }, [activeProfile, activeProfileName, setProfiles]);
+
     const toggleDateTime = useCallback(() => {
         const nextShowDateTime = !showDateTime;
         const newProfileData: DesktopProfile = {
@@ -611,6 +645,7 @@ const DesktopUI: React.FC<{
         const maxY = Math.max(margin, window.innerHeight - numericHeight - margin);
 
         const shouldMaximize = Boolean(widgetConfig.defaultMaximized) || widgetConfig.windowStyle === 'overlay';
+        const shouldFloat = Boolean(widgetDefaults?.floating);
         const defaultPosition = {
             x: Math.max(margin, Math.random() * maxX),
             y: Math.max(margin, Math.random() * maxY),
@@ -627,6 +662,7 @@ const DesktopUI: React.FC<{
             isMaximized: shouldMaximize,
             previousPosition: shouldMaximize ? defaultPosition : undefined,
             previousSize: shouldMaximize ? defaultSize : undefined,
+            windowStyleOverride: shouldFloat ? 'floating' : undefined,
         };
         setActiveWidgets(prev => [...prev, newWidget]);
         setActiveWindowId(newWidget.instanceId);
@@ -651,6 +687,16 @@ const DesktopUI: React.FC<{
         window.addEventListener('open-widget', handler as EventListener);
         return () => window.removeEventListener('open-widget', handler as EventListener);
     }, []);
+
+    useEffect(() => {
+        const handler = (event: Event) => {
+            const custom = event as CustomEvent<{ instanceId?: string; enable?: boolean }>;
+            if (!custom.detail?.instanceId) return;
+            toggleWidgetFloating(custom.detail.instanceId, custom.detail.enable);
+        };
+        window.addEventListener('widget-toggle-floating', handler as EventListener);
+        return () => window.removeEventListener('widget-toggle-floating', handler as EventListener);
+    }, [toggleWidgetFloating]);
 
     useEffect(() => {
         const handler = (event: Event) => {
@@ -1301,6 +1347,8 @@ const DesktopUI: React.FC<{
                 const savedToolbarPinned = widgetDefaults?.toolbarPinned ?? defaultToolbarPinned;
                 const zoomLevel = widget.zoom ?? widgetDefaults?.zoom ?? 1;
                 const toolbarPinned = widget.toolbarPinned ?? widgetDefaults?.toolbarPinned ?? true;
+                const windowStyle = widget.windowStyleOverride ?? config.windowStyle;
+                const baseTitle = t(config.title);
                 const windowTitle = widget.titleOverride
                     ? `${t(config.title)} — ${widget.titleOverride}`
                     : t(config.title);
@@ -1309,8 +1357,9 @@ const DesktopUI: React.FC<{
                         key={widget.instanceId}
                         id={widget.instanceId}
                         title={windowTitle}
+                        menuTitle={baseTitle}
                         icon={config.icon}
-                        windowStyle={config.windowStyle}
+                        windowStyle={windowStyle}
                         helpText={helpText}
                         zoomLevel={zoomLevel}
                         toolbarPinned={toolbarPinned}
@@ -1401,7 +1450,7 @@ const DesktopUI: React.FC<{
                                 </div>
                             }
                         >
-                            <Component instanceId={widget.instanceId} />
+                            <Component instanceId={widget.instanceId} windowStyle={windowStyle} />
                         </Suspense>
                     </WidgetWindow>
                 );
