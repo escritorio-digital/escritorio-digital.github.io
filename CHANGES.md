@@ -1,5 +1,12 @@
 # Cambios realizados
 
+## 2.6.1
+- Alarma/Temporizador: selector de fecha y hora para alarmas por hora.
+- Cuenta atrás: selector rapido de minutos con opciones de 5 a 60 y campo editable sin spinners.
+- Vista movil: layout de alarma en una columna.
+- Pantalla de cuenta atrás: si solo hay una alarma, ocupa todo el espacio.
+- Sonido: alarma por defecto con audio dedicado.
+
 ## 2.5.4
 - Menu de configuracion: feedback de guardado integrado en el boton.
 

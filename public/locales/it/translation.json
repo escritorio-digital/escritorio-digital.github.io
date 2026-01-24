@@ -693,6 +693,7 @@
       "mode_time": "Ora",
       "mode_countdown": "Conto alla rovescia",
       "time_label": "Ora",
+      "date_label": "Data",
       "countdown_minutes": "Minuti",
       "countdown_seconds": "Secondi",
       "label_label": "Etichetta (opzionale)",

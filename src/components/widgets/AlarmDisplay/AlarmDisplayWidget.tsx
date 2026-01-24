@@ -33,6 +33,7 @@ export const AlarmDisplayWidget: FC = () => {
             .sort((a, b) => a.targetTime - b.targetTime);
     }, [alarms]);
     const displayAlarms = activeAlarms.slice(0, 4);
+    const hasSingleAlarm = displayAlarms.length === 1;
     const remainingCount = Math.max(0, activeAlarms.length - displayAlarms.length);
     const triggeredAlarms = useMemo(() => alarms.filter((alarm) => alarm.triggered), [alarms]);
     const alertMessage = useMemo(() => {
@@ -63,7 +64,7 @@ export const AlarmDisplayWidget: FC = () => {
                 <div className="alarm-display-empty">{t('widgets.alarm_display.none')}</div>
             ) : (
                 <>
-                    <div className="alarm-display-grid">
+                    <div className={`alarm-display-grid${hasSingleAlarm ? ' is-single' : ''}`}>
                         {displayAlarms.map((alarm) => {
                             const label = alarm.label || t('widgets.alarm.default_label');
                             const remaining = alarm.targetTime - now;

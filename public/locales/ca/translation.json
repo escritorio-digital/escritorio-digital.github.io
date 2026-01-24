@@ -693,6 +693,7 @@
       "mode_time": "Hora",
       "mode_countdown": "Compte enrere",
       "time_label": "Hora",
+      "date_label": "Data",
       "countdown_minutes": "Minuts",
       "countdown_seconds": "Segons",
       "label_label": "Etiqueta (opcional)",

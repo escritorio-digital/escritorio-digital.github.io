@@ -265,8 +265,7 @@ const DesktopUI: React.FC<{
     const openDialogWidgetLabel = getWidgetLabel(openDialogState.options.sourceWidgetId);
     const saveDialogWidgetLabel = getWidgetLabel(saveDialogState.sourceWidgetId);
     const [alarmItems, setAlarmItems] = useState<AlarmItem[]>(() => getStoredAlarms());
-    const alarmAudioContextRef = useRef<AudioContext | null>(null);
-    const alarmSoundTimerRef = useRef<number | null>(null);
+    const alarmAudioRef = useRef<HTMLAudioElement | null>(null);
     const activeAlarmAlerts = alarmItems.filter((alarm) => alarm.triggered);
 
     useEffect(() => {
@@ -294,42 +293,20 @@ const DesktopUI: React.FC<{
         return () => window.clearInterval(interval);
     }, []);
 
-    const playAlarmBeep = useCallback(() => {
-        const AudioContextClass = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-        if (!AudioContextClass) return;
-        if (!alarmAudioContextRef.current) {
-            alarmAudioContextRef.current = new AudioContextClass();
+    const startAlarmSound = useCallback(() => {
+        if (!alarmAudioRef.current) {
+            alarmAudioRef.current = new Audio('/sounds/alarm-clock-elapsed.oga');
+            alarmAudioRef.current.loop = true;
+            alarmAudioRef.current.volume = 0.9;
         }
-        const context = alarmAudioContextRef.current;
-        if (context.state === 'suspended') {
-            context.resume().catch(() => undefined);
-        }
-        const oscillator = context.createOscillator();
-        const gainNode = context.createGain();
-        oscillator.type = 'square';
-        oscillator.frequency.setValueAtTime(620, context.currentTime);
-        oscillator.frequency.linearRampToValueAtTime(920, context.currentTime + 0.45);
-        oscillator.frequency.linearRampToValueAtTime(680, context.currentTime + 0.95);
-        const now = context.currentTime;
-        gainNode.gain.setValueAtTime(0.001, now);
-        gainNode.gain.exponentialRampToValueAtTime(0.28, now + 0.04);
-        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
-        oscillator.connect(gainNode);
-        gainNode.connect(context.destination);
-        oscillator.start(now);
-        oscillator.stop(now + 1.3);
+        if (!alarmAudioRef.current.paused) return;
+        alarmAudioRef.current.play().catch(() => undefined);
     }, []);
 
-    const startAlarmSound = useCallback(() => {
-        if (alarmSoundTimerRef.current !== null) return;
-        playAlarmBeep();
-        alarmSoundTimerRef.current = window.setInterval(playAlarmBeep, 1600);
-    }, [playAlarmBeep]);
-
     const stopAlarmSound = useCallback(() => {
-        if (alarmSoundTimerRef.current === null) return;
-        window.clearInterval(alarmSoundTimerRef.current);
-        alarmSoundTimerRef.current = null;
+        if (!alarmAudioRef.current) return;
+        alarmAudioRef.current.pause();
+        alarmAudioRef.current.currentTime = 0;
     }, []);
 
     useEffect(() => {

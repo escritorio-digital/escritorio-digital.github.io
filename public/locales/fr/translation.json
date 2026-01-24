@@ -694,6 +694,7 @@
       "mode_time": "Heure",
       "mode_countdown": "Compte à rebours",
       "time_label": "Heure",
+      "date_label": "Date",
       "countdown_minutes": "Minutes",
       "countdown_seconds": "Secondes",
       "label_label": "Libellé (optionnel)",

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Bell, BellOff, Clock, Timer, Trash2, Plus } from 'lucide-react';
+import { Bell, BellOff, Clock, Timer, Trash2, Plus, ChevronDown } from 'lucide-react';
 import {
     createAlarmItem,
     getStoredAlarms,
@@ -21,17 +21,26 @@ const formatRemaining = (ms: number): string => {
     return parts.join(':');
 };
 
-const getNextTimeTarget = (timeValue: string): number | null => {
+const getTodayDateValue = (now: number): string => {
+    const date = new Date(now);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+};
+
+const getDateTimeTarget = (dateValue: string, timeValue: string): number | null => {
+    const [yearRaw, monthRaw, dayRaw] = dateValue.split('-');
     const [hoursRaw, minutesRaw] = timeValue.split(':');
+    const year = Number.parseInt(yearRaw ?? '', 10);
+    const month = Number.parseInt(monthRaw ?? '', 10);
+    const day = Number.parseInt(dayRaw ?? '', 10);
     const hours = Number.parseInt(hoursRaw ?? '', 10);
     const minutes = Number.parseInt(minutesRaw ?? '', 10);
+    if (!Number.isFinite(year) || !Number.isFinite(month) || !Number.isFinite(day)) return null;
     if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return null;
-    const now = new Date();
-    const target = new Date(now);
-    target.setHours(hours, minutes, 0, 0);
-    if (target.getTime() <= now.getTime()) {
-        target.setDate(target.getDate() + 1);
-    }
+    const target = new Date(year, month - 1, day, hours, minutes, 0, 0);
+    if (Number.isNaN(target.getTime())) return null;
     return target.getTime();
 };
 
@@ -43,6 +52,7 @@ export const AlarmWidget: FC<AlarmWidgetProps> = ({ instanceId }) => {
     const { t, i18n } = useTranslation();
     const [mode, setMode] = useState<AlarmMode>('time');
     const [timeValue, setTimeValue] = useState('08:00');
+    const [dateValue, setDateValue] = useState(() => getTodayDateValue(Date.now()));
     const [minutes, setMinutes] = useState(5);
     const [seconds, setSeconds] = useState(0);
     const [label, setLabel] = useState('');
@@ -52,8 +62,12 @@ export const AlarmWidget: FC<AlarmWidgetProps> = ({ instanceId }) => {
     const [now, setNow] = useState(Date.now());
     const rootRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const minuteMenuRef = useRef<HTMLDivElement>(null);
     const lastResizeRef = useRef<number | null>(null);
     const resizeAttemptsRef = useRef(0);
+    const todayValue = useMemo(() => getTodayDateValue(now), [now]);
+    const [isMinuteMenuOpen, setIsMinuteMenuOpen] = useState(false);
+    const minuteOptions = useMemo(() => [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60], []);
 
     useEffect(() => subscribeAlarmStore(setAlarms), []);
 
@@ -80,8 +94,8 @@ export const AlarmWidget: FC<AlarmWidgetProps> = ({ instanceId }) => {
     const handleCreateAlarm = () => {
         setError(null);
         if (mode === 'time') {
-            const targetTime = getNextTimeTarget(timeValue);
-            if (!targetTime) {
+            const targetTime = getDateTimeTarget(dateValue, timeValue);
+            if (!targetTime || targetTime <= Date.now()) {
                 setError(t('widgets.alarm.invalid_time'));
                 return;
             }
@@ -131,6 +145,18 @@ export const AlarmWidget: FC<AlarmWidgetProps> = ({ instanceId }) => {
     };
 
     const hasAlarms = formattedAlarms.length > 0;
+
+    useEffect(() => {
+        if (!isMinuteMenuOpen) return;
+        const handleClick = (event: MouseEvent) => {
+            const target = event.target as Node | null;
+            if (!target || !minuteMenuRef.current) return;
+            if (minuteMenuRef.current.contains(target)) return;
+            setIsMinuteMenuOpen(false);
+        };
+        document.addEventListener('mousedown', handleClick);
+        return () => document.removeEventListener('mousedown', handleClick);
+    }, [isMinuteMenuOpen]);
 
     useEffect(() => {
         if (!instanceId) return;
@@ -199,24 +225,65 @@ export const AlarmWidget: FC<AlarmWidgetProps> = ({ instanceId }) => {
                     </div>
 
                     {mode === 'time' ? (
-                        <label className="alarm-field">
-                            <span>{t('widgets.alarm.time_label')}</span>
-                            <input
-                                type="time"
-                                value={timeValue}
-                                onChange={(event) => setTimeValue(event.target.value)}
-                            />
-                        </label>
+                        <div className="alarm-time-grid">
+                            <label className="alarm-field">
+                                <span>{t('widgets.alarm.date_label')}</span>
+                                <input
+                                    type="date"
+                                    value={dateValue}
+                                    min={todayValue}
+                                    onChange={(event) => setDateValue(event.target.value)}
+                                />
+                            </label>
+                            <label className="alarm-field">
+                                <span>{t('widgets.alarm.time_label')}</span>
+                                <input
+                                    type="time"
+                                    value={timeValue}
+                                    onChange={(event) => setTimeValue(event.target.value)}
+                                />
+                            </label>
+                        </div>
                     ) : (
                         <div className="alarm-countdown-grid">
                             <label className="alarm-field">
                                 <span>{t('widgets.alarm.countdown_minutes')}</span>
-                                <input
-                                    type="number"
-                                    min={0}
-                                    value={minutes}
-                                    onChange={(event) => setMinutes(Math.max(0, Number(event.target.value) || 0))}
-                                />
+                                <div className="alarm-minute-control" ref={minuteMenuRef}>
+                                    <input
+                                        type="number"
+                                        min={0}
+                                        value={minutes}
+                                        onChange={(event) => setMinutes(Math.max(0, Number(event.target.value) || 0))}
+                                        onFocus={(event) => event.target.select()}
+                                    />
+                                    <button
+                                        type="button"
+                                        className="alarm-minute-toggle"
+                                        aria-label={t('widgets.alarm.countdown_minutes')}
+                                        aria-haspopup="listbox"
+                                        aria-expanded={isMinuteMenuOpen}
+                                        onClick={() => setIsMinuteMenuOpen((prev) => !prev)}
+                                    >
+                                        <ChevronDown size={16} />
+                                    </button>
+                                    {isMinuteMenuOpen && (
+                                        <div className="alarm-minute-menu" role="listbox">
+                                            {minuteOptions.map((option) => (
+                                                <button
+                                                    key={option}
+                                                    type="button"
+                                                    className="alarm-minute-option"
+                                                    onClick={() => {
+                                                        setMinutes(option);
+                                                        setIsMinuteMenuOpen(false);
+                                                    }}
+                                                >
+                                                    {option}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
                             </label>
                             <label className="alarm-field">
                                 <span>{t('widgets.alarm.countdown_seconds')}</span>

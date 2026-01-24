@@ -29,6 +29,14 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.alarm-display-grid.is-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.alarm-display-grid.is-single .alarm-display-card {
+  min-height: clamp(320px, 55cqw, 520px);
+}
+
 .alarm-display-more {
   @apply text-sm font-semibold text-slate-300 text-center;
 }

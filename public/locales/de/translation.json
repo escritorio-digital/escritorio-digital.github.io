@@ -693,6 +693,7 @@
       "mode_time": "Uhrzeit",
       "mode_countdown": "Countdown",
       "time_label": "Uhrzeit",
+      "date_label": "Datum",
       "countdown_minutes": "Minuten",
       "countdown_seconds": "Sekunden",
       "label_label": "Bezeichnung (optional)",
