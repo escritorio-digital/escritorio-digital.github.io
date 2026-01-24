@@ -29,6 +29,7 @@ export const WIDGET_CATEGORIES: WidgetCategory[] = [
             'notepad',
             'markdown-text-editor',
             'drawing-pad',
+            'screen-annotator',
             'image-carousel',
             'html-sandbox',
             'boardlive',

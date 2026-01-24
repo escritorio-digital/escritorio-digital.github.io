@@ -8,6 +8,7 @@
   "save_dialog": {
     "title": "Gardar ficheiro",
     "description": "Onde queres gardalo?",
+    "file_manager": "Gardar en Ed",
     "save_in_manager": "Arquivos Ed",
     "save_in_device": "Disco local",
     "cancel": "Cancelar",
@@ -44,7 +45,7 @@
       "reset_description": "Elimina todos os datos gardados (perfís, ferramentas e preferencias) e reinicia como se fose a primeira vez.",
       "reset_button": "Restablecer a valores de fábrica",
       "reset_confirm": "¿Seguro que queres eliminar todas as preferencias e datos locais? Esta acción non se pode desfacer.",
-      "version_value": "v1.6.3 (Enero 2026)"
+      "version_value": "v2.6.0 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Nome de perfil inválido ou xa existente.",
@@ -1017,6 +1018,31 @@
       "empty_state": "Comeza unha busca para ver resultados.",
       "open_new_tab": "Abrir nunha nova pestana",
       "open_article": "Abrir artigo"
+    },
+    "screen_annotator": {
+      "title": "Pizarra transparente",
+      "search_keywords": "pizarra, transparente, anotacións, subliñar, pantalla",
+      "tool_pen": "Lapis",
+      "tool_highlighter": "Resaltador",
+      "tool_eraser": "Borrador",
+      "tool_line": "Liña",
+      "tool_rectangle": "Rectángulo",
+      "tool_ellipse": "Elipse",
+      "tool_arrow": "Frecha",
+      "color_label": "Cor",
+      "size_label": "Grosor",
+      "fill_on": "Recheo activado",
+      "fill_off": "Recheo desactivado",
+      "undo": "Desfacer",
+      "redo": "Refacer",
+      "clear": "Limpar",
+      "clear_confirm": "Queres borrar todas as anotacións?",
+      "close": "Pechar",
+      "toolbar_drag": "Mover controis",
+      "opacity_label": "Transparencia",
+      "section_tools": "Ferramentas",
+      "section_properties": "Propiedades",
+      "section_actions": "Accións"
     }
   },
   "backup": {
@@ -1131,6 +1157,7 @@
     "tic-tac-toe": "Tres en raia para repaso rápido.",
     "memory-game": "Memorama de parellas para practicar conceptos.",
     "sliding-puzzle": "Puzzle deslizante para lóxica e atención.",
-    "work-gestures": "Xestos de traballo para dinámicas de aula."
+    "work-gestures": "Xestos de traballo para dinámicas de aula.",
+    "screen-annotator": "Capa transparente para subliñar e marcar sobre o escritorio."
   }
 }

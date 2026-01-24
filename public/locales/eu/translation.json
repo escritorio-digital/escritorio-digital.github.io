@@ -8,6 +8,7 @@
   "save_dialog": {
     "title": "Fitxategia gorde",
     "description": "Non gorde nahi duzu?",
+    "file_manager": "Gorde Ed-en",
     "save_in_manager": "Ed fitxategiak",
     "save_in_device": "Disko lokala",
     "cancel": "Utzi",
@@ -43,7 +44,7 @@
       "reset_description": "Gordetako datu guztiak ezabatzen ditu (profilak, tresnak eta lehentasunak) eta lehen aldia balitz bezala berrabiarazten du.",
       "reset_button": "Fabrikako balioetara berrezarri",
       "reset_confirm": "Ziur zaude lehentasun eta datu lokal guztiak ezabatu nahi dituzula? Ekintza hau ezin da desegin.",
-      "version_value": "v1.6.3 (Enero 2026)"
+      "version_value": "v2.6.0 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Profilaren izen baliogabea edo lehendik dagoena.",
@@ -1016,6 +1017,31 @@
       "empty_state": "Hasi bilaketa bat emaitzak ikusteko.",
       "open_new_tab": "Ireki fitxa berri batean",
       "open_article": "Ireki artikulua"
+    },
+    "screen_annotator": {
+      "title": "Arbel gardena",
+      "search_keywords": "arbel, gardena, oharrak, azpimarra, pantaila",
+      "tool_pen": "Arkatza",
+      "tool_highlighter": "Nabarmentzailea",
+      "tool_eraser": "Ezabagailua",
+      "tool_line": "Lerroa",
+      "tool_rectangle": "Laukizuzena",
+      "tool_ellipse": "Elipsea",
+      "tool_arrow": "Gezia",
+      "color_label": "Kolorea",
+      "size_label": "Lodiera",
+      "fill_on": "Betegarria aktibo",
+      "fill_off": "Betegarria inaktibo",
+      "undo": "Desegin",
+      "redo": "Berregin",
+      "clear": "Garbitu",
+      "clear_confirm": "Anotazio guztiak ezabatu?",
+      "close": "Itxi",
+      "toolbar_drag": "Kontrolak mugitu",
+      "opacity_label": "Gardentasuna",
+      "section_tools": "Tresnak",
+      "section_properties": "Propietateak",
+      "section_actions": "Ekintzak"
     }
   },
   "backup": {
@@ -1130,6 +1156,7 @@
     "tic-tac-toe": "Hiru lerroan errepaso azkarrerako.",
     "memory-game": "Bikoteen memoria-jokoa kontzeptuak praktikatzeko.",
     "sliding-puzzle": "Puzzle labainkorra logika eta arretarako.",
-    "work-gestures": "Gelako dinamiken lan-keinuak."
+    "work-gestures": "Gelako dinamiken lan-keinuak.",
+    "screen-annotator": "Mahai-gainean azpimarratzeko eta markatzeko geruza gardena."
   }
 }

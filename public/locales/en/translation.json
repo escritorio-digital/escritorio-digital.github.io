@@ -8,6 +8,7 @@
   "save_dialog": {
     "title": "Save file",
     "description": "Where do you want to save it?",
+    "file_manager": "Save in Ed",
     "save_in_manager": "Ed Files",
     "save_in_device": "Local disk",
     "cancel": "Cancel",
@@ -44,7 +45,7 @@
       "reset_description": "Removes all saved data (profiles, tools, and preferences) and restarts as first run.",
       "reset_button": "Factory Reset",
       "reset_confirm": "Are you sure you want to remove all local preferences and data? This cannot be undone.",
-      "version_value": "v1.6.3 (Enero 2026)"
+      "version_value": "v2.6.0 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Invalid or already existing profile name.",
@@ -1017,6 +1018,31 @@
       "empty_state": "Start a search to see results.",
       "open_new_tab": "Open in new tab",
       "open_article": "Open article"
+    },
+    "screen_annotator": {
+      "title": "Transparent board",
+      "search_keywords": "transparent board, annotations, highlight, screen",
+      "tool_pen": "Pen",
+      "tool_highlighter": "Highlighter",
+      "tool_eraser": "Eraser",
+      "tool_line": "Line",
+      "tool_rectangle": "Rectangle",
+      "tool_ellipse": "Ellipse",
+      "tool_arrow": "Arrow",
+      "color_label": "Color",
+      "size_label": "Thickness",
+      "fill_on": "Fill on",
+      "fill_off": "Fill off",
+      "undo": "Undo",
+      "redo": "Redo",
+      "clear": "Clear",
+      "clear_confirm": "Clear all annotations?",
+      "close": "Close",
+      "toolbar_drag": "Move controls",
+      "opacity_label": "Opacity",
+      "section_tools": "Tools",
+      "section_properties": "Properties",
+      "section_actions": "Actions"
     }
   },
   "backup": {
@@ -1131,6 +1157,7 @@
     "tic-tac-toe": "Tic-tac-toe for quick review.",
     "memory-game": "Memory pairs game to practice concepts.",
     "sliding-puzzle": "Sliding puzzle for logic and attention.",
-    "work-gestures": "Work gestures for classroom routines."
+    "work-gestures": "Work gestures for classroom routines.",
+    "screen-annotator": "Transparent layer to underline and mark over the desktop."
   }
 }

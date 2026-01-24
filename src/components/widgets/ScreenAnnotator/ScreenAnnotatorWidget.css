@@ -1,0 +1,92 @@
+.screen-annotator-root {
+  @apply relative w-full h-full overflow-hidden;
+}
+
+.screen-annotator-canvas {
+  @apply absolute inset-0;
+  touch-action: none;
+}
+
+.screen-annotator-toolbar {
+  @apply absolute z-20 flex flex-col gap-2 rounded-xl border border-gray-200 bg-white/90 px-2 py-2 text-sm text-gray-700 shadow-xl backdrop-blur;
+  max-width: 520px;
+  align-items: flex-start;
+}
+
+.screen-annotator-toolbar-section {
+  @apply flex flex-col gap-2;
+}
+
+.screen-annotator-toolbar-header {
+  @apply flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wide text-gray-500;
+  justify-content: flex-start;
+}
+
+.screen-annotator-divider {
+  @apply h-px w-full bg-gray-200/80;
+}
+
+.screen-annotator-toolbar-row {
+  @apply flex items-center gap-2 flex-wrap;
+  justify-content: flex-start;
+}
+
+.screen-annotator-toolbar-row.tools {
+  @apply flex flex-wrap gap-2;
+}
+
+.screen-annotator-toolbar-row.settings {
+  @apply flex flex-col gap-2 items-start;
+}
+
+.screen-annotator-handle {
+  @apply inline-flex items-center justify-center rounded-md border border-gray-200 bg-gray-100 p-1 text-gray-500 hover:bg-gray-200 cursor-move;
+}
+
+.screen-annotator-tool {
+  @apply inline-flex items-center justify-center rounded-md border border-gray-200 bg-white p-1 text-gray-600 hover:bg-gray-100 transition-colors;
+}
+
+.screen-annotator-tool.is-active {
+  @apply bg-accent text-text-dark border-transparent shadow-sm;
+}
+
+.screen-annotator-field {
+  @apply flex items-center gap-3 text-xs font-semibold text-gray-600 min-w-0 w-full;
+  justify-content: flex-start;
+}
+
+.screen-annotator-field > span {
+  min-width: 92px;
+  text-align: left;
+}
+
+.screen-annotator-field input[type="color"] {
+  @apply h-7 w-9 rounded-md border border-gray-200 bg-white;
+  padding: 0;
+}
+
+.screen-annotator-field input[type="range"] {
+  @apply w-full;
+  min-width: 160px;
+}
+
+.screen-annotator-toggle {
+  @apply inline-flex items-center justify-center w-full rounded-md border border-gray-200 bg-white px-2 py-1 text-xs font-semibold text-gray-600 hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.screen-annotator-toggle.is-active {
+  @apply bg-accent text-text-dark border-transparent;
+}
+
+.screen-annotator-action {
+  @apply inline-flex items-center justify-center rounded-md border border-gray-200 bg-white p-1 text-gray-600 hover:bg-gray-100 transition-colors;
+}
+
+.screen-annotator-close {
+  @apply border-red-200 text-red-600 hover:bg-red-50;
+}
+
+.screen-annotator-toolbar-row.actions {
+  @apply flex items-center gap-2;
+}

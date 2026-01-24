@@ -15,6 +15,8 @@ export interface WidgetConfig {
   defaultSize: { width: number; height: number };
   startTooltip?: string;
   searchKeywords?: string[];
+  windowStyle?: 'default' | 'overlay';
+  defaultMaximized?: boolean;
   component: WidgetComponent; // El componente de React como una función (cargado bajo demanda)
 }
 

@@ -47,9 +47,12 @@ const formatBytes = (bytes: number) => {
 
 export const FileManagerWidget: FC = () => {
     const { t } = useTranslation();
-    const [currentFolderId, setCurrentFolderId] = useState(FILE_MANAGER_ROOT_ID);
+    const [currentFolderId, setCurrentFolderId] = useLocalStorage<string>(
+        'file-manager-current-folder-id',
+        FILE_MANAGER_ROOT_ID
+    );
     const [entries, setEntries] = useState<FileManagerEntry[]>([]);
-    const [isTrashView, setIsTrashView] = useState(false);
+    const [isTrashView, setIsTrashView] = useLocalStorage<boolean>('file-manager-trash-view', false);
     const [isLoading, setIsLoading] = useState(false);
     const [storageEstimate, setStorageEstimate] = useState<StorageEstimate>({ usage: null, quota: null });
     const [trashTtlHours, setTrashTtlHours] = useLocalStorage<number>('file-manager-trash-ttl-hours', DEFAULT_TRASH_HOURS);
@@ -91,6 +94,20 @@ export const FileManagerWidget: FC = () => {
         setSelectedEntryIds([]);
         setLastSelectedIndex(null);
     }, [refreshEntries]);
+
+    useEffect(() => {
+        if (isTrashView || currentFolderId === FILE_MANAGER_ROOT_ID) return;
+        let isMounted = true;
+        getEntry(currentFolderId).then((entry) => {
+            if (!isMounted) return;
+            if (!entry || entry.type !== 'folder') {
+                setCurrentFolderId(FILE_MANAGER_ROOT_ID);
+            }
+        });
+        return () => {
+            isMounted = false;
+        };
+    }, [currentFolderId, isTrashView, setCurrentFolderId]);
 
     useEffect(() => {
         if (!contextMenu.isOpen) return;
@@ -231,7 +248,7 @@ export const FileManagerWidget: FC = () => {
     const renderEntryIcon = useCallback((entry: FileManagerEntry) => {
         if (entry.type === 'folder') {
             return (
-                <span className="file-manager-entry-icon">
+                <span className="file-manager-entry-icon file-manager-entry-icon-folder">
                     <Folder size={18} />
                 </span>
             );

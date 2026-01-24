@@ -633,17 +633,23 @@ const DesktopUI: React.FC<{
         const maxX = Math.max(margin, window.innerWidth - numericWidth - margin);
         const maxY = Math.max(margin, window.innerHeight - numericHeight - margin);
 
+        const shouldMaximize = Boolean(widgetConfig.defaultMaximized) || widgetConfig.windowStyle === 'overlay';
+        const defaultPosition = {
+            x: Math.max(margin, Math.random() * maxX),
+            y: Math.max(margin, Math.random() * maxY),
+        };
+        const defaultSize = { width: widthValue, height: heightValue };
         const newWidget: ActiveWidget = {
             instanceId: `${widgetId}-${Date.now()}`,
             widgetId: widgetId,
-            position: { 
-                x: Math.max(margin, Math.random() * maxX), 
-                y: Math.max(margin, Math.random() * maxY) 
-            },
-            size: { width: widthValue, height: heightValue },
+            position: shouldMaximize ? { x: 0, y: 0 } : defaultPosition,
+            size: shouldMaximize ? { width: '100vw', height: '100vh' } : defaultSize,
             zIndex: newZ,
             zoom: widgetDefaults?.zoom ?? 1,
             toolbarPinned: widgetDefaults?.toolbarPinned ?? !POPUP_WIDGET_IDS.has(widgetId),
+            isMaximized: shouldMaximize,
+            previousPosition: shouldMaximize ? defaultPosition : undefined,
+            previousSize: shouldMaximize ? defaultSize : undefined,
         };
         setActiveWidgets(prev => [...prev, newWidget]);
         setActiveWindowId(newWidget.instanceId);
@@ -726,6 +732,14 @@ const DesktopUI: React.FC<{
     }, []);
 
     const closeWidget = (instanceId: string) => setActiveWidgets(prev => {
+        const target = prev.find((widget) => widget.instanceId === instanceId);
+        if (target) {
+            window.dispatchEvent(
+                new CustomEvent('widget-close', {
+                    detail: { instanceId, widgetId: target.widgetId },
+                })
+            );
+        }
         const next = prev.filter(w => w.instanceId !== instanceId);
         if (activeWindowId === instanceId) {
             const nextActive = next.reduce<ActiveWidget | null>((acc, item) => {
@@ -835,6 +849,15 @@ const DesktopUI: React.FC<{
     const requestCloseWidget = useCallback((instanceId: string) => {
         closeWidgetsWithPrompt([instanceId]);
     }, [closeWidgetsWithPrompt]);
+    useEffect(() => {
+        const handler = (event: Event) => {
+            const custom = event as CustomEvent<{ instanceId?: string }>;
+            if (!custom.detail?.instanceId) return;
+            requestCloseWidget(custom.detail.instanceId);
+        };
+        window.addEventListener('widget-close-request', handler as EventListener);
+        return () => window.removeEventListener('widget-close-request', handler as EventListener);
+    }, [requestCloseWidget]);
     const requestCloseAll = useCallback(() => {
         const instanceIds = activeProfile.activeWidgets.map((widget) => widget.instanceId);
         const hasDirty = instanceIds.some((instanceId) => dirtyWidgets[instanceId]);
@@ -1310,6 +1333,7 @@ const DesktopUI: React.FC<{
                         id={widget.instanceId}
                         title={windowTitle}
                         icon={config.icon}
+                        windowStyle={config.windowStyle}
                         helpText={helpText}
                         zoomLevel={zoomLevel}
                         toolbarPinned={toolbarPinned}
@@ -2229,7 +2253,7 @@ function App() {
         'Escritorio Principal': {
             theme: defaultTheme,
             activeWidgets: [],
-            pinnedWidgets: ['work-list', 'alarm', 'file-opener', 'vce-community'],
+            pinnedWidgets: ['screen-annotator', 'work-list', 'alarm', 'file-opener', 'vce-community'],
             vceFavorites: [],
         },
     });

@@ -8,6 +8,7 @@
   "save_dialog": {
     "title": "Datei speichern",
     "description": "Wo möchtest du sie speichern?",
+    "file_manager": "In Ed speichern",
     "save_in_manager": "Ed-Dateien",
     "save_in_device": "Lokaler Datenträger",
     "cancel": "Abbrechen",
@@ -44,7 +45,7 @@
       "reset_description": "Entfernt alle gespeicherten Daten (Profile, Werkzeuge und Einstellungen) und startet wie beim ersten Mal.",
       "reset_button": "Auf Werkseinstellungen zurücksetzen",
       "reset_confirm": "Möchtest du wirklich alle lokalen Einstellungen und Daten entfernen? Dies kann nicht rückgängig gemacht werden.",
-      "version_value": "v1.6.3 (Enero 2026)"
+      "version_value": "v2.6.0 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Ungültiger oder bereits vorhandener Profilname.",
@@ -1017,6 +1018,31 @@
       "empty_state": "Starte eine Suche, um Ergebnisse zu sehen.",
       "open_new_tab": "In neuem Tab öffnen",
       "open_article": "Artikel öffnen"
+    },
+    "screen_annotator": {
+      "title": "Transparente Tafel",
+      "search_keywords": "tafel, transparent, anmerkungen, markieren, bildschirm",
+      "tool_pen": "Stift",
+      "tool_highlighter": "Textmarker",
+      "tool_eraser": "Radierer",
+      "tool_line": "Linie",
+      "tool_rectangle": "Rechteck",
+      "tool_ellipse": "Ellipse",
+      "tool_arrow": "Pfeil",
+      "color_label": "Farbe",
+      "size_label": "Strichstärke",
+      "fill_on": "Füllung an",
+      "fill_off": "Füllung aus",
+      "undo": "Rückgängig",
+      "redo": "Wiederholen",
+      "clear": "Löschen",
+      "clear_confirm": "Alle Anmerkungen löschen?",
+      "close": "Schließen",
+      "toolbar_drag": "Steuerung verschieben",
+      "opacity_label": "Transparenz",
+      "section_tools": "Werkzeuge",
+      "section_properties": "Eigenschaften",
+      "section_actions": "Aktionen"
     }
   },
   "backup": {
@@ -1131,6 +1157,7 @@
     "tic-tac-toe": "Tic-Tac-Toe für schnelle Wiederholung.",
     "memory-game": "Paar-Memory zum Üben von Begriffen.",
     "sliding-puzzle": "Schiebepuzzle für Logik und Aufmerksamkeit.",
-    "work-gestures": "Arbeitsgesten für Unterrichtsroutinen."
+    "work-gestures": "Arbeitsgesten für Unterrichtsroutinen.",
+    "screen-annotator": "Transparente Ebene zum Unterstreichen und Markieren auf dem Desktop."
   }
 }

@@ -103,6 +103,10 @@
   height: 20px;
 }
 
+.file-manager-entry-icon-folder {
+  color: #f2c018;
+}
+
 .file-manager-entry-icon img,
 .file-manager-entry-icon svg {
   width: 18px;

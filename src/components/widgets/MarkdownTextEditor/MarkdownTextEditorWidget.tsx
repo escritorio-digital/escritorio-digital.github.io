@@ -85,15 +85,57 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
         instanceId ?? `markdown-text-editor-${Date.now()}-${Math.random().toString(16).slice(2)}`
     );
     const resolvedInstanceId = instanceId ?? instanceIdRef.current;
+    const draftStorageKey = `markdown-text-editor-draft:${resolvedInstanceId}`;
+    const initialDraftRef = useRef<{
+        input: string;
+        lastSavedSnapshot: string;
+        viewMode: ViewMode;
+        currentFilename: string | null;
+        currentParentId: string | null;
+        currentEntryId: string | null;
+    } | null>(null);
+    if (!initialDraftRef.current) {
+        try {
+            const raw = window.localStorage.getItem(draftStorageKey);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                if (parsed && typeof parsed.input === 'string') {
+                    initialDraftRef.current = {
+                        input: parsed.input,
+                        lastSavedSnapshot: typeof parsed.lastSavedSnapshot === 'string' ? parsed.lastSavedSnapshot : '',
+                        viewMode: parsed.viewMode === 'editor' || parsed.viewMode === 'preview' || parsed.viewMode === 'split'
+                            ? parsed.viewMode
+                            : 'split',
+                        currentFilename: typeof parsed.currentFilename === 'string' ? parsed.currentFilename : null,
+                        currentParentId: typeof parsed.currentParentId === 'string' ? parsed.currentParentId : null,
+                        currentEntryId: typeof parsed.currentEntryId === 'string' ? parsed.currentEntryId : null,
+                    };
+                }
+            }
+        } catch {
+            initialDraftRef.current = null;
+        }
+    }
+    const sampleContentRef = useRef(t('widgets.markdown_text_editor.sample_content'));
     const [input, setInput] = useState<string>(
-        t('widgets.markdown_text_editor.sample_content')
+        initialDraftRef.current?.input ?? sampleContentRef.current
     );
     const [feedback, setFeedback] = useState<string>('');
-    const [lastSavedSnapshot, setLastSavedSnapshot] = useState<string>('');
-    const [viewMode, setViewMode] = useState<ViewMode>('split');
-    const [currentFilename, setCurrentFilename] = useState<string | null>(null);
-    const [currentParentId, setCurrentParentId] = useState<string | null>(null);
-    const [currentEntryId, setCurrentEntryId] = useState<string | null>(null);
+    const [lastSavedSnapshot, setLastSavedSnapshot] = useState<string>(
+        initialDraftRef.current?.lastSavedSnapshot ?? ''
+    );
+    const [viewMode, setViewMode] = useState<ViewMode>(
+        initialDraftRef.current?.viewMode ?? 'split'
+    );
+    const [currentFilename, setCurrentFilename] = useState<string | null>(
+        initialDraftRef.current?.currentFilename ?? null
+    );
+    const [currentParentId, setCurrentParentId] = useState<string | null>(
+        initialDraftRef.current?.currentParentId ?? null
+    );
+    const [currentEntryId, setCurrentEntryId] = useState<string | null>(
+        initialDraftRef.current?.currentEntryId ?? null
+    );
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const previewRef = useRef<HTMLDivElement>(null);
     const printRef = useRef<HTMLDivElement>(null);
@@ -108,10 +150,34 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
 
     useEffect(() => {
         const sampleContent = t('widgets.markdown_text_editor.sample_content');
-        if (sampleContent !== 'widgets.markdown_text_editor.sample_content') {
+        if (!initialDraftRef.current && input === sampleContentRef.current) {
             setInput(sampleContent);
         }
-    }, [t, i18n.language]);
+        sampleContentRef.current = sampleContent;
+    }, [t, i18n.language, input]);
+
+    useEffect(() => {
+        const draft = {
+            input,
+            lastSavedSnapshot,
+            viewMode,
+            currentFilename,
+            currentParentId,
+            currentEntryId,
+        };
+        window.localStorage.setItem(draftStorageKey, JSON.stringify(draft));
+    }, [draftStorageKey, input, lastSavedSnapshot, viewMode, currentFilename, currentParentId, currentEntryId]);
+
+    useEffect(() => {
+        const handler = (event: Event) => {
+            const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
+            if (custom.detail?.instanceId !== resolvedInstanceId) return;
+            if (custom.detail?.widgetId && custom.detail.widgetId !== 'markdown-text-editor') return;
+            window.localStorage.removeItem(draftStorageKey);
+        };
+        window.addEventListener('widget-close', handler as EventListener);
+        return () => window.removeEventListener('widget-close', handler as EventListener);
+    }, [draftStorageKey, resolvedInstanceId]);
 
     useEffect(() => {
         const node = printRef.current;

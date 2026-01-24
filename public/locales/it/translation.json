@@ -8,6 +8,7 @@
   "save_dialog": {
     "title": "Salva file",
     "description": "Dove vuoi salvarlo?",
+    "file_manager": "Salva in Ed",
     "save_in_manager": "File Ed",
     "save_in_device": "Disco locale",
     "cancel": "Annulla",
@@ -44,7 +45,7 @@
       "reset_description": "Rimuove tutti i dati salvati (profili, strumenti e preferenze) e riavvia come al primo avvio.",
       "reset_button": "Ripristino impostazioni di fabbrica",
       "reset_confirm": "Sei sicuro di voler eliminare tutte le preferenze e i dati locali? Questa azione non può essere annullata.",
-      "version_value": "v1.6.3 (Enero 2026)"
+      "version_value": "v2.6.0 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Nome profilo non valido o già esistente.",
@@ -1017,6 +1018,31 @@
       "empty_state": "Avvia una ricerca per vedere i risultati.",
       "open_new_tab": "Apri in una nuova scheda",
       "open_article": "Apri articolo"
+    },
+    "screen_annotator": {
+      "title": "Lavagna trasparente",
+      "search_keywords": "lavagna, trasparente, annotazioni, evidenziare, schermo",
+      "tool_pen": "Penna",
+      "tool_highlighter": "Evidenziatore",
+      "tool_eraser": "Gomma",
+      "tool_line": "Linea",
+      "tool_rectangle": "Rettangolo",
+      "tool_ellipse": "Ellisse",
+      "tool_arrow": "Freccia",
+      "color_label": "Colore",
+      "size_label": "Spessore",
+      "fill_on": "Riempimento attivo",
+      "fill_off": "Riempimento disattivato",
+      "undo": "Annulla",
+      "redo": "Ripristina",
+      "clear": "Cancella",
+      "clear_confirm": "Cancellare tutte le annotazioni?",
+      "close": "Chiudi",
+      "toolbar_drag": "Sposta controlli",
+      "opacity_label": "Trasparenza",
+      "section_tools": "Strumenti",
+      "section_properties": "Proprietà",
+      "section_actions": "Azioni"
     }
   },
   "backup": {
@@ -1131,6 +1157,7 @@
     "tic-tac-toe": "Tris per ripasso rapido.",
     "memory-game": "Memory a coppie per praticare concetti.",
     "sliding-puzzle": "Puzzle scorrevole per logica e attenzione.",
-    "work-gestures": "Gesti di lavoro per dinamiche in aula."
+    "work-gestures": "Gesti di lavoro per dinamiche in aula.",
+    "screen-annotator": "Livello trasparente per sottolineare e segnare sul desktop."
   }
 }
