@@ -183,7 +183,7 @@ const DesktopUI: React.FC<{
             const nextEnable = typeof enable === 'boolean' ? enable : target.windowStyleOverride !== 'floating';
             const nextWidgets = profile.activeWidgets.map((widget) => {
                 if (widget.instanceId !== instanceId) return widget;
-                let nextWidget = { ...widget, windowStyleOverride: nextEnable ? 'floating' : undefined };
+                let nextWidget = { ...widget, windowStyleOverride: nextEnable ? ('floating' as const) : undefined };
                 if (nextEnable && widget.isMaximized) {
                     nextWidget = {
                         ...nextWidget,
