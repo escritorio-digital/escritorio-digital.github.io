@@ -8,6 +8,7 @@
   "save_dialog": {
     "title": "Enregistrer le fichier",
     "description": "Où voulez-vous l'enregistrer ?",
+    "file_manager": "Enregistrer dans Ed",
     "save_in_manager": "Fichiers Ed",
     "save_in_device": "Disque local",
     "cancel": "Annuler",
@@ -45,7 +46,7 @@
       "reset_description": "Supprime toutes les données enregistrées (profils, outils et préférences) et redémarre comme si c'était la première fois.",
       "reset_button": "Réinitialiser aux valeurs d'usine",
       "reset_confirm": "Êtes-vous sûr de vouloir supprimer toutes les préférences et données locales ? Cette action est irréversible.",
-      "version_value": "v1.6.3 (Enero 2026)"
+      "version_value": "v2.6.0 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Nom de profil invalide ou déjà existant.",
@@ -1018,6 +1019,31 @@
       "empty_state": "Lance une recherche pour voir des résultats.",
       "open_new_tab": "Ouvrir dans un nouvel onglet",
       "open_article": "Ouvrir l'article"
+    },
+    "screen_annotator": {
+      "title": "Tableau transparent",
+      "search_keywords": "tableau, transparent, annotations, surligner, écran",
+      "tool_pen": "Stylo",
+      "tool_highlighter": "Surligneur",
+      "tool_eraser": "Gomme",
+      "tool_line": "Ligne",
+      "tool_rectangle": "Rectangle",
+      "tool_ellipse": "Ellipse",
+      "tool_arrow": "Flèche",
+      "color_label": "Couleur",
+      "size_label": "Épaisseur",
+      "fill_on": "Remplissage activé",
+      "fill_off": "Remplissage désactivé",
+      "undo": "Annuler",
+      "redo": "Rétablir",
+      "clear": "Effacer",
+      "clear_confirm": "Effacer toutes les annotations ?",
+      "close": "Fermer",
+      "toolbar_drag": "Déplacer les contrôles",
+      "opacity_label": "Opacité",
+      "section_tools": "Outils",
+      "section_properties": "Propriétés",
+      "section_actions": "Actions"
     }
   },
   "backup": {
@@ -1132,6 +1158,7 @@
     "tic-tac-toe": "Morpion pour révision rapide.",
     "memory-game": "Jeu de mémoire par paires pour pratiquer des concepts.",
     "sliding-puzzle": "Puzzle coulissant pour logique et attention.",
-    "work-gestures": "Gestes de travail pour routines de classe."
+    "work-gestures": "Gestes de travail pour routines de classe.",
+    "screen-annotator": "Calque transparent pour souligner et marquer sur le bureau."
   }
 }

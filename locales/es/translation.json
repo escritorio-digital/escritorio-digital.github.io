@@ -8,15 +8,16 @@
   "save_dialog": {
     "title": "Guardar archivo",
     "description": "¿Dónde quieres guardarlo?",
-    "save_in_manager": "Archivos Ed",
+    "file_manager": "Guardar en Ed",
+    "save_in_manager": "Guardar en Ed",
     "save_in_device": "Disco local",
     "cancel": "Cancelar",
     "folder_label": "Carpeta de destino",
     "new_folder": "Nueva carpeta",
-    "root_folder": "Archivos Ed",
+    "root_folder": "Guardar en Ed",
     "filename_label": "Nombre del archivo",
     "default_filename": "archivo",
-    "message": "¿Guardar en Archivos Ed? Aceptar = Archivos Ed, Cancelar = Disco local.",
+    "message": "¿Guardar en Ed? Aceptar = Guardar en Ed, Cancelar = Disco local.",
     "existing_files": "Archivos en esta carpeta",
     "replace_hint": "Haz clic en una carpeta para abrirla o en un archivo para usar su nombre y reemplazarlo.",
     "no_files": "No hay archivos en esta carpeta.",
@@ -44,7 +45,7 @@
       "reset_description": "Elimina todos los datos guardados (perfiles, herramientas y preferencias) y reinicia como si fuera la primera vez.",
       "reset_button": "Restablecer a valores de fábrica",
       "reset_confirm": "¿Seguro que quieres eliminar todas las preferencias y datos locales? Esta acción no se puede deshacer.",
-      "version_value": "v1.6.3 (Enero 2026)"
+      "version_value": "v2.6.0 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Nombre de perfil inválido o ya existente.",
@@ -315,7 +316,7 @@
       "copy": "Copiar",
       "cut": "Cortar",
       "paste": "Pegar",
-      "feedback_saved": "Guardado en Archivos Ed.",
+      "feedback_saved": "Guardado en Ed.",
       "feedback_opening": "Abriendo archivo...",
       "rename": "Renombrar",
       "rename_prompt": "Nuevo nombre",
@@ -1018,6 +1019,31 @@
       "empty_state": "Empieza una búsqueda para ver resultados.",
       "open_new_tab": "Abrir en pestaña nueva",
       "open_article": "Abrir artículo"
+    },
+    "screen_annotator": {
+      "title": "Pizarra transparente",
+      "search_keywords": "pizarra, transparente, anotaciones, subrayar, pantalla",
+      "tool_pen": "Lápiz",
+      "tool_highlighter": "Resaltador",
+      "tool_eraser": "Borrador",
+      "tool_line": "Línea",
+      "tool_rectangle": "Rectángulo",
+      "tool_ellipse": "Elipse",
+      "tool_arrow": "Flecha",
+      "color_label": "Color",
+      "size_label": "Grosor",
+      "fill_on": "Relleno activado",
+      "fill_off": "Relleno desactivado",
+      "undo": "Deshacer",
+      "redo": "Rehacer",
+      "clear": "Limpiar",
+      "clear_confirm": "¿Quieres borrar todas las anotaciones?",
+      "close": "Cerrar",
+      "toolbar_drag": "Mover controles",
+      "opacity_label": "Transparencia",
+      "section_tools": "Herramientas",
+      "section_properties": "Propiedades",
+      "section_actions": "Acciones"
     }
   },
   "backup": {
@@ -1069,8 +1095,8 @@
   },
   "open_dialog": {
     "title": "Abrir archivo",
-    "description": "Elige desde Archivos Ed o desde el disco local.",
-    "file_manager": "Archivos Ed",
+    "description": "Elige desde Guardar en Ed o desde el disco local.",
+    "file_manager": "Guardar en Ed",
     "up": "Subir",
     "empty_folder": "Esta carpeta está vacía.",
     "local": "Disco local",
@@ -1079,7 +1105,7 @@
     "cancel": "Cancelar",
     "open_selected": "Abrir seleccionados",
     "open_file": "Abrir archivo",
-    "root_folder": "Archivos Ed",
+    "root_folder": "Guardar en Ed",
     "filter_widget": "Ver solo archivos creados con {{widget}}"
   },
   "unsaved_modal": {
@@ -1132,6 +1158,7 @@
     "tic-tac-toe": "Tres en raya para repaso rápido.",
     "memory-game": "Memorama de parejas para practicar conceptos.",
     "sliding-puzzle": "Puzzle deslizante para lógica y atención.",
-    "work-gestures": "Gestos de trabajo para dinámicas de aula."
+    "work-gestures": "Gestos de trabajo para dinámicas de aula.",
+    "screen-annotator": "Pizarra transparente para subrayar y marcar sobre el escritorio."
   }
 }

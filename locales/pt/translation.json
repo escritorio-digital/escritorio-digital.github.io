@@ -8,6 +8,7 @@
   "save_dialog": {
     "title": "Guardar ficheiro",
     "description": "Onde queres guardar?",
+    "file_manager": "Guardar no Ed",
     "save_in_manager": "Arquivos Ed",
     "save_in_device": "Disco local",
     "cancel": "Cancelar",
@@ -46,7 +47,7 @@
       "reset_description": "Remove todos os dados salvos (perfis, ferramentas e preferências) e reinicia como na primeira execução.",
       "reset_button": "Restaurar de fábrica",
       "reset_confirm": "Tem certeza de que deseja remover todas as preferências e dados locais? Esta ação não pode ser desfeita.",
-      "version_value": "v1.6.3 (Enero 2026)"
+      "version_value": "v2.6.0 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Nome de perfil inválido ou já existente.",
@@ -1019,6 +1020,31 @@
       "empty_state": "Começa uma pesquisa para ver resultados.",
       "open_new_tab": "Abrir em nova aba",
       "open_article": "Abrir artigo"
+    },
+    "screen_annotator": {
+      "title": "Quadro transparente",
+      "search_keywords": "quadro, transparente, anotações, sublinhar, ecrã",
+      "tool_pen": "Caneta",
+      "tool_highlighter": "Marcador",
+      "tool_eraser": "Borracha",
+      "tool_line": "Linha",
+      "tool_rectangle": "Retângulo",
+      "tool_ellipse": "Elipse",
+      "tool_arrow": "Seta",
+      "color_label": "Cor",
+      "size_label": "Espessura",
+      "fill_on": "Preenchimento ativo",
+      "fill_off": "Preenchimento inativo",
+      "undo": "Anular",
+      "redo": "Refazer",
+      "clear": "Limpar",
+      "clear_confirm": "Limpar todas as anotações?",
+      "close": "Fechar",
+      "toolbar_drag": "Mover controlos",
+      "opacity_label": "Transparência",
+      "section_tools": "Ferramentas",
+      "section_properties": "Propriedades",
+      "section_actions": "Ações"
     }
   },
   "backup": {
@@ -1133,6 +1159,7 @@
     "tic-tac-toe": "Jogo do galo para revisão rápida.",
     "memory-game": "Jogo da memória de pares para praticar conceitos.",
     "sliding-puzzle": "Puzzle deslizante para lógica e atenção.",
-    "work-gestures": "Gestos de trabalho para dinâmicas de aula."
+    "work-gestures": "Gestos de trabalho para dinâmicas de aula.",
+    "screen-annotator": "Camada transparente para sublinhar e marcar no ambiente de trabalho."
   }
 }

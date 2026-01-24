@@ -8,6 +8,7 @@
   "save_dialog": {
     "title": "Desar fitxer",
     "description": "On el vols desar?",
+    "file_manager": "Desar a Ed",
     "save_in_manager": "Arxius Ed",
     "save_in_device": "Disc local",
     "cancel": "Cancel·lar",
@@ -44,7 +45,7 @@
       "reset_description": "Elimina totes les dades desades (perfils, eines i preferències) i reinicia com si fos la primera vegada.",
       "reset_button": "Restablir a valors de fàbrica",
       "reset_confirm": "Estàs segur que vols eliminar totes les preferències i dades locals? Aquesta acció no es pot desfer.",
-      "version_value": "v1.6.3 (Enero 2026)"
+      "version_value": "v2.6.0 (Enero 2026)"
     },
     "profiles": {
       "invalid_name_alert": "Nom de perfil invàlid o ja existent.",
@@ -1017,6 +1018,31 @@
       "empty_state": "Comença una cerca per veure resultats.",
       "open_new_tab": "Obrir en una pestanya nova",
       "open_article": "Obrir article"
+    },
+    "screen_annotator": {
+      "title": "Pissarra transparent",
+      "search_keywords": "pissarra, transparent, anotacions, subratllar, pantalla",
+      "tool_pen": "Llapis",
+      "tool_highlighter": "Ressaltador",
+      "tool_eraser": "Esborrador",
+      "tool_line": "Línia",
+      "tool_rectangle": "Rectangle",
+      "tool_ellipse": "El·lipse",
+      "tool_arrow": "Fletxa",
+      "color_label": "Color",
+      "size_label": "Gruix",
+      "fill_on": "Emplenat actiu",
+      "fill_off": "Emplenat inactiu",
+      "undo": "Desfer",
+      "redo": "Refer",
+      "clear": "Esborrar",
+      "clear_confirm": "Vols esborrar totes les anotacions?",
+      "close": "Tancar",
+      "toolbar_drag": "Moure controls",
+      "opacity_label": "Transparència",
+      "section_tools": "Eines",
+      "section_properties": "Propietats",
+      "section_actions": "Accions"
     }
   },
   "backup": {
@@ -1131,6 +1157,7 @@
     "tic-tac-toe": "Tres en ratlla per a repàs ràpid.",
     "memory-game": "Memorama de parelles per practicar conceptes.",
     "sliding-puzzle": "Trencaclosques lliscant per a lògica i atenció.",
-    "work-gestures": "Gestos de treball per a dinàmiques d'aula."
+    "work-gestures": "Gestos de treball per a dinàmiques d'aula.",
+    "screen-annotator": "Capa transparent per subratllar i marcar sobre l'escriptori."
   }
 }
