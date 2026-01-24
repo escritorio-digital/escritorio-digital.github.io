@@ -368,7 +368,9 @@
       "history": "Cronologia",
       "no_history": "Nessuna cronologia.",
       "error": "Errore",
-      "infinity": "Infinito"
+      "infinity": "Infinito",
+      "floating_on": "Flottante",
+      "floating_off": "Finestra"
     },
     "calendar": {
       "title": "Calendario",
@@ -945,7 +947,9 @@
       "intro_step5": "I preferiti mantengono gli strumenti selezionati visibili in cima alla lista.",
       "less": "meno...",
       "move_up": "Sposta il preferito su",
-      "move_down": "Sposta il preferito giu"
+      "move_down": "Sposta il preferito giu",
+      "collapse_list": "Nascondi elenco",
+      "expand_list": "Mostra elenco"
     },
     "chatgpt_ia_edu": {
       "title": "Comunità ChatGPT-IA-edu",

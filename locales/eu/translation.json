@@ -367,7 +367,9 @@
       "history": "Historia",
       "no_history": "Ez dago historiarik.",
       "error": "Errorea",
-      "infinity": "Infinitua"
+      "infinity": "Infinitua",
+      "floating_on": "Flotagarria",
+      "floating_off": "Leihoa"
     },
     "calendar": {
       "title": "Egutegia",
@@ -944,7 +946,9 @@
       "intro_step5": "Gogokoek hautatutako tresnak zerrendaren goialdean ikusgai mantentzen dituzte.",
       "less": "gutxiago...",
       "move_up": "Mugitu gogokoa gora",
-      "move_down": "Mugitu gogokoa behera"
+      "move_down": "Mugitu gogokoa behera",
+      "collapse_list": "Ezkutatu zerrenda",
+      "expand_list": "Erakutsi zerrenda"
     },
     "chatgpt_ia_edu": {
       "title": "ChatGPT-IA-edu komunitatea",

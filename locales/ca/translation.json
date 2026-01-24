@@ -368,7 +368,9 @@
       "history": "Historial",
       "no_history": "No hi ha historial.",
       "error": "Error",
-      "infinity": "Infinit"
+      "infinity": "Infinit",
+      "floating_on": "Flotant",
+      "floating_off": "Finestra"
     },
     "calendar": {
       "title": "Calendari",
@@ -945,7 +947,9 @@
       "intro_step5": "Els favorits mantenen les eines seleccionades visibles a la part superior de la llista.",
       "less": "menys...",
       "move_up": "Moure el favorit amunt",
-      "move_down": "Moure el favorit avall"
+      "move_down": "Moure el favorit avall",
+      "collapse_list": "Amagar llista",
+      "expand_list": "Mostrar llista"
     },
     "chatgpt_ia_edu": {
       "title": "Comunitat ChatGPT-IA-edu",
