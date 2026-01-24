@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import type { FC, PointerEvent as ReactPointerEvent } from 'react';
+import type { FC, PointerEvent as ReactPointerEvent, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight, Circle, Eraser, GripVertical, Highlighter, Minus, Pencil, RotateCcw, RotateCw, Square, Trash2, X } from 'lucide-react';
 import './ScreenAnnotatorWidget.css';
@@ -81,7 +81,7 @@ export const ScreenAnnotatorWidget: FC<{ instanceId?: string }> = ({ instanceId 
     const [toolbarPos, setToolbarPos] = useState(initialDraftRef.current?.toolbarPos ?? { x: 24, y: 24 });
     const activeSettings = toolSettings[tool] ?? { color: DEFAULT_COLOR, size: DEFAULT_SIZE, opacity: 1 };
 
-    const toolButtons: { id: Tool; icon: JSX.Element; label: string }[] = useMemo(() => [
+    const toolButtons: { id: Tool; icon: ReactNode; label: string }[] = useMemo(() => [
         { id: 'pen', icon: <Pencil size={16} />, label: t('widgets.screen_annotator.tool_pen') },
         { id: 'highlighter', icon: <Highlighter size={16} />, label: t('widgets.screen_annotator.tool_highlighter') },
         { id: 'eraser', icon: <Eraser size={16} />, label: t('widgets.screen_annotator.tool_eraser') },
