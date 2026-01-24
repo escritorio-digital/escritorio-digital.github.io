@@ -694,6 +694,7 @@
       "mode_time": "Hora",
       "mode_countdown": "Cuenta atrás",
       "time_label": "Hora",
+      "date_label": "Fecha",
       "countdown_minutes": "Minutos",
       "countdown_seconds": "Segundos",
       "label_label": "Etiqueta (opcional)",
