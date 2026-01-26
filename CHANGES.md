@@ -1,5 +1,8 @@
 # Cambios realizados
 
+## 2.6.3
+- Visor web local: los enlaces internos conservan los estilos y recursos al navegar entre paginas.
+
 ## 2.6.2
 - Calculadora: modo flotante persistente, teclado basico y ajustes de tamaño inicial.
 - Alarma/temporizador: fecha para alarmas, selector rápido de minutos y mejoras móviles.

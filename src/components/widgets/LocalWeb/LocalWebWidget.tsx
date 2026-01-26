@@ -7,11 +7,13 @@ import { requestOpenFile } from '../../../utils/openDialog';
 import { unzipSync } from 'fflate';
 import './LocalWebWidget.css';
 import { WidgetToolbar } from '../../core/WidgetToolbar';
+import { withBaseUrl } from '../../../utils/assetPaths';
 
 type SiteMeta = {
     id: string;
     name: string;
     profileName?: string;
+    indexPath?: string;
     createdAt: number;
     updatedAt: number;
     fileCount: number;
@@ -41,6 +43,7 @@ const ACTIVE_PROFILE_EVENT = 'active-profile-change';
 const defaultProfileKey = 'Escritorio Principal';
 
 let dbPromise: Promise<IDBDatabase> | null = null;
+let serviceWorkerReadyPromise: Promise<boolean> | null = null;
 
 const openDb = (): Promise<IDBDatabase> => {
     if (!dbPromise) {
@@ -197,6 +200,60 @@ const resolvePath = (basePath: string, relativePath: string): string => {
         }
     });
     return resolved.join('/');
+};
+
+const findIndexPath = (paths: string[]): string => {
+    const normalized = paths.map((path) => normalizePath(path));
+    const lower = normalized.map((path) => path.toLowerCase());
+    const htmlIndex = lower.indexOf('index.html');
+    if (htmlIndex !== -1) return normalized[htmlIndex];
+    const htmIndex = lower.indexOf('index.htm');
+    if (htmIndex !== -1) return normalized[htmIndex];
+    const anyHtmlIndex = lower.findIndex((path) => path.endsWith('.html') || path.endsWith('.htm'));
+    if (anyHtmlIndex !== -1) return normalized[anyHtmlIndex];
+    return normalized[0] ?? '';
+};
+
+const encodePath = (path: string): string => {
+    const normalized = normalizePath(path);
+    return normalized
+        .split('/')
+        .map((part) => encodeURIComponent(part))
+        .join('/');
+};
+
+const buildSiteUrl = (siteId: string, path: string): string => {
+    const encodedPath = encodePath(path);
+    return withBaseUrl(`local-web/site/${siteId}/${encodedPath}`);
+};
+
+const ensureLocalWebServiceWorker = async (): Promise<boolean> => {
+    if (!('serviceWorker' in navigator)) return false;
+    if (serviceWorkerReadyPromise) return serviceWorkerReadyPromise;
+    serviceWorkerReadyPromise = (async () => {
+        try {
+            const registration = await navigator.serviceWorker.register(
+                withBaseUrl('local-web-sw.js'),
+                { scope: withBaseUrl('local-web/') }
+            );
+            const worker = registration.installing || registration.waiting || registration.active;
+            if (!worker) return false;
+            if (worker.state === 'activated') return true;
+            await new Promise<void>((resolve) => {
+                const handleStateChange = () => {
+                    if (worker.state === 'activated') {
+                        worker.removeEventListener('statechange', handleStateChange);
+                        resolve();
+                    }
+                };
+                worker.addEventListener('statechange', handleStateChange);
+            });
+            return true;
+        } catch {
+            return false;
+        }
+    })();
+    return serviceWorkerReadyPromise;
 };
 
 const rewriteCssUrls = (css: string, cssPath: string, urlMap: Map<string, string>): string => {
@@ -446,12 +503,16 @@ export const LocalWebWidget: FC = () => {
         return Math.min(100, Math.max(0, Math.round((usage / quota) * 100)));
     }, [storageEstimate]);
 
+    const clearObjectUrls = () => {
+        objectUrlsRef.current.forEach((url) => URL.revokeObjectURL(url));
+        objectUrlsRef.current = [];
+    };
+
     const resetPreview = () => {
         setActiveSiteId(null);
         setPreviewUrl(null);
         setPreviewName('');
-        objectUrlsRef.current.forEach((url) => URL.revokeObjectURL(url));
-        objectUrlsRef.current = [];
+        clearObjectUrls();
     };
 
     const openPreviewInWindow = () => {
@@ -545,10 +606,12 @@ export const LocalWebWidget: FC = () => {
 
         const siteId = crypto.randomUUID();
         const now = Date.now();
+        const indexPath = findIndexPath(files.map((item) => item.path));
         const site: SiteMeta = {
             id: siteId,
             name: file.name.replace(/\.zip$/i, ''),
             profileName: activeProfileName,
+            indexPath,
             createdAt: now,
             updatedAt: now,
             fileCount: files.length,
@@ -588,10 +651,12 @@ export const LocalWebWidget: FC = () => {
         });
 
         const folderName = (files[0] as File & { webkitRelativePath?: string }).webkitRelativePath?.split('/')[0] || files[0].name;
+        const indexPath = findIndexPath(storedFiles.map((item) => item.path));
         const site: SiteMeta = {
             id: siteId,
             name: folderName,
             profileName: activeProfileName,
+            indexPath,
             createdAt: now,
             updatedAt: now,
             fileCount: storedFiles.length,
@@ -609,19 +674,30 @@ export const LocalWebWidget: FC = () => {
     const openSite = async (site: SiteMeta) => {
         setStatusMessage(t('widgets.local_web.loading'));
         const files = await getFilesForSite(site.id);
-        const fileMap = new Map<string, StoredFile>();
-        files.forEach((file) => fileMap.set(normalizePath(file.path), file));
-        const entryPath =
-            files.find((file) => file.path.toLowerCase().endsWith('index.html'))?.path ||
-            files.find((file) => file.path.toLowerCase().endsWith('index.htm'))?.path ||
-            '';
+        const entryPath = site.indexPath || findIndexPath(files.map((file) => file.path));
         if (!entryPath) {
             setStatusMessage(t('widgets.local_web.missing_index'));
             return;
         }
 
-        objectUrlsRef.current.forEach((url) => URL.revokeObjectURL(url));
-        objectUrlsRef.current = [];
+        if (!site.indexPath || site.indexPath !== entryPath) {
+            const updatedSite = { ...site, indexPath: entryPath };
+            await saveSite(updatedSite);
+            setSites((prev) => prev.map((item) => (item.id === site.id ? updatedSite : item)));
+        }
+
+        clearObjectUrls();
+        const useServiceWorker = await ensureLocalWebServiceWorker();
+        if (useServiceWorker) {
+            setPreviewName(site.name);
+            setPreviewUrl(buildSiteUrl(site.id, entryPath));
+            setActiveSiteId(site.id);
+            setStatusMessage('');
+            return;
+        }
+
+        const fileMap = new Map<string, StoredFile>();
+        files.forEach((file) => fileMap.set(normalizePath(file.path), file));
         const urlMap = new Map<string, string>();
         files.forEach((file) => {
             const url = URL.createObjectURL(file.blob);
