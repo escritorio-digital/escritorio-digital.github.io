@@ -1,1 +1,0 @@
-import{j as t}from"./index-rdPxbIB-.js";import{q as d}from"./index-rdPxbIB-.js";import{ExternalAppWidget as e}from"./ExternalAppWidget-CRkzfAhl.js";const r=()=>t.jsx(e,{url:"https://jjdeharo.github.io/directo/ideas.html",titleKey:"widgets.directo_ideas.title",appendLanguageParam:!0,openInPopup:!0});export{r as DirectoIdeasWidget,d as widgetConfig};
