@@ -923,6 +923,7 @@
       "filter_area_all": "Todas as áreas",
       "filter_languages": "Idiomas",
       "filter_languages_all": "Todos os idiomas",
+      "showing_count": "A mostrar {{count}} aplicações",
       "no_results": "Não há ferramentas com estes filtros.",
       "no_selection": "Selecione uma ferramenta para ver.",
       "open_new_tab": "Abrir em nova aba",

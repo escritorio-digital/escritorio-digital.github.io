@@ -921,6 +921,7 @@
       "filter_area_all": "Totes les àrees",
       "filter_languages": "Idiomes",
       "filter_languages_all": "Tots els idiomes",
+      "showing_count": "Mostrant {{count}} aplicacions",
       "no_results": "No hi ha eines amb aquests filtres.",
       "no_selection": "Selecciona una eina per veure-la.",
       "open_new_tab": "Obrir en pestanya nova",
