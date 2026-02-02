@@ -265,6 +265,7 @@ export const VceCommunityWidget = () => {
         () => filteredApps.filter((app) => !favoriteSet.has(app.url)),
         [filteredApps, favoriteSet]
     );
+    const visibleAppsCount = favoriteApps.length + regularApps.length;
 
     useEffect(() => {
         if (activeApp && !apps.some((app) => app.url === activeApp.url)) {
@@ -468,6 +469,9 @@ export const VceCommunityWidget = () => {
                                     ))}
                                 </div>
                             )}
+                        </div>
+                        <div className="vce-count">
+                            {t('widgets.vce.showing_count', { count: visibleAppsCount })}
                         </div>
                     </div>
                 </div>

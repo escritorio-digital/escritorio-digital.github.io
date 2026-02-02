@@ -922,6 +922,7 @@
       "filter_area_all": "Toutes les matières",
       "filter_languages": "Langues",
       "filter_languages_all": "Toutes les langues",
+      "showing_count": "Affichage de {{count}} applications",
       "no_results": "Aucune application ne correspond à ces filtres.",
       "no_selection": "Sélectionnez une application pour l'afficher.",
       "open_new_tab": "Ouvrir dans un nouvel onglet",

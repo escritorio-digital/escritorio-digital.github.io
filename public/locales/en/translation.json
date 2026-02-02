@@ -921,6 +921,7 @@
       "filter_area_all": "All subjects",
       "filter_languages": "Languages",
       "filter_languages_all": "All languages",
+      "showing_count": "Showing {{count}} apps",
       "no_results": "No apps match these filters.",
       "no_selection": "Select an app to preview.",
       "open_new_tab": "Open in new tab",

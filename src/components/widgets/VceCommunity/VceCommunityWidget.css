@@ -163,6 +163,14 @@
     accent-color: #0f766e;
 }
 
+.vce-count {
+    align-self: center;
+    font-size: 0.75rem;
+    color: #64748b;
+    padding: 0 6px;
+    white-space: nowrap;
+}
+
 .vce-body {
     flex: 1;
     display: grid;

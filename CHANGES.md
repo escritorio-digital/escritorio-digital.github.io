@@ -1,5 +1,8 @@
 # Cambios realizados
 
+## 2.6.5
+- Comunidad VCE: contador visible con el número de aplicaciones mostradas.
+
 ## 2.6.4
 - Comunidad VCE: filtro por idioma (multiselección) basado en la columna "Idiomas de la aplicación".
 
