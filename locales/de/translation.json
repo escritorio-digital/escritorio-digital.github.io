@@ -919,6 +919,8 @@
       "search_placeholder": "Nach Titel, Autor oder Beschreibung suchen",
       "filter_level_all": "Alle Stufen",
       "filter_area_all": "Alle Fächer",
+      "filter_languages": "Sprachen",
+      "filter_languages_all": "Alle Sprachen",
       "no_results": "Keine Apps für diese Filter.",
       "no_selection": "Wähle eine App zur Vorschau.",
       "open_new_tab": "In neuem Tab öffnen",

@@ -918,6 +918,8 @@
       "search_placeholder": "Bilatu izenburu, egile edo deskribapenaren arabera",
       "filter_level_all": "Maila guztiak",
       "filter_area_all": "Arlo guztiak",
+      "filter_languages": "Hizkuntzak",
+      "filter_languages_all": "Hizkuntza guztiak",
       "no_results": "Ez dago tresna egokirik iragazki hauekin.",
       "no_selection": "Hautatu tresna bat ikusteko.",
       "open_new_tab": "Ireki fitxa berrian",
