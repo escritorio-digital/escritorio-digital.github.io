@@ -11,8 +11,21 @@ type VceApp = {
     url: string;
     levels: string[];
     areas: string[];
+    languages: string[];
     description: string;
 };
+
+const LANGUAGE_OPTIONS = [
+    'Español',
+    'Català',
+    'Galego',
+    'Euskara',
+    'English',
+    'Português',
+    'Français',
+    'Deutsch',
+    'Italiano',
+] as const;
 
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSj_hltRI4Q0QolINWJVcKxCMMjfpdiCkKzSdgp9d8RlGTdUU1UIKvaj-TBSkq0JQGneDhfUkSQuFzy/pub?output=csv';
 const COMMUNITY_URL = 'https://vibe-coding-educativo.github.io/';
@@ -76,6 +89,8 @@ export const VceCommunityWidget = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [levelFilter, setLevelFilter] = useState('');
     const [areaFilter, setAreaFilter] = useState('');
+    const [languageFilter, setLanguageFilter] = useState<Set<string>>(() => new Set());
+    const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
     const [activeApp, setActiveApp] = useState<VceApp | null>(null);
     const [expandedApps, setExpandedApps] = useState<Set<string>>(new Set());
     const [isLoading, setIsLoading] = useState(true);
@@ -83,6 +98,7 @@ export const VceCommunityWidget = () => {
     const [iframeBlocked, setIframeBlocked] = useState(false);
     const [isListCollapsed, setIsListCollapsed] = useState(false);
     const iframeRef = useRef<HTMLIFrameElement | null>(null);
+    const languageMenuRef = useRef<HTMLDivElement | null>(null);
     const [activeProfileName, setActiveProfileName] = useState(() => readActiveProfileName());
     const [favoriteUrls, setFavoriteUrls] = useState<string[]>(() => (
         readFavoritesForProfile(readActiveProfileName())
@@ -106,21 +122,26 @@ export const VceCommunityWidget = () => {
                 const deleteField = '¿QUIERES ELIMINAR UN REGISTRO?\\nMarca la casilla y escribe más abajo la URL que tiene tu aplicación. En el resto de campos, escribe cualquier cosa y envía el formulario.\\nIMPORTANTE: Si solo quieres rectificar un registro, no marques esta casilla, haz lo que se  indica a continuación';
                 const toList = (value?: string) =>
                     (value || '')
+                        .replaceAll(';', ',')
                         .split(',')
                         .map((item) => item.trim())
                         .filter(Boolean);
                 const nextApps = (parsed.data || [])
-                    .map((row) => ({
-                        title: (row['Título de la aplicación'] || '').trim(),
-                        author: (row['Tu nombre (Autor/a de la aplicación)'] || '').trim(),
-                        url: (row['Enlace (URL) a la aplicación'] || '').trim(),
-                        levels: toList(row['Nivel o niveles educativos']),
-                        areas: toList(row['Área o áreas de conocimiento']),
-                        description: (row['Descripción breve'] || '').trim(),
-                        deleteFlag: (row[deleteField] || '').trim(),
-                    }))
-                    .filter((row) => row.title && row.url && !row.deleteFlag)
-                    .map(({ deleteFlag, ...rest }) => rest);
+                    .map((row) => {
+                        const app: VceApp = {
+                            title: (row['Título de la aplicación'] || '').trim(),
+                            author: (row['Tu nombre (Autor/a de la aplicación)'] || '').trim(),
+                            url: (row['Enlace (URL) a la aplicación'] || '').trim(),
+                            levels: toList(row['Nivel o niveles educativos']),
+                            areas: toList(row['Área o áreas de conocimiento']),
+                            languages: toList(row['Idiomas de la aplicación']),
+                            description: (row['Descripción breve'] || '').trim(),
+                        };
+                        const deleteFlag = (row[deleteField] || '').trim();
+                        return { app, deleteFlag };
+                    })
+                    .filter(({ app, deleteFlag }) => app.title && app.url && !deleteFlag)
+                    .map(({ app }) => app);
                 if (isMounted) {
                     setApps(nextApps);
                 }
@@ -178,12 +199,31 @@ export const VceCommunityWidget = () => {
         return Array.from(set).sort((a, b) => a.localeCompare(b));
     }, [apps]);
 
+    useEffect(() => {
+        if (!isLanguageMenuOpen) return;
+        const handleClickOutside = (event: MouseEvent) => {
+            if (!languageMenuRef.current) return;
+            if (!languageMenuRef.current.contains(event.target as Node)) {
+                setIsLanguageMenuOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isLanguageMenuOpen]);
+
     const filteredApps = useMemo(() => {
         const term = searchTerm.trim().toLowerCase();
+        const isAllLanguagesSelected = languageFilter.size === 0 || languageFilter.size === LANGUAGE_OPTIONS.length;
         const ordered = [...apps].reverse(); // mostrar en orden inverso al original
         return ordered.filter((app) => {
             if (levelFilter && !app.levels.includes(levelFilter)) return false;
             if (areaFilter && !app.areas.includes(areaFilter)) return false;
+            if (!isAllLanguagesSelected) {
+                const matchesLanguage = app.languages.some((language) => languageFilter.has(language));
+                if (!matchesLanguage) return false;
+            }
             if (!term) return true;
             return (
                 app.title.toLowerCase().includes(term)
@@ -191,7 +231,7 @@ export const VceCommunityWidget = () => {
                 || app.description.toLowerCase().includes(term)
             );
         });
-    }, [apps, searchTerm, levelFilter, areaFilter]);
+    }, [apps, searchTerm, levelFilter, areaFilter, languageFilter]);
 
     const isGoogleUrl = (url: string) => {
         try {
@@ -216,11 +256,11 @@ export const VceCommunityWidget = () => {
 
     const favoriteSet = useMemo(() => new Set(favoriteUrls), [favoriteUrls]);
     const favoriteApps = useMemo(() => {
-        const byUrl = new Map(apps.map((app) => [app.url, app]));
+        const byUrl = new Map(filteredApps.map((app) => [app.url, app]));
         return favoriteUrls
             .map((url) => byUrl.get(url))
             .filter((app): app is VceApp => Boolean(app));
-    }, [apps, favoriteUrls]);
+    }, [filteredApps, favoriteUrls]);
     const regularApps = useMemo(
         () => filteredApps.filter((app) => !favoriteSet.has(app.url)),
         [filteredApps, favoriteSet]
@@ -298,6 +338,18 @@ export const VceCommunityWidget = () => {
         } catch {
             // Ignore cross-origin access errors.
         }
+    };
+
+    const toggleLanguage = (language: string) => {
+        setLanguageFilter((prev) => {
+            const next = new Set(prev);
+            if (next.has(language)) {
+                next.delete(language);
+            } else {
+                next.add(language);
+            }
+            return next;
+        });
     };
 
     return (
@@ -383,6 +435,40 @@ export const VceCommunityWidget = () => {
                                 <option key={area} value={area}>{area}</option>
                             ))}
                         </select>
+                        <div className="vce-language-filter" ref={languageMenuRef}>
+                            <button
+                                type="button"
+                                className="vce-select vce-language-button"
+                                onClick={() => setIsLanguageMenuOpen((prev) => !prev)}
+                                aria-haspopup="listbox"
+                                aria-expanded={isLanguageMenuOpen}
+                            >
+                                {languageFilter.size === 0 || languageFilter.size === LANGUAGE_OPTIONS.length
+                                    ? t('widgets.vce.filter_languages_all')
+                                    : `${t('widgets.vce.filter_languages')} (${languageFilter.size})`}
+                                <span className="vce-language-button-icon" aria-hidden="true">
+                                    <ChevronDown size={16} />
+                                </span>
+                            </button>
+                            {isLanguageMenuOpen && (
+                                <div
+                                    className="vce-language-menu"
+                                    role="listbox"
+                                    aria-multiselectable="true"
+                                >
+                                    {LANGUAGE_OPTIONS.map((language) => (
+                                        <label key={language} className="vce-language-option">
+                                            <input
+                                                type="checkbox"
+                                                checked={languageFilter.size > 0 && languageFilter.has(language)}
+                                                onChange={() => toggleLanguage(language)}
+                                            />
+                                            <span>{language}</span>
+                                        </label>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </WidgetToolbar>
@@ -603,5 +689,3 @@ export const VceCommunityWidget = () => {
         </div>
     );
 };
-
-export { widgetConfig } from './widgetConfig';

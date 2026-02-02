@@ -919,6 +919,8 @@
       "search_placeholder": "Buscar por título, autor ou descrición",
       "filter_level_all": "Todos os niveis",
       "filter_area_all": "Todas as áreas",
+      "filter_languages": "Idiomas",
+      "filter_languages_all": "Todos os idiomas",
       "no_results": "Non hai ferramentas con estes filtros.",
       "no_selection": "Selecciona unha ferramenta para vela.",
       "open_new_tab": "Abrir nunha nova lapela",

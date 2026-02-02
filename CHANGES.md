@@ -1,5 +1,8 @@
 # Cambios realizados
 
+## 2.6.4
+- Comunidad VCE: filtro por idioma (multiselección) basado en la columna "Idiomas de la aplicación".
+
 ## 2.6.3
 - Visor web local: los enlaces internos conservan los estilos y recursos al navegar entre paginas.
 

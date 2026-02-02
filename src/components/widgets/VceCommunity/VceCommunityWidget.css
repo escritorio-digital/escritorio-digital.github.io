@@ -105,6 +105,64 @@
     flex: 0 1 190px;
 }
 
+.vce-language-filter {
+    position: relative;
+    flex: 0 1 190px;
+}
+
+.vce-language-button {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.vce-language-button-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+}
+
+.vce-language-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 8px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
+    max-height: 220px;
+    overflow: auto;
+}
+
+.vce-language-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8125rem;
+    color: #111827;
+    padding: 6px 6px;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.vce-language-option:hover {
+    background: rgba(15, 118, 110, 0.08);
+}
+
+.vce-language-option input {
+    width: 14px;
+    height: 14px;
+    accent-color: #0f766e;
+}
+
 .vce-body {
     flex: 1;
     display: grid;

@@ -920,6 +920,8 @@
       "search_placeholder": "Buscar por título, autor o descripción",
       "filter_level_all": "Todos los niveles",
       "filter_area_all": "Todas las áreas",
+      "filter_languages": "Idiomas",
+      "filter_languages_all": "Todos los idiomas",
       "no_results": "No hay herramientas con estos filtros.",
       "no_selection": "Selecciona una herramienta para verla.",
       "open_new_tab": "Abrir en pestaña nueva",

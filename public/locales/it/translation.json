@@ -919,6 +919,8 @@
       "search_placeholder": "Cerca per titolo, autore o descrizione",
       "filter_level_all": "Tutti i livelli",
       "filter_area_all": "Tutte le materie",
+      "filter_languages": "Lingue",
+      "filter_languages_all": "Tutte le lingue",
       "no_results": "Nessuna app con questi filtri.",
       "no_selection": "Seleziona un'app da visualizzare.",
       "open_new_tab": "Apri in una nuova scheda",

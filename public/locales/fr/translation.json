@@ -920,6 +920,8 @@
       "search_placeholder": "Rechercher par titre, auteur ou description",
       "filter_level_all": "Tous les niveaux",
       "filter_area_all": "Toutes les matières",
+      "filter_languages": "Langues",
+      "filter_languages_all": "Toutes les langues",
       "no_results": "Aucune application ne correspond à ces filtres.",
       "no_selection": "Sélectionnez une application pour l'afficher.",
       "open_new_tab": "Ouvrir dans un nouvel onglet",
