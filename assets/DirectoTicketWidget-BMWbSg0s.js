@@ -1,0 +1,1 @@
+import{j as t}from"./index-CENsQprf.js";import{x as d}from"./index-CENsQprf.js";import{ExternalAppWidget as e}from"./ExternalAppWidget-3aFA-1ib.js";const r=()=>t.jsx(e,{url:"https://jjdeharo.github.io/directo/ticket.html",titleKey:"widgets.directo_ticket.title",appendLanguageParam:!0,openInPopup:!0});export{r as DirectoTicketWidget,d as widgetConfig};
