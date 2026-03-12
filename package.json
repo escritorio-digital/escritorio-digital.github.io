@@ -1,7 +1,7 @@
 {
   "name": "escritorio",
   "private": true,
-  "homepage": "https://jjdeharo.github.io/escritorio/",
+  "homepage": "https://escritorio-digital.github.io/",
   "version": "2.6.5",
   "type": "module",
   "scripts": {
