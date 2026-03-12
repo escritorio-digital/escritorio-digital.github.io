@@ -745,7 +745,7 @@
     },
     "iframe": {
       "title": "Visor Web",
-      "url_placeholder": "Enganxa una URL aquí...",
+      "url_placeholder": "Enganxa un URL aquí...",
       "load": "Carregar",
       "embedded_content": "Contingut Incrustat",
       "content_placeholder": "El contingut de la URL es mostrarà aquí.",
