@@ -198,7 +198,8 @@
     "community_title": "Community",
     "community_text": "This project is part of the Educational Apps Repository of the Vibe Coding Educativo community.",
     "community_repo_label": "Applications repository:",
-    "community_telegram_label": "Telegram community:"
+    "community_telegram_label": "Telegram community:",
+    "analytics_notice": "This application only collects aggregated usage statistics with an in-house system to understand how it is used and improve the tool. No IP addresses are stored and no analytics cookies are used for visitors."
   },
   "licenses": {
     "title": "Credits and licenses",

@@ -198,7 +198,8 @@
     "community_title": "Comunidade",
     "community_text": "Este proxecto forma parte do Repositorio de aplicacións educativas da comunidade Vibe Coding Educativo.",
     "community_repo_label": "Repositorio de aplicacións:",
-    "community_telegram_label": "Comunidade en Telegram:"
+    "community_telegram_label": "Comunidade en Telegram:",
+    "analytics_notice": "Esta aplicación recolle unicamente estatísticas de uso agregadas cun sistema propio para coñecer a súa utilización e mellorar a ferramenta. Non se almacenan enderezos IP nin se usan cookies de analítica para as persoas visitantes."
   },
   "licenses": {
     "title": "Créditos e licenzas",
