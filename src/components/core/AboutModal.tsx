@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ExternalLink, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export const AboutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
   const { t, i18n } = useTranslation();
+  const [showAnalyticsNotice, setShowAnalyticsNotice] = useState(false);
   if (!isOpen) return null;
 
   const appVersion = import.meta.env.VITE_APP_VERSION ?? 'dev';
@@ -97,7 +98,16 @@ export const AboutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
           </div>
 
           <div className="p-3 bg-white/70 border border-gray-200 rounded-lg">
-            <p className="text-sm text-gray-700">{t('about.analytics_notice')}</p>
+            <button
+              type="button"
+              onClick={() => setShowAnalyticsNotice((value) => !value)}
+              className="text-sm text-blue-600 underline underline-offset-2 hover:text-blue-700"
+            >
+              {t('about.analytics_link')}
+            </button>
+            {showAnalyticsNotice ? (
+              <p className="mt-2 text-sm text-gray-700">{t('about.analytics_notice')}</p>
+            ) : null}
           </div>
         </div>
       </div>

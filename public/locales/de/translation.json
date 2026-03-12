@@ -199,6 +199,7 @@
     "community_text": "Dieses Projekt ist Teil des Repositoriums für Bildungsanwendungen der Community Vibe Coding Educativo.",
     "community_repo_label": "Anwendungs-Repository:",
     "community_telegram_label": "Telegram-Community:",
+    "analytics_link": "Datenschutz",
     "analytics_notice": "Diese Anwendung erfasst ausschließlich aggregierte Nutzungsstatistiken mit einem eigenen System, um ihre Nutzung zu verstehen und das Werkzeug zu verbessern. Es werden keine IP-Adressen gespeichert und für Besucher werden keine Analyse-Cookies verwendet."
   },
   "licenses": {
