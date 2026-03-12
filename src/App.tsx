@@ -24,7 +24,6 @@ import type { OpenDialogResult, OpenDialogOptions } from './utils/openDialog';
 import { getStoredAlarms, setStoredAlarms, subscribeAlarmStore, updateStoredAlarms, type AlarmItem } from './utils/alarmStore';
 // --- ¡AQUÍ ESTÁ EL CAMBIO! Importamos el nuevo componente ---
 import { ProfileSwitcher } from './components/core/ProfileSwitcher';
-import { AnalyticsBadge } from './components/core/AnalyticsBadge';
 
 const formatFileSize = (size?: number) => {
     if (size === undefined || size === null) return '';
@@ -1581,7 +1580,6 @@ const DesktopUI: React.FC<{
                 <img src={withBaseUrl('escritorio-digital.png')} alt={t('toolbar.start')} width="24" height="24" />
                 <span className="text-sm font-semibold">{t('toolbar.start')}</span>
             </button>
-            <AnalyticsBadge />
             <StartMenu
                 isOpen={isStartMenuOpen}
                 onClose={() => setIsStartMenuOpen(false)}
