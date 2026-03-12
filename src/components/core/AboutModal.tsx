@@ -95,6 +95,10 @@ export const AboutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
               </p>
             </div>
           </div>
+
+          <div className="p-3 bg-white/70 border border-gray-200 rounded-lg">
+            <p className="text-sm text-gray-700">{t('about.analytics_notice')}</p>
+          </div>
         </div>
       </div>
     </div>

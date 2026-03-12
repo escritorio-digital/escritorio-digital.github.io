@@ -197,7 +197,8 @@
     "community_title": "Komunitatea",
     "community_text": "Proiektu hau Vibe Coding Educativo komunitateko hezkuntza-aplikazioen biltegiaren parte da.",
     "community_repo_label": "Aplikazioen biltegia:",
-    "community_telegram_label": "Telegram komunitatea:"
+    "community_telegram_label": "Telegram komunitatea:",
+    "analytics_notice": "Aplikazio honek erabileraren estatistika agregatuak baino ez ditu biltzen sistema propio baten bidez, erabilera ezagutu eta tresna hobetzeko. Ez da IP helbiderik gordetzen eta ez da analitika-cookie-rik erabiltzen bisitarientzat."
   },
   "licenses": {
     "title": "Kredituak eta lizentziak",
