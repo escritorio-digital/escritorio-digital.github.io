@@ -332,7 +332,7 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
             .catch(() => showFeedback(t('widgets.markdown_text_editor.copy_failed')));
     };
 
-    const handleSaveAs = async () => {
+    const handleSaveAs = useCallback(async () => {
         const blob = new Blob([input], { type: 'text/markdown;charset=utf-8' });
         const filename = currentFilename || t('widgets.markdown_text_editor.default_filename');
         const destination = await requestSaveDestination(filename, { sourceWidgetId: 'markdown-text-editor' });
@@ -368,9 +368,9 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
                 detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor' },
             })
         );
-    };
+    }, [currentFilename, input, resolvedInstanceId, t]);
 
-    const handleSave = async () => {
+    const handleSave = useCallback(async () => {
         let parentId = currentParentId;
         if (!parentId && currentEntryId) {
             const entry = await getEntry(currentEntryId);
@@ -400,7 +400,7 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
             return;
         }
         await handleSaveAs();
-    };
+    }, [currentEntryId, currentFilename, currentParentId, handleSaveAs, input, resolvedInstanceId]);
 
     const loadFromFile = async (file: File, parentId?: string | null, entryId?: string | null) => {
         const text = await file.text();
@@ -541,7 +541,7 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
             );
         });
         return unsubscribe;
-    }, []);
+    }, [resolvedInstanceId]);
 
     const snapshot = useMemo(() => JSON.stringify({ input }), [input]);
     const isDirty = lastSavedSnapshot !== '' && snapshot !== lastSavedSnapshot;

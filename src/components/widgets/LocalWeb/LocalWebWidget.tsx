@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FolderOpen, Trash2, Eye, UploadCloud, Maximize2, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -447,12 +447,6 @@ export const LocalWebWidget: FC = () => {
     }, []);
 
     useEffect(() => {
-        refreshSites(activeProfileName);
-        refreshStorage();
-        resetPreview();
-    }, [activeProfileName]);
-
-    useEffect(() => {
         const handleLocalWebChange = () => {
             refreshSites(activeProfileName);
             refreshStorage();
@@ -503,17 +497,23 @@ export const LocalWebWidget: FC = () => {
         return Math.min(100, Math.max(0, Math.round((usage / quota) * 100)));
     }, [storageEstimate]);
 
-    const clearObjectUrls = () => {
+    const clearObjectUrls = useCallback(() => {
         objectUrlsRef.current.forEach((url) => URL.revokeObjectURL(url));
         objectUrlsRef.current = [];
-    };
+    }, []);
 
-    const resetPreview = () => {
+    const resetPreview = useCallback(() => {
         setActiveSiteId(null);
         setPreviewUrl(null);
         setPreviewName('');
         clearObjectUrls();
-    };
+    }, [clearObjectUrls]);
+
+    useEffect(() => {
+        refreshSites(activeProfileName);
+        refreshStorage();
+        resetPreview();
+    }, [activeProfileName, resetPreview]);
 
     const openPreviewInWindow = () => {
         if (!previewUrl) return;

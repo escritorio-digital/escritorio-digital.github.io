@@ -1030,7 +1030,7 @@
       "open_article": "Artikel öffnen"
     },
     "screen_annotator": {
-      "title": "Transparente Tafel",
+      "title": "Auf dem Bildschirm annotieren",
       "search_keywords": "tafel, transparent, anmerkungen, markieren, bildschirm",
       "tool_pen": "Stift",
       "tool_highlighter": "Textmarker",
@@ -1168,6 +1168,6 @@
     "memory-game": "Paar-Memory zum Üben von Begriffen.",
     "sliding-puzzle": "Schiebepuzzle für Logik und Aufmerksamkeit.",
     "work-gestures": "Arbeitsgesten für Unterrichtsroutinen.",
-    "screen-annotator": "Transparente Ebene zum Unterstreichen und Markieren auf dem Desktop."
+    "screen-annotator": "Auf dem Bildschirm annotieren, um auf dem Desktop zu unterstreichen und zu markieren."
   }
 }

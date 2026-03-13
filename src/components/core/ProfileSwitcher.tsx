@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { ChevronUp, ChevronsUpDown, Download, Upload, Users } from 'lucide-react';
 import type { ProfileCollection } from '../../types';
 import { useTranslation } from 'react-i18next';
@@ -277,7 +277,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
     return total;
   };
 
-  const estimateBackupSize = async () => {
+  const estimateBackupSize = useCallback(async () => {
     let total = 0;
     if (includeProfiles && selectedProfiles.length > 0) {
       const selected: ProfileCollection = {};
@@ -306,7 +306,17 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
       }
     }
     return total;
-  };
+  }, [
+    activeProfileName,
+    hasWidgetData,
+    includeFileManager,
+    includeLocalWeb,
+    includeProfiles,
+    includeWidgetData,
+    isPartialProfileSelection,
+    profiles,
+    selectedProfiles,
+  ]);
 
   useEffect(() => {
     if (!isBackupOpen) return;
@@ -330,7 +340,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
       }
     };
     estimate();
-  }, [isBackupOpen, includeProfiles, includeWidgetData, includeLocalWeb, includeFileManager, selectedProfiles, hasWidgetData, hasLocalWeb, hasFileManager, profiles, activeProfileName, t]);
+  }, [isBackupOpen, includeProfiles, includeWidgetData, includeLocalWeb, includeFileManager, selectedProfiles, hasWidgetData, hasLocalWeb, hasFileManager, profiles, activeProfileName, t, estimateBackupSize]);
 
   const handleExport = async () => {
     if (includeProfiles && selectedProfiles.length === 0) {

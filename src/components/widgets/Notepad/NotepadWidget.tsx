@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { FC } from 'react';
 import { useEditor, EditorContent, Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -108,7 +108,7 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
   const [currentFilename, setCurrentFilename] = useState<string | null>(null);
   const [currentParentId, setCurrentParentId] = useState<string | null>(null);
   const [currentEntryId, setCurrentEntryId] = useState<string | null>(null);
-  const turndownService = new TurndownService();
+  const turndownService = useMemo(() => new TurndownService(), []);
 
   const editor = useEditor({
     autofocus: 'end',
@@ -262,7 +262,7 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
       );
     });
     return unsubscribe;
-  }, [editor]);
+  }, [editor, resolvedInstanceId]);
 
   useEffect(() => {
     const handler = (event: Event) => {

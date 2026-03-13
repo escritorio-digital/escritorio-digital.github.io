@@ -64,7 +64,7 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
     }
   };
 
-  const handleSaveAs = async () => {
+  const handleSaveAs = useCallback(async () => {
     const csv = Papa.unparse(tasks.map(t => ({ id: t.id, text: t.text, completed: t.completed })));
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const destination = await requestSaveDestination(currentFilename || 'lista_de_trabajo.csv', { sourceWidgetId: 'work-list' });
@@ -96,9 +96,9 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
     const signature = JSON.stringify(tasks);
     setLastSavedSignature(signature);
     window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'work-list' } }));
-  };
+  }, [currentFilename, resolvedInstanceId, tasks]);
 
-  const handleSave = async () => {
+  const handleSave = useCallback(async () => {
     let parentId = currentParentId;
     if (!parentId && currentEntryId) {
       const entry = await getEntry(currentEntryId);
@@ -125,7 +125,7 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
       return;
     }
     await handleSaveAs();
-  };
+  }, [currentEntryId, currentFilename, currentParentId, handleSaveAs, resolvedInstanceId, tasks]);
 
   const loadCsvFile = useCallback((file: File, filename?: string, parentId?: string | null, entryId?: string | null) => {
     Papa.parse<Task>(file, {

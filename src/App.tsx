@@ -515,13 +515,21 @@ const DesktopUI: React.FC<{
         return () => {
             isMounted = false;
         };
-    }, [openDialogFilterWidget, openDialogFolderId, openDialogState.isOpen, openDialogState.options.sourceWidgetId, t]);
+    }, [
+        openDialogFilterWidget,
+        openDialogFolderId,
+        openDialogState.isOpen,
+        openDialogState.options.accept,
+        openDialogState.options.sourceWidgetId,
+    ]);
 
     const normalizeFilename = useCallback((name: string) => {
         const trimmed = name.trim();
         if (!trimmed) return '';
         let normalized = trimmed.replace(/[\\/:*?"<>|]/g, '-');
-        normalized = normalized.replace(/[\u0000-\u001f]/g, '');
+        normalized = Array.from(normalized)
+            .filter((char) => char >= ' ' || char === '\u007f')
+            .join('');
         normalized = normalized.replace(/\s+/g, ' ');
         normalized = normalized.replace(/^\.+/, '').replace(/\.+$/, '');
         return normalized.trim();
@@ -589,14 +597,14 @@ const DesktopUI: React.FC<{
             return ordered;
         });
     }, [profiles, setProfileOrder]);
-    const getViewportBounds = () => {
+    const getViewportBounds = useCallback(() => {
         const margin = 16;
         const maxWidth = Math.max(200, window.innerWidth - margin * 2);
         const maxHeight = Math.max(150, window.innerHeight - margin * 2);
         return { margin, maxWidth, maxHeight };
-    };
+    }, []);
 
-    const clampWidgetToViewport = (widget: ActiveWidget): ActiveWidget => {
+    const clampWidgetToViewport = useCallback((widget: ActiveWidget): ActiveWidget => {
         if (widget.isMaximized) return widget;
         const { margin, maxWidth, maxHeight } = getViewportBounds();
         const parseDimension = (value: number | string, fallback: number) => {
@@ -624,9 +632,9 @@ const DesktopUI: React.FC<{
             size: { width: numericWidth, height: numericHeight },
             position: { x, y },
         };
-    };
+    }, [getViewportBounds]);
 
-    const addWidget = (widgetId: string) => {
+    const addWidget = useCallback((widgetId: string) => {
         const widgetConfig = WIDGET_REGISTRY[widgetId];
         if (!widgetConfig) return null;
         const newZ = highestZ + 1;
@@ -667,7 +675,7 @@ const DesktopUI: React.FC<{
         setActiveWidgets(prev => [...prev, newWidget]);
         setActiveWindowId(newWidget.instanceId);
         return newWidget.instanceId;
-    };
+    }, [activeProfile.widgetPreferences, getViewportBounds, highestZ, setActiveWidgets]);
 
     const addWidgetRef = useRef(addWidget);
     const clampWidgetToViewportRef = useRef(clampWidgetToViewport);
@@ -754,7 +762,7 @@ const DesktopUI: React.FC<{
         return () => window.removeEventListener('open-dialog-request', handler as EventListener);
     }, []);
 
-    const closeWidget = (instanceId: string) => setActiveWidgets(prev => {
+    const closeWidget = useCallback((instanceId: string) => setActiveWidgets(prev => {
         const target = prev.find((widget) => widget.instanceId === instanceId);
         if (target) {
             window.dispatchEvent(
@@ -772,7 +780,7 @@ const DesktopUI: React.FC<{
             setActiveWindowId(nextActive ? nextActive.instanceId : null);
         }
         return next;
-    });
+    }), [activeWindowId, setActiveWidgets]);
     const [dirtyWidgets, setDirtyWidgets] = useState<Record<string, boolean>>({});
     const [pendingCloseWidgetId, setPendingCloseWidgetId] = useState<string | null>(null);
     const [pendingCloseInstanceId, setPendingCloseInstanceId] = useState<string | null>(null);
@@ -850,7 +858,7 @@ const DesktopUI: React.FC<{
         };
         window.addEventListener('widget-title-update', handler as EventListener);
         return () => window.removeEventListener('widget-title-update', handler as EventListener);
-    }, [setActiveWidgets]);
+    }, [clampWidgetToViewport, setActiveWidgets]);
     const closeWidgetsWithPrompt = useCallback((instanceIds: string[]) => {
         for (let index = 0; index < instanceIds.length; index += 1) {
             const instanceId = instanceIds[index];
@@ -1005,11 +1013,11 @@ const DesktopUI: React.FC<{
         };
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, [setActiveWidgets]);
+    }, [clampWidgetToViewport, setActiveWidgets]);
 
     useEffect(() => {
         setActiveWidgets(prev => prev.map(clampWidgetToViewport));
-    }, [activeProfileName]);
+    }, [activeProfileName, clampWidgetToViewport, setActiveWidgets]);
 
     useEffect(() => {
         const handleFullscreenChange = () => {
@@ -2353,12 +2361,12 @@ function App() {
     const activeProfile = profiles[activeProfileName] || Object.values(profiles)[0];
     const theme = activeProfile.theme || defaultTheme;
 
-    const handleThemeChange = (newThemeOrUpdater: Theme | ((val: Theme) => Theme)) => {
+    const handleThemeChange = useCallback((newThemeOrUpdater: Theme | ((val: Theme) => Theme)) => {
         const currentTheme = activeProfile.theme;
         const newTheme = typeof newThemeOrUpdater === 'function' ? newThemeOrUpdater(currentTheme) : newThemeOrUpdater;
         const newProfileData = { ...activeProfile, theme: newTheme };
         setProfiles(prev => ({ ...prev, [activeProfileName]: newProfileData }));
-    };
+    }, [activeProfile, activeProfileName, setProfiles]);
 
     const handleWallpaperChange = (wallpaperUrl: string) => {
         handleThemeChange((prevTheme) => ({ ...prevTheme, '--wallpaper': wallpaperUrl }));
@@ -2387,7 +2395,7 @@ function App() {
         const isNone = lower === 'none';
         if (isNone || isCustomUrl || isWallpaperValueValid(value)) return;
         handleThemeChange((prevTheme) => ({ ...prevTheme, '--wallpaper': defaultWallpaperValue }));
-    }, [theme['--wallpaper'], handleThemeChange]);
+    }, [theme, handleThemeChange]);
 
     useEffect(() => {
         window.dispatchEvent(new CustomEvent('active-profile-change', { detail: { name: activeProfileName } }));

@@ -251,13 +251,13 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
   const showToolSettingsSave = Boolean(
     onSaveToolSettings && toolSettingsLabel && toolSettingsSaveLabel && (hasToolSettingsChanges || isSaveNoticeVisible)
   );
-  const clearToolbarHideTimer = () => {
+  const clearToolbarHideTimer = React.useCallback(() => {
     if (toolbarHideTimer.current) {
       window.clearTimeout(toolbarHideTimer.current);
       toolbarHideTimer.current = null;
     }
-  };
-  const showToolbarHint = () => {
+  }, []);
+  const showToolbarHint = React.useCallback(() => {
     if (!toolbarRevealHintText) return;
     if (toolbarHintTimer.current) {
       window.clearTimeout(toolbarHintTimer.current);
@@ -267,8 +267,8 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
       setIsToolbarHintVisible(false);
       toolbarHintTimer.current = null;
     }, 3200);
-  };
-  const toggleToolbarPinned = (force?: boolean) => {
+  }, [toolbarRevealHintText]);
+  const toggleToolbarPinned = React.useCallback((force?: boolean) => {
     setIsToolbarPinned((prev) => {
       const next = force ?? !prev;
       if (!next) {
@@ -286,7 +286,7 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
       }
       return next;
     });
-  };
+  }, [onToolbarPinnedChange, showToolbarHint]);
   const scheduleToolbarHide = () => {
     if (isToolbarPinned) return;
     clearToolbarHideTimer();
@@ -346,7 +346,7 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [clearToolbarHideTimer, isActive, isMinimized, onZoomChange, toggleToolbarPinned, zoomValue]);
+  }, [clearToolbarHideTimer, isActive, isMinimized, onZoomChange, onZoomReset, toggleToolbarPinned, zoomValue]);
 
   React.useEffect(() => {
     if (!isZoomEditing) {

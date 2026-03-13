@@ -20,4 +20,14 @@ export default tseslint.config([
       globals: globals.browser,
     },
   },
+  {
+    files: [
+      'src/main.tsx',
+      'src/context/ThemeContext.tsx',
+      'src/components/widgets/**/*.tsx',
+    ],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 ])

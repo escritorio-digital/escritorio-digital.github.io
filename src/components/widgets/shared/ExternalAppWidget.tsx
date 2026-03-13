@@ -16,7 +16,7 @@ const buildUrlWithLanguage = (rawUrl: string, language: string, paramKey: string
         const url = new URL(rawUrl);
         url.searchParams.set(paramKey, language);
         return url.toString();
-    } catch (error) {
+    } catch {
         return rawUrl;
     }
 };

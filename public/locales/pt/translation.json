@@ -1032,7 +1032,7 @@
       "open_article": "Abrir artigo"
     },
     "screen_annotator": {
-      "title": "Quadro transparente",
+      "title": "Anotar no ecra",
       "search_keywords": "quadro, transparente, anotações, sublinhar, ecrã",
       "tool_pen": "Caneta",
       "tool_highlighter": "Marcador",
@@ -1170,6 +1170,6 @@
     "memory-game": "Jogo da memória de pares para praticar conceitos.",
     "sliding-puzzle": "Puzzle deslizante para lógica e atenção.",
     "work-gestures": "Gestos de trabalho para dinâmicas de aula.",
-    "screen-annotator": "Camada transparente para sublinhar e marcar no ambiente de trabalho."
+    "screen-annotator": "Anotar no ecra para sublinhar e marcar no ambiente de trabalho."
   }
 }

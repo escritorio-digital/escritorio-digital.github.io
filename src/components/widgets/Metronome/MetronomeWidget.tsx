@@ -3,6 +3,10 @@ import type { FC } from 'react';
 import { Play, Pause } from 'lucide-react';
 import './Metronome.css';
 
+type AudioContextWithWebkit = typeof window & {
+  webkitAudioContext?: typeof AudioContext;
+};
+
 // El componente principal del Metrónomo
 export const MetronomeWidget: FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -16,7 +20,7 @@ export const MetronomeWidget: FC = () => {
   // Genera el sonido del "tick"
   const playTick = (isFirstBeat: boolean) => {
     if (!audioContextRef.current) {
-        const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+        const AudioContext = window.AudioContext || (window as AudioContextWithWebkit).webkitAudioContext;
         audioContextRef.current = new AudioContext();
     }
     const context = audioContextRef.current;

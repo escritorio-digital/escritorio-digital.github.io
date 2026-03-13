@@ -1030,7 +1030,7 @@
       "open_article": "Open article"
     },
     "screen_annotator": {
-      "title": "Transparent board",
+      "title": "Annotate on screen",
       "search_keywords": "transparent board, annotations, highlight, screen",
       "tool_pen": "Pen",
       "tool_highlighter": "Highlighter",
@@ -1168,6 +1168,6 @@
     "memory-game": "Memory pairs game to practice concepts.",
     "sliding-puzzle": "Sliding puzzle for logic and attention.",
     "work-gestures": "Work gestures for classroom routines.",
-    "screen-annotator": "Transparent layer to underline and mark over the desktop."
+    "screen-annotator": "Annotate on screen to underline and mark over the desktop."
   }
 }

@@ -5,10 +5,13 @@ import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { RotateCcw, X, Circle } from 'lucide-react';
 import './TicTacToe.css';
 
+type PlayerMark = 'X' | 'O';
+type BoardCell = PlayerMark | null;
+
 // El componente principal del Tic-Tac-Toe
 export const TicTacToeWidget: FC = () => {
   const { t } = useTranslation();
-  const [board, setBoard] = useState(Array(9).fill(null));
+  const [board, setBoard] = useState<BoardCell[]>(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
   const [players, setPlayers] = useLocalStorage('tictactoe-players', { X: 'Jugador 1', O: 'Jugador 2' });
   
@@ -29,7 +32,7 @@ export const TicTacToeWidget: FC = () => {
     setPlayers({ ...players, [player]: name });
   };
   
-  const calculateWinner = (squares: any[]) => {
+  const calculateWinner = (squares: BoardCell[]): PlayerMark | null => {
     const lines = [
       [0, 1, 2], [3, 4, 5], [6, 7, 8], // Filas
       [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columnas

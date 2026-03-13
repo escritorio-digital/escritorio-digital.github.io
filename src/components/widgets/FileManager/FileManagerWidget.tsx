@@ -479,7 +479,9 @@ export const FileManagerWidget: FC = () => {
         const trimmed = name.trim();
         if (!trimmed) return '';
         let normalized = trimmed.replace(/[\\/:*?"<>|]/g, '-');
-        normalized = normalized.replace(/[\u0000-\u001f]/g, '');
+        normalized = Array.from(normalized)
+            .filter((char) => char >= ' ' || char === '\u007f')
+            .join('');
         normalized = normalized.replace(/\s+/g, ' ');
         normalized = normalized.replace(/^\.+/, '').replace(/\.+$/, '');
         return normalized.trim();
@@ -541,7 +543,7 @@ export const FileManagerWidget: FC = () => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key !== 'F2') return;
             const target = event.target as HTMLElement | null;
-            if (target?.closest('input, textarea, select, [contenteditable=\"true\"]')) return;
+            if (target?.closest('input, textarea, select, [contenteditable="true"]')) return;
             if (selectedEntryIds.length !== 1 || isTrashView) return;
             event.preventDefault();
             handleRenameEntry();

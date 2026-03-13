@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'; // 'useEffect' ha sido eliminado de esta línea
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
@@ -27,6 +27,20 @@ interface Student {
 }
 
 type AttendanceRecords = Record<string, Student[]>;
+
+type AttendanceCsvRow = {
+  id?: string | number;
+  name?: string;
+};
+
+type AttendanceExportRow = {
+  date: string;
+  id: number;
+  name: string;
+  status: Student['status'];
+  badges: string;
+  alerts: string;
+};
 
 // Constantes movidas dentro del componente para usar traducciones
 
@@ -66,11 +80,6 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
     { id: 4, icon: '✏️', description: t('widgets.attendance.alerts.incomplete_homework') },
   ];
 
-  // Si las traducciones no están listas, mostrar un loader simple
-  if (!ready) {
-    return <div className="flex items-center justify-center h-full">{t('loading')}</div>;
-  }
-
   const dateKey = formatDate(selectedDate);
   
   const getStudentsForSelectedDate = () => {
@@ -92,9 +101,9 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
   
   const students = getStudentsForSelectedDate();
 
-  const updateStudentsForDate = (newStudentList: Student[]) => {
+  const updateStudentsForDate = useCallback((newStudentList: Student[]) => {
     setRecords(prev => ({ ...prev, [dateKey]: newStudentList }));
-  };
+  }, [dateKey, setRecords]);
   
   const addStudent = () => {
     if (newStudentName.trim() === '') return;
@@ -133,8 +142,8 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
     updateStudentsForDate(updatedStudents);
   };
   
-  const loadCsvFile = (file: File, filename?: string, parentId?: string | null, entryId?: string | null) => {
-    Papa.parse<any>(file, {
+  const loadCsvFile = useCallback((file: File, filename?: string, parentId?: string | null, entryId?: string | null) => {
+    Papa.parse<AttendanceCsvRow>(file, {
       header: true,
       skipEmptyLines: true,
       complete: (results) => {
@@ -165,7 +174,7 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
         );
       }
     });
-  };
+  }, [dateKey, records, resolvedInstanceId, setLastSavedSignature, t, updateStudentsForDate]);
 
   const handleOpenFile = async () => {
     const result = await requestOpenFile({ accept: '.csv', sourceWidgetId: 'attendance' });
@@ -215,10 +224,10 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
       loadCsvFile(file, entry.name, entry.parentId, entry.id);
     });
     return unsubscribe;
-  }, []);
+  }, [loadCsvFile]);
 
-  const buildExportBlob = () => {
-    const dataToExport: any[] = [];
+  const buildExportBlob = useCallback(() => {
+    const dataToExport: AttendanceExportRow[] = [];
     Object.keys(records).sort().forEach(date => {
         records[date].forEach(s => {
             dataToExport.push({
@@ -234,9 +243,9 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
 
     const csv = Papa.unparse(dataToExport);
     return new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-  };
+  }, [records]);
 
-  const handleSaveAs = async () => {
+  const handleSaveAs = useCallback(async () => {
     const blob = buildExportBlob();
     const destination = await requestSaveDestination(currentFilename || 'asistencia_completa.csv', { sourceWidgetId: 'attendance' });
     if (!destination) return;
@@ -266,9 +275,9 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
     );
     setLastSavedSignature(JSON.stringify(records));
     window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'attendance' } }));
-  };
+  }, [buildExportBlob, currentFilename, records, resolvedInstanceId]);
 
-  const handleSave = async () => {
+  const handleSave = useCallback(async () => {
     let parentId = currentParentId;
     if (!parentId && currentEntryId) {
       const entry = await getEntry(currentEntryId);
@@ -293,7 +302,7 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
       return;
     }
     await handleSaveAs();
-  };
+  }, [buildExportBlob, currentEntryId, currentFilename, currentParentId, handleSaveAs, records, resolvedInstanceId]);
 
   useEffect(() => {
     const handler = (event: Event) => {
@@ -354,6 +363,10 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
             );
     }
   };
+
+  if (!ready) {
+    return <div className="flex items-center justify-center h-full">{t('loading')}</div>;
+  }
 
   return (
     <div className="attendance-widget">

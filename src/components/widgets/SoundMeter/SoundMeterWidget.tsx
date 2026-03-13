@@ -6,6 +6,10 @@ import './SoundMeter.css';
 import { WidgetToolbar } from '../../core/WidgetToolbar';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 
+type AudioContextWithWebkit = typeof window & {
+  webkitAudioContext?: typeof AudioContext;
+};
+
 // ... (El resto del archivo no necesita cambios)
 type NoiseLevel = 'silence' | 'conversation' | 'noise';
 
@@ -67,7 +71,7 @@ export const SoundMeterWidget: FC = () => {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
       streamRef.current = stream;
       
-      const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+      const AudioContext = window.AudioContext || (window as AudioContextWithWebkit).webkitAudioContext;
       audioContextRef.current = new AudioContext();
       const analyser = audioContextRef.current.createAnalyser();
       analyser.fftSize = 1024;

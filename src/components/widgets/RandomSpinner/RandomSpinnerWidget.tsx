@@ -12,6 +12,10 @@ interface SpinnerOption {
   color: string;
 }
 
+type SpinnerTranslationOption = {
+  text: string;
+};
+
 const getRandomColor = () => `hsl(${Math.random() * 360}, 70%, 80%)`;
 
 export const RandomSpinnerWidget: FC = () => {
@@ -23,7 +27,7 @@ export const RandomSpinnerWidget: FC = () => {
     if (storedOptions === null) {
         const defaultOptions = t('widgets.random_spinner.default_options', { returnObjects: true });
         if (Array.isArray(defaultOptions)) {
-            setOptions(defaultOptions.map((opt: any) => ({ ...opt, color: getRandomColor() })));
+            setOptions(defaultOptions.map((opt) => ({ ...(opt as SpinnerTranslationOption), color: getRandomColor() })));
         }
     }
   }, [t, setOptions]);

@@ -17,7 +17,7 @@ const widgetHelpText: Record<string, string> = {
     'file-manager': 'Gestiona archivos y carpetas guardados en el navegador.',
     'notepad': 'Bloc de notas rápido para consignas y listas.',
     'drawing-pad': 'Pizarra de dibujo libre y esquemas.',
-    'screen-annotator': 'Pizarra transparente para subrayar y marcar sobre el escritorio.',
+    'screen-annotator': 'Anotar en pantalla para subrayar y marcar sobre el escritorio.',
     'image-carousel': 'Muestra una colección de imágenes.',
     'html-sandbox': 'Espacio para mostrar contenido HTML.',
     'boardlive': 'Pizarra colaborativa en tiempo real.',

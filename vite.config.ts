@@ -9,6 +9,9 @@ export default defineConfig(() => ({
     define: {
         'import.meta.env.VITE_APP_VERSION': JSON.stringify(pkg.version),
     },
+    build: {
+        chunkSizeWarningLimit: 750,
+    },
     plugins: [
         react(),
         VitePWA({

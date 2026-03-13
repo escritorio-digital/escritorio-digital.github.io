@@ -360,7 +360,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
       resizeObserver.disconnect();
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, []); // Sin dependencias para evitar bucles - todo se maneja internamente
+  }, [getBackupCanvas, redrawCanvasWithPan]); // Callbacks estables, seguras como dependencias
 
   // Efecto para cambiar el modo de composición global del canvas (dibujar vs. borrar)
   useEffect(() => {
@@ -486,7 +486,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
         case 'rectangle':
           context.strokeRect(startX, startY, width, height);
           break;
-        case 'circle':
+        case 'circle': {
           const centerX = (startX + offsetX) / 2;
           const centerY = (startY + offsetY) / 2;
           const radiusX = Math.abs(width / 2);
@@ -495,7 +495,8 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
           context.ellipse(centerX, centerY, radiusX, radiusY, 0, 0, 2 * Math.PI);
           context.stroke();
           break;
-        case 'arrow':
+        }
+        case 'arrow': {
           context.beginPath();
           context.moveTo(startX, startY);
           context.lineTo(offsetX, offsetY);
@@ -506,6 +507,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
           // Aumentado el tamaño de la cabeza de flecha para que sea más visible
           drawArrowhead(context, offsetX, offsetY, angle, brushSize * 4); 
           break;
+        }
         default:
           break;
       }
@@ -583,7 +585,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
             case 'rectangle':
                 context.strokeRect(startX, startY, width, height);
                 break;
-            case 'circle':
+            case 'circle': {
                 const centerX = (startX + finalX) / 2;
                 const centerY = (startY + finalY) / 2;
                 const radiusX = Math.abs(width / 2);
@@ -592,7 +594,8 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
                 context.ellipse(centerX, centerY, radiusX, radiusY, 0, 0, 2 * Math.PI);
                 context.stroke();
                 break;
-            case 'arrow':
+            }
+            case 'arrow': {
                 context.beginPath();
                 context.moveTo(startX, startY);
                 context.lineTo(finalX, finalY);
@@ -602,6 +605,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
                 const angle = Math.atan2(finalY - startY, finalX - startX);
                 drawArrowhead(context, finalX, finalY, angle, brushSize * 4);
                 break;
+            }
             default:
                 break;
         }
@@ -646,7 +650,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
     }
   };
 
-  const loadImageFile = (file: File, parentId?: string | null, entryId?: string | null) => {
+  const loadImageFile = useCallback((file: File, parentId?: string | null, entryId?: string | null) => {
     // Ocultar mensaje inicial al subir una imagen
     hideInitialMessage();
     
@@ -672,7 +676,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
     setCurrentParentId(parentId ?? null);
     setCurrentEntryId(entryId ?? null);
     setIsDirty(false);
-  };
+  }, [drawCanvasContent, hideInitialMessage, resolvedInstanceId, saveToBackup]);
 
   const handleOpenImage = async () => {
     const result = await requestOpenFile({ accept: 'image/*', sourceWidgetId: 'drawing-pad' });
@@ -698,7 +702,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
       loadImageFile(file, entry.parentId, entry.id);
     });
     return unsubscribe;
-  }, []);
+  }, [loadImageFile]);
 
   const handleSaveAsDrawing = () => {
     const canvas = canvasRef.current;

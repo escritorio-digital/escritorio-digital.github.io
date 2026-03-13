@@ -100,6 +100,21 @@ type FileManagerEntryMeta = {
   hasBlob: boolean;
 };
 
+type FileManagerStoredEntry = {
+  id: string;
+  type: 'file' | 'folder';
+  name: string;
+  parentId: string;
+  createdAt: number;
+  updatedAt: number;
+  trashedAt?: number | null;
+  size?: number;
+  mime?: string;
+  sourceWidgetId?: string;
+  sourceWidgetTitleKey?: string;
+  blob?: Blob;
+};
+
 export type FileManagerArchive = {
   entries: FileManagerEntryMeta[];
   files: Array<{ id: string; blob: Blob }>;
@@ -307,7 +322,11 @@ export const exportLocalWebRecords = async (
   });
 };
 
-export const getLocalWebStats = async (profileNames?: string[], _fallbackProfileName?: string): Promise<LocalWebStats> => {
+export const getLocalWebStats = async (
+  profileNames?: string[],
+  _fallbackProfileName?: string
+): Promise<LocalWebStats> => {
+  void _fallbackProfileName;
   const db = await openLocalWebDb();
   return new Promise<LocalWebStats>((resolve, reject) => {
     const tx = db.transaction([LOCAL_WEB_SITES, LOCAL_WEB_FILES], 'readonly');
@@ -371,7 +390,7 @@ export const exportFileManagerRecords = async (): Promise<FileManagerArchive> =>
     const tx = db.transaction(FILE_MANAGER_ENTRIES, 'readonly');
     const request = tx.objectStore(FILE_MANAGER_ENTRIES).getAll();
     tx.oncomplete = () => {
-      const entries = (request.result as Array<any>) ?? [];
+      const entries = (request.result as FileManagerStoredEntry[]) ?? [];
       const meta: FileManagerEntryMeta[] = entries.map((entry) => ({
         id: entry.id,
         type: entry.type,

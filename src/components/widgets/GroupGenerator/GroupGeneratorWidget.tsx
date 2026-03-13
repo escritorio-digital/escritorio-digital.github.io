@@ -253,7 +253,7 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
     setGeneratedGroups(newGroups);
   };
 
-  const formatGroupsText = () => (
+  const formatGroupsText = useCallback(() => (
     generatedGroups
       .map((group, index) => {
         const title = t('widgets.group_generator.group_title', { number: index + 1 });
@@ -261,7 +261,7 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
         return [title, ...lines].join('\n');
       })
       .join('\n\n')
-  );
+  ), [generatedGroups, t]);
 
   const copyGroups = async () => {
     if (generatedGroups.length === 0) return;
@@ -284,7 +284,7 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
     }
   };
 
-  const handleSaveAs = async () => {
+  const handleSaveAs = useCallback(async () => {
     if (generatedGroups.length === 0) return;
     const destination = await requestSaveDestination(currentFilename || 'grupos.txt', { sourceWidgetId: 'group-generator' });
     if (!destination) return;
@@ -346,9 +346,9 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
       );
       window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'group-generator' } }));
     }
-  };
+  }, [currentFilename, formatGroupsText, generatedGroups, groupValue, mode, resolvedInstanceId, studentList]);
 
-  const handleSave = async () => {
+  const handleSave = useCallback(async () => {
     if (generatedGroups.length === 0) return;
     let parentId = currentParentId;
     if (!parentId && currentEntryId) {
@@ -381,7 +381,7 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
       return;
     }
     await handleSaveAs();
-  };
+  }, [currentEntryId, currentFilename, currentParentId, generatedGroups, groupValue, handleSaveAs, mode, resolvedInstanceId, studentList]);
 
   const snapshot = JSON.stringify({
     version: 1,

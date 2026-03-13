@@ -1031,7 +1031,7 @@
       "open_article": "Ouvrir l'article"
     },
     "screen_annotator": {
-      "title": "Tableau transparent",
+      "title": "Annoter sur l'ecran",
       "search_keywords": "tableau, transparent, annotations, surligner, écran",
       "tool_pen": "Stylo",
       "tool_highlighter": "Surligneur",
@@ -1169,6 +1169,6 @@
     "memory-game": "Jeu de mémoire par paires pour pratiquer des concepts.",
     "sliding-puzzle": "Puzzle coulissant pour logique et attention.",
     "work-gestures": "Gestes de travail pour routines de classe.",
-    "screen-annotator": "Calque transparent pour souligner et marquer sur le bureau."
+    "screen-annotator": "Annoter sur l'ecran pour souligner et marquer sur le bureau."
   }
 }
