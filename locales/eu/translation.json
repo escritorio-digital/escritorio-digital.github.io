@@ -1029,7 +1029,7 @@
       "open_article": "Ireki artikulua"
     },
     "screen_annotator": {
-      "title": "Arbel gardena",
+      "title": "Pantailan oharrak egin",
       "search_keywords": "arbel, gardena, oharrak, azpimarra, pantaila",
       "tool_pen": "Arkatza",
       "tool_highlighter": "Nabarmentzailea",
@@ -1167,6 +1167,6 @@
     "memory-game": "Bikoteen memoria-jokoa kontzeptuak praktikatzeko.",
     "sliding-puzzle": "Puzzle labainkorra logika eta arretarako.",
     "work-gestures": "Gelako dinamiken lan-keinuak.",
-    "screen-annotator": "Mahai-gainean azpimarratzeko eta markatzeko geruza gardena."
+    "screen-annotator": "Pantailan oharrak egin mahaigainean azpimarratzeko eta markatzeko."
   }
 }

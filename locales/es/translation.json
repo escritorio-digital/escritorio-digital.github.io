@@ -1031,7 +1031,7 @@
       "open_article": "Abrir artículo"
     },
     "screen_annotator": {
-      "title": "Pizarra transparente",
+      "title": "Anotar en pantalla",
       "search_keywords": "pizarra, transparente, anotaciones, subrayar, pantalla",
       "tool_pen": "Lápiz",
       "tool_highlighter": "Resaltador",
@@ -1169,6 +1169,6 @@
     "memory-game": "Memorama de parejas para practicar conceptos.",
     "sliding-puzzle": "Puzzle deslizante para lógica y atención.",
     "work-gestures": "Gestos de trabajo para dinámicas de aula.",
-    "screen-annotator": "Pizarra transparente para subrayar y marcar sobre el escritorio."
+    "screen-annotator": "Anotar en pantalla para subrayar y marcar sobre el escritorio."
   }
 }

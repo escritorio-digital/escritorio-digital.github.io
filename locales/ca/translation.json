@@ -1030,7 +1030,7 @@
       "open_article": "Obrir article"
     },
     "screen_annotator": {
-      "title": "Pissarra transparent",
+      "title": "Anotar a la pantalla",
       "search_keywords": "pissarra, transparent, anotacions, subratllar, pantalla",
       "tool_pen": "Llapis",
       "tool_highlighter": "Ressaltador",
@@ -1168,6 +1168,6 @@
     "memory-game": "Memorama de parelles per practicar conceptes.",
     "sliding-puzzle": "Trencaclosques lliscant per a lògica i atenció.",
     "work-gestures": "Gestos de treball per a dinàmiques d'aula.",
-    "screen-annotator": "Capa transparent per subratllar i marcar sobre l'escriptori."
+    "screen-annotator": "Anotar a la pantalla per subratllar i marcar sobre l'escriptori."
   }
 }

@@ -1030,7 +1030,7 @@
       "open_article": "Apri articolo"
     },
     "screen_annotator": {
-      "title": "Lavagna trasparente",
+      "title": "Annotare sullo schermo",
       "search_keywords": "lavagna, trasparente, annotazioni, evidenziare, schermo",
       "tool_pen": "Penna",
       "tool_highlighter": "Evidenziatore",
@@ -1168,6 +1168,6 @@
     "memory-game": "Memory a coppie per praticare concetti.",
     "sliding-puzzle": "Puzzle scorrevole per logica e attenzione.",
     "work-gestures": "Gesti di lavoro per dinamiche in aula.",
-    "screen-annotator": "Livello trasparente per sottolineare e segnare sul desktop."
+    "screen-annotator": "Annotare sullo schermo per sottolineare e segnare sul desktop."
   }
 }
