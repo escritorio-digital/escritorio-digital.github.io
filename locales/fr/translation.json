@@ -163,6 +163,7 @@
     "tooltip": "Aide",
     "title": "Aide",
     "guide": "Guide d'utilisation",
+    "report_issue": "Signaler un bug ou une suggestion",
     "about": "À propos du projet",
     "licenses": "Crédits et licences"
   },
