@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LayoutGrid } from 'lucide-react';
 import { DndContext, PointerSensor, KeyboardSensor, useSensor, useSensors, closestCenter, type DragEndEvent } from '@dnd-kit/core';
@@ -38,8 +38,6 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 }) => {
   const { t } = useTranslation();
   const toolbarRef = useRef<HTMLDivElement>(null);
-  const [anchorLeft, setAnchorLeft] = useState<number | null>(null);
-  const [anchorMaxWidth, setAnchorMaxWidth] = useState<number | null>(null);
   const getWidgetLabel = (config: (typeof WIDGET_REGISTRY)[string]) => (
     config?.startTooltip ? t(config.startTooltip) : t(config.title)
   );
@@ -108,26 +106,31 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   };
 
   useLayoutEffect(() => {
+    const translateY = isHidden && !isPeeking ? '0.75rem' : '0rem';
+
     const updateShift = () => {
       const toolbar = toolbarRef.current;
+      if (!toolbar) return;
       const startButton = startButtonRef?.current;
       if (!toolbar || !startButton) {
-        setAnchorLeft(null);
-        setAnchorMaxWidth(null);
+        toolbar.style.left = '';
+        toolbar.style.maxWidth = '';
+        toolbar.style.transform = `translate(-50%, ${translateY})`;
         return;
       }
-      const padding = 8;
-      const toolbarRect = toolbar.getBoundingClientRect();
+      const padding = 16;
+      const naturalWidth = Math.ceil(toolbar.scrollWidth);
       const startRect = startButton.getBoundingClientRect();
-      const centerLeft = window.innerWidth / 2 - toolbarRect.width / 2;
+      const centerLeft = window.innerWidth / 2 - naturalWidth / 2;
       const minLeft = startRect.right + padding;
       if (centerLeft < minLeft) {
-        const nextMaxWidth = Math.max(240, window.innerWidth - minLeft - padding);
-        setAnchorLeft(minLeft);
-        setAnchorMaxWidth(nextMaxWidth);
+        toolbar.style.left = `${Math.round(minLeft)}px`;
+        toolbar.style.maxWidth = `${Math.round(Math.max(240, window.innerWidth - minLeft - padding))}px`;
+        toolbar.style.transform = `translate(0, ${translateY})`;
       } else {
-        setAnchorLeft(null);
-        setAnchorMaxWidth(null);
+        toolbar.style.left = '';
+        toolbar.style.maxWidth = '';
+        toolbar.style.transform = `translate(-50%, ${translateY})`;
       }
     };
     updateShift();
@@ -135,21 +138,14 @@ export const Toolbar: React.FC<ToolbarProps> = ({
     return () => window.removeEventListener('resize', updateShift);
   }, [pinnedWidgets, openWidgets, isHidden, isPeeking, startButtonRef]);
 
-  const translateY = isHidden && !isPeeking ? '0.75rem' : '0rem';
-
   return (
     <div
       ref={toolbarRef}
-      className={`fixed bottom-5 left-1/2 bg-widget-bg p-2 rounded-2xl flex items-center gap-3 shadow-lg z-[10000] border border-custom-border max-w-[calc(100vw-1rem)] transition-all duration-200 max-[700px]:hidden ${
+      className={`fixed bottom-5 left-1/2 bg-widget-bg p-2 rounded-2xl flex items-center gap-3 shadow-lg z-[10002] border border-custom-border max-w-[calc(100vw-1rem)] transition-all duration-200 max-[700px]:hidden ${
         isHidden && !isPeeking
           ? 'opacity-0 pointer-events-none'
           : 'opacity-100'
       }`}
-      style={{
-        transform: `${anchorLeft === null ? 'translate(-50%, ' : 'translate(0, '}${translateY})`,
-        left: anchorLeft === null ? undefined : `${anchorLeft}px`,
-        maxWidth: anchorMaxWidth === null ? undefined : `${anchorMaxWidth}px`,
-      }}
       data-toolbar="true"
       onContextMenu={handleBarContextMenu}
       onMouseLeave={onMouseLeave}

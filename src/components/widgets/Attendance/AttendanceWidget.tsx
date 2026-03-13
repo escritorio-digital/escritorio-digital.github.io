@@ -10,6 +10,7 @@ import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
 import { requestSaveDestination } from '../../../utils/saveDialog';
 import { requestOpenFile } from '../../../utils/openDialog';
+import { notifyWidgetDirtyState, notifyWidgetEntryOpened, notifyWidgetSaveComplete, notifyWidgetTitleUpdate, onDesktopEvent } from '../../../utils/desktopEvents';
 
 // --- Tipos de Datos ---
 interface BadgeInfo {
@@ -158,20 +159,13 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
         setLastSavedSignature(JSON.stringify({ ...records, [dateKey]: importedStudents }));
         const title = filename || file.name;
         if (title) {
-          window.dispatchEvent(
-            new CustomEvent('widget-title-update', {
-              detail: { instanceId: resolvedInstanceId, title },
-            })
-          );
+          notifyWidgetTitleUpdate(resolvedInstanceId, title);
           setCurrentFilename(title);
           setCurrentParentId(parentId ?? null);
           setCurrentEntryId(entryId ?? null);
         }
-        window.dispatchEvent(
-          new CustomEvent('widget-dirty-state', {
-            detail: { instanceId: resolvedInstanceId, widgetId: 'attendance', isDirty: false },
-          })
-        );
+        notifyWidgetEntryOpened(resolvedInstanceId, entryId ?? undefined, 'attendance');
+        notifyWidgetDirtyState(resolvedInstanceId, false, 'attendance');
       }
     });
   }, [dateKey, records, resolvedInstanceId, setLastSavedSignature, t, updateStudentsForDate]);
@@ -199,32 +193,25 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
       setLastSavedSignature(JSON.stringify(records));
       return;
     }
-    window.dispatchEvent(
-      new CustomEvent('widget-dirty-state', {
-        detail: { instanceId: resolvedInstanceId, widgetId: 'attendance', isDirty },
-      })
-    );
+    notifyWidgetDirtyState(resolvedInstanceId, isDirty, 'attendance');
   }, [isDirty, lastSavedSignature, records, resolvedInstanceId]);
 
   useEffect(() => {
     return () => {
-      window.dispatchEvent(
-        new CustomEvent('widget-dirty-state', {
-          detail: { instanceId: resolvedInstanceId, widgetId: 'attendance', isDirty: false },
-        })
-      );
+      notifyWidgetDirtyState(resolvedInstanceId, false, 'attendance');
     };
   }, [resolvedInstanceId]);
 
   useEffect(() => {
-    const unsubscribe = subscribeFileOpen('attendance', async ({ entryId }) => {
+    const unsubscribe = subscribeFileOpen('attendance', async ({ entryId, instanceId }) => {
+      if (instanceId && instanceId !== resolvedInstanceId) return;
       const entry = await getEntry(entryId);
       if (!entry?.blob) return;
       const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
       loadCsvFile(file, entry.name, entry.parentId, entry.id);
     });
     return unsubscribe;
-  }, [loadCsvFile]);
+  }, [loadCsvFile, resolvedInstanceId]);
 
   const buildExportBlob = useCallback(() => {
     const dataToExport: AttendanceExportRow[] = [];
@@ -262,19 +249,11 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
       downloadBlob(blob, destination.filename);
       setCurrentParentId(null);
     }
-    window.dispatchEvent(
-      new CustomEvent('widget-title-update', {
-        detail: { instanceId: resolvedInstanceId, title: destination.filename },
-      })
-    );
+    notifyWidgetTitleUpdate(resolvedInstanceId, destination.filename);
     setCurrentFilename(destination.filename);
-    window.dispatchEvent(
-      new CustomEvent('widget-dirty-state', {
-        detail: { instanceId: resolvedInstanceId, widgetId: 'attendance', isDirty: false },
-      })
-    );
+    notifyWidgetDirtyState(resolvedInstanceId, false, 'attendance');
     setLastSavedSignature(JSON.stringify(records));
-    window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'attendance' } }));
+    notifyWidgetSaveComplete(resolvedInstanceId, 'attendance');
   }, [buildExportBlob, currentFilename, records, resolvedInstanceId]);
 
   const handleSave = useCallback(async () => {
@@ -292,27 +271,21 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
         sourceWidgetTitleKey: 'widgets.attendance.title',
         parentId,
       });
-      window.dispatchEvent(
-        new CustomEvent('widget-dirty-state', {
-          detail: { instanceId: resolvedInstanceId, widgetId: 'attendance', isDirty: false },
-        })
-      );
+      notifyWidgetDirtyState(resolvedInstanceId, false, 'attendance');
       setLastSavedSignature(JSON.stringify(records));
-      window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'attendance' } }));
+      notifyWidgetSaveComplete(resolvedInstanceId, 'attendance');
       return;
     }
     await handleSaveAs();
   }, [buildExportBlob, currentEntryId, currentFilename, currentParentId, handleSaveAs, records, resolvedInstanceId]);
 
   useEffect(() => {
-    const handler = (event: Event) => {
-      const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
-      if (custom.detail?.instanceId !== resolvedInstanceId) return;
-      if (custom.detail?.widgetId && custom.detail.widgetId !== 'attendance') return;
+    const unsubscribe = onDesktopEvent('widget-save-request', (detail) => {
+      if (detail?.instanceId !== resolvedInstanceId) return;
+      if (detail?.widgetId && detail.widgetId !== 'attendance') return;
       handleSave();
-    };
-    window.addEventListener('widget-save-request', handler as EventListener);
-    return () => window.removeEventListener('widget-save-request', handler as EventListener);
+    });
+    return unsubscribe;
   }, [handleSave, resolvedInstanceId]);
 
   const resetAll = () => {

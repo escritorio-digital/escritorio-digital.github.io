@@ -64,6 +64,24 @@ export const clearFileManagerData = async (): Promise<void> => {
     });
 };
 
+export const replaceAllEntries = async (entries: FileManagerEntry[]): Promise<void> => {
+    const db = await openDb();
+    await new Promise<void>((resolve, reject) => {
+        const tx = db.transaction(STORE_ENTRIES, 'readwrite');
+        const store = tx.objectStore(STORE_ENTRIES);
+        store.clear();
+        entries.forEach((entry) => {
+            store.put({
+                ...entry,
+                size: entry.size ?? (entry.blob ? entry.blob.size : undefined),
+                mime: entry.mime ?? (entry.blob ? entry.blob.type : undefined),
+            });
+        });
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+    });
+};
+
 const withStore = async <T,>(
     mode: IDBTransactionMode,
     action: (store: IDBObjectStore) => IDBRequest<T>

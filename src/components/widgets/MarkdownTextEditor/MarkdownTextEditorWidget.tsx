@@ -35,7 +35,9 @@ import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
 import { requestSaveDestination } from '../../../utils/saveDialog';
 import { requestOpenFile } from '../../../utils/openDialog';
+import { notifyWidgetDirtyState, notifyWidgetEntryOpened, notifyWidgetSaveComplete, notifyWidgetTitleUpdate, onDesktopEvent } from '../../../utils/desktopEvents';
 import { WidgetToolbar } from '../../core/WidgetToolbar';
+import { readLocalJson, removeLocalJson, writeLocalJson } from '../../../repositories/localJsonStorage';
 
 const EDICUATEX_ORIGIN = 'https://edicuatex.github.io';
 
@@ -95,25 +97,25 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
         currentEntryId: string | null;
     } | null>(null);
     if (!initialDraftRef.current) {
-        try {
-            const raw = window.localStorage.getItem(draftStorageKey);
-            if (raw) {
-                const parsed = JSON.parse(raw);
-                if (parsed && typeof parsed.input === 'string') {
-                    initialDraftRef.current = {
-                        input: parsed.input,
-                        lastSavedSnapshot: typeof parsed.lastSavedSnapshot === 'string' ? parsed.lastSavedSnapshot : '',
-                        viewMode: parsed.viewMode === 'editor' || parsed.viewMode === 'preview' || parsed.viewMode === 'split'
-                            ? parsed.viewMode
-                            : 'split',
-                        currentFilename: typeof parsed.currentFilename === 'string' ? parsed.currentFilename : null,
-                        currentParentId: typeof parsed.currentParentId === 'string' ? parsed.currentParentId : null,
-                        currentEntryId: typeof parsed.currentEntryId === 'string' ? parsed.currentEntryId : null,
-                    };
-                }
-            }
-        } catch {
-            initialDraftRef.current = null;
+        const parsed = readLocalJson<Partial<{
+            input: string;
+            lastSavedSnapshot: string;
+            viewMode: ViewMode;
+            currentFilename: string | null;
+            currentParentId: string | null;
+            currentEntryId: string | null;
+        }>>(draftStorageKey);
+        if (parsed && typeof parsed.input === 'string') {
+            initialDraftRef.current = {
+                input: parsed.input,
+                lastSavedSnapshot: typeof parsed.lastSavedSnapshot === 'string' ? parsed.lastSavedSnapshot : '',
+                viewMode: parsed.viewMode === 'editor' || parsed.viewMode === 'preview' || parsed.viewMode === 'split'
+                    ? parsed.viewMode
+                    : 'split',
+                currentFilename: typeof parsed.currentFilename === 'string' ? parsed.currentFilename : null,
+                currentParentId: typeof parsed.currentParentId === 'string' ? parsed.currentParentId : null,
+                currentEntryId: typeof parsed.currentEntryId === 'string' ? parsed.currentEntryId : null,
+            };
         }
     }
     const sampleContentRef = useRef(t('widgets.markdown_text_editor.sample_content'));
@@ -165,18 +167,16 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
             currentParentId,
             currentEntryId,
         };
-        window.localStorage.setItem(draftStorageKey, JSON.stringify(draft));
+        writeLocalJson(draftStorageKey, draft);
     }, [draftStorageKey, input, lastSavedSnapshot, viewMode, currentFilename, currentParentId, currentEntryId]);
 
     useEffect(() => {
-        const handler = (event: Event) => {
-            const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
-            if (custom.detail?.instanceId !== resolvedInstanceId) return;
-            if (custom.detail?.widgetId && custom.detail.widgetId !== 'markdown-text-editor') return;
-            window.localStorage.removeItem(draftStorageKey);
-        };
-        window.addEventListener('widget-close', handler as EventListener);
-        return () => window.removeEventListener('widget-close', handler as EventListener);
+        const unsubscribe = onDesktopEvent('widget-close', (detail) => {
+            if (detail?.instanceId !== resolvedInstanceId) return;
+            if (detail?.widgetId && detail.widgetId !== 'markdown-text-editor') return;
+            removeLocalJson(draftStorageKey);
+        });
+        return unsubscribe;
     }, [draftStorageKey, resolvedInstanceId]);
 
     useEffect(() => {
@@ -350,24 +350,12 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
             downloadBlob(blob, destination.filename);
             setCurrentParentId(null);
         }
-        window.dispatchEvent(
-            new CustomEvent('widget-title-update', {
-                detail: { instanceId: resolvedInstanceId, title: destination.filename },
-            })
-        );
+        notifyWidgetTitleUpdate(resolvedInstanceId, destination.filename);
         setCurrentFilename(destination.filename);
-        window.dispatchEvent(
-            new CustomEvent('widget-dirty-state', {
-                detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor', isDirty: false },
-            })
-        );
+        notifyWidgetDirtyState(resolvedInstanceId, false, 'markdown-text-editor');
         const snapshot = JSON.stringify({ input });
         setLastSavedSnapshot(snapshot);
-        window.dispatchEvent(
-            new CustomEvent('widget-save-complete', {
-                detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor' },
-            })
-        );
+        notifyWidgetSaveComplete(resolvedInstanceId, 'markdown-text-editor');
     }, [currentFilename, input, resolvedInstanceId, t]);
 
     const handleSave = useCallback(async () => {
@@ -385,18 +373,10 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
                 sourceWidgetTitleKey: 'widgets.markdown_text_editor.title',
                 parentId,
             });
-            window.dispatchEvent(
-                new CustomEvent('widget-dirty-state', {
-                    detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor', isDirty: false },
-                })
-            );
+            notifyWidgetDirtyState(resolvedInstanceId, false, 'markdown-text-editor');
             const snapshot = JSON.stringify({ input });
             setLastSavedSnapshot(snapshot);
-            window.dispatchEvent(
-                new CustomEvent('widget-save-complete', {
-                    detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor' },
-                })
-            );
+            notifyWidgetSaveComplete(resolvedInstanceId, 'markdown-text-editor');
             return;
         }
         await handleSaveAs();
@@ -406,19 +386,12 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
         const text = await file.text();
         setInput(text);
         setLastSavedSnapshot(JSON.stringify({ input: text }));
-        window.dispatchEvent(
-            new CustomEvent('widget-title-update', {
-                detail: { instanceId: resolvedInstanceId, title: file.name },
-            })
-        );
+        notifyWidgetTitleUpdate(resolvedInstanceId, file.name);
         setCurrentFilename(file.name);
         setCurrentParentId(parentId ?? null);
         setCurrentEntryId(entryId ?? null);
-        window.dispatchEvent(
-            new CustomEvent('widget-dirty-state', {
-                detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor', isDirty: false },
-            })
-        );
+        notifyWidgetEntryOpened(resolvedInstanceId, entryId ?? undefined, 'markdown-text-editor');
+        notifyWidgetDirtyState(resolvedInstanceId, false, 'markdown-text-editor');
     };
 
     const handleOpenFile = async () => {
@@ -526,19 +499,12 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
             const content = await entry.blob.text();
             setInput(content);
             setLastSavedSnapshot(JSON.stringify({ input: content }));
-            window.dispatchEvent(
-                new CustomEvent('widget-title-update', {
-                    detail: { instanceId: resolvedInstanceId, title: entry.name },
-                })
-            );
+            notifyWidgetTitleUpdate(resolvedInstanceId, entry.name);
             setCurrentFilename(entry.name);
             setCurrentParentId(entry.parentId);
             setCurrentEntryId(entry.id);
-            window.dispatchEvent(
-                new CustomEvent('widget-dirty-state', {
-                    detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor', isDirty: false },
-                })
-            );
+            notifyWidgetEntryOpened(resolvedInstanceId, entry.id, 'markdown-text-editor');
+            notifyWidgetDirtyState(resolvedInstanceId, false, 'markdown-text-editor');
         });
         return unsubscribe;
     }, [resolvedInstanceId]);
@@ -547,31 +513,21 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
     const isDirty = lastSavedSnapshot !== '' && snapshot !== lastSavedSnapshot;
 
     useEffect(() => {
-        window.dispatchEvent(
-            new CustomEvent('widget-dirty-state', {
-                detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor', isDirty },
-            })
-        );
+        notifyWidgetDirtyState(resolvedInstanceId, isDirty, 'markdown-text-editor');
     }, [isDirty, resolvedInstanceId]);
 
     useEffect(() => {
-        const handler = (event: Event) => {
-            const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
-            if (custom.detail?.instanceId !== resolvedInstanceId) return;
-            if (custom.detail?.widgetId && custom.detail.widgetId !== 'markdown-text-editor') return;
+        const unsubscribe = onDesktopEvent('widget-save-request', (detail) => {
+            if (detail?.instanceId !== resolvedInstanceId) return;
+            if (detail?.widgetId && detail.widgetId !== 'markdown-text-editor') return;
             handleSave();
-        };
-        window.addEventListener('widget-save-request', handler as EventListener);
-        return () => window.removeEventListener('widget-save-request', handler as EventListener);
+        });
+        return unsubscribe;
     }, [handleSave, resolvedInstanceId]);
 
     useEffect(() => {
         return () => {
-            window.dispatchEvent(
-                new CustomEvent('widget-dirty-state', {
-                    detail: { instanceId: resolvedInstanceId, widgetId: 'markdown-text-editor', isDirty: false },
-                })
-            );
+            notifyWidgetDirtyState(resolvedInstanceId, false, 'markdown-text-editor');
         };
     }, [resolvedInstanceId]);
 

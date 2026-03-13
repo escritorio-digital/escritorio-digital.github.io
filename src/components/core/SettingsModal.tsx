@@ -8,11 +8,11 @@ import { ThemeSettingsModal } from './ThemeSettingsModal';
 import { ProfileManager } from './ProfileManager';
 import type { ProfileCollection } from '../../types';
 import { clearLocalWebData, WIDGET_DATA_KEYS } from '../../utils/backup';
-import { removeFromIndexedDb } from '../../utils/storage';
-import { clearFileManagerData } from '../../utils/fileManagerDb';
+import { clearFileManagerData } from '../../repositories/fileManagerRepository';
+import { clearWidgetDataKeys } from '../../repositories/widgetDataRepository';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useTheme } from '../../context/ThemeContext';
-import { wallpaperOptions, getWallpaperValue } from '../../utils/wallpapers';
+import { getWallpaperValue, loadWallpaperOptions, type WallpaperOption } from '../../utils/wallpapers';
 
 type WidgetsViewMode = 'theme' | 'alphabetical';
 
@@ -50,6 +50,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   const [searchTerm, setSearchTerm] = useState('');
   const [widgetsViewMode, setWidgetsViewMode] = useLocalStorage<WidgetsViewMode>('widgets-view-mode', 'theme');
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
+  const [wallpaperOptions, setWallpaperOptions] = useState<WallpaperOption[]>([]);
   const lastThemeRequestRef = useRef<number | null>(null);
   const { theme, setTheme, setWallpaper, resetTheme } = useTheme();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -78,6 +79,20 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     setActiveTab('theme');
     setIsThemeModalOpen(true);
   }, [isOpen, themeModalRequestId]);
+
+  useEffect(() => {
+    if (!isOpen || activeTab !== 'theme') return;
+    let isMounted = true;
+    loadWallpaperOptions().then((options) => {
+      if (!isMounted) return;
+      setWallpaperOptions(options);
+    }).catch((error) => {
+      console.error('No se pudieron cargar los fondos.', error);
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, [activeTab, isOpen]);
 
   const handleWallpaperUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -167,8 +182,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
       ...WIDGET_DATA_KEYS,
     ]));
     try {
-      keysToClear.forEach(k => window.localStorage.removeItem(k));
-      await Promise.all(WIDGET_DATA_KEYS.map((key) => removeFromIndexedDb(key)));
+      await clearWidgetDataKeys(WIDGET_DATA_KEYS);
+      keysToClear
+        .filter((key) => !WIDGET_DATA_KEYS.includes(key))
+        .forEach((key) => window.localStorage.removeItem(key));
       await clearFileManagerData();
       await clearLocalWebData();
     } catch (error) {

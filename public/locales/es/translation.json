@@ -162,6 +162,7 @@
     "tooltip": "Ayuda",
     "title": "Ayuda",
     "guide": "Guía de uso",
+    "report_issue": "Informar de un error o sugerencia",
     "about": "Acerca del proyecto",
     "licenses": "Créditos y licencias"
   },

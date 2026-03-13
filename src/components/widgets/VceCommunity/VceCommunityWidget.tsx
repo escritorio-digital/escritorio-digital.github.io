@@ -4,6 +4,7 @@ import Papa from 'papaparse';
 import './VceCommunityWidget.css';
 import { ChevronDown, ChevronUp, PanelLeftClose, PanelLeftOpen, Star } from 'lucide-react';
 import { WidgetToolbar } from '../../core/WidgetToolbar';
+import { notifyVceFavoritesUpdate, onDesktopEvent } from '../../../utils/desktopEvents';
 
 type VceApp = {
     title: string;
@@ -30,8 +31,6 @@ const LANGUAGE_OPTIONS = [
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSj_hltRI4Q0QolINWJVcKxCMMjfpdiCkKzSdgp9d8RlGTdUU1UIKvaj-TBSkq0JQGneDhfUkSQuFzy/pub?output=csv';
 const COMMUNITY_URL = 'https://vibe-coding-educativo.github.io/';
 const ACTIVE_PROFILE_STORAGE_KEY = 'active-profile-name';
-const ACTIVE_PROFILE_EVENT = 'active-profile-change';
-const PROFILES_UPDATED_EVENT = 'profiles-updated';
 const defaultProfileKey = 'Escritorio Principal';
 const GOOGLE_HOSTS = new Set([
     'google.com',
@@ -162,8 +161,7 @@ export const VceCommunityWidget = () => {
     }, []);
 
     useEffect(() => {
-        const handleProfileChange = (event: Event) => {
-            const detail = (event as CustomEvent<{ name?: string }>).detail;
+        const handleProfileChange = (detail?: { name?: string }) => {
             setActiveProfileName(detail?.name || readActiveProfileName());
         };
         const handleStorage = (event: StorageEvent) => {
@@ -173,13 +171,13 @@ export const VceCommunityWidget = () => {
         const handleProfilesUpdated = () => {
             setFavoriteUrls(readFavoritesForProfile(activeProfileName));
         };
-        window.addEventListener(ACTIVE_PROFILE_EVENT, handleProfileChange as EventListener);
+        const unsubscribeProfile = onDesktopEvent('active-profile-change', handleProfileChange);
         window.addEventListener('storage', handleStorage);
-        window.addEventListener(PROFILES_UPDATED_EVENT, handleProfilesUpdated);
+        const unsubscribeProfiles = onDesktopEvent('profiles-updated', handleProfilesUpdated);
         return () => {
-            window.removeEventListener(ACTIVE_PROFILE_EVENT, handleProfileChange as EventListener);
+            unsubscribeProfile();
             window.removeEventListener('storage', handleStorage);
-            window.removeEventListener(PROFILES_UPDATED_EVENT, handleProfilesUpdated);
+            unsubscribeProfiles();
         };
     }, [activeProfileName]);
 
@@ -282,12 +280,7 @@ export const VceCommunityWidget = () => {
             const next = prev.includes(url)
                 ? prev.filter((item) => item !== url)
                 : [...prev, url];
-            window.dispatchEvent(new CustomEvent('vce-favorites-update', {
-                detail: {
-                    profileName: activeProfileName,
-                    favorites: next,
-                },
-            }));
+            notifyVceFavoritesUpdate(activeProfileName, next);
             return next;
         });
     };
@@ -301,12 +294,7 @@ export const VceCommunityWidget = () => {
             const next = [...prev];
             const [item] = next.splice(index, 1);
             next.splice(nextIndex, 0, item);
-            window.dispatchEvent(new CustomEvent('vce-favorites-update', {
-                detail: {
-                    profileName: activeProfileName,
-                    favorites: next,
-                },
-            }));
+            notifyVceFavoritesUpdate(activeProfileName, next);
             return next;
         });
     };

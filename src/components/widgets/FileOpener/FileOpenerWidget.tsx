@@ -9,6 +9,7 @@ import 'katex/dist/katex.min.css';
 import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
 import { requestOpenFile } from '../../../utils/openDialog';
+import { notifyWidgetEntryOpened } from '../../../utils/desktopEvents';
 import { WidgetToolbar } from '../../core/WidgetToolbar';
 
 type DisplayType = 'none' | 'image' | 'pdf' | 'text' | 'markdown' | 'video' | 'audio' | 'html';
@@ -38,8 +39,10 @@ function renderMarkdownWithLatex(input: string): string {
   return html;
 }
 
-export const FileOpenerWidget: FC = () => {
+export const FileOpenerWidget: FC<{ instanceId?: string }> = ({ instanceId }) => {
   const { t } = useTranslation();
+  const instanceIdRef = useRef(instanceId ?? `file-opener-${Date.now()}-${Math.random().toString(16).slice(2)}`);
+  const resolvedInstanceId = instanceId ?? instanceIdRef.current;
   const markdownRef = useRef<HTMLDivElement>(null);
   const [displayType, setDisplayType] = useState<DisplayType>('none');
   const [fileName, setFileName] = useState('');
@@ -139,14 +142,16 @@ export const FileOpenerWidget: FC = () => {
   }, [fileUrl]);
 
   useEffect(() => {
-    const unsubscribe = subscribeFileOpen('file-opener', async ({ entryId }) => {
+    const unsubscribe = subscribeFileOpen('file-opener', async ({ entryId, instanceId }) => {
+      if (instanceId && instanceId !== resolvedInstanceId) return;
       const entry = await getEntry(entryId);
       if (!entry?.blob) return;
+      notifyWidgetEntryOpened(resolvedInstanceId, entry.id, 'file-opener');
       const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
       await openFile(file);
     });
     return unsubscribe;
-  }, [openFile]);
+  }, [openFile, resolvedInstanceId]);
 
   const markdownHtml = useMemo(() => {
     if (displayType !== 'markdown' || !fileContent) return '';

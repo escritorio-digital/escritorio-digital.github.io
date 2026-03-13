@@ -6,6 +6,7 @@ import {
     Info,
     FileText,
     Settings,
+    Bug,
     Users,
     Image,
     LayoutGrid,
@@ -96,6 +97,7 @@ export const StartMenu: React.FC<StartMenuProps> = ({
     anchorRect,
     anchorRef,
 }) => {
+    const issuesUrl = 'https://github.com/escritorio-digital/escritorio-digital.github.io/issues/new/choose';
     const { t, i18n } = useTranslation();
     const getWidgetLabel = (widget: WidgetConfig) => (widget.startTooltip ? t(widget.startTooltip) : t(widget.title));
     const menuRef = useRef<HTMLDivElement>(null);
@@ -430,6 +432,11 @@ export const StartMenu: React.FC<StartMenuProps> = ({
         onClose();
     };
 
+    const handleOpenIssues = () => {
+        window.open(issuesUrl, '_blank', 'noopener,noreferrer');
+        onClose();
+    };
+
     const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key !== 'Enter') return;
         const firstWidget = filteredWidgets[0];
@@ -740,6 +747,13 @@ export const StartMenu: React.FC<StartMenuProps> = ({
                                     >
                                         <HelpCircle size={18} />
                                         <span className="text-sm font-semibold">{t('credits.user_guide_title')}</span>
+                                    </button>
+                                    <button
+                                        onClick={handleOpenIssues}
+                                        className="w-full flex items-center gap-3 px-3 py-2 rounded-lg bg-white/90 hover:bg-amber-50 border border-gray-200 transition text-left shadow-sm"
+                                    >
+                                        <Bug size={18} />
+                                        <span className="text-sm font-semibold">{t('help.report_issue')}</span>
                                     </button>
                                     <button
                                         onClick={() => {

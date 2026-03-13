@@ -1,4 +1,5 @@
-import { FILE_MANAGER_ROOT_ID, listEntriesByParent, moveEntryToTrash, saveFileEntry } from './fileManagerDb';
+import { FILE_MANAGER_ROOT_ID, listEntriesByParent, moveEntryToTrash, saveFileEntry } from '../repositories/fileManagerRepository';
+import { notifyFileManagerFeedback, notifyFileManagerRefresh } from './desktopEvents';
 
 export const downloadBlob = (blob: Blob, filename: string) => {
     const url = URL.createObjectURL(blob);
@@ -32,11 +33,6 @@ export const saveToFileManager = async (params: {
         sourceWidgetId: params.sourceWidgetId,
         sourceWidgetTitleKey: params.sourceWidgetTitleKey,
     });
-    window.dispatchEvent(new CustomEvent('file-manager-refresh'));
-    window.dispatchEvent(new CustomEvent('file-manager-feedback', {
-        detail: {
-            type: 'saved',
-            filename: params.filename,
-        },
-    }));
+    notifyFileManagerRefresh();
+    notifyFileManagerFeedback('saved', params.filename);
 };

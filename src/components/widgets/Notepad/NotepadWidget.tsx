@@ -13,6 +13,7 @@ import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
 import { requestSaveDestination } from '../../../utils/saveDialog';
 import { requestOpenFile } from '../../../utils/openDialog';
+import { notifyWidgetDirtyState, notifyWidgetEntryOpened, notifyWidgetSaveComplete, notifyWidgetTitleUpdate, onDesktopEvent } from '../../../utils/desktopEvents';
 import { WidgetToolbar } from '../../core/WidgetToolbar';
 import {
   Bold,
@@ -109,6 +110,7 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
   const [currentParentId, setCurrentParentId] = useState<string | null>(null);
   const [currentEntryId, setCurrentEntryId] = useState<string | null>(null);
   const turndownService = useMemo(() => new TurndownService(), []);
+  const hasSyncedInitialContentRef = useRef(false);
 
   const editor = useEditor({
     autofocus: 'end',
@@ -129,6 +131,16 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
         },
     },
   });
+
+  const applyCleanContent = useCallback((htmlContent: string) => {
+    if (!editor) return;
+    editor.commands.setContent(htmlContent, { emitUpdate: false });
+    const normalizedHtml = editor.getHTML();
+    setContent(normalizedHtml);
+    setLastSavedContent(normalizedHtml);
+    setIsDirty(false);
+    return normalizedHtml;
+  }, [editor, setContent]);
 
   const handleSaveAs = useCallback(async () => {
     if (!editor) return;
@@ -152,20 +164,12 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
       downloadBlob(blob, destination.filename);
       setCurrentParentId(null);
     }
-    window.dispatchEvent(
-      new CustomEvent('widget-title-update', {
-        detail: { instanceId: resolvedInstanceId, title: destination.filename },
-      })
-    );
+    notifyWidgetTitleUpdate(resolvedInstanceId, destination.filename);
     setCurrentFilename(destination.filename);
-    window.dispatchEvent(
-      new CustomEvent('widget-dirty-state', {
-        detail: { instanceId: resolvedInstanceId, widgetId: 'notepad', isDirty: false },
-      })
-    );
+    notifyWidgetDirtyState(resolvedInstanceId, false, 'notepad');
     setLastSavedContent(htmlContent);
     setIsDirty(false);
-    window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'notepad' } }));
+    notifyWidgetSaveComplete(resolvedInstanceId, 'notepad');
   }, [editor, currentFilename, resolvedInstanceId, t, turndownService]);
 
   const handleSave = useCallback(async () => {
@@ -186,14 +190,10 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
         sourceWidgetTitleKey: 'widgets.notepad.title',
         parentId,
       });
-      window.dispatchEvent(
-        new CustomEvent('widget-dirty-state', {
-          detail: { instanceId: resolvedInstanceId, widgetId: 'notepad', isDirty: false },
-        })
-      );
+      notifyWidgetDirtyState(resolvedInstanceId, false, 'notepad');
       setLastSavedContent(htmlContent);
       setIsDirty(false);
-      window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'notepad' } }));
+      notifyWidgetSaveComplete(resolvedInstanceId, 'notepad');
       return;
     }
     await handleSaveAs();
@@ -203,22 +203,13 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
     if (!editor) return;
     const text = await file.text();
     const htmlContent = await marked.parse(text);
-    editor.commands.setContent(htmlContent);
-    setLastSavedContent(htmlContent);
-    setIsDirty(false);
-    window.dispatchEvent(
-      new CustomEvent('widget-title-update', {
-        detail: { instanceId: resolvedInstanceId, title: file.name },
-      })
-    );
+    applyCleanContent(htmlContent);
+    notifyWidgetTitleUpdate(resolvedInstanceId, file.name);
     setCurrentFilename(file.name);
     setCurrentParentId(parentId ?? null);
     setCurrentEntryId(entryId ?? null);
-    window.dispatchEvent(
-      new CustomEvent('widget-dirty-state', {
-        detail: { instanceId: resolvedInstanceId, widgetId: 'notepad', isDirty: false },
-      })
-    );
+    notifyWidgetEntryOpened(resolvedInstanceId, entryId ?? undefined, 'notepad');
+    notifyWidgetDirtyState(resolvedInstanceId, false, 'notepad');
   };
 
   const handleOpenFile = async () => {
@@ -238,41 +229,40 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
   };
 
   useEffect(() => {
+    if (!editor || hasSyncedInitialContentRef.current) return;
+    const normalizedHtml = editor.getHTML();
+    setContent(normalizedHtml);
+    setLastSavedContent(normalizedHtml);
+    setIsDirty(false);
+    hasSyncedInitialContentRef.current = true;
+  }, [editor, setContent]);
+
+  useEffect(() => {
     if (!editor) return;
-    const unsubscribe = subscribeFileOpen('notepad', async ({ entryId }) => {
+    const unsubscribe = subscribeFileOpen('notepad', async ({ entryId, instanceId }) => {
+      if (instanceId && instanceId !== resolvedInstanceId) return;
       const entry = await getEntry(entryId);
       if (!entry?.blob) return;
       const content = await entry.blob.text();
       const htmlContent = await marked.parse(content);
-      editor.commands.setContent(htmlContent);
-      setLastSavedContent(htmlContent);
-      setIsDirty(false);
-      window.dispatchEvent(
-        new CustomEvent('widget-title-update', {
-          detail: { instanceId: resolvedInstanceId, title: entry.name },
-        })
-      );
+      applyCleanContent(htmlContent);
+      notifyWidgetTitleUpdate(resolvedInstanceId, entry.name);
       setCurrentFilename(entry.name);
       setCurrentParentId(entry.parentId);
       setCurrentEntryId(entry.id);
-      window.dispatchEvent(
-        new CustomEvent('widget-dirty-state', {
-          detail: { instanceId: resolvedInstanceId, widgetId: 'notepad', isDirty: false },
-        })
-      );
+      notifyWidgetEntryOpened(resolvedInstanceId, entry.id, 'notepad');
+      notifyWidgetDirtyState(resolvedInstanceId, false, 'notepad');
     });
     return unsubscribe;
-  }, [editor, resolvedInstanceId]);
+  }, [applyCleanContent, editor, resolvedInstanceId]);
 
   useEffect(() => {
-    const handler = (event: Event) => {
-      const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
-      if (custom.detail?.instanceId !== resolvedInstanceId) return;
-      if (custom.detail?.widgetId && custom.detail.widgetId !== 'notepad') return;
+    const unsubscribe = onDesktopEvent('widget-save-request', (detail) => {
+      if (detail?.instanceId !== resolvedInstanceId) return;
+      if (detail?.widgetId && detail.widgetId !== 'notepad') return;
       handleSave();
-    };
-    window.addEventListener('widget-save-request', handler as EventListener);
-    return () => window.removeEventListener('widget-save-request', handler as EventListener);
+    });
+    return unsubscribe;
   }, [handleSave, resolvedInstanceId]);
 
   useEffect(() => {
@@ -280,20 +270,12 @@ export const NotepadWidget: React.FC<{ instanceId?: string }> = ({ instanceId })
   }, [content, lastSavedContent]);
 
   useEffect(() => {
-    window.dispatchEvent(
-      new CustomEvent('widget-dirty-state', {
-        detail: { instanceId: resolvedInstanceId, widgetId: 'notepad', isDirty },
-      })
-    );
+    notifyWidgetDirtyState(resolvedInstanceId, isDirty, 'notepad');
   }, [isDirty, resolvedInstanceId]);
 
   useEffect(() => {
     return () => {
-      window.dispatchEvent(
-        new CustomEvent('widget-dirty-state', {
-          detail: { instanceId: resolvedInstanceId, widgetId: 'notepad', isDirty: false },
-        })
-      );
+      notifyWidgetDirtyState(resolvedInstanceId, false, 'notepad');
     };
   }, [resolvedInstanceId]);
 

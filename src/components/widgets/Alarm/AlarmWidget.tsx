@@ -10,6 +10,7 @@ import {
     type AlarmItem,
     type AlarmMode,
 } from '../../../utils/alarmStore';
+import { openWidget, requestWidgetResize } from '../../../utils/desktopEvents';
 import './Alarm.css';
 
 const formatRemaining = (ms: number): string => {
@@ -175,11 +176,7 @@ export const AlarmWidget: FC<AlarmWidgetProps> = ({ instanceId }) => {
             const nextHeight = Math.ceil(windowHeight + delta + 16);
             if (lastResizeRef.current && Math.abs(nextHeight - lastResizeRef.current) < 6) return;
             lastResizeRef.current = nextHeight;
-            window.dispatchEvent(
-                new CustomEvent('widget-resize-request', {
-                    detail: { instanceId, size: { height: nextHeight } },
-                })
-            );
+            requestWidgetResize(instanceId, { height: nextHeight });
         };
 
         const observer = new ResizeObserver(requestResize);
@@ -329,7 +326,7 @@ export const AlarmWidget: FC<AlarmWidgetProps> = ({ instanceId }) => {
                 <button
                     type="button"
                     className="alarm-display-launch"
-                    onClick={() => window.dispatchEvent(new CustomEvent('open-widget', { detail: { widgetId: 'alarm-display' } }))}
+                    onClick={() => openWidget('alarm-display')}
                 >
                     {t('widgets.alarm.open_display')}
                 </button>

@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { ChevronUp, ChevronsUpDown, Download, Upload, Users } from 'lucide-react';
 import type { ProfileCollection } from '../../types';
 import { useTranslation } from 'react-i18next';
-import type { FileManagerArchive, LocalWebArchive } from '../../utils/backup';
+import type { LocalWebArchive } from '../../utils/backup';
+import type { FileManagerArchive } from '../../repositories/fileManagerRepository';
 import {
   buildBackupPayload,
   clearLocalWebData,
@@ -21,8 +22,9 @@ import {
   importWidgetData,
   WIDGET_DATA_KEYS,
 } from '../../utils/backup';
-import { getFromIndexedDb } from '../../utils/storage';
-import { clearFileManagerData } from '../../utils/fileManagerDb';
+import { notifyFileManagerRefresh, notifyLocalWebDataChanged, onDesktopEvent } from '../../utils/desktopEvents';
+import { clearFileManagerData } from '../../repositories/fileManagerRepository';
+import { estimateWidgetDataSize, hasStoredWidgetData } from '../../repositories/widgetDataRepository';
 
 // Definimos las propiedades que nuestro componente necesita
 interface ProfileSwitcherProps {
@@ -86,14 +88,11 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
   const defaultProfileKey = 'Escritorio Principal';
 
   useEffect(() => {
-    const handleOpenBackup = (event: Event) => {
-      const detail = (event as CustomEvent<{ tab?: 'export' | 'import' }>).detail;
+    return onDesktopEvent('open-profile-backup', (detail) => {
       setBackupTab(detail?.tab ?? 'export');
       setIsBackupOpen(true);
       setIsOpen(false);
-    };
-    window.addEventListener('open-profile-backup', handleOpenBackup as EventListener);
-    return () => window.removeEventListener('open-profile-backup', handleOpenBackup as EventListener);
+    });
   }, []);
 
   const getDisplayName = (name: string) =>
@@ -134,10 +133,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
     setSizeLabel('');
     setBackupTab('export');
     setImportMode('replace');
-    const widgetDataAvailable = WIDGET_DATA_KEYS.some((key) => {
-      const item = window.localStorage.getItem(key);
-      return Boolean(item);
-    });
+    const widgetDataAvailable = hasStoredWidgetData(WIDGET_DATA_KEYS);
     setHasWidgetData(widgetDataAvailable);
     setIncludeWidgetData(widgetDataAvailable);
     getLocalWebStats()
@@ -262,21 +258,6 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
     return { updated, nameMap };
   };
 
-  const estimateWidgetDataSize = async () => {
-    let total = 0;
-    for (const key of WIDGET_DATA_KEYS) {
-      const item = window.localStorage.getItem(key);
-      if (!item) continue;
-      if (item === '__indexed_db__') {
-        const value = await getFromIndexedDb(key);
-        if (value) total += new Blob([value]).size;
-      } else {
-        total += new Blob([item]).size;
-      }
-    }
-    return total;
-  };
-
   const estimateBackupSize = useCallback(async () => {
     let total = 0;
     if (includeProfiles && selectedProfiles.length > 0) {
@@ -291,7 +272,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
       total += new Blob([JSON.stringify(profileData)]).size;
     }
     if (includeWidgetData && hasWidgetData && !isPartialProfileSelection) {
-      total += await estimateWidgetDataSize();
+      total += await estimateWidgetDataSize(WIDGET_DATA_KEYS);
     }
     if (includeLocalWeb) {
       const stats = await getLocalWebStats(selectedProfiles, activeProfileName);
@@ -505,14 +486,14 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
         } else if (payload.data.localWeb) {
           await importLocalWebData(payload.data.localWeb, { profileNameMap, fallbackProfileName });
         }
-        window.dispatchEvent(new Event('local-web-data-changed'));
+        notifyLocalWebDataChanged();
       }
       if (fileManagerRecords) {
         if (importMode === 'replace') {
           await clearFileManagerData();
         }
         await importFileManagerRecords(fileManagerRecords);
-        window.dispatchEvent(new CustomEvent('file-manager-refresh'));
+        notifyFileManagerRefresh();
       }
       setBackupStatus(t('backup.import_done'));
       if (!controller.signal.aborted) {

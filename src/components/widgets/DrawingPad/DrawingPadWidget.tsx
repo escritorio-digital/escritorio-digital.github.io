@@ -7,6 +7,7 @@ import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
 import { requestSaveDestination } from '../../../utils/saveDialog';
 import { requestOpenFile } from '../../../utils/openDialog';
+import { notifyWidgetEntryOpened, notifyWidgetTitleUpdate } from '../../../utils/desktopEvents';
 import { WidgetToolbar } from '../../core/WidgetToolbar';
 // Asumiendo que WidgetConfig existe en tu proyecto. Si no, puedes quitar esta línea o definirla.
 
@@ -667,14 +668,11 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
       img.src = e.target?.result as string;
     };
     reader.readAsDataURL(file);
-    window.dispatchEvent(
-      new CustomEvent('widget-title-update', {
-        detail: { instanceId: resolvedInstanceId, title: file.name },
-      })
-    );
+    notifyWidgetTitleUpdate(resolvedInstanceId, file.name);
     setCurrentFilename(file.name);
     setCurrentParentId(parentId ?? null);
     setCurrentEntryId(entryId ?? null);
+    notifyWidgetEntryOpened(resolvedInstanceId, entryId ?? undefined, 'drawing-pad');
     setIsDirty(false);
   }, [drawCanvasContent, hideInitialMessage, resolvedInstanceId, saveToBackup]);
 
@@ -695,14 +693,15 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
   };
 
   useEffect(() => {
-    const unsubscribe = subscribeFileOpen('drawing-pad', async ({ entryId }) => {
+    const unsubscribe = subscribeFileOpen('drawing-pad', async ({ entryId, instanceId }) => {
+      if (instanceId && instanceId !== resolvedInstanceId) return;
       const entry = await getEntry(entryId);
       if (!entry?.blob) return;
       const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
       loadImageFile(file, entry.parentId, entry.id);
     });
     return unsubscribe;
-  }, [loadImageFile]);
+  }, [loadImageFile, resolvedInstanceId]);
 
   const handleSaveAsDrawing = () => {
     const canvas = canvasRef.current;
@@ -720,11 +719,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
           sourceWidgetTitleKey: 'widgets.drawing_pad.title',
           parentId: destination.parentId,
         });
-        window.dispatchEvent(
-          new CustomEvent('widget-title-update', {
-            detail: { instanceId: resolvedInstanceId, title: destination.filename },
-          })
-        );
+        notifyWidgetTitleUpdate(resolvedInstanceId, destination.filename);
         setCurrentFilename(destination.filename);
         setCurrentParentId(destination.parentId);
         setIsDirty(false);
@@ -734,11 +729,7 @@ export const DrawingPadWidget: React.FC<{ instanceId?: string }> = ({ instanceId
         downloadBlob(blob, destination.filename);
         setCurrentParentId(null);
       }
-      window.dispatchEvent(
-        new CustomEvent('widget-title-update', {
-          detail: { instanceId: resolvedInstanceId, title: destination.filename },
-        })
-      );
+      notifyWidgetTitleUpdate(resolvedInstanceId, destination.filename);
       setCurrentFilename(destination.filename);
       setIsDirty(false);
     }, 'image/png');

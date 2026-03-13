@@ -29,6 +29,7 @@ export interface WidgetConfig {
 export interface ActiveWidget {
   instanceId: string;
   widgetId: string;
+  openedEntryId?: string;
   position: { x: number; y: number };
   size: { width: number | string; height: number | string };
   zIndex: number;

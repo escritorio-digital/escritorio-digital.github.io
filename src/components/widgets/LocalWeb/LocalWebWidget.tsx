@@ -8,156 +8,26 @@ import { unzipSync } from 'fflate';
 import './LocalWebWidget.css';
 import { WidgetToolbar } from '../../core/WidgetToolbar';
 import { withBaseUrl } from '../../../utils/assetPaths';
-
-type SiteMeta = {
-    id: string;
-    name: string;
-    profileName?: string;
-    indexPath?: string;
-    createdAt: number;
-    updatedAt: number;
-    fileCount: number;
-    totalBytes: number;
-};
-
-type StoredFile = {
-    key: string;
-    siteId: string;
-    path: string;
-    blob: Blob;
-    size: number;
-    type: string;
-};
+import { onDesktopEvent } from '../../../utils/desktopEvents';
+import {
+    ACTIVE_PROFILE_STORAGE_KEY,
+    DEFAULT_LOCAL_WEB_PROFILE_NAME,
+    deleteLocalWebSite,
+    getAllLocalWebSites,
+    getLocalWebFilesForSite,
+    readActiveProfileName,
+    saveLocalWebFiles,
+    saveLocalWebSite,
+    type LocalWebSite as SiteMeta,
+    type LocalWebStoredFile as StoredFile,
+} from '../../../repositories/localWebRepository';
 
 type StorageEstimate = {
     usage: number | null;
     quota: number | null;
 };
 
-const DB_NAME = 'escritorio-digital-sites';
-const DB_VERSION = 1;
-const STORE_SITES = 'sites';
-const STORE_FILES = 'files';
-const ACTIVE_PROFILE_STORAGE_KEY = 'active-profile-name';
-const ACTIVE_PROFILE_EVENT = 'active-profile-change';
-const defaultProfileKey = 'Escritorio Principal';
-
-let dbPromise: Promise<IDBDatabase> | null = null;
 let serviceWorkerReadyPromise: Promise<boolean> | null = null;
-
-const openDb = (): Promise<IDBDatabase> => {
-    if (!dbPromise) {
-        dbPromise = new Promise((resolve, reject) => {
-            const request = window.indexedDB.open(DB_NAME, DB_VERSION);
-            request.onupgradeneeded = () => {
-                const db = request.result;
-                if (!db.objectStoreNames.contains(STORE_SITES)) {
-                    db.createObjectStore(STORE_SITES, { keyPath: 'id' });
-                }
-                if (!db.objectStoreNames.contains(STORE_FILES)) {
-                    const store = db.createObjectStore(STORE_FILES, { keyPath: 'key' });
-                    store.createIndex('siteId', 'siteId', { unique: false });
-                }
-            };
-            request.onsuccess = () => resolve(request.result);
-            request.onerror = () => reject(request.error);
-        });
-    }
-    return dbPromise;
-};
-
-const readActiveProfileName = (): string => {
-    const stored = window.localStorage.getItem(ACTIVE_PROFILE_STORAGE_KEY);
-    if (!stored) return defaultProfileKey;
-    try {
-        const parsed = JSON.parse(stored);
-        return typeof parsed === 'string' && parsed.trim() ? parsed : stored;
-    } catch {
-        return stored;
-    }
-};
-
-const withStore = async <T,>(
-    storeName: string,
-    mode: IDBTransactionMode,
-    action: (store: IDBObjectStore) => IDBRequest<T>
-): Promise<T> => {
-    const db = await openDb();
-    return new Promise<T>((resolve, reject) => {
-        const tx = db.transaction(storeName, mode);
-        const store = tx.objectStore(storeName);
-        const request = action(store);
-        request.onsuccess = () => resolve(request.result);
-        request.onerror = () => reject(request.error);
-    });
-};
-
-const assignProfileToSites = async (profileName: string, sites: SiteMeta[]) => {
-    const sitesToUpdate = sites.filter((site) => !site.profileName);
-    if (sitesToUpdate.length === 0) return;
-    await withStore(STORE_SITES, 'readwrite', (store) => {
-        sitesToUpdate.forEach((site) => {
-            store.put({ ...site, profileName });
-        });
-        return store.getAll();
-    });
-};
-
-const getAllSites = async (profileName: string): Promise<SiteMeta[]> => {
-    const result = await withStore<SiteMeta[]>(STORE_SITES, 'readonly', (store) => store.getAll());
-    const sites = result ?? [];
-    if (sites.some((site) => !site.profileName)) {
-        await assignProfileToSites(profileName, sites);
-        return sites.map((site) => ({ ...site, profileName: site.profileName ?? profileName }))
-            .filter((site) => site.profileName === profileName);
-    }
-    return sites.filter((site) => site.profileName === profileName);
-};
-
-const saveSite = async (site: SiteMeta): Promise<void> => {
-    await withStore(STORE_SITES, 'readwrite', (store) => store.put(site));
-};
-
-const deleteSite = async (siteId: string): Promise<void> => {
-    const db = await openDb();
-    await new Promise<void>((resolve, reject) => {
-        const tx = db.transaction([STORE_SITES, STORE_FILES], 'readwrite');
-        tx.objectStore(STORE_SITES).delete(siteId);
-        const fileStore = tx.objectStore(STORE_FILES);
-        const index = fileStore.index('siteId');
-        const request = index.getAllKeys(IDBKeyRange.only(siteId));
-        request.onsuccess = () => {
-            const keys = request.result as string[];
-            keys.forEach((key) => fileStore.delete(key));
-        };
-        tx.oncomplete = () => resolve();
-        tx.onerror = () => reject(tx.error);
-    });
-};
-
-const getFilesForSite = async (siteId: string): Promise<StoredFile[]> => {
-    const db = await openDb();
-    return new Promise<StoredFile[]>((resolve, reject) => {
-        const tx = db.transaction(STORE_FILES, 'readonly');
-        const store = tx.objectStore(STORE_FILES);
-        const index = store.index('siteId');
-        const request = index.getAll(IDBKeyRange.only(siteId));
-        request.onsuccess = () => resolve((request.result as StoredFile[]) ?? []);
-        request.onerror = () => reject(request.error);
-    });
-};
-
-const saveFiles = async (files: StoredFile[]): Promise<void> => {
-    if (files.length === 0) return;
-    const db = await openDb();
-    await new Promise<void>((resolve, reject) => {
-        const tx = db.transaction(STORE_FILES, 'readwrite');
-        const store = tx.objectStore(STORE_FILES);
-        files.forEach((file) => store.put(file));
-        tx.oncomplete = () => resolve();
-        tx.onerror = () => reject(tx.error);
-    });
-};
 
 const guessMimeType = (path: string): string => {
     const lower = path.toLowerCase();
@@ -397,7 +267,7 @@ export const LocalWebWidget: FC = () => {
     const skipRenameBlurRef = useRef(false);
 
     const refreshSites = async (profileName: string) => {
-        const allSites = await getAllSites(profileName);
+        const allSites = await getAllLocalWebSites(profileName);
         allSites.sort((a, b) => b.updatedAt - a.updatedAt);
         setSites(allSites);
     };
@@ -421,14 +291,13 @@ export const LocalWebWidget: FC = () => {
     }, []);
 
     useEffect(() => {
-        const handleProfileChange = (event: Event) => {
-            const detail = (event as CustomEvent<{ name?: string }>).detail;
+        const handleProfileChange = (detail?: { name?: string }) => {
             setActiveProfileName(detail?.name || readActiveProfileName());
         };
         const handleStorage = (event: StorageEvent) => {
             if (event.key !== ACTIVE_PROFILE_STORAGE_KEY) return;
             if (!event.newValue) {
-                setActiveProfileName(defaultProfileKey);
+                setActiveProfileName(DEFAULT_LOCAL_WEB_PROFILE_NAME);
                 return;
             }
             try {
@@ -438,10 +307,10 @@ export const LocalWebWidget: FC = () => {
                 setActiveProfileName(event.newValue);
             }
         };
-        window.addEventListener(ACTIVE_PROFILE_EVENT, handleProfileChange as EventListener);
+        const unsubscribeProfile = onDesktopEvent('active-profile-change', handleProfileChange);
         window.addEventListener('storage', handleStorage);
         return () => {
-            window.removeEventListener(ACTIVE_PROFILE_EVENT, handleProfileChange as EventListener);
+            unsubscribeProfile();
             window.removeEventListener('storage', handleStorage);
         };
     }, []);
@@ -451,10 +320,7 @@ export const LocalWebWidget: FC = () => {
             refreshSites(activeProfileName);
             refreshStorage();
         };
-        window.addEventListener('local-web-data-changed', handleLocalWebChange);
-        return () => {
-            window.removeEventListener('local-web-data-changed', handleLocalWebChange);
-        };
+        return onDesktopEvent('local-web-data-changed', handleLocalWebChange);
     }, [activeProfileName]);
 
     useEffect(() => {
@@ -623,8 +489,8 @@ export const LocalWebWidget: FC = () => {
             item.key = `${siteId}::${item.path}`;
         });
 
-        await saveSite(site);
-        await saveFiles(files);
+        await saveLocalWebSite(site);
+        await saveLocalWebFiles(files);
         setStatusMessage(t('widgets.local_web.import_done'));
         await refreshSites(activeProfileName);
         await refreshStorage();
@@ -663,8 +529,8 @@ export const LocalWebWidget: FC = () => {
             totalBytes: storedFiles.reduce((sum, item) => sum + item.size, 0),
         };
 
-        await saveSite(site);
-        await saveFiles(storedFiles);
+        await saveLocalWebSite(site);
+        await saveLocalWebFiles(storedFiles);
         setStatusMessage(t('widgets.local_web.import_done'));
         await refreshSites(activeProfileName);
         await refreshStorage();
@@ -673,7 +539,7 @@ export const LocalWebWidget: FC = () => {
 
     const openSite = async (site: SiteMeta) => {
         setStatusMessage(t('widgets.local_web.loading'));
-        const files = await getFilesForSite(site.id);
+        const files = await getLocalWebFilesForSite(site.id);
         const entryPath = site.indexPath || findIndexPath(files.map((file) => file.path));
         if (!entryPath) {
             setStatusMessage(t('widgets.local_web.missing_index'));
@@ -682,7 +548,7 @@ export const LocalWebWidget: FC = () => {
 
         if (!site.indexPath || site.indexPath !== entryPath) {
             const updatedSite = { ...site, indexPath: entryPath };
-            await saveSite(updatedSite);
+            await saveLocalWebSite(updatedSite);
             setSites((prev) => prev.map((item) => (item.id === site.id ? updatedSite : item)));
         }
 
@@ -755,7 +621,7 @@ export const LocalWebWidget: FC = () => {
             name: trimmedName,
             updatedAt: Date.now(),
         };
-        await saveSite(updatedSite);
+        await saveLocalWebSite(updatedSite);
         setSites((prev) => {
             const next = prev.map((item) => (item.id === site.id ? updatedSite : item));
             next.sort((a, b) => b.updatedAt - a.updatedAt);
@@ -795,7 +661,7 @@ export const LocalWebWidget: FC = () => {
         if (activeSiteId === siteId) {
             resetPreview();
         }
-        await deleteSite(siteId);
+        await deleteLocalWebSite(siteId);
         await refreshSites(activeProfileName);
         await refreshStorage();
         notifyStorageChange();

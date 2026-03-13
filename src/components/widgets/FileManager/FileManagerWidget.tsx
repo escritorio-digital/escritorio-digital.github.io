@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Folder, File, Trash2, UploadCloud, FolderPlus, ArrowUp, Download, Copy, Scissors, ClipboardPaste, XCircle, Pencil, Image, Music, Film } from 'lucide-react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { withBaseUrl } from '../../../utils/assetPaths';
+import { onDesktopEvent } from '../../../utils/desktopEvents';
 import { WidgetToolbar } from '../../core/WidgetToolbar';
 import { WIDGET_REGISTRY } from '../index';
 import {
@@ -25,6 +26,7 @@ import {
     type FileManagerEntry,
     type StorageEstimate,
 } from '../../../utils/fileManagerDb';
+import { openFileManagerEntry, openWidget } from '../../../utils/desktopEvents';
 import './FileManagerWidget.css';
 
 const DEFAULT_TRASH_HOURS = 1;
@@ -131,15 +133,12 @@ export const FileManagerWidget: FC = () => {
     }, [contextMenu.isOpen]);
 
     useEffect(() => {
-        const handler = () => refreshEntries();
-        window.addEventListener('file-manager-refresh', handler);
-        return () => window.removeEventListener('file-manager-refresh', handler);
+        return onDesktopEvent('file-manager-refresh', () => refreshEntries());
     }, [refreshEntries]);
 
     useEffect(() => {
-        const handler = (event: Event) => {
-            const custom = event as CustomEvent<{ type?: string }>;
-            if (custom.detail?.type !== 'saved') return;
+        return onDesktopEvent('file-manager-feedback', (detail) => {
+            if (detail?.type !== 'saved') return;
             setFeedbackMessage(t('widgets.file_manager.feedback_saved'));
             if (feedbackTimeoutRef.current) {
                 window.clearTimeout(feedbackTimeoutRef.current);
@@ -147,11 +146,7 @@ export const FileManagerWidget: FC = () => {
             feedbackTimeoutRef.current = window.setTimeout(() => {
                 setFeedbackMessage(null);
             }, FEEDBACK_TIMEOUT_MS);
-        };
-        window.addEventListener('file-manager-feedback', handler);
-        return () => {
-            window.removeEventListener('file-manager-feedback', handler);
-        };
+        });
     }, [t]);
 
     useEffect(() => {
@@ -358,7 +353,7 @@ export const FileManagerWidget: FC = () => {
             }, FEEDBACK_TIMEOUT_MS);
         }
         const widgetId = entry.sourceWidgetId || 'file-opener';
-        window.dispatchEvent(new CustomEvent('file-manager-open', { detail: { widgetId, entryId: entry.id } }));
+        openFileManagerEntry(widgetId, entry.id);
     };
 
     const handleDeleteEntry = async (entry: FileManagerEntry) => {
@@ -591,7 +586,7 @@ export const FileManagerWidget: FC = () => {
                 </button>
                 <button
                     className="file-manager-icon-only"
-                    onClick={() => window.dispatchEvent(new CustomEvent('open-widget', { detail: { widgetId: 'local-web' } }))}
+                    onClick={() => openWidget('local-web')}
                     title={t('widgets.local_web.tooltip')}
                     aria-label={t('widgets.local_web.tooltip')}
                 >

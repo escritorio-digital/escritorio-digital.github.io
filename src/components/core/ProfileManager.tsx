@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowDown, ArrowUp, Check, FolderOpen, Trash2 } from 'lucide-react';
 import { defaultTheme, useTheme } from '../../context/ThemeContext';
 import { cloneLocalWebData } from '../../utils/backup';
+import { requestOpenProfileBackup } from '../../utils/desktopEvents';
 import type { ProfileCollection } from '../../types';
 import { useTranslation } from 'react-i18next';
 
@@ -187,7 +188,7 @@ export const ProfileManager: React.FC<ProfileManagerProps> = ({
         <button
           onClick={() => {
             onCloseSettings();
-            window.dispatchEvent(new CustomEvent('open-profile-backup', { detail: { tab: 'export' } }));
+            requestOpenProfileBackup('export');
           }}
           className="w-full text-left px-3 py-2 rounded-lg bg-white border border-gray-300 text-sm text-text-dark hover:bg-gray-100 transition-colors shadow-sm"
         >

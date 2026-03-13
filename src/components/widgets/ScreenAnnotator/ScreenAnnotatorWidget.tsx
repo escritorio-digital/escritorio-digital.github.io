@@ -2,6 +2,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { FC, PointerEvent as ReactPointerEvent, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight, Circle, CircleHelp, Eraser, GripVertical, Highlighter, Minus, Pencil, RotateCcw, RotateCw, Square, Trash2, X } from 'lucide-react';
+import { onDesktopEvent, requestWidgetClose } from '../../../utils/desktopEvents';
+import { readLocalJson, removeLocalJson, writeLocalJson } from '../../../repositories/localJsonStorage';
 import './ScreenAnnotatorWidget.css';
 
 type Tool = 'pen' | 'highlighter' | 'eraser' | 'line' | 'rectangle' | 'ellipse' | 'arrow';
@@ -50,26 +52,19 @@ export const ScreenAnnotatorWidget: FC<{ instanceId?: string }> = ({ instanceId 
 
     const initialDraftRef = useRef<DraftState | null>(null);
     if (!initialDraftRef.current) {
-        try {
-            const raw = window.localStorage.getItem(storageKey);
-            if (raw) {
-                const parsed = JSON.parse(raw) as Partial<DraftState> | null;
-                if (parsed && typeof parsed === 'object') {
-                    initialDraftRef.current = {
-                        imageDataUrl: typeof parsed.imageDataUrl === 'string' ? parsed.imageDataUrl : null,
-                        tool: (parsed.tool as Tool) || DEFAULT_TOOL,
-                        toolSettings: parsed.toolSettings && typeof parsed.toolSettings === 'object'
-                            ? { ...buildDefaultToolSettings(), ...(parsed.toolSettings as ToolSettings) }
-                            : buildDefaultToolSettings(),
-                        fillShapes: Boolean(parsed.fillShapes),
-                        toolbarPos: parsed.toolbarPos && typeof parsed.toolbarPos.x === 'number' && typeof parsed.toolbarPos.y === 'number'
-                            ? parsed.toolbarPos
-                            : { x: 24, y: 24 },
-                    };
-                }
-            }
-        } catch {
-            initialDraftRef.current = null;
+        const parsed = readLocalJson<Partial<DraftState>>(storageKey);
+        if (parsed && typeof parsed === 'object') {
+            initialDraftRef.current = {
+                imageDataUrl: typeof parsed.imageDataUrl === 'string' ? parsed.imageDataUrl : null,
+                tool: (parsed.tool as Tool) || DEFAULT_TOOL,
+                toolSettings: parsed.toolSettings && typeof parsed.toolSettings === 'object'
+                    ? { ...buildDefaultToolSettings(), ...(parsed.toolSettings as ToolSettings) }
+                    : buildDefaultToolSettings(),
+                fillShapes: Boolean(parsed.fillShapes),
+                toolbarPos: parsed.toolbarPos && typeof parsed.toolbarPos.x === 'number' && typeof parsed.toolbarPos.y === 'number'
+                    ? parsed.toolbarPos
+                    : { x: 24, y: 24 },
+            };
         }
     }
 
@@ -151,19 +146,15 @@ export const ScreenAnnotatorWidget: FC<{ instanceId?: string }> = ({ instanceId 
     const persistDraft = useCallback(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-        try {
-            const imageDataUrl = canvas.toDataURL('image/png');
-            const draft: DraftState = {
-                imageDataUrl,
-                tool,
-                toolSettings,
-                fillShapes,
-                toolbarPos,
-            };
-            window.localStorage.setItem(storageKey, JSON.stringify(draft));
-        } catch {
-            // ignore storage errors
-        }
+        const imageDataUrl = canvas.toDataURL('image/png');
+        const draft: DraftState = {
+            imageDataUrl,
+            tool,
+            toolSettings,
+            fillShapes,
+            toolbarPos,
+        };
+        writeLocalJson(storageKey, draft);
     }, [fillShapes, storageKey, toolbarPos, tool, toolSettings]);
 
     const clearCanvas = useCallback(() => {
@@ -379,14 +370,12 @@ export const ScreenAnnotatorWidget: FC<{ instanceId?: string }> = ({ instanceId 
     }, [pushHistory]);
 
     useEffect(() => {
-        const handleClose = (event: Event) => {
-            const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
-            if (custom.detail?.instanceId !== resolvedInstanceId) return;
-            if (custom.detail?.widgetId && custom.detail.widgetId !== 'screen-annotator') return;
-            window.localStorage.removeItem(storageKey);
-        };
-        window.addEventListener('widget-close', handleClose as EventListener);
-        return () => window.removeEventListener('widget-close', handleClose as EventListener);
+        const unsubscribe = onDesktopEvent('widget-close', (detail) => {
+            if (detail?.instanceId !== resolvedInstanceId) return;
+            if (detail?.widgetId && detail.widgetId !== 'screen-annotator') return;
+            removeLocalJson(storageKey);
+        });
+        return unsubscribe;
     }, [resolvedInstanceId, storageKey]);
 
     const toolbarDragRef = useRef<{ offsetX: number; offsetY: number } | null>(null);
@@ -429,7 +418,7 @@ export const ScreenAnnotatorWidget: FC<{ instanceId?: string }> = ({ instanceId 
     }, [persistDraft]);
 
     const handleClose = () => {
-        window.dispatchEvent(new CustomEvent('widget-close-request', { detail: { instanceId: resolvedInstanceId } }));
+        requestWidgetClose(resolvedInstanceId);
     };
 
     const handleClear = () => {

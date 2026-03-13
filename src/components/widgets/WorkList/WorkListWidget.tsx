@@ -8,6 +8,7 @@ import { getEntry } from '../../../utils/fileManagerDb';
 import { subscribeFileOpen } from '../../../utils/fileOpenBus';
 import { requestSaveDestination } from '../../../utils/saveDialog';
 import { requestOpenFile } from '../../../utils/openDialog';
+import { notifyWidgetDirtyState, notifyWidgetEntryOpened, notifyWidgetSaveComplete, notifyWidgetTitleUpdate, onDesktopEvent } from '../../../utils/desktopEvents';
 
 interface Task {
   id: number;
@@ -19,7 +20,7 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
   const { t, ready } = useTranslation();
   const instanceIdRef = useRef(instanceId ?? `work-list-${Date.now()}-${Math.random().toString(16).slice(2)}`);
   const resolvedInstanceId = instanceId ?? instanceIdRef.current;
-  const [tasks, setTasks] = useLocalStorage<Task[]>('work-list-tasks', []);
+  const [tasks, setTasks] = useLocalStorage<Task[]>(`work-list-tasks-${resolvedInstanceId}`, []);
   const [newTask, setNewTask] = useState('');
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
   const [editingTaskText, setEditingTaskText] = useState('');
@@ -82,20 +83,12 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
       downloadBlob(blob, destination.filename);
       setCurrentParentId(null);
     }
-    window.dispatchEvent(
-      new CustomEvent('widget-title-update', {
-        detail: { instanceId: resolvedInstanceId, title: destination.filename },
-      })
-    );
+    notifyWidgetTitleUpdate(resolvedInstanceId, destination.filename);
     setCurrentFilename(destination.filename);
-    window.dispatchEvent(
-      new CustomEvent('widget-dirty-state', {
-        detail: { instanceId: resolvedInstanceId, widgetId: 'work-list', isDirty: false },
-      })
-    );
+    notifyWidgetDirtyState(resolvedInstanceId, false, 'work-list');
     const signature = JSON.stringify(tasks);
     setLastSavedSignature(signature);
-    window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'work-list' } }));
+    notifyWidgetSaveComplete(resolvedInstanceId, 'work-list');
   }, [currentFilename, resolvedInstanceId, tasks]);
 
   const handleSave = useCallback(async () => {
@@ -114,14 +107,10 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
         sourceWidgetTitleKey: 'widgets.work_list.title',
         parentId,
       });
-      window.dispatchEvent(
-        new CustomEvent('widget-dirty-state', {
-          detail: { instanceId: resolvedInstanceId, widgetId: 'work-list', isDirty: false },
-        })
-      );
+      notifyWidgetDirtyState(resolvedInstanceId, false, 'work-list');
       const signature = JSON.stringify(tasks);
       setLastSavedSignature(signature);
-      window.dispatchEvent(new CustomEvent('widget-save-complete', { detail: { instanceId: resolvedInstanceId, widgetId: 'work-list' } }));
+      notifyWidgetSaveComplete(resolvedInstanceId, 'work-list');
       return;
     }
     await handleSaveAs();
@@ -138,7 +127,8 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
             completed: String(row.completed).toLowerCase() === 'true'
           })).filter(task => task.text);
 
-          if (window.confirm(t('widgets.work_list.replace_list_confirm'))) {
+          const hasExistingTasks = tasks.length > 0;
+          if (!hasExistingTasks || window.confirm(t('widgets.work_list.replace_list_confirm'))) {
             setTasks(newTasks);
             setLastSavedSignature(JSON.stringify(newTasks));
           } else {
@@ -150,27 +140,20 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
           }
           const title = filename || file.name;
           if (title) {
-            window.dispatchEvent(
-              new CustomEvent('widget-title-update', {
-                detail: { instanceId: resolvedInstanceId, title },
-              })
-            );
+            notifyWidgetTitleUpdate(resolvedInstanceId, title);
             setCurrentFilename(title);
             setCurrentParentId(parentId ?? null);
             setCurrentEntryId(entryId ?? null);
           }
-          window.dispatchEvent(
-            new CustomEvent('widget-dirty-state', {
-              detail: { instanceId: resolvedInstanceId, widgetId: 'work-list', isDirty: false },
-            })
-          );
+          notifyWidgetEntryOpened(resolvedInstanceId, entryId ?? undefined, 'work-list');
+          notifyWidgetDirtyState(resolvedInstanceId, false, 'work-list');
         },
         error: (error) => {
           console.error("Error al parsear el CSV:", error);
           alert(t('widgets.work_list.csv_error'));
         }
     });
-  }, [resolvedInstanceId, setTasks, t]);
+  }, [resolvedInstanceId, setTasks, t, tasks]);
 
   const handleOpenFile = async () => {
     const result = await requestOpenFile({ accept: '.csv', sourceWidgetId: 'work-list' });
@@ -190,14 +173,15 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
 
 
   useEffect(() => {
-    const unsubscribe = subscribeFileOpen('work-list', async ({ entryId }) => {
+    const unsubscribe = subscribeFileOpen('work-list', async ({ entryId, instanceId }) => {
+      if (instanceId && instanceId !== resolvedInstanceId) return;
       const entry = await getEntry(entryId);
       if (!entry?.blob) return;
       const file = new File([entry.blob], entry.name, { type: entry.mime || entry.blob.type });
       loadCsvFile(file, entry.name, entry.parentId, entry.id);
     });
     return unsubscribe;
-  }, [loadCsvFile]);
+  }, [loadCsvFile, resolvedInstanceId]);
 
   const isDirty = lastSavedSignature !== '' && JSON.stringify(tasks) !== lastSavedSignature;
 
@@ -206,31 +190,21 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
       setLastSavedSignature(JSON.stringify(tasks));
       return;
     }
-    window.dispatchEvent(
-      new CustomEvent('widget-dirty-state', {
-        detail: { instanceId: resolvedInstanceId, widgetId: 'work-list', isDirty },
-      })
-    );
+    notifyWidgetDirtyState(resolvedInstanceId, isDirty, 'work-list');
   }, [isDirty, lastSavedSignature, resolvedInstanceId, tasks]);
 
   useEffect(() => {
-    const handler = (event: Event) => {
-      const custom = event as CustomEvent<{ instanceId?: string; widgetId?: string }>;
-      if (custom.detail?.instanceId !== resolvedInstanceId) return;
-      if (custom.detail?.widgetId && custom.detail.widgetId !== 'work-list') return;
+    const unsubscribe = onDesktopEvent('widget-save-request', (detail) => {
+      if (detail?.instanceId !== resolvedInstanceId) return;
+      if (detail?.widgetId && detail.widgetId !== 'work-list') return;
       handleSave();
-    };
-    window.addEventListener('widget-save-request', handler as EventListener);
-    return () => window.removeEventListener('widget-save-request', handler as EventListener);
+    });
+    return unsubscribe;
   }, [handleSave, resolvedInstanceId]);
 
   useEffect(() => {
     return () => {
-      window.dispatchEvent(
-        new CustomEvent('widget-dirty-state', {
-          detail: { instanceId: resolvedInstanceId, widgetId: 'work-list', isDirty: false },
-        })
-      );
+      notifyWidgetDirtyState(resolvedInstanceId, false, 'work-list');
     };
   }, [resolvedInstanceId]);
 

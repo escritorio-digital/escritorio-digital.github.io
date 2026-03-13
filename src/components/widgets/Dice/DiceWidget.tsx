@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Dices, Info, Volume2, VolumeX } from 'lucide-react';
 import './Dice.css';
 import { WidgetToolbar } from '../../core/WidgetToolbar';
+import { useLocalStorage } from '../../../hooks/useLocalStorage';
 
 // ... (Interfaz DieState sin cambios)
 interface DieState {
@@ -20,13 +21,7 @@ export const DiceWidget: FC = () => {
   const [total, setTotal] = useState(0);
   const [isRolling, setIsRolling] = useState(false);
   const [rollDurationMs, setRollDurationMs] = useState(1500);
-  const [isSoundMuted, setIsSoundMuted] = useState(() => {
-    try {
-      return localStorage.getItem('dice-sound-muted') === 'true';
-    } catch {
-      return false;
-    }
-  });
+  const [isSoundMuted, setIsSoundMuted] = useLocalStorage<boolean>('dice-sound-muted', false);
   
   // 1. Inicializa la referencia como null
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -225,17 +220,7 @@ export const DiceWidget: FC = () => {
             <button
                 type="button"
                 className="dice-toolbar-button"
-                onClick={() => {
-                  setIsSoundMuted((prev) => {
-                    const next = !prev;
-                    try {
-                      localStorage.setItem('dice-sound-muted', next ? 'true' : 'false');
-                    } catch {
-                      // ignore storage errors
-                    }
-                    return next;
-                  });
-                }}
+                onClick={() => setIsSoundMuted((prev) => !prev)}
                 title={isSoundMuted ? t('widgets.dice.sound_on') : t('widgets.dice.sound_off')}
                 aria-label={isSoundMuted ? t('widgets.dice.sound_on') : t('widgets.dice.sound_off')}
             >

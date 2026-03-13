@@ -5,6 +5,7 @@ import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { useTranslation } from 'react-i18next';
 import { getEntry } from '../../../utils/fileManagerDb';
 import { requestOpenFile } from '../../../utils/openDialog';
+import { readLocalJson } from '../../../repositories/localJsonStorage';
 import './RandomSpinner.css';
 
 interface SpinnerOption {
@@ -23,12 +24,10 @@ export const RandomSpinnerWidget: FC = () => {
   const [options, setOptions] = useLocalStorage<SpinnerOption[]>('spinner-options', []);
   
   useEffect(() => {
-    const storedOptions = window.localStorage.getItem('spinner-options');
-    if (storedOptions === null) {
-        const defaultOptions = t('widgets.random_spinner.default_options', { returnObjects: true });
-        if (Array.isArray(defaultOptions)) {
-            setOptions(defaultOptions.map((opt) => ({ ...(opt as SpinnerTranslationOption), color: getRandomColor() })));
-        }
+    if (readLocalJson<SpinnerOption[]>('spinner-options') !== null) return;
+    const defaultOptions = t('widgets.random_spinner.default_options', { returnObjects: true });
+    if (Array.isArray(defaultOptions)) {
+      setOptions(defaultOptions.map((opt) => ({ ...(opt as SpinnerTranslationOption), color: getRandomColor() })));
     }
   }, [t, setOptions]);
 

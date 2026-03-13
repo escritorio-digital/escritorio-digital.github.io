@@ -1,3 +1,5 @@
+import { notifyAlarmStoreUpdated, onDesktopEvent } from './desktopEvents';
+
 export type AlarmMode = 'time' | 'countdown';
 
 export type AlarmItem = {
@@ -11,8 +13,6 @@ export type AlarmItem = {
 };
 
 const STORAGE_KEY = 'alarm-widget-alarms';
-const EVENT_NAME = 'alarm-store-updated';
-
 const createId = (): string => {
     if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
         return crypto.randomUUID();
@@ -36,7 +36,7 @@ export const getStoredAlarms = (): AlarmItem[] => {
 export const setStoredAlarms = (alarms: AlarmItem[]): void => {
     try {
         window.localStorage.setItem(STORAGE_KEY, JSON.stringify(alarms));
-        window.dispatchEvent(new CustomEvent(EVENT_NAME, { detail: alarms }));
+        notifyAlarmStoreUpdated(alarms);
     } catch (error) {
         console.error(error);
     }
@@ -49,15 +49,13 @@ export const updateStoredAlarms = (updater: (alarms: AlarmItem[]) => AlarmItem[]
 };
 
 export const subscribeAlarmStore = (handler: (alarms: AlarmItem[]) => void): (() => void) => {
-    const listener = (event: Event) => {
-        if (event instanceof CustomEvent && Array.isArray(event.detail)) {
-            handler(event.detail);
+    return onDesktopEvent('alarm-store-updated', (detail) => {
+        if (Array.isArray(detail)) {
+            handler(detail);
             return;
         }
         handler(getStoredAlarms());
-    };
-    window.addEventListener(EVENT_NAME, listener as EventListener);
-    return () => window.removeEventListener(EVENT_NAME, listener as EventListener);
+    });
 };
 
 export const createAlarmItem = (params: Omit<AlarmItem, 'id' | 'createdAt' | 'triggered'>): AlarmItem => ({

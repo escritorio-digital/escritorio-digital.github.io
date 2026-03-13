@@ -140,7 +140,7 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
   const finalSize = isMinimized ? { ...size, height: 40 } : size;
   const containerStyle: React.CSSProperties = {
     zIndex,
-    opacity: isMinimized ? 0 : (!isMinimized && !isActive ? 0.97 : 1),
+    opacity: isMinimized ? 0 : 1,
     pointerEvents: isMinimized ? 'none' : 'auto',
     transform: isMinimized ? 'scale(0.98)' : 'scale(1)',
     transition: isMinimized
@@ -461,7 +461,7 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
           onMouseDown={onFocus}
           onMouseDownCapture={onFocus}
           onDragStart={() => onFocus()}
-          className={`widget-window relative ${isActive ? 'is-active' : 'is-inactive'} ${isOverlay || isFloating ? 'bg-transparent border-transparent rounded-none shadow-none' : 'bg-widget-bg rounded-lg border-2 border-widget-header'} ${isOverlay || isFloating ? '' : (isActive ? 'ring-2 ring-accent/70 shadow-2xl' : 'shadow-xl')}`}
+          className={`widget-window relative ${isOverlay || isFloating ? 'bg-transparent border-transparent rounded-none shadow-none' : 'bg-widget-bg rounded-lg border-2 border-widget-header shadow-xl'}`}
           dragHandleClassName={isFloating ? undefined : 'widget-header-drag-handle'}
           bounds="parent" 
         >

@@ -1,6 +1,7 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { requestWidgetToggleFloating } from '../../../utils/desktopEvents';
 import './ScientificCalculatorWidget.css';
 
 type ScientificCalculatorWidgetProps = {
@@ -559,11 +560,7 @@ export const ScientificCalculatorWidget: FC<ScientificCalculatorWidgetProps> = (
 
     const handleToggleFloating = () => {
         if (!instanceId) return;
-        window.dispatchEvent(
-            new CustomEvent('widget-toggle-floating', {
-                detail: { instanceId, enable: !isFloating },
-            })
-        );
+        requestWidgetToggleFloating(instanceId, !isFloating);
     };
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {

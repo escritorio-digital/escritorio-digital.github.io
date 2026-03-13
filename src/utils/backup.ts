@@ -1,9 +1,26 @@
 import type { ProfileCollection } from '../types';
-import { getFromIndexedDb, removeFromIndexedDb, setInIndexedDb } from './storage';
 import { strFromU8, strToU8, unzipSync, Zip, ZipDeflate } from 'fflate';
-
-const IDB_MARKER = '__indexed_db__';
-const IDB_THRESHOLD_BYTES = 200_000;
+import {
+  exportWidgetDataEntries,
+  clearLocalWebData as clearLocalWebRepositoryData,
+  cloneLocalWebData as cloneLocalWebRepositoryData,
+  importWidgetDataEntries,
+  getLocalWebStats as getLocalWebRepositoryStats,
+  importFileManagerArchive,
+  exportFileManagerArchive,
+  getFileManagerStats as getFileManagerRepositoryStats,
+  readAllLocalWebFiles,
+  readAllLocalWebSites,
+  saveLocalWebFiles,
+  saveLocalWebSites,
+  type FileManagerArchive,
+  type FileManagerEntryMeta,
+  type FileManagerStats,
+  type LocalWebSite,
+  type LocalWebStats,
+  type LocalWebStoredFile,
+  type WidgetDataEntry,
+} from '../repositories';
 
 const BACKUP_VERSION = 1;
 
@@ -29,21 +46,6 @@ type BackupMeta = {
   app: string;
   version: number;
   createdAt: string;
-};
-
-type WidgetDataEntry = {
-  storage: 'localStorage' | 'indexedDb';
-  value: string;
-};
-
-type LocalWebSite = {
-  id: string;
-  name: string;
-  profileName?: string;
-  createdAt: number;
-  updatedAt: number;
-  fileCount: number;
-  totalBytes: number;
 };
 
 type LocalWebFile = {
@@ -85,41 +87,6 @@ export type LocalWebArchive = {
   files: LocalWebRecord[];
 };
 
-type FileManagerEntryMeta = {
-  id: string;
-  type: 'file' | 'folder';
-  name: string;
-  parentId: string;
-  createdAt: number;
-  updatedAt: number;
-  trashedAt?: number | null;
-  size?: number;
-  mime?: string;
-  sourceWidgetId?: string;
-  sourceWidgetTitleKey?: string;
-  hasBlob: boolean;
-};
-
-type FileManagerStoredEntry = {
-  id: string;
-  type: 'file' | 'folder';
-  name: string;
-  parentId: string;
-  createdAt: number;
-  updatedAt: number;
-  trashedAt?: number | null;
-  size?: number;
-  mime?: string;
-  sourceWidgetId?: string;
-  sourceWidgetTitleKey?: string;
-  blob?: Blob;
-};
-
-export type FileManagerArchive = {
-  entries: FileManagerEntryMeta[];
-  files: Array<{ id: string; blob: Blob }>;
-};
-
 export type BackupPayload = {
   meta: BackupMeta;
   data: {
@@ -128,68 +95,6 @@ export type BackupPayload = {
     widgetData?: Record<string, WidgetDataEntry>;
     localWeb?: LocalWebBackup;
   };
-};
-
-export type LocalWebStats = {
-  siteCount: number;
-  totalBytes: number;
-};
-
-export type FileManagerStats = {
-  entryCount: number;
-  totalBytes: number;
-};
-
-const LOCAL_WEB_DB_NAME = 'escritorio-digital-sites';
-const LOCAL_WEB_DB_VERSION = 1;
-const LOCAL_WEB_SITES = 'sites';
-const LOCAL_WEB_FILES = 'files';
-
-const FILE_MANAGER_DB_NAME = 'escritorio-digital-files';
-const FILE_MANAGER_DB_VERSION = 1;
-const FILE_MANAGER_ENTRIES = 'entries';
-
-let localWebDbPromise: Promise<IDBDatabase> | null = null;
-let fileManagerDbPromise: Promise<IDBDatabase> | null = null;
-
-const openLocalWebDb = (): Promise<IDBDatabase> => {
-  if (!localWebDbPromise) {
-    localWebDbPromise = new Promise((resolve, reject) => {
-      const request = window.indexedDB.open(LOCAL_WEB_DB_NAME, LOCAL_WEB_DB_VERSION);
-      request.onupgradeneeded = () => {
-        const db = request.result;
-        if (!db.objectStoreNames.contains(LOCAL_WEB_SITES)) {
-          db.createObjectStore(LOCAL_WEB_SITES, { keyPath: 'id' });
-        }
-        if (!db.objectStoreNames.contains(LOCAL_WEB_FILES)) {
-          const store = db.createObjectStore(LOCAL_WEB_FILES, { keyPath: 'key' });
-          store.createIndex('siteId', 'siteId', { unique: false });
-        }
-      };
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
-  return localWebDbPromise;
-};
-
-const openFileManagerDb = (): Promise<IDBDatabase> => {
-  if (!fileManagerDbPromise) {
-    fileManagerDbPromise = new Promise((resolve, reject) => {
-      const request = window.indexedDB.open(FILE_MANAGER_DB_NAME, FILE_MANAGER_DB_VERSION);
-      request.onupgradeneeded = () => {
-        const db = request.result;
-        if (!db.objectStoreNames.contains(FILE_MANAGER_ENTRIES)) {
-          const store = db.createObjectStore(FILE_MANAGER_ENTRIES, { keyPath: 'id' });
-          store.createIndex('parentId', 'parentId', { unique: false });
-          store.createIndex('trashedAt', 'trashedAt', { unique: false });
-        }
-      };
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
-  return fileManagerDbPromise;
 };
 
 const arrayBufferToBase64 = (buffer: ArrayBuffer): string => {
@@ -211,115 +116,72 @@ const base64ToArrayBuffer = (value: string): ArrayBuffer => {
 };
 
 export const exportWidgetData = async (keys: string[]): Promise<Record<string, WidgetDataEntry>> => {
-  const result: Record<string, WidgetDataEntry> = {};
-  for (const key of keys) {
-    const item = window.localStorage.getItem(key);
-    if (!item) continue;
-    if (item === IDB_MARKER) {
-      const value = await getFromIndexedDb(key);
-      if (value == null) continue;
-      result[key] = { storage: 'indexedDb', value };
-    } else {
-      result[key] = { storage: 'localStorage', value: item };
-    }
-  }
-  return result;
+  return exportWidgetDataEntries(keys);
 };
 
 export const importWidgetData = async (entries: Record<string, WidgetDataEntry>): Promise<void> => {
-  for (const [key, entry] of Object.entries(entries)) {
-    if (entry.storage === 'indexedDb') {
-      await setInIndexedDb(key, entry.value);
-      window.localStorage.setItem(key, IDB_MARKER);
-      continue;
-    }
-    if (entry.value.length > IDB_THRESHOLD_BYTES) {
-      await setInIndexedDb(key, entry.value);
-      window.localStorage.setItem(key, IDB_MARKER);
-      continue;
-    }
-    window.localStorage.setItem(key, entry.value);
-    await removeFromIndexedDb(key);
-  }
+  await importWidgetDataEntries(entries);
 };
 
 export const exportLocalWebData = async (
   profileNames?: string[],
   fallbackProfileName?: string
 ): Promise<LocalWebBackup> => {
-  const db = await openLocalWebDb();
-  return new Promise<LocalWebBackup>((resolve, reject) => {
-    const tx = db.transaction([LOCAL_WEB_SITES, LOCAL_WEB_FILES], 'readonly');
-    const sitesRequest = tx.objectStore(LOCAL_WEB_SITES).getAll();
-    const filesRequest = tx.objectStore(LOCAL_WEB_FILES).getAll();
-    tx.oncomplete = async () => {
-      const sites = (sitesRequest.result as LocalWebSite[]) ?? [];
-      const files = (filesRequest.result as Array<{ key: string; siteId: string; path: string; blob: Blob; size: number; type: string; profileName?: string }>) ?? [];
+  const sites = await readAllLocalWebSites();
+  const files = await readAllLocalWebFiles();
 
       // Filter sites: include those without profileName OR those with profileName in selection
-      const filteredSites = profileNames && profileNames.length > 0
-        ? sites.filter((site) => !site.profileName || profileNames.includes(site.profileName))
-        : sites;
+  const filteredSites = profileNames && profileNames.length > 0
+    ? sites.filter((site) => !site.profileName || profileNames.includes(site.profileName))
+    : sites;
 
       // Assign fallback profile to sites without one for export
-      const resolvedSites = filteredSites.map((site) => ({
-        ...site,
-        profileName: site.profileName ?? fallbackProfileName,
-      }));
+  const resolvedSites = filteredSites.map((site) => ({
+    ...site,
+    profileName: site.profileName ?? fallbackProfileName,
+  }));
 
-      const selectedSiteIds = new Set(resolvedSites.map((site) => site.id));
-      const encodedFiles: LocalWebFile[] = [];
-      for (const file of files.filter((item) => selectedSiteIds.has(item.siteId))) {
-        const buffer = await file.blob.arrayBuffer();
-        encodedFiles.push({
-          key: file.key,
-          siteId: file.siteId,
-          path: file.path,
-          type: file.type,
-          size: file.size,
-          profileName: file.profileName ?? fallbackProfileName,
-          dataBase64: arrayBufferToBase64(buffer),
-        });
-      }
-      resolve({ sites: resolvedSites, files: encodedFiles });
-    };
-    tx.onerror = () => reject(tx.error);
-  });
+  const selectedSiteIds = new Set(resolvedSites.map((site) => site.id));
+  const encodedFiles: LocalWebFile[] = [];
+  for (const file of files.filter((item) => selectedSiteIds.has(item.siteId))) {
+    const buffer = await file.blob.arrayBuffer();
+    encodedFiles.push({
+      key: file.key,
+      siteId: file.siteId,
+      path: file.path,
+      type: file.type,
+      size: file.size,
+      profileName: file.profileName ?? fallbackProfileName,
+      dataBase64: arrayBufferToBase64(buffer),
+    });
+  }
+  return { sites: resolvedSites, files: encodedFiles };
 };
 
 export const exportLocalWebRecords = async (
   profileNames?: string[],
   fallbackProfileName?: string
 ): Promise<LocalWebArchive> => {
-  const db = await openLocalWebDb();
-  return new Promise<LocalWebArchive>((resolve, reject) => {
-    const tx = db.transaction([LOCAL_WEB_SITES, LOCAL_WEB_FILES], 'readonly');
-    const sitesRequest = tx.objectStore(LOCAL_WEB_SITES).getAll();
-    const filesRequest = tx.objectStore(LOCAL_WEB_FILES).getAll();
-    tx.oncomplete = () => {
-      const sites = (sitesRequest.result as LocalWebSite[]) ?? [];
-      const files = (filesRequest.result as LocalWebRecord[]) ?? [];
+  const sites = await readAllLocalWebSites();
+  const files = await readAllLocalWebFiles();
 
       // Filter sites: include those without profileName OR those with profileName in selection
-      const filteredSites = profileNames && profileNames.length > 0
-        ? sites.filter((site) => !site.profileName || profileNames.includes(site.profileName))
-        : sites;
+  const filteredSites = profileNames && profileNames.length > 0
+    ? sites.filter((site) => !site.profileName || profileNames.includes(site.profileName))
+    : sites;
 
       // Assign fallback profile to sites without one for export
-      const resolvedSites = filteredSites.map((site) => ({
-        ...site,
-        profileName: site.profileName ?? fallbackProfileName,
-      }));
+  const resolvedSites = filteredSites.map((site) => ({
+    ...site,
+    profileName: site.profileName ?? fallbackProfileName,
+  }));
 
-      const selectedSiteIds = new Set(resolvedSites.map((site) => site.id));
-      const selectedFiles = files.filter((file) => selectedSiteIds.has(file.siteId)).map((file) => ({
-        ...file,
-        profileName: file.profileName ?? fallbackProfileName,
-      }));
-      resolve({ sites: resolvedSites, files: selectedFiles });
-    };
-    tx.onerror = () => reject(tx.error);
-  });
+  const selectedSiteIds = new Set(resolvedSites.map((site) => site.id));
+  const selectedFiles = files.filter((file) => selectedSiteIds.has(file.siteId)).map((file) => ({
+    ...file,
+    profileName: file.profileName ?? fallbackProfileName,
+  }));
+  return { sites: resolvedSites, files: selectedFiles };
 };
 
 export const getLocalWebStats = async (
@@ -327,153 +189,51 @@ export const getLocalWebStats = async (
   _fallbackProfileName?: string
 ): Promise<LocalWebStats> => {
   void _fallbackProfileName;
-  const db = await openLocalWebDb();
-  return new Promise<LocalWebStats>((resolve, reject) => {
-    const tx = db.transaction([LOCAL_WEB_SITES, LOCAL_WEB_FILES], 'readonly');
-    const sitesRequest = tx.objectStore(LOCAL_WEB_SITES).getAll();
-    const filesRequest = tx.objectStore(LOCAL_WEB_FILES).getAll();
-    tx.oncomplete = () => {
-      const sites = (sitesRequest.result as LocalWebSite[]) ?? [];
-      const files = (filesRequest.result as Array<{ siteId: string; size?: number }>) ?? [];
-
-      // Sites without profileName are considered available for all profiles
-      // Sites with profileName are only available if their profile is in the selection
-      const selectedSites = profileNames && profileNames.length > 0
-        ? sites.filter((site) => !site.profileName || profileNames.includes(site.profileName))
-        : sites;
-
-      const selectedSiteIds = new Set(selectedSites.map((site) => site.id));
-      const bytesFromSites = selectedSites.reduce((sum, site) => sum + (site.totalBytes || 0), 0);
-      const bytesFromFiles = files
-        .filter((file) => selectedSiteIds.has(file.siteId))
-        .reduce((sum, file) => sum + (file.size || 0), 0);
-
-      resolve({
-        siteCount: selectedSites.length,
-        totalBytes: bytesFromFiles > 0 ? bytesFromFiles : bytesFromSites,
-      });
-    };
-    tx.onerror = () => reject(tx.error);
-  });
+  return getLocalWebRepositoryStats(profileNames);
 };
 
 export const getFileManagerStats = async (): Promise<FileManagerStats> => {
-  const db = await openFileManagerDb();
-  return new Promise<FileManagerStats>((resolve, reject) => {
-    const tx = db.transaction(FILE_MANAGER_ENTRIES, 'readonly');
-    const request = tx.objectStore(FILE_MANAGER_ENTRIES).getAll();
-    tx.oncomplete = () => {
-      const entries = (request.result as Array<{ id: string; type: 'file' | 'folder'; size?: number }>) ?? [];
-      const files = entries.filter((entry) => entry.type === 'file');
-      const entryCount = entries.filter((entry) => entry.id !== 'root').length;
-      const totalBytes = files.reduce((sum, entry) => sum + (entry.size || 0), 0);
-      resolve({ entryCount, totalBytes });
-    };
-    tx.onerror = () => reject(tx.error);
-  });
+  return getFileManagerRepositoryStats();
 };
 
 export const clearLocalWebData = async (): Promise<void> => {
-  const db = await openLocalWebDb();
-  await new Promise<void>((resolve, reject) => {
-    const tx = db.transaction([LOCAL_WEB_SITES, LOCAL_WEB_FILES], 'readwrite');
-    tx.objectStore(LOCAL_WEB_SITES).clear();
-    tx.objectStore(LOCAL_WEB_FILES).clear();
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
-  });
+  await clearLocalWebRepositoryData();
 };
 
 export const exportFileManagerRecords = async (): Promise<FileManagerArchive> => {
-  const db = await openFileManagerDb();
-  return new Promise<FileManagerArchive>((resolve, reject) => {
-    const tx = db.transaction(FILE_MANAGER_ENTRIES, 'readonly');
-    const request = tx.objectStore(FILE_MANAGER_ENTRIES).getAll();
-    tx.oncomplete = () => {
-      const entries = (request.result as FileManagerStoredEntry[]) ?? [];
-      const meta: FileManagerEntryMeta[] = entries.map((entry) => ({
-        id: entry.id,
-        type: entry.type,
-        name: entry.name,
-        parentId: entry.parentId,
-        createdAt: entry.createdAt,
-        updatedAt: entry.updatedAt,
-        trashedAt: entry.trashedAt,
-        size: entry.size,
-        mime: entry.mime,
-        sourceWidgetId: entry.sourceWidgetId,
-        sourceWidgetTitleKey: entry.sourceWidgetTitleKey,
-        hasBlob: Boolean(entry.blob),
-      }));
-      const files = entries
-        .filter((entry) => entry.blob)
-        .map((entry) => ({ id: entry.id, blob: entry.blob as Blob }));
-      resolve({ entries: meta, files });
-    };
-    tx.onerror = () => reject(tx.error);
-  });
+  return exportFileManagerArchive();
 };
 
 export const importFileManagerRecords = async (payload: FileManagerArchive): Promise<void> => {
-  const db = await openFileManagerDb();
-  const fileMap = new Map(payload.files.map((file) => [file.id, file.blob]));
-  await new Promise<void>((resolve, reject) => {
-    const tx = db.transaction(FILE_MANAGER_ENTRIES, 'readwrite');
-    const store = tx.objectStore(FILE_MANAGER_ENTRIES);
-    payload.entries.forEach((entry) => {
-      const blob = entry.hasBlob ? fileMap.get(entry.id) : undefined;
-      store.put({
-        id: entry.id,
-        type: entry.type,
-        name: entry.name,
-        parentId: entry.parentId,
-        createdAt: entry.createdAt,
-        updatedAt: entry.updatedAt,
-        trashedAt: entry.trashedAt,
-        blob,
-        size: entry.size ?? (blob ? blob.size : undefined),
-        mime: entry.mime ?? (blob ? blob.type : undefined),
-        sourceWidgetId: entry.sourceWidgetId,
-        sourceWidgetTitleKey: entry.sourceWidgetTitleKey,
-      });
-    });
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
-  });
+  await importFileManagerArchive(payload);
 };
 
 export const importLocalWebData = async (
   payload: LocalWebBackup,
   options?: { profileNameMap?: Map<string, string>; fallbackProfileName?: string }
 ): Promise<void> => {
-  const db = await openLocalWebDb();
-  await new Promise<void>((resolve, reject) => {
-    const tx = db.transaction([LOCAL_WEB_SITES, LOCAL_WEB_FILES], 'readwrite');
-    const siteStore = tx.objectStore(LOCAL_WEB_SITES);
-    const fileStore = tx.objectStore(LOCAL_WEB_FILES);
-    payload.sites.forEach((site) => {
-      const mappedName = site.profileName && options?.profileNameMap?.get(site.profileName);
-      const profileName = mappedName ?? site.profileName ?? options?.fallbackProfileName;
-      siteStore.put({ ...site, profileName });
-    });
-    payload.files.forEach((file) => {
-      const mappedName = file.profileName && options?.profileNameMap?.get(file.profileName);
-      const profileName = mappedName ?? file.profileName ?? options?.fallbackProfileName;
-      const buffer = base64ToArrayBuffer(file.dataBase64);
-      const blob = new Blob([buffer], { type: file.type });
-      fileStore.put({
-        key: file.key,
-        siteId: file.siteId,
-        path: file.path,
-        blob,
-        size: file.size,
-        type: file.type,
-        profileName,
-      });
-    });
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
+  const sites = payload.sites.map((site) => {
+    const mappedName = site.profileName && options?.profileNameMap?.get(site.profileName);
+    const profileName = mappedName ?? site.profileName ?? options?.fallbackProfileName;
+    return { ...site, profileName };
   });
+  const files: LocalWebStoredFile[] = payload.files.map((file) => {
+    const mappedName = file.profileName && options?.profileNameMap?.get(file.profileName);
+    const profileName = mappedName ?? file.profileName ?? options?.fallbackProfileName;
+    const buffer = base64ToArrayBuffer(file.dataBase64);
+    const blob = new Blob([buffer], { type: file.type });
+    return {
+      key: file.key,
+      siteId: file.siteId,
+      path: file.path,
+      blob,
+      size: file.size,
+      type: file.type,
+      profileName,
+    };
+  });
+  await saveLocalWebSites(sites);
+  await saveLocalWebFiles(files);
 };
 
 export const importLocalWebRecords = async (
@@ -486,21 +246,14 @@ export const importLocalWebRecords = async (
     fallbackProfileName?: string;
   }
 ): Promise<void> => {
-  const db = await openLocalWebDb();
   if (options?.signal?.aborted) {
     throw new Error('abort');
   }
-  await new Promise<void>((resolve, reject) => {
-    const tx = db.transaction(LOCAL_WEB_SITES, 'readwrite');
-    const siteStore = tx.objectStore(LOCAL_WEB_SITES);
-    payload.sites.forEach((site) => {
-      const mappedName = site.profileName && options?.profileNameMap?.get(site.profileName);
-      const profileName = mappedName ?? site.profileName ?? options?.fallbackProfileName;
-      siteStore.put({ ...site, profileName });
-    });
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
-  });
+  await saveLocalWebSites(payload.sites.map((site) => {
+    const mappedName = site.profileName && options?.profileNameMap?.get(site.profileName);
+    const profileName = mappedName ?? site.profileName ?? options?.fallbackProfileName;
+    return { ...site, profileName };
+  }));
 
   const total = payload.files.length;
   const batchSize = 50;
@@ -510,25 +263,19 @@ export const importLocalWebRecords = async (
       throw new Error('abort');
     }
     const batch = payload.files.slice(i, i + batchSize);
-    await new Promise<void>((resolve, reject) => {
-      const tx = db.transaction(LOCAL_WEB_FILES, 'readwrite');
-      const fileStore = tx.objectStore(LOCAL_WEB_FILES);
-      batch.forEach((file) => {
-        const mappedName = file.profileName && options?.profileNameMap?.get(file.profileName);
-        const profileName = mappedName ?? file.profileName ?? options?.fallbackProfileName;
-        fileStore.put({
-          key: file.key,
-          siteId: file.siteId,
-          path: file.path,
-          blob: file.blob,
-          size: file.size,
-          type: file.type,
-          profileName,
-        });
-      });
-      tx.oncomplete = () => resolve();
-      tx.onerror = () => reject(tx.error);
-    });
+    await saveLocalWebFiles(batch.map((file) => {
+      const mappedName = file.profileName && options?.profileNameMap?.get(file.profileName);
+      const profileName = mappedName ?? file.profileName ?? options?.fallbackProfileName;
+      return {
+        key: file.key,
+        siteId: file.siteId,
+        path: file.path,
+        blob: file.blob,
+        size: file.size,
+        type: file.type,
+        profileName,
+      };
+    }));
     current += batch.length;
     if (options?.onProgress) options.onProgress(current, total);
     if (options?.yieldControl) await options.yieldControl();
@@ -699,71 +446,5 @@ export const parseBackupArchive = (buffer: ArrayBuffer): {
 };
 
 export const cloneLocalWebData = async (sourceProfileName: string, targetProfileName: string): Promise<void> => {
-  const db = await openLocalWebDb();
-  const { sites, files } = await new Promise<{ sites: LocalWebSite[]; files: LocalWebRecord[] }>((resolve, reject) => {
-    const tx = db.transaction([LOCAL_WEB_SITES, LOCAL_WEB_FILES], 'readonly');
-    const sitesRequest = tx.objectStore(LOCAL_WEB_SITES).getAll();
-    const filesRequest = tx.objectStore(LOCAL_WEB_FILES).getAll();
-    tx.oncomplete = () => {
-      resolve({
-        sites: (sitesRequest.result as LocalWebSite[]) ?? [],
-        files: (filesRequest.result as LocalWebRecord[]) ?? [],
-      });
-    };
-    tx.onerror = () => reject(tx.error);
-  });
-
-  const now = Date.now();
-  const sourceSites = sites.filter((site) => site.profileName === sourceProfileName || !site.profileName);
-  if (sourceSites.length === 0) return;
-
-  const idMap = new Map<string, string>();
-  const clonedSites = sourceSites.map((site) => {
-    const newId = crypto.randomUUID();
-    idMap.set(site.id, newId);
-    return {
-      ...site,
-      id: newId,
-      profileName: targetProfileName,
-      createdAt: now,
-      updatedAt: now,
-    };
-  });
-
-  const clonedFiles = files
-    .filter((file) => idMap.has(file.siteId))
-    .map((file) => {
-      const newSiteId = idMap.get(file.siteId) as string;
-      return {
-        ...file,
-        key: `${newSiteId}::${file.path}`,
-        siteId: newSiteId,
-        profileName: targetProfileName,
-      };
-    });
-
-  await new Promise<void>((resolve, reject) => {
-    const tx = db.transaction([LOCAL_WEB_SITES, LOCAL_WEB_FILES], 'readwrite');
-    const siteStore = tx.objectStore(LOCAL_WEB_SITES);
-    const fileStore = tx.objectStore(LOCAL_WEB_FILES);
-    sourceSites.forEach((site) => {
-      if (!site.profileName) {
-        siteStore.put({ ...site, profileName: sourceProfileName });
-      }
-    });
-    clonedSites.forEach((site) => siteStore.put(site));
-    clonedFiles.forEach((file) => {
-      fileStore.put({
-        key: file.key,
-        siteId: file.siteId,
-        path: file.path,
-        blob: file.blob,
-        size: file.size,
-        type: file.type,
-        profileName: file.profileName,
-      });
-    });
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
-  });
+  await cloneLocalWebRepositoryData(sourceProfileName, targetProfileName);
 };

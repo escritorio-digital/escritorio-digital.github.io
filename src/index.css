@@ -59,9 +59,12 @@ body.high-contrast {
   object-fit: contain;
 }
 
+.widget-window,
+.widget-window.is-active,
 .widget-window.is-inactive {
   filter: none;
   backdrop-filter: none;
+  opacity: 1;
 }
 
 /* --- Theme color picker (clean circular swatch) --- */
