@@ -244,7 +244,6 @@
     "toolbar_reveal_hint": "Per tornar a veure la barra d'eines, acosta el ratolí a la vora superior del widget."
   },
   "credits": {
-    "title": "Crèdits i Llicència",
     "tooltip": "Crèdits, llicència i guia d'eines",
     "user_guide_title": "Guia d'eines",
     "user_guide_link": "Obrir la guia d'eines",
@@ -256,9 +255,7 @@
     "vibe_apps_link_text": "Consulta més aplicacions d'aquesta comunitat a:",
     "vibe_apps_repo_text": "Repositori Vibe Coding Educativo",
     "vibe_telegram_link_text": "Uneix-te a la comunitat a Telegram:",
-    "code_license": "Llicència del codi:",
-    "open_knowledge_adherence": "Aquest projecte s'adhereix al",
-    "open_knowledge_decalogue": "Decàleg del Coneixement Obert"
+    "code_license": "Llicència del codi:"
   },
   "context_menu": {
     "new_widget": "Nou favorit",

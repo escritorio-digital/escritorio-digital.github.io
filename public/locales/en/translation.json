@@ -244,7 +244,6 @@
     "toolbar_reveal_hint": "To show the toolbar again, move the mouse to the top edge of the widget."
   },
   "credits": {
-    "title": "Credits and License",
     "tooltip": "Credits, license, and tools guide",
     "user_guide_title": "Tools guide",
     "user_guide_link": "Open tools guide",
@@ -256,9 +255,7 @@
     "vibe_apps_link_text": "Check out more applications from this community at:",
     "vibe_apps_repo_text": "Vibe Coding Educativo Repository",
     "vibe_telegram_link_text": "Join the community on Telegram:",
-    "code_license": "Code license:",
-    "open_knowledge_adherence": "This project adheres to the",
-    "open_knowledge_decalogue": "Open Knowledge Decalogue"
+    "code_license": "Code license:"
   },
   "context_menu": {
     "new_widget": "New favorite",

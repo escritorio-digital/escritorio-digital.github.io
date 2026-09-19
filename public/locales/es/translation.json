@@ -244,7 +244,6 @@
     "toolbar_reveal_hint": "Para volver a ver la barra de herramientas, acerca el ratón al borde superior del widget."
   },
   "credits": {
-    "title": "Créditos y Licencia",
     "tooltip": "Créditos, licencia y guía de herramientas",
     "user_guide_title": "Guía de herramientas",
     "user_guide_link": "Abrir guía de herramientas",
@@ -256,9 +255,7 @@
     "vibe_apps_link_text": "Consulta más aplicaciones de esta comunidad en:",
     "vibe_apps_repo_text": "Repositorio Vibe Coding Educativo",
     "vibe_telegram_link_text": "Únete a la comunidad en Telegram:",
-    "code_license": "Licencia del código:",
-    "open_knowledge_adherence": "Este proyecto se adhiere al",
-    "open_knowledge_decalogue": "Decálogo del Conocimiento Abierto"
+    "code_license": "Licencia del código:"
   },
   "context_menu": {
     "new_widget": "Nuevo favorito",

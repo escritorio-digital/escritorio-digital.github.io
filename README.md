@@ -190,6 +190,16 @@ Consulta más aplicaciones de esta comunidad en: <a href="https://vibe-coding-ed
 </li>
 </ul>
 <hr />
+### Licencias
+
+El proyecto se distribuye bajo dos licencias distintas, según el tipo de material:
+
+* **Código:** [GNU Affero General Public License v3 o posterior (AGPL-3.0-or-later)](https://www.gnu.org/licenses/agpl-3.0.html). El texto completo está en el archivo [LICENSE](LICENSE).
+* **Contenidos** (textos, materiales y recursos didácticos): [Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.es).
+* **Recursos de terceros:** las librerías, iconos y tipografías incorporadas conservan su propia licencia.
+
+El detalle de estas condiciones se encuentra en [LICENSE-CONTENIDOS.md](LICENSE-CONTENIDOS.md).
+
 <div>
 <p>Este proyecto se adhiere al
 <a href="https://conocimiento-abierto.github.io/" target="_blank" rel="noopener noreferrer">Decálogo del Conocimiento Abierto</a></p>
