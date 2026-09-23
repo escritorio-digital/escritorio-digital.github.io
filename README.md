@@ -190,13 +190,38 @@ Consulta más aplicaciones de esta comunidad en: <a href="https://vibe-coding-ed
 </li>
 </ul>
 <hr />
+
+### Uso de IA
+
+La versión actual del Escritorio Digital se ha programado con ayuda de IA: quienes la desarrollan han decidido el diseño y las funciones, y han probado el programa numerosas veces, en situaciones diferentes, para detectar errores y aspectos que mejorar.
+
+### Privacidad y servicios externos
+
+La configuración del escritorio y los datos de cada herramienta se guardan solo en el navegador de quien lo usa. La aplicación no recoge estadísticas de uso.
+
+Carga o incrusta estos servicios de otros sitios:
+
+| Servicio | Para qué se usa |
+|---|---|
+| [Google Fonts](https://fonts.google.com/specimen/Mulish) | Tipografía Mulish de la interfaz. |
+| [Creative Commons](https://creativecommons.org/) | Insignia de la licencia en «Créditos y licencias». |
+| [Google Sheets](https://workspace.google.com/products/sheets/) | Lista de «Aplicaciones de la comunidad», publicada como hoja de cálculo. |
+| [Wikipedia](https://www.wikipedia.org/) | Búsquedas de la herramienta Wikipedia. |
+| [Directo](https://jjdeharo.github.io/directo/) | Votación simple, Escala de valoración, Nube de palabras, Lluvia de ideas y votos, Muro interactivo y Tickets de salida. |
+| [QPlay](https://jjdeharo.github.io/qplay/) | Concursos de la herramienta QPlay. |
+| [BoardLive](https://boardlive.github.io/) | Pizarra colaborativa de la herramienta BoardLive. |
+
+Además, el visor web y «Aplicaciones de la comunidad» abren la página que elija cada persona.
+
 ### Licencias
 
 El proyecto se distribuye bajo dos licencias distintas, según el tipo de material:
 
 * **Código:** [GNU Affero General Public License v3 o posterior (AGPL-3.0-or-later)](https://www.gnu.org/licenses/agpl-3.0.html). El texto completo está en el archivo [LICENSE](LICENSE).
 * **Contenidos** (textos, materiales y recursos didácticos): [Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.es).
-* **Recursos de terceros:** las librerías, iconos y tipografías incorporadas conservan su propia licencia.
+* **Recursos de terceros:** las librerías, iconos y tipografías incorporadas conservan su propia licencia. Los sonidos son de otros autores:
+  * Dados: [u_qpfzpydtro](https://pixabay.com/users/u_qpfzpydtro-29496424/), en [Pixabay](https://pixabay.com/sound-effects/dice-142528/), con la [licencia de contenido de Pixabay](https://pixabay.com/service/license-summary/).
+  * Alarma: [Tim (corsica_s)](https://freesound.org/people/corsica_s/), del [tema de sonidos de freedesktop.org](https://gitlab.freedesktop.org/xdg/xdg-sound-theme), con licencia [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.es).
 
 El detalle de estas condiciones se encuentra en [LICENSE-CONTENIDOS.md](LICENSE-CONTENIDOS.md).
 

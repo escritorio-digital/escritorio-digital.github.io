@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ExternalLink, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export const AboutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
   const { t, i18n } = useTranslation();
-  const [showAnalyticsNotice, setShowAnalyticsNotice] = useState(false);
   if (!isOpen) return null;
 
   const appVersion = import.meta.env.VITE_APP_VERSION ?? 'dev';
@@ -97,17 +96,18 @@ export const AboutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
             </div>
           </div>
 
-          <div className="p-3 bg-white/70 border border-gray-200 rounded-lg">
-            <button
-              type="button"
-              onClick={() => setShowAnalyticsNotice((value) => !value)}
-              className="text-sm text-blue-600 underline underline-offset-2 hover:text-blue-700"
-            >
-              {t('about.analytics_link')}
-            </button>
-            {showAnalyticsNotice ? (
-              <p className="mt-2 text-sm text-gray-700">{t('about.analytics_notice')}</p>
-            ) : null}
+          <div>
+            <h3 className="text-base font-semibold mb-2">{t('about.ai_title')}</h3>
+            <div className="p-3 bg-white/70 border border-gray-200 rounded-lg">
+              <p className="text-sm text-gray-700">{t('about.ai_text')}</p>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-base font-semibold mb-2">{t('about.privacy_title')}</h3>
+            <div className="p-3 bg-white/70 border border-gray-200 rounded-lg">
+              <p className="text-sm text-gray-700">{t('about.privacy_text')}</p>
+            </div>
           </div>
         </div>
       </div>

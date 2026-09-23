@@ -21,6 +21,50 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
   };
   const ccDeedUrl = ccDeeds[lang] ?? ccDeeds.es;
 
+  // Todo lo que el escritorio carga o incrusta de otros sitios.
+  const externalServices = [
+    { name: 'Google Fonts', url: 'https://fonts.google.com/specimen/Mulish', purposeKey: 'licenses.services.fonts' },
+    { name: 'Creative Commons', url: 'https://creativecommons.org/', purposeKey: 'licenses.services.badge' },
+    { name: 'Google Sheets', url: 'https://workspace.google.com/products/sheets/', purposeKey: 'licenses.services.catalog' },
+    { name: 'Wikipedia', url: 'https://www.wikipedia.org/', purposeKey: 'licenses.services.wikipedia' },
+    { name: 'Directo', url: 'https://jjdeharo.github.io/directo/', purposeKey: 'licenses.services.directo' },
+    { name: 'QPlay', url: 'https://jjdeharo.github.io/qplay/', purposeKey: 'licenses.services.qplay' },
+    { name: 'BoardLive', url: 'https://boardlive.github.io/', purposeKey: 'licenses.services.boardlive' },
+  ];
+
+  const ccBySa3Deeds: Record<string, string> = {
+    es: 'https://creativecommons.org/licenses/by-sa/3.0/deed.es',
+    en: 'https://creativecommons.org/licenses/by-sa/3.0/deed.en',
+    ca: 'https://creativecommons.org/licenses/by-sa/3.0/deed.ca',
+    gl: 'https://creativecommons.org/licenses/by-sa/3.0/deed.gl',
+    eu: 'https://creativecommons.org/licenses/by-sa/3.0/deed.eu',
+    de: 'https://creativecommons.org/licenses/by-sa/3.0/deed.de',
+    fr: 'https://creativecommons.org/licenses/by-sa/3.0/deed.fr',
+    it: 'https://creativecommons.org/licenses/by-sa/3.0/deed.it',
+    pt: 'https://creativecommons.org/licenses/by-sa/3.0/deed.pt',
+  };
+
+  const sounds = [
+    {
+      labelKey: 'licenses.sound_dice',
+      author: 'u_qpfzpydtro',
+      authorUrl: 'https://pixabay.com/users/u_qpfzpydtro-29496424/',
+      source: 'Pixabay',
+      sourceUrl: 'https://pixabay.com/sound-effects/dice-142528/',
+      license: 'licenses.pixabay_license',
+      licenseUrl: 'https://pixabay.com/service/license-summary/',
+    },
+    {
+      labelKey: 'licenses.sound_alarm',
+      author: 'Tim (corsica_s)',
+      authorUrl: 'https://freesound.org/people/corsica_s/',
+      source: 'freedesktop.org',
+      sourceUrl: 'https://gitlab.freedesktop.org/xdg/xdg-sound-theme',
+      license: 'CC BY-SA 3.0',
+      licenseUrl: ccBySa3Deeds[lang] ?? ccBySa3Deeds.es,
+    },
+  ];
+
   return (
     <div className="fixed inset-0 bg-black/50 z-[10001] flex items-center justify-center" onClick={onClose}>
       <div 
@@ -93,7 +137,46 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
 
             <div>
               <h4 className="font-semibold">{t('licenses.external_title')}</h4>
-              <p>{t('licenses.external_text')}</p>
+              <p className="mb-2">{t('licenses.external_text')}</p>
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-gray-300">
+                    <th scope="col" className="py-1 pr-3 font-semibold">{t('licenses.service_col')}</th>
+                    <th scope="col" className="py-1 font-semibold">{t('licenses.purpose_col')}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {externalServices.map(({ name, url, purposeKey }) => (
+                    <tr key={name} className="border-b border-gray-200 align-top">
+                      <td className="py-1 pr-3">
+                        <a href={url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{name}</a>
+                      </td>
+                      <td className="py-1">{t(purposeKey)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div>
+              <h4 className="font-semibold">{t('licenses.sounds_title')}</h4>
+              <ul className="list-disc list-inside space-y-1">
+                {sounds.map(({ labelKey, author, authorUrl, source, sourceUrl, license, licenseUrl }) => (
+                  <li key={labelKey}>
+                    {t(labelKey)}:{' '}
+                    <a href={authorUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{author}</a>
+                    {' ('}
+                    <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{source}</a>
+                    {'), '}
+                    <a href={licenseUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{t(license)}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold">{t('licenses.libraries_title')}</h4>
+              <p>{t('licenses.libraries_text')}</p>
               <p>
                 <a href="https://github.com/escritorio-digital/escritorio-digital.github.io" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                   {t('licenses.repo_link_label')}

@@ -25,3 +25,12 @@ Juan José de Haro, y mantenerse la misma licencia en las obras derivadas.
 La aplicación incorpora librerías, iconos y tipografías de terceros, cada uno con su
 propia licencia. Sus condiciones se conservan íntegras y pueden consultarse en los
 paquetes correspondientes del repositorio.
+
+Los sonidos incluidos son de otros autores:
+
+- `public/sounds/dice-142528.mp3`: u_qpfzpydtro, en Pixabay
+  (<https://pixabay.com/sound-effects/dice-142528/>), con la licencia de contenido
+  de Pixabay (<https://pixabay.com/service/license-summary/>).
+- `public/sounds/alarm-clock-elapsed.oga`: Tim (corsica_s), del tema de sonidos de
+  freedesktop.org (<https://gitlab.freedesktop.org/xdg/xdg-sound-theme>), con licencia
+  CC BY-SA 3.0 (<https://creativecommons.org/licenses/by-sa/3.0/deed.es>).

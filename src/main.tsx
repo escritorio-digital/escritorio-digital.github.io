@@ -4,7 +4,6 @@ import App from './App.tsx';
 import './index.css';
 import { i18nReady } from './i18n'; // Importar i18next y esperar readiness
 import { useTranslation } from 'react-i18next';
-import { scheduleAnalyticsTracking } from './utils/analytics';
 
 const I18nFallback: React.FC = () => {
   const { t } = useTranslation();
@@ -12,8 +11,6 @@ const I18nFallback: React.FC = () => {
 };
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
-
-scheduleAnalyticsTracking();
 
 // Esperar a que i18next esté inicializado y el ns cargado antes de renderizar
 i18nReady.then(() => {
