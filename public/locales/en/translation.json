@@ -201,7 +201,7 @@
     "community_repo_label": "Applications repository:",
     "community_telegram_label": "Telegram community:",
     "ai_title": "Use of AI",
-    "ai_text": "The current version of the Digital Desktop was programmed with the help of AI: the author decided the design and the features, and tested the program many times, in different situations, to find errors and aspects to improve.",
+    "ai_text": "The current version of the Digital Desktop was programmed with the help of AI: the authors decided the design and the features, and tested the program many times, in different situations, to find errors and aspects to improve.",
     "privacy_title": "Privacy",
     "privacy_text": "The desktop settings and the data of each tool are stored only in this browser. The application does not collect usage statistics. Some tools connect to other sites in order to work; they are listed in “Credits and licenses”."
   },

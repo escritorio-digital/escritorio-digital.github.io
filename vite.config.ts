@@ -8,6 +8,8 @@ export default defineConfig(() => ({
     base: '/',
     define: {
         'import.meta.env.VITE_APP_VERSION': JSON.stringify(pkg.version),
+        // Fecha de compilación (AAAA-MM-DD): la de publicación, porque cada despliegue compila.
+        'import.meta.env.VITE_APP_BUILD_DATE': JSON.stringify(new Date().toISOString().slice(0, 10)),
     },
     test: {
         environment: 'jsdom',
@@ -19,6 +21,11 @@ export default defineConfig(() => ({
         react(),
         VitePWA({
             registerType: 'autoUpdate',
+            workbox: {
+                // Las traducciones y las guías van en la misma caché que el programa,
+                // para que se actualicen a la vez y funcionen sin conexión (ADR 4).
+                globPatterns: ['**/*.{js,css,html,json,md}'],
+            },
             manifest: {
                 name: 'Escritorio Digital',
                 short_name: 'Escritorio',

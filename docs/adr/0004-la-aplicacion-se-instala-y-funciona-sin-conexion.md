@@ -18,6 +18,15 @@ El escritorio es una aplicación web progresiva (PWA) generada con
 service worker guarda la aplicación para abrirla sin conexión. Las
 actualizaciones se aplican solas (`registerType: 'autoUpdate'`).
 
+La caché incluye, además del programa (`js`, `css`, `html`), las traducciones
+(`json`) y las guías de uso (`md`), para que se actualicen a la vez que el
+programa. Se añadieron el 2026-09-23 (versión 2.7.2): hasta entonces se pedían
+siempre a la red, y en la primera visita tras publicar una versión el
+programa anterior, guardado en caché, se mezclaba con las traducciones nuevas
+y mostraba claves sin traducir; sin conexión, la aplicación se quedaba sin
+textos. Los iconos (unos 11 MB) no se guardan, para no cargar esa descarga a
+cada visitante.
+
 El widget «Web local» usa un service worker propio (`public/local-web-sw.js`)
 para servir las webs guardadas en el navegador.
 
@@ -30,6 +39,10 @@ para servir las webs guardadas en el navegador.
 ## Consecuencias
 
 - Tras publicar una versión, cada navegador la recibe en la siguiente visita
-  con conexión; hasta entonces puede verse la anterior.
+  con conexión; hasta entonces ve la anterior entera, con sus textos.
+- Un archivo nuevo que la aplicación lea en `public/` y deba funcionar sin
+  conexión tiene que coincidir con `globPatterns` en `vite.config.ts`.
+- Sin conexión, los iconos de los widgets que no se hayan visto antes no
+  aparecen.
 - Lo que depende de servicios externos (Wikipedia, catálogo de la comunidad,
   herramientas en directo) sigue necesitando conexión.

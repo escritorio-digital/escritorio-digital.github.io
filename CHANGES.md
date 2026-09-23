@@ -1,5 +1,10 @@
 # Cambios realizados
 
+## 2.7.2
+- Actualizaciones: las traducciones y las guías se guardan en la caché con el programa; tras publicar una versión ya no aparecen claves sin traducir y la aplicación conserva los textos sin conexión.
+- «Acerca del proyecto»: la fecha junto a la versión es la de publicación, no la del día en que se abre.
+- «Uso de IA»: la nota habla de los autores.
+
 ## 2.7.1
 - Privacidad: se retira el contador de visitas; la aplicación ya no envía estadísticas de uso.
 - «Acerca del proyecto»: nuevos apartados «Uso de IA» y «Privacidad».

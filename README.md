@@ -197,7 +197,7 @@ Consulta más aplicaciones de esta comunidad en: <a href="https://vibe-coding-ed
 
 ### Uso de IA
 
-La versión actual del Escritorio Digital se ha programado con ayuda de IA: el autor ha decidido el diseño y las funciones, y ha probado el programa numerosas veces, en situaciones diferentes, para detectar errores y aspectos que mejorar.
+La versión actual del Escritorio Digital se ha programado con ayuda de IA: los autores han decidido el diseño y las funciones, y han probado el programa numerosas veces, en situaciones diferentes, para detectar errores y aspectos que mejorar.
 
 ### Privacidad y servicios externos
 

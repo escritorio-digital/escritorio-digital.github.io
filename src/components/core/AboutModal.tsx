@@ -7,11 +7,14 @@ export const AboutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   if (!isOpen) return null;
 
   const appVersion = import.meta.env.VITE_APP_VERSION ?? 'dev';
+  const buildDate = import.meta.env.VITE_APP_BUILD_DATE;
+  // La fecha se interpreta en UTC para que no cambie de día según la zona horaria.
   const formattedDate = new Intl.DateTimeFormat(i18n.language, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-  }).format(new Date());
+    timeZone: 'UTC',
+  }).format(buildDate ? new Date(`${buildDate}T00:00:00Z`) : new Date());
 
   return (
     <div className="fixed inset-0 bg-black/50 z-[10001] flex items-center justify-center" onClick={onClose}>
