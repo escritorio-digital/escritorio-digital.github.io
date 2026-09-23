@@ -1,6 +1,6 @@
 # Cambios realizados
 
-## Sin publicar
+## 2.7.1
 - Privacidad: se retira el contador de visitas; la aplicación ya no envía estadísticas de uso.
 - «Acerca del proyecto»: nuevos apartados «Uso de IA» y «Privacidad».
 - «Créditos y licencias»: tabla de servicios externos y créditos de los sonidos (autoría, procedencia y licencia).
