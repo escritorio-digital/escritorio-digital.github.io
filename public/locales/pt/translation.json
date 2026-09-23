@@ -197,13 +197,13 @@
     "development_title": "Desenvolvimento funcional do projeto",
     "development_text": "Transformação do protótipo inicial numa aplicação operativa: Pablo G. Guízar.",
     "continuity_title": "Atualização e continuidade do projeto",
-    "continuity_text": "Manutenção e desenvolvimento da versão atual: Juan José de Haro e Pablo G. Guízar.",
+    "continuity_text": "Manutenção e desenvolvimento da versão atual: Juan José de Haro.",
     "community_title": "Comunidade",
     "community_text": "Este projeto faz parte do Repositório de aplicações educativas da comunidade Vibe Coding Educativo.",
     "community_repo_label": "Repositório de aplicações:",
     "community_telegram_label": "Comunidade no Telegram:",
     "ai_title": "Uso de IA",
-    "ai_text": "A versão atual do Ambiente de trabalho digital foi programada com a ajuda de IA: as pessoas que a desenvolvem decidiram o design e as funções, e testaram o programa muitas vezes, em situações diferentes, para detetar erros e aspetos a melhorar.",
+    "ai_text": "A versão atual do Ambiente de trabalho digital foi programada com a ajuda de IA: o autor decidiu o design e as funções, e testou o programa muitas vezes, em situações diferentes, para detetar erros e aspetos a melhorar.",
     "privacy_title": "Privacidade",
     "privacy_text": "A configuração do ambiente de trabalho e os dados de cada ferramenta são guardados apenas neste navegador. A aplicação não recolhe estatísticas de utilização. Algumas ferramentas ligam-se a outros sites para funcionar; estão indicadas em «Créditos e licenças»."
   },
@@ -219,7 +219,7 @@
     "content_license_name": "Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)",
     "content_link_label": "Texto oficial da licença",
     "external_title": "Serviços externos",
-    "external_text": "A aplicação carrega ou incorpora estes serviços de outros sites. Além disso, o visualizador web e «Aplicações da comunidade» abrem a página que cada pessoa escolher.",
+    "external_text": "A aplicação usa estes serviços de outros sites. Além disso, o visualizador web e «Aplicações da comunidade» abrem a página que cada pessoa escolher.",
     "service_col": "Serviço",
     "purpose_col": "Para que serve",
     "services": {
@@ -227,9 +227,9 @@
       "badge": "Selo da licença, nesta janela.",
       "catalog": "Lista de «Aplicações da comunidade», publicada como folha de cálculo.",
       "wikipedia": "Pesquisas da ferramenta Wikipedia.",
-      "directo": "Votação simples, Escala de avaliação, Nuvem de palavras, Chuva de ideias e votos, Mural interativo e Tickets de saída, que se abrem na sua janela.",
-      "qplay": "Concursos da ferramenta QPlay.",
-      "boardlive": "Quadro colaborativo da ferramenta BoardLive."
+      "directo": "Votação simples, Escala de avaliação, Nuvem de palavras, Chuva de ideias e votos, Mural interativo e Tickets de saída, que se abrem numa janela nova.",
+      "qplay": "Concursos da ferramenta QPlay, que se abrem numa janela nova.",
+      "boardlive": "Quadro colaborativo da ferramenta BoardLive, que se abre numa janela nova."
     },
     "sounds_title": "Sons",
     "sound_dice": "Dados",

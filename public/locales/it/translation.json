@@ -195,13 +195,13 @@
     "development_title": "Sviluppo funzionale",
     "development_text": "Trasformazione del prototipo iniziale in un'applicazione operativa: Pablo G. Guízar.",
     "continuity_title": "Aggiornamento e continuità",
-    "continuity_text": "Manutenzione e sviluppo della versione attuale: Juan José de Haro e Pablo G. Guízar.",
+    "continuity_text": "Manutenzione e sviluppo della versione attuale: Juan José de Haro.",
     "community_title": "Comunità",
     "community_text": "Questo progetto fa parte del Repertorio di applicazioni educative della comunità Vibe Coding Educativo.",
     "community_repo_label": "Repository delle applicazioni:",
     "community_telegram_label": "Comunità su Telegram:",
     "ai_title": "Uso dell'IA",
-    "ai_text": "La versione attuale della Scrivania digitale è stata programmata con l'aiuto dell'IA: le persone che la sviluppano ne hanno deciso il design e le funzioni, e hanno provato il programma molte volte, in situazioni diverse, per individuare errori e aspetti da migliorare.",
+    "ai_text": "La versione attuale della Scrivania digitale è stata programmata con l'aiuto dell'IA: l'autore ne ha deciso il design e le funzioni, e ha provato il programma molte volte, in situazioni diverse, per individuare errori e aspetti da migliorare.",
     "privacy_title": "Privacy",
     "privacy_text": "La configurazione della scrivania e i dati di ogni strumento vengono salvati solo in questo browser. L'applicazione non raccoglie statistiche di utilizzo. Alcuni strumenti si collegano ad altri siti per funzionare; sono indicati in «Crediti e licenze»."
   },
@@ -217,7 +217,7 @@
     "content_license_name": "Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)",
     "content_link_label": "Testo ufficiale della licenza",
     "external_title": "Servizi esterni",
-    "external_text": "L'applicazione carica o incorpora questi servizi da altri siti. Inoltre, il visualizzatore web e «App della comunità» aprono la pagina scelta da ciascuna persona.",
+    "external_text": "L'applicazione usa questi servizi di altri siti. Inoltre, il visualizzatore web e «App della comunità» aprono la pagina scelta da ciascuna persona.",
     "service_col": "Servizio",
     "purpose_col": "A cosa serve",
     "services": {
@@ -225,9 +225,9 @@
       "badge": "Badge della licenza, in questa finestra.",
       "catalog": "Elenco delle «App della comunità», pubblicato come foglio di calcolo.",
       "wikipedia": "Ricerche dello strumento Wikipedia.",
-      "directo": "Votazione semplice, Scala di valutazione, Nuvola di parole, Pioggia di idee e voti, Muro interattivo e Ticket di uscita, che si aprono nella loro finestra.",
-      "qplay": "Quiz dello strumento QPlay.",
-      "boardlive": "Lavagna collaborativa dello strumento BoardLive."
+      "directo": "Votazione semplice, Scala di valutazione, Nuvola di parole, Pioggia di idee e voti, Muro interattivo e Ticket di uscita, che si aprono in una nuova finestra.",
+      "qplay": "Quiz dello strumento QPlay, che si aprono in una nuova finestra.",
+      "boardlive": "Lavagna collaborativa dello strumento BoardLive, che si apre in una nuova finestra."
     },
     "sounds_title": "Suoni",
     "sound_dice": "Dadi",

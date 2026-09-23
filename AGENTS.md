@@ -49,3 +49,7 @@ Guía breve para contribuir al proyecto Escritorio Digital (Vite + React + TS).
 2) Exporta el componente y `export const widgetConfig = { id: 'kebab-id', title: 'widgets.<clave>', defaultSize, ... }`.
 3) Añade icono a `public/icons/` si aplica y claves de i18n.
 4) El registro de widgets se carga automáticamente desde `index.ts` (glob).
+
+## Decisiones (ADR)
+- El porqué de cada decisión que condiciona el proyecto se registra en `docs/adr/` al tomarla, con `nuevo-adr "Título"` desde la raíz, y se anota en `docs/adr/README.md`.
+- Si un cambio altera lo que describe un ADR, se actualiza ese ADR (o se marca como sustituido) en el mismo commit.

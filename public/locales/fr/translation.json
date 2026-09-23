@@ -196,13 +196,13 @@
     "development_title": "Développement fonctionnel",
     "development_text": "Transformation du prototype initial en application opérationnelle : Pablo G. Guízar.",
     "continuity_title": "Mise à jour et continuité",
-    "continuity_text": "Maintenance et développement de la version actuelle : Juan José de Haro et Pablo G. Guízar.",
+    "continuity_text": "Maintenance et développement de la version actuelle : Juan José de Haro.",
     "community_title": "Communauté",
     "community_text": "Ce projet fait partie du Répertoire des applications éducatives de la communauté Vibe Coding Educativo.",
     "community_repo_label": "Répertoire des applications :",
     "community_telegram_label": "Communauté Telegram :",
     "ai_title": "Utilisation de l'IA",
-    "ai_text": "La version actuelle du Bureau numérique a été programmée avec l'aide de l'IA : les personnes qui la développent en ont décidé la conception et les fonctions, et ont testé le programme de nombreuses fois, dans des situations différentes, pour détecter les erreurs et les points à améliorer.",
+    "ai_text": "La version actuelle du Bureau numérique a été programmée avec l'aide de l'IA : l'auteur en a décidé la conception et les fonctions, et a testé le programme de nombreuses fois, dans des situations différentes, pour détecter les erreurs et les points à améliorer.",
     "privacy_title": "Confidentialité",
     "privacy_text": "La configuration du bureau et les données de chaque outil sont enregistrées uniquement dans ce navigateur. L'application ne recueille pas de statistiques d'utilisation. Certains outils se connectent à d'autres sites pour fonctionner ; ils sont détaillés dans « Crédits et licences »."
   },
@@ -218,7 +218,7 @@
     "content_license_name": "Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)",
     "content_link_label": "Texte officiel de la licence",
     "external_title": "Services externes",
-    "external_text": "L'application charge ou intègre ces services d'autres sites. En outre, le visualiseur web et « Applications de la communauté » ouvrent la page choisie par chaque personne.",
+    "external_text": "L'application utilise ces services d'autres sites. En outre, le visualiseur web et « Applications de la communauté » ouvrent la page choisie par chaque personne.",
     "service_col": "Service",
     "purpose_col": "À quoi il sert",
     "services": {
@@ -226,9 +226,9 @@
       "badge": "Badge de la licence, dans cette fenêtre.",
       "catalog": "Liste des « Applications de la communauté », publiée sous forme de feuille de calcul.",
       "wikipedia": "Recherches de l'outil Wikipedia.",
-      "directo": "Vote simple, Échelle d'évaluation, Nuage de mots, Pluie d'idées et votes, Mur interactif et Tickets de sortie, qui s'ouvrent dans leur fenêtre.",
-      "qplay": "Quiz de l'outil QPlay.",
-      "boardlive": "Tableau collaboratif de l'outil BoardLive."
+      "directo": "Vote simple, Échelle d'évaluation, Nuage de mots, Pluie d'idées et votes, Mur interactif et Tickets de sortie, qui s'ouvrent dans une nouvelle fenêtre.",
+      "qplay": "Quiz de l'outil QPlay, qui s'ouvrent dans une nouvelle fenêtre.",
+      "boardlive": "Tableau collaboratif de l'outil BoardLive, qui s'ouvre dans une nouvelle fenêtre."
     },
     "sounds_title": "Sons",
     "sound_dice": "Dés",

@@ -21,7 +21,7 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
   };
   const ccDeedUrl = ccDeeds[lang] ?? ccDeeds.es;
 
-  // Todo lo que el escritorio carga o incrusta de otros sitios.
+  // Todo lo que el escritorio carga, incrusta o abre de otros sitios.
   const externalServices = [
     { name: 'Google Fonts', url: 'https://fonts.google.com/specimen/Mulish', purposeKey: 'licenses.services.fonts' },
     { name: 'Creative Commons', url: 'https://creativecommons.org/', purposeKey: 'licenses.services.badge' },

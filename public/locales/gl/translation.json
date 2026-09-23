@@ -195,13 +195,13 @@
     "development_title": "Desenvolvemento funcional do proxecto",
     "development_text": "Transformación do prototipo inicial nunha aplicación operativa: Pablo G. Guízar.",
     "continuity_title": "Actualización e continuidade do proxecto",
-    "continuity_text": "Mantemento e desenvolvemento da versión actual: Juan José de Haro e Pablo G. Guízar.",
+    "continuity_text": "Mantemento e desenvolvemento da versión actual: Juan José de Haro.",
     "community_title": "Comunidade",
     "community_text": "Este proxecto forma parte do Repositorio de aplicacións educativas da comunidade Vibe Coding Educativo.",
     "community_repo_label": "Repositorio de aplicacións:",
     "community_telegram_label": "Comunidade en Telegram:",
     "ai_title": "Uso de IA",
-    "ai_text": "A versión actual do Escritorio Dixital programouse con axuda de IA: as persoas que a desenvolven decidiron o deseño e as funcións, e probaron o programa moitas veces, en situacións diferentes, para detectar erros e aspectos que mellorar.",
+    "ai_text": "A versión actual do Escritorio Dixital programouse con axuda de IA: o autor decidiu o deseño e as funcións, e probou o programa moitas veces, en situacións diferentes, para detectar erros e aspectos que mellorar.",
     "privacy_title": "Privacidade",
     "privacy_text": "A configuración do escritorio e os datos de cada ferramenta gárdanse só neste navegador. A aplicación non recolle estatísticas de uso. Algunhas ferramentas conéctanse a outros sitios para funcionar; detállanse en «Créditos e licenzas»."
   },
@@ -217,7 +217,7 @@
     "content_license_name": "Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)",
     "content_link_label": "Texto oficial da licenza",
     "external_title": "Servizos externos",
-    "external_text": "A aplicación carga ou incrusta estes servizos doutros sitios. Ademais, o visor web e «Aplicacións da comunidade» abren a páxina que escolla cada persoa.",
+    "external_text": "A aplicación usa estes servizos doutros sitios. Ademais, o visor web e «Aplicacións da comunidade» abren a páxina que escolla cada persoa.",
     "service_col": "Servizo",
     "purpose_col": "Para que se usa",
     "services": {
@@ -225,9 +225,9 @@
       "badge": "Insignia da licenza, nesta xanela.",
       "catalog": "Lista de «Aplicacións da comunidade», publicada como folla de cálculo.",
       "wikipedia": "Buscas da ferramenta Wikipedia.",
-      "directo": "Votación simple, Escala de valoración, Nube de palabras, Choiva de ideas e votos, Muro interactivo e Tickets de saída, que se abren na súa xanela.",
-      "qplay": "Concursos da ferramenta QPlay.",
-      "boardlive": "Lousa colaborativa da ferramenta BoardLive."
+      "directo": "Votación simple, Escala de valoración, Nube de palabras, Choiva de ideas e votos, Muro interactivo e Tickets de saída, que se abren nunha xanela nova.",
+      "qplay": "Concursos da ferramenta QPlay, que se abren nunha xanela nova.",
+      "boardlive": "Lousa colaborativa da ferramenta BoardLive, que se abre nunha xanela nova."
     },
     "sounds_title": "Sons",
     "sound_dice": "Dados",

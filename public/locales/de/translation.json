@@ -195,13 +195,13 @@
     "development_title": "Funktionale Weiterentwicklung",
     "development_text": "Transformation des ersten Prototyps in eine einsatzfähige Anwendung: Pablo G. Guízar.",
     "continuity_title": "Aktualisierung und Kontinuität",
-    "continuity_text": "Wartung und Weiterentwicklung der aktuellen Version: Juan José de Haro und Pablo G. Guízar.",
+    "continuity_text": "Wartung und Weiterentwicklung der aktuellen Version: Juan José de Haro.",
     "community_title": "Community",
     "community_text": "Dieses Projekt ist Teil des Repositoriums für Bildungsanwendungen der Community Vibe Coding Educativo.",
     "community_repo_label": "Anwendungs-Repository:",
     "community_telegram_label": "Telegram-Community:",
     "ai_title": "Einsatz von KI",
-    "ai_text": "Die aktuelle Version des Digitalen Desktops wurde mit Hilfe von KI programmiert: Die Menschen, die sie entwickeln, haben das Design und die Funktionen festgelegt und das Programm viele Male in unterschiedlichen Situationen getestet, um Fehler und Verbesserungsmöglichkeiten zu finden.",
+    "ai_text": "Die aktuelle Version des Digitalen Desktops wurde mit Hilfe von KI programmiert: Der Autor hat das Design und die Funktionen festgelegt und das Programm viele Male in unterschiedlichen Situationen getestet, um Fehler und Verbesserungsmöglichkeiten zu finden.",
     "privacy_title": "Datenschutz",
     "privacy_text": "Die Einstellungen des Desktops und die Daten jedes Werkzeugs werden nur in diesem Browser gespeichert. Die Anwendung erhebt keine Nutzungsstatistiken. Einige Werkzeuge verbinden sich mit anderen Websites, um zu funktionieren; sie sind unter „Credits und Lizenzen“ aufgeführt."
   },
@@ -217,7 +217,7 @@
     "content_license_name": "Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)",
     "content_link_label": "Offizieller Lizenztext",
     "external_title": "Externe Dienste",
-    "external_text": "Die Anwendung lädt oder bettet diese Dienste von anderen Websites ein. Außerdem öffnen der Web-Viewer und „Apps der Community“ die Seite, die jede Person auswählt.",
+    "external_text": "Die Anwendung nutzt diese Dienste anderer Websites. Außerdem öffnen der Web-Viewer und „Apps der Community“ die Seite, die jede Person auswählt.",
     "service_col": "Dienst",
     "purpose_col": "Wofür er genutzt wird",
     "services": {
@@ -225,9 +225,9 @@
       "badge": "Lizenzsymbol in diesem Fenster.",
       "catalog": "Liste der „Apps der Community“, als Tabelle veröffentlicht.",
       "wikipedia": "Suchen im Werkzeug Wikipedia.",
-      "directo": "Einfache Abstimmung, Bewertungsskala, Wortwolke, Brainstorming und Abstimmung, Interaktive Wand und Exit-Tickets, die sich in ihrem Fenster öffnen.",
-      "qplay": "Quiz im Werkzeug QPlay.",
-      "boardlive": "Kollaborative Tafel im Werkzeug BoardLive."
+      "directo": "Einfache Abstimmung, Bewertungsskala, Wortwolke, Brainstorming und Abstimmung, Interaktive Wand und Exit-Tickets, die sich in einem neuen Fenster öffnen.",
+      "qplay": "Quiz im Werkzeug QPlay, die sich in einem neuen Fenster öffnen.",
+      "boardlive": "Kollaborative Tafel im Werkzeug BoardLive, die sich in einem neuen Fenster öffnet."
     },
     "sounds_title": "Klänge",
     "sound_dice": "Würfel",

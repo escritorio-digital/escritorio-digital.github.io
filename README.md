@@ -138,6 +138,10 @@ export const widgetConfig: Omit<WidgetConfig, 'component'> = {
 
 Una vez que hayas creado tus archivos y reiniciado el servidor de desarrollo, tu nuevo widget estará disponible automáticamente en la **Librería de Widgets** (el modal de configuración).
 
+## Decisiones de diseño
+
+El porqué de las decisiones que condicionan el proyecto (registro de widgets, almacenamiento, idiomas, licencias, privacidad…) está en los [ADR](docs/adr/README.md).
+
 ## Librerías y Frameworks
 
 ### Librerías y Frameworks Principales
@@ -193,13 +197,13 @@ Consulta más aplicaciones de esta comunidad en: <a href="https://vibe-coding-ed
 
 ### Uso de IA
 
-La versión actual del Escritorio Digital se ha programado con ayuda de IA: quienes la desarrollan han decidido el diseño y las funciones, y han probado el programa numerosas veces, en situaciones diferentes, para detectar errores y aspectos que mejorar.
+La versión actual del Escritorio Digital se ha programado con ayuda de IA: el autor ha decidido el diseño y las funciones, y ha probado el programa numerosas veces, en situaciones diferentes, para detectar errores y aspectos que mejorar.
 
 ### Privacidad y servicios externos
 
 La configuración del escritorio y los datos de cada herramienta se guardan solo en el navegador de quien lo usa. La aplicación no recoge estadísticas de uso.
 
-Carga o incrusta estos servicios de otros sitios:
+Usa estos servicios de otros sitios:
 
 | Servicio | Para qué se usa |
 |---|---|
@@ -207,9 +211,9 @@ Carga o incrusta estos servicios de otros sitios:
 | [Creative Commons](https://creativecommons.org/) | Insignia de la licencia en «Créditos y licencias». |
 | [Google Sheets](https://workspace.google.com/products/sheets/) | Lista de «Aplicaciones de la comunidad», publicada como hoja de cálculo. |
 | [Wikipedia](https://www.wikipedia.org/) | Búsquedas de la herramienta Wikipedia. |
-| [Directo](https://jjdeharo.github.io/directo/) | Votación simple, Escala de valoración, Nube de palabras, Lluvia de ideas y votos, Muro interactivo y Tickets de salida. |
-| [QPlay](https://jjdeharo.github.io/qplay/) | Concursos de la herramienta QPlay. |
-| [BoardLive](https://boardlive.github.io/) | Pizarra colaborativa de la herramienta BoardLive. |
+| [Directo](https://jjdeharo.github.io/directo/) | Votación simple, Escala de valoración, Nube de palabras, Lluvia de ideas y votos, Muro interactivo y Tickets de salida, que se abren en una ventana nueva. |
+| [QPlay](https://jjdeharo.github.io/qplay/) | Concursos de la herramienta QPlay, que se abren en una ventana nueva. |
+| [BoardLive](https://boardlive.github.io/) | Pizarra colaborativa de la herramienta BoardLive, que se abre en una ventana nueva. |
 
 Además, el visor web y «Aplicaciones de la comunidad» abren la página que elija cada persona.
 
