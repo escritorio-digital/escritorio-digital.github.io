@@ -1,0 +1,1 @@
+import{j as t}from"./index-CvcTcXmc.js";import{a0 as s}from"./index-CvcTcXmc.js";import{ExternalAppWidget as e}from"./ExternalAppWidget-Bdk2zwcg.js";const a=()=>t.jsx(e,{url:"https://jjdeharo.github.io/directo/escala.html",titleKey:"widgets.directo_escala.title",appendLanguageParam:!0,openInPopup:!0});export{a as DirectoEscalaWidget,s as widgetConfig};
