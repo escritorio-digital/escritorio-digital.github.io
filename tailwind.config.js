@@ -11,6 +11,7 @@ export default {
         'custom-bg': 'var(--color-bg)',
         'widget-bg': 'var(--color-widget-bg)',
         'widget-header': 'var(--color-widget-header)',
+        'widget-header-text': 'var(--color-widget-header-text, var(--color-text-light))',
         'accent': 'var(--color-accent)',
         'text-light': 'var(--color-text-light)',
         'text-dark': 'var(--color-text-dark)',

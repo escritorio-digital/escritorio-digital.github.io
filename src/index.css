@@ -262,7 +262,9 @@ body.high-contrast {
 }
 
 .work-list-hint {
-  @apply text-center text-gray-500;
+  @apply text-center;
+  /* Va sobre el fondo de la ventana, que elige el tema: color calculado en App.tsx */
+  color: var(--color-widget-bg-text, #ffffff);
   font-size: clamp(0.75rem, 1.8cqw, 0.95rem);
   margin-top: clamp(6px, 1.6cqw, 12px);
 }

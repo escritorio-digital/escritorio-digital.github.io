@@ -26,6 +26,17 @@ La aplicación incorpora librerías, iconos y tipografías de terceros, cada uno
 propia licencia. Sus condiciones se conservan íntegras y pueden consultarse en los
 paquetes correspondientes del repositorio.
 
+Los fondos de pantalla (`src/assets/backgrounds/`, hechos con Gemini) y los iconos
+(`public/icons/`) se han generado con IA y se publican con la licencia de los
+contenidos, CC BY-SA 4.0, salvo este:
+
+- `public/icons/Wikipedia.png`: adaptación del logotipo de Wikipedia, de Nohat
+  (concepto de Paullusmagnus), Wikimedia
+  (<https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2.svg>), con licencia
+  CC BY-SA 3.0 (<https://creativecommons.org/licenses/by-sa/3.0/deed.es>).
+  Wikipedia es una marca registrada de la Fundación Wikimedia
+  (<https://foundation.wikimedia.org/wiki/Policy:Trademark_policy>).
+
 Los sonidos incluidos son de otros autores:
 
 - `public/sounds/dice-142528.mp3`: u_qpfzpydtro, en Pixabay

@@ -218,7 +218,7 @@ export const RandomSpinnerWidget: FC = () => {
       <div ref={containerRef} className="spinner-area">
         <canvas ref={canvasRef} className="spinner-canvas" />
         <div className="spinner-pointer" />
-        <button onClick={spin} disabled={isSpinning || options.length < 2} className="spin-button">
+        <button onClick={spin} disabled={isSpinning || options.length < 2} className="spin-button" title={t('widgets.random_spinner.spin')}>
           <Play size={32} />
         </button>
         {result && !isSpinning && (
@@ -257,10 +257,11 @@ export const RandomSpinnerWidget: FC = () => {
             value={newOption}
             onChange={(e) => setNewOption(e.target.value)}
             placeholder={t('widgets.random_spinner.add_option_placeholder')}
+            aria-label={t('widgets.random_spinner.add_option_placeholder')}
             maxLength={20}
             onKeyPress={(e) => e.key === 'Enter' && addOption()}
           />
-          <button onClick={addOption}><Plus size={18} /></button>
+          <button onClick={addOption} title={t('widgets.random_spinner.add_option')}><Plus size={18} /></button>
         </div>
         <button onClick={handleOpenFile} className="upload-options-button">
           <FolderOpen size={16} /> {t('widgets.random_spinner.load_from_file')}
@@ -282,7 +283,7 @@ export const RandomSpinnerWidget: FC = () => {
               ) : (
                 <span className="option-text">{option.text}</span>
               )}
-              <button onClick={() => removeOption(index)}><Trash2 size={14} /></button>
+              <button onClick={() => removeOption(index)} title={t('widgets.random_spinner.remove_option')}><Trash2 size={14} /></button>
             </li>
           ))}
         </ul>

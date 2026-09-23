@@ -89,12 +89,12 @@ export const TicTacToeWidget: FC = () => {
       <div className="game-info">
         <div className="player-input">
           <X size={16} className="text-blue-500" />
-          <input type="text" value={players.X} onChange={e => handlePlayerNameChange('X', e.target.value)} />
+          <input type="text" aria-label={t('widgets.tic_tac_toe.player_1')} value={players.X} onChange={e => handlePlayerNameChange('X', e.target.value)} />
           <span className="player-score">{score.X}</span>
         </div>
         <div className="player-input">
           <Circle size={16} className="text-red-500" />
-          <input type="text" value={players.O} onChange={e => handlePlayerNameChange('O', e.target.value)} />
+          <input type="text" aria-label={t('widgets.tic_tac_toe.player_2')} value={players.O} onChange={e => handlePlayerNameChange('O', e.target.value)} />
           <span className="player-score">{score.O}</span>
         </div>
       </div>
@@ -103,7 +103,7 @@ export const TicTacToeWidget: FC = () => {
       <div className="game-board-container">
         <div className="game-board">
           {board.map((value, i) => (
-            <button key={i} className="square" onClick={() => handleClick(i)} disabled={!!value || !!winner}>
+            <button key={i} className="square" onClick={() => handleClick(i)} disabled={!!value || !!winner} aria-label={`${t('widgets.tic_tac_toe.cell', { number: i + 1 })}${value ? `: ${value}` : ''}`}>
               {value === 'X' && <X size={48} className="text-blue-500" />}
               {value === 'O' && <Circle size={48} className="text-red-500" />}
             </button>

@@ -26,6 +26,7 @@ import { useDesktopContextMenu } from './hooks/desktop/useDesktopContextMenu';
 import { useDesktopDialogs } from './hooks/desktop/useDesktopDialogs';
 import { useDesktopSystem } from './hooks/desktop/useDesktopSystem';
 import { useDesktopWindows } from './hooks/desktop/useDesktopWindows';
+import { readableTextColor } from './utils/contrast';
 // --- ¡AQUÍ ESTÁ EL CAMBIO! Importamos el nuevo componente ---
 import { ProfileSwitcher } from './components/core/ProfileSwitcher';
 
@@ -761,7 +762,15 @@ const DesktopUI: React.FC<{
             <StartMenu
                 isOpen={isStartMenuOpen}
                 onClose={() => setIsStartMenuOpen(false)}
-                onAddWidget={addWidget}
+                onAddWidget={(widgetId) => {
+                    const instanceId = addWidget(widgetId);
+                    // El foco pasa al contenido de la ventana nueva cuando ya está pintada.
+                    if (instanceId) {
+                        window.setTimeout(() => {
+                            document.querySelector<HTMLElement>(`[data-window-content="${instanceId}"]`)?.focus({ preventScroll: true });
+                        }, 100);
+                    }
+                }}
                 onOpenSettingsTab={openSettingsTab}
                 onOpenThemeModal={openThemeModal}
                 onOpenAbout={() => setIsAboutOpen(true)}
@@ -1051,6 +1060,17 @@ function App() {
                 root.style.setProperty(key, value as string);
             }
         }
+        // El texto de las cabeceras usa el color claro del tema salvo que no contraste
+        // lo suficiente (4,5:1) con el color de cabecera elegido; entonces, el oscuro.
+        root.style.setProperty(
+            '--color-widget-header-text',
+            readableTextColor(theme['--color-widget-header'], [theme['--color-text-light'], theme['--color-text-dark']]),
+        );
+        // Lo mismo para el texto que va directamente sobre el fondo de las ventanas.
+        root.style.setProperty(
+            '--color-widget-bg-text',
+            readableTextColor(theme['--color-widget-bg'], [theme['--color-text-light'], '#ffffff', theme['--color-text-dark'], '#000000']),
+        );
     }, [theme]);
 
     useEffect(() => {

@@ -201,7 +201,7 @@
     "community_repo_label": "Applications repository:",
     "community_telegram_label": "Telegram community:",
     "ai_title": "Use of AI",
-    "ai_text": "The current version of the Digital Desktop was programmed with the help of AI: the authors decided the design and the features, and tested the program many times, in different situations, to find errors and aspects to improve.",
+    "ai_text": "The current version of the Digital Desktop was programmed with the help of AI: the authors decided the design and the features, and tested the program many times, in different situations, to find errors and aspects to improve. The wallpapers were generated with Gemini, and the icons were also generated with AI.",
     "privacy_title": "Privacy",
     "privacy_text": "The desktop settings and the data of each tool are stored only in this browser. The application does not collect usage statistics. Some tools connect to other sites in order to work; they are listed in “Credits and licenses”."
   },
@@ -229,6 +229,10 @@
       "qplay": "Quizzes in the QPlay tool, which open in a new window.",
       "boardlive": "Collaborative whiteboard in the BoardLive tool, which opens in a new window."
     },
+    "images_title": "Images",
+    "images_generated": "The wallpapers (made with Gemini) and the icons were generated with AI and are published under the content licence, CC BY-SA 4.0.",
+    "wikipedia_icon": "Wikipedia icon: adaptation of the Wikipedia logo, by Nohat (concept by Paullusmagnus), Wikimedia,",
+    "wikipedia_trademark": "Wikipedia is a registered trademark of the Wikimedia Foundation.",
     "sounds_title": "Sounds",
     "sound_dice": "Dice",
     "sound_alarm": "Alarm",
@@ -377,7 +381,9 @@
       "badges_tab": "Badges",
       "alerts_tab": "Alerts",
       "no_students_message": "No students in the list for this date.",
-      "add_students_instruction": "Add students or import a CSV file."
+      "add_students_instruction": "Add students or import a CSV file.",
+      "add_student": "Add student",
+      "export_without_names_tooltip": "Export without names: each student appears only with their number"
     },
     "scientific_calculator": {
       "title": "Scientific Calculator",
@@ -415,7 +421,9 @@
         "October",
         "November",
         "December"
-      ]
+      ],
+      "previous_month": "Previous month",
+      "next_month": "Next month"
     },
     "image_carousel": {
       "title": "Image Carousel",
@@ -447,7 +455,11 @@
         "celsius": "Celsius",
         "fahrenheit": "Fahrenheit",
         "kelvin": "Kelvin"
-      }
+      },
+      "from_value": "Source value",
+      "to_value": "Converted value",
+      "from_unit": "Source unit",
+      "to_unit": "Target unit"
     },
     "stopwatch": {
       "title": "Stopwatch",
@@ -492,7 +504,8 @@
       "icon_alt": "QR Code Generator",
       "placeholder": "Enter text to generate a QR code.",
       "input_placeholder": "Type text or URL here...",
-      "generate_button": "Generate QR"
+      "generate_button": "Generate QR",
+      "image_label": "QR code"
     },
     "work_gestures": {
       "title": "Work Gestures",
@@ -523,7 +536,8 @@
       "your_javascript": "Your JavaScript",
       "show_preview": "Show Preview",
       "show_code": "Show Code",
-      "preview_title": "HTML Preview"
+      "preview_title": "HTML Preview",
+      "code_label": "HTML code"
     },
     "work_list": {
       "title": "Work List",
@@ -532,7 +546,10 @@
       "download_csv": "Download as CSV",
       "replace_list_confirm": "Do you want to replace the current list with tasks from the file? \n(Click \"Cancel\" to add them to the end)",
       "csv_error": "There was an error reading the CSV file. Please check its format.",
-      "double_click_edit": "Double click on a task to edit it."
+      "double_click_edit": "Double click on a task to edit it.",
+      "edit_task": "Edit task",
+      "delete_task": "Delete task",
+      "mark_done": "Mark as done: {{task}}"
     },
     "scoreboard": {
       "title": "Scoreboard",
@@ -541,7 +558,10 @@
       "empty_message": "Add a team or player to start.",
       "input_placeholder": "Team or player name...",
       "add_button": "Add",
-      "reset_button_title": "Reset all to zero"
+      "reset_button_title": "Reset all to zero",
+      "subtract_point": "Subtract a point",
+      "add_point": "Add a point",
+      "remove_player": "Remove team or player"
     },
     "sound_meter": {
       "title": "Sound Meter",
@@ -571,7 +591,12 @@
       "icon_alt": "Memory Game"
     },
     "metronome": {
-      "title": "Metronome"
+      "title": "Metronome",
+      "start": "Start",
+      "stop": "Stop",
+      "tempo_label": "Tempo (BPM)",
+      "fewer_beats": "Fewer beats per measure",
+      "more_beats": "More beats per measure"
     },
     "notepad": {
       "title": "Notepad",
@@ -678,7 +703,9 @@
         "moscow": "Moscow",
         "dubai": "Dubai",
         "shanghai": "Shanghai"
-      }
+      },
+      "remove_clock": "Remove clock",
+      "timezone_label": "Time zone"
     },
     "random_spinner": {
       "title": "Random Spinner",
@@ -700,7 +727,10 @@
       "options_header": "Options",
       "add_option_placeholder": "Add option...",
       "load_from_file": "Load from file",
-      "remove_after_select": "Remove option after selection"
+      "remove_after_select": "Remove option after selection",
+      "spin": "Spin",
+      "add_option": "Add option",
+      "remove_option": "Remove option"
     },
     "traffic_light": {
       "title": "Traffic Light",
@@ -760,7 +790,8 @@
       "draw": "It's a draw!",
       "next_turn": "Next turn:",
       "next_round": "Next Round",
-      "reset_all": "Reset all"
+      "reset_all": "Reset all",
+      "cell": "Square {{number}}"
     },
     "iframe": {
       "title": "Web Viewer",
@@ -971,7 +1002,9 @@
       "move_up": "Move favorite up",
       "move_down": "Move favorite down",
       "collapse_list": "Hide list",
-      "expand_list": "Show list"
+      "expand_list": "Show list",
+      "filter_level_label": "Level",
+      "filter_area_label": "Subject area"
     },
     "chatgpt_ia_edu": {
       "title": "ChatGPT-IA-edu community",

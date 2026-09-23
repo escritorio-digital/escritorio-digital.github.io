@@ -201,7 +201,7 @@
     "community_repo_label": "Repositorio de aplicacións:",
     "community_telegram_label": "Comunidade en Telegram:",
     "ai_title": "Uso de IA",
-    "ai_text": "A versión actual do Escritorio Dixital programouse con axuda de IA: os autores decidiron o deseño e as funcións, e probaron o programa moitas veces, en situacións diferentes, para detectar erros e aspectos que mellorar.",
+    "ai_text": "A versión actual do Escritorio Dixital programouse con axuda de IA: os autores decidiron o deseño e as funcións, e probaron o programa moitas veces, en situacións diferentes, para detectar erros e aspectos que mellorar. Os fondos de pantalla xeráronse con Gemini, e as iconas, tamén con IA.",
     "privacy_title": "Privacidade",
     "privacy_text": "A configuración do escritorio e os datos de cada ferramenta gárdanse só neste navegador. A aplicación non recolle estatísticas de uso. Algunhas ferramentas conéctanse a outros sitios para funcionar; detállanse en «Créditos e licenzas»."
   },
@@ -229,6 +229,10 @@
       "qplay": "Concursos da ferramenta QPlay, que se abren nunha xanela nova.",
       "boardlive": "Lousa colaborativa da ferramenta BoardLive, que se abre nunha xanela nova."
     },
+    "images_title": "Imaxes",
+    "images_generated": "Os fondos de pantalla (feitos con Gemini) e as iconas xeráronse con IA e publícanse coa licenza dos contidos, CC BY-SA 4.0.",
+    "wikipedia_icon": "Icona de Wikipedia: adaptación do logotipo de Wikipedia, de Nohat (concepto de Paullusmagnus), Wikimedia,",
+    "wikipedia_trademark": "Wikipedia é unha marca rexistrada da Fundación Wikimedia.",
     "sounds_title": "Sons",
     "sound_dice": "Dados",
     "sound_alarm": "Alarma",
@@ -377,7 +381,9 @@
       "badges_tab": "Insignias",
       "alerts_tab": "Alertas",
       "no_students_message": "Non hai estudantes na lista para esta data.",
-      "add_students_instruction": "Engade estudantes ou importa un ficheiro CSV."
+      "add_students_instruction": "Engade estudantes ou importa un ficheiro CSV.",
+      "add_student": "Engadir estudante",
+      "export_without_names_tooltip": "Exportar sen nomes: cada estudante aparece só co seu número"
     },
     "scientific_calculator": {
       "title": "Calculadora Científica",
@@ -415,7 +421,9 @@
         "outubro",
         "novembro",
         "decembro"
-      ]
+      ],
+      "previous_month": "Mes anterior",
+      "next_month": "Mes seguinte"
     },
     "image_carousel": {
       "title": "Carrusel de Imaxes",
@@ -447,7 +455,11 @@
         "celsius": "Celsius",
         "fahrenheit": "Fahrenheit",
         "kelvin": "Kelvin"
-      }
+      },
+      "from_value": "Valor de orixe",
+      "to_value": "Valor convertido",
+      "from_unit": "Unidade de orixe",
+      "to_unit": "Unidade de destino"
     },
     "stopwatch": {
       "title": "Cronómetro",
@@ -492,7 +504,8 @@
       "icon_alt": "Xerador QR",
       "placeholder": "Introduce texto para xerar un código QR.",
       "input_placeholder": "Escribe o texto ou URL aquí...",
-      "generate_button": "Xerar QR"
+      "generate_button": "Xerar QR",
+      "image_label": "Código QR"
     },
     "work_gestures": {
       "title": "Xestos de Traballo",
@@ -523,7 +536,8 @@
       "your_javascript": "O teu JavaScript",
       "show_preview": "Mostrar Vista Previa",
       "show_code": "Mostrar Código",
-      "preview_title": "Vista previa HTML"
+      "preview_title": "Vista previa HTML",
+      "code_label": "Código HTML"
     },
     "work_list": {
       "title": "Lista de Traballo",
@@ -532,7 +546,10 @@
       "download_csv": "Descargar como CSV",
       "replace_list_confirm": "¿Queres substituír a lista actual coas tarefas do ficheiro? \n(Fai clic en \"Cancelar\" para engadilas ao final)",
       "csv_error": "Houbo un erro ao ler o ficheiro CSV. Por favor, revisa o seu formato.",
-      "double_click_edit": "Dobre clic nunha tarefa para editala."
+      "double_click_edit": "Dobre clic nunha tarefa para editala.",
+      "edit_task": "Editar tarefa",
+      "delete_task": "Eliminar tarefa",
+      "mark_done": "Marcar como feita: {{task}}"
     },
     "scoreboard": {
       "title": "Marcador de Puntos",
@@ -541,7 +558,10 @@
       "empty_message": "Engade un equipo ou xogador para comezar.",
       "input_placeholder": "Nome do equipo ou xogador...",
       "add_button": "Engadir",
-      "reset_button_title": "Reiniciar todo a cero"
+      "reset_button_title": "Reiniciar todo a cero",
+      "subtract_point": "Restar un punto",
+      "add_point": "Sumar un punto",
+      "remove_player": "Quitar equipo ou xogador"
     },
     "sound_meter": {
       "title": "Medidor de Ruído",
@@ -571,7 +591,12 @@
       "icon_alt": "Memorama"
     },
     "metronome": {
-      "title": "Metrónomo"
+      "title": "Metrónomo",
+      "start": "Iniciar",
+      "stop": "Deter",
+      "tempo_label": "Tempo (BPM)",
+      "fewer_beats": "Menos pulsos por compás",
+      "more_beats": "Máis pulsos por compás"
     },
     "notepad": {
       "title": "Bloc de Notas",
@@ -678,7 +703,9 @@
         "moscow": "Moscova",
         "dubai": "Dubái",
         "shanghai": "Xangai"
-      }
+      },
+      "remove_clock": "Quitar reloxo",
+      "timezone_label": "Zona horaria"
     },
     "random_spinner": {
       "title": "Ruleta Aleatoria",
@@ -700,7 +727,10 @@
       "options_header": "Opcións",
       "add_option_placeholder": "Engadir opción...",
       "load_from_file": "Cargar desde arquivo",
-      "remove_after_select": "Eliminar opción ao saír"
+      "remove_after_select": "Eliminar opción ao saír",
+      "spin": "Xirar",
+      "add_option": "Engadir opción",
+      "remove_option": "Eliminar opción"
     },
     "traffic_light": {
       "title": "Semáforo",
@@ -760,7 +790,8 @@
       "draw": "¡É un empate!",
       "next_turn": "Seguinte quenda:",
       "next_round": "Seguinte Rolda",
-      "reset_all": "Reiniciar todo"
+      "reset_all": "Reiniciar todo",
+      "cell": "Casa {{number}}"
     },
     "iframe": {
       "title": "Visor Web",
@@ -971,7 +1002,9 @@
       "move_up": "Mover favorito arriba",
       "move_down": "Mover favorito abaixo",
       "collapse_list": "Agochar lista",
-      "expand_list": "Mostrar lista"
+      "expand_list": "Mostrar lista",
+      "filter_level_label": "Nivel",
+      "filter_area_label": "Área"
     },
     "chatgpt_ia_edu": {
       "title": "Comunidade ChatGPT-IA-edu",

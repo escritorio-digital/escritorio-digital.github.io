@@ -197,7 +197,7 @@ Consulta más aplicaciones de esta comunidad en: <a href="https://vibe-coding-ed
 
 ### Uso de IA
 
-La versión actual del Escritorio Digital se ha programado con ayuda de IA: los autores han decidido el diseño y las funciones, y han probado el programa numerosas veces, en situaciones diferentes, para detectar errores y aspectos que mejorar.
+La versión actual del Escritorio Digital se ha programado con ayuda de IA: los autores han decidido el diseño y las funciones, y han probado el programa numerosas veces, en situaciones diferentes, para detectar errores y aspectos que mejorar. Los fondos de pantalla se han generado con Gemini, y los iconos, también con IA.
 
 ### Privacidad y servicios externos
 
@@ -223,8 +223,10 @@ El proyecto se distribuye bajo dos licencias distintas, según el tipo de materi
 
 * **Código:** [GNU Affero General Public License v3 o posterior (AGPL-3.0-or-later)](https://www.gnu.org/licenses/agpl-3.0.html). El texto completo está en el archivo [LICENSE](LICENSE).
 * **Contenidos** (textos, materiales y recursos didácticos): [Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.es).
-* **Recursos de terceros:** las librerías, iconos y tipografías incorporadas conservan su propia licencia. Los sonidos son de otros autores:
+* **Recursos de terceros:** las librerías, iconos y tipografías incorporadas conservan su propia licencia. Imágenes y sonidos:
   * Dados: [u_qpfzpydtro](https://pixabay.com/users/u_qpfzpydtro-29496424/), en [Pixabay](https://pixabay.com/sound-effects/dice-142528/), con la [licencia de contenido de Pixabay](https://pixabay.com/service/license-summary/).
+  * Los fondos de pantalla (hechos con Gemini) y los iconos se han generado con IA y se publican con la licencia de los contenidos, CC BY-SA 4.0.
+  * Icono de Wikipedia: adaptación del [logotipo de Wikipedia](https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2.svg), de Nohat (concepto de Paullusmagnus), Wikimedia, con licencia [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.es). Wikipedia es una [marca registrada de la Fundación Wikimedia](https://foundation.wikimedia.org/wiki/Policy:Trademark_policy).
   * Alarma: [Tim (corsica_s)](https://freesound.org/people/corsica_s/), del [tema de sonidos de freedesktop.org](https://gitlab.freedesktop.org/xdg/xdg-sound-theme), con licencia [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.es).
 
 El detalle de estas condiciones se encuentra en [LICENSE-CONTENIDOS.md](LICENSE-CONTENIDOS.md).

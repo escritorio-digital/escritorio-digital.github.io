@@ -71,7 +71,7 @@
 }
 
 .no-groups-message {
-  @apply w-full text-center text-gray-400 p-8;
+  @apply w-full text-center text-gray-500 p-8;
 }
 
 .group-card {

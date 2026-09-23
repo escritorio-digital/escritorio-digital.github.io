@@ -71,13 +71,13 @@ export const CalendarWidget: FC = () => {
   return (
     <div className={`calendar-widget ${isWidgetBgDark ? 'calendar-widget--dark' : 'calendar-widget--light'}`}>
       <div className="calendar-header">
-        <button onClick={goToPreviousMonth} className="calendar-nav-button">
+        <button onClick={goToPreviousMonth} className="calendar-nav-button" title={t('widgets.calendar.previous_month')}>
           <ChevronLeft size={20} />
         </button>
         <h3 className="calendar-title">
           {((t('widgets.calendar.months', { returnObjects: true }) as string[]) || ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'])[currentDate.getMonth()]} {currentDate.getFullYear()}
         </h3>
-        <button onClick={goToNextMonth} className="calendar-nav-button">
+        <button onClick={goToNextMonth} className="calendar-nav-button" title={t('widgets.calendar.next_month')}>
           <ChevronRight size={20} />
         </button>
       </div>

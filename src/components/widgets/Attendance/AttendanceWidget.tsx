@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import Papa from 'papaparse';
-import { Users, Badge, UserPlus, FolderOpen, RotateCcw, AlertTriangle, Save, SaveAll } from 'lucide-react';
+import { Users, Badge, UserPlus, FolderOpen, RotateCcw, AlertTriangle, Save, SaveAll, VenetianMask } from 'lucide-react';
 import './Attendance.css';
 import { downloadBlob, saveToFileManager } from '../../../utils/fileSave';
 import { getEntry } from '../../../utils/fileManagerDb';
@@ -37,7 +37,7 @@ type AttendanceCsvRow = {
 type AttendanceExportRow = {
   date: string;
   id: number;
-  name: string;
+  name?: string;
   status: Student['status'];
   badges: string;
   alerts: string;
@@ -213,14 +213,16 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
     return unsubscribe;
   }, [loadCsvFile, resolvedInstanceId]);
 
-  const buildExportBlob = useCallback(() => {
+  // Sin nombres, cada alumno queda identificado solo por su id, que es el mismo en
+  // todas las fechas y permite cruzar el archivo con la lista completa del docente.
+  const buildExportBlob = useCallback((includeNames = true) => {
     const dataToExport: AttendanceExportRow[] = [];
     Object.keys(records).sort().forEach(date => {
         records[date].forEach(s => {
             dataToExport.push({
                 date: date,
                 id: s.id,
-                name: s.name,
+                ...(includeNames ? { name: s.name } : {}),
                 status: s.status,
                 badges: s.badges.join(';'),
                 alerts: s.alerts.join(';'),
@@ -255,6 +257,24 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
     setLastSavedSignature(JSON.stringify(records));
     notifyWidgetSaveComplete(resolvedInstanceId, 'attendance');
   }, [buildExportBlob, currentFilename, records, resolvedInstanceId]);
+
+  // Exportación aparte: no cambia el archivo de trabajo ni su estado de guardado.
+  const handleExportWithoutNames = useCallback(async () => {
+    const blob = buildExportBlob(false);
+    const destination = await requestSaveDestination('asistencia_sin_nombres.csv', { sourceWidgetId: 'attendance' });
+    if (!destination) return;
+    if (destination.destination === 'file-manager') {
+      await saveToFileManager({
+        blob,
+        filename: destination.filename,
+        sourceWidgetId: 'attendance',
+        sourceWidgetTitleKey: 'widgets.attendance.title',
+        parentId: destination.parentId,
+      });
+    } else if (destination.destination === 'download') {
+      downloadBlob(blob, destination.filename);
+    }
+  }, [buildExportBlob]);
 
   const handleSave = useCallback(async () => {
     let parentId = currentParentId;
@@ -384,8 +404,8 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
       
       <div className="footer">
         <div className="add-student-form">
-          <input type="text" value={newStudentName} onChange={e => setNewStudentName(e.target.value)} placeholder={t('widgets.attendance.new_student_placeholder')} onKeyPress={e => e.key === 'Enter' && addStudent()} />
-          <button onClick={addStudent}><UserPlus size={16}/></button>
+          <input type="text" aria-label={t('widgets.attendance.new_student_placeholder')} value={newStudentName} onChange={e => setNewStudentName(e.target.value)} placeholder={t('widgets.attendance.new_student_placeholder')} onKeyPress={e => e.key === 'Enter' && addStudent()} />
+          <button onClick={addStudent} title={t('widgets.attendance.add_student')}><UserPlus size={16}/></button>
         </div>
         <div className="actions-group">
             <button onClick={handleOpenFile} className="action-btn" title={t('widgets.attendance.import_csv_tooltip')}><FolderOpen size={16}/></button>
@@ -396,6 +416,7 @@ export const AttendanceWidget: FC<{ instanceId?: string }> = ({ instanceId }) =>
               </span>
             </button>
             <button onClick={handleSaveAs} className="action-btn" title={t('actions.save_as')}><SaveAll size={16}/></button>
+            <button onClick={handleExportWithoutNames} className="action-btn" title={t('widgets.attendance.export_without_names_tooltip')}><VenetianMask size={16}/></button>
             <button onClick={resetAll} className="action-btn danger" title={t('widgets.attendance.delete_all_tooltip')}><RotateCcw size={16}/></button>
         </div>
       </div>

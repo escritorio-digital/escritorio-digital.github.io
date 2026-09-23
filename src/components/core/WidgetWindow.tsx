@@ -467,7 +467,7 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
         >
           {showHeader && (
             <div
-              className="widget-header relative flex items-center justify-between h-10 bg-widget-header text-text-light font-bold px-3 absolute top-0 left-0 right-0"
+              className="widget-header relative flex items-center justify-between h-10 bg-widget-header text-widget-header-text font-bold px-3 absolute top-0 left-0 right-0"
               onContextMenu={onOpenContextMenu}
               onDoubleClick={(event) => {
                 event.stopPropagation();
@@ -764,9 +764,14 @@ export const WidgetWindow: React.FC<WidgetWindowProps> = ({
                     </div>
                   </>
                 )}
+                {/* Recibe el foco al abrir el widget desde el menú, para seguir con el tabulador dentro. */}
                 <div
-                  className="absolute inset-0 overflow-y-auto overflow-x-hidden box-border transition-all duration-150"
+                  className="absolute inset-0 overflow-y-auto overflow-x-hidden box-border transition-all duration-150 focus:outline-none"
                   style={{ paddingTop: toolbarOffset }}
+                  data-window-content={id}
+                  tabIndex={-1}
+                  role="region"
+                  aria-label={title}
                 >
                   <WidgetToolbarProvider onChange={setToolbarContent}>
                     <div

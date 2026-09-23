@@ -69,14 +69,14 @@
 
 /* --- Colores de las Tarjetas --- */
 .card-silence {
-  background-color: #3b82f6; /* blue-500 */
+  background-color: #1d4ed8; /* blue-700: contraste 6,7:1 con el texto blanco */
 }
 .card-pairs {
-  background-color: #22c55e; /* green-500 */
+  background-color: #15803d; /* green-700: 5,0:1 */
 }
 .card-teams {
-  background-color: #f97316; /* orange-500 */
+  background-color: #c2410c; /* orange-700: 5,2:1 */
 }
 .card-plenary {
-  background-color: #8b5cf6; /* violet-500 */
+  background-color: #6d28d9; /* violet-700: 7,1:1 */
 }

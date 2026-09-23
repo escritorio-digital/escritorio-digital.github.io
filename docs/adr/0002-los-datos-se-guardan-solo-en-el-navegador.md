@@ -42,3 +42,8 @@ navegador de quien lo usa, sin cuentas ni servidor:
   seguridad es la única forma de recuperarlo o de llevarlo a otro equipo.
 - Cualquier dato nuevo de un widget que deba viajar en la copia tiene que
   añadirse a `WIDGET_DATA_KEYS` en `src/utils/backup.ts`.
+- Lo que sale del navegador lo decide quien usa el escritorio. Desde el
+  2026-09-23, Asistencia permite además exportar sin nombres: cada estudiante
+  aparece con su número, el mismo en todas las fechas, para compartir los datos
+  sin identificar a nadie. La exportación completa, con nombres, se mantiene
+  porque es la que sirve al docente.

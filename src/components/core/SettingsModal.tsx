@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { useEscapeKey } from '../../hooks/useEscapeKey';
 import { X, Search } from 'lucide-react';
 import { WIDGET_REGISTRY } from '../widgets';
 import { buildWidgetsByCategory } from '../widgets/widgetCategories';
@@ -54,6 +55,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   const lastThemeRequestRef = useRef<number | null>(null);
   const { theme, setTheme, setWallpaper, resetTheme } = useTheme();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  // Si está abierta la ventana de tema, Escape cierra solo esa.
+  useEscapeKey(isOpen && !isThemeModalOpen, onClose);
   const widgetSearchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -217,7 +220,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           >
             <header className="p-4 border-b flex justify-between items-center">
               <h2 className="text-xl font-bold">{t('settings.title')}</h2>
-              <button onClick={onClose} className="p-1 rounded-full hover:bg-black/10"><X size={20}/></button>
+              <button onClick={onClose} className="p-1 rounded-full hover:bg-black/10" aria-label={t('desktop.window_close')} title={t('desktop.window_close')}><X size={20}/></button>
             </header>
 
             <div className="flex border-b">
@@ -337,7 +340,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                             <span className="text-2xl">{widget.icon}</span>
                             <span className="font-semibold">{t(widget.title)}</span>
                           </div>
-                          <button onClick={() => togglePin(widget.id)} className={`font-semibold py-2 px-4 rounded-lg transition-colors ${pinnedWidgets.includes(widget.id) ? 'bg-widget-header text-text-light hover:bg-[#7b69b1]' : 'bg-accent text-text-dark hover:bg-[#8ec9c9]'}`}>
+                          <button onClick={() => togglePin(widget.id)} className={`font-semibold py-2 px-4 rounded-lg transition-colors ${pinnedWidgets.includes(widget.id) ? 'bg-widget-header text-widget-header-text hover:bg-[#7b69b1]' : 'bg-accent text-text-dark hover:bg-[#8ec9c9]'}`}>
                             {pinnedWidgets.includes(widget.id) ? t('settings.widgets.remove') : t('settings.widgets.add')}
                           </button>
                         </li>
@@ -357,7 +360,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                                     <span className="text-2xl">{widget.icon}</span>
                                     <span className="font-semibold">{t(widget.title)}</span>
                                   </div>
-                                  <button onClick={() => togglePin(widget.id)} className={`font-semibold py-2 px-4 rounded-lg transition-colors ${pinnedWidgets.includes(widget.id) ? 'bg-widget-header text-text-light hover:bg-[#7b69b1]' : 'bg-accent text-text-dark hover:bg-[#8ec9c9]'}`}>
+                                  <button onClick={() => togglePin(widget.id)} className={`font-semibold py-2 px-4 rounded-lg transition-colors ${pinnedWidgets.includes(widget.id) ? 'bg-widget-header text-widget-header-text hover:bg-[#7b69b1]' : 'bg-accent text-text-dark hover:bg-[#8ec9c9]'}`}>
                                     {pinnedWidgets.includes(widget.id) ? t('settings.widgets.remove') : t('settings.widgets.add')}
                                   </button>
                                 </li>

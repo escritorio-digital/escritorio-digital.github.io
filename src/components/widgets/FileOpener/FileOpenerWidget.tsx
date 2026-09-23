@@ -34,7 +34,9 @@ function renderMarkdownWithLatex(input: string): string {
       throwOnError: false,
       displayMode: token.displayMode,
     });
-    html = html.split(placeholder).join(rendered);
+    // Una fórmula en bloque puede desplazarse en horizontal: debe poder recibir el foco.
+    const focusable = token.displayMode ? rendered.replace('<span class="katex-display">', '<span class="katex-display" tabindex="0">') : rendered;
+    html = html.split(placeholder).join(focusable);
   }
   return html;
 }

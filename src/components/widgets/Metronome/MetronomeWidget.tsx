@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import type { FC } from 'react';
 import { Play, Pause } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import './Metronome.css';
 
 type AudioContextWithWebkit = typeof window & {
@@ -9,6 +10,7 @@ type AudioContextWithWebkit = typeof window & {
 
 // El componente principal del Metrónomo
 export const MetronomeWidget: FC = () => {
+  const { t } = useTranslation();
   const [isPlaying, setIsPlaying] = useState(false);
   const [bpm, setBpm] = useState(120);
   const [beatsPerMeasure, setBeatsPerMeasure] = useState(4);
@@ -83,6 +85,7 @@ export const MetronomeWidget: FC = () => {
       <div className="bpm-slider">
         <input
           type="range"
+          aria-label={t('widgets.metronome.tempo_label')}
           min="40"
           max="240"
           value={bpm}
@@ -99,12 +102,12 @@ export const MetronomeWidget: FC = () => {
 
       <div className="controls">
         <div className="measure-control">
-          <button onClick={() => setBeatsPerMeasure(Math.max(1, beatsPerMeasure - 1))} disabled={isPlaying}>-</button>
+          <button onClick={() => setBeatsPerMeasure(Math.max(1, beatsPerMeasure - 1))} disabled={isPlaying} title={t('widgets.metronome.fewer_beats')}>-</button>
           <span>{beatsPerMeasure}/4</span>
-          <button onClick={() => setBeatsPerMeasure(Math.min(12, beatsPerMeasure + 1))} disabled={isPlaying}>+</button>
+          <button onClick={() => setBeatsPerMeasure(Math.min(12, beatsPerMeasure + 1))} disabled={isPlaying} title={t('widgets.metronome.more_beats')}>+</button>
         </div>
 
-        <button onClick={handleStartStop} className="play-button">
+        <button onClick={handleStartStop} className="play-button" title={isPlaying ? t('widgets.metronome.stop') : t('widgets.metronome.start')}>
           {isPlaying ? <Pause size={32} /> : <Play size={32} />}
         </button>
       </div>

@@ -473,6 +473,7 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
           value={groupValue}
           onChange={(e) => setGroupValue(Math.max(1, parseInt(e.target.value) || 1))}
           className="group-value-input"
+          aria-label={mode === 'bySize' ? t('widgets.group_generator.students_per_group') : t('widgets.group_generator.number_of_groups')}
           min="1"
         />
         <button onClick={generateGroups} className="generate-button">
@@ -483,7 +484,7 @@ export const GroupGeneratorWidget: FC<{ instanceId?: string }> = ({ instanceId }
         <div className="output-header">
           <label className="panel-label">{t('widgets.group_generator.generated_groups_label')}</label>
         </div>
-        <div className="groups-container">
+        <div className="groups-container" tabIndex={0} role="region" aria-label={t('widgets.group_generator.generated_groups_label')}>
           {generatedGroups.length > 0 ? (
             generatedGroups.map((group, index) => (
               <div key={index} className="group-card">

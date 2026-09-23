@@ -267,6 +267,7 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
             <input
               type="checkbox"
               className="work-list-checkbox"
+              aria-label={t('widgets.work_list.mark_done', { task: task.text })}
               checked={task.completed}
               onChange={() => toggleTask(task.id)}
             />
@@ -288,10 +289,10 @@ export const WorkListWidget: React.FC<{ instanceId?: string }> = ({ instanceId }
                 {task.text}
               </span>
             )}
-            <button onClick={() => startEditing(task)} className="work-list-action">
+            <button onClick={() => startEditing(task)} className="work-list-action" title={t('widgets.work_list.edit_task')}>
               <Edit size={16} />
             </button>
-            <button onClick={() => removeTask(task.id)} className="work-list-action delete">
+            <button onClick={() => removeTask(task.id)} className="work-list-action delete" title={t('widgets.work_list.delete_task')}>
               <X size={16} />
             </button>
           </li>

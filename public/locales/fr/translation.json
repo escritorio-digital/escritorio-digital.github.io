@@ -202,7 +202,7 @@
     "community_repo_label": "Répertoire des applications :",
     "community_telegram_label": "Communauté Telegram :",
     "ai_title": "Utilisation de l'IA",
-    "ai_text": "La version actuelle du Bureau numérique a été programmée avec l'aide de l'IA : les auteurs en ont décidé la conception et les fonctions, et ont testé le programme de nombreuses fois, dans des situations différentes, pour détecter les erreurs et les points à améliorer.",
+    "ai_text": "La version actuelle du Bureau numérique a été programmée avec l'aide de l'IA : les auteurs en ont décidé la conception et les fonctions, et ont testé le programme de nombreuses fois, dans des situations différentes, pour détecter les erreurs et les points à améliorer. Les fonds d'écran ont été générés avec Gemini, et les icônes, également avec l'IA.",
     "privacy_title": "Confidentialité",
     "privacy_text": "La configuration du bureau et les données de chaque outil sont enregistrées uniquement dans ce navigateur. L'application ne recueille pas de statistiques d'utilisation. Certains outils se connectent à d'autres sites pour fonctionner ; ils sont détaillés dans « Crédits et licences »."
   },
@@ -230,6 +230,10 @@
       "qplay": "Quiz de l'outil QPlay, qui s'ouvrent dans une nouvelle fenêtre.",
       "boardlive": "Tableau collaboratif de l'outil BoardLive, qui s'ouvre dans une nouvelle fenêtre."
     },
+    "images_title": "Images",
+    "images_generated": "Les fonds d'écran (réalisés avec Gemini) et les icônes ont été générés avec l'IA et sont publiés sous la licence des contenus, CC BY-SA 4.0.",
+    "wikipedia_icon": "Icône de Wikipédia : adaptation du logo de Wikipédia, de Nohat (concept de Paullusmagnus), Wikimedia,",
+    "wikipedia_trademark": "Wikipédia est une marque déposée de la Wikimedia Foundation.",
     "sounds_title": "Sons",
     "sound_dice": "Dés",
     "sound_alarm": "Alarme",
@@ -381,7 +385,9 @@
       "badges_tab": "Badges",
       "alerts_tab": "Alertes",
       "no_students_message": "Aucun étudiant sur la liste pour cette date.",
-      "add_students_instruction": "Ajoutez des étudiants ou importez un fichier CSV."
+      "add_students_instruction": "Ajoutez des étudiants ou importez un fichier CSV.",
+      "add_student": "Ajouter un élève",
+      "export_without_names_tooltip": "Exporter sans noms : chaque élève n'apparaît qu'avec son numéro"
     },
     "scientific_calculator": {
       "title": "Calculatrice scientifique",
@@ -419,7 +425,9 @@
         "octobre",
         "novembre",
         "décembre"
-      ]
+      ],
+      "previous_month": "Mois précédent",
+      "next_month": "Mois suivant"
     },
     "image_carousel": {
       "title": "Carrousel d'images",
@@ -451,7 +459,11 @@
         "celsius": "Celsius",
         "fahrenheit": "Fahrenheit",
         "kelvin": "Kelvin"
-      }
+      },
+      "from_value": "Valeur d'origine",
+      "to_value": "Valeur convertie",
+      "from_unit": "Unité d'origine",
+      "to_unit": "Unité de destination"
     },
     "stopwatch": {
       "title": "Chronomètre",
@@ -496,7 +508,8 @@
       "icon_alt": "Générateur de QR",
       "placeholder": "Entrez du texte pour générer un code QR.",
       "input_placeholder": "Écrivez le texte ou l'URL ici...",
-      "generate_button": "Générer le QR"
+      "generate_button": "Générer le QR",
+      "image_label": "Code QR"
     },
     "work_gestures": {
       "title": "Gestes de travail",
@@ -527,7 +540,8 @@
       "your_javascript": "Votre JavaScript",
       "show_preview": "Afficher l'aperçu",
       "show_code": "Afficher le code",
-      "preview_title": "Aperçu HTML"
+      "preview_title": "Aperçu HTML",
+      "code_label": "Code HTML"
     },
     "work_list": {
       "title": "Liste de tâches",
@@ -536,7 +550,10 @@
       "download_csv": "Télécharger en CSV",
       "replace_list_confirm": "Voulez-vous remplacer la liste actuelle par les tâches du fichier ? \n(Cliquez sur \"Annuler\" pour les ajouter à la fin)",
       "csv_error": "Une erreur est survenue lors de la lecture du fichier CSV. Veuillez vérifier son format.",
-      "double_click_edit": "Double-cliquez sur une tâche pour la modifier."
+      "double_click_edit": "Double-cliquez sur une tâche pour la modifier.",
+      "edit_task": "Modifier la tâche",
+      "delete_task": "Supprimer la tâche",
+      "mark_done": "Marquer comme faite : {{task}}"
     },
     "scoreboard": {
       "title": "Tableau des scores",
@@ -545,7 +562,10 @@
       "empty_message": "Ajoutez une équipe ou un joueur pour commencer.",
       "input_placeholder": "Nom de l'équipe ou du joueur...",
       "add_button": "Ajouter",
-      "reset_button_title": "Tout réinitialiser à zéro"
+      "reset_button_title": "Tout réinitialiser à zéro",
+      "subtract_point": "Retirer un point",
+      "add_point": "Ajouter un point",
+      "remove_player": "Retirer l'équipe ou le joueur"
     },
     "sound_meter": {
       "title": "Sonomètre",
@@ -575,7 +595,12 @@
       "icon_alt": "Jeu de mémoire"
     },
     "metronome": {
-      "title": "Métronome"
+      "title": "Métronome",
+      "start": "Démarrer",
+      "stop": "Arrêter",
+      "tempo_label": "Tempo (BPM)",
+      "fewer_beats": "Moins de temps par mesure",
+      "more_beats": "Plus de temps par mesure"
     },
     "notepad": {
       "title": "Bloc-notes",
@@ -682,7 +707,9 @@
         "moscow": "Moscou",
         "dubai": "Dubaï",
         "shanghai": "Shanghai"
-      }
+      },
+      "remove_clock": "Retirer l'horloge",
+      "timezone_label": "Fuseau horaire"
     },
     "random_spinner": {
       "title": "Roue aléatoire",
@@ -704,7 +731,10 @@
       "options_header": "Options",
       "add_option_placeholder": "Ajouter une option...",
       "load_from_file": "Charger depuis un fichier",
-      "remove_after_select": "Supprimer l'option après tirage"
+      "remove_after_select": "Supprimer l'option après tirage",
+      "spin": "Tourner",
+      "add_option": "Ajouter une option",
+      "remove_option": "Supprimer l'option"
     },
     "traffic_light": {
       "title": "Feu de signalisation",
@@ -764,7 +794,8 @@
       "draw": "C'est un match nul !",
       "next_turn": "Prochain tour :",
       "next_round": "Prochaine manche",
-      "reset_all": "Tout réinitialiser"
+      "reset_all": "Tout réinitialiser",
+      "cell": "Case {{number}}"
     },
     "iframe": {
       "title": "Visionneuse Web",
@@ -975,7 +1006,9 @@
       "move_up": "Monter le favori",
       "move_down": "Descendre le favori",
       "collapse_list": "Masquer la liste",
-      "expand_list": "Afficher la liste"
+      "expand_list": "Afficher la liste",
+      "filter_level_label": "Niveau",
+      "filter_area_label": "Domaine"
     },
     "chatgpt_ia_edu": {
       "title": "Communauté ChatGPT-IA-edu",

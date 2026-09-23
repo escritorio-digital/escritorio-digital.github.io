@@ -9,7 +9,7 @@
 }
 
 .empty-message {
-  @apply text-center text-gray-500 h-full flex items-center justify-center;
+  @apply text-center text-gray-600 h-full flex items-center justify-center;
   font-size: 1rem;
   font-size: clamp(1rem, 3cqw, 1.6rem);
 }

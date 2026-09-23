@@ -53,14 +53,14 @@ export const ScoreboardWidget: FC = () => {
             <div key={player.id} className="player-row">
               <span className="player-name">{player.name}</span>
               <div className="player-controls">
-                <button onClick={() => updateScore(player.id, -1)} className="score-button minus">
+                <button onClick={() => updateScore(player.id, -1)} className="score-button minus" title={t('widgets.scoreboard.subtract_point')}>
                   <Minus size={16} />
                 </button>
                 <span className="player-score">{player.score}</span>
-                <button onClick={() => updateScore(player.id, 1)} className="score-button plus">
+                <button onClick={() => updateScore(player.id, 1)} className="score-button plus" title={t('widgets.scoreboard.add_point')}>
                   <Plus size={16} />
                 </button>
-                <button onClick={() => removePlayer(player.id)} className="remove-button">
+                <button onClick={() => removePlayer(player.id)} className="remove-button" title={t('widgets.scoreboard.remove_player')}>
                   <Trash2 size={16} />
                 </button>
               </div>

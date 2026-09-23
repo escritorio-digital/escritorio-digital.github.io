@@ -30,6 +30,7 @@ export const HtmlSandboxWidget: FC = () => {
             value={code}
             onChange={(e) => setCode(e.target.value)}
             spellCheck="false"
+            aria-label={t('widgets.html_sandbox.code_label')}
             className="code-textarea"
           />
         </div>

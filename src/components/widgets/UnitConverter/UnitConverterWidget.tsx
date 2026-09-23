@@ -128,8 +128,8 @@ export const UnitConverterWidget: FC = () => {
 
       <div className="conversion-interface">
         <div className="unit-group">
-          <input type="number" value={fromValue} onChange={handleFromChange} />
-          <select value={fromUnit} onChange={e => { setFromUnit(e.target.value); setIsTyping('from'); }}>
+          <input type="number" aria-label={t('widgets.unit_converter.from_value')} value={fromValue} onChange={handleFromChange} />
+          <select aria-label={t('widgets.unit_converter.from_unit')} value={fromUnit} onChange={e => { setFromUnit(e.target.value); setIsTyping('from'); }}>
             {availableUnits.map(unit => <option key={unit} value={unit}>{t(`widgets.unit_converter.units.${unit}`)}</option>)}
           </select>
         </div>
@@ -139,8 +139,8 @@ export const UnitConverterWidget: FC = () => {
         </button>
 
         <div className="unit-group">
-          <input type="number" value={toValue} onChange={handleToChange} />
-          <select value={toUnit} onChange={e => { setToUnit(e.target.value); setIsTyping('to'); }}>
+          <input type="number" aria-label={t('widgets.unit_converter.to_value')} value={toValue} onChange={handleToChange} />
+          <select aria-label={t('widgets.unit_converter.to_unit')} value={toUnit} onChange={e => { setToUnit(e.target.value); setIsTyping('to'); }}>
             {availableUnits.map(unit => <option key={unit} value={unit}>{t(`widgets.unit_converter.units.${unit}`)}</option>)}
           </select>
         </div>

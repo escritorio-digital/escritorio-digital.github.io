@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation, Trans } from 'react-i18next';
+import { useEscapeKey } from '../../hooks/useEscapeKey';
 import { X } from 'lucide-react';
 
 interface CreditsModalProps {
@@ -9,6 +10,7 @@ interface CreditsModalProps {
 
 export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) => {
   const { t, i18n } = useTranslation();
+  useEscapeKey(isOpen, onClose);
   if (!isOpen) return null;
 
   const lang = (i18n.resolvedLanguage || i18n.language || 'es').split('-')[0];
@@ -73,7 +75,7 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
       >
         <header className="p-4 border-b flex justify-between items-center">
           <h2 className="text-xl font-bold">{t('licenses.title')}</h2>
-          <button onClick={onClose} className="p-1 rounded-full hover:bg-black/10"><X size={20}/></button>
+          <button onClick={onClose} className="p-1 rounded-full hover:bg-black/10" aria-label={t('desktop.window_close')} title={t('desktop.window_close')}><X size={20}/></button>
         </header>
 
         <div className="p-6 overflow-y-auto text-sm space-y-4">
@@ -156,6 +158,21 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
                   ))}
                 </tbody>
               </table>
+            </div>
+
+            <div>
+              <h4 className="font-semibold">{t('licenses.images_title')}</h4>
+              <ul className="list-disc list-inside space-y-1">
+              <li>{t('licenses.images_generated')}</li>
+              <li>
+                {t('licenses.wikipedia_icon')}{' '}
+                <a href="https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2.svg" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Wikimedia Commons</a>
+                {', '}
+                <a href={ccBySa3Deeds[lang] ?? ccBySa3Deeds.es} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">CC BY-SA 3.0</a>
+                {'. '}
+                <a href="https://foundation.wikimedia.org/wiki/Policy:Trademark_policy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{t('licenses.wikipedia_trademark')}</a>
+              </li>
+              </ul>
             </div>
 
             <div>

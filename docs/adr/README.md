@@ -21,3 +21,4 @@ están en [CHANGES.md](../../CHANGES.md).
 | [6](0006-el-catalogo-de-la-comunidad-se-lee-de-una-hoja-de-calculo-publicada.md) | El catálogo de la comunidad se lee de una hoja de cálculo publicada | aceptado |
 | [7](0007-el-codigo-y-los-contenidos-llevan-licencias-distintas.md) | El código y los contenidos llevan licencias distintas | aceptado |
 | [8](0008-el-escritorio-no-cuenta-visitas.md) | El escritorio no cuenta visitas | aceptado |
+| [9](0009-el-texto-sobre-colores-del-tema-se-elige-por-contraste.md) | El texto sobre colores del tema se elige por contraste | aceptado |

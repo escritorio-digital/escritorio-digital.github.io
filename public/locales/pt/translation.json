@@ -203,7 +203,7 @@
     "community_repo_label": "Repositório de aplicações:",
     "community_telegram_label": "Comunidade no Telegram:",
     "ai_title": "Uso de IA",
-    "ai_text": "A versão atual do Ambiente de trabalho digital foi programada com a ajuda de IA: os autores decidiram o design e as funções, e testaram o programa muitas vezes, em situações diferentes, para detetar erros e aspetos a melhorar.",
+    "ai_text": "A versão atual do Ambiente de trabalho digital foi programada com a ajuda de IA: os autores decidiram o design e as funções, e testaram o programa muitas vezes, em situações diferentes, para detetar erros e aspetos a melhorar. Os fundos de ecrã foram gerados com o Gemini, e os ícones, também com IA.",
     "privacy_title": "Privacidade",
     "privacy_text": "A configuração do ambiente de trabalho e os dados de cada ferramenta são guardados apenas neste navegador. A aplicação não recolhe estatísticas de utilização. Algumas ferramentas ligam-se a outros sites para funcionar; estão indicadas em «Créditos e licenças»."
   },
@@ -231,6 +231,10 @@
       "qplay": "Concursos da ferramenta QPlay, que se abrem numa janela nova.",
       "boardlive": "Quadro colaborativo da ferramenta BoardLive, que se abre numa janela nova."
     },
+    "images_title": "Imagens",
+    "images_generated": "Os fundos de ecrã (feitos com o Gemini) e os ícones foram gerados com IA e são publicados com a licença dos conteúdos, CC BY-SA 4.0.",
+    "wikipedia_icon": "Ícone da Wikipédia: adaptação do logótipo da Wikipédia, de Nohat (conceito de Paullusmagnus), Wikimedia,",
+    "wikipedia_trademark": "Wikipédia é uma marca registada da Wikimedia Foundation.",
     "sounds_title": "Sons",
     "sound_dice": "Dados",
     "sound_alarm": "Alarme",
@@ -382,7 +386,9 @@
       "badges_tab": "Distintivos",
       "alerts_tab": "Alertas",
       "no_students_message": "Não há estudantes na lista para esta data.",
-      "add_students_instruction": "Adicione estudantes ou importe um arquivo CSV."
+      "add_students_instruction": "Adicione estudantes ou importe um arquivo CSV.",
+      "add_student": "Adicionar estudante",
+      "export_without_names_tooltip": "Exportar sem nomes: cada estudante aparece apenas com o seu número"
     },
     "scientific_calculator": {
       "title": "Calculadora Científica",
@@ -420,7 +426,9 @@
         "outubro",
         "novembro",
         "dezembro"
-      ]
+      ],
+      "previous_month": "Mês anterior",
+      "next_month": "Mês seguinte"
     },
     "image_carousel": {
       "title": "Carrossel de Imagens",
@@ -452,7 +460,11 @@
         "celsius": "Celsius",
         "fahrenheit": "Fahrenheit",
         "kelvin": "Kelvin"
-      }
+      },
+      "from_value": "Valor de origem",
+      "to_value": "Valor convertido",
+      "from_unit": "Unidade de origem",
+      "to_unit": "Unidade de destino"
     },
     "stopwatch": {
       "title": "Cronômetro",
@@ -497,7 +509,8 @@
       "icon_alt": "Gerador de QR",
       "placeholder": "Insira texto para gerar um código QR.",
       "input_placeholder": "Escreva o texto ou URL aqui...",
-      "generate_button": "Gerar QR"
+      "generate_button": "Gerar QR",
+      "image_label": "Código QR"
     },
     "work_gestures": {
       "title": "Gestos de Trabalho",
@@ -528,7 +541,8 @@
       "your_javascript": "Seu JavaScript",
       "show_preview": "Mostrar Prévia",
       "show_code": "Mostrar Código",
-      "preview_title": "Prévia HTML"
+      "preview_title": "Prévia HTML",
+      "code_label": "Código HTML"
     },
     "work_list": {
       "title": "Lista de Tarefas",
@@ -537,7 +551,10 @@
       "download_csv": "Baixar como CSV",
       "replace_list_confirm": "Deseja substituir a lista atual pelas tarefas do arquivo? \n(Clique em \"Cancelar\" para adicioná-las ao final)",
       "csv_error": "Houve um erro ao ler o arquivo CSV. Verifique o formato.",
-      "double_click_edit": "Clique duas vezes em uma tarefa para editá-la."
+      "double_click_edit": "Clique duas vezes em uma tarefa para editá-la.",
+      "edit_task": "Editar tarefa",
+      "delete_task": "Eliminar tarefa",
+      "mark_done": "Marcar como feita: {{task}}"
     },
     "scoreboard": {
       "title": "Placar de Pontos",
@@ -546,7 +563,10 @@
       "empty_message": "Adicione uma equipe ou jogador para começar.",
       "input_placeholder": "Nome da equipe ou jogador...",
       "add_button": "Adicionar",
-      "reset_button_title": "Reiniciar tudo para zero"
+      "reset_button_title": "Reiniciar tudo para zero",
+      "subtract_point": "Subtrair um ponto",
+      "add_point": "Somar um ponto",
+      "remove_player": "Remover equipa ou jogador"
     },
     "sound_meter": {
       "title": "Medidor de Ruído",
@@ -576,7 +596,12 @@
       "icon_alt": "Jogo da Memória"
     },
     "metronome": {
-      "title": "Metrônomo"
+      "title": "Metrônomo",
+      "start": "Iniciar",
+      "stop": "Parar",
+      "tempo_label": "Tempo (BPM)",
+      "fewer_beats": "Menos tempos por compasso",
+      "more_beats": "Mais tempos por compasso"
     },
     "notepad": {
       "title": "Bloco de Notas",
@@ -683,7 +708,9 @@
         "moscow": "Moscou",
         "dubai": "Dubai",
         "shanghai": "Xangai"
-      }
+      },
+      "remove_clock": "Remover relógio",
+      "timezone_label": "Fuso horário"
     },
     "random_spinner": {
       "title": "Roleta Aleatória",
@@ -705,7 +732,10 @@
       "options_header": "Opções",
       "add_option_placeholder": "Adicionar opção...",
       "load_from_file": "Carregar de ficheiro",
-      "remove_after_select": "Remover opção após sair"
+      "remove_after_select": "Remover opção após sair",
+      "spin": "Girar",
+      "add_option": "Adicionar opção",
+      "remove_option": "Remover opção"
     },
     "traffic_light": {
       "title": "Semáforo",
@@ -765,7 +795,8 @@
       "draw": "É um empate!",
       "next_turn": "Próxima vez:",
       "next_round": "Próxima Rodada",
-      "reset_all": "Reiniciar tudo"
+      "reset_all": "Reiniciar tudo",
+      "cell": "Casa {{number}}"
     },
     "iframe": {
       "title": "Visualizador Web",
@@ -976,7 +1007,9 @@
       "move_up": "Mover favorito para cima",
       "move_down": "Mover favorito para baixo",
       "collapse_list": "Ocultar lista",
-      "expand_list": "Mostrar lista"
+      "expand_list": "Mostrar lista",
+      "filter_level_label": "Nível",
+      "filter_area_label": "Área"
     },
     "chatgpt_ia_edu": {
       "title": "Comunidade ChatGPT-IA-edu",

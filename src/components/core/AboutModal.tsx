@@ -1,9 +1,11 @@
 import React from 'react';
 import { ExternalLink, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useEscapeKey } from '../../hooks/useEscapeKey';
 
 export const AboutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
   const { t, i18n } = useTranslation();
+  useEscapeKey(isOpen, onClose);
   if (!isOpen) return null;
 
   const appVersion = import.meta.env.VITE_APP_VERSION ?? 'dev';
@@ -24,7 +26,7 @@ export const AboutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
       >
         <header className="p-4 border-b flex justify-between items-center">
           <h2 className="text-xl font-bold">{t('about.title')}</h2>
-          <button onClick={onClose} className="p-1 rounded-full hover:bg-black/10">
+          <button onClick={onClose} className="p-1 rounded-full hover:bg-black/10" aria-label={t('desktop.window_close')} title={t('desktop.window_close')}>
             <X size={20} />
           </button>
         </header>

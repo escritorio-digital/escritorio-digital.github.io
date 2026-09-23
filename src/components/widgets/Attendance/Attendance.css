@@ -45,7 +45,7 @@
 }
 
 .empty-state {
-  @apply h-full flex flex-col items-center justify-center text-center text-gray-500;
+  @apply h-full flex flex-col items-center justify-center text-center text-gray-600;
   font-size: clamp(0.9rem, 2.4cqw, 1.2rem);
 }
 
@@ -76,13 +76,14 @@
   font-size: 0.75rem;
   font-size: clamp(0.7rem, 1.8cqw, 0.95rem);
 }
-.status-btn.present { @apply border-green-500 text-green-600; }
-.status-btn.absent { @apply border-red-500 text-red-600; }
-.status-btn.late { @apply border-yellow-500 text-yellow-600; }
+/* Tonos 700: contraste de al menos 4,5:1 con el blanco en los dos estados */
+.status-btn.present { @apply border-green-700 text-green-700; }
+.status-btn.absent { @apply border-red-700 text-red-700; }
+.status-btn.late { @apply border-amber-700 text-amber-700; }
 
-.status-btn.present.active { @apply bg-green-500 text-white; }
-.status-btn.absent.active { @apply bg-red-500 text-white; }
-.status-btn.late.active { @apply bg-yellow-500 text-white; }
+.status-btn.present.active { @apply bg-green-700 text-white; }
+.status-btn.absent.active { @apply bg-red-700 text-white; }
+.status-btn.late.active { @apply bg-amber-700 text-white; }
 
 .badge-btn, .alert-btn {
   @apply text-2xl rounded-full w-9 h-9 flex items-center justify-center transition-all duration-200;

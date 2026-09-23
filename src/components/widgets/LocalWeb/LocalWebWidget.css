@@ -43,11 +43,11 @@
 }
 
 .local-web-storage-ok {
-  @apply text-green-600;
+  @apply text-green-700;
 }
 
 .local-web-storage-warn {
-  @apply text-amber-600;
+  @apply text-amber-700;
 }
 
 .local-web-storage-danger {

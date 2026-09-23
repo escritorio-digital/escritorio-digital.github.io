@@ -32,6 +32,7 @@ export const QrCodeGeneratorWidget: FC = () => {
             level={"L"}
             includeMargin={true}
             className="qr-code-svg"
+            title={t('widgets.qr_code_generator.image_label')}
           />
         ) : (
           <div className="qr-placeholder">

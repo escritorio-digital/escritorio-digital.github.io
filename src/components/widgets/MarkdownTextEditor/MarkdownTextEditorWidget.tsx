@@ -57,11 +57,13 @@ function renderMarkdownInto(
 ) {
     const tokens: Array<{ token: string; html: string }> = [];
     const pushToken = (latex: string, displayMode: boolean) => {
-        const html = katex.renderToString(latex.trim(), {
+        const rendered = katex.renderToString(latex.trim(), {
             throwOnError: false,
             displayMode,
             output: options.katexOutput,
         });
+        // Una fórmula en bloque puede desplazarse en horizontal: debe poder recibir el foco.
+        const html = displayMode ? rendered.replace('<span class="katex-display">', '<span class="katex-display" tabindex="0">') : rendered;
         const token = `%%MATH_${tokens.length}%%`;
         tokens.push({ token, html });
         return token;
@@ -643,6 +645,7 @@ export const MarkdownTextEditorWidget: FC<{ instanceId?: string }> = ({ instance
                             value={input}
                             onChange={(event) => setInput(event.target.value)}
                             spellCheck
+                            aria-label={t('widgets.markdown_text_editor.editor_title')}
                             className="editor-textarea"
                         />
                     </div>

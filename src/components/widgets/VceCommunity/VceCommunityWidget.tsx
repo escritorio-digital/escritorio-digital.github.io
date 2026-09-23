@@ -400,12 +400,14 @@ export const VceCommunityWidget = () => {
                         <input
                             type="text"
                             className="vce-search"
+                            aria-label={t('widgets.vce.search_placeholder')}
                             value={searchTerm}
                             onChange={(event) => setSearchTerm(event.target.value)}
                             placeholder={t('widgets.vce.search_placeholder')}
                         />
                         <select
                             className="vce-select"
+                            aria-label={t('widgets.vce.filter_level_label')}
                             value={levelFilter}
                             onChange={(event) => setLevelFilter(event.target.value)}
                         >
@@ -416,6 +418,7 @@ export const VceCommunityWidget = () => {
                         </select>
                         <select
                             className="vce-select"
+                            aria-label={t('widgets.vce.filter_area_label')}
                             value={areaFilter}
                             onChange={(event) => setAreaFilter(event.target.value)}
                         >
@@ -490,17 +493,10 @@ export const VceCommunityWidget = () => {
                             key={app.url}
                             className={`vce-item vce-item-favorite${activeApp?.url === app.url ? ' vce-item-active' : ''}`}
                             onClick={() => handleSelectApp(app)}
-                            role="button"
-                            tabIndex={0}
-                            onKeyDown={(event) => {
-                                if (event.key === 'Enter' || event.key === ' ') {
-                                    event.preventDefault();
-                                    handleSelectApp(app);
-                                }
-                            }}
                         >
                             <div className="vce-item-header">
-                                <div className="vce-item-title">{app.title}</div>
+                                {/* El título es el botón que elige la app con teclado; el clic sube hasta la ficha. */}
+                                <button type="button" className="vce-item-title">{app.title}</button>
                                 <div className="vce-fav-actions">
                                     <button
                                         type="button"
@@ -557,17 +553,10 @@ export const VceCommunityWidget = () => {
                             key={app.url}
                             className={`vce-item${activeApp?.url === app.url ? ' vce-item-active' : ''}`}
                             onClick={() => handleSelectApp(app)}
-                            role="button"
-                            tabIndex={0}
-                            onKeyDown={(event) => {
-                                if (event.key === 'Enter' || event.key === ' ') {
-                                    event.preventDefault();
-                                    handleSelectApp(app);
-                                }
-                            }}
                         >
                             <div className="vce-item-header">
-                                <div className="vce-item-title">{app.title}</div>
+                                {/* El título es el botón que elige la app con teclado; el clic sube hasta la ficha. */}
+                                <button type="button" className="vce-item-title">{app.title}</button>
                                 <button
                                     type="button"
                                     className="vce-fav-toggle"

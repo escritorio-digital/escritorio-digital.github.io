@@ -49,7 +49,7 @@ export function DesktopStatusOverlays({
             <button
                 onClick={onToggleFullscreen}
                 onContextMenu={onFullscreenContextMenu}
-                className="fixed top-4 left-4 z-[2] p-2 rounded-full text-white/80 bg-black/15 backdrop-blur-sm hover:bg-black/30 hover:text-white transition-colors"
+                className="fixed top-4 left-4 z-[2] p-2 rounded-full text-white bg-black/45 backdrop-blur-sm hover:bg-black/60 transition-colors"
                 title={isFullscreen ? fullscreenExitLabel : fullscreenEnterLabel}
                 aria-label={isFullscreen ? fullscreenExitLabel : fullscreenEnterLabel}
             >
@@ -58,7 +58,7 @@ export function DesktopStatusOverlays({
             {showDateTime && (
                 <div
                     ref={clockRef}
-                    className="fixed top-4 right-4 z-[1] pointer-events-none select-none text-white bg-black/45 backdrop-blur-md rounded-2xl px-6 py-5 shadow-lg"
+                    className="fixed top-4 right-4 z-[1] pointer-events-none select-none text-white bg-black/60 backdrop-blur-md rounded-2xl px-6 py-5 shadow-lg"
                 >
                     <div className="text-lg opacity-90">{formattedDate}</div>
                     <div className="text-4xl font-semibold leading-tight">{renderClockTime(formattedTime)}</div>
@@ -80,7 +80,7 @@ export function DesktopStatusOverlays({
                                 );
                             })}
                             {activeAlarms.length > 3 && (
-                                <div className="flex items-center gap-2 pl-5 text-xs text-white/80">
+                                <div className="flex items-center gap-2 pl-5 text-xs text-white/90">
                                     <span>+{activeAlarms.length - 3}</span>
                                 </div>
                             )}
@@ -90,13 +90,13 @@ export function DesktopStatusOverlays({
             )}
             {showSystemStats && statsRows.length > 0 && (
                 <div
-                    className="fixed right-4 z-[1] pointer-events-none select-none text-white bg-black/45 backdrop-blur-md rounded-2xl px-5 py-4 shadow-lg min-w-[220px]"
+                    className="fixed right-4 z-[1] pointer-events-none select-none text-white bg-black/60 backdrop-blur-md rounded-2xl px-5 py-4 shadow-lg min-w-[220px]"
                     style={{ top: showDateTime && clockBottom != null ? `${Math.round(clockBottom + 5)}px` : '1rem' }}
                 >
                     <div className="space-y-1 text-sm">
                         {statsRows.map((row) => (
                             <div key={row.label} className="flex justify-between gap-4">
-                                <span className="text-white/70">{row.label}</span>
+                                <span className="text-white/85">{row.label}</span>
                                 <span className="text-white">{row.value}</span>
                             </div>
                         ))}

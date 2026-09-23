@@ -100,14 +100,14 @@ export const GlobalClocksWidget: FC = () => {
               <span className="time-display">
                 {renderTime(currentTime.toLocaleTimeString(undefined, { timeZone: tz }))}
               </span>
-              <button onClick={() => removeClock(tz)} className="remove-clock-btn"><Trash2 size={16} /></button>
+              <button onClick={() => removeClock(tz)} className="remove-clock-btn" title={t('widgets.global_clocks.remove_clock')}><Trash2 size={16} /></button>
             </div>
           );
         })}
       </div>
 
       <div className="clocks-footer">
-        <select value={newTimezone} onChange={e => setNewTimezone(e.target.value)}>
+        <select aria-label={t('widgets.global_clocks.timezone_label')} value={newTimezone} onChange={e => setNewTimezone(e.target.value)}>
           {TIMEZONES.filter(tz => !selectedTimezones.includes(tz.timezone)).map(tz => (
             <option key={tz.timezone} value={tz.timezone}>{t(`widgets.global_clocks.cities.${tz.cityKey}`)}</option>
           ))}

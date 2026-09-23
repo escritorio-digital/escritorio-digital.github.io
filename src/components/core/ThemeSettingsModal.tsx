@@ -1,6 +1,7 @@
 import React from 'react';
 import { X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useEscapeKey } from '../../hooks/useEscapeKey';
 import { ThemeSettings } from './ThemeSettings';
 
 interface ThemeSettingsModalProps {
@@ -10,6 +11,7 @@ interface ThemeSettingsModalProps {
 
 export const ThemeSettingsModal: React.FC<ThemeSettingsModalProps> = ({ isOpen, onClose }) => {
     const { t } = useTranslation();
+    useEscapeKey(isOpen, onClose);
     if (!isOpen) return null;
 
     return (
@@ -26,7 +28,7 @@ export const ThemeSettingsModal: React.FC<ThemeSettingsModalProps> = ({ isOpen, 
             >
                 <header className="p-4 border-b flex justify-between items-center">
                     <h2 className="text-xl font-bold">{t('settings.theme.modal_title')}</h2>
-                    <button onClick={onClose} className="p-1 rounded-full hover:bg-black/10">
+                    <button onClick={onClose} className="p-1 rounded-full hover:bg-black/10" aria-label={t('desktop.window_close')} title={t('desktop.window_close')}>
                         <X size={20} />
                     </button>
                 </header>

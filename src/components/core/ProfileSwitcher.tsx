@@ -568,7 +568,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
         <button
           onClick={() => setIsOpen(!isOpen)}
           onContextMenu={onOpenContextMenu}
-          className="w-56 h-12 px-4 bg-black/20 backdrop-blur-md rounded-full text-white hover:bg-black/40 transition-colors flex items-center justify-between"
+          className="w-56 h-12 px-4 bg-black/55 backdrop-blur-md rounded-full text-white hover:bg-black/70 transition-colors flex items-center justify-between"
           title={t('settings.profiles.switcher_title')}
         >
           <span className="font-semibold">{getDisplayName(activeProfileName)}</span>
