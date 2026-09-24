@@ -23,7 +23,7 @@ Digitaler Desktop ist eine Arbeitsfläche mit „Fenstern“ für den Unterricht
 
 ### Zeit und Rhythmus
 
-- **Timer**: Countdown für Stationen, kurze Tests, Arbeit in Runden usw.
+- **Alarm / Timer**: Alarme zu einer festen Uhrzeit und Countdown für Stationen, kurze Tests, Arbeit in Runden usw.
 - **Stoppuhr**: Zeiten messen (Experimente, Challenges, Sport, Dynamiken).
 - **Metronom**: gleichmäßiger Puls. Nützlich für Musik, rhythmisches Lesen, Routinen oder Intervallarbeit.
 - **Weltuhren**: zeigt die Uhrzeiten mehrerer Städte zum Vergleich im Unterricht.
@@ -44,6 +44,7 @@ Digitaler Desktop ist eine Arbeitsfläche mit „Fenstern“ für den Unterricht
 
 - **Notizblock**: schnelle Notizen für Anweisungen, Ideen, Beispiele, Listen usw.
 - **Zeichenfläche**: freihändig zeichnen (Skizzen, Diagramme, Concept Maps).
+- **Auf dem Bildschirm annotieren**: unterstreichen, markieren und zeichnen über allem, was auf dem Desktop zu sehen ist, während einer Erklärung.
 - **Bilder‑Karussell**: Bildsammlung anzeigen (Tafeln, Aufgaben, Laborfotos, Karten …).
 - **HTML‑Sandbox**: Bereich für vorbereitete Inhalte.
 - **BoardLive**: kollaboratives Whiteboard in Echtzeit.
@@ -54,7 +55,6 @@ Digitaler Desktop ist eine Arbeitsfläche mit „Fenstern“ für den Unterricht
 - **Web‑Viewer**: eine Webseite im Desktop öffnen, ohne den Tab zu wechseln.
 - **Lokale Webs**: Webseiten im Browser speichern (ZIP oder Ordner) und offline nutzen.
 - **Datei-Explorer**: lokale Dateien öffnen (PDF, Bilder, Text und Markdown, Audio und Video).
-- **Live-Verbindung**: für die komfortable Anzeige von Web‑Inhalten oder externen Ressourcen während der Erklärung.
 - **Wikipedia**: schnelle Suche mit Sprachwechsel für Unterrichtsthemen.
 
 #### Ed-Dateien: so nutzt du es
@@ -97,9 +97,9 @@ Dieses Widget funktioniert wie ein Ablagesystem im Browser.
 
 ## Ideen für den Unterricht
 
-- **Start der Stunde**: Aufgabenliste + Timer + Ampel.
+- **Start der Stunde**: Aufgabenliste + Alarm / Timer + Ampel.
 - **Erklärung**: Markdown-Texteditor + Zeichenfläche + Web‑Viewer.
-- **Kooperativ**: Gruppengenerator + Timer + Lautstärke-Messgerät.
+- **Kooperativ**: Gruppengenerator + Alarm / Timer + Lautstärke-Messgerät.
 - **Gamification**: Zufalls-Spinner + Würfel + Punktestand.
 
 ---

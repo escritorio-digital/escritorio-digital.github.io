@@ -25,7 +25,7 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 
 ### Temps et rythme
 
-- **Minuteur** : compte à rebours pour ateliers, évaluations courtes, travail par tours, etc.
+- **Alarme / Minuteur** : alarmes à heure fixe et compte à rebours pour ateliers, évaluations courtes, travail par tours, etc.
 - **Chronomètre** : mesure des temps (expériences, défis, EPS, dynamiques).
 - **Métronome** : marque un tempo constant. Utile pour la musique, la lecture rythmée, les routines ou le travail par intervalles.
 - **Horloges mondiales** : affiche l’heure de plusieurs villes pour comparer en classe.
@@ -46,6 +46,7 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 
 - **Bloc‑notes** : notes rapides pour consignes, idées, exemples, listes, etc.
 - **Tableau de dessin** : dessin à main levée (schémas, graphiques, cartes conceptuelles, diagrammes).
+- **Annoter sur l'écran** : soulignez, signalez et dessinez sur tout ce qui apparaît sur le bureau pendant une explication.
 - **Carrousel d’images** : afficher une collection d’images (planches, exercices, photos de labo, cartes…).
 - **Sandbox HTML** : espace pour afficher des contenus préparés.
 - **BoardLive** : tableau collaboratif en temps réel.
@@ -56,7 +57,6 @@ Bureau Numérique est un tableau de travail avec des « fenêtres » pensé pour
 - **Visionneuse web** : ouvre une page web dans le bureau sans changer d’onglet.
 - **Web local** : enregistrez des sites dans le navigateur (ZIP ou dossier) et exécutez-les hors ligne.
 - **Explorateur de fichiers** : ouvrir des fichiers locaux (PDF, images, texte et Markdown, audio et vidéo).
-- **Connexion en direct** : pour afficher confortablement du contenu web ou des ressources externes pendant l’explication.
 - **Wikipedia** : recherche rapide avec changement de langue pour les sujets de classe.
 
 #### Fichiers Ed : comment l’utiliser
@@ -99,9 +99,9 @@ Ce widget fonctionne comme un classeur dans le navigateur.
 
 ## Idées d’usage en classe
 
-- **Début de séance** : Liste de tâches + Minuteur + Feu tricolore.
+- **Début de séance** : Liste de tâches + Alarme / Minuteur + Feu tricolore.
 - **Explication** : Éditeur de textes Markdown + Tableau de dessin + Visionneuse web.
-- **Coopératif** : Générateur de groupes + Minuteur + Sonomètre.
+- **Coopératif** : Générateur de groupes + Alarme / Minuteur + Sonomètre.
 - **Gamification** : Roue aléatoire + Dé + Tableau de scores.
 
 ---

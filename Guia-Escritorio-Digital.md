@@ -26,7 +26,7 @@ Escritorio Digital es una pizarra de trabajo con “ventanas” pensada para el 
 
 ### Tiempo y ritmo
 
-- **Temporizador**: cuenta atrás para actividades por estaciones, exámenes cortos, trabajo por turnos, etc.
+- **Alarma / Temporizador**: alarmas a una hora fija y cuenta atrás para actividades por estaciones, exámenes cortos, trabajo por turnos, etc.
 - **Cronómetro**: mide tiempos (experimentos, retos, educación física, dinámicas).
 - **Metrónomo**: marca un pulso constante. Útil para música, lectura rítmica, dinámicas de clase o trabajo por intervalos.
 - **Relojes mundiales**: muestra horas de ciudades para compararlas en clase.
@@ -47,6 +47,7 @@ Escritorio Digital es una pizarra de trabajo con “ventanas” pensada para el 
 
 - **Bloc de notas**: notas rápidas para consignas, ideas, ejemplos, listas, etc.
 - **Pizarra de dibujo**: dibuja a mano alzada (esquemas, gráficas, mapas conceptuales, diagramas).
+- **Anotar en pantalla**: subraya, señala y dibuja sobre todo lo que se ve en el escritorio durante una explicación.
 - **Carrusel de imágenes**: muestra una colección de imágenes (láminas, ejercicios, fotos de laboratorio, mapas…).
 - **Sandbox HTML**: espacio para mostrar contenidos preparados.
 - **BoardLive**: pizarra colaborativa en tiempo real.
@@ -57,7 +58,6 @@ Escritorio Digital es una pizarra de trabajo con “ventanas” pensada para el 
 - **Visor web**: abre una página web dentro del escritorio para usar un recurso online sin cambiar de pestaña.
 - **Web local**: guarda webs en tu navegador (desde ZIP o carpeta) y ejecútalas sin conexión.
 - **Explorador de archivos**: abre archivos locales (PDF, imágenes, texto y Markdown, HTML, audio y vídeo).
-- **Conexión en Directo**: pensado para mostrar contenido web o recursos externos de forma cómoda durante la explicación.
 - **Wikipedia**: búsqueda rápida con cambio de idioma para términos de clase.
 
 #### Archivos Ed: cómo usarlo
@@ -111,9 +111,9 @@ Este widget está pensado para abrir webs hechas con IA o recursos offline para 
 
 ## Ideas de uso en clase
 
-- **Inicio de sesión**: Lista de tareas + Temporizador + Semáforo.
+- **Inicio de sesión**: Lista de tareas + Alarma / Temporizador + Semáforo.
 - **Explicación**: Editor de textos Markdown + Pizarra de dibujo + Visor web.
-- **Cooperativo**: Generador de grupos + Temporizador + Medidor de sonido.
+- **Cooperativo**: Generador de grupos + Alarma / Temporizador + Medidor de sonido.
 - **Gamificación**: Ruleta aleatoria + Dado + Marcador de puntos.
 
 ---

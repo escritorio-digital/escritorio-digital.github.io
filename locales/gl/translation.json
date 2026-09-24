@@ -227,7 +227,9 @@
       "wikipedia": "Buscas da ferramenta Wikipedia.",
       "directo": "Votación simple, Escala de valoración, Nube de palabras, Choiva de ideas e votos, Muro interactivo e Tickets de saída, que se abren nunha xanela nova.",
       "qplay": "Concursos da ferramenta QPlay, que se abren nunha xanela nova.",
-      "boardlive": "Lousa colaborativa da ferramenta BoardLive, que se abre nunha xanela nova."
+      "boardlive": "Lousa colaborativa da ferramenta BoardLive, que se abre nunha xanela nova.",
+      "chatgpt": "Páxina da comunidade, que mostra a ferramenta Comunidade ChatGPT-IA-edu ao abrirse.",
+      "vce": "Repositorio de aplicacións da comunidade, que o visor web mostra ao abrirse."
     },
     "images_title": "Imaxes",
     "images_generated": "Os fondos de pantalla (feitos con Gemini) e as iconas xeráronse con IA e publícanse coa licenza dos contidos, CC BY-SA 4.0.",
@@ -431,7 +433,9 @@
       "select_images": "Seleccionar Imaxes",
       "slide_alt": "Diapositiva {{number}}",
       "select_new_images": "Seleccionar novas imaxes",
-      "more_images_hint": "Carga máis imaxes para navegar"
+      "more_images_hint": "Carga máis imaxes para navegar",
+      "previous": "Imaxe anterior",
+      "next": "Imaxe seguinte"
     },
     "unit_converter": {
       "title": "Conversor de Unidades",
@@ -440,7 +444,7 @@
       "swap_button_title": "Intercambiar unidades",
       "categories": {
         "length": "Lonxitude",
-        "weight": "Peso",
+        "weight": "Masa",
         "temperature": "Temperatura"
       },
       "units": {
@@ -588,7 +592,9 @@
       "win_title": "¡Gañaches!",
       "win_message": "Completáchelo en {{moves}} movementos.",
       "play_again": "Xogar de Novo",
-      "icon_alt": "Memorama"
+      "icon_alt": "Memorama",
+      "card": "Carta {{number}}",
+      "card_image": "Carta {{number}}: imaxe {{image}}"
     },
     "metronome": {
       "title": "Metrónomo",
@@ -684,7 +690,9 @@
         "normal": "Normal (4x4)",
         "hard": "Difícil (5x5)"
       },
-      "shuffle_button": "Barallar"
+      "shuffle_button": "Barallar",
+      "piece": "Peza {{number}}",
+      "empty": "Oco"
     },
     "global_clocks": {
       "title": "Reloxos Mundiais",
@@ -735,7 +743,12 @@
     "traffic_light": {
       "title": "Semáforo",
       "icon_alt": "Semáforo",
-      "tooltip": "Fai clic para cambiar de cor"
+      "tooltip": "Fai clic para cambiar de cor",
+      "colors": {
+        "red": "vermello",
+        "yellow": "amarelo",
+        "green": "verde"
+      }
     },
     "alarm": {
       "title": "Alarma / Temporizador",

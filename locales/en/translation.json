@@ -227,7 +227,9 @@
       "wikipedia": "Searches in the Wikipedia tool.",
       "directo": "Simple voting, Rating scale, Word cloud, Brainstorming and voting, Interactive wall and Exit tickets, which open in a new window.",
       "qplay": "Quizzes in the QPlay tool, which open in a new window.",
-      "boardlive": "Collaborative whiteboard in the BoardLive tool, which opens in a new window."
+      "boardlive": "Collaborative whiteboard in the BoardLive tool, which opens in a new window.",
+      "chatgpt": "Community page, shown by the ChatGPT-IA-edu community tool when it opens.",
+      "vce": "Repository of community apps, shown by the web viewer when it opens."
     },
     "images_title": "Images",
     "images_generated": "The wallpapers (made with Gemini) and the icons were generated with AI and are published under the content licence, CC BY-SA 4.0.",
@@ -431,7 +433,9 @@
       "select_images": "Select Images",
       "slide_alt": "Slide {{number}}",
       "select_new_images": "Select new images",
-      "more_images_hint": "Load more images to navigate"
+      "more_images_hint": "Load more images to navigate",
+      "previous": "Previous image",
+      "next": "Next image"
     },
     "unit_converter": {
       "title": "Unit Converter",
@@ -440,7 +444,7 @@
       "swap_button_title": "Swap units",
       "categories": {
         "length": "Length",
-        "weight": "Weight",
+        "weight": "Mass",
         "temperature": "Temperature"
       },
       "units": {
@@ -588,7 +592,9 @@
       "win_title": "You Won!",
       "win_message": "You completed it in {{moves}} moves.",
       "play_again": "Play Again",
-      "icon_alt": "Memory Game"
+      "icon_alt": "Memory Game",
+      "card": "Card {{number}}",
+      "card_image": "Card {{number}}: image {{image}}"
     },
     "metronome": {
       "title": "Metronome",
@@ -684,7 +690,9 @@
         "normal": "Normal (4x4)",
         "hard": "Hard (5x5)"
       },
-      "shuffle_button": "Shuffle"
+      "shuffle_button": "Shuffle",
+      "piece": "Piece {{number}}",
+      "empty": "Empty space"
     },
     "global_clocks": {
       "title": "World Clocks",
@@ -735,7 +743,12 @@
     "traffic_light": {
       "title": "Traffic Light",
       "icon_alt": "Traffic Light",
-      "tooltip": "Click to change color"
+      "tooltip": "Click to change color",
+      "colors": {
+        "red": "red",
+        "yellow": "yellow",
+        "green": "green"
+      }
     },
     "alarm": {
       "title": "Alarm / Timer",

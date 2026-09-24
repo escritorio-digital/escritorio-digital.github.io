@@ -227,7 +227,9 @@
       "wikipedia": "Suchen im Werkzeug Wikipedia.",
       "directo": "Einfache Abstimmung, Bewertungsskala, Wortwolke, Brainstorming und Abstimmung, Interaktive Wand und Exit-Tickets, die sich in einem neuen Fenster öffnen.",
       "qplay": "Quiz im Werkzeug QPlay, die sich in einem neuen Fenster öffnen.",
-      "boardlive": "Kollaborative Tafel im Werkzeug BoardLive, die sich in einem neuen Fenster öffnet."
+      "boardlive": "Kollaborative Tafel im Werkzeug BoardLive, die sich in einem neuen Fenster öffnet.",
+      "chatgpt": "Seite der Community, die das Werkzeug ChatGPT-IA-edu Community beim Öffnen anzeigt.",
+      "vce": "Verzeichnis der Community-Apps, das der Web-Viewer beim Öffnen anzeigt."
     },
     "images_title": "Bilder",
     "images_generated": "Die Hintergrundbilder (mit Gemini erstellt) und die Symbole wurden mit KI erzeugt und stehen unter der Lizenz der Inhalte, CC BY-SA 4.0.",
@@ -434,7 +436,9 @@
       "select_images": "Bilder auswählen",
       "slide_alt": "Folie {{number}}",
       "select_new_images": "Neue Bilder auswählen",
-      "more_images_hint": "Lade mehr Bilder, um zu navigieren"
+      "more_images_hint": "Lade mehr Bilder, um zu navigieren",
+      "previous": "Vorheriges Bild",
+      "next": "Nächstes Bild"
     },
     "unit_converter": {
       "title": "Einheitenumrechner",
@@ -443,7 +447,7 @@
       "swap_button_title": "Einheiten tauschen",
       "categories": {
         "length": "Länge",
-        "weight": "Gewicht",
+        "weight": "Masse",
         "temperature": "Temperatur"
       },
       "units": {
@@ -591,7 +595,9 @@
       "win_title": "Du hast gewonnen!",
       "win_message": "Du hast es in {{moves}} Zügen geschafft.",
       "play_again": "Nochmal spielen",
-      "icon_alt": "Memory"
+      "icon_alt": "Memory",
+      "card": "Karte {{number}}",
+      "card_image": "Karte {{number}}: Bild {{image}}"
     },
     "metronome": {
       "title": "Metronom",
@@ -687,7 +693,9 @@
         "normal": "Normal (4x4)",
         "hard": "Schwierig (5x5)"
       },
-      "shuffle_button": "Mischen"
+      "shuffle_button": "Mischen",
+      "piece": "Teil {{number}}",
+      "empty": "Leeres Feld"
     },
     "global_clocks": {
       "title": "Weltuhren",
@@ -738,7 +746,12 @@
     "traffic_light": {
       "title": "Ampel",
       "icon_alt": "Ampel",
-      "tooltip": "Klicke, um die Farbe zu wechseln"
+      "tooltip": "Klicke, um die Farbe zu wechseln",
+      "colors": {
+        "red": "rot",
+        "yellow": "gelb",
+        "green": "grün"
+      }
     },
     "alarm": {
       "title": "Alarm / Timer",

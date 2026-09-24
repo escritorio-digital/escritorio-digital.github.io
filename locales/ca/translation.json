@@ -227,7 +227,9 @@
       "wikipedia": "Cerques de l'eina Wikipedia.",
       "directo": "Votació simple, Escala de valoració, Núvol de paraules, Pluja d'idees i vots, Mur interactiu i Tiquets de sortida, que s'obren en una finestra nova.",
       "qplay": "Concursos de l'eina QPlay, que s'obren en una finestra nova.",
-      "boardlive": "Pissarra col·laborativa de l'eina BoardLive, que s'obre en una finestra nova."
+      "boardlive": "Pissarra col·laborativa de l'eina BoardLive, que s'obre en una finestra nova.",
+      "chatgpt": "Pàgina de la comunitat, que mostra l'eina Comunitat ChatGPT-IA-edu en obrir-se.",
+      "vce": "Repositori d'aplicacions de la comunitat, que el visor web mostra en obrir-se."
     },
     "images_title": "Imatges",
     "images_generated": "Els fons de pantalla (fets amb Gemini) i les icones s'han generat amb IA i es publiquen amb la llicència dels continguts, CC BY-SA 4.0.",
@@ -431,7 +433,9 @@
       "select_images": "Seleccionar Imatges",
       "slide_alt": "Diapositiva {{number}}",
       "select_new_images": "Seleccionar noves imatges",
-      "more_images_hint": "Carrega més imatges per navegar"
+      "more_images_hint": "Carrega més imatges per navegar",
+      "previous": "Imatge anterior",
+      "next": "Imatge següent"
     },
     "unit_converter": {
       "title": "Conversor d'Unitats",
@@ -440,7 +444,7 @@
       "swap_button_title": "Intercanviar unitats",
       "categories": {
         "length": "Longitud",
-        "weight": "Pes",
+        "weight": "Massa",
         "temperature": "Temperatura"
       },
       "units": {
@@ -588,7 +592,9 @@
       "win_title": "Has Guanyat!",
       "win_message": "Ho has completat en {{moves}} moviments.",
       "play_again": "Jugar de Nou",
-      "icon_alt": "Memorama"
+      "icon_alt": "Memorama",
+      "card": "Carta {{number}}",
+      "card_image": "Carta {{number}}: imatge {{image}}"
     },
     "metronome": {
       "title": "Metrònom",
@@ -684,7 +690,9 @@
         "normal": "Normal (4x4)",
         "hard": "Difícil (5x5)"
       },
-      "shuffle_button": "Barrejar"
+      "shuffle_button": "Barrejar",
+      "piece": "Peça {{number}}",
+      "empty": "Forat"
     },
     "global_clocks": {
       "title": "Rellotges Mundials",
@@ -735,7 +743,12 @@
     "traffic_light": {
       "title": "Semàfor",
       "icon_alt": "Semàfor",
-      "tooltip": "Fes clic per canviar de color"
+      "tooltip": "Fes clic per canviar de color",
+      "colors": {
+        "red": "vermell",
+        "yellow": "groc",
+        "green": "verd"
+      }
     },
     "alarm": {
       "title": "Alarma / Temporitzador",

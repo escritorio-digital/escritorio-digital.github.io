@@ -227,7 +227,9 @@
       "wikipedia": "Ricerche dello strumento Wikipedia.",
       "directo": "Votazione semplice, Scala di valutazione, Nuvola di parole, Pioggia di idee e voti, Muro interattivo e Ticket di uscita, che si aprono in una nuova finestra.",
       "qplay": "Quiz dello strumento QPlay, che si aprono in una nuova finestra.",
-      "boardlive": "Lavagna collaborativa dello strumento BoardLive, che si apre in una nuova finestra."
+      "boardlive": "Lavagna collaborativa dello strumento BoardLive, che si apre in una nuova finestra.",
+      "chatgpt": "Pagina della comunità, mostrata dallo strumento Comunità ChatGPT-IA-edu all'apertura.",
+      "vce": "Archivio di app della comunità, mostrato dal visualizzatore web all'apertura."
     },
     "images_title": "Immagini",
     "images_generated": "Gli sfondi (realizzati con Gemini) e le icone sono stati generati con l'IA e sono pubblicati con la licenza dei contenuti, CC BY-SA 4.0.",
@@ -434,7 +436,9 @@
       "select_images": "Seleziona immagini",
       "slide_alt": "Diapositiva {{number}}",
       "select_new_images": "Seleziona nuove immagini",
-      "more_images_hint": "Carica più immagini per navigare"
+      "more_images_hint": "Carica più immagini per navigare",
+      "previous": "Immagine precedente",
+      "next": "Immagine successiva"
     },
     "unit_converter": {
       "title": "Convertitore di unità",
@@ -443,7 +447,7 @@
       "swap_button_title": "Scambia unità",
       "categories": {
         "length": "Lunghezza",
-        "weight": "Peso",
+        "weight": "Massa",
         "temperature": "Temperatura"
       },
       "units": {
@@ -591,7 +595,9 @@
       "win_title": "Hai vinto!",
       "win_message": "Completato in {{moves}} mosse.",
       "play_again": "Gioca di nuovo",
-      "icon_alt": "Gioco di memoria"
+      "icon_alt": "Gioco di memoria",
+      "card": "Carta {{number}}",
+      "card_image": "Carta {{number}}: immagine {{image}}"
     },
     "metronome": {
       "title": "Metronomo",
@@ -687,7 +693,9 @@
         "normal": "Normale (4x4)",
         "hard": "Difficile (5x5)"
       },
-      "shuffle_button": "Mescola"
+      "shuffle_button": "Mescola",
+      "piece": "Tessera {{number}}",
+      "empty": "Spazio vuoto"
     },
     "global_clocks": {
       "title": "Orologi mondiali",
@@ -738,7 +746,12 @@
     "traffic_light": {
       "title": "Semaforo",
       "icon_alt": "Semaforo",
-      "tooltip": "Clic per cambiare colore"
+      "tooltip": "Clic per cambiare colore",
+      "colors": {
+        "red": "rosso",
+        "yellow": "giallo",
+        "green": "verde"
+      }
     },
     "alarm": {
       "title": "Allarme / Timer",

@@ -23,7 +23,7 @@ Escritorio Digital è una lavagna di lavoro con “finestre” pensata per la cl
 
 ### Tempo e ritmo
 
-- **Timer**: conto alla rovescia per stazioni, verifiche brevi, lavoro a turni, ecc.
+- **Allarme / Timer**: allarmi a un’ora fissa e conto alla rovescia per stazioni, verifiche brevi, lavoro a turni, ecc.
 - **Cronometro**: misura tempi (esperimenti, sfide, educazione fisica, dinamiche).
 - **Metronomo**: segna un impulso costante. Utile per musica, lettura ritmica, routine di classe o lavoro a intervalli.
 - **Orologi mondiali**: mostra l’ora di più città per confrontarle in classe.
@@ -44,6 +44,7 @@ Escritorio Digital è una lavagna di lavoro con “finestre” pensata per la cl
 
 - **Blocco note**: note rapide per consegne, idee, esempi, liste, ecc.
 - **Lavagna di disegno**: disegno a mano libera (schemi, grafici, mappe concettuali, diagrammi).
+- **Annotare sullo schermo**: sottolinea, indica e disegna su tutto ciò che si vede sul desktop durante una spiegazione.
 - **Carosello di immagini**: mostra una raccolta di immagini (tavole, esercizi, foto di laboratorio, mappe…).
 - **Sandbox HTML**: spazio per mostrare contenuti preparati.
 - **BoardLive**: lavagna collaborativa in tempo reale.
@@ -54,7 +55,6 @@ Escritorio Digital è una lavagna di lavoro con “finestre” pensata per la cl
 - **Visualizzatore web**: apre una pagina web dentro il desktop per usare una risorsa online senza cambiare scheda.
 - **Web locale**: salva siti nel browser (da ZIP o cartella) e usali offline.
 - **Esploratore file**: apre file locali (PDF, immagini, testo e Markdown, audio e video).
-- **Connessione in diretta**: pensato per mostrare contenuti web o risorse esterne in modo comodo durante la spiegazione.
 - **Wikipedia**: ricerca rapida con cambio lingua per temi di classe.
 
 #### File Ed: come usarlo
@@ -97,9 +97,9 @@ Questo widget funziona come un archivio nel browser.
 
 ## Idee d’uso in classe
 
-- **Inizio della lezione**: Lista attività + Timer + Semaforo.
+- **Inizio della lezione**: Lista attività + Allarme / Timer + Semaforo.
 - **Spiegazione**: Editor di testi Markdown + Lavagna di disegno + Visualizzatore web.
-- **Cooperativo**: Generatore di gruppi + Timer + Misuratore di suono.
+- **Cooperativo**: Generatore di gruppi + Allarme / Timer + Misuratore di suono.
 - **Gamification**: Ruota casuale + Dado + Segnapunti.
 
 ---

@@ -25,7 +25,7 @@ Escriptori Digital és una pissarra de treball amb “finestres” pensada per a
 
 ### Temps i ritme
 
-- **Temporitzador**: compte enrere per a activitats per estacions, exàmens curts, treball per torns, etc.
+- **Alarma / Temporitzador**: alarmes a una hora fixa i compte enrere per a activitats per estacions, exàmens curts, treball per torns, etc.
 - **Cronòmetre**: mesura temps (experiments, reptes, educació física, dinàmiques).
 - **Metrònom**: marca un pols constant. Útil per a música, lectura rítmica, dinàmiques de classe o treball per intervals.
 - **Rellotges mundials**: mostra hores de diverses ciutats per comparar-les a classe.
@@ -46,6 +46,7 @@ Escriptori Digital és una pissarra de treball amb “finestres” pensada per a
 
 - **Bloc de notes**: notes ràpides per a consignes, idees, exemples, llistes, etc.
 - **Pissarra de dibuix**: dibuix a mà alçada (esquemes, gràfiques, mapes conceptuals, diagrames).
+- **Anotar a la pantalla**: subratlla, assenyala i dibuixa sobre tot el que es veu a l’escriptori durant una explicació.
 - **Carrusel d’imatges**: mostra una col·lecció d’imatges (làmines, exercicis, fotos de laboratori, mapes…).
 - **Sandbox HTML**: espai per mostrar continguts preparats.
 - **BoardLive**: pissarra col·laborativa en temps real.
@@ -56,7 +57,6 @@ Escriptori Digital és una pissarra de treball amb “finestres” pensada per a
 - **Visor web**: obre una pàgina web dins l’escriptori per usar un recurs en línia sense canviar de pestanya.
 - **Web local**: desa webs al navegador (des de ZIP o carpeta) i executa-les sense connexió.
 - **Explorador de fitxers**: obre fitxers locals (PDF, imatges, text i Markdown, àudio i vídeo).
-- **Connexió en Directe**: pensat per mostrar contingut web o recursos externs de manera còmoda durant l’explicació.
 - **Wikipedia**: cerca ràpida amb canvi d’idioma per a temes de classe.
 
 #### Arxius Ed: com fer-lo servir
@@ -99,9 +99,9 @@ Aquest widget funciona com un arxivador dins del navegador.
 
 ## Idees d’ús a classe
 
-- **Inici de classe**: Llista de tasques + Temporitzador + Semàfor.
+- **Inici de classe**: Llista de tasques + Alarma / Temporitzador + Semàfor.
 - **Explicació**: Editor de textos Markdown + Pissarra de dibuix + Visor web.
-- **Cooperatiu**: Generador de grups + Temporitzador + Mesurador de so.
+- **Cooperatiu**: Generador de grups + Alarma / Temporitzador + Mesurador de so.
 - **Gamificació**: Ruleta aleatòria + Dau + Marcador de punts.
 
 ---

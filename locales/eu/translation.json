@@ -226,7 +226,9 @@
       "wikipedia": "Wikipedia tresnaren bilaketak.",
       "directo": "Bozketa sinplea, Balorazio eskala, Hitz hodeia, Ideia-jasa eta botoak, Horma interaktiboa eta Irteera txartelak, leiho berri batean irekitzen direnak.",
       "qplay": "QPlay tresnaren lehiaketak, leiho berri batean irekitzen direnak.",
-      "boardlive": "BoardLive tresnaren arbela kolaboratiboa, leiho berri batean irekitzen dena."
+      "boardlive": "BoardLive tresnaren arbela kolaboratiboa, leiho berri batean irekitzen dena.",
+      "chatgpt": "Komunitatearen orria; ChatGPT-IA-edu komunitatea tresnak irekitzean erakusten du.",
+      "vce": "Komunitateko aplikazioen biltegia; web-ikustaileak irekitzean erakusten du."
     },
     "images_title": "Irudiak",
     "images_generated": "Pantaila-atzealdeak (Geminirekin eginak) eta ikonoak AArekin sortu dira, eta edukien lizentziarekin argitaratzen dira, CC BY-SA 4.0.",
@@ -430,7 +432,9 @@
       "select_images": "Hautatu Irudiak",
       "slide_alt": "{{number}} diapositiba",
       "select_new_images": "Hautatu irudi berriak",
-      "more_images_hint": "Kargatu irudi gehiago nabigatzeko"
+      "more_images_hint": "Kargatu irudi gehiago nabigatzeko",
+      "previous": "Aurreko irudia",
+      "next": "Hurrengo irudia"
     },
     "unit_converter": {
       "title": "Unitate Bihurgailua",
@@ -439,7 +443,7 @@
       "swap_button_title": "Trukatu unitateak",
       "categories": {
         "length": "Luzera",
-        "weight": "Pisua",
+        "weight": "Masa",
         "temperature": "Tenperatura"
       },
       "units": {
@@ -587,7 +591,9 @@
       "win_title": "Irabazi duzu!",
       "win_message": "{{moves}} mugimendutan osatu duzu.",
       "play_again": "Jolastu Berriro",
-      "icon_alt": "Memorama"
+      "icon_alt": "Memorama",
+      "card": "{{number}}. karta",
+      "card_image": "{{number}}. karta: {{image}}. irudia"
     },
     "metronome": {
       "title": "Metronomoa",
@@ -683,7 +689,9 @@
         "normal": "Normala (4x4)",
         "hard": "Zaila (5x5)"
       },
-      "shuffle_button": "Nahastu"
+      "shuffle_button": "Nahastu",
+      "piece": "{{number}}. pieza",
+      "empty": "Hutsunea"
     },
     "global_clocks": {
       "title": "Munduko Erlojuak",
@@ -734,7 +742,12 @@
     "traffic_light": {
       "title": "Semaforoa",
       "icon_alt": "Semaforoa",
-      "tooltip": "Egin klik kolorez aldatzeko"
+      "tooltip": "Egin klik kolorez aldatzeko",
+      "colors": {
+        "red": "gorria",
+        "yellow": "horia",
+        "green": "berdea"
+      }
     },
     "alarm": {
       "title": "Alarma / Tenporizadorea",

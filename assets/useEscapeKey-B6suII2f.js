@@ -1,0 +1,1 @@
+import{r as o}from"./index-D3-7xxzf.js";const a=(e,r)=>{o.useEffect(()=>{if(!e)return;const t=n=>{n.key==="Escape"&&r()};return window.addEventListener("keydown",t),()=>window.removeEventListener("keydown",t)},[e,r])};export{a as u};

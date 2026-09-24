@@ -25,7 +25,7 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 
 ### Time and rhythm
 
-- **Timer**: countdown for stations, short exams, turn-based work, etc.
+- **Alarm / Timer**: alarms at a set time and countdowns for stations, short exams, turn-based work, etc.
 - **Stopwatch**: measure times (experiments, challenges, PE, dynamics).
 - **Metronome**: steady pulse. Useful for music, rhythm reading, class routines, or interval work.
 - **World clocks**: show times in multiple cities for class comparisons.
@@ -46,6 +46,7 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 
 - **Notepad**: quick notes for instructions, ideas, examples, lists, etc.
 - **Drawing pad**: freehand drawing (sketches, graphs, concept maps, diagrams).
+- **Annotate on screen**: underline, point out and draw over everything on the desktop while explaining.
 - **Image carousel**: show a collection of images (plates, exercises, lab photos, maps…).
 - **HTML Sandbox**: space to display prepared content.
 - **BoardLive**: collaborative whiteboard in real time.
@@ -56,7 +57,6 @@ Digital Desktop is a workboard with “windows” designed for the classroom. Yo
 - **Web viewer**: open a web page inside the desktop to use an online resource without switching tabs.
 - **Local web**: save websites in the browser (from ZIP or folder) and run them offline.
 - **File explorer**: open local files (PDF, images, text and Markdown, audio and video).
-- **Live viewer**: designed to show web content or external resources comfortably while explaining.
 - **Wikipedia**: quick search with language switching for class topics.
 
 #### Ed Files: how to use it
@@ -98,9 +98,9 @@ This widget works as a file cabinet inside the browser.
 
 ## Classroom use ideas
 
-- **Start of class**: Task list + Timer + Traffic Light.
+- **Start of class**: Task list + Alarm / Timer + Traffic Light.
 - **Explanation**: Markdown Text Editor + Drawing pad + Web viewer.
-- **Cooperative work**: Group generator + Timer + Sound meter.
+- **Cooperative work**: Group generator + Alarm / Timer + Sound meter.
 - **Gamification**: Random spinner + Dice + Scoreboard.
 
 ---

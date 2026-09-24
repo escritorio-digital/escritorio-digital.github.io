@@ -227,7 +227,9 @@
       "wikipedia": "Búsquedas de la herramienta Wikipedia.",
       "directo": "Votación simple, Escala de valoración, Nube de palabras, Lluvia de ideas y votos, Muro interactivo y Tickets de salida, que se abren en una ventana nueva.",
       "qplay": "Concursos de la herramienta QPlay, que se abren en una ventana nueva.",
-      "boardlive": "Pizarra colaborativa de la herramienta BoardLive, que se abre en una ventana nueva."
+      "boardlive": "Pizarra colaborativa de la herramienta BoardLive, que se abre en una ventana nueva.",
+      "chatgpt": "Página de la comunidad, que muestra la herramienta Comunidad ChatGPT-IA-edu al abrirse.",
+      "vce": "Repositorio de aplicaciones de la comunidad, que el visor web muestra al abrirse."
     },
     "images_title": "Imágenes",
     "images_generated": "Los fondos de pantalla (hechos con Gemini) y los iconos se han generado con IA y se publican con la licencia de los contenidos, CC BY-SA 4.0.",
@@ -431,7 +433,9 @@
       "select_images": "Seleccionar Imágenes",
       "slide_alt": "Diapositiva {{number}}",
       "select_new_images": "Seleccionar nuevas imágenes",
-      "more_images_hint": "Carga más imágenes para navegar"
+      "more_images_hint": "Carga más imágenes para navegar",
+      "previous": "Imagen anterior",
+      "next": "Imagen siguiente"
     },
     "unit_converter": {
       "title": "Conversor de Unidades",
@@ -440,7 +444,7 @@
       "swap_button_title": "Intercambiar unidades",
       "categories": {
         "length": "Longitud",
-        "weight": "Peso",
+        "weight": "Masa",
         "temperature": "Temperatura"
       },
       "units": {
@@ -589,7 +593,9 @@
       "win_title": "¡Ganaste!",
       "win_message": "Lo completaste en {{moves}} movimientos.",
       "play_again": "Jugar de Nuevo",
-      "icon_alt": "Memorama"
+      "icon_alt": "Memorama",
+      "card": "Carta {{number}}",
+      "card_image": "Carta {{number}}: imagen {{image}}"
     },
     "metronome": {
       "title": "Metrónomo",
@@ -685,7 +691,9 @@
         "normal": "Normal (4x4)",
         "hard": "Difícil (5x5)"
       },
-      "shuffle_button": "Barajar"
+      "shuffle_button": "Barajar",
+      "piece": "Pieza {{number}}",
+      "empty": "Hueco"
     },
     "global_clocks": {
       "title": "Relojes Mundiales",
@@ -736,7 +744,12 @@
     "traffic_light": {
       "title": "Semáforo",
       "icon_alt": "Semáforo",
-      "tooltip": "Haz clic para cambiar de color"
+      "tooltip": "Haz clic para cambiar de color",
+      "colors": {
+        "red": "rojo",
+        "yellow": "amarillo",
+        "green": "verde"
+      }
     },
     "alarm": {
       "title": "Alarma / Temporizador",
