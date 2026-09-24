@@ -100,11 +100,14 @@ const SCIENTIFIC_LAYOUT: ButtonDef[] = [
     { label: 'cos', value: 'cos', kind: 'function' },
     { label: 'tan', value: 'tan', kind: 'function' },
     { label: 'π', value: 'pi', kind: 'constant' },
-    { label: 'C', value: 'clear', kind: 'control' },
-    { label: '⌫', value: 'backspace', kind: 'control' },
     { label: 'log', value: 'log', kind: 'function' },
     { label: 'ln', value: 'ln', kind: 'function' },
     { label: '√', value: 'sqrt', kind: 'function' },
+    { label: '(', value: '(', kind: 'operator' },
+    { label: ')', value: ')', kind: 'operator' },
+    { label: 'C', value: 'clear', kind: 'control', span: 2 },
+    { label: '⌫', value: 'backspace', kind: 'control', span: 2 },
+    { label: 'Ans', value: 'Ans', kind: 'constant' },
     { label: '7', value: '7', kind: 'digit' },
     { label: '8', value: '8', kind: 'digit' },
     { label: '9', value: '9', kind: 'digit' },
@@ -120,12 +123,15 @@ const SCIENTIFIC_LAYOUT: ButtonDef[] = [
     { label: '3', value: '3', kind: 'digit' },
     { label: '−', value: '-', kind: 'operator' },
     { label: 'x!', value: '!', kind: 'operator' },
-    { label: '0', value: '0', kind: 'digit' },
+    { label: '0', value: '0', kind: 'digit', span: 2 },
     { label: '.', value: '.', kind: 'digit' },
-    { label: 'Ans', value: 'Ans', kind: 'constant' },
     { label: '+', value: '+', kind: 'operator' },
     { label: '=', value: '=', kind: 'equals' },
 ];
+
+// Paréntesis abiertos y aún sin cerrar en una expresión.
+const openParentheses = (expression: string) =>
+    (expression.match(/\(/g)?.length ?? 0) - (expression.match(/\)/g)?.length ?? 0);
 
 const formatExpression = (value: string) => {
     return value
@@ -489,7 +495,9 @@ export const ScientificCalculatorWidget: FC<ScientificCalculatorWidgetProps> = (
             return;
         }
         if (value === '=') {
-            const target = expression || display;
+            // Como en las calculadoras escolares, «=» cierra los paréntesis que queden abiertos.
+            const typed = expression || display;
+            const target = typed + ')'.repeat(Math.max(0, openParentheses(typed)));
             try {
                 const tokens = tokenize(target);
                 const rpn = toRpn(tokens);
@@ -539,19 +547,30 @@ export const ScientificCalculatorWidget: FC<ScientificCalculatorWidgetProps> = (
             return;
         }
         if (isOperatorChar(value) || value === '(' || value === ')') {
+            // Sin un paréntesis abierto, «)» no tiene nada que cerrar.
+            if (value === ')' && (lastInputWasEval || openParentheses(expression) <= 0)) return;
             if (lastInputWasEval) {
-                updateExpression(display + value);
+                // Tras un resultado, «(» empieza otra operación; un operador sigue con el resultado.
+                updateExpression(value === '(' ? value : display + value);
                 setLastInputWasEval(false);
                 return;
             }
-            if (!expression && value !== '-') return;
+            if (!expression && value !== '-' && value !== '(') return;
             if (value === '(') {
                 const next = insertImplicitMultiply('(');
                 updateExpression(expression + next);
                 return;
             }
-            if (isOperatorChar(expression.slice(-1)) && isOperatorChar(value)) {
-                updateExpression(expression.slice(0, -1) + value);
+            const last = expression.slice(-1);
+            // Detrás de ×, ÷ o ^, «−» es el signo del número que sigue (2^−2, 3×−4).
+            if (value === '-' && ['*', '/', '^'].includes(last)) {
+                updateExpression(expression + value);
+                return;
+            }
+            // Dos operadores seguidos: el nuevo sustituye al anterior, y también al signo que lo acompañe.
+            if (isOperatorChar(last) && isOperatorChar(value)) {
+                const signAfterOperator = last === '-' && isOperatorChar(expression.slice(-2, -1));
+                updateExpression(expression.slice(0, signAfterOperator ? -2 : -1) + value);
                 return;
             }
             updateExpression(expression + value);
