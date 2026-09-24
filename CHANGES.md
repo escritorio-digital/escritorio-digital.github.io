@@ -1,5 +1,10 @@
 # Cambios realizados
 
+## 2.7.5
+- Calculadora científica: el modo Científica tiene botones «(» y «)», y «=» cierra los paréntesis que queden abiertos; sin, cos, tan, log, ln y √ funcionan ya con los botones (antes daban «Error»).
+- Calculadora: «(» funciona al principio de una operación; detrás de ×, ÷ o ^, «−» es el signo del número (2^−2 = 0,25, 3×−4 = −12).
+- Desarrollo: pruebas de la calculadora que pulsan sus botones en los tres modos.
+
 ## 2.7.4
 - Calculadora científica: el signo menos se aplica después de la potencia (−2^2 = −4); seno, coseno y tangente dan valores exactos en los múltiplos de 90° (cos 90° = 0, tan 90° da error).
 - Conversor de unidades: la categoría de kilogramos, gramos, libras y onzas se llama «Masa»; factores exactos para millas, pies, libras y onzas.
