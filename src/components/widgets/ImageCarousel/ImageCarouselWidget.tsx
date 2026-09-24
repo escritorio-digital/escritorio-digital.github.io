@@ -127,14 +127,15 @@ export const ImageCarouselWidget: FC = () => {
           {/* Controles de Navegación - Solo mostrar si hay más de 1 imagen */}
           {images.length > 1 && (
             <>
-              <button className="carousel-arrow left-arrow" onClick={goToPrevious}><ChevronLeft size={32} /></button>
-              <button className="carousel-arrow right-arrow" onClick={goToNext}><ChevronRight size={32} /></button>
+              <button className="carousel-arrow left-arrow" onClick={goToPrevious} aria-label={t('widgets.image_carousel.previous')} title={t('widgets.image_carousel.previous')}><ChevronLeft size={32} /></button>
+              <button className="carousel-arrow right-arrow" onClick={goToNext} aria-label={t('widgets.image_carousel.next')} title={t('widgets.image_carousel.next')}><ChevronRight size={32} /></button>
             </>
           )}
           
           {/* Indicadores de Diapositiva - Solo mostrar si hay más de 1 imagen */}
           {images.length > 1 && (
-            <div className="slide-indicators">
+            <div className="slide-indicators" aria-hidden="true">
+              {/* Los puntos repiten con el ratón lo que las flechas ya hacen con el teclado. */}
               {images.map((_, index) => (
                 <div 
                   key={index}

@@ -40,7 +40,7 @@
 }
 
 .card {
-  @apply bg-transparent cursor-pointer rounded-lg;
+  @apply bg-transparent cursor-pointer rounded-lg block w-full p-0 border-0;
   aspect-ratio: 1 / 1;
 }
 .card-inner {

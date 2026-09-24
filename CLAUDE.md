@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Escritorio Digital is an interactive desktop environment built with React that allows users to add, move, and resize interactive "widgets". The system is designed for educational use and includes 27 different widgets like calculators, timers, drawing tools, games, and productivity tools.
+Escritorio Digital is an interactive desktop environment built with React that allows users to add, move, and resize interactive "widgets". The system is designed for educational use and includes several dozen widgets such as calculators, timers, drawing tools, games, and productivity tools.
 
 ## Development Commands
 

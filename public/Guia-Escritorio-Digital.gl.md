@@ -23,7 +23,7 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 
 ### Tempo e ritmo
 
-- **Temporizador**: conta atrás para actividades por estacións, exames curtos, traballo por quendas, etc.
+- **Alarma / Temporizador**: alarmas a unha hora fixa e conta atrás para actividades por estacións, exames curtos, traballo por quendas, etc.
 - **Cronómetro**: mide tiempos (experimentos, retos, educación física, dinámicas).
 - **Metrónomo**: marca un pulso constante. Útil para música, lectura rítmica, dinámicas de clase ou traballo por intervalos.
 - **Reloxos mundiais**: amosa horas de varias cidades para comparalas en clase.
@@ -44,6 +44,7 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 
 - **Bloc de notas**: notas rápidas para consignas, ideas, exemplos, listas, etc.
 - **Pizarra de debuxo**: debuxa a man alzada (esquemas, gráficas, mapas conceptuais, diagramas).
+- **Anotar na pantalla**: subliña, sinala e debuxa sobre todo o que se ve no escritorio durante unha explicación.
 - **Carrusel de imaxes**: amosa unha colección de imaxes (láminas, exercicios, fotos de laboratorio, mapas…).
 - **Sandbox HTML**: espazo para mostrar contidos preparados.
 - **BoardLive**: pizarra colaborativa en tempo real.
@@ -54,7 +55,6 @@ Escritorio Dixital é unha pizarra de traballo con “xanelas” pensada para a 
 - **Visor web**: abre unha páxina web dentro do escritorio para usar un recurso en liña sen cambiar de pestana.
 - **Web local**: garda webs no navegador (desde ZIP ou cartafol) e execútaas sen conexión.
 - **Explorador de ficheiros**: abre ficheiros locais (PDF, imaxes, texto e Markdown, audio e vídeo).
-- **Conexión en Directo**: pensado para mostrar contido web ou recursos externos de forma cómoda durante a explicación.
 - **Wikipedia**: procura rápida con cambio de idioma para temas da clase.
 
 #### Arquivos Ed: como usalo
@@ -97,9 +97,9 @@ Este widget funciona como un archivador dentro do navegador.
 
 ## Ideas de uso na clase
 
-- **Inicio de sesión**: Lista de tarefas + Temporizador + Semáforo.
+- **Inicio de sesión**: Lista de tarefas + Alarma / Temporizador + Semáforo.
 - **Explicación**: Editor de textos Markdown + Pizarra de debuxo + Visor web.
-- **Cooperativo**: Xerador de grupos + Temporizador + Medidor de son.
+- **Cooperativo**: Xerador de grupos + Alarma / Temporizador + Medidor de son.
 - **Gamificación**: Ruleta aleatoria + Dado + Marcador de puntos.
 
 ---

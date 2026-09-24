@@ -23,7 +23,7 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 
 ### Tempo e ritmo
 
-- **Temporizador**: contagem decrescente para estações, testes curtos, trabalho por turnos, etc.
+- **Alarme / Temporizador**: alarmes a uma hora fixa e contagem decrescente para estações, testes curtos, trabalho por turnos, etc.
 - **Cronómetro**: mide tiempos (experimentos, retos, educación física, dinámicas).
 - **Metrónomo**: marca um pulso constante. Útil para música, leitura rítmica, dinâmicas de aula ou trabalho por intervalos.
 - **Relógios Mundiais**: mostra a hora de várias cidades para comparação em sala.
@@ -44,6 +44,7 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 
 - **Bloco de notas**: notas rápidas para instruções, ideias, exemplos, listas, etc.
 - **Quadro de desenho**: desenho à mão livre (esquemas, gráficos, mapas conceptuais, diagramas).
+- **Anotar no ecrã**: sublinha, assinala e desenha sobre tudo o que se vê no ambiente de trabalho durante uma explicação.
 - **Carrossel de imagens**: mostra uma coleção de imagens (pranchas, exercícios, fotos de laboratório, mapas…).
 - **Sandbox HTML**: espaço para mostrar conteúdos preparados.
 - **BoardLive**: quadro colaborativo em tempo real.
@@ -54,7 +55,6 @@ Escritorio Digital é um quadro de trabalho com “janelas” pensado para a sal
 - **Visualizador web**: abre uma página web dentro do ambiente para usar um recurso online sem mudar de separador.
 - **Web local**: guarda sites no navegador (ZIP ou pasta) e executa-os offline.
 - **Explorador de ficheiros**: abre ficheiros locais (PDF, imagens, texto e Markdown, áudio e vídeo).
-- **Conexão ao Vivo**: pensado para mostrar conteúdo web ou recursos externos de forma cómoda durante a explicação.
 - **Wikipedia**: pesquisa rápida com troca de idioma para temas da aula.
 
 #### Arquivos Ed: como usar
@@ -97,9 +97,9 @@ Este widget funciona como um arquivo dentro do navegador.
 
 ## Ideias de uso na aula
 
-- **Início da aula**: Lista de tarefas + Temporizador + Semáforo.
+- **Início da aula**: Lista de tarefas + Alarme / Temporizador + Semáforo.
 - **Explicação**: Editor de textos Markdown + Quadro de desenho + Visualizador web.
-- **Cooperativo**: Gerador de grupos + Temporizador + Medidor de som.
+- **Cooperativo**: Gerador de grupos + Alarme / Temporizador + Medidor de som.
 - **Gamificação**: Roleta aleatória + Dado + Marcador de pontos.
 
 ---

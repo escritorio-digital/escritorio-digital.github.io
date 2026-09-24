@@ -6,14 +6,15 @@ import './UnitConverter.css';
 
 type UnitMap = { [unit: string]: (value: number) => number };
 
+// Factores exactos por definición (milla, pie, libra y onza internacionales).
 const CONVERSIONS = {
   length: {
     baseUnit: 'meters',
     units: {
       'meters': (v: number) => v,
       'kilometers': (v: number) => v / 1000,
-      'miles': (v: number) => v / 1609.34,
-      'feet': (v: number) => v * 3.28084,
+      'miles': (v: number) => v / 1609.344,
+      'feet': (v: number) => v / 0.3048,
     } as UnitMap,
   },
   weight: {
@@ -21,8 +22,8 @@ const CONVERSIONS = {
     units: {
       'kilograms': (v: number) => v,
       'grams': (v: number) => v * 1000,
-      'pounds': (v: number) => v * 2.20462,
-      'ounces': (v: number) => v * 35.274,
+      'pounds': (v: number) => v / 0.45359237,
+      'ounces': (v: number) => v / 0.028349523125,
     } as UnitMap,
   },
   temperature: {

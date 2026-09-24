@@ -66,6 +66,42 @@ export function useDesktopDialogs({ t }: UseDesktopDialogsParams): UseDesktopDia
     const [openDialogSelectedIds, setOpenDialogSelectedIds] = useState<string[]>([]);
     const openDialogInputRef = useRef<HTMLInputElement>(null);
     const [openDialogBreadcrumb, setOpenDialogBreadcrumb] = useState<FileManagerEntry[]>([]);
+    // Al cerrar un diálogo, el foco vuelve a donde estaba al abrirlo (WCAG 2.4.3). Si ese botón
+    // ya no existe (el widget ha cambiado de pantalla), vuelve a la ventana que lo contenía.
+    const returnFocusRef = useRef<{ element: HTMLElement; windowContent: HTMLElement | null } | null>(null);
+
+    const rememberFocus = useCallback(() => {
+        const element = document.activeElement;
+        if (!(element instanceof HTMLElement) || element === document.body) return;
+        returnFocusRef.current = {
+            element,
+            windowContent: element.closest<HTMLElement>('[data-window-content]'),
+        };
+    }, []);
+
+    const restoreFocus = useCallback(() => {
+        const target = returnFocusRef.current;
+        returnFocusRef.current = null;
+        if (!target) return;
+        const { element, windowContent } = target;
+        const focusWindow = () => {
+            if (!element.isConnected && windowContent?.isConnected) windowContent.focus();
+        };
+        requestAnimationFrame(() => {
+            if (element.isConnected) element.focus();
+            else focusWindow();
+            // El widget puede retirar ese botón al pintar lo recibido (el memorama cambia a las
+            // cartas): si desaparece con el foco, el foco pasa a su ventana y no se pierde.
+            if (!windowContent) return;
+            const observer = new MutationObserver(() => {
+                if (element.isConnected) return;
+                observer.disconnect();
+                if (document.activeElement === document.body || document.activeElement === null) focusWindow();
+            });
+            observer.observe(windowContent, { childList: true, subtree: true });
+            window.setTimeout(() => observer.disconnect(), 2000);
+        });
+    }, []);
 
     const closeSaveDialog = useCallback((result: SaveDialogResult) => {
         const resolver = saveDialogResolverRef.current;
@@ -73,7 +109,8 @@ export function useDesktopDialogs({ t }: UseDesktopDialogsParams): UseDesktopDia
         setSaveDialogState({ isOpen: false });
         setSaveDialogFilterWidget(false);
         if (resolver) resolver(result);
-    }, []);
+        restoreFocus();
+    }, [restoreFocus]);
 
     useEffect(() => {
         if (!saveDialogState.isOpen) return;
@@ -224,7 +261,8 @@ export function useDesktopDialogs({ t }: UseDesktopDialogsParams): UseDesktopDia
         setOpenDialogFilterWidget(false);
         setOpenDialogState((prev) => ({ ...prev, isOpen: false }));
         if (resolver) resolver(result);
-    }, []);
+        restoreFocus();
+    }, [restoreFocus]);
 
     useEffect(() => {
         return onDesktopEvent('save-dialog-request', (detail) => {
@@ -233,13 +271,14 @@ export function useDesktopDialogs({ t }: UseDesktopDialogsParams): UseDesktopDia
                 saveDialogResolverRef.current(null);
             }
             saveDialogResolverRef.current = detail.resolve;
+            rememberFocus();
             const suggested = detail.suggestedFilename?.trim() || t('save_dialog.default_filename');
             setSaveDialogSuggestedFilename(suggested);
             setSaveDialogFilename(suggested);
             setSaveDialogFilterWidget(Boolean(detail.sourceWidgetId));
             setSaveDialogState({ isOpen: true, sourceWidgetId: detail.sourceWidgetId });
         });
-    }, [t]);
+    }, [rememberFocus, t]);
 
     useEffect(() => {
         return onDesktopEvent('open-dialog-request', (detail) => {
@@ -248,12 +287,13 @@ export function useDesktopDialogs({ t }: UseDesktopDialogsParams): UseDesktopDia
                 openDialogResolverRef.current(null);
             }
             openDialogResolverRef.current = detail.resolve;
+            rememberFocus();
             setOpenDialogSelectedIds([]);
             setOpenDialogFolderId(FILE_MANAGER_ROOT_ID);
             setOpenDialogFilterWidget(Boolean(detail.options?.sourceWidgetId));
             setOpenDialogState({ isOpen: true, options: detail.options ?? {} });
         });
-    }, []);
+    }, [rememberFocus]);
 
     return {
         saveDialogState,

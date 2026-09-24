@@ -33,13 +33,14 @@ type OperatorInfo = {
     arity: 1 | 2;
 };
 
+// El signo menos va por debajo de la potencia, como en matemáticas: −2^2 = −(2^2) = −4.
 const OPERATORS: Record<string, OperatorInfo> = {
     '+': { prec: 1, assoc: 'left', arity: 2 },
     '-': { prec: 1, assoc: 'left', arity: 2 },
     '*': { prec: 2, assoc: 'left', arity: 2 },
     '/': { prec: 2, assoc: 'left', arity: 2 },
-    '^': { prec: 3, assoc: 'right', arity: 2 },
-    neg: { prec: 4, assoc: 'right', arity: 1 },
+    neg: { prec: 3, assoc: 'right', arity: 1 },
+    '^': { prec: 4, assoc: 'right', arity: 2 },
     '!': { prec: 5, assoc: 'left', arity: 1 },
     '%': { prec: 5, assoc: 'left', arity: 1 },
 };
@@ -229,7 +230,8 @@ const toRpn = (tokens: Token[]): Token[] => {
         } else if (token.type === 'operator') {
             const current = OPERATORS[token.value];
             if (!current) throw new Error('Unknown operator');
-            while (stack.length > 0) {
+            // Un operador prefijo no tiene operando a su izquierda: no saca nada de la pila (2^−2).
+            while (current.arity === 2 && stack.length > 0) {
                 const top = stack[stack.length - 1];
                 if (top.type !== 'operator') break;
                 const topInfo = OPERATORS[top.value];
@@ -278,6 +280,23 @@ const factorial = (value: number) => {
     return result;
 };
 
+// En los múltiplos de 90° el seno, el coseno y la tangente tienen valor exacto; calcularlos
+// con Math.sin y π aproximado deja restos como cos 90° = 6,12·10⁻¹⁷ o tan 90° = 1,6·10¹⁶.
+const trig = (name: string, radians: number) => {
+    const quarterTurns = radians / (Math.PI / 2);
+    const k = Math.round(quarterTurns);
+    // k = 0 queda fuera: cerca de 0 el cálculo directo ya es exacto y no hay que perder ángulos pequeños.
+    if (k !== 0 && Math.abs(quarterTurns - k) < 1e-12) {
+        const quadrant = ((k % 4) + 4) % 4;
+        if (name === 'sin') return [0, 1, 0, -1][quadrant];
+        if (name === 'cos') return [1, 0, -1, 0][quadrant];
+        return quadrant % 2 === 0 ? 0 : NaN;
+    }
+    if (name === 'sin') return Math.sin(radians);
+    if (name === 'cos') return Math.cos(radians);
+    return Math.tan(radians);
+};
+
 const evalRpn = (tokens: Token[], angleMode: AngleMode, lastAnswer: number) => {
     const stack: number[] = [];
 
@@ -300,9 +319,7 @@ const evalRpn = (tokens: Token[], angleMode: AngleMode, lastAnswer: number) => {
             const input = angleMode === 'deg' && ['sin', 'cos', 'tan'].includes(token.value)
                 ? value * Math.PI / 180
                 : value;
-            if (token.value === 'sin') stack.push(Math.sin(input));
-            if (token.value === 'cos') stack.push(Math.cos(input));
-            if (token.value === 'tan') stack.push(Math.tan(input));
+            if (['sin', 'cos', 'tan'].includes(token.value)) stack.push(trig(token.value, input));
             if (token.value === 'log') stack.push(Math.log10(value));
             if (token.value === 'ln') stack.push(Math.log(value));
             if (token.value === 'sqrt') stack.push(Math.sqrt(value));

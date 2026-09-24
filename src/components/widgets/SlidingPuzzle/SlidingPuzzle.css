@@ -38,7 +38,7 @@
 }
 
 .puzzle-piece {
-  @apply rounded-md cursor-pointer bg-gray-700;
+  @apply rounded-md cursor-pointer bg-gray-700 block p-0 border-0;
   overflow: hidden; /* Clave para que la imagen no se salga */
 }
 

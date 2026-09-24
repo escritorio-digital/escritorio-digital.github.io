@@ -229,7 +229,9 @@
       "wikipedia": "Pesquisas da ferramenta Wikipedia.",
       "directo": "Votação simples, Escala de avaliação, Nuvem de palavras, Chuva de ideias e votos, Mural interativo e Tickets de saída, que se abrem numa janela nova.",
       "qplay": "Concursos da ferramenta QPlay, que se abrem numa janela nova.",
-      "boardlive": "Quadro colaborativo da ferramenta BoardLive, que se abre numa janela nova."
+      "boardlive": "Quadro colaborativo da ferramenta BoardLive, que se abre numa janela nova.",
+      "chatgpt": "Página da comunidade, mostrada pela ferramenta Comunidade ChatGPT-IA-edu ao abrir.",
+      "vce": "Repositório de aplicações da comunidade, mostrado pelo visualizador web ao abrir."
     },
     "images_title": "Imagens",
     "images_generated": "Os fundos de ecrã (feitos com o Gemini) e os ícones foram gerados com IA e são publicados com a licença dos conteúdos, CC BY-SA 4.0.",
@@ -436,7 +438,9 @@
       "select_images": "Selecionar Imagens",
       "slide_alt": "Slide {{number}}",
       "select_new_images": "Selecionar novas imagens",
-      "more_images_hint": "Carregue mais imagens para navegar"
+      "more_images_hint": "Carregue mais imagens para navegar",
+      "previous": "Imagem anterior",
+      "next": "Imagem seguinte"
     },
     "unit_converter": {
       "title": "Conversor de Unidades",
@@ -445,7 +449,7 @@
       "swap_button_title": "Trocar unidades",
       "categories": {
         "length": "Comprimento",
-        "weight": "Peso",
+        "weight": "Massa",
         "temperature": "Temperatura"
       },
       "units": {
@@ -593,7 +597,9 @@
       "win_title": "Você Ganhou!",
       "win_message": "Você completou em {{moves}} movimentos.",
       "play_again": "Jogar Novamente",
-      "icon_alt": "Jogo da Memória"
+      "icon_alt": "Jogo da Memória",
+      "card": "Carta {{number}}",
+      "card_image": "Carta {{number}}: imagem {{image}}"
     },
     "metronome": {
       "title": "Metrônomo",
@@ -689,7 +695,9 @@
         "normal": "Normal (4x4)",
         "hard": "Difícil (5x5)"
       },
-      "shuffle_button": "Embaralhar"
+      "shuffle_button": "Embaralhar",
+      "piece": "Peça {{number}}",
+      "empty": "Espaço vazio"
     },
     "global_clocks": {
       "title": "Relógios Mundiais",
@@ -740,7 +748,12 @@
     "traffic_light": {
       "title": "Semáforo",
       "icon_alt": "Semáforo",
-      "tooltip": "Clique para mudar de cor"
+      "tooltip": "Clique para mudar de cor",
+      "colors": {
+        "red": "vermelho",
+        "yellow": "amarelo",
+        "green": "verde"
+      }
     },
     "alarm": {
       "title": "Alarme / Temporizador",
@@ -1085,7 +1098,7 @@
       "open_article": "Abrir artigo"
     },
     "screen_annotator": {
-      "title": "Anotar no ecra",
+      "title": "Anotar no ecrã",
       "search_keywords": "quadro, transparente, anotações, sublinhar, ecrã",
       "tool_pen": "Caneta",
       "tool_highlighter": "Marcador",
@@ -1223,6 +1236,6 @@
     "memory-game": "Jogo da memória de pares para praticar conceitos.",
     "sliding-puzzle": "Puzzle deslizante para lógica e atenção.",
     "work-gestures": "Gestos de trabalho para dinâmicas de aula.",
-    "screen-annotator": "Anotar no ecra para sublinhar e marcar no ambiente de trabalho."
+    "screen-annotator": "Anotar no ecrã para sublinhar e marcar no ambiente de trabalho."
   }
 }

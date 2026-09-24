@@ -72,6 +72,18 @@ const addItems = (placeholder, items) => async (page) => {
 
 const attendance = es.widgets.attendance;
 
+// Carga imágenes en un widget por el diálogo «Abrir» (disco local). Basta un PNG de 1×1.
+const PIXEL = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg==', 'base64');
+const loadImages = (buttonText, count) => async (page) => {
+    await press(page.getByText(buttonText, { exact: true }).first());
+    const chooser = page.waitForEvent('filechooser');
+    await press(page.getByText(es.open_dialog.choose_local, { exact: true }));
+    await (await chooser).setFiles(
+        Array.from({ length: count }, (_, i) => ({ name: `imagen${i + 1}.png`, mimeType: 'image/png', buffer: PIXEL })),
+    );
+    await page.waitForTimeout(800);
+};
+
 // Cada caso abre un estado y devuelve, si hace falta, estados adicionales que auditar.
 const cases = [
     { name: 'escritorio', open: async () => {} },
@@ -126,6 +138,28 @@ const cases = [
             await openWidget(page, es.widgets.group_generator.title);
             await page.getByPlaceholder(es.widgets.group_generator.placeholder).fill('Ana\nLuis\nEva\nPau\nIsa\nJon');
             await press(page.getByText(es.widgets.group_generator.generate_groups, { exact: true }));
+        },
+    },
+    {
+        name: 'Memorama con cartas, una girada',
+        open: async (page) => {
+            await openWidget(page, es.widgets.memory_game.title);
+            await loadImages(es.widgets.memory_game.upload_button, 2)(page);
+            await press(page.locator('.memory-game-widget .card').first());
+        },
+    },
+    {
+        name: 'Puzzle deslizante con imagen',
+        open: async (page) => {
+            await openWidget(page, es.widgets.sliding_puzzle.title);
+            await loadImages(es.widgets.sliding_puzzle.upload_button, 1)(page);
+        },
+    },
+    {
+        name: 'Carrusel con imágenes',
+        open: async (page) => {
+            await openWidget(page, es.widgets.image_carousel.title);
+            await loadImages(es.widgets.image_carousel.select_images, 2)(page);
         },
     },
     {

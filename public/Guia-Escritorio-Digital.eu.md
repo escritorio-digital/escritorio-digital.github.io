@@ -25,7 +25,7 @@ Idazmahai Digitala ikasgelarako pentsatutako “leihoekin” lan‑taula bat da.
 
 ### Denbora eta erritmoa
 
-- **Kronometroa**: atzerako kontua estazio‑lanetarako, proba laburretarako, txandakako lanerako, etab.
+- **Alarma / Tenporizadorea**: ordu jakin bateko alarmak eta atzerako kontua estazio‑lanetarako, proba laburretarako, txandakako lanerako, etab.
 - **Kronometroa**: denborak neurtu (esperimentuak, erronkak, heziketa fisikoa, dinamikak).
 - **Metronomoa**: pultsua markatzen du. Musika, irakurketa erritmikoa, ikasgelako dinamikak edo tarte‑lana egiteko.
 - **Munduko Erlojuak**: hiri ezberdinetako orduak erakusten ditu ikasgelan alderatzeko.
@@ -46,6 +46,7 @@ Idazmahai Digitala ikasgelarako pentsatutako “leihoekin” lan‑taula bat da.
 
 - **Ohar‑blokea**: oharrak azkar idazteko.
 - **Marrazteko arbela**: eskuz marrazteko (eskemak, grafikoak, kontzeptu‑mapak, diagramak).
+- **Pantailan oharrak egin**: mahaigainean ikusten den guztiaren gainean azpimarratu, seinalatu eta marraztu azalpen batean.
 - **Irudi‑karusela**: irudi bilduma bat erakutsi (laminak, ariketak, laborategiko argazkiak, mapak…).
 - **HTML Sandbox**: aurrez prestatutako edukiak erakusteko gunea.
 - **BoardLive**: denbora errealeko arbel kolaboratiboa.
@@ -56,7 +57,6 @@ Idazmahai Digitala ikasgelarako pentsatutako “leihoekin” lan‑taula bat da.
 - **Web‑bisorea**: web orri bat mahaigain barruan ireki, fitxaz aldatu gabe.
 - **Web lokala**: gorde webak nabigatzailean (ZIP edo karpeta) eta exekutatu lineaz kanpo.
 - **Fitxategi‑arakatzailea**: fitxategi lokalak ireki (PDF, irudiak, testua eta Markdown, audioa eta bideoa).
-- **Zuzeneko Konexioa**: azalpenetan web edukia edo kanpoko baliabideak eroso erakusteko.
 - **Wikipedia**: hizkuntza‑aldaketarekin bilaketa azkarra klaseko gaientzat.
 
 #### Ed fitxategiak: nola erabili
@@ -98,9 +98,9 @@ Widget honek nabigatzaile barruko artxibategi gisa funtzionatzen du.
 
 ## Ikasgelarako ideiak
 
-- **Saioaren hasiera**: Zereginen zerrenda + Temporizadorea + Semaforoa.
+- **Saioaren hasiera**: Zereginen zerrenda + Alarma / Tenporizadorea + Semaforoa.
 - **Azalpena**: Markdown testu editorea + Marrazteko arbela + Web‑bisorea.
-- **Kooperatiboa**: Talde-sortzailea + Temporizadorea + Soinu-neurgailua.
+- **Kooperatiboa**: Talde-sortzailea + Alarma / Tenporizadorea + Soinu-neurgailua.
 - **Gamifikazioa**: Zorizko erruleta + Dadoa + Puntu-markagailua.
 
 ---

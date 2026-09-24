@@ -129,10 +129,12 @@ export const SlidingPuzzleWidget: FC = () => {
           const row = Math.floor(pieceId / gridSize);
 
           return (
-            <div
+            <button
+              type="button"
               key={index}
               className={`puzzle-piece ${isempty ? 'empty' : ''}`}
               onClick={() => handlePieceClick(index)}
+              aria-label={isempty ? t('widgets.sliding_puzzle.empty') : t('widgets.sliding_puzzle.piece', { number: pieceId + 1 })}
             >
               {!isempty && (
                 <div
@@ -144,7 +146,7 @@ export const SlidingPuzzleWidget: FC = () => {
                   }}
                 />
               )}
-            </div>
+            </button>
           );
         })}
         {isSolved && <div className="solved-overlay">{t('widgets.sliding_puzzle.solved_overlay')}</div>}

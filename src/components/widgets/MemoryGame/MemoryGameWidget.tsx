@@ -137,18 +137,22 @@ export const MemoryGameWidget: FC = () => {
     <div className="memory-game-widget">
       <div className="game-board" style={{gridTemplateColumns: `repeat(${Math.ceil(Math.sqrt(cards.length))}, 1fr)`}}>
         {cards.map((card, index) => (
-          <div 
-            key={index} 
+          <button
+            type="button"
+            key={index}
             className={`card ${card.isFlipped || card.isMatched ? 'flipped' : ''}`}
             onClick={() => handleCardClick(index)}
+            aria-label={card.isFlipped || card.isMatched
+              ? t('widgets.memory_game.card_image', { number: index + 1, image: card.pairId + 1 })
+              : t('widgets.memory_game.card', { number: index + 1 })}
           >
-            <div className="card-inner">
+            <div className="card-inner" aria-hidden="true">
               <div className="card-front">?</div>
               <div className="card-back">
-                <img src={card.content} alt={`par ${card.pairId}`} />
+                <img src={card.content} alt="" />
               </div>
             </div>
-          </div>
+          </button>
         ))}
       </div>
       <div className="game-footer">

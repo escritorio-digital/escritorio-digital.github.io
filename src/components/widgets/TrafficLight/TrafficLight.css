@@ -1,5 +1,5 @@
 .traffic-light-widget {
-  @apply w-full h-full flex items-center justify-center p-4;
+  @apply w-full h-full flex items-center justify-center p-4 bg-transparent border-0;
   container-type: size;
 }
 

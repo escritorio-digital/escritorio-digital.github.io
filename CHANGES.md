@@ -1,7 +1,13 @@
 # Cambios realizados
 
 ## Sin publicar
-- Desarrollo: `npm run test:a11y` pasa axe (WCAG 2.1 AA) por todos los widgets, los modales y varios estados con datos.
+- Calculadora científica: el signo menos se aplica después de la potencia (−2^2 = −4); seno, coseno y tangente dan valores exactos en los múltiplos de 90° (cos 90° = 0, tan 90° da error).
+- Conversor de unidades: la categoría de kilogramos, gramos, libras y onzas se llama «Masa»; factores exactos para millas, pies, libras y onzas.
+- Accesibilidad: el Semáforo, las cartas del Memorama y las piezas del Puzzle deslizante se manejan con el teclado y anuncian su estado; las flechas del Carrusel tienen nombre; el idioma de la página sigue al de la interfaz; al cerrar los diálogos de abrir y guardar, el foco vuelve al widget.
+- «Créditos y licencias»: la tabla de servicios externos incluye ChatGPT-IA-edu y la página inicial del visor web; la licencia de los contenidos enlaza a su texto en alemán, francés, italiano y portugués.
+- Guía: el catálogo recoge «Alarma / Temporizador» y «Anotar en pantalla», y deja de citar una herramienta que no existe como tal.
+- Erratas: «Anotar en pantalla» en francés y portugués.
+- Desarrollo: `npm run test:a11y` pasa axe (WCAG 2.1 AA) por todos los widgets, los modales y varios estados con datos, entre ellos el Memorama, el Puzzle y el Carrusel con imágenes.
 - Aplicaciones de la comunidad: el aviso «Cargando listado...» tiene contraste suficiente.
 
 ## 2.7.3

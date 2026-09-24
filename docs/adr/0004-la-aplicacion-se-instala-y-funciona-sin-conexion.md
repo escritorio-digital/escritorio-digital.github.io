@@ -45,4 +45,5 @@ para servir las webs guardadas en el navegador.
 - Sin conexión, los iconos de los widgets que no se hayan visto antes no
   aparecen.
 - Lo que depende de servicios externos (Wikipedia, catálogo de la comunidad,
-  herramientas en directo) sigue necesitando conexión.
+  páginas de las comunidades, herramientas en directo) sigue necesitando
+  conexión.

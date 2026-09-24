@@ -6,6 +6,12 @@ import Backend from 'i18next-http-backend';
 
 const baseUrl = import.meta.env.BASE_URL ?? '/';
 
+// El atributo lang de la página sigue al idioma elegido, para que los lectores de pantalla
+// pronuncien bien la interfaz (WCAG 3.1.1).
+i18n.on('languageChanged', (lng) => {
+  document.documentElement.lang = lng.split('-')[0];
+});
+
 i18n
   // Carga las traducciones desde una API/backend (en este caso, la carpeta `public/locales`)
   .use(Backend)

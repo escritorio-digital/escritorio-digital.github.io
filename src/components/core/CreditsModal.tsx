@@ -20,6 +20,10 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
     ca: 'https://creativecommons.org/licenses/by-sa/4.0/deed.ca',
     gl: 'https://creativecommons.org/licenses/by-sa/4.0/deed.gl',
     eu: 'https://creativecommons.org/licenses/by-sa/4.0/deed.eu',
+    de: 'https://creativecommons.org/licenses/by-sa/4.0/deed.de',
+    fr: 'https://creativecommons.org/licenses/by-sa/4.0/deed.fr',
+    it: 'https://creativecommons.org/licenses/by-sa/4.0/deed.it',
+    pt: 'https://creativecommons.org/licenses/by-sa/4.0/deed.pt',
   };
   const ccDeedUrl = ccDeeds[lang] ?? ccDeeds.es;
 
@@ -32,6 +36,8 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
     { name: 'Directo', url: 'https://jjdeharo.github.io/directo/', purposeKey: 'licenses.services.directo' },
     { name: 'QPlay', url: 'https://jjdeharo.github.io/qplay/', purposeKey: 'licenses.services.qplay' },
     { name: 'BoardLive', url: 'https://boardlive.github.io/', purposeKey: 'licenses.services.boardlive' },
+    { name: 'ChatGPT-IA-edu', url: 'https://chatgpt-ia-edu.github.io/', purposeKey: 'licenses.services.chatgpt' },
+    { name: 'Vibe Coding Educativo', url: 'https://vibe-coding-educativo.github.io/app_edu/', purposeKey: 'licenses.services.vce' },
   ];
 
   const ccBySa3Deeds: Record<string, string> = {

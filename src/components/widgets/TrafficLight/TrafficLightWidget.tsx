@@ -35,17 +35,20 @@ export const TrafficLightWidget: FC = () => {
   };
 
   return (
-    <div 
+    <button
+      type="button"
       className="traffic-light-widget cursor-pointer"
       onClick={handleClick}
       title={t('widgets.traffic_light.tooltip')}
+      aria-label={`${t('widgets.traffic_light.title')}: ${t(`widgets.traffic_light.colors.${activeLight}`)}`}
+      aria-live="polite"
     >
       <div className="traffic-light-housing">
         <Light color="red" active={activeLight === 'red'} />
         <Light color="yellow" active={activeLight === 'yellow'} />
         <Light color="green" active={activeLight === 'green'} />
       </div>
-    </div>
+    </button>
   );
 };
 

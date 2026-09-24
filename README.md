@@ -1,4 +1,4 @@
-# Escritorio Interactivo ReactJS
+# Escritorio Digital
 
 Este proyecto es un entorno de escritorio virtual construido con React, que permite a los usuarios añadir, mover y redimensionar "widgets" interactivos. El sistema está diseñado para que la creación de nuevos widgets sea un proceso sencillo y modular.
 
@@ -27,25 +27,26 @@ Este proyecto es un entorno de escritorio virtual construido con React, que perm
 21. **Relojes Mundiales:** Muestra la hora actual en diferentes ciudades del mundo y la compara con tu hora local.
 22. **Ruleta Aleatoria:** Una ruleta personalizable para seleccionar opciones al azar.
 23. **Semáforo:** Un semáforo visual (rojo, amarillo, verde) ideal para gestionar los tiempos o niveles de ruido en el aula.
-24. **Temporizador:** Un contador regresivo que puedes configurar con minutos y segundos.
+24. **Alarma / Temporizador:** Programa alarmas a una hora fija y cuentas atrás, y avisa con sonido al terminar.
 25. **Tres en raya:** El juego clásico de tres en raya para dos jugadores.
 26. **Visor Web:** Permite embeber y mostrar el contenido de una URL directamente en el escritorio, usando un iframe.
 27. **Web local:** Guarda webs en el navegador (desde ZIP o carpeta) y ejecútalas sin conexión.
 28. **Explorador de archivos:** Abre archivos locales (PDF, imágenes, texto y Markdown, HTML, audio y vídeo).
 29. **Archivos Ed:** Gestor de archivos del escritorio para guardar, organizar y abrir archivos.
-30. **Conexión en Directo:** Es un visor de aplicaciones web que carga una página externa, específicamente la aplicación "Conexión en Directo" de Juan José de Haro, dentro de una ventana en el escritorio.
-31. **Paleta de Dibujo:** Una completa herramienta de dibujo que permite trazos con diferentes pinceles (lápiz, rotulador, spray), insertar formas geométricas (líneas, rectángulos, círculos), añadir flechas y texto.
+30. **Paleta de Dibujo:** Una completa herramienta de dibujo que permite trazos con diferentes pinceles (lápiz, rotulador, spray), insertar formas geométricas (líneas, rectángulos, círculos), añadir flechas y texto.
+31. **Anotar en pantalla:** Capa transparente para subrayar, señalar y dibujar sobre todo lo que se ve en el escritorio.
 32. **Votación simple:** Votaciones de opción múltiple en tiempo real con resultados instantáneos.
 33. **Escala de valoración:** Escalas tipo Likert, numéricas o semáforo para medir opiniones.
 34. **Nube de palabras:** Recopila ideas y las muestra como una nube visual.
 35. **Lluvia de ideas y votos:** Fase de propuestas + fase de votación para priorizar.
 36. **Muro interactivo:** Muro colaborativo con notas tipo post-it exportables.
-37. **QPlay:** Concurso interactivo con cuestionarios en tiempo real.
-38. **BoardLive:** Pizarra colaborativa en tiempo real con control por el anfitrión.
-39. **Vibe Coding Educativo:** Catálogo de apps creadas por docentes de la comunidad para descubrir recursos didácticos y abrirlos en el visor o en una pestaña nueva.
-40. **Comunidad ChatGPT-IA-edu:** Acceso a recursos y enlaces del proyecto ChatGPT-IA-edu.
-41. **EduMedia-IAG:** Recursos y multimedia educativa con IA generativa.
-42. **Wikipedia:** Búsqueda rápida con cambio de idioma para términos de clase.
+37. **Tickets de salida:** Recoge las impresiones del grupo al final de la sesión.
+38. **QPlay:** Concurso interactivo con cuestionarios en tiempo real.
+39. **BoardLive:** Pizarra colaborativa en tiempo real con control por el anfitrión.
+40. **Vibe Coding Educativo:** Catálogo de apps creadas por docentes de la comunidad para descubrir recursos didácticos y abrirlos en el visor o en una pestaña nueva.
+41. **Comunidad ChatGPT-IA-edu:** Acceso a recursos y enlaces del proyecto ChatGPT-IA-edu.
+42. **EduMedia-IAG:** Recursos y multimedia educativa con IA generativa.
+43. **Wikipedia:** Búsqueda rápida con cambio de idioma para términos de clase.
 
 ## Uso básico
 
@@ -214,6 +215,8 @@ Usa estos servicios de otros sitios:
 | [Directo](https://jjdeharo.github.io/directo/) | Votación simple, Escala de valoración, Nube de palabras, Lluvia de ideas y votos, Muro interactivo y Tickets de salida, que se abren en una ventana nueva. |
 | [QPlay](https://jjdeharo.github.io/qplay/) | Concursos de la herramienta QPlay, que se abren en una ventana nueva. |
 | [BoardLive](https://boardlive.github.io/) | Pizarra colaborativa de la herramienta BoardLive, que se abre en una ventana nueva. |
+| [ChatGPT-IA-edu](https://chatgpt-ia-edu.github.io/) | Página de la comunidad, que muestra la herramienta Comunidad ChatGPT-IA-edu al abrirse. |
+| [Vibe Coding Educativo](https://vibe-coding-educativo.github.io/app_edu/) | Repositorio de aplicaciones de la comunidad, que el visor web muestra al abrirse. |
 
 Además, el visor web y «Aplicaciones de la comunidad» abren la página que elija cada persona.
 
