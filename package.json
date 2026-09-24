@@ -2,7 +2,7 @@
   "name": "escritorio",
   "private": true,
   "homepage": "https://escritorio-digital.github.io/",
-  "version": "2.7.3",
+  "version": "2.7.4",
   "license": "AGPL-3.0-or-later",
   "type": "module",
   "scripts": {

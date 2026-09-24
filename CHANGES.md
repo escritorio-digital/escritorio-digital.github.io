@@ -1,6 +1,6 @@
 # Cambios realizados
 
-## Sin publicar
+## 2.7.4
 - Calculadora científica: el signo menos se aplica después de la potencia (−2^2 = −4); seno, coseno y tangente dan valores exactos en los múltiplos de 90° (cos 90° = 0, tan 90° da error).
 - Conversor de unidades: la categoría de kilogramos, gramos, libras y onzas se llama «Masa»; factores exactos para millas, pies, libras y onzas.
 - Accesibilidad: el Semáforo, las cartas del Memorama y las piezas del Puzzle deslizante se manejan con el teclado y anuncian su estado; las flechas del Carrusel tienen nombre; el idioma de la página sigue al de la interfaz; al cerrar los diálogos de abrir y guardar, el foco vuelve al widget.
