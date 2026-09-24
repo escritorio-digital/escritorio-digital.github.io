@@ -11,6 +11,7 @@ Escritorio Digital is an interactive desktop environment built with React that a
 - **Development server**: `npm run dev`
 - **Build**: `npm run build` (runs TypeScript check first, then Vite build)
 - **Lint**: `npm run lint`
+- **Accessibility check**: `npm run test:a11y` (axe-core, WCAG 2.1 AA, all widgets; see AGENTS.md)
 - **Preview build**: `npm run preview`
 - **Deploy to GitHub Pages**: `npm run deploy`
 

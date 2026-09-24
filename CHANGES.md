@@ -1,5 +1,9 @@
 # Cambios realizados
 
+## Sin publicar
+- Desarrollo: `npm run test:a11y` pasa axe (WCAG 2.1 AA) por todos los widgets, los modales y varios estados con datos.
+- Aplicaciones de la comunidad: el aviso «Cargando listado...» tiene contraste suficiente.
+
 ## 2.7.3
 - Asistencia: nueva exportación sin nombres (cada estudiante aparece solo con su número).
 - Accesibilidad: el título de las ventanas elige el color de texto por contraste con el tema; nombres y etiquetas en los controles que no los tenían; Escape cierra «Acerca de», «Créditos», «Ajustes» y «Tema»; el foco entra en el widget al abrirlo desde el menú; contrastes corregidos en Asistencia, Cronómetro, Gestos de trabajo, Web local, Marcador, Lista de trabajo, reloj y selector de escritorio. Sin fallos en axe (WCAG 2.1 AA) en los 44 widgets.

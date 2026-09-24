@@ -43,6 +43,7 @@ Guía breve para contribuir al proyecto Escritorio Digital (Vite + React + TS).
 - PRs: describe el cambio, motivación y enlaza issue. Incluye capturas para cambios de UI.
 - i18n: actualiza claves en `public/locales/*/translation.json` y valida cadenas.
 - Antes de enviar: `npm run lint`, `npm run build` y prueba `npm run preview`.
+- Si el cambio toca la interfaz, pasa también `npm run test:a11y` antes de publicar (ver «Accesibilidad»).
 
 ## Añadir un Widget (resumen)
 1) Crea `src/components/widgets/<Nombre>/<Nombre>Widget.tsx` y `<Nombre>.css`.
@@ -53,3 +54,10 @@ Guía breve para contribuir al proyecto Escritorio Digital (Vite + React + TS).
 ## Decisiones (ADR)
 - El porqué de cada decisión que condiciona el proyecto se registra en `docs/adr/` al tomarla, con `nuevo-adr "Título"` desde la raíz, y se anota en `docs/adr/README.md`.
 - Si un cambio altera lo que describe un ADR, se actualiza ese ADR (o se marca como sustituido) en el mismo commit.
+
+## Accesibilidad
+- `npm run test:a11y` pasa axe-core (WCAG 2.1 A y AA) por el escritorio, el menú Inicio, «Acerca de», «Créditos», cada widget recién abierto y varios widgets con datos. Levanta Vite en un puerto libre y tarda un minuto y medio; termina con error si hay fallos y los lista con el elemento y el motivo.
+- Un widget nuevo entra solo en la prueba. Si tiene estados con datos que conviene revisar (listas, resultados), añade un caso en `scripts/test-a11y.mjs`.
+- No analiza el contenido de los iframes (es de otros sitios) ni sustituye la revisión con teclado y lector de pantalla.
+- En un equipo nuevo, instala antes el navegador: `npx playwright install chromium`.
+- Al añadir texto sobre un color del tema, usa `--color-widget-header-text` o `--color-widget-bg-text` (ADR 9).
