@@ -222,7 +222,6 @@
     "purpose_col": "Per a què s'utilitza",
     "services": {
       "fonts": "Tipografia Mulish de la interfície.",
-      "badge": "Insígnia de la llicència, en aquesta finestra.",
       "catalog": "Llista d'«Aplicacions de la comunitat», publicada com a full de càlcul.",
       "wikipedia": "Cerques de l'eina Wikipedia.",
       "directo": "Votació simple, Escala de valoració, Núvol de paraules, Pluja d'idees i vots, Mur interactiu i Tiquets de sortida, que s'obren en una finestra nova.",
@@ -245,7 +244,8 @@
     "principles_title": "Principis",
     "principles_text": "Aquest projecte s'adhereix al:",
     "principles_name": "Decàleg del Coneixement Obert",
-    "principles_link_label": "Veure el decàleg"
+    "principles_link_label": "Veure el decàleg",
+    "cc_badge": "Insígnia de la llicència: Creative Commons,"
   },
   "desktop": {
     "fullscreen_enter": "Pantalla completa",

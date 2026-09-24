@@ -221,7 +221,6 @@
     "purpose_col": "Zertarako erabiltzen den",
     "services": {
       "fonts": "Interfazearen Mulish letra-tipoa.",
-      "badge": "Lizentziaren ikurra, leiho honetan.",
       "catalog": "«Komunitateko aplikazioak» zerrenda, kalkulu-orri gisa argitaratua.",
       "wikipedia": "Wikipedia tresnaren bilaketak.",
       "directo": "Bozketa sinplea, Balorazio eskala, Hitz hodeia, Ideia-jasa eta botoak, Horma interaktiboa eta Irteera txartelak, leiho berri batean irekitzen direnak.",
@@ -244,7 +243,8 @@
     "principles_title": "Printzipioak",
     "principles_text": "Proiektu hau honi atxikitzen zaio:",
     "principles_name": "Ezagutza Irekiaren Dekalogoa",
-    "principles_link_label": "Ikusi dekalogoa"
+    "principles_link_label": "Ikusi dekalogoa",
+    "cc_badge": "Lizentziaren ikurra: Creative Commons,"
   },
   "desktop": {
     "fullscreen_enter": "Pantaila osoa",
