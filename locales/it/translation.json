@@ -201,7 +201,7 @@
     "community_repo_label": "Repository delle applicazioni:",
     "community_telegram_label": "Comunità su Telegram:",
     "ai_title": "Uso dell'IA",
-    "ai_text": "La versione attuale della Scrivania digitale è stata programmata con l'aiuto dell'IA: gli autori ne hanno deciso il design e le funzioni, e hanno provato il programma molte volte, in situazioni diverse, per individuare errori e aspetti da migliorare.",
+    "ai_text": "La versione attuale della Scrivania digitale è stata programmata con l'aiuto dell'IA: gli autori ne hanno deciso il design e le funzioni, e hanno provato il programma molte volte, in situazioni diverse, per individuare errori e aspetti da migliorare. Gli sfondi sono stati generati con Gemini, e anche le icone con l'IA.",
     "privacy_title": "Privacy",
     "privacy_text": "La configurazione della scrivania e i dati di ogni strumento vengono salvati solo in questo browser. L'applicazione non raccoglie statistiche di utilizzo. Alcuni strumenti si collegano ad altri siti per funzionare; sono indicati in «Crediti e licenze»."
   },
@@ -229,6 +229,10 @@
       "qplay": "Quiz dello strumento QPlay, che si aprono in una nuova finestra.",
       "boardlive": "Lavagna collaborativa dello strumento BoardLive, che si apre in una nuova finestra."
     },
+    "images_title": "Immagini",
+    "images_generated": "Gli sfondi (realizzati con Gemini) e le icone sono stati generati con l'IA e sono pubblicati con la licenza dei contenuti, CC BY-SA 4.0.",
+    "wikipedia_icon": "Icona di Wikipedia: adattamento del logo di Wikipedia, di Nohat (concetto di Paullusmagnus), Wikimedia,",
+    "wikipedia_trademark": "Wikipedia è un marchio registrato della Wikimedia Foundation.",
     "sounds_title": "Suoni",
     "sound_dice": "Dadi",
     "sound_alarm": "Allarme",
@@ -380,7 +384,9 @@
       "badges_tab": "Distintivi",
       "alerts_tab": "Avvisi",
       "no_students_message": "Non ci sono studenti nell'elenco per questa data.",
-      "add_students_instruction": "Aggiungi studenti o importa un file CSV."
+      "add_students_instruction": "Aggiungi studenti o importa un file CSV.",
+      "add_student": "Aggiungi studente",
+      "export_without_names_tooltip": "Esporta senza nomi: ogni studente compare solo con il suo numero"
     },
     "scientific_calculator": {
       "title": "Calcolatrice scientifica",
@@ -418,7 +424,9 @@
         "ottobre",
         "novembre",
         "dicembre"
-      ]
+      ],
+      "previous_month": "Mese precedente",
+      "next_month": "Mese successivo"
     },
     "image_carousel": {
       "title": "Carosello di immagini",
@@ -450,7 +458,11 @@
         "celsius": "Celsius",
         "fahrenheit": "Fahrenheit",
         "kelvin": "Kelvin"
-      }
+      },
+      "from_value": "Valore di origine",
+      "to_value": "Valore convertito",
+      "from_unit": "Unità di origine",
+      "to_unit": "Unità di destinazione"
     },
     "stopwatch": {
       "title": "Cronometro",
@@ -495,7 +507,8 @@
       "icon_alt": "Generatore di QR",
       "placeholder": "Inserisci testo per generare un codice QR.",
       "input_placeholder": "Scrivi testo o URL qui...",
-      "generate_button": "Genera QR"
+      "generate_button": "Genera QR",
+      "image_label": "Codice QR"
     },
     "work_gestures": {
       "title": "Gesti di lavoro",
@@ -526,7 +539,8 @@
       "your_javascript": "Il tuo JavaScript",
       "show_preview": "Mostra anteprima",
       "show_code": "Mostra codice",
-      "preview_title": "Anteprima HTML"
+      "preview_title": "Anteprima HTML",
+      "code_label": "Codice HTML"
     },
     "work_list": {
       "title": "Lista di lavoro",
@@ -535,7 +549,10 @@
       "download_csv": "Scarica come CSV",
       "replace_list_confirm": "Vuoi sostituire l'elenco corrente con le attività dal file? \n(Fai clic su \"Annulla\" per aggiungerle alla fine)",
       "csv_error": "Si è verificato un errore durante la lettura del file CSV. Controllane il formato.",
-      "double_click_edit": "Doppio clic su un'attività per modificarla."
+      "double_click_edit": "Doppio clic su un'attività per modificarla.",
+      "edit_task": "Modifica attività",
+      "delete_task": "Elimina attività",
+      "mark_done": "Segna come fatta: {{task}}"
     },
     "scoreboard": {
       "title": "Tabellone segnapunti",
@@ -544,7 +561,10 @@
       "empty_message": "Aggiungi una squadra o un giocatore per iniziare.",
       "input_placeholder": "Nome della squadra o del giocatore...",
       "add_button": "Aggiungi",
-      "reset_button_title": "Azzera tutto a zero"
+      "reset_button_title": "Azzera tutto a zero",
+      "subtract_point": "Togli un punto",
+      "add_point": "Aggiungi un punto",
+      "remove_player": "Rimuovi squadra o giocatore"
     },
     "sound_meter": {
       "title": "Misuratore di rumore",
@@ -574,7 +594,12 @@
       "icon_alt": "Gioco di memoria"
     },
     "metronome": {
-      "title": "Metronomo"
+      "title": "Metronomo",
+      "start": "Avvia",
+      "stop": "Ferma",
+      "tempo_label": "Tempo (BPM)",
+      "fewer_beats": "Meno battiti per battuta",
+      "more_beats": "Più battiti per battuta"
     },
     "notepad": {
       "title": "Blocco note",
@@ -681,7 +706,9 @@
         "moscow": "Mosca",
         "dubai": "Dubai",
         "shanghai": "Shanghai"
-      }
+      },
+      "remove_clock": "Rimuovi orologio",
+      "timezone_label": "Fuso orario"
     },
     "random_spinner": {
       "title": "Ruota casuale",
@@ -703,7 +730,10 @@
       "options_header": "Opzioni",
       "add_option_placeholder": "Aggiungi opzione...",
       "load_from_file": "Carica da file",
-      "remove_after_select": "Rimuovi l'opzione dopo l'estrazione"
+      "remove_after_select": "Rimuovi l'opzione dopo l'estrazione",
+      "spin": "Gira",
+      "add_option": "Aggiungi opzione",
+      "remove_option": "Elimina opzione"
     },
     "traffic_light": {
       "title": "Semaforo",
@@ -755,7 +785,7 @@
       "more_count": "+{{count}} in più"
     },
     "tic_tac_toe": {
-      "title": "Tic-Tac-Toe",
+      "title": "Tris",
       "player_1": "Giocatore 1",
       "player_2": "Giocatore 2",
       "reset_confirm": "Sei sicuro di voler reimpostare il gioco e i punteggi?",
@@ -763,7 +793,8 @@
       "draw": "È un pareggio!",
       "next_turn": "Turno successivo:",
       "next_round": "Prossimo round",
-      "reset_all": "Reimposta tutto"
+      "reset_all": "Reimposta tutto",
+      "cell": "Casella {{number}}"
     },
     "iframe": {
       "title": "Visualizzatore web",
@@ -974,7 +1005,9 @@
       "move_up": "Sposta il preferito su",
       "move_down": "Sposta il preferito giu",
       "collapse_list": "Nascondi elenco",
-      "expand_list": "Mostra elenco"
+      "expand_list": "Mostra elenco",
+      "filter_level_label": "Livello",
+      "filter_area_label": "Area"
     },
     "chatgpt_ia_edu": {
       "title": "Comunità ChatGPT-IA-edu",

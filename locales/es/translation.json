@@ -201,7 +201,7 @@
     "community_repo_label": "Repositorio de aplicaciones:",
     "community_telegram_label": "Comunidad en Telegram:",
     "ai_title": "Uso de IA",
-    "ai_text": "La versión actual del Escritorio Digital se ha programado con ayuda de IA: los autores han decidido el diseño y las funciones, y han probado el programa numerosas veces, en situaciones diferentes, para detectar errores y aspectos que mejorar.",
+    "ai_text": "La versión actual del Escritorio Digital se ha programado con ayuda de IA: los autores han decidido el diseño y las funciones, y han probado el programa numerosas veces, en situaciones diferentes, para detectar errores y aspectos que mejorar. Los fondos de pantalla se han generado con Gemini, y los iconos, también con IA.",
     "privacy_title": "Privacidad",
     "privacy_text": "La configuración del escritorio y los datos de cada herramienta se guardan solo en este navegador. La aplicación no recoge estadísticas de uso. Algunas herramientas se conectan a otros sitios para funcionar; se detallan en «Créditos y licencias»."
   },
@@ -229,6 +229,10 @@
       "qplay": "Concursos de la herramienta QPlay, que se abren en una ventana nueva.",
       "boardlive": "Pizarra colaborativa de la herramienta BoardLive, que se abre en una ventana nueva."
     },
+    "images_title": "Imágenes",
+    "images_generated": "Los fondos de pantalla (hechos con Gemini) y los iconos se han generado con IA y se publican con la licencia de los contenidos, CC BY-SA 4.0.",
+    "wikipedia_icon": "Icono de Wikipedia: adaptación del logotipo de Wikipedia, de Nohat (concepto de Paullusmagnus), Wikimedia,",
+    "wikipedia_trademark": "Wikipedia es una marca registrada de la Fundación Wikimedia.",
     "sounds_title": "Sonidos",
     "sound_dice": "Dados",
     "sound_alarm": "Alarma",
@@ -358,7 +362,7 @@
         "helps_classmates": "Ayuda a Compañeros"
       },
       "alerts": {
-        "talks_in_class": "Platica en clase",
+        "talks_in_class": "Habla en clase",
         "doesnt_work": "No trabaja",
         "bad_behavior": "Mala conducta",
         "incomplete_homework": "Incumple con la tarea"
@@ -377,7 +381,9 @@
       "badges_tab": "Insignias",
       "alerts_tab": "Alertas",
       "no_students_message": "No hay estudiantes en la lista para esta fecha.",
-      "add_students_instruction": "Añade estudiantes o importa un archivo CSV."
+      "add_students_instruction": "Añade estudiantes o importa un archivo CSV.",
+      "add_student": "Añadir estudiante",
+      "export_without_names_tooltip": "Exportar sin nombres: cada estudiante aparece solo con su número"
     },
     "scientific_calculator": {
       "title": "Calculadora Científica",
@@ -415,7 +421,9 @@
         "octubre",
         "noviembre",
         "diciembre"
-      ]
+      ],
+      "previous_month": "Mes anterior",
+      "next_month": "Mes siguiente"
     },
     "image_carousel": {
       "title": "Carrusel de Imágenes",
@@ -447,7 +455,11 @@
         "celsius": "Celsius",
         "fahrenheit": "Fahrenheit",
         "kelvin": "Kelvin"
-      }
+      },
+      "from_value": "Valor de origen",
+      "to_value": "Valor convertido",
+      "from_unit": "Unidad de origen",
+      "to_unit": "Unidad de destino"
     },
     "stopwatch": {
       "title": "Cronómetro",
@@ -492,7 +504,8 @@
       "icon_alt": "Generador QR",
       "placeholder": "Introduce texto para generar un código QR.",
       "input_placeholder": "Escribe el texto o URL aquí...",
-      "generate_button": "Generar QR"
+      "generate_button": "Generar QR",
+      "image_label": "Código QR"
     },
     "work_gestures": {
       "title": "Gestos de Trabajo",
@@ -523,7 +536,8 @@
       "your_javascript": "Tu JavaScript",
       "show_preview": "Mostrar Vista Previa",
       "show_code": "Mostrar Código",
-      "preview_title": "Vista previa HTML"
+      "preview_title": "Vista previa HTML",
+      "code_label": "Código HTML"
     },
     "work_list": {
       "title": "Lista de Trabajo",
@@ -532,7 +546,10 @@
       "download_csv": "Descargar como CSV",
       "replace_list_confirm": "¿Quieres reemplazar la lista actual con las tareas del archivo? \n(Haz clic en \"Cancelar\" para añadirlas al final)",
       "csv_error": "Hubo un error al leer el archivo CSV. Por favor, revisa su formato.",
-      "double_click_edit": "Doble click en una tarea para editarla."
+      "double_click_edit": "Doble click en una tarea para editarla.",
+      "edit_task": "Editar tarea",
+      "delete_task": "Eliminar tarea",
+      "mark_done": "Marcar como hecha: {{task}}"
     },
     "scoreboard": {
       "title": "Marcador de Puntos",
@@ -541,7 +558,10 @@
       "empty_message": "Añade un equipo o jugador para empezar.",
       "input_placeholder": "Nombre del equipo o jugador...",
       "add_button": "Añadir",
-      "reset_button_title": "Reiniciar todo a cero"
+      "reset_button_title": "Reiniciar todo a cero",
+      "subtract_point": "Restar un punto",
+      "add_point": "Sumar un punto",
+      "remove_player": "Quitar equipo o jugador"
     },
     "sound_meter": {
       "title": "Medidor de Ruido",
@@ -572,7 +592,12 @@
       "icon_alt": "Memorama"
     },
     "metronome": {
-      "title": "Metrónomo"
+      "title": "Metrónomo",
+      "start": "Iniciar",
+      "stop": "Detener",
+      "tempo_label": "Tempo (BPM)",
+      "fewer_beats": "Menos pulsos por compás",
+      "more_beats": "Más pulsos por compás"
     },
     "notepad": {
       "title": "Bloc de Notas",
@@ -679,7 +704,9 @@
         "moscow": "Moscú",
         "dubai": "Dubái",
         "shanghai": "Shanghái"
-      }
+      },
+      "remove_clock": "Quitar reloj",
+      "timezone_label": "Zona horaria"
     },
     "random_spinner": {
       "title": "Ruleta Aleatoria",
@@ -701,7 +728,10 @@
       "options_header": "Opciones",
       "add_option_placeholder": "Añadir opción...",
       "load_from_file": "Cargar desde archivo",
-      "remove_after_select": "Eliminar opción al salir"
+      "remove_after_select": "Eliminar opción al salir",
+      "spin": "Girar",
+      "add_option": "Añadir opción",
+      "remove_option": "Eliminar opción"
     },
     "traffic_light": {
       "title": "Semáforo",
@@ -753,7 +783,7 @@
       "more_count": "+{{count}} más"
     },
     "tic_tac_toe": {
-      "title": "Tres en ralla",
+      "title": "Tres en raya",
       "player_1": "Jugador 1",
       "player_2": "Jugador 2",
       "reset_confirm": "¿Seguro que quieres reiniciar el juego y los marcadores?",
@@ -761,7 +791,8 @@
       "draw": "¡Es un empate!",
       "next_turn": "Siguiente turno:",
       "next_round": "Siguiente Ronda",
-      "reset_all": "Reiniciar todo"
+      "reset_all": "Reiniciar todo",
+      "cell": "Casilla {{number}}"
     },
     "iframe": {
       "title": "Visor Web",
@@ -972,7 +1003,9 @@
       "move_up": "Mover favorito arriba",
       "move_down": "Mover favorito abajo",
       "collapse_list": "Ocultar lista",
-      "expand_list": "Mostrar lista"
+      "expand_list": "Mostrar lista",
+      "filter_level_label": "Nivel",
+      "filter_area_label": "Área"
     },
     "chatgpt_ia_edu": {
       "title": "Comunidad ChatGPT-IA-edu",

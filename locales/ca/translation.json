@@ -201,7 +201,7 @@
     "community_repo_label": "Repositori d'aplicacions:",
     "community_telegram_label": "Comunitat a Telegram:",
     "ai_title": "Ús d'IA",
-    "ai_text": "La versió actual de l'Escriptori Digital s'ha programat amb ajuda d'IA: els autors n'han decidit el disseny i les funcions, i han provat el programa moltes vegades, en situacions diferents, per detectar errors i aspectes que cal millorar.",
+    "ai_text": "La versió actual de l'Escriptori Digital s'ha programat amb ajuda d'IA: els autors n'han decidit el disseny i les funcions, i han provat el programa moltes vegades, en situacions diferents, per detectar errors i aspectes que cal millorar. Els fons de pantalla s'han generat amb Gemini, i les icones, també amb IA.",
     "privacy_title": "Privadesa",
     "privacy_text": "La configuració de l'escriptori i les dades de cada eina es desen només en aquest navegador. L'aplicació no recull estadístiques d'ús. Algunes eines es connecten a altres llocs per funcionar; es detallen a «Crèdits i llicències»."
   },
@@ -229,6 +229,10 @@
       "qplay": "Concursos de l'eina QPlay, que s'obren en una finestra nova.",
       "boardlive": "Pissarra col·laborativa de l'eina BoardLive, que s'obre en una finestra nova."
     },
+    "images_title": "Imatges",
+    "images_generated": "Els fons de pantalla (fets amb Gemini) i les icones s'han generat amb IA i es publiquen amb la llicència dels continguts, CC BY-SA 4.0.",
+    "wikipedia_icon": "Icona de Wikipedia: adaptació del logotip de Wikipedia, de Nohat (concepte de Paullusmagnus), Wikimedia,",
+    "wikipedia_trademark": "Wikipedia és una marca registrada de la Fundació Wikimedia.",
     "sounds_title": "Sons",
     "sound_dice": "Daus",
     "sound_alarm": "Alarma",
@@ -377,7 +381,9 @@
       "badges_tab": "Insígnies",
       "alerts_tab": "Alertes",
       "no_students_message": "No hi ha estudiants a la llista per a aquesta data.",
-      "add_students_instruction": "Afegeix estudiants o importa un fitxer CSV."
+      "add_students_instruction": "Afegeix estudiants o importa un fitxer CSV.",
+      "add_student": "Afegeix estudiant",
+      "export_without_names_tooltip": "Exporta sense noms: cada estudiant apareix només amb el seu número"
     },
     "scientific_calculator": {
       "title": "Calculadora Científica",
@@ -415,7 +421,9 @@
         "octubre",
         "novembre",
         "desembre"
-      ]
+      ],
+      "previous_month": "Mes anterior",
+      "next_month": "Mes següent"
     },
     "image_carousel": {
       "title": "Carrusel d'Imatges",
@@ -447,7 +455,11 @@
         "celsius": "Celsius",
         "fahrenheit": "Fahrenheit",
         "kelvin": "Kelvin"
-      }
+      },
+      "from_value": "Valor d'origen",
+      "to_value": "Valor convertit",
+      "from_unit": "Unitat d'origen",
+      "to_unit": "Unitat de destinació"
     },
     "stopwatch": {
       "title": "Cronòmetre",
@@ -492,7 +504,8 @@
       "icon_alt": "Generador QR",
       "placeholder": "Introdueix text per generar un codi QR.",
       "input_placeholder": "Escriu el text o URL aquí...",
-      "generate_button": "Generar QR"
+      "generate_button": "Generar QR",
+      "image_label": "Codi QR"
     },
     "work_gestures": {
       "title": "Gestos de Treball",
@@ -523,7 +536,8 @@
       "your_javascript": "El teu JavaScript",
       "show_preview": "Mostrar Vista Prèvia",
       "show_code": "Mostrar Codi",
-      "preview_title": "Vista prèvia HTML"
+      "preview_title": "Vista prèvia HTML",
+      "code_label": "Codi HTML"
     },
     "work_list": {
       "title": "Llista de Treball",
@@ -532,7 +546,10 @@
       "download_csv": "Descarregar com a CSV",
       "replace_list_confirm": "Vols reemplaçar la llista actual amb les tasques del fitxer? \n(Fes clic a \"Cancel·lar\" per afegir-les al final)",
       "csv_error": "Hi ha hagut un error en llegir el fitxer CSV. Si us plau, revisa el seu format.",
-      "double_click_edit": "Doble clic en una tasca per editar-la."
+      "double_click_edit": "Doble clic en una tasca per editar-la.",
+      "edit_task": "Edita la tasca",
+      "delete_task": "Elimina la tasca",
+      "mark_done": "Marca com a feta: {{task}}"
     },
     "scoreboard": {
       "title": "Marcador de Punts",
@@ -541,7 +558,10 @@
       "empty_message": "Afegeix un equip o jugador per començar.",
       "input_placeholder": "Nom de l'equip o jugador...",
       "add_button": "Afegir",
-      "reset_button_title": "Reiniciar-ho tot a zero"
+      "reset_button_title": "Reiniciar-ho tot a zero",
+      "subtract_point": "Resta un punt",
+      "add_point": "Suma un punt",
+      "remove_player": "Treu l'equip o jugador"
     },
     "sound_meter": {
       "title": "Mesurador de Soroll",
@@ -571,7 +591,12 @@
       "icon_alt": "Memorama"
     },
     "metronome": {
-      "title": "Metrònom"
+      "title": "Metrònom",
+      "start": "Inicia",
+      "stop": "Atura",
+      "tempo_label": "Tempo (BPM)",
+      "fewer_beats": "Menys pulsacions per compàs",
+      "more_beats": "Més pulsacions per compàs"
     },
     "notepad": {
       "title": "Bloc de Notes",
@@ -678,7 +703,9 @@
         "moscow": "Moscou",
         "dubai": "Dubai",
         "shanghai": "Xangai"
-      }
+      },
+      "remove_clock": "Treu el rellotge",
+      "timezone_label": "Zona horària"
     },
     "random_spinner": {
       "title": "Ruleta Aleatòria",
@@ -700,7 +727,10 @@
       "options_header": "Opcions",
       "add_option_placeholder": "Afegir opció...",
       "load_from_file": "Carrega des d'un fitxer",
-      "remove_after_select": "Elimina l'opció en sortir"
+      "remove_after_select": "Elimina l'opció en sortir",
+      "spin": "Gira",
+      "add_option": "Afegeix opció",
+      "remove_option": "Elimina l'opció"
     },
     "traffic_light": {
       "title": "Semàfor",
@@ -752,7 +782,7 @@
       "more_count": "+{{count}} més"
     },
     "tic_tac_toe": {
-      "title": "Tres en Ratlla",
+      "title": "Tres en ratlla",
       "player_1": "Jugador 1",
       "player_2": "Jugador 2",
       "reset_confirm": "Estàs segur que vols reiniciar el joc i els marcadors?",
@@ -760,7 +790,8 @@
       "draw": "És un empat!",
       "next_turn": "Següent torn:",
       "next_round": "Següent Ronda",
-      "reset_all": "Reiniciar-ho tot"
+      "reset_all": "Reiniciar-ho tot",
+      "cell": "Casella {{number}}"
     },
     "iframe": {
       "title": "Visor Web",
@@ -971,7 +1002,9 @@
       "move_up": "Moure el favorit amunt",
       "move_down": "Moure el favorit avall",
       "collapse_list": "Amagar llista",
-      "expand_list": "Mostrar llista"
+      "expand_list": "Mostrar llista",
+      "filter_level_label": "Nivell",
+      "filter_area_label": "Àrea"
     },
     "chatgpt_ia_edu": {
       "title": "Comunitat ChatGPT-IA-edu",

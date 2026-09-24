@@ -1,0 +1,1 @@
+import{j as t}from"./index-BFT6Doqt.js";import{a3 as n}from"./index-BFT6Doqt.js";import{ExternalAppWidget as e}from"./ExternalAppWidget-BWoWTQH7.js";const i=()=>t.jsx(e,{url:"https://jjdeharo.github.io/directo/nube.html",titleKey:"widgets.directo_nube.title",appendLanguageParam:!0,openInPopup:!0});export{i as DirectoNubeWidget,n as widgetConfig};

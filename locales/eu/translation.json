@@ -200,7 +200,7 @@
     "community_repo_label": "Aplikazioen biltegia:",
     "community_telegram_label": "Telegram komunitatea:",
     "ai_title": "AAren erabilera",
-    "ai_text": "Mahaigain digitalaren egungo bertsioa AAren laguntzaz programatu da: egileek erabaki dituzte diseinua eta funtzioak, eta programa askotan probatu dute, egoera desberdinetan, akatsak eta hobetu beharrekoak aurkitzeko.",
+    "ai_text": "Mahaigain digitalaren egungo bertsioa AAren laguntzaz programatu da: egileek erabaki dituzte diseinua eta funtzioak, eta programa askotan probatu dute, egoera desberdinetan, akatsak eta hobetu beharrekoak aurkitzeko. Pantaila-atzealdeak Geminirekin sortu dira, eta ikonoak ere AArekin.",
     "privacy_title": "Pribatutasuna",
     "privacy_text": "Mahaigainaren konfigurazioa eta tresna bakoitzaren datuak nabigatzaile honetan bakarrik gordetzen dira. Aplikazioak ez du erabilera-estatistikarik biltzen. Tresna batzuk beste gune batzuetara konektatzen dira funtzionatzeko; «Kredituak eta lizentziak» atalean zehazten dira."
   },
@@ -228,6 +228,10 @@
       "qplay": "QPlay tresnaren lehiaketak, leiho berri batean irekitzen direnak.",
       "boardlive": "BoardLive tresnaren arbela kolaboratiboa, leiho berri batean irekitzen dena."
     },
+    "images_title": "Irudiak",
+    "images_generated": "Pantaila-atzealdeak (Geminirekin eginak) eta ikonoak AArekin sortu dira, eta edukien lizentziarekin argitaratzen dira, CC BY-SA 4.0.",
+    "wikipedia_icon": "Wikipediaren ikonoa: Wikipediaren logotipoaren egokitzapena, Nohatena (Paullusmagnusen kontzeptua), Wikimedia,",
+    "wikipedia_trademark": "Wikipedia Wikimedia Fundazioaren marka erregistratua da.",
     "sounds_title": "Soinuak",
     "sound_dice": "Dadoak",
     "sound_alarm": "Alarma",
@@ -376,7 +380,9 @@
       "badges_tab": "Intsigniak",
       "alerts_tab": "Alertak",
       "no_students_message": "Ez dago ikaslerik zerrendan data honetarako.",
-      "add_students_instruction": "Gehitu ikasleak edo inportatu CSV fitxategi bat."
+      "add_students_instruction": "Gehitu ikasleak edo inportatu CSV fitxategi bat.",
+      "add_student": "Gehitu ikaslea",
+      "export_without_names_tooltip": "Esportatu izenik gabe: ikasle bakoitza bere zenbakiarekin bakarrik agertzen da"
     },
     "scientific_calculator": {
       "title": "Kalkulagailu Zientifikoa",
@@ -414,7 +420,9 @@
         "urria",
         "azaroa",
         "abendua"
-      ]
+      ],
+      "previous_month": "Aurreko hilabetea",
+      "next_month": "Hurrengo hilabetea"
     },
     "image_carousel": {
       "title": "Irudi-karrusela",
@@ -446,7 +454,11 @@
         "celsius": "Celsius",
         "fahrenheit": "Fahrenheit",
         "kelvin": "Kelvin"
-      }
+      },
+      "from_value": "Jatorrizko balioa",
+      "to_value": "Balio bihurtua",
+      "from_unit": "Jatorrizko unitatea",
+      "to_unit": "Helburuko unitatea"
     },
     "stopwatch": {
       "title": "Kronometroa",
@@ -491,7 +503,8 @@
       "icon_alt": "QR Sortzailea",
       "placeholder": "Sartu testua QR kode bat sortzeko.",
       "input_placeholder": "Idatzi testua edo URLa hemen...",
-      "generate_button": "Sortu QR"
+      "generate_button": "Sortu QR",
+      "image_label": "QR kodea"
     },
     "work_gestures": {
       "title": "Lan Keinuak",
@@ -522,7 +535,8 @@
       "your_javascript": "Zure JavaScript",
       "show_preview": "Erakutsi Aurrebista",
       "show_code": "Erakutsi Kodea",
-      "preview_title": "HTML aurrebista"
+      "preview_title": "HTML aurrebista",
+      "code_label": "HTML kodea"
     },
     "work_list": {
       "title": "Lan Zerrenda",
@@ -531,7 +545,10 @@
       "download_csv": "Deskargatu CSV gisa",
       "replace_list_confirm": "Zerrenda unekoa fitxategiko zereginekin ordezkatu nahi duzu? \n(Egin klik \"Utzi\" botoian amaieran gehitzeko)",
       "csv_error": "Errore bat gertatu da CSV fitxategia irakurtzean. Mesedez, egiaztatu formatua.",
-      "double_click_edit": "Egin klik bikoitza zeregin batean editatzeko."
+      "double_click_edit": "Egin klik bikoitza zeregin batean editatzeko.",
+      "edit_task": "Editatu zeregina",
+      "delete_task": "Ezabatu zeregina",
+      "mark_done": "Markatu eginda gisa: {{task}}"
     },
     "scoreboard": {
       "title": "Puntuazio Markagailua",
@@ -540,7 +557,10 @@
       "empty_message": "Gehitu talde edo jokalari bat hasteko.",
       "input_placeholder": "Taldearen edo jokalariaren izena...",
       "add_button": "Gehitu",
-      "reset_button_title": "Berrezarri dena zerora"
+      "reset_button_title": "Berrezarri dena zerora",
+      "subtract_point": "Kendu puntu bat",
+      "add_point": "Gehitu puntu bat",
+      "remove_player": "Kendu taldea edo jokalaria"
     },
     "sound_meter": {
       "title": "Zarata Neurgailua",
@@ -570,7 +590,12 @@
       "icon_alt": "Memorama"
     },
     "metronome": {
-      "title": "Metronomoa"
+      "title": "Metronomoa",
+      "start": "Hasi",
+      "stop": "Gelditu",
+      "tempo_label": "Tempoa (BPM)",
+      "fewer_beats": "Pultsu gutxiago konpaseko",
+      "more_beats": "Pultsu gehiago konpaseko"
     },
     "notepad": {
       "title": "Ohar Bloka",
@@ -677,7 +702,9 @@
         "moscow": "Mosku",
         "dubai": "Dubai",
         "shanghai": "Shanghai"
-      }
+      },
+      "remove_clock": "Kendu erlojua",
+      "timezone_label": "Ordu-eremua"
     },
     "random_spinner": {
       "title": "Ausazko Erruleta",
@@ -699,7 +726,10 @@
       "options_header": "Aukerak",
       "add_option_placeholder": "Gehitu aukera...",
       "load_from_file": "Kargatu fitxategitik",
-      "remove_after_select": "Kendu aukera ateratzean"
+      "remove_after_select": "Kendu aukera ateratzean",
+      "spin": "Biratu",
+      "add_option": "Gehitu aukera",
+      "remove_option": "Ezabatu aukera"
     },
     "traffic_light": {
       "title": "Semaforoa",
@@ -759,7 +789,8 @@
       "draw": "Berdinketa!",
       "next_turn": "Hurrengo txanda:",
       "next_round": "Hurrengo Erronda",
-      "reset_all": "Berrezarri dena"
+      "reset_all": "Berrezarri dena",
+      "cell": "{{number}}. laukia"
     },
     "iframe": {
       "title": "Web Bistaratzailea",
@@ -970,7 +1001,9 @@
       "move_up": "Mugitu gogokoa gora",
       "move_down": "Mugitu gogokoa behera",
       "collapse_list": "Ezkutatu zerrenda",
-      "expand_list": "Erakutsi zerrenda"
+      "expand_list": "Erakutsi zerrenda",
+      "filter_level_label": "Maila",
+      "filter_area_label": "Arloa"
     },
     "chatgpt_ia_edu": {
       "title": "ChatGPT-IA-edu komunitatea",

@@ -201,7 +201,7 @@
     "community_repo_label": "Anwendungs-Repository:",
     "community_telegram_label": "Telegram-Community:",
     "ai_title": "Einsatz von KI",
-    "ai_text": "Die aktuelle Version des Digitalen Desktops wurde mit Hilfe von KI programmiert: Die Autoren haben das Design und die Funktionen festgelegt und das Programm viele Male in unterschiedlichen Situationen getestet, um Fehler und Verbesserungsmöglichkeiten zu finden.",
+    "ai_text": "Die aktuelle Version des Digitalen Desktops wurde mit Hilfe von KI programmiert: Die Autoren haben das Design und die Funktionen festgelegt und das Programm viele Male in unterschiedlichen Situationen getestet, um Fehler und Verbesserungsmöglichkeiten zu finden. Die Hintergrundbilder wurden mit Gemini erzeugt, die Symbole ebenfalls mit KI.",
     "privacy_title": "Datenschutz",
     "privacy_text": "Die Einstellungen des Desktops und die Daten jedes Werkzeugs werden nur in diesem Browser gespeichert. Die Anwendung erhebt keine Nutzungsstatistiken. Einige Werkzeuge verbinden sich mit anderen Websites, um zu funktionieren; sie sind unter „Credits und Lizenzen“ aufgeführt."
   },
@@ -229,6 +229,10 @@
       "qplay": "Quiz im Werkzeug QPlay, die sich in einem neuen Fenster öffnen.",
       "boardlive": "Kollaborative Tafel im Werkzeug BoardLive, die sich in einem neuen Fenster öffnet."
     },
+    "images_title": "Bilder",
+    "images_generated": "Die Hintergrundbilder (mit Gemini erstellt) und die Symbole wurden mit KI erzeugt und stehen unter der Lizenz der Inhalte, CC BY-SA 4.0.",
+    "wikipedia_icon": "Wikipedia-Symbol: Bearbeitung des Wikipedia-Logos von Nohat (Konzept von Paullusmagnus), Wikimedia,",
+    "wikipedia_trademark": "Wikipedia ist eine eingetragene Marke der Wikimedia Foundation.",
     "sounds_title": "Klänge",
     "sound_dice": "Würfel",
     "sound_alarm": "Alarm",
@@ -380,7 +384,9 @@
       "badges_tab": "Abzeichen",
       "alerts_tab": "Warnungen",
       "no_students_message": "Für dieses Datum sind keine Schüler in der Liste.",
-      "add_students_instruction": "Füge Schüler hinzu oder importiere eine CSV-Datei."
+      "add_students_instruction": "Füge Schüler hinzu oder importiere eine CSV-Datei.",
+      "add_student": "Schüler/in hinzufügen",
+      "export_without_names_tooltip": "Ohne Namen exportieren: jede Person erscheint nur mit ihrer Nummer"
     },
     "scientific_calculator": {
       "title": "Wissenschaftlicher Taschenrechner",
@@ -418,7 +424,9 @@
         "Oktober",
         "November",
         "Dezember"
-      ]
+      ],
+      "previous_month": "Vorheriger Monat",
+      "next_month": "Nächster Monat"
     },
     "image_carousel": {
       "title": "Bilderkarussell",
@@ -450,7 +458,11 @@
         "celsius": "Celsius",
         "fahrenheit": "Fahrenheit",
         "kelvin": "Kelvin"
-      }
+      },
+      "from_value": "Ausgangswert",
+      "to_value": "Umgerechneter Wert",
+      "from_unit": "Ausgangseinheit",
+      "to_unit": "Zieleinheit"
     },
     "stopwatch": {
       "title": "Stoppuhr",
@@ -495,7 +507,8 @@
       "icon_alt": "QR-Code-Generator",
       "placeholder": "Gib Text ein, um einen QR-Code zu erzeugen.",
       "input_placeholder": "Text oder URL hier eingeben...",
-      "generate_button": "QR-Code erzeugen"
+      "generate_button": "QR-Code erzeugen",
+      "image_label": "QR-Code"
     },
     "work_gestures": {
       "title": "Arbeitsgesten",
@@ -526,7 +539,8 @@
       "your_javascript": "Dein JavaScript",
       "show_preview": "Vorschau anzeigen",
       "show_code": "Code anzeigen",
-      "preview_title": "HTML-Vorschau"
+      "preview_title": "HTML-Vorschau",
+      "code_label": "HTML-Code"
     },
     "work_list": {
       "title": "Arbeitsliste",
@@ -535,7 +549,10 @@
       "download_csv": "Als CSV herunterladen",
       "replace_list_confirm": "Möchtest du die aktuelle Liste durch die Aufgaben aus der Datei ersetzen? \n(Klicke auf \"Abbrechen\", um sie ans Ende anzuhängen)",
       "csv_error": "Beim Lesen der CSV-Datei ist ein Fehler aufgetreten. Bitte prüfe das Format.",
-      "double_click_edit": "Doppelklicke auf eine Aufgabe, um sie zu bearbeiten."
+      "double_click_edit": "Doppelklicke auf eine Aufgabe, um sie zu bearbeiten.",
+      "edit_task": "Aufgabe bearbeiten",
+      "delete_task": "Aufgabe löschen",
+      "mark_done": "Als erledigt markieren: {{task}}"
     },
     "scoreboard": {
       "title": "Punktestand",
@@ -544,7 +561,10 @@
       "empty_message": "Füge ein Team oder einen Spieler hinzu, um zu starten.",
       "input_placeholder": "Team- oder Spielername...",
       "add_button": "Hinzufügen",
-      "reset_button_title": "Alles auf null setzen"
+      "reset_button_title": "Alles auf null setzen",
+      "subtract_point": "Einen Punkt abziehen",
+      "add_point": "Einen Punkt hinzufügen",
+      "remove_player": "Team oder Spieler/in entfernen"
     },
     "sound_meter": {
       "title": "Lärmpegelmesser",
@@ -574,7 +594,12 @@
       "icon_alt": "Memory"
     },
     "metronome": {
-      "title": "Metronom"
+      "title": "Metronom",
+      "start": "Starten",
+      "stop": "Stoppen",
+      "tempo_label": "Tempo (BPM)",
+      "fewer_beats": "Weniger Schläge pro Takt",
+      "more_beats": "Mehr Schläge pro Takt"
     },
     "notepad": {
       "title": "Notizblock",
@@ -681,7 +706,9 @@
         "moscow": "Moskau",
         "dubai": "Dubai",
         "shanghai": "Shanghai"
-      }
+      },
+      "remove_clock": "Uhr entfernen",
+      "timezone_label": "Zeitzone"
     },
     "random_spinner": {
       "title": "Zufallsrad",
@@ -703,7 +730,10 @@
       "options_header": "Optionen",
       "add_option_placeholder": "Option hinzufügen...",
       "load_from_file": "Aus Datei laden",
-      "remove_after_select": "Option nach Auswahl entfernen"
+      "remove_after_select": "Option nach Auswahl entfernen",
+      "spin": "Drehen",
+      "add_option": "Option hinzufügen",
+      "remove_option": "Option entfernen"
     },
     "traffic_light": {
       "title": "Ampel",
@@ -763,7 +793,8 @@
       "draw": "Unentschieden!",
       "next_turn": "Nächster Zug:",
       "next_round": "Nächste Runde",
-      "reset_all": "Alles zurücksetzen"
+      "reset_all": "Alles zurücksetzen",
+      "cell": "Feld {{number}}"
     },
     "iframe": {
       "title": "Web-Viewer",
@@ -974,7 +1005,9 @@
       "move_up": "Favorit nach oben",
       "move_down": "Favorit nach unten",
       "collapse_list": "Liste ausblenden",
-      "expand_list": "Liste anzeigen"
+      "expand_list": "Liste anzeigen",
+      "filter_level_label": "Stufe",
+      "filter_area_label": "Fachbereich"
     },
     "chatgpt_ia_edu": {
       "title": "ChatGPT-IA-edu Community",
