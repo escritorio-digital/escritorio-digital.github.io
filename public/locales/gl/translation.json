@@ -222,7 +222,6 @@
     "purpose_col": "Para que se usa",
     "services": {
       "fonts": "Tipografía Mulish da interface.",
-      "badge": "Insignia da licenza, nesta xanela.",
       "catalog": "Lista de «Aplicacións da comunidade», publicada como folla de cálculo.",
       "wikipedia": "Buscas da ferramenta Wikipedia.",
       "directo": "Votación simple, Escala de valoración, Nube de palabras, Choiva de ideas e votos, Muro interactivo e Tickets de saída, que se abren nunha xanela nova.",
@@ -245,7 +244,8 @@
     "principles_title": "Principios",
     "principles_text": "Este proxecto adhírese ao:",
     "principles_name": "Decálogo do Coñecemento Aberto",
-    "principles_link_label": "Ver o decálogo"
+    "principles_link_label": "Ver o decálogo",
+    "cc_badge": "Insignia da licenza: Creative Commons,"
   },
   "desktop": {
     "fullscreen_enter": "Pantalla completa",

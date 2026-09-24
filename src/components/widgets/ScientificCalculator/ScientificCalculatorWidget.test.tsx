@@ -77,6 +77,16 @@ describe('Calculadora científica', () => {
         expect(calculate('standard', keys)).toBe(expected);
     });
 
+    it('teclado: (2+3)^2 = 25 y 4! = 24', () => {
+        const { container } = render(<ScientificCalculatorWidget />);
+        const calculator = container.querySelector('.scientific-calculator') as HTMLElement;
+        const type = (keys: string) => [...keys].forEach((key) => fireEvent.keyDown(calculator, { key }));
+        type('(2+3)^2=');
+        expect(container.querySelector('.calc-result')?.textContent).toBe('25');
+        type('4!=');
+        expect(container.querySelector('.calc-result')?.textContent).toBe('24');
+    });
+
     it('básica: 7 × 6 = 42', () => {
         expect(calculate('basic', ['7', '×', '6'])).toBe('42');
     });

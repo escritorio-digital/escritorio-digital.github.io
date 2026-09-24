@@ -147,6 +147,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           : 'opacity-100'
       }`}
       data-toolbar="true"
+      data-desktop-bar
       onContextMenu={handleBarContextMenu}
       onMouseLeave={onMouseLeave}
     >

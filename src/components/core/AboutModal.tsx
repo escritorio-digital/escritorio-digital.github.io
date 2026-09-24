@@ -19,7 +19,7 @@ export const AboutModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   }).format(buildDate ? new Date(`${buildDate}T00:00:00Z`) : new Date());
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-[10001] flex items-center justify-center" onClick={onClose}>
+    <div className="fixed inset-0 bg-black/50 z-[10005] flex items-center justify-center" onClick={onClose}>
       <div
         className="bg-white/90 backdrop-blur-xl text-text-dark rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col"
         onClick={(event) => event.stopPropagation()}

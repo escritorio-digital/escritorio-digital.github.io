@@ -27,7 +27,7 @@ export function DesktopUnsavedChangesModal({
 
     return (
         <div
-            className="fixed inset-0 z-[10003] flex items-center justify-center bg-black/60"
+            className="fixed inset-0 z-[10007] flex items-center justify-center bg-black/60"
             onClick={onCancel}
         >
             <div

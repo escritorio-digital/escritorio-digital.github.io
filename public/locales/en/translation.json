@@ -222,7 +222,6 @@
     "purpose_col": "What it is used for",
     "services": {
       "fonts": "Mulish typeface of the interface.",
-      "badge": "License badge, in this window.",
       "catalog": "List of “Community apps”, published as a spreadsheet.",
       "wikipedia": "Searches in the Wikipedia tool.",
       "directo": "Simple voting, Rating scale, Word cloud, Brainstorming and voting, Interactive wall and Exit tickets, which open in a new window.",
@@ -245,7 +244,8 @@
     "principles_title": "Principles",
     "principles_text": "This project adheres to:",
     "principles_name": "Open Knowledge Decalogue",
-    "principles_link_label": "View the decalogue"
+    "principles_link_label": "View the decalogue",
+    "cc_badge": "Licence badge: Creative Commons,"
   },
   "desktop": {
     "fullscreen_enter": "Enter fullscreen",

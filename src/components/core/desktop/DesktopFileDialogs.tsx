@@ -72,7 +72,7 @@ export function DesktopFileDialogs({
         <>
             {saveDialogState.isOpen && (
                 <div
-                    className="fixed inset-0 z-[10002] flex items-center justify-center bg-black/60"
+                    className="fixed inset-0 z-[10006] flex items-center justify-center bg-black/60"
                     onClick={() => closeSaveDialog(null)}
                 >
                     <div
@@ -221,7 +221,7 @@ export function DesktopFileDialogs({
             )}
             {openDialogState.isOpen && (
                 <div
-                    className="fixed inset-0 z-[10002] flex items-center justify-center bg-black/60"
+                    className="fixed inset-0 z-[10006] flex items-center justify-center bg-black/60"
                     onClick={() => closeOpenDialog(null)}
                 >
                     <div

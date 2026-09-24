@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { ChevronUp, ChevronsUpDown, Download, Upload, Users } from 'lucide-react';
 import type { ProfileCollection } from '../../types';
 import { useTranslation } from 'react-i18next';
@@ -521,7 +522,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
 
   return (
     // Contenedor principal en la esquina inferior derecha
-    <div className="fixed bottom-4 right-4 z-[9999] max-[700px]:hidden" ref={containerRef} onContextMenu={onOpenContextMenu}>
+    <div className="fixed bottom-4 right-4 z-[9999] max-[700px]:hidden" data-desktop-bar ref={containerRef} onContextMenu={onOpenContextMenu}>
       <div className="relative">
         {/* Menú desplegable que aparece cuando isOpen es true */}
         {isOpen && (
@@ -575,8 +576,9 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
           {/* El icono cambia si el menú está abierto o cerrado */}
           {isOpen ? <ChevronUp size={20} /> : <ChevronsUpDown size={20} />}
         </button>
-        {isBackupOpen && (
-          <div className="fixed inset-0 z-[10001] flex items-center justify-center bg-black/40">
+        {/* Los diálogos van en <body>: dentro del selector quedarían bajo la barra de tareas. */}
+        {isBackupOpen && createPortal(
+          <div className="fixed inset-0 z-[10005] flex items-center justify-center bg-black/40">
             <div className="w-full max-w-xl bg-white/90 backdrop-blur-md rounded-xl shadow-2xl border border-black/10 p-5 text-sm">
               <div className="flex items-center justify-between mb-4">
                 <div className="font-semibold text-lg">{t('backup.manage_profiles')}</div>
@@ -720,9 +722,9 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
               )}
             </div>
           </div>
-        )}
-        {isTransferOpen && (
-          <div className="fixed inset-0 z-[10002] flex items-center justify-center bg-black/50">
+        , document.body)}
+        {isTransferOpen && createPortal(
+          <div className="fixed inset-0 z-[10006] flex items-center justify-center bg-black/50">
             <div className="w-full max-w-sm bg-white/95 backdrop-blur-md rounded-xl shadow-2xl border border-black/10 p-5 text-sm">
               <div className="font-semibold text-lg mb-2">{transferLabel}</div>
               <div className="text-sm text-gray-700 mb-4">{transferProgress}</div>
@@ -734,7 +736,7 @@ export const ProfileSwitcher: React.FC<ProfileSwitcherProps> = ({
               </button>
             </div>
           </div>
-        )}
+        , document.body)}
         <input
           ref={importInputRef}
           type="file"

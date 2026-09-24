@@ -209,7 +209,6 @@ Usa estos servicios de otros sitios:
 | Servicio | Para qué se usa |
 |---|---|
 | [Google Fonts](https://fonts.google.com/specimen/Mulish) | Tipografía Mulish de la interfaz. |
-| [Creative Commons](https://creativecommons.org/) | Insignia de la licencia en «Créditos y licencias». |
 | [Google Sheets](https://workspace.google.com/products/sheets/) | Lista de «Aplicaciones de la comunidad», publicada como hoja de cálculo. |
 | [Wikipedia](https://www.wikipedia.org/) | Búsquedas de la herramienta Wikipedia. |
 | [Directo](https://jjdeharo.github.io/directo/) | Votación simple, Escala de valoración, Nube de palabras, Lluvia de ideas y votos, Muro interactivo y Tickets de salida, que se abren en una ventana nueva. |
@@ -230,6 +229,7 @@ El proyecto se distribuye bajo dos licencias distintas, según el tipo de materi
   * Dados: [u_qpfzpydtro](https://pixabay.com/users/u_qpfzpydtro-29496424/), en [Pixabay](https://pixabay.com/sound-effects/dice-142528/), con la [licencia de contenido de Pixabay](https://pixabay.com/service/license-summary/).
   * Los fondos de pantalla (hechos con Gemini) y los iconos se han generado con IA y se publican con la licencia de los contenidos, CC BY-SA 4.0.
   * Icono de Wikipedia: adaptación del [logotipo de Wikipedia](https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2.svg), de Nohat (concepto de Paullusmagnus), Wikimedia, con licencia [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.es). Wikipedia es una [marca registrada de la Fundación Wikimedia](https://foundation.wikimedia.org/wiki/Policy:Trademark_policy).
+  * Insignia de la licencia: [Creative Commons](https://creativecommons.org/mission/downloads/), con licencia [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.es).
   * Alarma: [Tim (corsica_s)](https://freesound.org/people/corsica_s/), del [tema de sonidos de freedesktop.org](https://gitlab.freedesktop.org/xdg/xdg-sound-theme), con licencia [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.es).
 
 El detalle de estas condiciones se encuentra en [LICENSE-CONTENIDOS.md](LICENSE-CONTENIDOS.md).
@@ -239,7 +239,7 @@ El detalle de estas condiciones se encuentra en [LICENSE-CONTENIDOS.md](LICENSE-
 <a href="https://conocimiento-abierto.github.io/" target="_blank" rel="noopener noreferrer">Decálogo del Conocimiento Abierto</a></p>
 <p>
 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener noreferrer">
-<img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Licencia Creative Commons BY-SA 4.0" />
+<img src="public/badges/cc-by-sa-4.0.png" alt="Licencia Creative Commons BY-SA 4.0" />
 </a>
 </p>
 </div>

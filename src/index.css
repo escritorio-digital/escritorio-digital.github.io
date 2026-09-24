@@ -270,7 +270,7 @@ body.high-contrast {
 }
 
 .alarm-toast-stack {
-  @apply fixed bottom-4 right-4 z-[10004] flex flex-col gap-3;
+  @apply fixed bottom-4 right-4 z-[10008] flex flex-col gap-3;
 }
 
 .alarm-toast {

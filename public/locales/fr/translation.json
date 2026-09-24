@@ -223,7 +223,6 @@
     "purpose_col": "À quoi il sert",
     "services": {
       "fonts": "Police Mulish de l'interface.",
-      "badge": "Badge de la licence, dans cette fenêtre.",
       "catalog": "Liste des « Applications de la communauté », publiée sous forme de feuille de calcul.",
       "wikipedia": "Recherches de l'outil Wikipedia.",
       "directo": "Vote simple, Échelle d'évaluation, Nuage de mots, Pluie d'idées et votes, Mur interactif et Tickets de sortie, qui s'ouvrent dans une nouvelle fenêtre.",
@@ -246,7 +245,8 @@
     "principles_title": "Principes",
     "principles_text": "Ce projet adhère au :",
     "principles_name": "Décalogue de la Connaissance Ouverte",
-    "principles_link_label": "Voir le décalogue"
+    "principles_link_label": "Voir le décalogue",
+    "cc_badge": "Badge de la licence : Creative Commons,"
   },
   "desktop": {
     "fullscreen_enter": "Plein écran",

@@ -24,8 +24,9 @@ programa. Se añadieron el 2026-09-23 (versión 2.7.2): hasta entonces se pedía
 siempre a la red, y en la primera visita tras publicar una versión el
 programa anterior, guardado en caché, se mezclaba con las traducciones nuevas
 y mostraba claves sin traducir; sin conexión, la aplicación se quedaba sin
-textos. Los iconos (unos 11 MB) no se guardan, para no cargar esa descarga a
-cada visitante.
+textos. Desde la versión 2.7.6 se guarda también la insignia de la licencia
+(`badges/*.png`, 1,5 KB), que antes se cargaba de Creative Commons. Los iconos
+(unos 11 MB) no se guardan, para no cargar esa descarga a cada visitante.
 
 El widget «Web local» usa un service worker propio (`public/local-web-sw.js`)
 para servir las webs guardadas en el navegador.

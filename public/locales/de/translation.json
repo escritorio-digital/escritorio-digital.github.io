@@ -222,7 +222,6 @@
     "purpose_col": "Wofür er genutzt wird",
     "services": {
       "fonts": "Schriftart Mulish der Oberfläche.",
-      "badge": "Lizenzsymbol in diesem Fenster.",
       "catalog": "Liste der „Apps der Community“, als Tabelle veröffentlicht.",
       "wikipedia": "Suchen im Werkzeug Wikipedia.",
       "directo": "Einfache Abstimmung, Bewertungsskala, Wortwolke, Brainstorming und Abstimmung, Interaktive Wand und Exit-Tickets, die sich in einem neuen Fenster öffnen.",
@@ -245,7 +244,8 @@
     "principles_title": "Prinzipien",
     "principles_text": "Dieses Projekt bekennt sich zum:",
     "principles_name": "Dekalog des Offenen Wissens",
-    "principles_link_label": "Dekalog ansehen"
+    "principles_link_label": "Dekalog ansehen",
+    "cc_badge": "Lizenz-Button: Creative Commons,"
   },
   "desktop": {
     "fullscreen_enter": "Vollbildmodus",

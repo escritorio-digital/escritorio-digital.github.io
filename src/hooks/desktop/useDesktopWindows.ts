@@ -89,6 +89,19 @@ export function useDesktopWindows({
         return { margin, maxWidth, maxHeight };
     }, []);
 
+    // Alto que ocupan abajo la barra de tareas, «Inicio» y el selector de escritorio
+    // (elementos con data-desktop-bar), si se ven. Una ventana nueva se abre por encima.
+    const getBottomBarsHeight = useCallback(() => {
+        let top = window.innerHeight;
+        document.querySelectorAll<HTMLElement>('[data-desktop-bar]').forEach((element) => {
+            const rect = element.getBoundingClientRect();
+            if (rect.height === 0 || rect.top >= window.innerHeight) return;
+            if (window.getComputedStyle(element).opacity === '0') return;
+            top = Math.min(top, rect.top);
+        });
+        return window.innerHeight - top;
+    }, []);
+
     const clampWidgetToViewport = useCallback((widget: ActiveWidget): ActiveWidget => {
         if (widget.isMaximized) return widget;
         const { margin, maxWidth, maxHeight } = getViewportBounds();
@@ -126,16 +139,19 @@ export function useDesktopWindows({
         setHighestZ(newZ);
         const widgetDefaults = widgetPreferences?.[widgetId];
         const { margin, maxWidth, maxHeight } = getViewportBounds();
+        // Espacio libre sobre las barras de abajo; si la ventana no cabe, se abre más baja.
+        const bottomLimit = window.innerHeight - getBottomBarsHeight();
+        const freeHeight = Math.max(150, bottomLimit - margin * 2);
         const widthValue = typeof widgetConfig.defaultSize.width === 'number'
             ? Math.min(widgetConfig.defaultSize.width, maxWidth)
             : widgetConfig.defaultSize.width;
         const heightValue = typeof widgetConfig.defaultSize.height === 'number'
-            ? Math.min(widgetConfig.defaultSize.height, maxHeight)
+            ? Math.min(widgetConfig.defaultSize.height, maxHeight, freeHeight)
             : widgetConfig.defaultSize.height;
         const numericWidth = typeof widthValue === 'number' ? widthValue : maxWidth;
         const numericHeight = typeof heightValue === 'number' ? heightValue : maxHeight;
         const maxX = Math.max(margin, window.innerWidth - numericWidth - margin);
-        const maxY = Math.max(margin, window.innerHeight - numericHeight - margin);
+        const maxY = Math.max(margin, bottomLimit - numericHeight - margin);
 
         const shouldMaximize = Boolean(widgetConfig.defaultMaximized) || widgetConfig.windowStyle === 'overlay';
         const shouldFloat = Boolean(widgetDefaults?.floating);
@@ -160,7 +176,7 @@ export function useDesktopWindows({
         setActiveWidgets((prev) => [...prev, newWidget]);
         setActiveWindowId(newWidget.instanceId);
         return newWidget.instanceId;
-    }, [getViewportBounds, highestZ, popupWidgetIds, setActiveWidgets, widgetPreferences]);
+    }, [getBottomBarsHeight, getViewportBounds, highestZ, popupWidgetIds, setActiveWidgets, widgetPreferences]);
 
     const addWidgetRef = useRef(addWidget);
     const clampWidgetToViewportRef = useRef(clampWidgetToViewport);

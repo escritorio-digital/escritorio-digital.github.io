@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import { useEscapeKey } from '../../hooks/useEscapeKey';
 import { X } from 'lucide-react';
+import { withBaseUrl } from '../../utils/assetPaths';
 
 interface CreditsModalProps {
   isOpen: boolean;
@@ -30,7 +31,6 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
   // Todo lo que el escritorio carga, incrusta o abre de otros sitios.
   const externalServices = [
     { name: 'Google Fonts', url: 'https://fonts.google.com/specimen/Mulish', purposeKey: 'licenses.services.fonts' },
-    { name: 'Creative Commons', url: 'https://creativecommons.org/', purposeKey: 'licenses.services.badge' },
     { name: 'Google Sheets', url: 'https://workspace.google.com/products/sheets/', purposeKey: 'licenses.services.catalog' },
     { name: 'Wikipedia', url: 'https://www.wikipedia.org/', purposeKey: 'licenses.services.wikipedia' },
     { name: 'Directo', url: 'https://jjdeharo.github.io/directo/', purposeKey: 'licenses.services.directo' },
@@ -39,6 +39,10 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
     { name: 'ChatGPT-IA-edu', url: 'https://chatgpt-ia-edu.github.io/', purposeKey: 'licenses.services.chatgpt' },
     { name: 'Vibe Coding Educativo', url: 'https://vibe-coding-educativo.github.io/app_edu/', purposeKey: 'licenses.services.vce' },
   ];
+
+  const ccBy4Deeds: Record<string, string> = Object.fromEntries(
+    ['es', 'en', 'ca', 'gl', 'eu', 'de', 'fr', 'it', 'pt'].map((code) => [code, `https://creativecommons.org/licenses/by/4.0/deed.${code}`]),
+  );
 
   const ccBySa3Deeds: Record<string, string> = {
     es: 'https://creativecommons.org/licenses/by-sa/3.0/deed.es',
@@ -74,7 +78,7 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
   ];
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-[10001] flex items-center justify-center" onClick={onClose}>
+    <div className="fixed inset-0 bg-black/50 z-[10005] flex items-center justify-center" onClick={onClose}>
       <div 
         className="bg-white/90 backdrop-blur-xl text-text-dark rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col" 
         onClick={e => e.stopPropagation()}
@@ -178,6 +182,13 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
                 {'. '}
                 <a href="https://foundation.wikimedia.org/wiki/Policy:Trademark_policy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{t('licenses.wikipedia_trademark')}</a>
               </li>
+              <li>
+                {t('licenses.cc_badge')}{' '}
+                <a href="https://creativecommons.org/mission/downloads/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">creativecommons.org</a>
+                {', '}
+                <a href={ccBy4Deeds[lang] ?? ccBy4Deeds.es} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">CC BY 4.0</a>
+                {'.'}
+              </li>
               </ul>
             </div>
 
@@ -215,7 +226,7 @@ export const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) =
             </a>
             <p className="mt-4">
               <a href={ccDeedUrl} target="_blank" rel="noopener noreferrer" className="inline-block" title={t('licenses.content_license_name')}>
-                <img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt={t('licenses.content_license_name')} />
+                <img src={withBaseUrl('badges/cc-by-sa-4.0.png')} alt={t('licenses.content_license_name')} width={88} height={31} />
               </a>
             </p>
           </div>

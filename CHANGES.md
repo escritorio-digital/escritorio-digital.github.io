@@ -1,5 +1,11 @@
 # Cambios realizados
 
+## 2.7.6
+- Ventanas: las nuevas se abren por encima de la barra de tareas, «Inicio» y el selector de escritorio; si no caben enteras, se abren más bajas.
+- «Acerca de», «Créditos», «Ajustes», «Tema», los diálogos de archivos y los de perfiles quedan por encima de la barra de tareas, que antes tapaba su parte inferior.
+- Calculadora: el teclado admite «(», «)», «^», «!» y «%».
+- «Créditos y licencias»: la insignia de la licencia va dentro de la aplicación (se acredita a Creative Commons, CC BY 4.0) y ya no se carga de su servidor; también funciona sin conexión.
+
 ## 2.7.5
 - Calculadora científica: el modo Científica tiene botones «(» y «)», y «=» cierra los paréntesis que queden abiertos; sin, cos, tan, log, ln y √ funcionan ya con los botones (antes daban «Error»).
 - Calculadora: «(» funciona al principio de una operación; detrás de ×, ÷ o ^, «−» es el signo del número (2^−2 = 0,25, 3×−4 = −12).

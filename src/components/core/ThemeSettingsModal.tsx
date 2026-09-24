@@ -16,7 +16,7 @@ export const ThemeSettingsModal: React.FC<ThemeSettingsModalProps> = ({ isOpen, 
 
     return (
         <div
-            className="fixed inset-0 bg-black/50 z-[10002] flex items-center justify-center"
+            className="fixed inset-0 bg-black/50 z-[10006] flex items-center justify-center"
             onClick={(event) => {
                 event.stopPropagation();
                 onClose();

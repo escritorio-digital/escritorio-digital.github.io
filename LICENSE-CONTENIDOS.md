@@ -37,6 +37,12 @@ contenidos, CC BY-SA 4.0, salvo este:
   Wikipedia es una marca registrada de la Fundación Wikimedia
   (<https://foundation.wikimedia.org/wiki/Policy:Trademark_policy>).
 
+La insignia de la licencia (`public/badges/cc-by-sa-4.0.png`) es de Creative Commons
+(<https://creativecommons.org/mission/downloads/>), con licencia CC BY 4.0
+(<https://creativecommons.org/licenses/by/4.0/deed.es>), y se usa para indicar la
+licencia de los contenidos, como permite su política de marcas
+(<https://creativecommons.org/policies/>).
+
 Los sonidos incluidos son de otros autores:
 
 - `public/sounds/dice-142528.mp3`: u_qpfzpydtro, en Pixabay

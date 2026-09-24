@@ -24,7 +24,8 @@ export default defineConfig(() => ({
             workbox: {
                 // Las traducciones y las guías van en la misma caché que el programa,
                 // para que se actualicen a la vez y funcionen sin conexión (ADR 4).
-                globPatterns: ['**/*.{js,css,html,json,md}'],
+                // La insignia de la licencia (1,5 KB) también, para que «Créditos» se vea completo.
+                globPatterns: ['**/*.{js,css,html,json,md}', 'badges/*.png'],
             },
             manifest: {
                 name: 'Escritorio Digital',

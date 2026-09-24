@@ -613,7 +613,7 @@ export const ScientificCalculatorWidget: FC<ScientificCalculatorWidgetProps> = (
             handleNumber('.');
             return;
         }
-        if (key === '+' || key === '-' || key === '*' || key === '/') {
+        if (['+', '-', '*', '/', '^', '(', ')', '!', '%'].includes(key)) {
             event.preventDefault();
             handleOperator(key);
             return;
