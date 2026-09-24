@@ -28,7 +28,7 @@ Este proyecto es un entorno de escritorio virtual construido con React, que perm
 22. **Ruleta Aleatoria:** Una ruleta personalizable para seleccionar opciones al azar.
 23. **Semáforo:** Un semáforo visual (rojo, amarillo, verde) ideal para gestionar los tiempos o niveles de ruido en el aula.
 24. **Temporizador:** Un contador regresivo que puedes configurar con minutos y segundos.
-25. **Tic-Tac-Toe:** El juego clásico de tres en raya para dos jugadores.
+25. **Tres en raya:** El juego clásico de tres en raya para dos jugadores.
 26. **Visor Web:** Permite embeber y mostrar el contenido de una URL directamente en el escritorio, usando un iframe.
 27. **Web local:** Guarda webs en el navegador (desde ZIP o carpeta) y ejecútalas sin conexión.
 28. **Explorador de archivos:** Abre archivos locales (PDF, imágenes, texto y Markdown, HTML, audio y vídeo).

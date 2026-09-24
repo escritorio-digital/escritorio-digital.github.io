@@ -786,7 +786,7 @@
       "more_count": "+{{count}} de plus"
     },
     "tic_tac_toe": {
-      "title": "Tic-Tac-Toe",
+      "title": "Morpion",
       "player_1": "Joueur 1",
       "player_2": "Joueur 2",
       "reset_confirm": "Êtes-vous sûr de vouloir réinitialiser le jeu et les scores ?",

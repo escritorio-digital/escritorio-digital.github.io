@@ -1,8 +1,9 @@
 # Cambios realizados
 
-## Sin publicar
+## 2.7.3
 - Asistencia: nueva exportación sin nombres (cada estudiante aparece solo con su número).
 - Accesibilidad: el título de las ventanas elige el color de texto por contraste con el tema; nombres y etiquetas en los controles que no los tenían; Escape cierra «Acerca de», «Créditos», «Ajustes» y «Tema»; el foco entra en el widget al abrirlo desde el menú; contrastes corregidos en Asistencia, Cronómetro, Gestos de trabajo, Web local, Marcador, Lista de trabajo, reloj y selector de escritorio. Sin fallos en axe (WCAG 2.1 AA) en los 44 widgets.
+- Erratas: «Tres en raya» y la alerta «Habla en clase»; el juego lleva su nombre habitual en catalán, gallego, francés, italiano y portugués.
 - «Créditos y licencias»: apartado «Imágenes» (fondos e iconos generados con IA, atribución del icono de Wikipedia); la nota de IA lo menciona.
 
 ## 2.7.2

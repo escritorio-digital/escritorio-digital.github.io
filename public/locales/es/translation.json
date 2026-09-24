@@ -362,7 +362,7 @@
         "helps_classmates": "Ayuda a Compañeros"
       },
       "alerts": {
-        "talks_in_class": "Platica en clase",
+        "talks_in_class": "Habla en clase",
         "doesnt_work": "No trabaja",
         "bad_behavior": "Mala conducta",
         "incomplete_homework": "Incumple con la tarea"
@@ -783,7 +783,7 @@
       "more_count": "+{{count}} más"
     },
     "tic_tac_toe": {
-      "title": "Tres en ralla",
+      "title": "Tres en raya",
       "player_1": "Jugador 1",
       "player_2": "Jugador 2",
       "reset_confirm": "¿Seguro que quieres reiniciar el juego y los marcadores?",

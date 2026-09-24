@@ -785,7 +785,7 @@
       "more_count": "+{{count}} in più"
     },
     "tic_tac_toe": {
-      "title": "Tic-Tac-Toe",
+      "title": "Tris",
       "player_1": "Giocatore 1",
       "player_2": "Giocatore 2",
       "reset_confirm": "Sei sicuro di voler reimpostare il gioco e i punteggi?",

@@ -782,7 +782,7 @@
       "more_count": "+{{count}} més"
     },
     "tic_tac_toe": {
-      "title": "Tres en Ratlla",
+      "title": "Tres en ratlla",
       "player_1": "Jugador 1",
       "player_2": "Jugador 2",
       "reset_confirm": "Estàs segur que vols reiniciar el joc i els marcadors?",

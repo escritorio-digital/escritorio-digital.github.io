@@ -787,7 +787,7 @@
       "more_count": "+{{count}} a mais"
     },
     "tic_tac_toe": {
-      "title": "Jogo da Velha",
+      "title": "Jogo do galo",
       "player_1": "Jogador 1",
       "player_2": "Jogador 2",
       "reset_confirm": "Tem certeza de que deseja reiniciar o jogo e os placares?",

@@ -362,7 +362,7 @@
         "helps_classmates": "Axuda a Compañeiros"
       },
       "alerts": {
-        "talks_in_class": "Platica en clase",
+        "talks_in_class": "Fala na clase",
         "doesnt_work": "Non traballa",
         "bad_behavior": "Mala conduta",
         "incomplete_homework": "Incumpre coa tarefa"
@@ -782,7 +782,7 @@
       "more_count": "+{{count}} máis"
     },
     "tic_tac_toe": {
-      "title": "Tic-Tac-Toe",
+      "title": "Tres en raia",
       "player_1": "Xogador 1",
       "player_2": "Xogador 2",
       "reset_confirm": "¿Seguro que queres reiniciar o xogo e os marcadores?",
