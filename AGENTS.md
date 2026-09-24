@@ -15,6 +15,7 @@ Guía breve para contribuir al proyecto Escritorio Digital (Vite + React + TS).
 - `npm run build`: compila TypeScript y genera `dist/` para producción.
 - `npm run preview`: previsualiza el build localmente.
 - `npm run lint`: ejecuta ESLint sobre el proyecto.
+- `npm test`: pasa las pruebas unitarias (ver «Pruebas»).
 - `npm run deploy`: publica `dist/` en GitHub Pages (requiere permisos y `gh-pages`).
 
 ## Estilo de Código y Nomenclatura
@@ -26,10 +27,8 @@ Guía breve para contribuir al proyecto Escritorio Digital (Vite + React + TS).
 - Linter: respeta `eslint.config.js` y ejecuta `npm run lint` antes del PR.
 
 ## Pruebas
-- Actualmente no hay test suite. Si añades pruebas:
-  - Sugiere Vitest + React Testing Library.
-  - Ficheros `*.test.ts(x)` junto al componente (`src/...`).
-  - Cubre lógica y render básico; apunta a >80% en lo modificado.
+- `npm test` pasa las pruebas unitarias (Vitest y Testing Library), en archivos `*.test.ts(x)` junto al código.
+- Las de la calculadora pulsan sus botones igual que una persona; al cambiar un widget que calcula o enseña algo, conviene probarlo así y no solo su lógica interna.
 
 ## Internacionalización (i18n)
 - Sigue TRANSLATION_GUIDE.md al pie de la letra.
@@ -42,7 +41,7 @@ Guía breve para contribuir al proyecto Escritorio Digital (Vite + React + TS).
 - Commits: sigue Conventional Commits `type(scope): mensaje` (ej.: `feat(i18n): add basque translation`, `fix(build): resolve typescript errors`).
 - PRs: describe el cambio, motivación y enlaza issue. Incluye capturas para cambios de UI.
 - i18n: actualiza claves en `public/locales/*/translation.json` y valida cadenas.
-- Antes de enviar: `npm run lint`, `npm run build` y prueba `npm run preview`.
+- Antes de enviar: `npm test`, `npm run lint`, `npm run build` y prueba `npm run preview`.
 - Si el cambio toca la interfaz, pasa también `npm run test:a11y` antes de publicar (ver «Accesibilidad»).
 
 ## Añadir un Widget (resumen)
